@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{title}}</title>
+  <style>
+    :root {
+      /* Hextech Visual Language - Riot Games Official Design System */
+      --hextech-gold: #c89b3c;
+      --hextech-gold-bright: #f0e6d2;
+      --hextech-gold-dark: #785a28;
+      --hextech-blue: #0bc6e3;
+      --hextech-blue-dark: #0397ab;
+      --piltover-black: #010a13;
+      --piltover-dark: #0a1428;
+      --surface-base: #0d1b2a;
+      --surface-raised: #1b2838;
+      --surface-overlay: #1e2d3d;
+      --text-primary: #f0e6d2;
+      --text-secondary: #a09b8c;
+      --text-tertiary: #5b5a56;
+      --magic-glow: #0bc6e3;
+      --victory: #00d084;
+      --defeat: #ff4655;
+      --border-metal: rgba(200,155,60,0.2);
+      --border-metal-strong: rgba(200,155,60,0.4);
+      --shadow-depth-1: 0 2px 8px rgba(0,0,0,0.4);
+      --shadow-depth-2: 0 8px 24px rgba(0,0,0,0.5);
+      --shadow-depth-3: 0 16px 48px rgba(0,0,0,0.6);
+      --shadow-hextech: 0 0 24px rgba(11,198,227,0.4), 0 0 48px rgba(11,198,227,0.2);
+      --shadow-gold: 0 0 20px rgba(200,155,60,0.4), 0 0 40px rgba(200,155,60,0.2);
+    }
+    * { 
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: 
+        radial-gradient(ellipse 1200px 800px at 20% -10%, rgba(200,155,60,0.08), transparent 50%),
+        radial-gradient(ellipse 1000px 700px at 80% 110%, rgba(3,151,171,0.06), transparent 50%),
+        linear-gradient(180deg, var(--riot-black) 0%, var(--riot-black-soft) 100%);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 40px 24px;
+    }
+    .header {
+      background: linear-gradient(135deg, var(--surface-elevated) 0%, var(--surface-1) 100%);
+      border: 1px solid var(--border-strong);
+      border-radius: 24px;
+      padding: 40px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      box-shadow: var(--shadow-lg), var(--shadow-gold);
+      margin-bottom: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--riot-gold), transparent);
+      opacity: 0.6;
+    }
+    .avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background:
+        url('{{profile_icon_url}}') center/cover no-repeat,
+        radial-gradient(circle at 30% 30%, var(--riot-gold-light), var(--riot-gold));
+      border: 3px solid var(--riot-gold);
+      display: grid;
+      place-items: center;
+      color: var(--riot-black);
+      font-weight: 800;
+      font-size: 32px;
+      box-shadow: 
+        0 0 0 6px rgba(200,155,60,0.2),
+        0 8px 32px rgba(0,0,0,0.6),
+        inset 0 2px 4px rgba(255,255,255,0.1);
+      user-select: none;
+      overflow: hidden;
+      position: relative;
+    }
+    .avatar::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent 50%);
+    }
+    .headings {
+      flex: 1;
+    }
+    .headings h1 {
+      margin: 0 0 8px;
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(135deg, var(--riot-gold-light) 0%, var(--riot-gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 2px 8px rgba(200,155,60,0.3);
+    }
+    .headings p {
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 16px;
+      font-weight: 500;
+    }
+    .meta {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-end;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 18px;
+      border: 1px solid var(--border-strong);
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--surface-2), var(--surface-1));
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      box-shadow: var(--shadow-sm);
+      backdrop-filter: blur(8px);
+    }
+    .badge strong {
+      color: var(--riot-gold);
+    }
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--riot-gold);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--riot-gold), 0 0 16px rgba(200,155,60,0.4);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(0.95); }
+    }
+    .card {
+      background: linear-gradient(135deg, var(--surface-elevated) 0%, var(--surface) 100%);
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    thead th {
+      text-align: left;
+      font-weight: 700;
+      color: var(--riot-gold);
+      padding: 20px 24px;
+      border-bottom: 2px solid var(--border-strong);
+      background: linear-gradient(180deg, var(--surface-2), var(--surface-1));
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    tbody td {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      font-size: 15px;
+      color: var(--text);
+      font-weight: 500;
+    }
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+    tbody tr {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    tbody tr:hover {
+      background: linear-gradient(90deg, transparent, rgba(200,155,60,0.08), transparent);
+      transform: translateX(4px);
+    }
+    .pill {
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      display: inline-block;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .win {
+      background: linear-gradient(135deg, rgba(0,208,132,0.2), rgba(0,208,132,0.1));
+      color: var(--win);
+      border: 1px solid rgba(0,208,132,0.3);
+      box-shadow: 0 0 12px rgba(0,208,132,0.2);
+    }
+    .loss {
+      background: linear-gradient(135deg, rgba(255,70,85,0.2), rgba(255,70,85,0.1));
+      color: var(--loss);
+      border: 1px solid rgba(255,70,85,0.3);
+      box-shadow: 0 0 12px rgba(255,70,85,0.2);
+    }
+    .champ-cell {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .champ-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      border: 2px solid var(--riot-gold);
+      box-shadow: 0 0 12px rgba(200,155,60,0.3);
+    }
+    .items-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .item-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      border: 1px solid var(--border-strong);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease;
+    }
+    .item-icon:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 16px rgba(200,155,60,0.4);
+    }
+    .item-empty {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.03);
+      border: 1px dashed var(--border);
+    }
+    .footer {
+      color: var(--text-tertiary);
+      padding: 24px;
+      font-size: 13px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      font-weight: 500;
+    }
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        text-align: center;
+        padding: 32px 24px;
+      }
+      .meta {
+        align-items: center;
+      }
+      tbody tr:hover {
+        transform: none;
+      }
+      .champ-cell {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .items-row {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="avatar">{{avatar}}</div>
+      <div class="headings">
+        <h1>{{invoker_name}}</h1>
+        <p>{{subtitle}}</p>
+      </div>
+      <div class="meta">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          <strong>Servidor</strong> · {{server}}
+        </div>
+        <div class="badge">
+          <strong>Nivel</strong> · {{level}}
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>Campeón</th>
+            <th>K / D / A</th>
+            <th>Items</th>
+            <th>Resultado</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{matches_rows}}
+        </tbody>
+      </table>
+      <div class="footer">
+        Generado {{generated_at}} · Plantilla: claude-4-5
+      </div>
+    </div>
+  </div>
+</body>
+</html>
