@@ -81,24 +81,40 @@ Invocador: TuNombre (Nivel 123) - Plataforma la2
 
 ## Exportar a HTML
 - Usa `--html-template` para generar un archivo HTML con una plantilla.
-- El archivo se genera en `out/<plantilla>/<slug>-<plantilla>.html`.
+- El archivo se genera en `outputs/<plantilla>/<slug>-<plantilla>.html`.
 
 Ejemplos:
 ```bash
-# Plantilla gpt5-medium (admite variantes de nombre: "gpt 5 medium", "gpt-5-medium")
-python main.py --platform la2 --summoner "nombre#tag" --count 10 --html-template "gpt 5 medium"
+# Plantilla claude-4-5 (admite variantes de nombre: "claude 4 5", "claude-4-5")
+python main.py --platform la2 --summoner "nombre#tag" --count 10 --html-template "claude 4 5"
 
 # Cambiar directorio de salida
-python main.py --platform la2 --summoner "nombre#tag" --html-template gpt5-medium --out-dir export
+python main.py --platform la2 --summoner "nombre#tag" --html-template claude-4-5 --out-dir export
 
 # Combinar con último mes
-python main.py --platform la2 --summoner "nombre#tag" --last-month --html-template gpt5-medium
+python main.py --platform la2 --summoner "nombre#tag" --last-month --html-template claude-4-5
 ```
 
-Plantillas disponibles inicialmente:
-- `gpt5-medium`
+Plantillas disponibles:
+- `claude-4-5`
 
 ## Problemas comunes
 - 401/403: API key inválida o expirada.
 - 404: invocador no encontrado (verifica `--platform` y nombre exacto).
 - 429: límite de tasa excedido; reintenta luego.
+
+## Estructura de Archivos y Directorios
+- **`main.py`**: Punto de entrada principal del programa.
+- **`src/riot_lol_cli/`**: Código fuente principal.
+  - `cli.py`: Lógica de la CLI, manejo de argumentos y flujo (incluye regiones y HTML integrados).
+  - `api.py`: Cliente para la API de Riot, con configuración de regiones.
+  - `templates/`: Plantillas HTML para exportación.
+- **`requirements.txt`**: Dependencias de Python.
+- **`.gitignore`**: Archivos a ignorar (e.g., `.venv/`, `outputs/`, `data/`).
+- **`.venv/`**: Entorno virtual (ignorado en repositorio).
+- **`config/`**: Archivos de configuración (e.g., `version.json` para versión del proyecto).
+- **`data/`**: Datos y caché generados (e.g., `cache/` con archivos como `matches.json` para datos de partidas; ignorado en repositorio).
+- **`outputs/`**: Archivos HTML generados por el usuario (e.g., `claude-4-5/` con informes exportados; ignorado en repositorio).
+- **`docs/`**: Para documentación futura (vacío).
+- **`scripts/`**: Para scripts utilitarios (vacío).
+- **`README.md`**: Esta documentación.
