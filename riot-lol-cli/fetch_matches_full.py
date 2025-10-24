@@ -2,6 +2,7 @@
 Script para obtener datos completos de partidas desde la API de Riot
 Incluye: daño, oro, visión, duración, nivel del campeón, etc.
 """
+import argparse
 import json
 import os
 import time
@@ -10,51 +11,54 @@ from pathlib import Path
 
 from src.riot_lol_cli.api import RiotClient
 
-# Configuración
-GAME_NAME = "Deshu"
-TAG_LINE = "LAS"
-PLATFORM = "la2"
-REGIONAL = "americas"
-MAX_MATCHES = 100
+# Configuración por defecto (se puede sobreescribir por args/env)
+DEFAULT_GAME_NAME = os.getenv("GAME_NAME", "Deshu")
+DEFAULT_TAG_LINE = os.getenv("TAG_LINE", "LAS")
+DEFAULT_PLATFORM = os.getenv("PLATFORM", "la2")
+DEFAULT_REGIONAL = os.getenv("REGIONAL", "americas")
+DEFAULT_MAX_MATCHES = int(os.getenv("MAX_MATCHES", "100"))
+
 
 def find_api_key():
-    """Busca la API key en múltiples ubicaciones"""
-    # 0. API Key hardcoded (temporal)
-    hardcoded_key = "RGAPI-f6a264bb-7878-4e16-8852-8ef348c464de"
-    if hardcoded_key and hardcoded_key.startswith("RGAPI-"):
-        print("✅ Usando API key configurada")
-        return hardcoded_key
-    
-    # 1. Variable de entorno
-    api_key = os.getenv("RIOT_API_KEY", "")
+    """Busca la API key en múltiples ubicaciones (sin hardcode)."""
+    # 1) Variable de entorno
+    api_key = os.getenv("RIOT_API_KEY", "").strip()
     if api_key:
         return api_key
-    
-    # 2. Archivo .env
+
+    # 2) Archivo .env
     env_file = Path(".env")
     if env_file.exists():
-        with open(env_file, "r") as f:
+        with open(env_file, "r", encoding="utf-8") as f:
             for line in f:
                 if line.startswith("RIOT_API_KEY="):
                     return line.split("=", 1)[1].strip().strip('"').strip("'")
-    
-    # 3. Archivo config/api_key.txt
+
+    # 3) Archivo config/api_key.txt
     api_key_file = Path("config/api_key.txt")
     if api_key_file.exists():
-        with open(api_key_file, "r") as f:
-            return f.read().strip()
-    
-    # 4. Archivo api_key.txt en raíz
-    api_key_file = Path("api_key.txt")
-    if api_key_file.exists():
-        with open(api_key_file, "r") as f:
-            return f.read().strip()
-    
+        return api_key_file.read_text(encoding="utf-8").strip()
+
+    # 4) Archivo api_key.txt en raíz
+    api_key_file2 = Path("api_key.txt")
+    if api_key_file2.exists():
+        return api_key_file2.read_text(encoding="utf-8").strip()
+
     return None
 
 def main():
+    parser = argparse.ArgumentParser(description="Fetch de partidas desde Riot API y guarda matches.json")
+    parser.add_argument("--game-name", dest="game_name", default=DEFAULT_GAME_NAME)
+    parser.add_argument("--tag-line", dest="tag_line", default=DEFAULT_TAG_LINE)
+    parser.add_argument("--platform", dest="platform", default=DEFAULT_PLATFORM,
+                        help="la2, la1, na1, br1, euw1, eun1, tr1, ru, kr, jp1, oc1")
+    parser.add_argument("--regional", dest="regional", default=DEFAULT_REGIONAL,
+                        help="americas, europe, asia")
+    parser.add_argument("--count", dest="count", type=int, default=DEFAULT_MAX_MATCHES)
+    parser.add_argument("--output", dest="output", default="data/cache/matches.json")
+    args = parser.parse_args()
+
     API_KEY = find_api_key()
-    
     if not API_KEY:
         print("❌ Error: No se encontró RIOT_API_KEY")
         print("Buscado en:")
@@ -63,14 +67,14 @@ def main():
         print("  - config/api_key.txt")
         print("  - api_key.txt")
         return
-    
+
     print("🔧 Inicializando cliente de Riot API...")
-    client = RiotClient(API_KEY, PLATFORM, REGIONAL)
+    client = RiotClient(API_KEY, args.platform, args.regional)
     
     try:
         # 1. Obtener cuenta por Riot ID
-        print(f"📡 Obteniendo cuenta para {GAME_NAME}#{TAG_LINE}...")
-        account = client.get_account_by_riot_id(GAME_NAME, TAG_LINE)
+        print(f"📡 Obteniendo cuenta para {args.game_name}#{args.tag_line}...")
+        account = client.get_account_by_riot_id(args.game_name, args.tag_line)
         puuid = account["puuid"]
         print(f"✅ PUUID: {puuid}")
         
@@ -88,8 +92,8 @@ def main():
         print(f"✅ Versión: {ddragon_version}")
         
         # 4. Obtener IDs de partidas
-        print(f"📡 Obteniendo últimas {MAX_MATCHES} partidas...")
-        match_ids = client.get_match_ids_by_puuid(puuid, start=0, count=MAX_MATCHES)
+        print(f"📡 Obteniendo últimas {args.count} partidas...")
+        match_ids = client.get_match_ids_by_puuid(puuid, start=0, count=args.count)
         print(f"✅ Se encontraron {len(match_ids)} partidas")
         
         # 5. Obtener detalles de cada partida
@@ -184,9 +188,9 @@ def main():
         output_data = {
             "version": 1,
             "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M"),
-            "platform": PLATFORM,
-            "server": "LAS",
-            "display_name": f"{GAME_NAME}#{TAG_LINE}",
+            "platform": args.platform,
+            "server": args.tag_line.upper(),
+            "display_name": f"{args.game_name}#{args.tag_line}",
             "level": summoner_level,
             "puuid": puuid,
             "ddragon_version": ddragon_version,
@@ -203,9 +207,9 @@ def main():
         }
         
         # 8. Guardar en archivo JSON
-        output_dir = Path("data/cache")
+        output_dir = Path(args.output).parent
         output_dir.mkdir(parents=True, exist_ok=True)
-        output_file = output_dir / "matches.json"
+        output_file = Path(args.output)
         
         with open(output_file, "w", encoding="utf-8") as f:
             json.dump(output_data, f, indent=2, ensure_ascii=False)

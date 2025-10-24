@@ -118,3 +118,38 @@ Plantillas disponibles:
 - **`docs/`**: Para documentación futura (vacío).
 - **`scripts/`**: Para scripts utilitarios (vacío).
 - **`README.md`**: Esta documentación.
+
+## Regenerar HTML en Linux
+
+Sigue estos pasos para regenerar el HTML usando la plantilla `claude-4-5`:
+
+```bash
+# 0) (Si venv no funciona) Instala soporte para entornos virtuales
+sudo apt update
+sudo apt install -y python3.12-venv
+
+# 1) Crear y activar un entorno virtual (recomendado)
+cd ~/lolcli/riot-lol-cli
+python3 -m venv .venv
+source .venv/bin/activate
+
+# 2) Instalar dependencias
+pip install -r requirements.txt
+
+# 3) Regenerar el HTML
+python3 -m src.riot_lol_cli.cli generate \
+  --read-json data/cache/matches.json \
+  --html-template claude-4-5 \
+  --output outputs/claude-4-5/deshu-las-claude-4-5.html
+```
+
+Notas:
+- **Requisitos**: Asegúrate de que el archivo `data/cache/matches.json` exista y tenga datos válidos.
+- El comando anterior incrementa automáticamente la versión en `config/version.json` y la imprime en el HTML.
+- Alternativa equivalente:
+  ```bash
+  python3 main.py generate \
+    --read-json data/cache/matches.json \
+    --html-template claude-4-5 \
+    --output outputs/claude-4-5/deshu-las-claude-4-5.html
+  ```
