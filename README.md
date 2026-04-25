@@ -1,120 +1,129 @@
-# riot-lol-cli
+# riot_lol_cli
 
-CLI simple en Python para consultar la API de League of Legends (Riot) y obtener:
+CLI en Python para League of Legends con múltiples subsistemas de análisis y visualización.
 
-- Nombre de invocador
-- Nivel de invocador
-- Historial de partidas (ids) y resumen por partida
+**Version:** 1.6.4 | **Python:** 3.9+ | **Licencia:** Privado
 
-Usa los endpoints Summoner-V4 y Match-V5.
+---
 
-Además permite exportar la información a HTML con plantillas bonitas (p. ej. "gpt5-medium").
+## Subsistemas
 
-## Requisitos
-- Python 3.9+
-- Una API Key vigente desde https://developer.riotgames.com/ (token de desarrollador personal, expira cada 24h)
+| Subsistema | Descripción | Entry Point |
+|------------|-------------|-------------|
+| **CLI Match History** | Consulta de partidas, exportación HTML Hextech | `python main.py --platform la2 --summoner "Nombre#TAG"` |
+| **Splash Arts Gallery** | Visor interactivo de 2019 splash arts, 171 campeones | `scripts/bat/regenerar_splash_viewer.bat` |
+| **Meta Analyzer** | Detección de meta, anomalías, tier lists S/A/B/C/D | `python scripts/setup_meta_analyzer.py` |
+| **Dashboard Enhanced** | Dashboard HTML con 4 tabs y filtros interactivos | `python scripts/generate_dashboard.py` |
+| **Draft Advisor** | Motor de recomendación de picks ADC | `cd src && python -m riot_lol_cli.draft_advisor.server` |
+| **API Server** | Backend REST FastAPI para meta analyzer | `python scripts/run_api.py` |
 
-## Instalación
+---
+
+## Quick Start
+
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
+# 1. Clonar y entorno virtual
+python -m venv .venv
+.venv\Scripts\activate          # Windows
+source .venv/bin/activate       # Linux/Mac
+
+# 2. Dependencias
 pip install -r requirements.txt
+
+# 3. API Key (obtener en https://developer.riotgames.com/)
+cp .env.example .env
+# Editar .env con tu RIOT_API_KEY
+
+# 4. Usar
+python main.py --platform la2 --summoner "Nombre#TAG" --html-template claude-4-5
 ```
 
-## Configurar API Key
-Puedes pasarla por variable de entorno o por argumento:
+Ver [docs/getting-started.md](docs/getting-started.md) para guía completa de cada subsistema.
 
-- Variable de entorno:
-  ```bash
-  export RIOT_API_KEY="tu_api_key"
-  ```
-- O como argumento `--api-key` al ejecutar.
+---
 
-Opcionalmente, copia `.env.example` a `.env` y exporta manualmente.
+## Estructura del Repositorio
 
-## Uso
-Ejemplos:
-```bash
-# Mostrar info y últimas 10 partidas (por defecto)
-python main.py --platform la2 --summoner "TuNombre"
-
-# Limitar a 5 partidas y pasar API key por argumento
-python main.py --platform la2 --summoner "TuNombre" --count 5 --api-key "$RIOT_API_KEY"
-
-# Usar Riot ID con tag (nombre#tag)
-python main.py --platform la2 --summoner "nombre#tag" --count 10
-
-# Último mes completo (ignora --count)
-python main.py --platform la2 --summoner "nombre#tag" --last-month
+```
+LOLCLI/
+├── main.py                    # Entry point del CLI
+├── requirements.txt           # Dependencias Python
+├── .env.example               # Template de variables de entorno
+├── AGENTS.md                  # Contexto para agentes de IA
+│
+├── src/riot_lol_cli/          # Código fuente principal
+│   ├── cli.py                 # Comandos Click (generate, build-splash-manifest, etc.)
+│   ├── api.py                 # Cliente Riot API (Summoner-V4, Match-V5)
+│   ├── api_server.py          # FastAPI backend
+│   ├── dashboard.py           # Generador de dashboard HTML
+│   ├── dashboard_enhanced.py  # Dashboard mejorado con tabs
+│   ├── html.py                # Utilidades de rendering
+│   ├── regions.py             # Mapping plataforma → región
+│   ├── database/              # SQLAlchemy ORM models
+│   ├── meta_analyzer/         # Sistema de detección de meta
+│   └── draft_advisor/         # Motor de recomendación ADC
+│
+├── templates/                 # Plantillas Jinja2 (HTML)
+├── config/                    # Configuración (version.json)
+├── data/                      # Datos y cache
+│   ├── cache/                 # Datos cacheados de partidas
+│   ├── draft_advisor/         # KB y perfiles del draft advisor
+│   └── splash-manifest.json   # Índice de splash arts
+│
+├── assets/                    # Assets estáticos
+│   ├── splash_arts/           # 2019 splash arts JPG (171 campeones)
+│   ├── items/                 # 623 iconos de ítems PNG
+│   └── data_id_imagen/        # Mapeo ID-imagen
+│
+├── scripts/                   # Scripts de utilidad
+│   ├── bat/                   # Batch scripts Windows
+│   ├── fetch_matches_full.py  # Fetch completo de partidas
+│   ├── download_splash_arts.py # Descarga splash arts
+│   ├── setup_meta_analyzer.py # Setup BD + datos demo
+│   ├── generate_dashboard.py  # Genera dashboard HTML
+│   ├── run_api.py             # Levanta API server
+│   └── ...
+│
+├── docs/                      # Documentación
+│   ├── getting-started.md     # Guía de inicio rápido
+│   ├── api-guide.md           # Guía de API
+│   ├── splash-viewer.md       # Guía del visor de splash arts
+│   ├── dashboard/             # Docs del dashboard
+│   ├── meta_analyzer/         # Docs del meta analyzer
+│   ├── adc_tracker/           # Docs del ADC tracker
+│   └── draft_advisor/         # Docs del draft advisor
+│
+├── .agent/rules/              # Reglas para agentes de IA
+├── _archive/                  # Proyectos legacy preservados
+├── _quarantine/               # Archivos pendientes de revisión
+└── _analysis/                 # Reportes de análisis
 ```
 
-- `--platform` es la ruta de plataforma (ej: `la2`, `la1`, `na1`, `br1`, `euw1`, `eun1`, `tr1`, `ru`, `kr`, `jp1`, `oc1`).
-- Internamente se mapea a la ruta regional para Match-V5 (`americas`, `europe`, `asia`).
+---
 
-## Qué hace
-1. Consulta Summoner-V4:
-   - `GET https://{platform}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summonerName}`
-   - Extrae `name`, `summonerLevel` y `puuid`.
-2. Consulta Match-V5 (ruta regional):
-   - `GET https://{regional}.api.riotgames.com/lol/match/v5/matches/by-puuid/{puuid}/ids?start=0&count=N`
-   - Para cada `matchId`, `GET https://{regional}.api.riotgames.com/lol/match/v5/matches/{matchId}` y resume tu desempeño.
+## Para Agentes de IA
 
-Además, si pasas `nombre#tag`, resuelve primero via Account-V1:
-- `GET https://{regional}.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{gameName}/{tagLine}` → `puuid`
-- Luego Summoner-V4 por PUUID.
+Leé [`AGENTS.md`](AGENTS.md) primero. Contiene la arquitectura, convenciones, puntos de entrada y gotchas del proyecto. Las reglas transversales están en [`.agent/rules/`](.agent/rules/).
 
-## Plataformas soportadas y región derivada
-- americas: `na1`, `br1`, `la1`, `la2`, `oc1`
-- europe: `euw1`, `eun1`, `tr1`, `ru`
-- asia: `kr`, `jp1`
+## Para Humanos Nuevos
 
-## Nota sobre límites de tasa (429)
-Se implementa reintento básico con `Retry-After` cuando esté presente. Si recibes muchos 429, espera o reduce la frecuencia de consultas.
+1. Leé este README
+2. Seguí [docs/getting-started.md](docs/getting-started.md) para setup
+3. Revisá [docs/api-guide.md](docs/api-guide.md) para la API key
+4. Explorá el subsistema que te interese en [docs/](docs/)
 
-## Salida esperada (ejemplo)
-```
-Invocador: TuNombre (Nivel 123) - Plataforma la2
-Últimas 5 partidas:
-- 2025-10-08 18:12 | ARAM | Lux | 12/3/18 | Win | LA2_1234567890
-- 2025-10-08 17:40 | CLASSIC | Ahri | 8/5/9 | Loss | LA2_0987654321
-```
+## Documentación
 
-## Exportar a HTML
-- Usa `--html-template` para generar un archivo HTML con una plantilla.
-- El archivo se genera en `outputs/<plantilla>/<slug>-<plantilla>.html`.
+| Documento | Descripción |
+|-----------|-------------|
+| [docs/getting-started.md](docs/getting-started.md) | Setup y primeros pasos |
+| [docs/api-guide.md](docs/api-guide.md) | API de Riot + API local |
+| [docs/splash-viewer.md](docs/splash-viewer.md) | Visor de splash arts |
+| [docs/README.md](docs/README.md) | Índice completo de docs |
 
-Ejemplos:
-```bash
-# Plantilla claude-4-5 (admite variantes de nombre: "claude 4 5", "claude-4-5")
-python main.py --platform la2 --summoner "nombre#tag" --count 10 --html-template "claude 4 5"
+## Estado de Reorganización
 
-# Cambiar directorio de salida
-python main.py --platform la2 --summoner "nombre#tag" --html-template claude-4-5 --out-dir export
-
-# Combinar con último mes
-python main.py --platform la2 --summoner "nombre#tag" --last-month --html-template claude-4-5
-```
-
-Plantillas disponibles:
-- `claude-4-5`
-
-## Problemas comunes
-- 401/403: API key inválida o expirada.
-- 404: invocador no encontrado (verifica `--platform` y nombre exacto).
-- 429: límite de tasa excedido; reintenta luego.
-
-## Estructura de Archivos y Directorios
-- **`main.py`**: Punto de entrada principal del programa.
-- **`src/riot_lol_cli/`**: Código fuente principal.
-  - `cli.py`: Lógica de la CLI, manejo de argumentos y flujo (incluye regiones y HTML integrados).
-  - `api.py`: Cliente para la API de Riot, con configuración de regiones.
-  - `templates/`: Plantillas HTML para exportación.
-- **`requirements.txt`**: Dependencias de Python.
-- **`.gitignore`**: Archivos a ignorar (e.g., `.venv/`, `outputs/`, `data/`).
-- **`.venv/`**: Entorno virtual (ignorado en repositorio).
-- **`config/`**: Archivos de configuración (e.g., `version.json` para versión del proyecto).
-- **`data/`**: Datos y caché generados (e.g., `cache/` con archivos como `matches.json` para datos de partidas; ignorado en repositorio).
-- **`outputs/`**: Archivos HTML generados por el usuario (e.g., `claude-4-5/` con informes exportados; ignorado en repositorio).
-- **`docs/`**: Para documentación futura (vacío).
-- **`scripts/`**: Para scripts utilitarios (vacío).
-- **`README.md`**: Esta documentación.
+Este repositorio fue reorganizado el 2026-04-23. Ver:
+- [REORGANIZATION_REPORT.md](REORGANIZATION_REPORT.md) — Reporte completo
+- [SECURITY_FINDINGS.md](SECURITY_FINDINGS.md) — Hallazgos de seguridad
+- [_analysis/](\_analysis/) — Reportes de análisis detallados
