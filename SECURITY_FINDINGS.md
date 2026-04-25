@@ -11,7 +11,7 @@ Hallazgos de seguridad detectados durante la reorganización del repositorio.
 
 - **Archivo:** `.env`
 - **Variable:** `RIOT_API_KEY`
-- **Valor:** `RGAPI-5cc19c70-06fe-4314-9375-2ffe00917e43`
+- **Valor:** `RGAPI-[REDACTED]`
 - **Estado en git:** NO commiteada (archivo untracked `??`), pero `.gitignore` NO la excluía
 - **Riesgo:** MEDIO — No está en el historial de git, pero la ausencia de `.gitignore` la hacía vulnerable a commit accidental
 - **Mitigación aplicada:** `.gitignore` actualizado para excluir `.env`
