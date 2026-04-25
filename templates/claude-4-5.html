@@ -162,6 +162,7 @@
       mask-composite: exclude;
       opacity: 0.6;
       animation: border-flow 3s linear infinite;
+      pointer-events: none;
     }
     @keyframes border-flow {
       0% { background-position: 0% 50%; }
@@ -179,6 +180,7 @@
       background: linear-gradient(90deg, transparent, var(--hextech-blue), transparent);
       box-shadow: 0 0 20px var(--hextech-blue);
       animation: glow-pulse 2s ease-in-out infinite;
+      pointer-events: none;
     }
     @keyframes glow-pulse {
       0%, 100% { opacity: 0.6; }
@@ -371,14 +373,12 @@
       right: 20px;
       font-size: 11px;
       font-weight: 600;
-      color: var(--text-tertiary);
-      opacity: 0.6;
+      color: #ffffff;
       letter-spacing: 0.05em;
       font-family: 'Courier New', monospace;
       transition: opacity 0.3s ease;
     }
     .version:hover {
-      opacity: 1;
       color: var(--hextech-gold);
       text-shadow: 0 0 10px rgba(200,155,60,0.5);
     }
@@ -438,6 +438,7 @@
       -webkit-mask-composite: xor;
       mask-composite: exclude;
       opacity: 0.4;
+      pointer-events: none;
     }
     /* Match History Styles */
     .match-history {
@@ -1015,6 +1016,27 @@
       vertical-align: middle;
       height: 100%;
     }
+    /* Empty state */
+    #emptyStateRow { display: none; }
+    .empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 40px 20px;
+      color: var(--text-secondary);
+      background: rgba(0,0,0,0.25);
+      border: 1px dashed var(--border-metal);
+      border-radius: 12px;
+      text-align: center;
+    }
+    .empty-state-title {
+      color: var(--hextech-gold-bright);
+      font-weight: 900;
+      letter-spacing: 0.06em;
+    }
+    .empty-state-hint { font-size: 14px; }
     tbody tr {
       position: relative;
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -2032,6 +2054,14 @@
                     </tr>
                 </thead>
                 <tbody id="matchesTableBody">
+                    <tr id="emptyStateRow" style="display:none;">
+                      <td colspan="4">
+                        <div class="empty-state">
+                          <div class="empty-state-title">Sin resultados</div>
+                          <div class="empty-state-hint">No encontramos partidas que coincidan con tu búsqueda. Intenta con otro nombre de campeón o limpia el filtro.</div>
+                        </div>
+                      </td>
+                    </tr>
                     {{matches_rows}}
                 </tbody>
             </table>
@@ -2091,7 +2121,9 @@
         return;
       }
       
-      allRows = Array.from(tbody.querySelectorAll('tr'));
+      // Excluir la fila de empty state del conjunto de datos
+      allRows = Array.from(tbody.querySelectorAll('tr')).filter(r => r.id !== 'emptyStateRow');
+      const emptyRow = document.getElementById('emptyStateRow');
       console.log('Total de filas cargadas:', allRows.length);
       
       // Filtros
@@ -2109,11 +2141,15 @@
       // Búsqueda
       const searchInput = document.getElementById('championSearch');
       if (searchInput) {
-        searchInput.addEventListener('input', function(e) {
-          searchQuery = e.target.value.toLowerCase();
+        const handleSearch = (e) => {
+          searchQuery = (e.target?.value || searchInput.value || '').toLowerCase();
+          console.log('Search query:', searchQuery);
           currentPage = 1;
           filterAndPaginate();
-        });
+        };
+        searchInput.addEventListener('input', handleSearch);
+        searchInput.addEventListener('keyup', handleSearch);
+        searchInput.addEventListener('change', handleSearch);
       }
       
       // Selector de items por página (ambos)
@@ -2201,25 +2237,20 @@
     });
     
     function getFilteredRows() {
+      const q = (searchQuery || '').toLowerCase().trim();
       return allRows.filter(row => {
         // Filtro por resultado
-        if (currentFilter !== 'all') {
-          if (!row.classList.contains(currentFilter)) return false;
-        }
-        
-        // Filtro por búsqueda
-        if (searchQuery) {
-          const championName = row.querySelector('.champ-name');
-          if (!championName || !championName.textContent.toLowerCase().includes(searchQuery)) {
-            return false;
-          }
-        }
-        
+        if (currentFilter !== 'all' && !row.classList.contains(currentFilter)) return false;
+        // Filtro por búsqueda (siempre evalúa; con q == '' todos pasan)
+        const championName = row.querySelector('.champ-name');
+        if (!championName) return false;
+        if (!championName.textContent.toLowerCase().includes(q)) return false;
         return true;
       });
     }
     
     function filterAndPaginate() {
+      const emptyRow = document.getElementById('emptyStateRow');
       const filteredRows = getFilteredRows();
       const totalPages = Math.ceil(filteredRows.length / itemsPerPage) || 1;
       const startIndex = (currentPage - 1) * itemsPerPage;
@@ -2227,8 +2258,36 @@
       
       console.log('Filtradas:', filteredRows.length, 'Total páginas:', totalPages, 'Página actual:', currentPage);
       
-      // Ocultar todas las filas
+      // Ocultar todas las filas y el empty state por defecto
       allRows.forEach(row => row.style.display = 'none');
+      if (emptyRow) emptyRow.style.display = 'none';
+
+      // Si no hay resultados, mostrar empty state y ajustar paginación
+      if (filteredRows.length === 0) {
+        if (emptyRow) emptyRow.style.display = 'table-row';
+        const currentPageEls = [
+          document.getElementById('currentPage'),
+          document.getElementById('currentPageTop')
+        ];
+        const totalPagesEls = [
+          document.getElementById('totalPages'),
+          document.getElementById('totalPagesTop')
+        ];
+        const prevBtns = [
+          document.getElementById('prevPage'),
+          document.getElementById('prevPageTop')
+        ];
+        const nextBtns = [
+          document.getElementById('nextPage'),
+          document.getElementById('nextPageTop')
+        ];
+        currentPage = 1;
+        currentPageEls.forEach(el => { if (el) el.textContent = 1; });
+        totalPagesEls.forEach(el => { if (el) el.textContent = 1; });
+        prevBtns.forEach(btn => { if (btn) btn.disabled = true; });
+        nextBtns.forEach(btn => { if (btn) btn.disabled = true; });
+        return;
+      }
       
       // Mostrar solo las filas de la página actual
       filteredRows.slice(startIndex, endIndex).forEach(row => {

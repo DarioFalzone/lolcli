@@ -96,3 +96,31 @@ class RiotClient:
         if not isinstance(data, list) or not data:
             raise RiotAPIError("Respuesta inesperada de Data Dragon versions")
         return data
+
+    def get_ddragon_summoner_spells(self, version: str) -> Dict[str, Any]:
+        """Obtiene el catálogo de hechizos de invocador de Data Dragon para una versión.
+        Devuelve el JSON completo tal como viene de DDragon.
+        """
+        url = f"https://ddragon.leagueoflegends.com/cdn/{version}/data/en_US/summoner.json"
+        resp = requests.get(url, timeout=self.timeout)
+        if resp.status_code != 200:
+            raise RiotAPIError(f"No se pudieron obtener summoner spells: {resp.status_code}")
+        return resp.json()
+
+    def get_ddragon_runes(self, version: str) -> List[Dict[str, Any]]:
+        """Obtiene runesReforged (árboles y runas) para una versión.
+        Devuelve una lista de árboles con sus runas.
+        """
+        url = f"https://ddragon.leagueoflegends.com/cdn/{version}/data/en_US/runesReforged.json"
+        resp = requests.get(url, timeout=self.timeout)
+        if resp.status_code != 200:
+            raise RiotAPIError(f"No se pudieron obtener runesReforged: {resp.status_code}")
+        return resp.json()
+
+    def get_queues(self) -> List[Dict[str, Any]]:
+        """Obtiene el catálogo estático de colas para mapear queueId -> descripción."""
+        url = "https://static.developer.riotgames.com/docs/lol/queues.json"
+        resp = requests.get(url, timeout=self.timeout)
+        if resp.status_code != 200:
+            raise RiotAPIError(f"No se pudieron obtener queues.json: {resp.status_code}")
+        return resp.json()

@@ -1,18 +1,368 @@
 {
   "version": 1,
-  "generated_at": "2025-10-11 03:49",
+  "generated_at": "2025-10-24 15:12",
   "platform": "la2",
   "server": "LAS",
   "display_name": "Deshu#LAS",
-  "level": 83,
-  "puuid": "anCkjnOuXZ89pdOKryVO6F6g-nqWLLdJdMzPrlwJ4VUkpBzhMIr15CT9CfVFW97cjfoohWdhyaI5Pg",
-  "ddragon_version": "15.20.1",
+  "level": 84,
+  "puuid": "f8mxI-o43RUMjb7yBFUTQ5yClaBjkiWcDqkIWYMw4TPSycrF5Bik1ifSTmY5Igd8Rw-4I8NoiFLIVw",
+  "ddragon_version": "15.21.1",
   "profileIconId": 6700,
   "filters": {
     "range": "last_100",
     "queue": 420
   },
   "rows": [
+    {
+      "champ": "Naafiri",
+      "champ_id": "Naafiri",
+      "champ_level": 18,
+      "kda": "9/6/19",
+      "kda_ratio": 4.67,
+      "kills": 9,
+      "deaths": 6,
+      "assists": 19,
+      "win": true,
+      "match_id": "LA2_1541270928",
+      "items": [
+        3071,
+        6692,
+        3171,
+        3161,
+        3814,
+        0,
+        3364
+      ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Inspiration",
+          "runes": [
+            "Cosmic Insight",
+            "Magical Footwear"
+          ]
+        }
+      },
+      "total_damage_dealt": 24877,
+      "gold_earned": 15889,
+      "vision_score": 35,
+      "cs": 182,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
+      "game_duration": "34:54",
+      "game_duration_seconds": 2094,
+      "game_creation": "2025-10-23 22:37:43",
+      "time_ago": "Hace 16 horas",
+      "ddragon_version": "15.21.1"
+    },
+    {
+      "champ": "Naafiri",
+      "champ_id": "Naafiri",
+      "champ_level": 11,
+      "kda": "6/0/1",
+      "kda_ratio": 7,
+      "kills": 6,
+      "deaths": 0,
+      "assists": 1,
+      "win": true,
+      "match_id": "LA2_1540970553",
+      "items": [
+        3071,
+        6692,
+        3158,
+        2021,
+        0,
+        0,
+        3364
+      ],
+      "role": "SUPPORT",
+      "lane": "NONE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Treasure Hunter"
+          ]
+        }
+      },
+      "total_damage_dealt": 5769,
+      "gold_earned": 8737,
+      "vision_score": 7,
+      "cs": 114,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 1,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
+      "game_duration": "19:20",
+      "game_duration_seconds": 1160,
+      "game_creation": "2025-10-22 15:07:52",
+      "time_ago": "Hace 2 días",
+      "ddragon_version": "15.21.1"
+    },
+    {
+      "champ": "Ekko",
+      "champ_id": "Ekko",
+      "champ_level": 15,
+      "kda": "4/7/10",
+      "kda_ratio": 2.0,
+      "kills": 4,
+      "deaths": 7,
+      "assists": 10,
+      "win": false,
+      "match_id": "LA2_1540961772",
+      "items": [
+        2420,
+        1082,
+        3115,
+        3020,
+        3100,
+        1058,
+        3364
+      ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Domination",
+          "runes": [
+            "Dark Harvest",
+            "Sudden Impact",
+            "Grisly Mementos",
+            "Treasure Hunter"
+          ]
+        },
+        "secondary": {
+          "style": "Inspiration",
+          "runes": [
+            "Cosmic Insight",
+            "Magical Footwear"
+          ]
+        }
+      },
+      "total_damage_dealt": 18789,
+      "gold_earned": 11049,
+      "vision_score": 22,
+      "cs": 173,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
+      "game_duration": "30:04",
+      "game_duration_seconds": 1804,
+      "game_creation": "2025-10-22 14:09:56",
+      "time_ago": "Hace 2 días",
+      "ddragon_version": "15.21.1"
+    },
+    {
+      "champ": "Diana",
+      "champ_id": "Diana",
+      "champ_level": 18,
+      "kda": "8/5/12",
+      "kda_ratio": 4.0,
+      "kills": 8,
+      "deaths": 5,
+      "assists": 12,
+      "win": true,
+      "match_id": "LA2_1540941274",
+      "items": [
+        3157,
+        6653,
+        3115,
+        3175,
+        3145,
+        1058,
+        3364
+      ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Inspiration",
+          "runes": [
+            "Cosmic Insight",
+            "Magical Footwear"
+          ]
+        }
+      },
+      "total_damage_dealt": 37672,
+      "gold_earned": 15370,
+      "vision_score": 26,
+      "cs": 259,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 2,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
+      "game_duration": "32:23",
+      "game_duration_seconds": 1943,
+      "game_creation": "2025-10-22 09:34:13",
+      "time_ago": "Hace 2 días",
+      "ddragon_version": "15.21.1"
+    },
+    {
+      "champ": "Vi",
+      "champ_id": "Vi",
+      "champ_level": 13,
+      "kda": "0/5/7",
+      "kda_ratio": 1.4,
+      "kills": 0,
+      "deaths": 5,
+      "assists": 7,
+      "win": false,
+      "match_id": "LA2_1538559936",
+      "items": [
+        3111,
+        6610,
+        3067,
+        1036,
+        1028,
+        0,
+        3364
+      ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 440,
+      "queue": "5v5 Ranked Flex games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Ultimate Hunter"
+          ]
+        }
+      },
+      "total_damage_dealt": 10108,
+      "gold_earned": 7835,
+      "vision_score": 12,
+      "cs": 165,
+      "largest_multi_kill": 0,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
+      "game_duration": "24:16",
+      "game_duration_seconds": 1456,
+      "game_creation": "2025-10-12 02:35:07",
+      "time_ago": "Hace 12 días",
+      "ddragon_version": "15.21.1"
+    },
     {
       "champ": "TwistedFate",
       "champ_id": "TwistedFate",
@@ -33,14 +383,55 @@
         3871,
         3364
       ],
+      "role": "SUPPORT",
+      "lane": "NONE",
+      "team_position": "UTILITY",
+      "queue_id": 480,
+      "queue": "480",
+      "summoners": {
+        "d": {
+          "id": 12,
+          "name": "Teleport"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Inspiration",
+          "runes": [
+            "Unsealed Spellbook",
+            "Cash Back",
+            "Biscuit Delivery",
+            "Jack Of All Trades"
+          ]
+        },
+        "secondary": {
+          "style": "Resolve",
+          "runes": [
+            "Bone Plating",
+            "Unflinching"
+          ]
+        }
+      },
       "total_damage_dealt": 5241,
       "gold_earned": 8084,
       "vision_score": 19,
+      "cs": 50,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "16:26",
       "game_duration_seconds": 986,
       "game_creation": "2025-10-09 21:32:52",
-      "time_ago": "Hace 1 día",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 14 días",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Lux",
@@ -62,14 +453,55 @@
         3871,
         3364
       ],
+      "role": "DUO",
+      "lane": "BOTTOM",
+      "team_position": "UTILITY",
+      "queue_id": 480,
+      "queue": "480",
+      "summoners": {
+        "d": {
+          "id": 14,
+          "name": "Ignite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Sorcery",
+          "runes": [
+            "Arcane Comet",
+            "Manaflow Band",
+            "Transcendence",
+            "Scorch"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 38325,
       "gold_earned": 14683,
       "vision_score": 49,
+      "cs": 77,
+      "largest_multi_kill": 3,
+      "multi_kills": {
+        "double": 1,
+        "triple": 1,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "26:47",
       "game_duration_seconds": 1607,
       "game_creation": "2025-10-09 21:01:32",
-      "time_ago": "Hace 1 día",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 14 días",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "MonkeyKing",
@@ -91,14 +523,55 @@
         3156,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 29212,
       "gold_earned": 16904,
       "vision_score": 33,
+      "cs": 252,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "41:20",
       "game_duration_seconds": 2480,
       "game_creation": "2025-10-09 12:35:53",
-      "time_ago": "Hace 1 día",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 15 días",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "MonkeyKing",
@@ -120,14 +593,55 @@
         3057,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 34774,
       "gold_earned": 16487,
       "vision_score": 26,
+      "cs": 218,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 1,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "44:15",
       "game_duration_seconds": 2655,
       "game_creation": "2025-10-08 19:22:28",
-      "time_ago": "Hace 2 días",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 15 días",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Briar",
@@ -149,14 +663,55 @@
         1036,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Treasure Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 9748,
       "gold_earned": 10576,
       "vision_score": 13,
+      "cs": 160,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "27:22",
       "game_duration_seconds": 1642,
       "game_creation": "2025-10-08 18:49:07",
-      "time_ago": "Hace 2 días",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 15 días",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Briar",
@@ -178,14 +733,55 @@
         1053,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Treasure Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 32291,
       "gold_earned": 16641,
       "vision_score": 12,
+      "cs": 213,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 1,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "37:06",
       "game_duration_seconds": 2226,
       "game_creation": "2025-10-08 10:02:15",
-      "time_ago": "Hace 2 días",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 16 días",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Briar",
@@ -207,14 +803,55 @@
         0,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Treasure Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 25199,
       "gold_earned": 13778,
       "vision_score": 22,
+      "cs": 163,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 1,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "29:29",
       "game_duration_seconds": 1769,
       "game_creation": "2025-10-07 18:01:56",
-      "time_ago": "Hace 3 días",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 16 días",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Briar",
@@ -236,14 +873,55 @@
         0,
         3364
       ],
+      "role": "SUPPORT",
+      "lane": "NONE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Treasure Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 7618,
       "gold_earned": 7061,
       "vision_score": 8,
+      "cs": 95,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "15:37",
       "game_duration_seconds": 937,
       "game_creation": "2025-10-07 17:38:59",
-      "time_ago": "Hace 3 días",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 16 días",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Yasuo",
@@ -265,14 +943,55 @@
         0,
         2052
       ],
+      "role": "SUPPORT",
+      "lane": "NONE",
+      "team_position": "",
+      "queue_id": 450,
+      "queue": "5v5 ARAM games",
+      "summoners": {
+        "d": {
+          "id": 32,
+          "name": "Mark"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Taste of Blood",
+            "Treasure Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 38765,
       "gold_earned": 15486,
       "vision_score": 0,
+      "cs": 67,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 4,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "19:50",
       "game_duration_seconds": 1190,
       "game_creation": "2025-10-07 12:28:40",
-      "time_ago": "Hace 3 días",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 17 días",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "MonkeyKing",
@@ -294,14 +1013,55 @@
         0,
         2052
       ],
+      "role": "SUPPORT",
+      "lane": "NONE",
+      "team_position": "",
+      "queue_id": 450,
+      "queue": "5v5 ARAM games",
+      "summoners": {
+        "d": {
+          "id": 32,
+          "name": "Mark"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Haste",
+            "Last Stand"
+          ]
+        },
+        "secondary": {
+          "style": "Resolve",
+          "runes": [
+            "Bone Plating",
+            "Unflinching"
+          ]
+        }
+      },
       "total_damage_dealt": 29243,
       "gold_earned": 12124,
       "vision_score": 0,
+      "cs": 23,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 2,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "15:19",
       "game_duration_seconds": 919,
       "game_creation": "2025-10-07 12:08:46",
-      "time_ago": "Hace 3 días",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 17 días",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Chogath",
@@ -323,14 +1083,55 @@
         3066,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Domination",
+          "runes": [
+            "Hail of Blades",
+            "Cheap Shot",
+            "Grisly Mementos",
+            "Ultimate Hunter"
+          ]
+        },
+        "secondary": {
+          "style": "Sorcery",
+          "runes": [
+            "Axiom Arcanist",
+            "Celerity"
+          ]
+        }
+      },
       "total_damage_dealt": 20012,
       "gold_earned": 13164,
       "vision_score": 27,
+      "cs": 182,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "35:05",
       "game_duration_seconds": 2105,
       "game_creation": "2025-10-06 14:55:47",
-      "time_ago": "Hace 4 días",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 18 días",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "MonkeyKing",
@@ -352,14 +1153,55 @@
         2019,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 36896,
       "gold_earned": 17148,
       "vision_score": 24,
+      "cs": 249,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "45:55",
       "game_duration_seconds": 2755,
       "game_creation": "2025-10-06 09:42:59",
-      "time_ago": "Hace 4 días",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 18 días",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Amumu",
@@ -381,14 +1223,55 @@
         1033,
         3340
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 440,
+      "queue": "5v5 Ranked Flex games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Resolve",
+          "runes": [
+            "Aftershock",
+            "Font of Life",
+            "Bone Plating",
+            "Unflinching"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 13021,
       "gold_earned": 9047,
       "vision_score": 13,
+      "cs": 107,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "25:50",
       "game_duration_seconds": 1550,
       "game_creation": "2025-10-06 02:57:48",
-      "time_ago": "Hace 5 días",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 18 días",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Warwick",
@@ -410,14 +1293,55 @@
         2055,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 440,
+      "queue": "5v5 Ranked Flex games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Triumph",
+            "Legend: Haste",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Relentless Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 14352,
       "gold_earned": 9933,
       "vision_score": 25,
+      "cs": 121,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "29:17",
       "game_duration_seconds": 1757,
       "game_creation": "2025-10-06 02:13:21",
-      "time_ago": "Hace 5 días",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 18 días",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Vi",
@@ -439,14 +1363,55 @@
         0,
         3340
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 440,
+      "queue": "5v5 Ranked Flex games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Triumph",
+            "Legend: Haste",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Relentless Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 18051,
       "gold_earned": 12325,
       "vision_score": 34,
+      "cs": 203,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "31:43",
       "game_duration_seconds": 1903,
       "game_creation": "2025-10-06 01:35:22",
-      "time_ago": "Hace 5 días",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 18 días",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Sejuani",
@@ -468,14 +1433,55 @@
         1057,
         3340
       ],
+      "role": "SUPPORT",
+      "lane": "NONE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Triumph",
+            "Legend: Haste",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Relentless Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 9320,
       "gold_earned": 9558,
       "vision_score": 20,
+      "cs": 135,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "19:21",
       "game_duration_seconds": 1161,
       "game_creation": "2025-10-06 01:00:59",
-      "time_ago": "Hace 5 días",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 18 días",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Warwick",
@@ -497,14 +1503,55 @@
         0,
         3340
       ],
+      "role": "SUPPORT",
+      "lane": "NONE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Triumph",
+            "Legend: Haste",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Relentless Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 1855,
       "gold_earned": 2531,
       "vision_score": 4,
+      "cs": 20,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 1,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "5:30",
       "game_duration_seconds": 330,
       "game_creation": "2025-10-06 00:41:53",
-      "time_ago": "Hace 5 días",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 18 días",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Briar",
@@ -526,14 +1573,55 @@
         0,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Triumph",
+            "Legend: Haste",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Relentless Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 20852,
       "gold_earned": 12856,
       "vision_score": 10,
+      "cs": 156,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "28:52",
       "game_duration_seconds": 1732,
       "game_creation": "2025-10-05 20:03:52",
-      "time_ago": "Hace 5 días",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 18 días",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Nocturne",
@@ -555,14 +1643,55 @@
         1036,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Triumph",
+            "Legend: Haste",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Relentless Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 8530,
       "gold_earned": 7645,
       "vision_score": 12,
+      "cs": 102,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "23:30",
       "game_duration_seconds": 1410,
       "game_creation": "2025-10-05 19:32:19",
-      "time_ago": "Hace 5 días",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 18 días",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "MonkeyKing",
@@ -584,14 +1713,55 @@
         0,
         3340
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Triumph",
+            "Legend: Haste",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Relentless Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 6101,
       "gold_earned": 7786,
       "vision_score": 16,
+      "cs": 124,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "22:17",
       "game_duration_seconds": 1337,
       "game_creation": "2025-10-05 18:38:12",
-      "time_ago": "Hace 5 días",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 18 días",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Briar",
@@ -613,14 +1783,55 @@
         0,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Triumph",
+            "Legend: Haste",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Relentless Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 19588,
       "gold_earned": 10976,
       "vision_score": 12,
+      "cs": 133,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "23:31",
       "game_duration_seconds": 1411,
       "game_creation": "2025-10-05 17:05:42",
-      "time_ago": "Hace 5 días",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 18 días",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "XinZhao",
@@ -642,14 +1853,55 @@
         0,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Triumph",
+            "Legend: Haste",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Relentless Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 12329,
       "gold_earned": 9351,
       "vision_score": 10,
+      "cs": 133,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "23:16",
       "game_duration_seconds": 1396,
       "game_creation": "2025-10-05 02:25:31",
-      "time_ago": "Hace 6 días",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 19 días",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Yasuo",
@@ -671,14 +1923,55 @@
         3032,
         2052
       ],
+      "role": "SOLO",
+      "lane": "TOP",
+      "team_position": "",
+      "queue_id": 450,
+      "queue": "5v5 ARAM games",
+      "summoners": {
+        "d": {
+          "id": 32,
+          "name": "Mark"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Last Stand"
+          ]
+        },
+        "secondary": {
+          "style": "Resolve",
+          "runes": [
+            "Bone Plating",
+            "Unflinching"
+          ]
+        }
+      },
       "total_damage_dealt": 50059,
       "gold_earned": 16036,
       "vision_score": 0,
+      "cs": 67,
+      "largest_multi_kill": 3,
+      "multi_kills": {
+        "double": 2,
+        "triple": 1,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "21:45",
       "game_duration_seconds": 1305,
       "game_creation": "2025-09-04 22:16:18",
       "time_ago": "Hace 1 mes",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "RekSai",
@@ -700,14 +1993,55 @@
         3133,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Inspiration",
+          "runes": [
+            "Cosmic Insight",
+            "Magical Footwear"
+          ]
+        }
+      },
       "total_damage_dealt": 23052,
       "gold_earned": 14192,
       "vision_score": 21,
+      "cs": 207,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "37:40",
       "game_duration_seconds": 2260,
       "game_creation": "2025-08-26 23:52:27",
       "time_ago": "Hace 1 mes",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "RekSai",
@@ -729,14 +2063,55 @@
         3133,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Grisly Mementos",
+            "Treasure Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 24149,
       "gold_earned": 13483,
       "vision_score": 23,
+      "cs": 190,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "31:42",
       "game_duration_seconds": 1902,
       "game_creation": "2025-08-26 22:35:55",
       "time_ago": "Hace 1 mes",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Pantheon",
@@ -758,14 +2133,55 @@
         0,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 700,
+      "queue": "Summoner's Rift Clash games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Presence of Mind",
+            "Legend: Haste",
+            "Last Stand"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 12804,
       "gold_earned": 10212,
       "vision_score": 11,
+      "cs": 125,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 1,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "26:30",
       "game_duration_seconds": 1590,
       "game_creation": "2025-05-24 22:38:29",
-      "time_ago": "Hace 4 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 5 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Skarner",
@@ -787,14 +2203,55 @@
         0,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 700,
+      "queue": "Summoner's Rift Clash games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Resolve",
+          "runes": [
+            "Grasp of the Undying",
+            "Shield Bash",
+            "Conditioning",
+            "Overgrowth"
+          ]
+        },
+        "secondary": {
+          "style": "Inspiration",
+          "runes": [
+            "Approach Velocity",
+            "Magical Footwear"
+          ]
+        }
+      },
       "total_damage_dealt": 20407,
       "gold_earned": 12371,
       "vision_score": 13,
+      "cs": 183,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 1,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "31:51",
       "game_duration_seconds": 1911,
       "game_creation": "2025-05-24 21:52:22",
-      "time_ago": "Hace 4 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 5 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Nocturne",
@@ -816,14 +2273,55 @@
         1028,
         3363
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 700,
+      "queue": "Summoner's Rift Clash games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Last Stand"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Grisly Mementos",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 22134,
       "gold_earned": 14778,
       "vision_score": 12,
+      "cs": 194,
+      "largest_multi_kill": 3,
+      "multi_kills": {
+        "double": 1,
+        "triple": 1,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "28:13",
       "game_duration_seconds": 1693,
       "game_creation": "2025-05-24 21:07:12",
-      "time_ago": "Hace 4 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 5 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Vi",
@@ -845,14 +2343,55 @@
         0,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 11257,
       "gold_earned": 9117,
       "vision_score": 13,
+      "cs": 168,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "24:38",
       "game_duration_seconds": 1478,
       "game_creation": "2025-04-29 13:43:31",
       "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Naafiri",
@@ -874,14 +2413,55 @@
         0,
         3363
       ],
+      "role": "SUPPORT",
+      "lane": "TOP",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Treasure Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 25362,
       "gold_earned": 14803,
       "vision_score": 16,
+      "cs": 197,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 2,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "36:02",
       "game_duration_seconds": 2162,
       "game_creation": "2025-04-29 12:56:34",
       "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Naafiri",
@@ -903,14 +2483,55 @@
         1037,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 700,
+      "queue": "Summoner's Rift Clash games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Treasure Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 22182,
       "gold_earned": 13281,
       "vision_score": 23,
+      "cs": 156,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 1,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "31:59",
       "game_duration_seconds": 1919,
       "game_creation": "2025-04-19 21:50:54",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Amumu",
@@ -932,14 +2553,55 @@
         1028,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 700,
+      "queue": "Summoner's Rift Clash games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Triumph",
+            "Legend: Haste",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Relentless Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 17770,
       "gold_earned": 9967,
       "vision_score": 18,
+      "cs": 152,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "26:43",
       "game_duration_seconds": 1603,
       "game_creation": "2025-04-19 20:58:32",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Vi",
@@ -961,14 +2623,55 @@
         0,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 700,
+      "queue": "Summoner's Rift Clash games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Triumph",
+            "Legend: Haste",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Relentless Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 15268,
       "gold_earned": 12664,
       "vision_score": 25,
+      "cs": 195,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "32:13",
       "game_duration_seconds": 1933,
       "game_creation": "2025-04-19 20:02:37",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Vi",
@@ -990,14 +2693,55 @@
         0,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Triumph",
+            "Legend: Haste",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Relentless Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 14032,
       "gold_earned": 12273,
       "vision_score": 26,
+      "cs": 177,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 1,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "31:44",
       "game_duration_seconds": 1904,
       "game_creation": "2025-04-19 16:29:20",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Nocturne",
@@ -1019,14 +2763,55 @@
         0,
         3363
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Triumph",
+            "Legend: Haste",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Relentless Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 11398,
       "gold_earned": 10638,
       "vision_score": 12,
+      "cs": 177,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 1,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "26:59",
       "game_duration_seconds": 1619,
       "game_creation": "2025-04-19 14:38:58",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Ekko",
@@ -1048,14 +2833,55 @@
         0,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Triumph",
+            "Legend: Haste",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Relentless Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 17639,
       "gold_earned": 10626,
       "vision_score": 9,
+      "cs": 156,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "28:54",
       "game_duration_seconds": 1734,
       "game_creation": "2025-04-19 14:00:06",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Naafiri",
@@ -1077,14 +2903,55 @@
         1028,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Inspiration",
+          "runes": [
+            "Cosmic Insight",
+            "Magical Footwear"
+          ]
+        }
+      },
       "total_damage_dealt": 45465,
       "gold_earned": 15790,
       "vision_score": 21,
+      "cs": 196,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "44:13",
       "game_duration_seconds": 2653,
       "game_creation": "2025-04-17 14:37:04",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "LeeSin",
@@ -1106,14 +2973,55 @@
         1028,
         3340
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Inspiration",
+          "runes": [
+            "Cosmic Insight",
+            "Magical Footwear"
+          ]
+        }
+      },
       "total_damage_dealt": 26131,
       "gold_earned": 12788,
       "vision_score": 33,
+      "cs": 149,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "33:18",
       "game_duration_seconds": 1998,
       "game_creation": "2025-04-17 13:23:34",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Naafiri",
@@ -1135,14 +3043,55 @@
         0,
         3364
       ],
+      "role": "SUPPORT",
+      "lane": "NONE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Treasure Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 5567,
       "gold_earned": 6825,
       "vision_score": 9,
+      "cs": 103,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "16:31",
       "game_duration_seconds": 991,
       "game_creation": "2025-04-17 12:59:50",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "LeeSin",
@@ -1164,14 +3113,55 @@
         2055,
         3340
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Treasure Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 17496,
       "gold_earned": 12097,
       "vision_score": 36,
+      "cs": 185,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "41:25",
       "game_duration_seconds": 2485,
       "game_creation": "2025-04-16 23:11:44",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Belveth",
@@ -1193,14 +3183,55 @@
         1036,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Inspiration",
+          "runes": [
+            "Cosmic Insight",
+            "Magical Footwear"
+          ]
+        }
+      },
       "total_damage_dealt": 14693,
       "gold_earned": 12949,
       "vision_score": 22,
+      "cs": 231,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "36:01",
       "game_duration_seconds": 2161,
       "game_creation": "2025-04-16 22:04:14",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Nocturne",
@@ -1222,14 +3253,55 @@
         0,
         3364
       ],
+      "role": "SUPPORT",
+      "lane": "NONE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Last Stand"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Grisly Mementos",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 0,
       "gold_earned": 605,
       "vision_score": 0,
+      "cs": 4,
+      "largest_multi_kill": 0,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "1:47",
       "game_duration_seconds": 107,
       "game_creation": "2025-04-16 21:51:08",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Vi",
@@ -1251,14 +3323,55 @@
         1036,
         3363
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 27140,
       "gold_earned": 15207,
       "vision_score": 23,
+      "cs": 190,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "36:51",
       "game_duration_seconds": 2211,
       "game_creation": "2025-04-16 20:33:14",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Vi",
@@ -1280,14 +3393,55 @@
         0,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 11377,
       "gold_earned": 10116,
       "vision_score": 11,
+      "cs": 138,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "24:36",
       "game_duration_seconds": 1476,
       "game_creation": "2025-04-16 19:18:17",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "LeeSin",
@@ -1309,14 +3463,55 @@
         2055,
         3340
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Treasure Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 25221,
       "gold_earned": 15030,
       "vision_score": 33,
+      "cs": 178,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 1,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "33:19",
       "game_duration_seconds": 1999,
       "game_creation": "2025-04-16 18:34:47",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Gwen",
@@ -1338,14 +3533,55 @@
         0,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 6,
+          "name": "Ghost"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Presence of Mind",
+            "Legend: Alacrity",
+            "Last Stand"
+          ]
+        },
+        "secondary": {
+          "style": "Resolve",
+          "runes": [
+            "Bone Plating",
+            "Unflinching"
+          ]
+        }
+      },
       "total_damage_dealt": 11236,
       "gold_earned": 9417,
       "vision_score": 14,
+      "cs": 177,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "25:08",
       "game_duration_seconds": 1508,
       "game_creation": "2025-04-16 15:05:21",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Vi",
@@ -1367,14 +3603,55 @@
         1028,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 12972,
       "gold_earned": 13328,
       "vision_score": 22,
+      "cs": 268,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "33:48",
       "game_duration_seconds": 2028,
       "game_creation": "2025-04-16 14:23:32",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "LeeSin",
@@ -1396,14 +3673,55 @@
         0,
         3340
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Treasure Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 23513,
       "gold_earned": 14508,
       "vision_score": 35,
+      "cs": 185,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 2,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "29:19",
       "game_duration_seconds": 1759,
       "game_creation": "2025-04-16 13:48:12",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Brand",
@@ -1425,14 +3743,55 @@
         3871,
         3364
       ],
+      "role": "SUPPORT",
+      "lane": "BOTTOM",
+      "team_position": "UTILITY",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 14,
+          "name": "Ignite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Sorcery",
+          "runes": [
+            "Arcane Comet",
+            "Manaflow Band",
+            "Transcendence",
+            "Scorch"
+          ]
+        },
+        "secondary": {
+          "style": "Inspiration",
+          "runes": [
+            "Biscuit Delivery",
+            "Cosmic Insight"
+          ]
+        }
+      },
       "total_damage_dealt": 13000,
       "gold_earned": 6699,
       "vision_score": 38,
+      "cs": 66,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "23:30",
       "game_duration_seconds": 1410,
       "game_creation": "2025-04-16 12:00:04",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Vi",
@@ -1454,14 +3813,55 @@
         0,
         3364
       ],
+      "role": "SUPPORT",
+      "lane": "NONE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 6573,
       "gold_earned": 5871,
       "vision_score": 9,
+      "cs": 89,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "16:31",
       "game_duration_seconds": 991,
       "game_creation": "2025-04-16 11:36:16",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Morgana",
@@ -1483,14 +3883,55 @@
         3871,
         3364
       ],
+      "role": "SUPPORT",
+      "lane": "BOTTOM",
+      "team_position": "UTILITY",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 14,
+          "name": "Ignite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Sorcery",
+          "runes": [
+            "Arcane Comet",
+            "Manaflow Band",
+            "Transcendence",
+            "Scorch"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 27735,
       "gold_earned": 11752,
       "vision_score": 83,
+      "cs": 87,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "35:15",
       "game_duration_seconds": 2115,
       "game_creation": "2025-04-16 09:55:55",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Briar",
@@ -1512,14 +3953,55 @@
         0,
         3340
       ],
+      "role": "SUPPORT",
+      "lane": "NONE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Resolve",
+          "runes": [
+            "Conditioning",
+            "Overgrowth"
+          ]
+        }
+      },
       "total_damage_dealt": 287,
       "gold_earned": 1317,
       "vision_score": 1,
+      "cs": 20,
+      "largest_multi_kill": 0,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "4:23",
       "game_duration_seconds": 263,
       "game_creation": "2025-04-15 20:39:52",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Vi",
@@ -1541,14 +4023,55 @@
         0,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 19476,
       "gold_earned": 12668,
       "vision_score": 14,
+      "cs": 206,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "31:53",
       "game_duration_seconds": 1913,
       "game_creation": "2025-04-15 20:02:08",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Vi",
@@ -1570,14 +4093,55 @@
         1036,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 21718,
       "gold_earned": 14456,
       "vision_score": 19,
+      "cs": 222,
+      "largest_multi_kill": 3,
+      "multi_kills": {
+        "double": 2,
+        "triple": 1,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "28:58",
       "game_duration_seconds": 1738,
       "game_creation": "2025-04-15 19:12:44",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Shen",
@@ -1599,14 +4163,55 @@
         1028,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Resolve",
+          "runes": [
+            "Aftershock",
+            "Shield Bash",
+            "Second Wind",
+            "Revitalize"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 17364,
       "gold_earned": 10634,
       "vision_score": 14,
+      "cs": 143,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "29:09",
       "game_duration_seconds": 1749,
       "game_creation": "2025-04-15 18:36:22",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Naafiri",
@@ -1628,14 +4233,55 @@
         0,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Treasure Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 25641,
       "gold_earned": 13919,
       "vision_score": 20,
+      "cs": 185,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 1,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "30:33",
       "game_duration_seconds": 1833,
       "game_creation": "2025-04-15 17:58:49",
-      "time_ago": "Hace 5 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 6 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Sejuani",
@@ -1657,14 +4303,55 @@
         0,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Resolve",
+          "runes": [
+            "Aftershock",
+            "Font of Life",
+            "Conditioning",
+            "Overgrowth"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 20765,
       "gold_earned": 11847,
       "vision_score": 22,
+      "cs": 181,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "38:10",
       "game_duration_seconds": 2290,
       "game_creation": "2025-04-13 22:17:34",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Naafiri",
@@ -1686,14 +4373,55 @@
         3123,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Inspiration",
+          "runes": [
+            "Cosmic Insight",
+            "Magical Footwear"
+          ]
+        }
+      },
       "total_damage_dealt": 20322,
       "gold_earned": 13247,
       "vision_score": 19,
+      "cs": 217,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 1,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "34:32",
       "game_duration_seconds": 2072,
       "game_creation": "2025-04-13 21:27:46",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Vi",
@@ -1715,14 +4443,55 @@
         2019,
         3363
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Haste",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Inspiration",
+          "runes": [
+            "Cosmic Insight",
+            "Magical Footwear"
+          ]
+        }
+      },
       "total_damage_dealt": 36294,
       "gold_earned": 18731,
       "vision_score": 28,
+      "cs": 248,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 2,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "43:11",
       "game_duration_seconds": 2591,
       "game_creation": "2025-04-13 20:32:50",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Naafiri",
@@ -1744,14 +4513,55 @@
         2021,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Treasure Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 47664,
       "gold_earned": 16764,
       "vision_score": 11,
+      "cs": 172,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 3,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "33:00",
       "game_duration_seconds": 1980,
       "game_creation": "2025-04-13 19:25:15",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "LeeSin",
@@ -1773,14 +4583,55 @@
         0,
         3340
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Treasure Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 6794,
       "gold_earned": 7948,
       "vision_score": 14,
+      "cs": 122,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "20:10",
       "game_duration_seconds": 1210,
       "game_creation": "2025-04-13 18:58:03",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Zed",
@@ -1802,14 +4653,55 @@
         0,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Presence of Mind",
+            "Legend: Haste",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Sorcery",
+          "runes": [
+            "Axiom Arcanist",
+            "Transcendence"
+          ]
+        }
+      },
       "total_damage_dealt": 11274,
       "gold_earned": 11167,
       "vision_score": 13,
+      "cs": 189,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "28:27",
       "game_duration_seconds": 1707,
       "game_creation": "2025-04-13 16:57:42",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Belveth",
@@ -1831,14 +4723,55 @@
         0,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Inspiration",
+          "runes": [
+            "Cosmic Insight",
+            "Magical Footwear"
+          ]
+        }
+      },
       "total_damage_dealt": 14047,
       "gold_earned": 14703,
       "vision_score": 30,
+      "cs": 254,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "34:59",
       "game_duration_seconds": 2099,
       "game_creation": "2025-04-13 16:15:04",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Briar",
@@ -1860,14 +4793,55 @@
         6695,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Triumph",
+            "Legend: Haste",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Relentless Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 55763,
       "gold_earned": 22254,
       "vision_score": 18,
+      "cs": 245,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 2,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "42:40",
       "game_duration_seconds": 2560,
       "game_creation": "2025-04-13 13:22:06",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Pantheon",
@@ -1889,14 +4863,55 @@
         3877,
         3364
       ],
+      "role": "SUPPORT",
+      "lane": "BOTTOM",
+      "team_position": "UTILITY",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 14,
+          "name": "Ignite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Triumph",
+            "Legend: Haste",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Relentless Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 14826,
       "gold_earned": 9150,
       "vision_score": 32,
+      "cs": 43,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 2,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "22:34",
       "game_duration_seconds": 1354,
       "game_creation": "2025-04-13 12:49:12",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Naafiri",
@@ -1918,14 +4933,55 @@
         0,
         3363
       ],
+      "role": "SUPPORT",
+      "lane": "NONE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Inspiration",
+          "runes": [
+            "Cosmic Insight",
+            "Magical Footwear"
+          ]
+        }
+      },
       "total_damage_dealt": 12219,
       "gold_earned": 9346,
       "vision_score": 9,
+      "cs": 154,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 1,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "19:07",
       "game_duration_seconds": 1147,
       "game_creation": "2025-04-13 11:01:00",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Belveth",
@@ -1947,14 +5003,55 @@
         0,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Inspiration",
+          "runes": [
+            "Cosmic Insight",
+            "Magical Footwear"
+          ]
+        }
+      },
       "total_damage_dealt": 12071,
       "gold_earned": 12897,
       "vision_score": 9,
+      "cs": 219,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "27:06",
       "game_duration_seconds": 1626,
       "game_creation": "2025-04-13 10:27:20",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Shen",
@@ -1976,14 +5073,55 @@
         0,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Resolve",
+          "runes": [
+            "Aftershock",
+            "Shield Bash",
+            "Second Wind",
+            "Revitalize"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 13684,
       "gold_earned": 8631,
       "vision_score": 17,
+      "cs": 134,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "27:49",
       "game_duration_seconds": 1669,
       "game_creation": "2025-04-12 15:00:07",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Morgana",
@@ -2005,14 +5143,55 @@
         3871,
         3364
       ],
+      "role": "SUPPORT",
+      "lane": "MIDDLE",
+      "team_position": "UTILITY",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 14,
+          "name": "Ignite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Sorcery",
+          "runes": [
+            "Arcane Comet",
+            "Manaflow Band",
+            "Transcendence",
+            "Scorch"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 19441,
       "gold_earned": 11127,
       "vision_score": 76,
+      "cs": 71,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 1,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "33:05",
       "game_duration_seconds": 1985,
       "game_creation": "2025-04-12 14:13:22",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "LeeSin",
@@ -2034,14 +5213,55 @@
         2055,
         3340
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Treasure Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 21547,
       "gold_earned": 12831,
       "vision_score": 33,
+      "cs": 160,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "36:33",
       "game_duration_seconds": 2193,
       "game_creation": "2025-04-12 04:30:28",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Shen",
@@ -2063,14 +5283,55 @@
         0,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Resolve",
+          "runes": [
+            "Aftershock",
+            "Shield Bash",
+            "Second Wind",
+            "Revitalize"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 24477,
       "gold_earned": 11021,
       "vision_score": 12,
+      "cs": 124,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 1,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "26:35",
       "game_duration_seconds": 1595,
       "game_creation": "2025-04-12 03:43:34",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Sejuani",
@@ -2092,14 +5353,55 @@
         1031,
         3363
       ],
+      "role": "SUPPORT",
+      "lane": "TOP",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Resolve",
+          "runes": [
+            "Aftershock",
+            "Font of Life",
+            "Conditioning",
+            "Overgrowth"
+          ]
+        },
+        "secondary": {
+          "style": "Precision",
+          "runes": [
+            "Legend: Alacrity",
+            "Triumph"
+          ]
+        }
+      },
       "total_damage_dealt": 19797,
       "gold_earned": 12584,
       "vision_score": 23,
+      "cs": 195,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "35:57",
       "game_duration_seconds": 2157,
       "game_creation": "2025-04-11 20:29:47",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "LeeSin",
@@ -2121,14 +5423,55 @@
         0,
         3340
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Treasure Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 18176,
       "gold_earned": 11166,
       "vision_score": 25,
+      "cs": 127,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "27:06",
       "game_duration_seconds": 1626,
       "game_creation": "2025-04-11 19:46:50",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Shen",
@@ -2150,14 +5493,55 @@
         0,
         3340
       ],
+      "role": "SUPPORT",
+      "lane": "NONE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Resolve",
+          "runes": [
+            "Aftershock",
+            "Shield Bash",
+            "Second Wind",
+            "Revitalize"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Cheap Shot",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 0,
       "gold_earned": 509,
       "vision_score": 0,
+      "cs": 0,
+      "largest_multi_kill": 0,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "1:44",
       "game_duration_seconds": 104,
       "game_creation": "2025-04-11 19:34:58",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Briar",
@@ -2179,14 +5563,55 @@
         3053,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Resolve",
+          "runes": [
+            "Conditioning",
+            "Overgrowth"
+          ]
+        }
+      },
       "total_damage_dealt": 50708,
       "gold_earned": 19687,
       "vision_score": 18,
+      "cs": 206,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 4,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "37:04",
       "game_duration_seconds": 2224,
       "game_creation": "2025-04-11 18:23:49",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "XinZhao",
@@ -2208,14 +5633,55 @@
         0,
         3340
       ],
+      "role": "SUPPORT",
+      "lane": "NONE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Inspiration",
+          "runes": [
+            "Cosmic Insight",
+            "Magical Footwear"
+          ]
+        }
+      },
       "total_damage_dealt": 0,
       "gold_earned": 623,
       "vision_score": 0,
+      "cs": 4,
+      "largest_multi_kill": 0,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "1:56",
       "game_duration_seconds": 116,
       "game_creation": "2025-04-11 18:16:08",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Brand",
@@ -2237,14 +5703,55 @@
         0,
         3363
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Domination",
+          "runes": [
+            "Dark Harvest",
+            "Taste of Blood",
+            "Grisly Mementos",
+            "Treasure Hunter"
+          ]
+        },
+        "secondary": {
+          "style": "Inspiration",
+          "runes": [
+            "Magical Footwear",
+            "Cosmic Insight"
+          ]
+        }
+      },
       "total_damage_dealt": 23404,
       "gold_earned": 13766,
       "vision_score": 22,
+      "cs": 191,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "32:32",
       "game_duration_seconds": 1952,
       "game_creation": "2025-04-11 16:42:14",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Vi",
@@ -2266,14 +5773,55 @@
         1028,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Ultimate Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 16086,
       "gold_earned": 11717,
       "vision_score": 20,
+      "cs": 169,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "33:00",
       "game_duration_seconds": 1980,
       "game_creation": "2025-04-11 15:43:56",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "MonkeyKing",
@@ -2295,14 +5843,55 @@
         0,
         3364
       ],
+      "role": "SUPPORT",
+      "lane": "NONE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Relentless Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 5443,
       "gold_earned": 6902,
       "vision_score": 10,
+      "cs": 83,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "17:18",
       "game_duration_seconds": 1038,
       "game_creation": "2025-04-11 15:16:38",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Vi",
@@ -2324,14 +5913,55 @@
         0,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Haste",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Inspiration",
+          "runes": [
+            "Cosmic Insight",
+            "Magical Footwear"
+          ]
+        }
+      },
       "total_damage_dealt": 13683,
       "gold_earned": 14035,
       "vision_score": 18,
+      "cs": 234,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "31:03",
       "game_duration_seconds": 1863,
       "game_creation": "2025-04-11 13:41:09",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Belveth",
@@ -2353,14 +5983,55 @@
         2019,
         3364
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "JUNGLE",
+      "queue_id": 400,
+      "queue": "5v5 Draft Pick games",
+      "summoners": {
+        "d": {
+          "id": 11,
+          "name": "Smite"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Conqueror",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Sudden Impact",
+            "Relentless Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 11661,
       "gold_earned": 11428,
       "vision_score": 15,
+      "cs": 142,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 1,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "23:39",
       "game_duration_seconds": 1419,
       "game_creation": "2025-04-10 19:28:10",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Caitlyn",
@@ -2382,14 +6053,55 @@
         1038,
         3340
       ],
+      "role": "DUO",
+      "lane": "BOTTOM",
+      "team_position": "BOTTOM",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 21,
+          "name": "Barrier"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Lethal Tempo",
+            "Presence of Mind",
+            "Legend: Bloodline",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Sorcery",
+          "runes": [
+            "Absolute Focus",
+            "Gathering Storm"
+          ]
+        }
+      },
       "total_damage_dealt": 9347,
       "gold_earned": 8012,
       "vision_score": 17,
+      "cs": 181,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "25:53",
       "game_duration_seconds": 1553,
       "game_creation": "2025-04-06 18:29:38",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Jinx",
@@ -2411,14 +6123,55 @@
         3072,
         3363
       ],
+      "role": "NONE",
+      "lane": "JUNGLE",
+      "team_position": "BOTTOM",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 21,
+          "name": "Barrier"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Lethal Tempo",
+            "Presence of Mind",
+            "Legend: Bloodline",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Sorcery",
+          "runes": [
+            "Absolute Focus",
+            "Gathering Storm"
+          ]
+        }
+      },
       "total_damage_dealt": 30475,
       "gold_earned": 17274,
       "vision_score": 55,
+      "cs": 338,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "47:35",
       "game_duration_seconds": 2855,
       "game_creation": "2025-04-06 17:32:28",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Jinx",
@@ -2440,14 +6193,55 @@
         3123,
         3363
       ],
+      "role": "CARRY",
+      "lane": "BOTTOM",
+      "team_position": "BOTTOM",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 6,
+          "name": "Ghost"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Lethal Tempo",
+            "Presence of Mind",
+            "Legend: Bloodline",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Sorcery",
+          "runes": [
+            "Absolute Focus",
+            "Gathering Storm"
+          ]
+        }
+      },
       "total_damage_dealt": 22798,
       "gold_earned": 18094,
       "vision_score": 37,
+      "cs": 313,
+      "largest_multi_kill": 3,
+      "multi_kills": {
+        "double": 2,
+        "triple": 1,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "45:01",
       "game_duration_seconds": 2701,
       "game_creation": "2025-04-06 16:20:27",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Jinx",
@@ -2469,14 +6263,55 @@
         0,
         3363
       ],
+      "role": "CARRY",
+      "lane": "BOTTOM",
+      "team_position": "BOTTOM",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 21,
+          "name": "Barrier"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Lethal Tempo",
+            "Presence of Mind",
+            "Legend: Bloodline",
+            "Cut Down"
+          ]
+        },
+        "secondary": {
+          "style": "Sorcery",
+          "runes": [
+            "Gathering Storm",
+            "Absolute Focus"
+          ]
+        }
+      },
       "total_damage_dealt": 18886,
       "gold_earned": 12331,
       "vision_score": 17,
+      "cs": 199,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 2,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "28:04",
       "game_duration_seconds": 1684,
       "game_creation": "2025-04-05 23:03:19",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Xayah",
@@ -2498,14 +6333,55 @@
         1018,
         3363
       ],
+      "role": "CARRY",
+      "lane": "BOTTOM",
+      "team_position": "BOTTOM",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 21,
+          "name": "Barrier"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Lethal Tempo",
+            "Presence of Mind",
+            "Legend: Bloodline",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Inspiration",
+          "runes": [
+            "Biscuit Delivery",
+            "Magical Footwear"
+          ]
+        }
+      },
       "total_damage_dealt": 16448,
       "gold_earned": 9350,
       "vision_score": 9,
+      "cs": 171,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 2,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "25:17",
       "game_duration_seconds": 1517,
       "game_creation": "2025-04-05 22:20:58",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Sivir",
@@ -2527,14 +6403,55 @@
         6670,
         3363
       ],
+      "role": "CARRY",
+      "lane": "BOTTOM",
+      "team_position": "BOTTOM",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 21,
+          "name": "Barrier"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Lethal Tempo",
+            "Presence of Mind",
+            "Legend: Alacrity",
+            "Cut Down"
+          ]
+        },
+        "secondary": {
+          "style": "Sorcery",
+          "runes": [
+            "Gathering Storm",
+            "Manaflow Band"
+          ]
+        }
+      },
       "total_damage_dealt": 33716,
       "gold_earned": 14590,
       "vision_score": 13,
+      "cs": 218,
+      "largest_multi_kill": 3,
+      "multi_kills": {
+        "double": 3,
+        "triple": 2,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "27:40",
       "game_duration_seconds": 1660,
       "game_creation": "2025-04-05 20:15:57",
       "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Tristana",
@@ -2556,14 +6473,55 @@
         0,
         3363
       ],
+      "role": "CARRY",
+      "lane": "BOTTOM",
+      "team_position": "BOTTOM",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 21,
+          "name": "Barrier"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Triumph",
+            "Legend: Alacrity",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Domination",
+          "runes": [
+            "Taste of Blood",
+            "Treasure Hunter"
+          ]
+        }
+      },
       "total_damage_dealt": 12396,
       "gold_earned": 10378,
       "vision_score": 16,
+      "cs": 195,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "29:24",
       "game_duration_seconds": 1764,
       "game_creation": "2025-03-24 16:42:51",
-      "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 7 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Jhin",
@@ -2585,14 +6543,55 @@
         3009,
         3363
       ],
+      "role": "CARRY",
+      "lane": "BOTTOM",
+      "team_position": "BOTTOM",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 21,
+          "name": "Barrier"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Fleet Footwork",
+            "Presence of Mind",
+            "Legend: Bloodline",
+            "Coup de Grace"
+          ]
+        },
+        "secondary": {
+          "style": "Sorcery",
+          "runes": [
+            "Gathering Storm",
+            "Celerity"
+          ]
+        }
+      },
       "total_damage_dealt": 25551,
       "gold_earned": 13124,
       "vision_score": 18,
+      "cs": 189,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 1,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "33:07",
       "game_duration_seconds": 1987,
       "game_creation": "2025-03-24 15:59:13",
-      "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 7 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Aphelios",
@@ -2614,14 +6613,55 @@
         0,
         3363
       ],
+      "role": "CARRY",
+      "lane": "BOTTOM",
+      "team_position": "BOTTOM",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 21,
+          "name": "Barrier"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Absorb Life",
+            "Legend: Bloodline",
+            "Cut Down"
+          ]
+        },
+        "secondary": {
+          "style": "Sorcery",
+          "runes": [
+            "Absolute Focus",
+            "Gathering Storm"
+          ]
+        }
+      },
       "total_damage_dealt": 28630,
       "gold_earned": 13805,
       "vision_score": 17,
+      "cs": 185,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "34:43",
       "game_duration_seconds": 2083,
       "game_creation": "2025-03-21 15:39:04",
-      "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 7 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Aphelios",
@@ -2643,14 +6683,55 @@
         6670,
         3363
       ],
+      "role": "CARRY",
+      "lane": "BOTTOM",
+      "team_position": "BOTTOM",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 3,
+          "name": "Exhaust"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Absorb Life",
+            "Legend: Bloodline",
+            "Cut Down"
+          ]
+        },
+        "secondary": {
+          "style": "Sorcery",
+          "runes": [
+            "Absolute Focus",
+            "Gathering Storm"
+          ]
+        }
+      },
       "total_damage_dealt": 30217,
       "gold_earned": 15707,
       "vision_score": 16,
+      "cs": 201,
+      "largest_multi_kill": 3,
+      "multi_kills": {
+        "double": 4,
+        "triple": 1,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "32:30",
       "game_duration_seconds": 1950,
       "game_creation": "2025-03-21 15:00:07",
-      "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 7 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Aphelios",
@@ -2672,14 +6753,55 @@
         0,
         3340
       ],
+      "role": "CARRY",
+      "lane": "BOTTOM",
+      "team_position": "BOTTOM",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 1,
+          "name": "Cleanse"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Absorb Life",
+            "Legend: Bloodline",
+            "Cut Down"
+          ]
+        },
+        "secondary": {
+          "style": "Sorcery",
+          "runes": [
+            "Absolute Focus",
+            "Gathering Storm"
+          ]
+        }
+      },
       "total_damage_dealt": 11179,
       "gold_earned": 10092,
       "vision_score": 11,
+      "cs": 190,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "29:20",
       "game_duration_seconds": 1760,
       "game_creation": "2025-03-21 08:53:06",
-      "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 7 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Aphelios",
@@ -2701,14 +6823,55 @@
         3036,
         3363
       ],
+      "role": "CARRY",
+      "lane": "BOTTOM",
+      "team_position": "BOTTOM",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 21,
+          "name": "Barrier"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Absorb Life",
+            "Legend: Bloodline",
+            "Cut Down"
+          ]
+        },
+        "secondary": {
+          "style": "Sorcery",
+          "runes": [
+            "Absolute Focus",
+            "Gathering Storm"
+          ]
+        }
+      },
       "total_damage_dealt": 49430,
       "gold_earned": 15177,
       "vision_score": 22,
+      "cs": 214,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 2,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "34:04",
       "game_duration_seconds": 2044,
       "game_creation": "2025-03-21 07:59:59",
-      "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 7 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Sivir",
@@ -2730,14 +6893,55 @@
         3123,
         3363
       ],
+      "role": "CARRY",
+      "lane": "BOTTOM",
+      "team_position": "BOTTOM",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 21,
+          "name": "Barrier"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Lethal Tempo",
+            "Presence of Mind",
+            "Legend: Alacrity",
+            "Cut Down"
+          ]
+        },
+        "secondary": {
+          "style": "Sorcery",
+          "runes": [
+            "Absolute Focus",
+            "Gathering Storm"
+          ]
+        }
+      },
       "total_damage_dealt": 21402,
       "gold_earned": 15480,
       "vision_score": 17,
+      "cs": 315,
+      "largest_multi_kill": 1,
+      "multi_kills": {
+        "double": 0,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "33:47",
       "game_duration_seconds": 2027,
       "game_creation": "2025-03-20 13:42:35",
-      "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 7 meses",
+      "ddragon_version": "15.21.1"
     },
     {
       "champ": "Aphelios",
@@ -2759,159 +6963,55 @@
         1038,
         3363
       ],
+      "role": "CARRY",
+      "lane": "BOTTOM",
+      "team_position": "BOTTOM",
+      "queue_id": 420,
+      "queue": "5v5 Ranked Solo games",
+      "summoners": {
+        "d": {
+          "id": 1,
+          "name": "Cleanse"
+        },
+        "f": {
+          "id": 4,
+          "name": "Flash"
+        }
+      },
+      "runes": {
+        "primary": {
+          "style": "Precision",
+          "runes": [
+            "Press the Attack",
+            "Triumph",
+            "Legend: Bloodline",
+            "Cut Down"
+          ]
+        },
+        "secondary": {
+          "style": "Sorcery",
+          "runes": [
+            "Absolute Focus",
+            "Gathering Storm"
+          ]
+        }
+      },
       "total_damage_dealt": 21943,
       "gold_earned": 17393,
       "vision_score": 25,
+      "cs": 316,
+      "largest_multi_kill": 2,
+      "multi_kills": {
+        "double": 1,
+        "triple": 0,
+        "quadra": 0,
+        "penta": 0
+      },
       "game_duration": "38:48",
       "game_duration_seconds": 2328,
       "game_creation": "2025-03-19 22:01:54",
-      "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
-    },
-    {
-      "champ": "Aphelios",
-      "champ_id": "Aphelios",
-      "champ_level": 13,
-      "kda": "4/7/4",
-      "kda_ratio": 1.14,
-      "kills": 4,
-      "deaths": 7,
-      "assists": 4,
-      "win": false,
-      "match_id": "LA2_1492997735",
-      "items": [
-        3085,
-        6676,
-        3009,
-        1018,
-        1038,
-        0,
-        3363
-      ],
-      "total_damage_dealt": 15254,
-      "gold_earned": 9219,
-      "vision_score": 14,
-      "game_duration": "27:18",
-      "game_duration_seconds": 1638,
-      "game_creation": "2025-03-19 20:51:14",
-      "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
-    },
-    {
-      "champ": "Aphelios",
-      "champ_id": "Aphelios",
-      "champ_level": 17,
-      "kda": "11/3/7",
-      "kda_ratio": 6.0,
-      "kills": 11,
-      "deaths": 3,
-      "assists": 7,
-      "win": true,
-      "match_id": "LA2_1492966310",
-      "items": [
-        1018,
-        6676,
-        3085,
-        3170,
-        3072,
-        1038,
-        3363
-      ],
-      "total_damage_dealt": 27358,
-      "gold_earned": 15438,
-      "vision_score": 30,
-      "game_duration": "34:57",
-      "game_duration_seconds": 2097,
-      "game_creation": "2025-03-19 17:58:18",
-      "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
-    },
-    {
-      "champ": "Aphelios",
-      "champ_id": "Aphelios",
-      "champ_level": 17,
-      "kda": "14/2/10",
-      "kda_ratio": 12.0,
-      "kills": 14,
-      "deaths": 2,
-      "assists": 10,
-      "win": true,
-      "match_id": "LA2_1492923264",
-      "items": [
-        3072,
-        6676,
-        3006,
-        3085,
-        3031,
-        3123,
-        3363
-      ],
-      "total_damage_dealt": 47373,
-      "gold_earned": 17649,
-      "vision_score": 23,
-      "game_duration": "36:40",
-      "game_duration_seconds": 2200,
-      "game_creation": "2025-03-19 13:10:17",
-      "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
-    },
-    {
-      "champ": "Aphelios",
-      "champ_id": "Aphelios",
-      "champ_level": 17,
-      "kda": "7/7/5",
-      "kda_ratio": 1.71,
-      "kills": 7,
-      "deaths": 7,
-      "assists": 5,
-      "win": false,
-      "match_id": "LA2_1492866497",
-      "items": [
-        3031,
-        3032,
-        3009,
-        3036,
-        6670,
-        0,
-        3363
-      ],
-      "total_damage_dealt": 29523,
-      "gold_earned": 14433,
-      "vision_score": 16,
-      "game_duration": "36:29",
-      "game_duration_seconds": 2189,
-      "game_creation": "2025-03-19 00:00:44",
-      "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
-    },
-    {
-      "champ": "Sivir",
-      "champ_id": "Sivir",
-      "champ_level": 16,
-      "kda": "5/3/13",
-      "kda_ratio": 6.0,
-      "kills": 5,
-      "deaths": 3,
-      "assists": 13,
-      "win": true,
-      "match_id": "LA2_1492854798",
-      "items": [
-        1038,
-        3032,
-        3170,
-        6675,
-        1018,
-        1037,
-        3363
-      ],
-      "total_damage_dealt": 21665,
-      "gold_earned": 12921,
-      "vision_score": 20,
-      "game_duration": "33:42",
-      "game_duration_seconds": 2022,
-      "game_creation": "2025-03-18 23:20:11",
-      "time_ago": "Hace 6 meses",
-      "ddragon_version": "15.20.1"
+      "time_ago": "Hace 7 meses",
+      "ddragon_version": "15.21.1"
     }
   ],
   "count": 100,

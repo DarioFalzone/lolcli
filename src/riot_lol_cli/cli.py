@@ -4,6 +4,8 @@ import os
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Any
+from PIL import Image
+from collections import Counter
 
 # Create a Click command group
 @click.group()
@@ -37,6 +39,75 @@ def load_version() -> str:
         with open(VERSION_FILE, 'w') as f:
             json.dump(version_data, f, indent=2)
         return '1.0.0'
+
+def extract_color_palette(img_path: Path) -> dict:
+    """Extrae paleta de colores dominantes de una imagen."""
+    try:
+        img = Image.open(img_path)
+        img = img.convert('RGB')
+        img.thumbnail((150, 150))  # Reducir para performance
+        
+        pixels = list(img.getdata())
+        # Cuantizar a 5 colores dominantes
+        color_counts = Counter(pixels)
+        top_colors = color_counts.most_common(5)
+        
+        palette = [f"#{r:02x}{g:02x}{b:02x}" for (r,g,b), _ in top_colors]
+        primary = palette[0] if palette else "#808080"
+        
+        return {"primary": primary, "palette": palette}
+    except Exception:
+        return {"primary": "#808080", "palette": ["#808080"]}
+
+def detect_badges(skin_name: str) -> list:
+    """Detecta badges especiales en el nombre de la skin."""
+    badges = []
+    name_lower = skin_name.lower()
+    
+    badge_keywords = {
+        "Prestige": ["prestige"],
+        "Legacy": ["legacy"],
+        "Mythic": ["mythic"],
+        "Limited": ["limited"],
+        "Exclusive": ["exclusive", "pax"],
+        "Championship": ["championship"],
+        "Victorious": ["victorious"],
+        "Hextech": ["hextech"],
+        "Ultimate": ["ultimate"],
+        "Legendary": ["legendary"]
+    }
+    
+    for badge, keywords in badge_keywords.items():
+        if any(kw in name_lower for kw in keywords):
+            badges.append(badge)
+    
+    return badges
+
+def estimate_release_year(skin_name: str) -> Optional[int]:
+    """Estima el año de release basado en keywords en el nombre."""
+    import re
+    # Buscar años en el nombre (2018, 2019, etc.)
+    match = re.search(r'20\d{2}', skin_name)
+    if match:
+        return int(match.group())
+    
+    # Heurísticas por líneas de skins conocidas
+    year_hints = {
+        2024: ["arcane 2024", "heavenscale", "primordian"],
+        2023: ["faerie court", "soul fighter", "broken covenant"],
+        2022: ["crystal rose", "anima squad", "star guardian 2022"],
+        2021: ["crime city nightmare", "space groove", "sentinels"],
+        2020: ["spirit blossom", "psyops", "k/da all out"],
+        2019: ["true damage", "project 2019", "arcade 2019"],
+        2018: ["k/da", "odyssey", "pool party 2018"]
+    }
+    
+    name_lower = skin_name.lower()
+    for year, hints in year_hints.items():
+        if any(hint in name_lower for hint in hints):
+            return year
+    
+    return None
 
 def increment_version() -> str:
     """Incrementa el número de versión y lo guarda en el archivo."""
@@ -144,7 +215,28 @@ def generate_html(template: str, data: Dict, template_name: str) -> str:
                     kills, deaths, assists = 0, 0, 0
                 kda = f"{kills}/{deaths}/{assists}"
                 
-                            # Obtener los ítems
+                # Extras: cola, rol/posición, hechizos, runas, CS, multikills, match id
+                queue_text = match.get('queue', '') or ''
+                role_text = match.get('team_position') or match.get('role', '') or ''
+                cs_val = match.get('cs', 0) or 0
+                vision_val = match.get('vision_score', 0) or 0
+                lmk = match.get('largest_multi_kill', 0) or 0
+                mk = match.get('multi_kills', {}) or {}
+                match_id = match.get('match_id', '')
+
+                summoners = match.get('summoners', {}) or {}
+                d_name = (summoners.get('d') or {}).get('name', '')
+                f_name = (summoners.get('f') or {}).get('name', '')
+
+                runes = match.get('runes', {}) or {}
+                p = runes.get('primary') or {}
+                s = runes.get('secondary') or {}
+                p_style = p.get('style', '') or ''
+                s_style = s.get('style', '') or ''
+                p_runes = ', '.join(p.get('runes', []) or [])
+                s_runes = ', '.join(s.get('runes', []) or [])
+
+                # Obtener los ítems
                 items = match.get('items', {})
                 items_html = '<div class="items-container"><div class="items-row">'  # Inicializar items_html
 
@@ -181,7 +273,35 @@ def generate_html(template: str, data: Dict, template_name: str) -> str:
                     print(f"Error procesando ítems: {e}")
                     items_html = '<div class="items-container"><div class="items-row">Error al cargar ítems</div></div>'
                 
-                            # Crear el HTML de la partida
+                # Bloques auxiliares
+                spells_html = ''
+                if d_name or f_name:
+                    spells_html = f'<div class="badge" title="Hechizos">Spells: <strong>{d_name}</strong> / <strong>{f_name}</strong></div>'
+
+                runes_html = ''
+                if p_style or s_style or p_runes or s_runes:
+                    runes_html = (
+                        '<div class="badge" title="Runas">'
+                        f'Runas: <strong>{p_style}</strong>' + (f' ({p_runes})' if p_runes else '') +
+                        (f' • <strong>{s_style}</strong>' if s_style else '') + (f' ({s_runes})' if s_runes else '') +
+                        '</div>'
+                    )
+
+                queue_role_html = ''
+                if queue_text or role_text:
+                    queue_role_html = f'<div class="badge" title="Cola y rol">{queue_text or ""}{" • " if queue_text and role_text else ""}{role_text or ""}</div>'
+
+                extras_meta_html = (
+                    '<div class="badge" title="CS / Visión / Multikills">'
+                    f'CS: <strong>{cs_val}</strong> • Visión: <strong>{vision_val}</strong> • Multi: <strong>x{lmk}</strong>'
+                    '</div>'
+                )
+
+                match_id_html = ''
+                if match_id:
+                    match_id_html = f'<div class="badge" title="Match ID">{match_id}</div>'
+
+                # Crear el HTML de la partida
                 match_html = f"""
                 <tr class="match-row {result_class}">
                     <td class="champ-cell">
@@ -190,7 +310,7 @@ def generate_html(template: str, data: Dict, template_name: str) -> str:
                              data-champion-id="{champ_id}">
                         <div class="champ-info">
                             <div class="champ-name" title="{champ_name}">{champ_name}</div>
-                            <div class="champ-role">{match.get('role', '')} • Lvl {match.get('champ_level', '?')}</div>
+                            <div class="champ-role">{(role_text or "").strip()} • Lvl {match.get('champ_level', '?')}</div>
                         </div>
                     </td>
                     <td class="kda">
@@ -209,9 +329,16 @@ def generate_html(template: str, data: Dict, template_name: str) -> str:
                                 <span class="stat-label">Oro</span>
                             </div>
                             <div class="stat">
-                                <span class="stat-value">{match.get('vision_score', 0) or 0}</span>
+                                <span class="stat-value">{vision_val}</span>
                                 <span class="stat-label">Visión</span>
                             </div>
+                        </div>
+                        <div class="meta" style="margin-top:10px; gap:10px; flex-wrap: wrap;">
+                            {queue_role_html}
+                            {spells_html}
+                            {runes_html}
+                            {extras_meta_html}
+                            {match_id_html}
                         </div>
                     </td>
                     <td class="result">
@@ -220,6 +347,7 @@ def generate_html(template: str, data: Dict, template_name: str) -> str:
                         <div class="match-time" title="{match.get('game_creation', '')}">
                             {match.get('time_ago', 'Hace un momento')}
                         </div>
+                        <div class="queue-text" style="margin-top:6px; color:#c8aa6e; font-weight:700; font-size:12px;">{queue_text}</div>
                     </td>
                 </tr>
                 """
@@ -302,6 +430,157 @@ def bump_version():
     """Incrementa el número de versión."""
     new_version = increment_version()
     click.echo(f"✅ Versión actualizada a: v{new_version}")
+
+@cli.command()
+def build_splash_manifest():
+    """Escanea assets/splash_arts y genera data/splash-manifest.json."""
+    try:
+        import glob
+        from pathlib import Path
+        
+        splash_dir = BASE_DIR / "assets" / "splash_arts"
+        
+        if not splash_dir.exists():
+            click.echo(f"❌ Directorio no encontrado: {splash_dir}")
+            click.echo("💡 Ejecutá primero: python download_splash_arts.py")
+            raise click.Abort()
+        
+        click.echo("🔍 Escaneando splash arts...")
+        
+        champions = {}
+        images = []
+        
+        # Escanear cada carpeta de campeón
+        for champ_dir in sorted(splash_dir.iterdir()):
+            if not champ_dir.is_dir():
+                continue
+            
+            champ_id = champ_dir.name
+            files = list(champ_dir.glob("*.jpg")) + list(champ_dir.glob("*.png"))
+            
+            if not files:
+                continue
+            
+            champions[champ_id] = {
+                "id": champ_id,
+                "name": champ_id,
+                "count": len(files)
+            }
+            
+            for file in sorted(files):
+                # Ruta relativa desde outputs/splash-viewer.html a assets/splash_arts/...
+                rel_path = f"../assets/splash_arts/{champ_id}/{file.name}"
+                
+                # Extraer nombre de skin del archivo
+                skin_name = file.stem.replace(f"{champ_id}_", "")
+                
+                # Extraer paleta de colores
+                colors = extract_color_palette(file)
+                
+                # Detectar badges
+                badges = detect_badges(skin_name)
+                
+                # Estimar año de release (heurística simple)
+                release_year = estimate_release_year(skin_name)
+                
+                img_data = {
+                    "championId": champ_id,
+                    "file": file.name,
+                    "relPath": rel_path,
+                    "skinName": skin_name,
+                    "colors": colors,
+                    "badges": badges
+                }
+                
+                if release_year:
+                    img_data["releaseYear"] = release_year
+                
+                images.append(img_data)
+        
+        # Crear manifest
+        manifest = {
+            "champions": list(champions.values()),
+            "images": images,
+            "generatedAt": datetime.now().isoformat(),
+            "version": load_version(),
+            "totalChampions": len(champions),
+            "totalImages": len(images)
+        }
+        
+        # Guardar manifest
+        manifest_path = DATA_DIR / "splash-manifest.json"
+        with open(manifest_path, 'w', encoding='utf-8') as f:
+            json.dump(manifest, f, indent=2, ensure_ascii=False)
+        
+        click.echo(f"✅ Manifest generado: {manifest_path}")
+        click.echo(f"📊 {len(champions)} campeones, {len(images)} imágenes")
+        
+    except Exception as e:
+        click.echo(f"❌ Error: {str(e)}", err=True)
+        raise click.Abort()
+
+@cli.command()
+@click.option('--output', '-o', help='Ruta de salida para el HTML')
+def generate_splash_viewer(output: Optional[str]):
+    """Genera el visor de splash arts."""
+    try:
+        # Incrementar versión
+        new_version = increment_version()
+        click.echo(f"📦 Versión incrementada a: v{new_version}")
+        
+        # Verificar que existe el manifest
+        manifest_path = DATA_DIR / "splash-manifest.json"
+        if not manifest_path.exists():
+            click.echo("❌ Manifest no encontrado. Ejecutá primero: python -m riot_lol_cli.cli build-splash-manifest")
+            raise click.Abort()
+        
+        # Cargar manifest para stats
+        with open(manifest_path, 'r', encoding='utf-8') as f:
+            manifest = json.load(f)
+        
+        # Cargar plantilla
+        template = load_template('splash-viewer')
+        
+        # Determinar salida
+        if not output:
+            output = str(OUTPUT_DIR / "splash-viewer.html")
+        
+        # Reemplazar variables
+        replacements = {
+            '{{version}}': new_version,
+            '{{generated_at}}': datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+            '{{total_champions}}': str(manifest.get('totalChampions', 0)),
+            '{{total_images}}': str(manifest.get('totalImages', 0)),
+            # Importante: evitar querystring en file:// para compatibilidad local
+            '{{manifest_url}}': '../data/splash-manifest.json'
+        }
+        
+        html = template
+        for placeholder, value in replacements.items():
+            html = html.replace(placeholder, value)
+
+        # Inyectar manifest inline para compatibilidad con file://
+        try:
+            inline_manifest = json.dumps(manifest, ensure_ascii=False)
+            inline_script = f"<script>window.__INLINE_MANIFEST__ = {inline_manifest};</script>"
+            html = html.replace("<!-- INLINE_MANIFEST -->", inline_script)
+        except Exception:
+            # Si por alguna razón falla, dejamos el placeholder sin romper
+            pass
+        
+        # Guardar HTML
+        output_path = Path(output)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(output_path, 'w', encoding='utf-8') as f:
+            f.write(html)
+        
+        click.echo(f"✅ Visor generado: {output_path}")
+        click.echo(f"🎨 {manifest.get('totalChampions', 0)} campeones, {manifest.get('totalImages', 0)} splash arts")
+        click.echo(f"\n💡 Abrí: {output_path.absolute()}")
+        
+    except Exception as e:
+        click.echo(f"❌ Error: {str(e)}", err=True)
+        raise click.Abort()
 
 def main():
     """Punto de entrada principal del CLI."""
