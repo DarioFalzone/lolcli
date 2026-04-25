@@ -1,38 +1,62 @@
-# Entornos virtuales
-.venv/
-venv/
-env/
-ENV/
+# ===========================
+# riot_lol_cli .gitignore
+# ===========================
 
-# Archivos de Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-*.so
-*.egg
-*.egg-info/
-dist/
-build/
-
-# Archivos de configuración del usuario
+# ---------- Entorno y secretos ----------
 .env
 .env.local
+.env.*.local
 
-# IDEs
-.vscode/
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+dist/
+build/
+*.whl
+
+# ---------- Virtual environments ----------
+.venv/
+venv/
+ENV/
+env/
+
+# ---------- Testing & Coverage ----------
+coverage/
+.coverage
+htmlcov/
+.pytest_cache/
+
+# ---------- Databases ----------
+*.db
+*.sqlite3
+
+# ---------- IDE ----------
 .idea/
+.vscode/
+.claude/
 *.swp
 *.swo
+*~
 
-# Sistema operativo
+# ---------- Sistema operativo ----------
 .DS_Store
 Thumbs.db
+desktop.ini
+nul
 
-# Logs
+# ---------- Logs ----------
 *.log
 
-# Archivos temporales
+# ---------- Archivos temporales ----------
 *.tmp
 *.temp
+
+# ---------- Outputs generados ----------
+outputs/
+
+# ---------- Archives ----------
+*.zip
+
