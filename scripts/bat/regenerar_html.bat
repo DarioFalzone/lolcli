@@ -1,6 +1,9 @@
 @echo off
 setlocal enabledelayedexpansion
 
+:: Navegar al root del repo
+cd /d "%~dp0\..\.."
+
 echo ===================================
 echo  Regenerando HTML con plantilla claude-4-5
 echo ===================================
