@@ -1,0 +1,1234 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Notas de Parche | League of Legends</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spiegel:wght@400;500;600;700;900&family=Beaufort+for+LOL:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    @font-face {
+      font-family: 'FF Mark';
+      src: url('https://fonts.cdnfonts.com/s/19498/FFMark-Bold.woff') format('woff');
+      font-weight: 700;
+    }
+
+    :root {
+      /* Riot Games Official Colors */
+      --riot-black: #0A0E1A;
+      --riot-dark: #0C1F1F;
+      --riot-blue: #0596AA;
+      --riot-cyan: #0AC8B9;
+      --riot-gold: #F0E6D2;
+      --riot-gold-bright: #C89B3C;
+      --riot-gold-dark: #C8AA6E;
+      --riot-red: #EE2E48;
+      
+      /* Hextech Theme */
+      --hextech-blue: #1E2328;
+      --hextech-blue-bright: #0596AA;
+      --hextech-border: #3C4043;
+      --hextech-glow: #0AC8B9;
+      --hextech-gold: #F0E6D2;
+      
+      /* UI Colors */
+      --bg-primary: #010A13;
+      --bg-secondary: #0A1428;
+      --bg-card: #0A0E1A;
+      --bg-hover: #1E2328;
+      --text-primary: #F0E6D2;
+      --text-secondary: #A09B8C;
+      --text-muted: #5C5B57;
+      --border-color: #1E282D;
+      --border-bright: #C89B3C;
+      
+      /* Effects */
+      --shadow-card: 0 20px 40px rgba(0,0,0,0.8);
+      --shadow-glow: 0 0 40px rgba(10, 200, 185, 0.3);
+      --gradient-hextech: linear-gradient(135deg, #0596AA 0%, #0AC8B9 100%);
+      --gradient-gold: linear-gradient(135deg, #C8AA6E 0%, #F0E6D2 100%);
+    }
+
+    * { 
+      box-sizing: border-box; 
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body { 
+      height: 100%; 
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Spiegel', 'FF Mark', system-ui, -apple-system, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      position: relative;
+    }
+
+    /* Epic Background */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse at top left, rgba(5, 150, 170, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(200, 155, 60, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at center, rgba(10, 200, 185, 0.05) 0%, transparent 70%),
+        linear-gradient(180deg, #010A13 0%, #0A1428 50%, #010A13 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Animated Hextech Lines */
+    @keyframes hextech-pulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.8; }
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gradient-hextech);
+      animation: hextech-pulse 3s ease-in-out infinite;
+      z-index: 100;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: linear-gradient(180deg, rgba(10, 20, 40, 0.98) 0%, rgba(10, 20, 40, 0.9) 100%);
+      border-bottom: 1px solid var(--border-bright);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .hextech-icon {
+      width: 48px;
+      height: 48px;
+      position: relative;
+    }
+
+    .hextech-icon svg {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 0 20px rgba(10, 200, 185, 0.6));
+    }
+
+    h1 {
+      font-family: 'Beaufort for LOL', 'FF Mark', sans-serif;
+      font-size: 28px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      background: var(--gradient-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 2px 20px rgba(240, 230, 210, 0.3);
+    }
+
+    .meta-info {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      margin-left: auto;
+    }
+
+    .stat-badge {
+      background: linear-gradient(135deg, rgba(200, 155, 60, 0.1), rgba(200, 155, 60, 0.05));
+      border: 1px solid var(--border-bright);
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-primary);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      width: 100%;
+    }
+
+    /* Search Field */
+    .search-box {
+      position: relative;
+      flex: 1;
+      max-width: 400px;
+    }
+
+    .search-box svg {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      stroke: var(--hextech-glow);
+      filter: drop-shadow(0 0 10px rgba(10, 200, 185, 0.5));
+    }
+
+    .search-box input {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(30, 35, 40, 0.8), rgba(30, 35, 40, 0.4));
+      border: 1px solid var(--hextech-border);
+      border-radius: 4px;
+      padding: 12px 16px 12px 48px;
+      color: var(--text-primary);
+      font-size: 14px;
+      font-weight: 500;
+      outline: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .search-box input::placeholder {
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 12px;
+    }
+
+    .search-box input:focus {
+      border-color: var(--hextech-glow);
+      box-shadow: 0 0 0 3px rgba(10, 200, 185, 0.15), var(--shadow-glow);
+      background: linear-gradient(135deg, rgba(30, 35, 40, 1), rgba(30, 35, 40, 0.8));
+    }
+
+    /* Select */
+    select {
+      background: linear-gradient(135deg, rgba(30, 35, 40, 0.8), rgba(30, 35, 40, 0.4));
+      border: 1px solid var(--hextech-border);
+      border-radius: 4px;
+      padding: 12px 36px 12px 16px;
+      color: var(--text-primary);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      outline: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23F0E6D2' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      transition: all 0.3s ease;
+    }
+
+    select:hover {
+      border-color: var(--hextech-glow);
+      box-shadow: 0 4px 12px rgba(10, 200, 185, 0.2);
+    }
+
+    /* Buttons */
+    .btn {
+      background: var(--gradient-hextech);
+      border: 1px solid var(--hextech-glow);
+      color: var(--riot-black);
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 12px 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 12px rgba(10, 200, 185, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(10, 200, 185, 0.5);
+      filter: brightness(1.1);
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn.gold {
+      background: var(--gradient-gold);
+      border-color: var(--riot-gold-bright);
+      color: var(--riot-black);
+      box-shadow: 0 4px 12px rgba(200, 155, 60, 0.3);
+    }
+
+    .btn.gold:hover {
+      box-shadow: 0 8px 24px rgba(200, 155, 60, 0.5);
+    }
+
+    /* Main Content */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 32px 24px;
+    }
+
+    /* Grid */
+    .patch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 24px;
+      animation: fadeInUp 0.6s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Patch Card */
+    .patch-card {
+      background: linear-gradient(135deg, rgba(10, 14, 26, 0.95), rgba(10, 20, 40, 0.9));
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: var(--shadow-card);
+    }
+
+    .patch-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gradient-gold);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .patch-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card), var(--shadow-glow);
+      border-color: var(--hextech-glow);
+    }
+
+    .patch-card:hover::before {
+      opacity: 1;
+    }
+
+    .patch-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid rgba(200, 155, 60, 0.2);
+    }
+
+    .patch-title {
+      font-family: 'Beaufort for LOL', 'FF Mark', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .patch-subtitle {
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .patch-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .badge {
+      background: linear-gradient(135deg, rgba(200, 155, 60, 0.15), rgba(200, 155, 60, 0.05));
+      border: 1px solid rgba(200, 155, 60, 0.3);
+      color: var(--riot-gold);
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge.date {
+      background: linear-gradient(135deg, rgba(5, 150, 170, 0.15), rgba(10, 200, 185, 0.05));
+      border-color: rgba(10, 200, 185, 0.3);
+      color: var(--hextech-glow);
+    }
+
+    .badge.link {
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .badge.link:hover {
+      background: linear-gradient(135deg, rgba(200, 155, 60, 0.25), rgba(200, 155, 60, 0.15));
+      border-color: var(--riot-gold-bright);
+      transform: translateX(2px);
+    }
+
+    /* Items Section */
+    .items-section {
+      background: linear-gradient(135deg, rgba(30, 35, 40, 0.3), rgba(30, 35, 40, 0.1));
+      border: 1px solid var(--hextech-border);
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .items-section::before {
+      content: "OBJETOS";
+      position: absolute;
+      top: 8px;
+      left: 16px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--riot-gold-dark);
+      opacity: 0.5;
+    }
+
+    .items-content {
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-top: 12px;
+      font-size: 13px;
+    }
+
+    .items-content.clamp {
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Champions Section */
+    .champions-section {
+      margin-top: 20px;
+    }
+
+    .champion-item {
+      background: linear-gradient(135deg, rgba(30, 35, 40, 0.4), rgba(30, 35, 40, 0.2));
+      border: 1px solid var(--hextech-border);
+      border-radius: 6px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .champion-item:hover {
+      border-color: var(--hextech-glow);
+      box-shadow: 0 4px 12px rgba(10, 200, 185, 0.2);
+    }
+
+    .champion-header {
+      padding: 14px 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      user-select: none;
+      background: linear-gradient(135deg, rgba(10, 20, 40, 0.4), transparent);
+      transition: background 0.3s ease;
+    }
+
+    .champion-header:hover {
+      background: linear-gradient(135deg, rgba(10, 200, 185, 0.1), transparent);
+    }
+
+    .champion-toggle {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--hextech-glow);
+      transition: transform 0.3s ease;
+    }
+
+    .champion-item[open] .champion-toggle {
+      transform: rotate(90deg);
+    }
+
+    .champion-name {
+      font-family: 'Beaufort for LOL', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--text-primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .champion-body {
+      padding: 16px;
+      background: rgba(10, 14, 26, 0.6);
+      border-top: 1px solid var(--hextech-border);
+      color: var(--text-secondary);
+      line-height: 1.8;
+      white-space: pre-wrap;
+      font-size: 13px;
+    }
+
+    /* Sections */
+    .sections-container {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .section-item {
+      background: linear-gradient(135deg, rgba(30, 35, 40, 0.3), rgba(30, 35, 40, 0.1));
+      border: 1px solid var(--hextech-border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .section-header {
+      padding: 12px 16px;
+      cursor: pointer;
+      background: linear-gradient(135deg, rgba(5, 150, 170, 0.1), transparent);
+      color: var(--hextech-glow);
+      font-weight: 600;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-body {
+      padding: 16px;
+      background: rgba(10, 14, 26, 0.4);
+      color: var(--text-secondary);
+      line-height: 1.8;
+      font-size: 13px;
+    }
+
+    .patch-notes-section {
+      margin-bottom: 48px;
+    }
+    .patch-notes-section h3 {
+      font-family: 'Beaufort for LOL', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--riot-gold-dark);
+    }
+    .patch-notes-section p {
+      margin-bottom: 16px;
+    }
+    .patch-notes-section ul {
+      list-style-position: inside;
+      padding-left: 20px;
+      margin-bottom: 16px;
+    }
+
+    .champion-change {
+      margin-bottom: 40px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--hextech-border);
+    }
+    .champion-change:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .champion-title-flex {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 16px;
+    }
+    .champion-title-flex img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px solid var(--riot-gold-dark);
+    }
+    .champion-title-flex h4 {
+      font-family: 'Beaufort for LOL', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .champion-short-desc {
+      font-style: italic;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+    .champion-context {
+      padding: 16px;
+      border-left: 2px solid var(--riot-gold-dark);
+      background: rgba(10, 14, 26, 0.3);
+      margin-bottom: 24px;
+    }
+    .ability-change h5 {
+      font-family: 'Beaufort for LOL', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+    }
+    .ability-change ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .ability-change li {
+      padding-left: 1.5em;
+      text-indent: -1.5em;
+      margin-bottom: 8px;
+    }
+    .ability-change li::before {
+      content: '•';
+      color: var(--riot-gold-bright);
+      margin-right: 0.75em;
+    }
+
+    .item-change {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+    .item-change img {
+      width: 48px;
+      height: 48px;
+      border: 1px solid var(--hextech-border);
+      background: var(--bg-secondary);
+    }
+    .item-details h4 {
+      font-family: 'Beaufort for LOL', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .item-details p {
+      font-style: italic;
+      color: var(--text-secondary);
+      margin: 4px 0 8px;
+    }
+    .item-details ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .item-details li {
+      padding-left: 1.5em;
+      text-indent: -1.5em;
+    }
+    .item-details li::before {
+      content: '•';
+      color: var(--riot-gold-bright);
+      margin-right: 0.75em;
+    }
+
+    /* Loading State */
+    .loading-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+      gap: 24px;
+    }
+
+    .hextech-spinner {
+      width: 60px;
+      height: 60px;
+      position: relative;
+      animation: spin 2s linear infinite;
+    }
+
+    .hextech-spinner::before,
+    .hextech-spinner::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 3px solid transparent;
+      border-radius: 50%;
+    }
+
+    .hextech-spinner::before {
+      border-top-color: var(--hextech-glow);
+      animation: spin 1.5s linear infinite;
+    }
+
+    .hextech-spinner::after {
+      border-bottom-color: var(--riot-gold-bright);
+      animation: spin 1s linear infinite reverse;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--text-secondary);
+    }
+
+    .empty-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      opacity: 0.3;
+    }
+
+    .empty-title {
+      font-family: 'Beaufort for LOL', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .empty-message {
+      font-size: 14px;
+      line-height: 1.6;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--text-muted);
+      font-size: 12px;
+      border-top: 1px solid var(--border-color);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* File Input Hidden */
+    #fileInput {
+      display: none;
+    }
+
+    /* Drag and Drop Overlay */
+    .drop-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 200, 185, 0.95);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+
+    .drop-overlay.active {
+      display: flex;
+    }
+
+    .drop-content {
+      text-align: center;
+      color: var(--riot-black);
+    }
+
+    .drop-icon {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 24px;
+      animation: bounce 1s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .drop-text {
+      font-size: 24px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .meta-info {
+        margin-left: 0;
+        justify-content: center;
+      }
+
+      .controls {
+        flex-direction: column;
+      }
+
+      .search-box {
+        max-width: 100%;
+      }
+
+      .patch-grid {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hextech Overlay for Drag & Drop -->
+  <div class="drop-overlay" id="dropOverlay">
+    <div class="drop-content">
+      <svg class="drop-icon" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M50 10L70 30V70L50 90L30 70V30L50 10Z" stroke="currentColor" stroke-width="3" fill="rgba(255,255,255,0.1)"/>
+        <path d="M50 25L60 35V65L50 75L40 65V35L50 25Z" stroke="currentColor" stroke-width="2" fill="rgba(255,255,255,0.2)"/>
+      </svg>
+      <div class="drop-text">Suelta el archivo aquí</div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="header-content">
+      <div class="logo-section">
+        <div class="hextech-icon">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 4L40 14V34L24 44L8 34V14L24 4Z" stroke="#0AC8B9" stroke-width="2" fill="none"/>
+            <path d="M24 12L32 17V31L24 36L16 31V17L24 12Z" stroke="#F0E6D2" stroke-width="1.5" fill="rgba(240, 230, 210, 0.1)"/>
+            <circle cx="24" cy="24" r="3" fill="#0AC8B9"/>
+          </svg>
+        </div>
+        <h1>Notas de Parche</h1>
+      </div>
+      
+      <div class="meta-info" id="metaInfo"></div>
+      
+      <div class="controls">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+            <path d="M16 16L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <input type="search" id="searchInput" placeholder="Buscar campeón, objeto o cambio..." />
+        </div>
+        
+        <select id="versionFilter">
+          <option value="">Todas las versiones</option>
+        </select>
+        
+        <button class="btn gold" id="toggleItems">Objetos: Expandir</button>
+        <button class="btn" id="loadFile">Cargar Archivo</button>
+        <input type="file" id="fileInput" accept="application/json" />
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <div id="content">
+      <div class="loading-container">
+        <div class="hextech-spinner"></div>
+        <div class="loading-text">Invocando datos...</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div>© 2025 Riot Games, Inc. League of Legends y Riot Games son marcas registradas de Riot Games, Inc.</div>
+    <div style="margin-top: 8px; opacity: 0.7;">Visualizador no oficial de notas de parche • Desarrollado por la comunidad</div>
+  </footer>
+
+  <script>
+  (function() {
+    const state = {
+      data: null,
+      filterText: '',
+      filterVer: '',
+      clampItems: true,
+      dataUrl: null,
+    };
+
+    const $meta = document.getElementById('metaInfo');
+    const $search = document.getElementById('searchInput');
+    const $ver = document.getElementById('versionFilter');
+    const $toggleItems = document.getElementById('toggleItems');
+    const $loadBtn = document.getElementById('loadFile');
+    const $file = document.getElementById('fileInput');
+    const $content = document.getElementById('content');
+    const $drop = document.getElementById('dropOverlay');
+
+    function setMeta(){
+      if(!state.data) { $meta.textContent=''; return; }
+      const generated = state.data.generado || '';
+      const fuente = state.data.fuente || '';
+      const total = state.data.total || (Array.isArray(state.data.parches)? state.data.parches.length : 0);
+      $meta.innerHTML = `
+        <div class="stat-badge">Parches: ${total}</div>
+        <div class="stat-badge">Generado: ${generated}</div>
+        <div class="stat-badge">Fuente: ${fuente}</div>
+      `;
+    }
+
+    function populateVersions(){
+      if(!state.data) return;
+      const versions = [...new Set((state.data.parches||[]).map(p=>String(p.version||'')))].filter(Boolean)
+        .sort((a,b)=>{const [A,B]=a.split('.').map(Number);const [C,D]=b.split('.').map(Number);return (C-A)||(D-B)});
+      $ver.innerHTML = '<option value="">Todas las versiones</option>' + versions.map(v=>`<option value="${v}">${v}</option>`).join('');
+    }
+
+    function textIncludes(h, n){ return (h||'').toLowerCase().includes(n); }
+
+    function matchesFilters(p){
+      if(state.filterVer && String(p.version)!==String(state.filterVer)) return false;
+      if(!state.filterText) return true;
+      const q = state.filterText.toLowerCase();
+      if(textIncludes(p.titulo,q) || textIncludes(p.objetos,q)) return true;
+      if(Array.isArray(p.campeones)){
+        for(const c of p.campeones){ if(textIncludes(c.campeon,q)||textIncludes(c.texto,q)) return true; }
+      }
+      if(Array.isArray(p.secciones)){
+        for(const s of p.secciones){
+          if(textIncludes(s.nombre,q) || textIncludes(s.texto,q)) return true;
+          if(Array.isArray(s.subsecciones)){
+            for(const ss of s.subsecciones){ if(textIncludes(ss.titulo,q)||textIncludes(ss.texto,q)) return true; }
+          }
+        }
+      }
+      return false;
+    }
+
+    // -------- Special rendering for 25.17 ----------
+    function getPatch(ver){
+      return (state.data.parches||[]).find(p=> String(p.version)===String(ver));
+    }
+    function norm(s){ return (s||'').replace(/\r\n|\r/g,'\n').trim(); }
+    function extractBullets(text){
+      const t = norm(text); if(!t) return [];
+      const lines = t.split('\n').map(x=>x.trim()).filter(Boolean);
+      const keys = ['Se ha','Se han','En la vista','Ahora','Al ','Si ','Cuando ','Disponible','Además','Se añadió','Se agreg','Se despl'];
+      const out=[]; lines.forEach(ln=>{ if(keys.some(k=> ln.startsWith(k))) out.push(ln); });
+      if(out.length===0){
+        // fallback: first sentences
+        const sent = t.split('. ').map(x=>x.trim()).filter(Boolean);
+        return sent.slice(0,5);
+      }
+      return out;
+    }
+    function findSection(secciones, needle){
+      if(!Array.isArray(secciones)) return null;
+      const n = needle.toLowerCase();
+      let hit = secciones.find(s=> (s.nombre||'').toLowerCase().includes(n));
+      if(hit) return hit;
+      for(const s of secciones){
+        if(Array.isArray(s.subsecciones)){
+          for(const ss of s.subsecciones){ if((ss.titulo||'').toLowerCase().includes(n)) return ss; }
+        }
+      }
+      return null;
+    }
+    function buildChampion(c){
+      const txt = norm(c.texto);
+      const lines = txt.split('\n').map(x=>x.trim()).filter(Boolean);
+      const resumen = lines[0]||'';
+      const rest = lines.slice(1);
+      const matematicas = rest.filter(x=> x.includes('⇒'));
+      const explicacion = rest.filter(x=> !x.includes('⇒')).join('\n');
+      return { nombre: c.campeon||'Campeón', resumen, explicacion, matematicas };
+    }
+    function renderSpecial2517(){
+      const p = getPatch('25.17');
+      if(!p) { $content.innerHTML = '<div class="empty-state"><div class="empty-title">No encontré la versión 25.17</div></div>'; return; }
+
+      const LATEST_DDRAGON = '14.10.1'; // Usar una versión real reciente para los assets
+
+      const secs = p.secciones || [];
+      const trackingSection = findSection(secs, 'seguimiento de la información de partida');
+      const aramSection = findSection(secs, 'cambios de equilibrio de aram');
+      const itemsSection = findSection(secs, 'objetos');
+
+      const html = [];
+
+      // --- 1. Mejoras de seguimiento ---
+      if (trackingSection) {
+        const trackingText = norm(trackingSection.texto);
+        const parts = trackingText.split('Registro de muertes y seguimiento de los hechizos de invocador');
+        const timersText = parts[0].replace('Temporizadores de la jungla en el minimapa', '').trim();
+        const deathsText = parts.length > 1 ? parts[1].trim() : '';
+
+        html.push(`<div class="patch-notes-section">
+          <h3>Mejoras del seguimiento de la información de partida</h3>
+          <h4>Temporizadores de la jungla en el minimapa</h4>
+          <p>${timersText.split('\n').join('<br>')}</p>
+          <h4>Registro de muertes y seguimiento de los hechizos de invocador</h4>
+          <p>${deathsText.split('\n').join('<br>')}</p>
+        </div>`);
+      }
+
+      // --- 2. Campeones ---
+      if (p.campeones && p.campeones.length > 0) {
+        html.push('<div class="patch-notes-section"><h3>Campeones</h3>');
+        p.campeones.forEach(c => {
+          const champId = c.campeon.replace(/[^a-zA-Z0-9]/g, '');
+          const avatarUrl = `https://ddragon.leagueoflegends.com/cdn/${LATEST_DDRAGON}/img/champion/${champId}.png`;
+          
+          const txt = norm(c.texto);
+          const lines = txt.split('\n').map(x => x.trim()).filter(Boolean);
+          const short_desc = lines[0] || '';
+          const context = lines.length > 1 && !lines[1].includes('⇒') && !lines[1].toLowerCase().includes('estadísticas') ? lines[1] : '';
+          const changes = lines.slice(context ? 2 : 1).join('\n');
+
+          html.push(`
+            <div class="champion-change">
+              <div class="champion-title-flex">
+                <img src="${avatarUrl}" alt="${c.campeon}" class="champion-avatar"/>
+                <div>
+                  <h4>${c.campeon}</h4>
+                  <p class="champion-short-desc">${short_desc}</p>
+                </div>
+              </div>
+              ${context ? `<div class="champion-context"><p>${context}</p></div>` : ''}
+              <div class="ability-change">
+                <ul>${changes.split('\n').map(line => `<li>${line.replace('•','')}</li>`).join('')}</ul>
+              </div>
+            </div>
+          `);
+        });
+        html.push('</div>');
+      }
+
+      // --- 3. Objetos ---
+      if (p.objetos) {
+        const itemChanges = p.objetos.split(/\n(?=[A-ZÁÉÍÓÚ][a-záéíóú\s]+:)/).filter(Boolean);
+        html.push('<div class="patch-notes-section"><h3>Objetos</h3>');
+        itemChanges.forEach(itemText => {
+          const parts = itemText.split(':');
+          const title = parts[0].trim();
+          // Asumimos que el ID del objeto es el título sin espacios ni acentos para la URL
+          const itemId = title.replace(/\s/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+          // Esta es una suposición, puede que no funcione para todos los objetos.
+          // Idealmente, necesitaríamos un mapeo de nombre a ID de objeto.
+          const itemIconUrl = `https://ddragon.leagueoflegends.com/cdn/${LATEST_DDRAGON}/img/item/${itemId}.png`;
+
+          const restOfText = parts.slice(1).join(':').trim();
+          const lines = restOfText.split('\n').map(l => l.trim()).filter(Boolean);
+          const desc = lines.find(l => !l.includes('⇒')) || '';
+          const matematicas = lines.filter(l => l.includes('⇒'));
+
+          html.push(`
+            <div class="item-change">
+              <img src="${itemIconUrl}" alt="${title}" onerror="this.style.display='none'"/>
+              <div class="item-details">
+                <h4>${title}</h4>
+                ${desc ? `<p>${desc}</p>` : ''}
+                <ul>${matematicas.map(m => `<li>${m.replace('•','')}</li>`).join('')}</ul>
+              </div>
+            </div>
+          `);
+        });
+        html.push('</div>');
+      }
+
+      // --- 4. ARAM ---
+      if (aramSection) {
+        html.push(`<div class="patch-notes-section">
+          <h3>Cambios de equilibrio de ARAM</h3>
+          <p>${norm(aramSection.texto).split('\n').join('<br>')}</p>
+        </div>`);
+      }
+
+      $content.innerHTML = html.join('');
+    }
+
+    function render(){
+      if(!state.data) return;
+      // Special structured view for 25.17
+      if(state.filterVer && String(state.filterVer)==='25.17'){
+        return renderSpecial2517();
+      }
+      const items = (state.data.parches||[]).filter(matchesFilters);
+      if(items.length===0){
+        $content.innerHTML = `
+          <div class="empty-state">
+            <svg class="empty-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M8 12h8M12 8v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <div class="empty-title">Sin resultados</div>
+            <div class="empty-message">Ajustá el texto de búsqueda o la versión para ver resultados.</div>
+          </div>`;
+        return;
+      }
+      const out = ['<div class="patch-grid">'];
+      for(const p of items){
+        const champs = Array.isArray(p.campeones)?p.campeones:[];
+        const secciones = Array.isArray(p.secciones)?p.secciones:[];
+        const pub = p.publicado? `<span class="patch-meta">${p.publicado}</span>`: '';
+        const objetosClass = state.clampItems? 'items-text clamp' : 'items-text';
+        out.push(`
+          <article class="patch-card">
+            <div class="patch-header">
+              <div class="patch-title">${p.version||''} · ${p.titulo||'Notas'}</div>
+              <div class="patch-meta-row">${pub}
+                ${p.url? `<a href="${p.url}" target="_blank" rel="noopener" class="patch-link">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 3h7v7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M21 3l-9 9" stroke="currentColor" stroke-width="1.6"/><path d="M5 7v12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                  Oficial</a>`:''}
+              </div>
+            </div>
+            ${p.objetos? `<div class="objetos ${objetosClass}"><strong>Objetos:</strong> ${p.objetos}</div>`:''}
+            <div class="section">
+              <div class="section-title">Campeones</div>
+              <div class="champ-list">
+                ${champs.length? champs.map(c=>`
+                  <details>
+                    <summary>${c.campeon||'Campeón'}</summary>
+                    <div class="champ-body">${(c.texto||'').replace(/\n/g,'\n')}</div>
+                  </details>
+                `).join('') : '<div class="champ-body">Sin cambios listados.</div>'}
+              </div>
+            </div>
+            ${secciones.length? `
+            <div class="section">
+              <div class="section-title">Secciones</div>
+              ${secciones.map(s=>{
+                const name = s.nombre||'Sección';
+                if(Array.isArray(s.subsecciones) && s.subsecciones.length){
+                  const subs = s.subsecciones.map(ss=>`
+                    <div class="subsec">
+                      <div class="subsec-title"><strong>${ss.titulo||''}</strong></div>
+                      <div class="subsec-body">${ss.texto||''}</div>
+                    </div>
+                  `).join('');
+                  return `<details class="sec"><summary>${name}</summary><div class="sec-body">${subs}</div></details>`;
+                }
+                return `<details class="sec"><summary>${name}</summary><div class="sec-body">${s.texto||''}</div></details>`;
+              }).join('')}
+            </div>`: ''}
+          </article>
+        `);
+      }
+      out.push('</div>');
+      $content.innerHTML = out.join('');
+    }
+
+    function onDataLoaded(){ setMeta(); populateVersions(); render(); }
+
+    async function tryFetch(url){ const r = await fetch(url,{cache:'no-store'}); if(!r.ok) throw new Error(`HTTP ${r.status}`); return await r.json(); }
+
+    async function autoLoad(){
+      const qs = new URLSearchParams(location.search); const param = qs.get('data');
+      const candidates = param? [param] : ['lol_patch_notes.json','patch_notes.json','patchnotes.json','./data/lol_patch_notes.json'];
+      let ok=false, lastErr=null;
+      for(const u of candidates){ try{ const json=await tryFetch(u); state.data=json; state.dataUrl=u; ok=true; break; }catch(e){ lastErr=e; } }
+      if(ok){
+        // Default to 25.17 structured view if available
+        const has2517 = (state.data.parches||[]).some(p=> String(p.version)==='25.17');
+        if(has2517){ state.filterVer='25.17'; }
+        onDataLoaded();
+        if(has2517){ $ver.value='25.17'; }
+      }
+      else{ $content.innerHTML = `<div class=\"empty-state\"><div class=\"empty-title\">No pude cargar el JSON</div><div class=\"empty-message\">Usá \"Cargar Archivo\" o arrastrá el archivo aquí. También podés servir por HTTP y pasar ?data=RUTA.json</div></div>`; }
+    }
+
+    $search.addEventListener('input', (e)=>{ state.filterText = e.target.value.trim(); render(); });
+    $ver.addEventListener('change', (e)=>{ state.filterVer = e.target.value; render(); });
+    $toggleItems.addEventListener('click', ()=>{ state.clampItems=!state.clampItems; $toggleItems.textContent = `Objetos: ${state.clampItems? 'Expandir':'Contraer'}`; render(); });
+    $loadBtn.addEventListener('click', ()=> $file.click());
+    $file.addEventListener('change', (e)=>{ const f=e.target.files&&e.target.files[0]; if(!f) return; const reader=new FileReader(); reader.onload=()=>{ try{ state.data=JSON.parse(reader.result); onDataLoaded(); }catch(err){ $content.innerHTML='<div class="empty-state"><div class="empty-title">Archivo inválido</div><div class="empty-message">No es un JSON válido.</div></div>'; } }; reader.readAsText(f,'utf-8'); });
+    window.addEventListener('dragover', (e)=>{ e.preventDefault(); $drop.classList.add('active'); });
+    window.addEventListener('dragleave', (e)=>{ if(e.target===document || e.target===document.body) $drop.classList.remove('active'); });
+    window.addEventListener('drop', (e)=>{ e.preventDefault(); $drop.classList.remove('active'); const f=e.dataTransfer&&e.dataTransfer.files&&e.dataTransfer.files[0]; if(!f) return; const reader=new FileReader(); reader.onload=()=>{ try{ state.data=JSON.parse(reader.result); onDataLoaded(); }catch(err){ $content.innerHTML='<div class="empty-state"><div class="empty-title">Archivo inválido</div><div class="empty-message">No es un JSON válido.</div></div>'; } }; reader.readAsText(f,'utf-8'); });
+
+    autoLoad();
+  })();
+  </script>
+  </body>
+  </html>
