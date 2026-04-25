@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.0",
+  "last_updated": "2026-04-08",
+  "description": "Golden draft cases for regression testing the recommendation engine. Each case defines a draft state and assertions about expected outputs. New knowledge updates must not break these cases.",
+  "cases": [
+    {
+      "case_id": "gc-001-hypercarry-heaven",
+      "description": "Heavy frontline + peel → hypercarry should be top pick",
+      "draft_state": {
+        "allies": [
+          {"id": "Nautilus"},
+          {"id": "Maokai"},
+          {"id": "Orianna"}
+        ],
+        "enemies": [
+          {"id": "Zed"},
+          {"id": "LeeSin"}
+        ],
+        "bans": [],
+        "context": {
+          "pick_position": "late",
+          "information_level": "partial",
+          "queue_type": "ranked_solo"
+        },
+        "user_pool": {
+          "mode": "unrestricted",
+          "champions": [],
+          "comfort": {}
+        }
+      },
+      "assertions": {
+        "top_pick_must_be_one_of": ["Jinx", "KogMaw", "Aphelios", "Tristana"],
+        "top_3_must_include_any_of": ["Jinx", "KogMaw"],
+        "must_not_recommend_as_top": ["Draven", "Lucian", "Kalista"],
+        "top_pick_score_min": 60
+      }
+    },
+    {
+      "case_id": "gc-002-blind-pick-safety",
+      "description": "Zero info → safe blind pick ADC",
+      "draft_state": {
+        "allies": [],
+        "enemies": [],
+        "bans": [],
+        "context": {
+          "pick_position": "blind",
+          "information_level": "none",
+          "queue_type": "ranked_solo"
+        },
+        "user_pool": {
+          "mode": "unrestricted",
+          "champions": [],
+          "comfort": {}
+        }
+      },
+      "assertions": {
+        "top_pick_must_be_one_of": ["Ezreal", "Ashe", "Tristana", "Xayah", "Jhin", "Kaisa", "Sivir"],
+        "must_not_recommend_as_top": ["KogMaw", "Aphelios", "Draven", "Kalista", "Nilah"]
+      }
+    },
+    {
+      "case_id": "gc-003-anti-tank",
+      "description": "Enemy heavy tanks → tank shredder ADC",
+      "draft_state": {
+        "allies": [
+          {"id": "Leona"},
+          {"id": "Sejuani"},
+          {"id": "Syndra"}
+        ],
+        "enemies": [
+          {"id": "Ornn"},
+          {"id": "Maokai"},
+          {"id": "TahmKench"}
+        ],
+        "bans": [],
+        "context": {
+          "pick_position": "late",
+          "information_level": "partial",
+          "queue_type": "ranked_solo"
+        },
+        "user_pool": {
+          "mode": "unrestricted",
+          "champions": [],
+          "comfort": {}
+        }
+      },
+      "assertions": {
+        "top_3_must_include_any_of": ["Vayne", "KogMaw"],
+        "must_not_recommend_as_top": ["Jhin"]
+      }
+    },
+    {
+      "case_id": "gc-004-self-sufficient-required",
+      "description": "No frontline + enemy divers → self-sufficient ADC",
+      "draft_state": {
+        "allies": [
+          {"id": "Lulu"},
+          {"id": "Fiora"}
+        ],
+        "enemies": [
+          {"id": "Camille"},
+          {"id": "Nocturne"},
+          {"id": "Katarina"}
+        ],
+        "bans": [],
+        "context": {
+          "pick_position": "late",
+          "information_level": "partial",
+          "queue_type": "ranked_solo"
+        },
+        "user_pool": {
+          "mode": "unrestricted",
+          "champions": [],
+          "comfort": {}
+        }
+      },
+      "assertions": {
+        "top_pick_must_be_one_of": ["Ezreal", "Xayah", "Vayne", "Kaisa", "Zeri", "Tristana"],
+        "must_not_recommend_as_top": ["KogMaw", "Jinx", "Aphelios"]
+      }
+    },
+    {
+      "case_id": "gc-005-pool-only",
+      "description": "Pool-only mode restricts candidates to user's pool",
+      "draft_state": {
+        "allies": [
+          {"id": "Thresh"},
+          {"id": "JarvanIV"}
+        ],
+        "enemies": [
+          {"id": "Ahri"}
+        ],
+        "bans": [],
+        "context": {
+          "pick_position": "early",
+          "information_level": "partial",
+          "queue_type": "ranked_solo"
+        },
+        "user_pool": {
+          "mode": "pool_only",
+          "champions": ["Jhin", "Ezreal", "MissFortune"],
+          "comfort": {"Jhin": 9, "Ezreal": 7, "MissFortune": 5}
+        }
+      },
+      "assertions": {
+        "top_pick_must_be_one_of": ["Jhin", "Ezreal", "MissFortune"],
+        "total_candidates_max": 3
+      }
+    }
+  ]
+}

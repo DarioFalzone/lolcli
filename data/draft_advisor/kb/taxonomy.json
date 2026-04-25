@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "description": "Controlled vocabulary for the Draft Advisor Knowledge Base. All markdown frontmatter and structured data must use values from these enums.",
+
+  "note_types": {
+    "adc_champion_note":    {"prefix": "adc-",   "folder": "research/adcs/",       "description": "Strategic analysis of a specific ADC"},
+    "support_synergy_note": {"prefix": "syn-",   "folder": "research/supports/",   "description": "How a support interacts with ADCs"},
+    "threat_note":          {"prefix": "thr-",   "folder": "research/threats/",     "description": "How an enemy champion threatens ADCs"},
+    "archetype_note":       {"prefix": "arch-",  "folder": "research/archetypes/",  "description": "Comp archetype definition and ADC fit"},
+    "matchup_note":         {"prefix": "mu-",    "folder": "research/matchups/",    "description": "Specific lane or game matchup analysis"},
+    "patch_summary":        {"prefix": "patch-", "folder": "research/patches/",     "description": "Patch impact on ADC meta"},
+    "heuristic_note":       {"prefix": "heur-",  "folder": "research/heuristics/",  "description": "Draft decision rule or principle"},
+    "meta_snapshot":        {"prefix": "meta-",  "folder": "research/meta/",        "description": "Point-in-time meta state summary"}
+  },
+
+  "confidence_levels": ["high", "medium", "low", "speculative"],
+
+  "review_statuses": ["draft", "reviewed", "stale", "superseded"],
+
+  "source_types": [
+    "expert_analysis",
+    "riot_patch_notes",
+    "web_research",
+    "pdf_extraction",
+    "personal_note",
+    "community_guide",
+    "pro_play_analysis"
+  ],
+
+  "trust_levels": ["authoritative", "expert", "community", "speculative"],
+
+  "roles": ["Top", "Jungle", "Mid", "Bot", "Support"],
+
+  "topics": [
+    "front_to_back", "dive", "poke_siege", "pick_comp", "split_push",
+    "hypercarry", "lane_bully", "utility_adc", "scaling",
+    "peel_dependency", "frontline_dependency", "self_sufficiency",
+    "blind_pick_safety", "counter_pick", "flex_pick",
+    "anti_tank", "anti_dive", "anti_poke", "anti_burst",
+    "engage_synergy", "enchanter_synergy", "mage_support_synergy",
+    "lane_matchup", "teamfight", "skirmish", "objective_control",
+    "positioning", "mobility", "burst", "sustained_dps",
+    "early_game", "mid_game", "late_game",
+    "solo_queue", "coordinated_play", "clash",
+    "patch_impact", "meta_shift", "item_changes", "champion_changes",
+    "synergy", "threat", "matchup"
+  ],
+
+  "patch_format": {
+    "pattern": "^\\d+\\.\\d+$",
+    "description": "Major.Minor format, e.g. '16.7'. Use '*' for patch-agnostic notes.",
+    "examples": ["16.7", "16.8", "*"]
+  }
+}
