@@ -1,11 +1,10 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
 from typing import Optional
 
 from fastapi import APIRouter, HTTPException, Query
 
 from riot_lol_cli.database.models import AnalysisLog, Anomaly, AnomalyTypeEnum, ChampionHourly, TierList
 from riot_lol_cli.meta_api import dependencies
-
 
 router = APIRouter(tags=["stats"])
 
@@ -31,7 +30,7 @@ async def get_champion_stats(champion_name: str, hours: int = Query(24, ge=1, le
     """Obtiene las estadísticas históricas de un campeón."""
     try:
         with dependencies.session_scope() as session:
-            cutoff = datetime.utcnow() - timedelta(hours=hours)
+            cutoff = dependencies.utcnow() - timedelta(hours=hours)
             stats = (
                 session.query(ChampionHourly)
                 .filter(
@@ -123,7 +122,7 @@ async def get_champion_anomalies(champion_name: str, hours: int = Query(24, ge=1
     """Obtiene las anomalías detectadas para un campeón."""
     try:
         with dependencies.session_scope() as session:
-            cutoff = datetime.utcnow() - timedelta(hours=hours)
+            cutoff = dependencies.utcnow() - timedelta(hours=hours)
             anomalies = (
                 session.query(Anomaly)
                 .filter(
@@ -213,7 +212,7 @@ async def get_tier_list_history(days: int = Query(7, ge=1, le=30)):
     """Obtiene el histórico de tier lists."""
     try:
         with dependencies.session_scope() as session:
-            cutoff = datetime.utcnow() - timedelta(days=days)
+            cutoff = dependencies.utcnow() - timedelta(days=days)
             history = (
                 session.query(TierList)
                 .filter(TierList.snapshot_at >= cutoff)

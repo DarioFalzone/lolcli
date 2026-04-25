@@ -2,10 +2,11 @@
 """
 Script para obtener ADCs desde Data Dragon y actualizar el tracking
 """
-import requests
 import json
 import os
-import sys
+
+import requests
+
 
 def get_adc_champions():
     """Obtiene lista oficial de ADCs desde Data Dragon"""
@@ -50,19 +51,19 @@ def main():
     adcs = get_adc_champions()
     
     print(f"✅ Total ADCs encontrados: {len(adcs)}")
-    print(f"\n📋 Lista de ADCs:")
+    print("\n📋 Lista de ADCs:")
     for i, adc in enumerate(adcs, 1):
         print(f"   {i:2}. {adc}")
     
     # Agregar Yasuo
-    print(f"\n⚔️  Agregando Yasuo a la lista...")
+    print("\n⚔️  Agregando Yasuo a la lista...")
     if 'Yasuo' not in adcs:
         adcs_with_yasuo = adcs + ['Yasuo']
     else:
         adcs_with_yasuo = adcs
     
     print(f"\n✅ Total con Yasuo: {len(adcs_with_yasuo)}")
-    print(f"\n📋 Lista completa:")
+    print("\n📋 Lista completa:")
     for i, adc in enumerate(sorted(adcs_with_yasuo), 1):
         print(f"   {i:2}. {adc}")
     
@@ -79,9 +80,9 @@ def main():
         json.dump(output_data, f, indent=2)
     
     print(f"\n💾 Datos guardados en: {output_file}")
-    print(f"\n🎯 Resumen:")
+    print("\n🎯 Resumen:")
     print(f"   ADCs actuales: {len(adcs)}")
-    print(f"   + Yasuo: 1")
+    print("   + Yasuo: 1")
     print(f"   Total tracked: {len(adcs_with_yasuo)}")
     
     return adcs_with_yasuo

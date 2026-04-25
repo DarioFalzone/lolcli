@@ -18,31 +18,29 @@ Scoring formula (unambiguous):
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional, Tuple
-
-from .schemas import (
-    DraftState,
-    DraftAnalysis,
-    AdcProfile,
-    ChampionBase,
-    RawScores,
-    WeightedScores,
-    ScoreBreakdown,
-    RecommendedPick,
-    AlternativePick,
-    RecommendationOutput,
-    PoolMode,
-    PickPosition,
-    ThreatLevel,
-    TeamfightShape,
-    DamageType,
-)
-from .champion_data import ChampionDataService
-from .analyzer import CompositionAnalyzer
-
 import hashlib
 import json
 from datetime import datetime, timezone
+
+from .analyzer import CompositionAnalyzer
+from .champion_data import ChampionDataService
+from .schemas import (
+    AdcProfile,
+    AlternativePick,
+    DamageType,
+    DraftAnalysis,
+    DraftState,
+    PickPosition,
+    PoolMode,
+    RawScores,
+    RecommendationOutput,
+    RecommendedPick,
+    ScoreBreakdown,
+    TeamfightShape,
+    ThreatLevel,
+    WeightedScores,
+)
+from .scoring_rules import score_comp_gap_fill, score_scaling_fit
 
 
 class ScoringEngine:
@@ -75,7 +73,7 @@ class ScoringEngine:
         weights = self._compute_weights(draft_state)
 
         # 4. Score every candidate
-        scored: List[Tuple[str, float, ScoreBreakdown]] = []
+        scored: list[tuple[str, float, ScoreBreakdown]] = []
         for adc_id in candidates:
             profile = self._data.get_adc_profile(adc_id)
             if profile is None:
@@ -120,7 +118,7 @@ class ScoringEngine:
     # Candidate selection
     # ========================================================================
 
-    def _get_candidates(self, draft_state: DraftState) -> List[str]:
+    def _get_candidates(self, draft_state: DraftState) -> list[str]:
         """Get the list of ADC IDs to score based on pool mode."""
         all_adcs = self._data.get_adc_ids()
         pool = draft_state.user_pool
@@ -147,7 +145,7 @@ class ScoringEngine:
     # Weight computation (with context adjustments)
     # ========================================================================
 
-    def _compute_weights(self, draft_state: DraftState) -> Dict[str, float]:
+    def _compute_weights(self, draft_state: DraftState) -> dict[str, float]:
         """Compute final weights after applying context adjustments and normalizing."""
         base = dict(self._weights_config.base_weights)
         position = draft_state.context.pick_position.value
@@ -251,6 +249,7 @@ class ScoringEngine:
 
         score = 50.0
         enemy = analysis.enemy_comp_profile
+        allied = analysis.allied_comp_profile
 
         # Anti-dive capability vs dive comps
         if enemy.has_dive:
@@ -284,6 +283,13 @@ class ScoringEngine:
             # Reward greedy ADCs
             score += (profile.scaling - 5) * 2
 
+        # Protective comps unlock riskier hypercarries against hostile drafts.
+        if enemy.has_dive or enemy.has_burst:
+            if allied.has_frontline:
+                score += max(0, profile.synergy_frontline_comp - 5) * 2
+            if allied.has_peel:
+                score += max(0, profile.synergy_peel_comp - 5) * 2.5
+
         return max(0.0, min(100.0, score))
 
     def _score_blind_pick_safety(
@@ -308,59 +314,8 @@ class ScoringEngine:
     def _score_comp_gap_fill(
         self, profile: AdcProfile, analysis: DraftAnalysis
     ) -> float:
-        """
-        Does this ADC fill gaps in the team composition?
-        Rewards ADCs that provide what the team is missing.
-        """
-        score = 50.0
-        missing = analysis.allied_comp_profile.missing
-
-        if "physical_dps" in missing:
-            # Most ADCs provide this, slight bonus for high sustained DPS
-            base_champ = self._data.get_champion(profile.id)
-            if base_champ and base_champ.damage_type == DamageType.PHYSICAL:
-                score += 10
-
-        if "frontline" in missing:
-            # ADC can't really fill this, but tanky/self-peel ADCs lose less
-            score += (profile.self_peel - 5) * 1.5
-
-        if "engage" in missing:
-            # Some ADCs provide engage (Ashe R, Varus R, Jhin W/R)
-            base_champ = self._data.get_champion(profile.id)
-            if base_champ:
-                tags = base_champ.tags
-                if tags.engage >= 5:
-                    score += (tags.engage - 4) * 3
-
-        if "peel" in missing:
-            # ADCs with some self-peel are less hurt
-            score += (profile.self_peel - 5) * 1.5
-
-        if "poke" in missing:
-            # Some ADCs provide poke (Ezreal, Varus, Jhin)
-            base_champ = self._data.get_champion(profile.id)
-            if base_champ:
-                tags = base_champ.tags
-                if tags.poke >= 6:
-                    score += (tags.poke - 5) * 3
-
-        # Objective damage is almost always missing pre-ADC
-        if "objective_damage" in missing:
-            score += (profile.objective_dps - 5) * 3
-
-        # Teamfight shape alignment
-        shape = analysis.allied_comp_profile.teamfight_shape
-        if shape == TeamfightShape.FRONT_TO_BACK:
-            score += (profile.teamfight_consistency - 5) * 3
-        elif shape == TeamfightShape.DIVE:
-            score += (profile.skirmish_power - 5) * 3
-        elif shape == TeamfightShape.POKE_SIEGE:
-            score += (profile.siege_value - 5) * 3
-        elif shape == TeamfightShape.PICK:
-            score += (profile.pick_potential - 5) * 3
-
-        return max(0.0, min(100.0, score))
+        """Does this ADC fill gaps in the team composition?"""
+        return score_comp_gap_fill(profile, analysis.allied_comp_profile, self._data)
 
     def _score_solo_queue_reliability(self, profile: AdcProfile) -> float:
         """
@@ -375,34 +330,8 @@ class ScoringEngine:
     def _score_scaling_fit(
         self, profile: AdcProfile, analysis: DraftAnalysis
     ) -> float:
-        """
-        Does this ADC's scaling profile match the comp's game plan?
-        """
-        score = 50.0
-        allied = analysis.allied_comp_profile
-
-        # If comp has strong engage and frontline -> reward scaling ADCs
-        if allied.has_frontline and allied.has_engage:
-            score += (profile.scaling - 5) * 4
-
-        # If comp lacks frontline -> reward self-sufficient ADCs
-        if not allied.has_frontline:
-            score += (profile.self_peel - 5) * 2
-            score += (profile.mobility - 5) * 2
-            score -= (profile.scaling - 5) * 1  # Pure scalers suffer without frontline
-
-        # If comp is early-oriented (lots of early_power in allies)
-        early_power_sum = 0
-        ally_count = 0
-        for ally in analysis.allied_comp_profile.missing:
-            pass  # We don't have direct access to ally list here
-        # Use teamfight shape as proxy
-        if allied.teamfight_shape == TeamfightShape.DIVE:
-            # Dive comps want mid-game spike ADCs
-            score += (profile.skirmish_power - 5) * 3
-            score -= (profile.dependence_on_frontline - 5) * 2
-
-        return max(0.0, min(100.0, score))
+        """Does this ADC's scaling profile match the comp's game plan?"""
+        return score_scaling_fit(profile, analysis.allied_comp_profile)
 
     # ========================================================================
     # Score breakdown assembly
@@ -411,7 +340,7 @@ class ScoringEngine:
     def _build_breakdown(
         self,
         raw: RawScores,
-        weights: Dict[str, float],
+        weights: dict[str, float],
         draft_state: DraftState,
         adc_id: str,
     ) -> ScoreBreakdown:
@@ -533,7 +462,7 @@ class ScoringEngine:
 
     def _generate_strengths(
         self, profile: AdcProfile, analysis: DraftAnalysis, draft: DraftState
-    ) -> List[str]:
+    ) -> list[str]:
         """Generate human-readable strengths for the top pick in this draft."""
         strengths = []
         allied = analysis.allied_comp_profile
@@ -581,7 +510,7 @@ class ScoringEngine:
             champ = self._data.get_champion(profile.id)
             if champ and champ.damage_type == DamageType.PHYSICAL:
                 strengths.append(
-                    f"Fills team's need for physical damage"
+                    "Fills team's need for physical damage"
                 )
 
         if not strengths:
@@ -591,7 +520,7 @@ class ScoringEngine:
 
     def _generate_risks(
         self, profile: AdcProfile, analysis: DraftAnalysis, draft: DraftState
-    ) -> List[str]:
+    ) -> list[str]:
         """Generate risk warnings for the top pick in this draft."""
         risks = []
         allied = analysis.allied_comp_profile
@@ -707,7 +636,7 @@ class ScoringEngine:
 
     def _compare_advantages(
         self, alt: AdcProfile, top: AdcProfile
-    ) -> List[str]:
+    ) -> list[str]:
         """What does the alternative do better than the top pick?"""
         advantages = []
 
@@ -729,13 +658,13 @@ class ScoringEngine:
             advantages.append(f"Stronger in skirmishes ({alt.skirmish_power} vs {top.skirmish_power})")
 
         if not advantages:
-            advantages.append(f"More versatile in certain team compositions")
+            advantages.append("More versatile in certain team compositions")
 
         return advantages[:3]
 
     def _compare_disadvantages(
         self, alt: AdcProfile, top: AdcProfile
-    ) -> List[str]:
+    ) -> list[str]:
         """What does the alternative do worse than the top pick?"""
         disadvantages = []
 
@@ -753,6 +682,6 @@ class ScoringEngine:
             disadvantages.append(f"Less self-peel ({alt.self_peel} vs {top.self_peel})")
 
         if not disadvantages:
-            disadvantages.append(f"Slightly lower overall score in this specific draft context")
+            disadvantages.append("Slightly lower overall score in this specific draft context")
 
         return disadvantages[:3]

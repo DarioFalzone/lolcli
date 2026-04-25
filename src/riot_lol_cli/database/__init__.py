@@ -3,17 +3,17 @@ Database module initialization
 """
 
 from .models import (
-    DatabaseManager,
-    RawMatch,
-    ChampionHourly,
-    Anomaly,
-    TierList,
-    ChampionStatsHistorical,
-    MetaEvent,
     AnalysisLog,
+    Anomaly,
     AnomalyTypeEnum,
+    ChampionHourly,
+    ChampionStatsHistorical,
+    DatabaseManager,
+    MetaEvent,
+    RawMatch,
     SeverityEnum,
     TierEnum,
+    TierList,
     TrendEnum,
 )
 

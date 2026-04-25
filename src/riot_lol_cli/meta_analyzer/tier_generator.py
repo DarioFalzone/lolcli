@@ -2,11 +2,14 @@
 Tier Generator - Genera tier lists basadas en estadísticas y anomalías
 """
 import json
-from datetime import datetime
-from pathlib import Path
-from typing import List, Dict, Any, Optional
+import logging
 from dataclasses import dataclass
+from datetime import datetime
 from enum import Enum
+from pathlib import Path
+from typing import Any, Optional
+
+logger = logging.getLogger(__name__)
 
 
 class Tier(Enum):
@@ -31,7 +34,7 @@ class ChampionTierInfo:
     reason: Optional[str] = None     # Por qué está en este tier
     best_role: Optional[str] = None
     
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return {
             'champion': self.champion,
             'tier': self.tier.value,
@@ -68,9 +71,9 @@ class TierListGenerator:
     
     def generate_tier_list(
         self,
-        stats: Dict[str, Any],
-        anomalies: Optional[List[Any]] = None
-    ) -> List[ChampionTierInfo]:
+        stats: dict[str, Any],
+        anomalies: Optional[list[Any]] = None
+    ) -> list[ChampionTierInfo]:
         """
         Genera tier list desde estadísticas
         
@@ -177,7 +180,7 @@ class TierListGenerator:
         tier_index = list(Tier).index(tier)
         return list(Tier)[min(tier_index + 1, len(list(Tier)) - 1)]
     
-    def _detect_trend(self, champion: str, anomalies: List[Any]) -> Optional[str]:
+    def _detect_trend(self, champion: str, anomalies: list[Any]) -> Optional[str]:
         """Detecta tendencia del campeón basada en anomalías"""
         
         for anomaly in anomalies:
@@ -194,7 +197,7 @@ class TierListGenerator:
         
         return None
     
-    def _get_best_role(self, roles: Dict[str, Any]) -> Optional[str]:
+    def _get_best_role(self, roles: dict[str, Any]) -> Optional[str]:
         """Determina mejor rol para el campeón"""
         
         if not roles:
@@ -235,7 +238,7 @@ class TierListGenerator:
     
     def save_tier_list(
         self,
-        tier_list: List[ChampionTierInfo],
+        tier_list: list[ChampionTierInfo],
         timestamp: Optional[str] = None
     ) -> Path:
         """Guarda tier list"""
@@ -253,8 +256,8 @@ class TierListGenerator:
                 'tier_list': [info.to_dict() for info in tier_list]
             }, f, indent=2, ensure_ascii=False)
         
-        print(f"✅ Tier list guardada en {filepath}")
-        print(f"\n📊 Resumen:")
+        logger.info("Tier list guardada en %s", filepath)
+        logger.info("Resumen:")
         
         tier_counts = {}
         for info in tier_list:
@@ -262,11 +265,11 @@ class TierListGenerator:
         
         for tier in [Tier.S, Tier.A, Tier.B, Tier.C, Tier.D]:
             count = tier_counts.get(tier.value, 0)
-            print(f"  Tier {tier.value}: {count:3d} campeones")
+            logger.info("  Tier %s: %3d campeones", tier.value, count)
         
         return filepath
     
-    def get_tier_list_html(self, tier_list: List[ChampionTierInfo]) -> str:
+    def get_tier_list_html(self, tier_list: list[ChampionTierInfo]) -> str:
         """Genera HTML para visualizar tier list"""
         
         html_rows = ""
@@ -399,9 +402,10 @@ if __name__ == "__main__":
     
     tier_list = generator.generate_tier_list(stats)
     
-    print("\n📊 Generated Tier List:")
+    logging.basicConfig(level=logging.INFO)
+    logger.info("Generated Tier List:")
     for info in tier_list:
-        print(f"  [{info.tier.value}] {info.champion:20s} WR:{info.winrate:5.1f}% PR:{info.pickrate:5.1f}%")
+        logger.info("  [%s] %-20s WR:%5.1f%% PR:%5.1f%%", info.tier.value, info.champion, info.winrate, info.pickrate)
     
     # Save
     generator.save_tier_list(tier_list)

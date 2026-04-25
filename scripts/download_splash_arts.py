@@ -3,23 +3,23 @@ Script para descargar todos los splash arts de League of Legends
 Usa Data Dragon CDN de Riot Games (no requiere API key)
 """
 
-import requests
-import os
-import time
-import random
 import argparse
-from pathlib import Path
+import os
+import random
+import time
 
-# Asegurar que corremos desde el root del repo
-os.chdir(Path(__file__).parent.parent)
+import requests
+
+from riot_lol_cli import paths
+from riot_lol_cli.settings import get_ddragon_version
 
 # Configuración
-DATA_DRAGON_VERSION = "14.23.1"  # Versión actualizada
+DATA_DRAGON_VERSION = get_ddragon_version()
 BASE_URL = f"https://ddragon.leagueoflegends.com/cdn/{DATA_DRAGON_VERSION}"
 SPLASH_BASE_URL = "https://ddragon.leagueoflegends.com/cdn/img/champion/splash"
 CENTERED_BASE_URL = "https://ddragon.leagueoflegends.com/cdn/img/champion/centered"
 LOADING_BASE_URL = "https://ddragon.leagueoflegends.com/cdn/img/champion/loading"
-OUTPUT_DIR = "assets/splash_arts"
+OUTPUT_DIR = str(paths.ASSETS_DIR / "splash_arts")
 
 
 def get_latest_version():
@@ -130,7 +130,7 @@ def download_all_splash_arts(image_delay=0.2, champion_delay=0.4, max_retries=5)
         skins = get_champion_skins(champion_id, version)
         
         if not skins:
-            print(f"  ⚠️ No se encontraron skins")
+            print("  ⚠️ No se encontraron skins")
             continue
         
         # Crear carpeta para el campeón
@@ -220,8 +220,6 @@ def download_single_champion(champion_name, image_delay=0.2, max_retries=5):
     for skin in skins:
         skin_num = skin['num']
         skin_name = skin['name']
-        
-        splash_url = f"{SPLASH_BASE_URL}/{champion_id}_{skin_num}.jpg"
         
         if skin_name == "default":
             filename = f"{champion_id}_Classic.jpg"

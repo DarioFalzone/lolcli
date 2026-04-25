@@ -3,7 +3,6 @@ from sqlalchemy import text
 
 from riot_lol_cli.meta_api import dependencies
 
-
 router = APIRouter(tags=["maintenance"])
 
 

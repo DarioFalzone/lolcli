@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 from html import escape
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any
 
 from riot_lol_cli import paths
 from riot_lol_cli.settings import get_ddragon_version
@@ -16,7 +16,7 @@ def load_template(template_name: str) -> str:
     return template_path.read_text(encoding="utf-8")
 
 
-def load_matches_data(json_path: str) -> Dict[str, Any]:
+def load_matches_data(json_path: str) -> dict[str, Any]:
     file_path = Path(json_path)
     if not file_path.exists():
         raise FileNotFoundError(f"Archivo no encontrado: {json_path}")
@@ -37,7 +37,7 @@ def get_champion_icon(champ_id: str, ddragon_version: str) -> str:
     return f"https://ddragon.leagueoflegends.com/cdn/{ddragon_version}/img/champion/{champ_id}.png"
 
 
-def _normalize_items(items: Any) -> Dict[str, Any]:
+def _normalize_items(items: Any) -> dict[str, Any]:
     if isinstance(items, list):
         items_dict = {str(index): item_id for index, item_id in enumerate(items) if item_id and item_id > 0}
         if len(items) > 6 and items[6]:
@@ -87,7 +87,7 @@ def _escape_text(value: Any) -> str:
     return escape(str(value or ""))
 
 
-def generate_match_history_html(template: str, data: Dict[str, Any], template_name: str) -> str:
+def generate_match_history_html(template: str, data: dict[str, Any], template_name: str) -> str:
     version = get_version()
     ddragon_version = _escape_text(data.get("ddragon_version") or get_ddragon_version())
 

@@ -2,17 +2,17 @@
 Data Collector - Recolecta datos de partidas en tiempo real
 Versión BD-integrada (SQLAlchemy)
 """
-import json
+import logging
 import time
+from collections import defaultdict
 from datetime import datetime, timedelta
 from pathlib import Path
-from typing import List, Dict, Any, Optional
-from collections import defaultdict
+from typing import Any, Optional
 
 from riot_lol_cli.api import RiotClient
-from riot_lol_cli.database.models import (
-    DatabaseManager, RawMatch, ChampionHourly
-)
+from riot_lol_cli.database.models import ChampionHourly, DatabaseManager, RawMatch
+
+logger = logging.getLogger(__name__)
 
 
 class MetaDataCollectorDB:
@@ -26,7 +26,7 @@ class MetaDataCollectorDB:
         self.data_dir = Path(__file__).parent.parent.parent.parent / "data" / "meta"
         self.data_dir.mkdir(parents=True, exist_ok=True)
         
-    def collect_matches_batch(self, summoners: List[str], count_per_summoner: int = 20) -> List[Dict[str, Any]]:
+    def collect_matches_batch(self, summoners: list[str], count_per_summoner: int = 20) -> list[dict[str, Any]]:
         """
         Recolecta partidas de múltiples jugadores y las guarda en BD
         
@@ -60,27 +60,27 @@ class MetaDataCollectorDB:
                             matches_data.append(processed)
                             
                         except Exception as e:
-                            print(f"Error procesando match {match_id}: {e}")
+                            logger.warning("Error procesando match %s: %s", match_id, e)
                             continue
                     
                     time.sleep(1)  # Rate limiting
                     
                 except Exception as e:
-                    print(f"Error con summoner {summoner}: {e}")
+                    logger.warning("Error con summoner %s: %s", summoner, e)
                     continue
             
             session.commit()
-            print(f"✅ Guardadas {len(matches_data)} partidas en BD")
+            logger.info("Guardadas %d partidas en BD", len(matches_data))
             
         except Exception as e:
             session.rollback()
-            print(f"❌ Error guardando en BD: {e}")
+            logger.error("Error guardando en BD: %s", e)
         finally:
             session.close()
         
         return matches_data
 
-    def _process_match(self, match_detail: Dict, match_id: str) -> Dict[str, Any]:
+    def _process_match(self, match_detail: dict, match_id: str) -> dict[str, Any]:
         """
         Procesa datos crudos de una partida
         
@@ -139,7 +139,7 @@ class MetaDataCollectorDB:
         
         return processed
 
-    def _save_match_to_db(self, session, processed: Dict[str, Any]):
+    def _save_match_to_db(self, session, processed: dict[str, Any]):
         """Guarda una partida procesada en BD"""
         for participant in processed.get("participants", []):
             match = RawMatch(
@@ -176,7 +176,7 @@ class MetaDataCollectorDB:
             )
             session.add(match)
 
-    def get_hourly_stats(self, matches: Optional[List[Dict]] = None, hours_back: int = 24) -> Dict[str, Dict]:
+    def get_hourly_stats(self, matches: Optional[list[dict]] = None, hours_back: int = 24) -> dict[str, dict]:
         """
         Calcula estadísticas agregadas por hora desde BD
         
@@ -270,7 +270,7 @@ class MetaDataCollectorDB:
         finally:
             session.close()
 
-    def _save_hourly_stats(self, session, stats: Dict[str, Dict]):
+    def _save_hourly_stats(self, session, stats: dict[str, dict]):
         """Guarda stats horarias en BD"""
         hour_bucket = datetime.utcnow().replace(minute=0, second=0, microsecond=0)
         
@@ -299,7 +299,7 @@ class MetaDataCollectorDB:
             )
             session.add(hourly)
 
-    def get_stats_by_hour(self) -> Dict:
+    def get_stats_by_hour(self) -> dict:
         """
         Obtiene las últimas stats agregadas por hora desde BD
         

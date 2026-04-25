@@ -12,19 +12,18 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Dict, List, Optional, Set
 
 from .schemas import (
-    ChampionBase,
-    ChampionBaseFile,
-    DataManifestFile,
     AdcProfile,
     AdcProfilesFile,
+    ChampionBase,
+    ChampionBaseFile,
+    CombatClass,
+    DataManifestFile,
+    GameplayRole,
     PriorityProfile,
     PriorityProfilesFile,
     ScoringWeightsConfig,
-    GameplayRole,
-    CombatClass,
 )
 
 
@@ -36,19 +35,19 @@ class ChampionDataService:
     Total data volume is trivially small (~170 champions × ~50 fields).
     """
 
-    def __init__(self, data_dir: Optional[str | Path] = None):
+    def __init__(self, data_dir: str | Path | None = None):
         if data_dir is None:
             data_dir = Path(__file__).parent.parent.parent.parent / "data" / "draft_advisor"
         self._data_dir = Path(data_dir)
 
         # Loaded state
-        self._champion_base: Dict[str, ChampionBase] = {}
-        self._adc_profiles: Dict[str, AdcProfile] = {}
-        self._priority_profiles: Dict[str, PriorityProfile] = {}
-        self._scoring_weights: Optional[ScoringWeightsConfig] = None
+        self._champion_base: dict[str, ChampionBase] = {}
+        self._adc_profiles: dict[str, AdcProfile] = {}
+        self._priority_profiles: dict[str, PriorityProfile] = {}
+        self._scoring_weights: ScoringWeightsConfig | None = None
 
         # Metadata
-        self._manifest: Optional[DataManifestFile] = None
+        self._manifest: DataManifestFile | None = None
         self._schema_version: str = ""
 
         # Load everything
@@ -70,14 +69,14 @@ class ChampionDataService:
     def _load_data_manifest(self) -> None:
         """Load Global Metadata: data_manifest.json"""
         path = self._data_dir / "data_manifest.json"
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             raw = json.load(f)
         self._manifest = DataManifestFile(**raw)
 
     def _load_champion_base(self) -> None:
         """Load Tier 1: champion_base.json"""
         path = self._data_dir / "champion_base.json"
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             raw = json.load(f)
 
         validated = ChampionBaseFile(**raw)
@@ -87,7 +86,7 @@ class ChampionDataService:
     def _load_adc_profiles(self) -> None:
         """Load Tier 2: adc_profiles.json"""
         path = self._data_dir / "adc_profiles.json"
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             raw = json.load(f)
 
         validated = AdcProfilesFile(**raw)
@@ -96,7 +95,7 @@ class ChampionDataService:
     def _load_priority_profiles(self) -> None:
         """Load Tier 3: priority_profiles.json"""
         path = self._data_dir / "priority_profiles.json"
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             raw = json.load(f)
 
         validated = PriorityProfilesFile(**raw)
@@ -105,14 +104,14 @@ class ChampionDataService:
     def _load_scoring_weights(self) -> None:
         """Load scoring_weights.json"""
         path = self._data_dir / "scoring_weights.json"
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             raw = json.load(f)
 
         self._scoring_weights = ScoringWeightsConfig(**raw)
 
     def _cross_validate(self) -> None:
         """Cross-validate data consistency across tiers."""
-        errors: List[str] = []
+        errors: list[str] = []
 
         # Every ADC profile must exist in champion_base
         for adc_id in self._adc_profiles:
@@ -152,7 +151,7 @@ class ChampionDataService:
         return self._manifest.static_data_version if self._manifest else ""
         
     @property
-    def manifest(self) -> Optional[DataManifestFile]:
+    def manifest(self) -> DataManifestFile | None:
         return self._manifest
 
     @property
@@ -167,26 +166,26 @@ class ChampionDataService:
     def total_priority(self) -> int:
         return len(self._priority_profiles)
 
-    def get_champion(self, champion_id: str) -> Optional[ChampionBase]:
+    def get_champion(self, champion_id: str) -> ChampionBase | None:
         """Get a champion by Data Dragon ID."""
         return self._champion_base.get(champion_id)
 
-    def get_all_champions(self) -> Dict[str, ChampionBase]:
+    def get_all_champions(self) -> dict[str, ChampionBase]:
         """Get all champions."""
         return self._champion_base
 
-    def get_all_champion_ids(self) -> Set[str]:
+    def get_all_champion_ids(self) -> set[str]:
         """Get all champion IDs."""
         return set(self._champion_base.keys())
 
-    def get_champions_by_role(self, role: GameplayRole) -> List[ChampionBase]:
+    def get_champions_by_role(self, role: GameplayRole) -> list[ChampionBase]:
         """Get all champions with a given primary role."""
         return [
             c for c in self._champion_base.values()
             if c.primary_role == role
         ]
 
-    def get_champions_by_class(self, combat_class: CombatClass) -> List[ChampionBase]:
+    def get_champions_by_class(self, combat_class: CombatClass) -> list[ChampionBase]:
         """Get all champions with a given combat class."""
         return [
             c for c in self._champion_base.values()
@@ -201,15 +200,15 @@ class ChampionDataService:
     # Queries — ADC Profiles (Tier 2)
     # ========================================================================
 
-    def get_adc_profile(self, champion_id: str) -> Optional[AdcProfile]:
+    def get_adc_profile(self, champion_id: str) -> AdcProfile | None:
         """Get deep ADC profile by ID."""
         return self._adc_profiles.get(champion_id)
 
-    def get_all_adc_profiles(self) -> Dict[str, AdcProfile]:
+    def get_all_adc_profiles(self) -> dict[str, AdcProfile]:
         """Get all ADC profiles."""
         return self._adc_profiles
 
-    def get_adc_ids(self) -> Set[str]:
+    def get_adc_ids(self) -> set[str]:
         """Get all ADC champion IDs."""
         return set(self._adc_profiles.keys())
 
@@ -217,11 +216,11 @@ class ChampionDataService:
     # Queries — Priority Profiles (Tier 3)
     # ========================================================================
 
-    def get_priority_profile(self, champion_id: str) -> Optional[PriorityProfile]:
+    def get_priority_profile(self, champion_id: str) -> PriorityProfile | None:
         """Get priority profile by ID."""
         return self._priority_profiles.get(champion_id)
 
-    def get_all_priority_profiles(self) -> Dict[str, PriorityProfile]:
+    def get_all_priority_profiles(self) -> dict[str, PriorityProfile]:
         """Get all priority profiles."""
         return self._priority_profiles
 
@@ -248,7 +247,7 @@ class ChampionDataService:
         champ = self._champion_base.get(champion_id)
         return champ.display_name if champ else champion_id
 
-    def get_champion_tags(self, champion_id: str) -> Optional[dict]:
+    def get_champion_tags(self, champion_id: str) -> dict | None:
         """Get the 14 draft-relevant tags for a champion."""
         champ = self._champion_base.get(champion_id)
         if champ is None:

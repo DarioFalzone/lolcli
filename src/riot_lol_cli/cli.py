@@ -8,7 +8,6 @@ from riot_lol_cli.rendering import generate_match_history_html, load_matches_dat
 from riot_lol_cli.splash import build_splash_manifest, generate_splash_viewer_html, load_splash_manifest
 from riot_lol_cli.versioning import bump_version, get_version
 
-
 paths.ensure_runtime_directories()
 
 

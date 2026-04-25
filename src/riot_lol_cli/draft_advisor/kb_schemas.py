@@ -9,12 +9,9 @@ and matchup rules.
 from __future__ import annotations
 
 import re
-from datetime import date
 from enum import Enum
-from typing import Dict, List, Optional
 
 from pydantic import BaseModel, Field, field_validator
-
 
 # ============================================================================
 # PATCH FORMAT
@@ -92,8 +89,8 @@ class ResearchNoteMeta(BaseModel):
     type: NoteType
     domain: str = "draft_advisor"
     patch_scope: str = "*"
-    live_patch_label: Optional[str] = None
-    static_data_version: Optional[str] = None
+    live_patch_label: str | None = None
+    static_data_version: str | None = None
     source_type: SourceType
     source_url: str = ""
     source_file: str = ""
@@ -101,13 +98,13 @@ class ResearchNoteMeta(BaseModel):
     last_reviewed_at: str
     review_status: ReviewStatus
     confidence: ConfidenceLevel
-    champions: List[str] = Field(default_factory=list)
-    roles: List[str] = Field(default_factory=list)
-    topics: List[str] = Field(default_factory=list)
-    tags: List[str] = Field(default_factory=list)
-    derived_from: List[str] = Field(default_factory=list)
-    supersedes: List[str] = Field(default_factory=list)
-    superseded_by: List[str] = Field(default_factory=list)
+    champions: list[str] = Field(default_factory=list)
+    roles: list[str] = Field(default_factory=list)
+    topics: list[str] = Field(default_factory=list)
+    tags: list[str] = Field(default_factory=list)
+    derived_from: list[str] = Field(default_factory=list)
+    supersedes: list[str] = Field(default_factory=list)
+    superseded_by: list[str] = Field(default_factory=list)
 
     @field_validator("patch_scope")
     @classmethod
@@ -134,16 +131,16 @@ class SourceManifestEntry(BaseModel):
     """A single entry in the source manifest."""
 
     source_id: str
-    file_path: Optional[str] = None
+    file_path: str | None = None
     source_type: str
-    origin_url: Optional[str] = None
+    origin_url: str | None = None
     capture_date: str
     patch_scope: str = "*"
-    live_patch_label: Optional[str] = None
+    live_patch_label: str | None = None
     trust_level: TrustLevel
     review_status: ReviewStatus
-    linked_research_notes: List[str] = Field(default_factory=list)
-    linked_structured_updates: List[str] = Field(default_factory=list)
+    linked_research_notes: list[str] = Field(default_factory=list)
+    linked_structured_updates: list[str] = Field(default_factory=list)
     notes: str = ""
 
     @field_validator("patch_scope")
@@ -157,7 +154,7 @@ class SourceManifest(BaseModel):
 
     schema_version: str
     last_updated: str
-    sources: List[SourceManifestEntry]
+    sources: list[SourceManifestEntry]
 
 
 # ============================================================================
@@ -189,7 +186,7 @@ class PatchOverridesFile(BaseModel):
     live_patch_label: str
     last_updated: str
     description: str = ""
-    overrides: List[PatchOverride] = Field(default_factory=list)
+    overrides: list[PatchOverride] = Field(default_factory=list)
 
     @field_validator("live_patch_label")
     @classmethod
@@ -202,24 +199,24 @@ class PatchOverridesFile(BaseModel):
 # ============================================================================
 
 class ArchetypeDetectionRules(BaseModel):
-    min_frontline: Optional[int] = None
-    min_peel_sources: Optional[int] = None
-    min_dive_threats: Optional[int] = None
-    high_team_mobility: Optional[bool] = None
-    min_poke_sources: Optional[int] = None
-    has_waveclear: Optional[bool] = None
-    min_pick_potential_sources: Optional[int] = None
-    has_cc_chain: Optional[bool] = None
-    has_split_pusher: Optional[bool] = None
-    split_pusher_roles: List[str] = Field(default_factory=list)
-    excluded_shapes: List[str] = Field(default_factory=list)
+    min_frontline: int | None = None
+    min_peel_sources: int | None = None
+    min_dive_threats: int | None = None
+    high_team_mobility: bool | None = None
+    min_poke_sources: int | None = None
+    has_waveclear: bool | None = None
+    min_pick_potential_sources: int | None = None
+    has_cc_chain: bool | None = None
+    has_split_pusher: bool | None = None
+    split_pusher_roles: list[str] = Field(default_factory=list)
+    excluded_shapes: list[str] = Field(default_factory=list)
 
 
 class ArchetypeAdcPreferences(BaseModel):
-    boost_traits: List[str] = Field(default_factory=list)
-    penalize_traits: List[str] = Field(default_factory=list)
-    preferred_adcs: List[str] = Field(default_factory=list)
-    avoid_adcs: List[str] = Field(default_factory=list)
+    boost_traits: list[str] = Field(default_factory=list)
+    penalize_traits: list[str] = Field(default_factory=list)
+    preferred_adcs: list[str] = Field(default_factory=list)
+    avoid_adcs: list[str] = Field(default_factory=list)
 
 
 class CompArchetype(BaseModel):
@@ -228,15 +225,15 @@ class CompArchetype(BaseModel):
     description: str
     detection_rules: ArchetypeDetectionRules
     adc_preferences: ArchetypeAdcPreferences
-    weight_adjustments: Dict[str, float] = Field(default_factory=dict)
-    research_notes: List[str] = Field(default_factory=list)
+    weight_adjustments: dict[str, float] = Field(default_factory=dict)
+    research_notes: list[str] = Field(default_factory=list)
 
 
 class CompArchetypesFile(BaseModel):
     schema_version: str
     last_updated: str
     description: str = ""
-    archetypes: Dict[str, CompArchetype]
+    archetypes: dict[str, CompArchetype]
 
 
 # ============================================================================
@@ -248,8 +245,8 @@ class MatchupRule(BaseModel):
 
     rule_id: str
     description: str
-    trigger: Dict[str, object]  # e.g. {"enemy_contains": "Zed", "adc_trait_below": {"self_peel": 4}}
-    score_adjustment: Dict[str, float]  # e.g. {"enemy_matchup": -15}
+    trigger: dict[str, object]  # e.g. {"enemy_contains": "Zed", "adc_trait_below": {"self_peel": 4}}
+    score_adjustment: dict[str, float]  # e.g. {"enemy_matchup": -15}
     source_research_note: str = ""
 
 
@@ -257,7 +254,7 @@ class MatchupRulesFile(BaseModel):
     schema_version: str
     last_updated: str
     description: str = ""
-    rules: List[MatchupRule] = Field(default_factory=list)
+    rules: list[MatchupRule] = Field(default_factory=list)
 
 
 # ============================================================================
@@ -267,21 +264,21 @@ class MatchupRulesFile(BaseModel):
 class GoldenDraftState(BaseModel):
     """A draft state for evaluation."""
 
-    allies: List[Dict[str, str]] = Field(default_factory=list)
-    enemies: List[Dict[str, str]] = Field(default_factory=list)
-    bans: List[str] = Field(default_factory=list)
-    context: Dict[str, str] = Field(default_factory=dict)
-    user_pool: Optional[Dict[str, object]] = None
+    allies: list[dict[str, str]] = Field(default_factory=list)
+    enemies: list[dict[str, str]] = Field(default_factory=list)
+    bans: list[str] = Field(default_factory=list)
+    context: dict[str, str] = Field(default_factory=dict)
+    user_pool: dict[str, object] | None = None
 
 
 class GoldenAssertions(BaseModel):
     """Assertions about expected recommendation output."""
 
-    top_pick_must_be_one_of: List[str] = Field(default_factory=list)
-    top_3_must_include_any_of: List[str] = Field(default_factory=list)
-    must_not_recommend_as_top: List[str] = Field(default_factory=list)
-    top_pick_score_min: Optional[float] = None
-    total_candidates_max: Optional[int] = None
+    top_pick_must_be_one_of: list[str] = Field(default_factory=list)
+    top_3_must_include_any_of: list[str] = Field(default_factory=list)
+    must_not_recommend_as_top: list[str] = Field(default_factory=list)
+    top_pick_score_min: float | None = None
+    total_candidates_max: int | None = None
 
 
 class GoldenDraftCase(BaseModel):
@@ -299,4 +296,4 @@ class GoldenDraftsFile(BaseModel):
     schema_version: str
     last_updated: str
     description: str = ""
-    cases: List[GoldenDraftCase]
+    cases: list[GoldenDraftCase]

@@ -13,7 +13,6 @@ from __future__ import annotations
 import logging
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import List, Optional, Set
 
 import yaml
 
@@ -44,13 +43,13 @@ class RetrievedNote:
 class RetrievalQuery:
     """Query parameters for knowledge retrieval."""
 
-    champions: List[str] = field(default_factory=list)
-    topics: List[str] = field(default_factory=list)
+    champions: list[str] = field(default_factory=list)
+    topics: list[str] = field(default_factory=list)
     patch: str = "*"
     max_results: int = 5
     min_confidence: ConfidenceLevel = ConfidenceLevel.MEDIUM
     only_reviewed: bool = True
-    note_types: Optional[List[str]] = None  # Filter by specific note types
+    note_types: list[str] | None = None  # Filter by specific note types
 
 
 class KnowledgeRetriever:
@@ -66,9 +65,9 @@ class KnowledgeRetriever:
         """
         self._kb_root = kb_root
         self._research_dir = kb_root / "research"
-        self._cache: Optional[List[tuple[ResearchNoteMeta, Path]]] = None
+        self._cache: list[tuple[ResearchNoteMeta, Path]] | None = None
 
-    def retrieve(self, query: RetrievalQuery) -> List[RetrievedNote]:
+    def retrieve(self, query: RetrievalQuery) -> list[RetrievedNote]:
         """
         Retrieve relevant research notes based on query parameters.
 
@@ -82,7 +81,7 @@ class KnowledgeRetriever:
             List of RetrievedNote sorted by relevance_score descending.
         """
         all_notes = self._scan_notes()
-        results: List[RetrievedNote] = []
+        results: list[RetrievedNote] = []
 
         query_champions = set(c.lower() for c in query.champions)
         query_topics = set(t.lower() for t in query.topics)
@@ -145,7 +144,7 @@ class KnowledgeRetriever:
 
         return results[:query.max_results]
 
-    def get_note_by_id(self, note_id: str) -> Optional[RetrievedNote]:
+    def get_note_by_id(self, note_id: str) -> RetrievedNote | None:
         """Retrieve a specific note by its ID."""
         all_notes = self._scan_notes()
         for meta, filepath in all_notes:
@@ -154,7 +153,7 @@ class KnowledgeRetriever:
                 return RetrievedNote(meta=meta, file_path=filepath, body=body)
         return None
 
-    def list_all_notes(self) -> List[ResearchNoteMeta]:
+    def list_all_notes(self) -> list[ResearchNoteMeta]:
         """List metadata for all parseable research notes."""
         return [meta for meta, _ in self._scan_notes()]
 
@@ -166,12 +165,12 @@ class KnowledgeRetriever:
     # Internal
     # ========================================================================
 
-    def _scan_notes(self) -> List[tuple[ResearchNoteMeta, Path]]:
+    def _scan_notes(self) -> list[tuple[ResearchNoteMeta, Path]]:
         """Scan all .md files in research/ and parse their frontmatter."""
         if self._cache is not None:
             return self._cache
 
-        notes: List[tuple[ResearchNoteMeta, Path]] = []
+        notes: list[tuple[ResearchNoteMeta, Path]] = []
 
         if not self._research_dir.exists():
             logger.warning(f"Research directory not found: {self._research_dir}")
@@ -189,7 +188,7 @@ class KnowledgeRetriever:
         logger.info(f"KB retriever: scanned {len(notes)} research notes")
         return notes
 
-    def _parse_frontmatter(self, filepath: Path) -> Optional[ResearchNoteMeta]:
+    def _parse_frontmatter(self, filepath: Path) -> ResearchNoteMeta | None:
         """Parse YAML frontmatter from a markdown file."""
         text = filepath.read_text(encoding="utf-8")
 

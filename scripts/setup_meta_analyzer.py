@@ -3,9 +3,8 @@ Setup Script - Inicializa BD, carga datos, levanta API y dashboard
 """
 
 import argparse
-from pathlib import Path
-from datetime import datetime
 import json
+from datetime import datetime
 
 from riot_lol_cli.dashboard import save_dashboard
 from riot_lol_cli.dashboard_enhanced import save_enhanced_dashboard
@@ -33,10 +32,9 @@ def generate_demo_data(db: DatabaseManager):
     print("📈 GENERANDO DATOS DE DEMO")
     print("="*60)
     
-    from riot_lol_cli.database.models import (
-        ChampionHourly, Anomaly, TierList, AnomalyTypeEnum, SeverityEnum, TierEnum
-    )
-    from datetime import datetime, timedelta
+    from datetime import timedelta
+
+    from riot_lol_cli.database.models import Anomaly, AnomalyTypeEnum, ChampionHourly, SeverityEnum, TierEnum, TierList
     
     session = db.get_session()
     
@@ -48,7 +46,7 @@ def generate_demo_data(db: DatabaseManager):
         # Cargar ADCs de Data Dragon
         print("🔄 Cargando ADCs de Data Dragon...")
         try:
-            with open(BASE_DIR / "data" / "adc_champions.json", "r", encoding="utf-8") as f:
+            with open(BASE_DIR / "data" / "adc_champions.json", encoding="utf-8") as f:
                 adc_data = json.load(f)
                 adc_list = adc_data.get('adcs_with_yasuo', [])
         except FileNotFoundError:
@@ -150,7 +148,7 @@ def generate_demo_data(db: DatabaseManager):
                 "pickrate": champ["pr"],
                 "banrate": champ["pr"] * 0.5,
                 "trend": "RISING" if champ["wr"] > 50 else "STABLE",
-                "reason": f"Campeón fuerte en el meta actual"
+                "reason": "Campeón fuerte en el meta actual"
             })
         
         tier_list = TierList(
@@ -164,11 +162,11 @@ def generate_demo_data(db: DatabaseManager):
         session.add(tier_list)
         
         session.commit()
-        print(f"✅ Datos de demo generados:")
+        print("✅ Datos de demo generados:")
         print(f"   - {len(champions)} ADCs trackeados")
         print(f"   - {len(champions) * 8} stats horarias (últimas 24h)")
-        print(f"   - 3 anomalías detectadas")
-        print(f"   - 1 tier list snapshot")
+        print("   - 3 anomalías detectadas")
+        print("   - 1 tier list snapshot")
         
     except Exception as e:
         session.rollback()
@@ -189,7 +187,7 @@ def generate_frontend(output_path: str = "outputs/meta-analyzer-dashboard.html")
     # Dashboard mejorado con tabs avanzados
     save_enhanced_dashboard("outputs/meta-analyzer-dashboard-enhanced.html")
     
-    print(f"📱 Dashboards disponibles en:")
+    print("📱 Dashboards disponibles en:")
     api_port = get_meta_api_port()
     print(f"   - Original: http://localhost:{api_port}/dashboard")
     print(f"   - Enhanced: http://localhost:{api_port}/dashboard-enhanced (RECOMENDADO)")
@@ -221,7 +219,7 @@ def print_summary(db_path: str):
     
     print("\n📊 Base de datos:")
     print(f"   Ubicación: {db_path}")
-    print(f"   Tablas: 8 (raw_matches, champion_hourly, anomalies, tier_lists, etc)")
+    print("   Tablas: 8 (raw_matches, champion_hourly, anomalies, tier_lists, etc)")
     
     print("\n🚀 API Backend:")
     api_port = get_meta_api_port()
@@ -230,20 +228,20 @@ def print_summary(db_path: str):
     print(f"   OpenAPI: http://localhost:{api_port}/openapi.json")
     
     print("\n🎨 Frontend Dashboard:")
-    print(f"   URL: http://localhost:3000 (o archivo local)")
-    print(f"   Archivo: outputs/meta-analyzer-dashboard.html")
+    print("   URL: http://localhost:3000 (o archivo local)")
+    print("   Archivo: outputs/meta-analyzer-dashboard.html")
     
     print("\n📚 Endpoints principales:")
-    print(f"   GET  /api/v1/tier-list/current")
-    print(f"   GET  /api/v1/anomalies/high-confidence")
-    print(f"   GET  /api/v1/stats/latest")
-    print(f"   GET  /api/v1/dashboard/summary")
+    print("   GET  /api/v1/tier-list/current")
+    print("   GET  /api/v1/anomalies/high-confidence")
+    print("   GET  /api/v1/stats/latest")
+    print("   GET  /api/v1/dashboard/summary")
     
     print("\n🎯 Próximos pasos:")
-    print(f"   1. Instalar dependencias: pip install -r requirements.txt")
-    print(f"   2. Levantar API: python -m riot_lol_cli.api_server")
-    print(f"   3. Abrir Dashboard: abre outputs/meta-analyzer-dashboard.html en navegador")
-    print(f"   4. Recolectar datos: python main.py --collect-meta")
+    print("   1. Instalar dependencias: pip install -r requirements.txt")
+    print("   2. Levantar API: python -m riot_lol_cli.api_server")
+    print("   3. Abrir Dashboard: abre outputs/meta-analyzer-dashboard.html en navegador")
+    print("   4. Recolectar datos: python main.py --collect-meta")
     
 
 def main():

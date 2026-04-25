@@ -1,12 +1,11 @@
 import logging
+from collections.abc import Iterator
 from contextlib import contextmanager
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
-from typing import Iterator
 
 from riot_lol_cli.database.models import DatabaseManager
 from riot_lol_cli.paths import OUTPUT_DIR
-
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("riot_lol_cli.meta_api")
@@ -23,7 +22,11 @@ def session_scope() -> Iterator:
 
 
 def utcnow_iso() -> str:
-    return datetime.utcnow().isoformat()
+    return datetime.now(timezone.utc).isoformat()
+
+
+def utcnow() -> datetime:
+    return datetime.now(timezone.utc)
 
 
 def output_file(filename: str) -> Path:

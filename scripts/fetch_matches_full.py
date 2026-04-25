@@ -28,20 +28,20 @@ def find_api_key():
         return api_key
 
     # 2) Archivo .env
-    env_file = Path(".env")
+    env_file = BASE_DIR / ".env"
     if env_file.exists():
-        with open(env_file, "r", encoding="utf-8") as f:
+        with open(env_file, encoding="utf-8") as f:
             for line in f:
                 if line.startswith("RIOT_API_KEY="):
                     return line.split("=", 1)[1].strip().strip('"').strip("'")
 
     # 3) Archivo config/api_key.txt
-    api_key_file = Path("config/api_key.txt")
+    api_key_file = BASE_DIR / "config" / "api_key.txt"
     if api_key_file.exists():
         return api_key_file.read_text(encoding="utf-8").strip()
 
     # 4) Archivo api_key.txt en raíz
-    api_key_file2 = Path("api_key.txt")
+    api_key_file2 = BASE_DIR / "api_key.txt"
     if api_key_file2.exists():
         return api_key_file2.read_text(encoding="utf-8").strip()
 
@@ -56,7 +56,7 @@ def main():
     parser.add_argument("--regional", dest="regional", default=DEFAULT_REGIONAL,
                         help="americas, europe, asia")
     parser.add_argument("--count", dest="count", type=int, default=DEFAULT_MAX_MATCHES)
-    parser.add_argument("--output", dest="output", default="data/cache/matches.json")
+    parser.add_argument("--output", dest="output", default=str(BASE_DIR / "data" / "cache" / "matches.json"))
     args = parser.parse_args()
 
     API_KEY = find_api_key()
@@ -319,7 +319,7 @@ def main():
             json.dump(output_data, f, indent=2, ensure_ascii=False)
         
         print(f"\n✅ ¡Datos guardados exitosamente en {output_file}!")
-        print(f"📊 Estadísticas:")
+        print("📊 Estadísticas:")
         print(f"   Total de partidas: {total_matches}")
         print(f"   Victorias: {wins}")
         print(f"   Derrotas: {losses}")

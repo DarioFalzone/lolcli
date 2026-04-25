@@ -10,12 +10,16 @@ Usage:
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from .schemas import DraftState, RecommendationOutput
+
 import json
 import logging
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, List, Tuple
 
 # Setup paths
 _PROJECT_ROOT = Path(__file__).resolve().parents[3]
@@ -25,11 +29,17 @@ logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
 
 
-def _build_draft_state(case_draft: dict) -> "DraftState":
+def _build_draft_state(case_draft: dict) -> DraftState:
     """Convert a golden case draft_state dict into a DraftState model."""
     from .schemas import (
-        DraftChampion, DraftContext, DraftState, InformationLevel,
-        PickPosition, PoolMode, QueueType, UserPool,
+        DraftChampion,
+        DraftContext,
+        DraftState,
+        InformationLevel,
+        PickPosition,
+        PoolMode,
+        QueueType,
+        UserPool,
     )
 
     allies = [DraftChampion(**a) for a in case_draft.get("allies", [])]
@@ -62,13 +72,13 @@ def _build_draft_state(case_draft: dict) -> "DraftState":
 def _check_assertions(
     case_id: str,
     assertions: dict,
-    result: "RecommendationOutput",
-) -> List[str]:
+    result: RecommendationOutput,
+) -> list[str]:
     """
     Check assertion constraints against a recommendation result.
     Returns a list of failure messages (empty = all passed).
     """
-    failures: List[str] = []
+    failures: list[str] = []
     top_id = result.top_pick.id
     top_score = result.top_pick.total_score
 
@@ -117,7 +127,7 @@ def _check_assertions(
 def run_evaluation(
     golden_file: Path = _KB_ROOT / "evals" / "golden_drafts.json",
     save_results: bool = True,
-) -> Tuple[int, int, List[Dict]]:
+) -> tuple[int, int, list[dict]]:
     """
     Run all golden draft cases.
 
@@ -128,7 +138,7 @@ def run_evaluation(
     from .scoring import ScoringEngine
 
     # Load golden cases
-    with open(golden_file, "r", encoding="utf-8") as f:
+    with open(golden_file, encoding="utf-8") as f:
         golden_data = json.load(f)
 
     cases = golden_data["cases"]
@@ -138,7 +148,7 @@ def run_evaluation(
     data_service = ChampionDataService(_PROJECT_ROOT / "data" / "draft_advisor")
     engine = ScoringEngine(data_service)
 
-    results: List[Dict] = []
+    results: list[dict] = []
     passed = 0
 
     for case in cases:

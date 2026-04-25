@@ -10,14 +10,18 @@ Note: Runs on port 8001 to avoid conflict with the Meta Analyzer
 API server (api_server.py) which uses port 8000.
 """
 
+import logging
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 
-from .api import router as draft_router
 from riot_lol_cli import paths
 from riot_lol_cli.settings import get_draft_advisor_host, get_draft_advisor_port
+
+from .api import router as draft_router
 
 # ============================================================================
 # App
@@ -73,8 +77,8 @@ def run() -> None:
 
     port = get_draft_advisor_port()
     host = get_draft_advisor_host()
-    print("\n  ADC Draft Advisor")
-    print(f"  http://localhost:{port}/draft\n")
+    _logger = logging.getLogger(__name__)
+    _logger.info("ADC Draft Advisor levantado en http://localhost:%d/draft", port)
     uvicorn.run(app, host=host, port=port)
 
 

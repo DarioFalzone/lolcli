@@ -35,6 +35,7 @@ Flujo recomendado:
 3. **No tocar paths de otros subsistemas** sin verificar dependencias cruzadas
 4. **Si movés archivos:** usar `git mv` para preservar historial
 5. **Si tocás `cli.py`:** verificar que `BASE_DIR` y paths derivados siguen funcionando
+6. **Bitácora de Cambios:** SIEMPRE que completes una iteración significativa (ej. implementar un feature, refactorizar, resolver un bug complejo), debés actualizar el archivo `bitacora_de_cambios.md` en la raíz del repositorio agregando una nueva entrada con la fecha y un resumen detallado de lo que hiciste.
 
 ### Cosas que NO hacer
 
@@ -47,9 +48,9 @@ Flujo recomendado:
 
 ### Testing
 
-- No hay tests implementados todavía (ver `.agent/rules/testing-guidelines.md`)
-- Si agregás funcionalidad nueva, agregá tests
-- Para verificar que no rompiste nada: `python main.py --help` debe funcionar
+- Existen tests implementados usando `pytest` y `pytest-cov` (ver `.agent/rules/testing-guidelines.md`).
+- Si agregás funcionalidad nueva, DEBÉS agregar tests.
+- Para verificar que no rompiste nada, ejecutá `pytest`. La cobertura global no debe bajar del 30% (actualmente >50%).
 
 ### Idioma
 

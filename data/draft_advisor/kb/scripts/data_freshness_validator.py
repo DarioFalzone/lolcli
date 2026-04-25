@@ -12,7 +12,7 @@ import json
 def get_patch_major(patch_str):
     try:
         return float(patch_str)
-    except:
+    except (TypeError, ValueError):
         return 0.0
 
 def run_validation():
@@ -22,8 +22,6 @@ def run_validation():
         manifest = json.load(f)
     
     live_label = manifest.get("live_patch_label", "0.0")
-    live_major = get_patch_major(live_label)
-
     research_dir = base_dir / "kb" / "research"
     stale_count = 0
     tft_count = 0
@@ -58,7 +56,7 @@ def run_validation():
                             if get_patch_major(live_label) - get_patch_major(patch) > 2.0:
                                 print(f"WARNING: Note {file} is Stale ({patch} vs {live_label})")
                                 stale_count += 1
-                    except Exception as e:
+                    except Exception:
                         pass
     
     if tft_count > 0:

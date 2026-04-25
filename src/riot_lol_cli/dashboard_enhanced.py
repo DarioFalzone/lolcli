@@ -1009,11 +1009,13 @@ ENHANCED_DASHBOARD_HTML = """
 
 def save_enhanced_dashboard(output_path: str = "outputs/meta-analyzer-dashboard-enhanced.html"):
     """Guarda el dashboard mejorado en archivo"""
+    import logging
     from pathlib import Path
+    _logger = logging.getLogger(__name__)
     Path(output_path).parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(ENHANCED_DASHBOARD_HTML)
-    print(f"✅ Dashboard mejorado guardado en: {output_path}")
+    _logger.info("Dashboard mejorado guardado en: %s", output_path)
 
 if __name__ == "__main__":
     save_enhanced_dashboard()

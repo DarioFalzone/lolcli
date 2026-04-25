@@ -5,12 +5,9 @@ All domain model contracts live here as the single source of truth.
 
 from __future__ import annotations
 
-from datetime import datetime
 from enum import Enum
-from typing import Dict, List, Optional
 
 from pydantic import BaseModel, Field, field_validator
-
 
 # ============================================================================
 # ENUMS
@@ -157,9 +154,9 @@ class ChampionBase(BaseModel):
     display_name: str                           # Human-readable name
     title: str = ""
     primary_role: GameplayRole
-    off_roles: List[GameplayRole] = []
+    off_roles: list[GameplayRole] = []
     combat_class: CombatClass = Field(alias="class")
-    subclass: Optional[Subclass] = None
+    subclass: Subclass | None = None
     damage_type: DamageType
     range_type: RangeType
     tags: ChampionTags
@@ -179,7 +176,7 @@ class ChampionBaseFile(BaseModel):
     schema_version: str
     last_updated: str
     source: str
-    champions: Dict[str, ChampionBase]
+    champions: dict[str, ChampionBase]
 
 
 # ============================================================================
@@ -227,11 +224,11 @@ class AdcProfile(BaseModel):
     punish_short_range: int = Field(ge=1, le=10)
 
     # Descriptive
-    power_spikes: List[str]
-    strengths: List[str]
-    weaknesses: List[str]
-    best_with: List[str]       # Champion IDs
-    worst_into: List[str]      # Champion IDs
+    power_spikes: list[str]
+    strengths: list[str]
+    weaknesses: list[str]
+    best_with: list[str]       # Champion IDs
+    worst_into: list[str]      # Champion IDs
     draft_notes: str
 
 
@@ -240,7 +237,7 @@ class AdcProfilesFile(BaseModel):
     patch: str
     last_updated: str
     source: str
-    profiles: Dict[str, AdcProfile]
+    profiles: dict[str, AdcProfile]
 
 
 # ============================================================================
@@ -262,7 +259,7 @@ class PriorityProfilesFile(BaseModel):
     patch: str
     last_updated: str
     source: str
-    profiles: Dict[str, PriorityProfile]
+    profiles: dict[str, PriorityProfile]
 
 
 # ============================================================================
@@ -271,7 +268,7 @@ class PriorityProfilesFile(BaseModel):
 
 class DraftChampion(BaseModel):
     id: str
-    role: Optional[GameplayRole] = None
+    role: GameplayRole | None = None
 
 
 class DraftContext(BaseModel):
@@ -282,12 +279,12 @@ class DraftContext(BaseModel):
 
 class UserPool(BaseModel):
     mode: PoolMode = PoolMode.UNRESTRICTED
-    champions: List[str] = []
-    comfort: Dict[str, int] = {}     # champion_id -> 1-10
+    champions: list[str] = []
+    comfort: dict[str, int] = {}     # champion_id -> 1-10
 
     @field_validator("comfort")
     @classmethod
-    def validate_comfort(cls, v: Dict[str, int]) -> Dict[str, int]:
+    def validate_comfort(cls, v: dict[str, int]) -> dict[str, int]:
         for champ, score in v.items():
             if not 1 <= score <= 10:
                 raise ValueError(f"Comfort score for {champ} must be 1-10, got {score}")
@@ -295,9 +292,9 @@ class UserPool(BaseModel):
 
 
 class DraftState(BaseModel):
-    allies: List[DraftChampion] = Field(default_factory=list, max_length=4)
-    enemies: List[DraftChampion] = Field(default_factory=list, max_length=5)
-    bans: List[str] = Field(default_factory=list)
+    allies: list[DraftChampion] = Field(default_factory=list, max_length=4)
+    enemies: list[DraftChampion] = Field(default_factory=list, max_length=5)
+    bans: list[str] = Field(default_factory=list)
     context: DraftContext = Field(default_factory=DraftContext)
     user_pool: UserPool = Field(default_factory=UserPool)
 
@@ -330,7 +327,7 @@ class ScoreBreakdown(BaseModel):
     comfort_bonus: float = 0.0
     weighted_sum: float
     pre_clamp_total: float
-    weights_used: Dict[str, float]
+    weights_used: dict[str, float]
 
 
 class RecommendedPick(BaseModel):
@@ -338,9 +335,9 @@ class RecommendedPick(BaseModel):
     display_name: str
     total_score: float = Field(ge=0, le=100)
     score_breakdown: ScoreBreakdown
-    strengths_in_this_draft: List[str]
-    risks_in_this_draft: List[str]
-    not_recommended_when: List[str]
+    strengths_in_this_draft: list[str]
+    risks_in_this_draft: list[str]
+    not_recommended_when: list[str]
     enabled_play_pattern: str
 
 
@@ -350,8 +347,8 @@ class AlternativePick(BaseModel):
     total_score: float = Field(ge=0, le=100)
     score_breakdown: ScoreBreakdown
     one_line_reason: str
-    advantages_over_top_pick: List[str]
-    disadvantages_vs_top_pick: List[str]
+    advantages_over_top_pick: list[str]
+    disadvantages_vs_top_pick: list[str]
 
 
 class AlliedCompProfile(BaseModel):
@@ -359,9 +356,9 @@ class AlliedCompProfile(BaseModel):
     has_engage: bool = False
     has_peel: bool = False
     has_poke: bool = False
-    primary_damage_existing: Optional[DamageType] = None
+    primary_damage_existing: DamageType | None = None
     teamfight_shape: TeamfightShape = TeamfightShape.MIXED
-    missing: List[str] = Field(default_factory=list)
+    missing: list[str] = Field(default_factory=list)
 
 
 class EnemyCompProfile(BaseModel):
@@ -385,7 +382,7 @@ class RecommendationOutput(BaseModel):
     draft_state_hash: str
     mode: PoolMode
     top_pick: RecommendedPick
-    alternatives: List[AlternativePick] = Field(default_factory=list, max_length=3)
+    alternatives: list[AlternativePick] = Field(default_factory=list, max_length=3)
     draft_analysis: DraftAnalysis
 
 
@@ -396,16 +393,16 @@ class RecommendationOutput(BaseModel):
 class ScoringWeightsConfig(BaseModel):
     schema_version: str
     last_updated: str
-    base_weights: Dict[str, float]
+    base_weights: dict[str, float]
     comfort_bonus_weight: float
-    comfort_score_range: List[int]
+    comfort_score_range: list[int]
     comfort_bonus_max_points: int
-    context_adjustments: Dict[str, Dict[str, float]]
+    context_adjustments: dict[str, dict[str, float]]
     normalization_rule: str
 
     @field_validator("base_weights")
     @classmethod
-    def validate_weights_sum(cls, v: Dict[str, float]) -> Dict[str, float]:
+    def validate_weights_sum(cls, v: dict[str, float]) -> dict[str, float]:
         total = sum(v.values())
         if abs(total - 1.0) > 0.01:
             raise ValueError(f"Base weights must sum to 1.0, got {total}")

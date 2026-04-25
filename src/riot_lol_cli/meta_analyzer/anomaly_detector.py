@@ -2,12 +2,14 @@
 Anomaly Detector - Detecta cambios significativos en el meta
 """
 import json
-import math
-from datetime import datetime, timedelta
-from pathlib import Path
-from typing import List, Dict, Any, Optional, Tuple
-from dataclasses import dataclass, asdict
+import logging
+from dataclasses import dataclass
+from datetime import datetime
 from enum import Enum
+from pathlib import Path
+from typing import Any, Optional
+
+logger = logging.getLogger(__name__)
 
 
 class AnomalyType(Enum):
@@ -30,9 +32,9 @@ class Anomaly:
     magnitude: float                  # Cuánto cambió (e.g., +2.5 para +2.5%)
     confidence: float                 # 0-1, qué tan seguro estamos
     z_score: Optional[float] = None   # Z-score estadístico
-    details: Dict[str, Any] = None
+    details: dict[str, Any] = None
     
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return {
             'timestamp': self.timestamp.isoformat(),
             'champion': self.champion,
@@ -60,9 +62,9 @@ class MetaAnomalyDetector:
         
     def detect_anomalies(
         self,
-        current_stats: Dict[str, Any],
-        historical_stats: Dict[str, Any]
-    ) -> List[Anomaly]:
+        current_stats: dict[str, Any],
+        historical_stats: dict[str, Any]
+    ) -> list[Anomaly]:
         """
         Detecta anomalías comparando estadísticas actuales con históricas
         
@@ -104,8 +106,8 @@ class MetaAnomalyDetector:
     def _detect_winrate_spike(
         self,
         champion: str,
-        current: Dict[str, Any],
-        historical: Dict[str, Any]
+        current: dict[str, Any],
+        historical: dict[str, Any]
     ) -> Optional[Anomaly]:
         """Detecta si winrate subió significativamente"""
         
@@ -167,9 +169,9 @@ class MetaAnomalyDetector:
     def _detect_item_changes(
         self,
         champion: str,
-        current: Dict[str, Any],
-        historical: Dict[str, Any]
-    ) -> List[Anomaly]:
+        current: dict[str, Any],
+        historical: dict[str, Any]
+    ) -> list[Anomaly]:
         """Detecta cambios en itemización"""
         
         anomalies = []
@@ -215,8 +217,8 @@ class MetaAnomalyDetector:
     def _detect_pickrate_surge(
         self,
         champion: str,
-        current: Dict[str, Any],
-        historical: Dict[str, Any]
+        current: dict[str, Any],
+        historical: dict[str, Any]
     ) -> Optional[Anomaly]:
         """Detecta si pickrate subió significativamente"""
         
@@ -246,7 +248,7 @@ class MetaAnomalyDetector:
         
         return None
     
-    def save_anomalies(self, anomalies: List[Anomaly], timestamp: Optional[str] = None) -> Path:
+    def save_anomalies(self, anomalies: list[Anomaly], timestamp: Optional[str] = None) -> Path:
         """Guarda anomalías detectadas"""
         
         if timestamp is None:
@@ -261,10 +263,10 @@ class MetaAnomalyDetector:
                 'anomalies': [a.to_dict() for a in anomalies]
             }, f, indent=2, ensure_ascii=False)
         
-        print(f"✅ {len(anomalies)} anomalías guardadas en {filepath}")
+        logger.info("%d anomalías guardadas en %s", len(anomalies), filepath)
         return filepath
     
-    def get_high_confidence_anomalies(self, anomalies: List[Anomaly]) -> List[Anomaly]:
+    def get_high_confidence_anomalies(self, anomalies: list[Anomaly]) -> list[Anomaly]:
         """Filtra anomalías de alta confianza para tier list"""
         return [a for a in anomalies if a.confidence >= self.CONFIDENCE_HIGH]
 
@@ -294,6 +296,6 @@ if __name__ == "__main__":
     
     anomalies = detector.detect_anomalies(current, historical)
     for anomaly in anomalies:
-        print(f"\n🔔 {anomaly.anomaly_type.value} - {anomaly.champion}")
-        print(f"   Confidence: {anomaly.confidence:.2%}")
-        print(f"   Details: {anomaly.details}")
+        logger.info("%s - %s | Confidence: %.2f%% | Details: %s",
+                    anomaly.anomaly_type.value, anomaly.champion,
+                    anomaly.confidence * 100, anomaly.details)

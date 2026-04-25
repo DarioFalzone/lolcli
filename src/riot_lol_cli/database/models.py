@@ -3,13 +3,17 @@ ORM Models para Meta Analyzer
 Usando SQLAlchemy para abstracción de BD
 """
 
-from datetime import datetime
-from typing import Optional, Dict, List
-from sqlalchemy import create_engine, Column, Integer, String, Float, Boolean, DateTime, Text, Index, Enum as SQLEnum
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, Session
 import json
+import logging
+from datetime import datetime
 from enum import Enum
+from typing import Optional
+
+from sqlalchemy import Boolean, Column, DateTime, Float, Index, Integer, String, Text, create_engine
+from sqlalchemy import Enum as SQLEnum
+from sqlalchemy.orm import Session, declarative_base, sessionmaker
+
+logger = logging.getLogger(__name__)
 
 Base = declarative_base()
 
@@ -172,13 +176,13 @@ class ChampionHourly(Base):
             "items_top3": [self.item_1_id, self.item_2_id, self.item_3_id],
         }
 
-    def get_role_distribution(self) -> Dict[str, float]:
+    def get_role_distribution(self) -> dict[str, float]:
         """Parsea role_distribution JSON"""
         if not self.role_distribution:
             return {}
         return json.loads(self.role_distribution)
 
-    def set_role_distribution(self, dist: Dict[str, float]):
+    def set_role_distribution(self, dist: dict[str, float]):
         """Serializa role_distribution"""
         self.role_distribution = json.dumps(dist)
 
@@ -230,13 +234,13 @@ class Anomaly(Base):
             "detected_at": self.detected_at.isoformat() if self.detected_at else None,
         }
 
-    def get_details(self) -> Dict:
+    def get_details(self) -> dict:
         """Parsea details JSON"""
         if not self.details:
             return {}
         return json.loads(self.details)
 
-    def set_details(self, details: Dict):
+    def set_details(self, details: dict):
         """Serializa details"""
         self.details = json.dumps(details)
 
@@ -274,21 +278,21 @@ class TierList(Base):
             "tier_distribution": json.loads(self.tier_distribution) if self.tier_distribution else {},
         }
 
-    def get_tier_list(self) -> List[Dict]:
+    def get_tier_list(self) -> list[dict]:
         """Parsea tier_list_json"""
         return json.loads(self.tier_list_json)
 
-    def set_tier_list(self, tier_list: List[Dict]):
+    def set_tier_list(self, tier_list: list[dict]):
         """Serializa tier list"""
         self.tier_list_json = json.dumps(tier_list)
 
-    def get_tier_distribution(self) -> Dict[str, int]:
+    def get_tier_distribution(self) -> dict[str, int]:
         """Parsea tier_distribution"""
         if not self.tier_distribution:
             return {}
         return json.loads(self.tier_distribution)
 
-    def set_tier_distribution(self, dist: Dict[str, int]):
+    def set_tier_distribution(self, dist: dict[str, int]):
         """Serializa tier_distribution"""
         self.tier_distribution = json.dumps(dist)
 
@@ -350,20 +354,20 @@ class MetaEvent(Base):
     # Metadata
     created_at = Column(DateTime, default=datetime.utcnow)
 
-    def get_affected_champions(self) -> List[str]:
+    def get_affected_champions(self) -> list[str]:
         if not self.affected_champions:
             return []
         return json.loads(self.affected_champions)
 
-    def set_affected_champions(self, champs: List[str]):
+    def set_affected_champions(self, champs: list[str]):
         self.affected_champions = json.dumps(champs)
 
-    def get_affected_items(self) -> List[int]:
+    def get_affected_items(self) -> list[int]:
         if not self.affected_items:
             return []
         return json.loads(self.affected_items)
 
-    def set_affected_items(self, items: List[int]):
+    def set_affected_items(self, items: list[int]):
         self.affected_items = json.dumps(items)
 
 
@@ -421,7 +425,7 @@ class DatabaseManager:
     def init_db(self):
         """Inicializa la BD con el schema"""
         Base.metadata.create_all(self.engine)
-        print(f"✅ Base de datos inicializada: {self.db_path}")
+        logger.info("Base de datos inicializada: %s", self.db_path)
 
     def get_session(self) -> Session:
         """Retorna una sesión de BD"""
@@ -437,11 +441,11 @@ class DatabaseManager:
                 RawMatch.timestamp < cutoff
             ).delete()
             session.commit()
-            print(f"🧹 Eliminadas {deleted} partidas antiguas (>{hours}h)")
+            logger.info("Eliminadas %d partidas antiguas (>%dh)", deleted, hours)
         finally:
             session.close()
 
-    def get_latest_stats(self, limit: int = 50) -> List[ChampionHourly]:
+    def get_latest_stats(self, limit: int = 50) -> list[ChampionHourly]:
         """Obtiene las últimas stats de campeones"""
         session = self.get_session()
         try:
@@ -451,7 +455,7 @@ class DatabaseManager:
         finally:
             session.close()
 
-    def get_high_confidence_anomalies(self, min_confidence: float = 0.85) -> List[Anomaly]:
+    def get_high_confidence_anomalies(self, min_confidence: float = 0.85) -> list[Anomaly]:
         """Obtiene anomalías de alta confianza"""
         session = self.get_session()
         try:
@@ -473,7 +477,7 @@ class DatabaseManager:
 
 
 if __name__ == "__main__":
-    # Test
+    logging.basicConfig(level=logging.INFO)
     db = DatabaseManager()
     db.init_db()
-    print("✅ Models y DatabaseManager listos")
+    logger.info("Models y DatabaseManager listos")

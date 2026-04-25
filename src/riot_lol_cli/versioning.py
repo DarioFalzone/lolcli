@@ -1,19 +1,18 @@
 import json
-from typing import Any, Dict, Optional
+from typing import Any, Optional
 
 from riot_lol_cli import paths
-
 
 DEFAULT_VERSION = "1.0.0"
 
 
-def read_version_metadata() -> Dict[str, Any]:
+def read_version_metadata() -> dict[str, Any]:
     """Lee metadata de versión sin mutar el repo si el archivo no existe."""
     if not paths.VERSION_FILE.exists():
         return {"version": DEFAULT_VERSION}
 
     try:
-        with open(paths.VERSION_FILE, "r", encoding="utf-8") as handle:
+        with open(paths.VERSION_FILE, encoding="utf-8") as handle:
             data = json.load(handle)
     except (json.JSONDecodeError, OSError):
         return {"version": DEFAULT_VERSION}
@@ -29,7 +28,7 @@ def get_version() -> str:
     return str(read_version_metadata().get("version", DEFAULT_VERSION))
 
 
-def write_version(version: str, extra_metadata: Optional[Dict[str, Any]] = None) -> str:
+def write_version(version: str, extra_metadata: Optional[dict[str, Any]] = None) -> str:
     """Persiste la versión preservando otros metadatos."""
     paths.ensure_runtime_directories()
     metadata = read_version_metadata()

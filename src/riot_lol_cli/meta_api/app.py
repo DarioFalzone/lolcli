@@ -1,3 +1,6 @@
+import logging
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -13,10 +16,20 @@ from riot_lol_cli.settings import get_meta_api_host, get_meta_api_port
 
 
 def create_app() -> FastAPI:
+    @asynccontextmanager
+    async def lifespan(app: FastAPI):
+        try:
+            dependencies.db.init_db()
+            dependencies.logger.info("✅ BD inicializada correctamente")
+        except Exception as exc:
+            dependencies.logger.error("❌ Error inicializando BD: %s", exc)
+        yield
+
     app = FastAPI(
         title="LOLCLI Meta Analyzer API",
         description="API para detectar cambios en el meta de League of Legends",
         version="1.0.0",
+        lifespan=lifespan,
     )
 
     app.add_middleware(
@@ -30,14 +43,6 @@ def create_app() -> FastAPI:
     paths.ensure_runtime_directories()
     if paths.OUTPUT_DIR.exists():
         app.mount("/static", StaticFiles(directory=str(paths.OUTPUT_DIR)), name="static")
-
-    @app.on_event("startup")
-    async def startup_event():
-        try:
-            dependencies.db.init_db()
-            dependencies.logger.info("✅ BD inicializada correctamente")
-        except Exception as exc:
-            dependencies.logger.error("❌ Error inicializando BD: %s", exc)
 
     @app.exception_handler(HTTPException)
     async def http_exception_handler(request, exc):
@@ -65,6 +70,7 @@ def run() -> None:
 
     host = get_meta_api_host()
     port = get_meta_api_port()
-    print(f"🚀 Levantando API en http://localhost:{port}")
-    print(f"📚 Documentación en http://localhost:{port}/docs")
+    _logger = logging.getLogger(__name__)
+    _logger.info("Levantando API en http://localhost:%d", port)
+    _logger.info("Documentación en http://localhost:%d/docs", port)
     uvicorn.run(app, host=host, port=port, reload=False)

@@ -1,17 +1,13 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 Resumen ejecutivo de cambios - Dashboard Mejorado
 Ejecutar para ver estado del sistema
 """
 
-import json
-import os
 import sys
 from pathlib import Path
 
-# Asegurar que corremos desde el root del repo
-os.chdir(Path(__file__).parent.parent)
+from riot_lol_cli.paths import BASE_DIR
 
 # Configurar output UTF-8
 if sys.platform == 'win32':
@@ -24,7 +20,10 @@ def print_header(title):
     print("="*70)
 
 def check_file_exists(path):
-    return "✅" if Path(path).exists() else "❌"
+    file_path = Path(path)
+    if not file_path.is_absolute():
+        file_path = BASE_DIR / file_path
+    return "✅" if file_path.exists() else "❌"
 
 def main():
     print("\n")
@@ -48,12 +47,12 @@ def main():
     
     # ARCHIVOS MODIFICADOS
     print_header("🔧 ARCHIVOS MODIFICADOS")
-    print(f"\n✅ api_server.py")
+    print("\n✅ api_server.py")
     print("   + 4 nuevos endpoints (matchups, items, details, raw-data)")
     print("   + 2 rutas de servicio (/dashboard, /dashboard-enhanced)")
     print("   + 280 líneas de código")
     
-    print(f"\n✅ setup_meta_analyzer.py")
+    print("\n✅ setup_meta_analyzer.py")
     print("   + Import de dashboard_enhanced")
     print("   + Generación de ambos dashboards")
     print("   + 3 líneas modificadas")
@@ -196,21 +195,21 @@ def main():
     print_header("📊 MÉTRICAS DEL PROYECTO")
     
     print("\n💻 CÓDIGO")
-    print(f"   • Líneas HTML/JS agregadas: 800+")
-    print(f"   • Líneas Python (API) agregadas: 280+")
-    print(f"   • Líneas documentación: 1500+")
-    print(f"   • Archivos nuevos: 9")
-    print(f"   • Archivos modificados: 2")
+    print("   • Líneas HTML/JS agregadas: 800+")
+    print("   • Líneas Python (API) agregadas: 280+")
+    print("   • Líneas documentación: 1500+")
+    print("   • Archivos nuevos: 9")
+    print("   • Archivos modificados: 2")
     
     print("\n🔌 ENDPOINTS")
-    print(f"   • Endpoints data: 4")
-    print(f"   • Rutas de servicio: 2")
-    print(f"   • Total del sistema: 45+")
+    print("   • Endpoints data: 4")
+    print("   • Rutas de servicio: 2")
+    print("   • Total del sistema: 45+")
     
     print("\n📚 DOCUMENTACIÓN")
-    print(f"   • Guías: 5 principales")
-    print(f"   • Ejemplos: 50+")
-    print(f"   • Secciones: 20+")
+    print("   • Guías: 5 principales")
+    print("   • Ejemplos: 50+")
+    print("   • Secciones: 20+")
     
     # TECNOLOGÍA
     print_header("🔧 TECNOLOGÍA UTILIZADA")

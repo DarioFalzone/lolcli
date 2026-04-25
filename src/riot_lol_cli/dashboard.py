@@ -747,11 +747,13 @@ DASHBOARD_HTML = """
 
 def save_dashboard(output_path: str = "outputs/meta-analyzer-dashboard.html"):
     """Guarda el dashboard en archivo"""
+    import logging
     from pathlib import Path
+    _logger = logging.getLogger(__name__)
     Path(output_path).parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(DASHBOARD_HTML)
-    print(f"✅ Dashboard guardado en: {output_path}")
+    _logger.info("Dashboard guardado en: %s", output_path)
 
 if __name__ == "__main__":
     save_dashboard()

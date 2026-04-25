@@ -10,22 +10,18 @@ Takes the draft state and produces structured profiles describing:
 
 from __future__ import annotations
 
-from typing import Dict, List, Optional
-
+from .champion_data import ChampionDataService
 from .schemas import (
     AlliedCompProfile,
-    EnemyCompProfile,
-    DraftAnalysis,
-    DraftState,
-    DraftChampion,
+    Confidence,
     DamageType,
+    DraftAnalysis,
+    DraftChampion,
+    DraftState,
+    EnemyCompProfile,
     TeamfightShape,
     ThreatLevel,
-    Confidence,
-    InformationLevel,
 )
-from .champion_data import ChampionDataService
-
 
 # ============================================================================
 # Thresholds for boolean flags
@@ -70,7 +66,7 @@ class CompositionAnalyzer:
     # Allied composition analysis
     # ========================================================================
 
-    def _analyze_allies(self, allies: List[DraftChampion]) -> AlliedCompProfile:
+    def _analyze_allies(self, allies: list[DraftChampion]) -> AlliedCompProfile:
         """Analyze what the allied team brings and what's missing."""
         if not allies:
             return AlliedCompProfile(
@@ -194,7 +190,7 @@ class CompositionAnalyzer:
     # Enemy composition analysis
     # ========================================================================
 
-    def _analyze_enemies(self, enemies: List[DraftChampion]) -> EnemyCompProfile:
+    def _analyze_enemies(self, enemies: list[DraftChampion]) -> EnemyCompProfile:
         """Analyze enemy threats to the ADC."""
         if not enemies:
             return EnemyCompProfile(
@@ -207,7 +203,7 @@ class CompositionAnalyzer:
         has_tanks = False
         has_poke = False
 
-        threats: List[tuple[str, int]] = []  # (champion_display_name, threat_score)
+        threats: list[tuple[str, int]] = []  # (champion_display_name, threat_score)
 
         for enemy in enemies:
             tags = self._data.get_champion_tags(enemy.id)

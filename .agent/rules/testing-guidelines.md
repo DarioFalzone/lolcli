@@ -2,9 +2,9 @@
 
 ## Estado Actual
 
-- **Framework:** pytest 7.4+ con pytest-asyncio
-- **Tests existentes:** Ninguno implementado todavía
-- **Coverage:** Directorio `coverage/` existe pero está vacío
+- **Framework:** pytest 7.4+ con pytest-asyncio y pytest-cov
+- **Tests existentes:** Modelos Pydantic (`test_schemas.py`), Async API Client (`test_async_api.py`), etc.
+- **Coverage:** Requerido > 30% en CI (actualmente ~52%)
 
 ## Estructura Propuesta
 
@@ -29,14 +29,14 @@ tests/
 ## Cómo Correr Tests
 
 ```bash
-# Todos los tests
-pytest
+# Todos los tests (rápido)
+pytest -q
 
-# Con coverage
-pytest --cov=src/riot_lol_cli --cov-report=html
+# Con coverage (chequeado en CI)
+pytest -q --cov=src/riot_lol_cli --cov-report=term-missing --cov-fail-under=30
 
 # Un módulo específico
-pytest tests/draft_advisor/test_scoring.py -v
+pytest tests/test_schemas.py -v
 ```
 
 ## Tipos de Tests

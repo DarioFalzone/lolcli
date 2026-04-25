@@ -1,11 +1,10 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
 from typing import Optional
 
 from fastapi import APIRouter, HTTPException, Query
 
 from riot_lol_cli.database.models import Anomaly, ChampionHourly
 from riot_lol_cli.meta_api import dependencies
-
 
 router = APIRouter(tags=["champions"])
 
@@ -19,7 +18,7 @@ async def get_champion_matchups(
     """Obtiene historial de matchups para un campeón."""
     try:
         with dependencies.session_scope() as session:
-            cutoff = datetime.utcnow() - timedelta(hours=hours)
+            cutoff = dependencies.utcnow() - timedelta(hours=hours)
             stats = (
                 session.query(ChampionHourly)
                 .filter(

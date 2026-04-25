@@ -25,10 +25,16 @@
 
 - **Path resolution:** Usar `Path(__file__).parent` para paths relativos al módulo
 - **Config loading:** JSON files en `config/` o `data/`
-- **API clients:** Clase wrapper con métodos que retornan dicts
+- **API clients:** Clases wrappers (`RiotClient` síncrono con `requests`, `AsyncRiotClient` asíncrono con `httpx`). Ambas implementan backoff exponencial para 429.
+- **Data Validation:** Modelos estrictos `Pydantic V2` en `src/riot_lol_cli/schemas/` para mapear respuestas de la API de Riot (ej. Match-V5). ¡No usar diccionarios crudos (dict access) para parsear respuestas complejas!
 - **CLI commands:** Click decorators con `@cli.command()`
 - **HTML generation:** Jinja2 templates en `templates/`
 - **DB access:** SQLAlchemy ORM con `DatabaseManager.get_session()`
+
+## Logging y Linting
+
+- **Logging:** Prohibido usar `print()` en librerías o servidores en segundo plano (`api_server`, `data_collector`). Usar el módulo `logging` de Python. `print()` y `click.echo()` solo están permitidos en los comandos interactivos de la CLI.
+- **Ruff:** El proyecto usa Ruff como linter y formatter. Se aplican reglas estrictas incluyendo ordenamiento de imports (`I`) y actualización de sintaxis moderna (`UP`). Por ejemplo, usar `dict` y `list` en lugar de `typing.Dict` y `typing.List`.
 
 ## HTML/Templates
 

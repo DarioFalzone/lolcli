@@ -11,20 +11,18 @@ Endpoints:
 from __future__ import annotations
 
 from fastapi import APIRouter, HTTPException
-from fastapi.responses import JSONResponse
 from pydantic import BaseModel
-from typing import Dict, List, Optional
 
 from .champion_data import ChampionDataService
+from .schemas import DraftState, RecommendationOutput
 from .scoring import ScoringEngine
-from .schemas import DraftState, RecommendationOutput, GameplayRole
 
 # ============================================================================
 # Initialize services (loaded once at module import)
 # ============================================================================
 
-_data_service: Optional[ChampionDataService] = None
-_engine: Optional[ScoringEngine] = None
+_data_service: ChampionDataService | None = None
+_engine: ScoringEngine | None = None
 
 
 def _get_services():
@@ -101,7 +99,7 @@ async def version_info():
     )
 
 
-@router.get("/champions", response_model=List[ChampionListItem])
+@router.get("/champions", response_model=list[ChampionListItem])
 async def get_champions():
     """Get all champions for the UI champion selector."""
     svc, _ = _get_services()
@@ -124,7 +122,7 @@ async def get_champions():
     return result
 
 
-@router.get("/champions/adcs", response_model=List[ChampionListItem])
+@router.get("/champions/adcs", response_model=list[ChampionListItem])
 async def get_adcs():
     """Get ADC champions only."""
     svc, _ = _get_services()

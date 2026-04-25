@@ -3,7 +3,7 @@ import re
 from collections import Counter
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Optional
 
 from PIL import Image
 
@@ -11,7 +11,7 @@ from riot_lol_cli import paths
 from riot_lol_cli.versioning import get_version
 
 
-def extract_color_palette(img_path: Path) -> Dict[str, Any]:
+def extract_color_palette(img_path: Path) -> dict[str, Any]:
     """Extrae una paleta mínima para el visor de splash arts."""
     try:
         img = Image.open(img_path)
@@ -29,7 +29,7 @@ def extract_color_palette(img_path: Path) -> Dict[str, Any]:
         return {"primary": "#808080", "palette": ["#808080"]}
 
 
-def detect_badges(skin_name: str) -> List[str]:
+def detect_badges(skin_name: str) -> list[str]:
     badges = []
     name_lower = skin_name.lower()
 
@@ -76,14 +76,14 @@ def estimate_release_year(skin_name: str) -> Optional[int]:
     return None
 
 
-def build_splash_manifest() -> Dict[str, Any]:
+def build_splash_manifest() -> dict[str, Any]:
     """Escanea assets/splash_arts y genera data/splash-manifest.json."""
     splash_dir = paths.ASSETS_DIR / "splash_arts"
     if not splash_dir.exists():
         raise FileNotFoundError(f"Directorio no encontrado: {splash_dir}")
 
-    champions: Dict[str, Dict[str, Any]] = {}
-    images: List[Dict[str, Any]] = []
+    champions: dict[str, dict[str, Any]] = {}
+    images: list[dict[str, Any]] = []
 
     for champ_dir in sorted(splash_dir.iterdir()):
         if not champ_dir.is_dir():
@@ -107,7 +107,7 @@ def build_splash_manifest() -> Dict[str, Any]:
             badges = detect_badges(skin_name)
             release_year = estimate_release_year(skin_name)
 
-            image_data: Dict[str, Any] = {
+            image_data: dict[str, Any] = {
                 "championId": champ_id,
                 "file": file_path.name,
                 "relPath": rel_path,
@@ -134,7 +134,7 @@ def build_splash_manifest() -> Dict[str, Any]:
     return manifest
 
 
-def load_splash_manifest() -> Dict[str, Any]:
+def load_splash_manifest() -> dict[str, Any]:
     manifest_path = paths.DATA_DIR / "splash-manifest.json"
     if not manifest_path.exists():
         raise FileNotFoundError(
@@ -143,7 +143,7 @@ def load_splash_manifest() -> Dict[str, Any]:
     return json.loads(manifest_path.read_text(encoding="utf-8"))
 
 
-def generate_splash_viewer_html(manifest: Dict[str, Any]) -> str:
+def generate_splash_viewer_html(manifest: dict[str, Any]) -> str:
     template_path = paths.TEMPLATES_DIR / "splash-viewer.html"
     if not template_path.exists():
         raise FileNotFoundError("Plantilla no encontrada: splash-viewer")

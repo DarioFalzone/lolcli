@@ -3,7 +3,6 @@ from fastapi.responses import FileResponse
 
 from riot_lol_cli.meta_api import dependencies
 
-
 router = APIRouter(tags=["core"])
 
 
