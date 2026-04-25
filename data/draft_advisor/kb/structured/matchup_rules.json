@@ -1,0 +1,6 @@
+{
+  "schema_version": "1.0",
+  "last_updated": "2026-04-08",
+  "description": "Specific matchup scoring rules. Each rule applies a score adjustment when a specific champion interaction is detected in the draft.",
+  "rules": []
+}

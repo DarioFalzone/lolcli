@@ -1,0 +1,62 @@
+# ===========================
+# riot_lol_cli .gitignore
+# ===========================
+
+# ---------- Entorno y secretos ----------
+.env
+.env.local
+.env.*.local
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+*.egg
+dist/
+build/
+*.whl
+
+# ---------- Virtual environments ----------
+.venv/
+venv/
+ENV/
+env/
+
+# ---------- Testing & Coverage ----------
+coverage/
+.coverage
+htmlcov/
+.pytest_cache/
+
+# ---------- Databases ----------
+*.db
+*.sqlite3
+
+# ---------- IDE ----------
+.idea/
+.vscode/
+.claude/
+*.swp
+*.swo
+*~
+
+# ---------- Sistema operativo ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+nul
+
+# ---------- Logs ----------
+*.log
+
+# ---------- Archivos temporales ----------
+*.tmp
+*.temp
+
+# ---------- Outputs generados ----------
+outputs/
+
+# ---------- Archives ----------
+*.zip
+

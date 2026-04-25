@@ -1,0 +1,20 @@
+click>=8.0.0
+requests>=2.25.0
+
+# Database & ORM
+sqlalchemy>=2.0.0
+
+# API Backend
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+pydantic>=2.0.0
+python-multipart>=0.0.6
+
+# Frontend
+jinja2>=3.1.0
+
+# Image processing (extracción de paleta de colores en cli.py)
+Pillow>=10.0.0
+
+# Runtime Utils
+python-dotenv>=1.0.0

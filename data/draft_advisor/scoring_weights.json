@@ -1,0 +1,28 @@
+{
+  "schema_version": "1.0",
+  "last_updated": "2026-04-08",
+  "base_weights": {
+    "ally_synergy": 0.25,
+    "enemy_matchup": 0.20,
+    "blind_pick_safety": 0.10,
+    "comp_gap_fill": 0.20,
+    "solo_queue_reliability": 0.10,
+    "scaling_fit": 0.15
+  },
+  "comfort_bonus_weight": 0.15,
+  "comfort_score_range": [1, 10],
+  "comfort_bonus_max_points": 20,
+  "context_adjustments": {
+    "blind": {
+      "blind_pick_safety": 0.15,
+      "enemy_matchup": -0.10,
+      "ally_synergy": -0.05
+    },
+    "late": {
+      "enemy_matchup": 0.10,
+      "blind_pick_safety": -0.10
+    },
+    "early": {}
+  },
+  "normalization_rule": "After applying deltas, clamp each weight to >= 0, then divide all by their sum so total = 1.0."
+}

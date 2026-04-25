@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tier List — Junglas Élite de League of Legends</title>
+    <meta name="description" content="Tier list analítico de los mejores junglas de League of Legends con paso por LCS y escena internacional. Ranking S/A/B/C con estadísticas, títulos y análisis detallado.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+    <style>
+:root{--bg-primary:#0a0a0f;--bg-secondary:#111118;--bg-card:rgba(255,255,255,0.03);--bg-glass:rgba(255,255,255,0.04);--border-glass:rgba(255,255,255,0.08);--text-primary:#eaeaf0;--text-secondary:#9999aa;--text-muted:#66667a;--accent-1:#7b5ef7;--accent-2:#5eead4;--accent-3:#f97316;--accent-glow:rgba(123,94,247,0.25);--tier-s:#f59e0b;--tier-s-bg:rgba(245,158,11,0.08);--tier-s-border:rgba(245,158,11,0.3);--tier-a:#a78bfa;--tier-a-bg:rgba(167,139,250,0.08);--tier-a-border:rgba(167,139,250,0.3);--tier-b:#38bdf8;--tier-b-bg:rgba(56,189,248,0.08);--tier-b-border:rgba(56,189,248,0.3);--tier-c:#6ee7b7;--tier-c-bg:rgba(110,231,183,0.08);--tier-c-border:rgba(110,231,183,0.3);--font-main:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;--font-heading:'Outfit','Inter',sans-serif;--radius:16px;--radius-sm:10px;--transition:0.3s cubic-bezier(.4,0,.2,1)}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-main);background:var(--bg-primary);color:var(--text-primary);line-height:1.6;overflow-x:hidden}
+#particles-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.container{max-width:1280px;margin:0 auto;padding:0 24px}
+.glass{background:var(--bg-glass);border:1px solid var(--border-glass);border-radius:var(--radius);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.gradient-text{background:linear-gradient(135deg,var(--accent-1),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.accent{color:var(--accent-1)}
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;z-index:1;overflow:hidden}
+.hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(123,94,247,0.12) 0%,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(94,234,212,0.06) 0%,transparent 50%);z-index:0}
+.hero-content{position:relative;z-index:1;max-width:800px;padding:0 24px}
+.hero-badge{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:3px;color:var(--accent-2);text-transform:uppercase;margin-bottom:28px;padding:8px 20px;border:1px solid rgba(94,234,212,0.2);border-radius:100px;background:rgba(94,234,212,0.05);animation:fadeInDown .8s ease-out}
+.hero-title{font-family:var(--font-heading);font-weight:800;line-height:1.05;margin-bottom:28px;animation:fadeInUp .9s ease-out}
+.title-line{display:block}
+.title-line:first-child{font-size:clamp(2rem,5vw,3.5rem);color:var(--text-secondary)}
+.title-line:nth-child(2){font-size:clamp(4rem,10vw,8rem)}
+.title-line.small{font-size:clamp(1rem,2.5vw,1.5rem);color:var(--text-muted);letter-spacing:6px;text-transform:uppercase;margin-top:8px}
+.hero-subtitle{font-size:1.05rem;color:var(--text-secondary);max-width:600px;margin:0 auto 36px;line-height:1.7;animation:fadeInUp 1.1s ease-out}
+.hero-subtitle strong{color:var(--text-primary)}
+.hero-cta{display:inline-flex;align-items:center;gap:10px;padding:14px 32px;background:linear-gradient(135deg,var(--accent-1),#9b7dff);color:#fff;font-weight:600;font-size:.95rem;text-decoration:none;border-radius:100px;transition:var(--transition);animation:fadeInUp 1.3s ease-out;box-shadow:0 8px 30px var(--accent-glow)}
+.hero-cta:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(123,94,247,0.35)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 0;background:rgba(10,10,15,0.75);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border-glass);transform:translateY(-100%);transition:transform .4s ease}
+.nav.visible{transform:translateY(0)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1280px;margin:0 auto;padding:0 24px}
+.nav-logo{font-family:var(--font-heading);font-weight:800;font-size:1.3rem;color:var(--text-primary);text-decoration:none;letter-spacing:1px}
+.nav-links{display:flex;gap:28px}
+.nav-links a{color:var(--text-muted);text-decoration:none;font-size:.85rem;font-weight:500;transition:color var(--transition);letter-spacing:.5px}
+.nav-links a:hover{color:var(--text-primary)}
+.section{position:relative;z-index:1;padding:100px 0}
+.section-header{display:flex;align-items:center;gap:20px;margin-bottom:56px}
+.section-tag{display:flex;align-items:center;justify-content:center;width:42px;height:42px;font-family:var(--font-heading);font-weight:700;font-size:.85rem;color:var(--accent-1);border:1px solid rgba(123,94,247,0.3);border-radius:12px;background:rgba(123,94,247,0.08);flex-shrink:0}
+.section-header h2{font-family:var(--font-heading);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700}
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.summary-card{padding:32px 28px;transition:var(--transition)}
+.summary-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,0.12)}
+.summary-icon{font-size:2rem;margin-bottom:16px}
+.summary-card h3{font-family:var(--font-heading);font-size:1.15rem;font-weight:600;margin-bottom:10px}
+.summary-card p{font-size:.9rem;color:var(--text-secondary);line-height:1.65}
+.summary-card p strong{color:var(--text-primary)}
+.tier-block{margin-bottom:48px;animation:fadeInUp .6s ease-out both}
+.tier-block:nth-child(2){animation-delay:.1s}
+.tier-block:nth-child(3){animation-delay:.2s}
+.tier-block:nth-child(4){animation-delay:.3s}
+.tier-label{display:inline-flex;align-items:center;gap:14px;padding:10px 24px;border-radius:100px;margin-bottom:24px}
+.tier-letter{font-family:var(--font-heading);font-weight:900;font-size:1.8rem}
+.tier-desc{font-size:.85rem;font-weight:500;letter-spacing:1px;text-transform:uppercase}
+.tier-s{background:var(--tier-s-bg);border:1px solid var(--tier-s-border);color:var(--tier-s)}
+.tier-a{background:var(--tier-a-bg);border:1px solid var(--tier-a-border);color:var(--tier-a)}
+.tier-b{background:var(--tier-b-bg);border:1px solid var(--tier-b-border);color:var(--tier-b)}
+.tier-c{background:var(--tier-c-bg);border:1px solid var(--tier-c-border);color:var(--tier-c)}
+.tier-players{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:20px}
+.tier-players-grid{grid-template-columns:repeat(auto-fill,minmax(320px,1fr))}
+.player-card{border-radius:var(--radius);padding:28px;transition:var(--transition);position:relative;overflow:hidden}
+.player-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%}
+.tier-s-card{background:var(--tier-s-bg);border:1px solid var(--tier-s-border)}
+.tier-s-card::before{background:var(--tier-s)}
+.tier-a-card{background:var(--tier-a-bg);border:1px solid var(--tier-a-border)}
+.tier-a-card::before{background:var(--tier-a)}
+.tier-b-card{background:var(--tier-b-bg);border:1px solid var(--tier-b-border)}
+.tier-b-card::before{background:var(--tier-b)}
+.tier-c-card{background:var(--tier-c-bg);border:1px solid var(--tier-c-border)}
+.tier-c-card::before{background:var(--tier-c)}
+.player-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,0.3)}
+.player-card-top{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.player-avatar{width:72px;height:72px;border-radius:18px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.06);position:relative;flex-shrink:0}
+.player-avatar.small{width:56px;height:56px;border-radius:14px}
+.avatar-text{font-family:var(--font-heading);font-weight:800;font-size:1.1rem;color:var(--text-secondary)}
+.avatar-img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.player-avatar.small .avatar-text{font-size:.85rem}
+.player-info{flex:1;min-width:0}
+.player-info h3{font-family:var(--font-heading);font-size:1.35rem;font-weight:700}
+.player-real-name{font-size:.8rem;color:var(--text-muted);margin-top:2px}
+.player-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tag{display:inline-block;padding:3px 10px;border-radius:6px;font-size:.7rem;font-weight:600;letter-spacing:.5px}
+.tag-region{background:rgba(123,94,247,0.12);color:var(--accent-1)}
+.tag-no-lcs{background:rgba(249,115,22,0.12);color:var(--accent-3)}
+.tag-lcs{background:rgba(94,234,212,0.12);color:var(--accent-2)}
+.tag-retired{background:rgba(255,255,255,0.06);color:var(--text-muted)}
+.player-score{text-align:center;flex-shrink:0}
+.player-score .score-number{display:block;font-family:var(--font-heading);font-size:2rem;font-weight:800;line-height:1}
+.player-score .score-label{font-size:.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px}
+.player-score.small .score-number{font-size:1.5rem}
+.player-card-body{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.stat-row{display:flex;gap:12px;font-size:.85rem;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.stat-label{color:var(--text-muted);font-weight:500;min-width:70px;flex-shrink:0}
+.stat-value{color:var(--text-secondary)}
+.player-note{font-size:.82rem;color:var(--text-muted);font-style:italic;line-height:1.55;padding-top:8px;border-top:1px solid rgba(255,255,255,0.04)}
+.player-card-compact{border-radius:var(--radius);padding:22px;transition:var(--transition);position:relative;overflow:hidden}
+.player-card-compact::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%}
+.player-card-compact:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(0,0,0,0.25)}
+.compact-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.compact-top h3{font-family:var(--font-heading);font-size:1.1rem;font-weight:700;flex:1}
+.compact-top .player-real-name{font-size:.72rem;color:var(--text-muted)}
+.compact-info{font-size:.82rem;color:var(--text-secondary);line-height:1.55;margin-top:10px}
+.compact-info strong{color:var(--text-primary)}
+.compact-note{font-size:.78rem;color:var(--text-muted);font-style:italic;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.04)}
+.table-wrapper{overflow-x:auto;padding:4px}
+.data-table{width:100%;border-collapse:collapse;font-size:.85rem}
+.data-table thead th{text-align:left;padding:14px 16px;font-weight:600;font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);border-bottom:1px solid var(--border-glass);cursor:pointer;user-select:none;white-space:nowrap;transition:color var(--transition)}
+.data-table thead th:hover{color:var(--text-primary)}
+.sort-icon{font-size:.7rem;opacity:.4}
+.data-table tbody tr{transition:background var(--transition)}
+.data-table tbody tr:hover{background:rgba(255,255,255,0.03)}
+.data-table tbody td{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,0.03);color:var(--text-secondary);vertical-align:top}
+.data-table tbody td strong{color:var(--text-primary)}
+.data-table tbody td small{color:var(--text-muted);font-size:.72rem}
+.score-cell{text-align:center}
+.tier-badge{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;font-family:var(--font-heading);font-weight:800;font-size:.95rem}
+.tier-s-badge{background:var(--tier-s-bg);border:1px solid var(--tier-s-border);color:var(--tier-s)}
+.tier-a-badge{background:var(--tier-a-bg);border:1px solid var(--tier-a-border);color:var(--tier-a)}
+.tier-b-badge{background:var(--tier-b-bg);border:1px solid var(--tier-b-border);color:var(--tier-b)}
+.tier-c-badge{background:var(--tier-c-bg);border:1px solid var(--tier-c-border);color:var(--tier-c)}
+.timeline{position:relative;padding-left:40px}
+.timeline::before{content:'';position:absolute;left:15px;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,var(--accent-1),var(--accent-2));border-radius:2px}
+.timeline-item{position:relative;margin-bottom:32px}
+.timeline-marker{position:absolute;left:-33px;top:22px;width:14px;height:14px;border-radius:50%;background:var(--accent-1);border:3px solid var(--bg-primary);box-shadow:0 0 12px var(--accent-glow);z-index:2}
+.timeline-card{padding:22px 28px;transition:var(--transition)}
+.timeline-card:hover{transform:translateX(6px);border-color:rgba(255,255,255,0.12)}
+.timeline-year{display:inline-block;font-family:var(--font-heading);font-weight:800;font-size:1.5rem;margin-bottom:10px;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.timeline-card ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.timeline-card li{font-size:.88rem;color:var(--text-secondary);line-height:1.5}
+.timeline-card li strong{color:var(--text-primary)}
+.methodology-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-bottom:28px}
+.method-card{padding:28px;transition:var(--transition)}
+.method-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,0.12)}
+.method-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.method-icon{font-size:1.5rem}
+.method-header h3{font-family:var(--font-heading);font-size:1.05rem;font-weight:600;flex:1}
+.method-max{font-size:.72rem;font-weight:600;color:var(--accent-2);padding:3px 10px;border-radius:6px;background:rgba(94,234,212,0.08);border:1px solid rgba(94,234,212,0.2)}
+.method-card ul{list-style:none;margin-bottom:16px}
+.method-card li{font-size:.82rem;color:var(--text-secondary);padding:3px 0;border-bottom:1px solid rgba(255,255,255,0.03)}
+.method-card li strong{color:var(--accent-2)}
+.method-bar{height:6px;border-radius:3px;background:rgba(255,255,255,0.05);overflow:hidden}
+.method-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));transition:width 1.2s ease}
+.method-note{padding:20px 28px;font-size:.88rem;color:var(--text-secondary);line-height:1.6}
+.method-note strong{color:var(--text-primary)}
+.footer{position:relative;z-index:1;padding:60px 0 40px;border-top:1px solid var(--border-glass)}
+.footer-content{text-align:center}
+.footer-brand{font-family:var(--font-heading);font-weight:700;font-size:1.1rem;margin-bottom:12px}
+.footer-sources{font-size:.78rem;color:var(--text-muted);max-width:700px;margin:0 auto 8px;line-height:1.5}
+.footer-date{font-size:.72rem;color:var(--text-muted)}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:768px){.nav-links{display:none}.tier-players,.tier-players-grid{grid-template-columns:1fr}.chart-container{height:260px}.bar-label{font-size:.55rem}.data-table{font-size:.75rem}.data-table thead th,.data-table tbody td{padding:10px 8px}.section{padding:60px 0}.methodology-grid{grid-template-columns:1fr}.player-card-top{flex-wrap:wrap}}
+@media(max-width:480px){.summary-grid{grid-template-columns:1fr}.hero-badge{font-size:.65rem;letter-spacing:2px}.player-card,.player-card-compact{padding:16px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+:focus-visible{outline:2px solid var(--accent-2);outline-offset:3px}
+.skip-link{position:absolute;left:1rem;top:-120px;padding:.8rem 1rem;border-radius:100px;background:var(--bg-secondary);border:1px solid var(--border-glass);color:var(--text-primary);z-index:200;font-size:.85rem}
+.skip-link:focus{top:1rem}
+.filter-bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:32px}
+.search-box{display:flex;align-items:center;gap:8px;padding:8px 16px;border-radius:100px;border:1px solid var(--border-glass);background:rgba(255,255,255,0.03);flex:1;min-width:200px;max-width:400px}
+.search-box input{border:0;outline:0;background:transparent;color:var(--text-primary);font-family:var(--font-main);font-size:.85rem;width:100%}
+.search-box input::placeholder{color:var(--text-muted)}
+.search-box .search-icon{color:var(--accent-1);font-size:1rem;flex-shrink:0}
+.filter-btn{padding:6px 16px;border-radius:100px;border:1px solid var(--border-glass);background:rgba(255,255,255,0.03);color:var(--text-muted);font-size:.78rem;font-weight:600;cursor:pointer;transition:var(--transition);letter-spacing:.5px}
+.filter-btn:hover{border-color:rgba(255,255,255,0.15);color:var(--text-primary)}
+.filter-btn.active{background:linear-gradient(135deg,var(--accent-1),#9b7dff);color:#fff;border-color:transparent}
+.filter-btn.active-lcs{background:rgba(94,234,212,0.15);color:var(--accent-2);border-color:rgba(94,234,212,0.3)}
+.filter-btn.active-nolcs{background:rgba(249,115,22,0.15);color:var(--accent-3);border-color:rgba(249,115,22,0.3)}
+.filter-sep{width:1px;height:24px;background:var(--border-glass)}
+.hidden-by-filter{display:none!important}
+.player-quote{font-size:.78rem;color:var(--accent-2);font-style:italic;margin-top:8px;padding:8px 12px;border-left:2px solid rgba(94,234,212,0.3);background:rgba(94,234,212,0.03);border-radius:0 8px 8px 0;line-height:1.5}
+.player-quote cite{display:block;font-style:normal;color:var(--text-muted);font-size:.68rem;margin-top:4px}
+.stats-ext{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.04)}
+.stat-chip{padding:8px 10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);text-align:center}
+.stat-chip-val{display:block;font-family:var(--font-heading);font-weight:700;font-size:.95rem;color:var(--text-primary);line-height:1.2}
+.stat-chip-lbl{font-size:.6rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.5px}
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.meta-card{padding:24px;transition:var(--transition)}
+.meta-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,0.12)}
+.meta-year-title{font-family:var(--font-heading);font-weight:800;font-size:1.3rem;margin-bottom:6px}
+.meta-type{display:inline-block;padding:4px 12px;border-radius:100px;font-size:.7rem;font-weight:600;letter-spacing:.5px;margin-bottom:10px}
+.meta-type.engage{background:rgba(245,158,11,0.12);color:var(--tier-s)}
+.meta-type.carry{background:rgba(167,139,250,0.12);color:var(--tier-a)}
+.meta-type.skirmish{background:rgba(56,189,248,0.12);color:var(--tier-b)}
+.meta-type.utility{background:rgba(110,231,183,0.12);color:var(--tier-c)}
+.meta-picks{list-style:none;display:flex;flex-direction:column;gap:3px}
+.meta-picks li{font-size:.8rem;color:var(--text-secondary)}
+.meta-picks strong{color:var(--text-primary)}
+.h2h-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}
+.h2h-card{padding:28px;text-align:center;transition:var(--transition)}
+.h2h-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,0.12)}
+.h2h-vs{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:14px}
+.h2h-player{font-family:var(--font-heading);font-weight:700;font-size:1.15rem}
+.h2h-player.winner{color:var(--tier-s)}
+.h2h-icon{font-size:1.4rem;color:var(--accent-3);font-weight:800;font-family:var(--font-heading)}
+.h2h-result{font-size:.85rem;color:var(--text-secondary);margin-bottom:4px}
+.h2h-result strong{color:var(--text-primary)}
+.h2h-context{font-size:.72rem;color:var(--text-muted)}
+.eff-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.eff-card{padding:24px;transition:var(--transition);position:relative;overflow:hidden}
+.eff-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,0.12)}
+.eff-rank{position:absolute;top:12px;right:16px;font-family:var(--font-heading);font-size:2.5rem;font-weight:900;color:rgba(255,255,255,0.04)}
+.eff-name{font-family:var(--font-heading);font-weight:700;font-size:1.15rem;margin-bottom:6px}
+.eff-reason{font-size:.82rem;color:var(--text-secondary);line-height:1.55}
+.eff-reason strong{color:var(--text-primary)}
+.chart-section-new{position:relative}
+.chart-section-new::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:80%;max-width:600px;height:1px;background:linear-gradient(90deg,transparent,var(--accent-1),var(--accent-2),var(--accent-1),transparent)}
+.chart-glass{background:rgba(255,255,255,0.02);border:1px solid var(--border-glass);border-radius:var(--radius);padding:32px;position:relative;overflow:hidden}
+.chart-glass::after{content:'';position:absolute;top:-50%;right:-50%;width:100%;height:100%;background:radial-gradient(circle,rgba(123,94,247,0.03) 0%,transparent 60%);pointer-events:none}
+.chart-glass-gold::after{background:radial-gradient(circle,rgba(245,158,11,0.04) 0%,transparent 60%)}
+.charts-duo{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.chart-title{font-family:var(--font-heading);font-size:1.1rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.chart-title .ct-icon{font-size:1.3rem}
+.chart-subtitle{font-size:.78rem;color:var(--text-muted);margin-bottom:20px;line-height:1.5}
+.echart-box{width:100%;height:480px}
+.echart-box-sm{width:100%;height:360px}
+.cjs-canvas-wrap{position:relative;width:100%;max-width:400px;margin:0 auto}
+.radar-controls{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.radar-btn{padding:5px 14px;border-radius:100px;border:1px solid var(--border-glass);background:rgba(255,255,255,0.03);color:var(--text-muted);font-size:.72rem;font-weight:600;cursor:pointer;transition:var(--transition);font-family:var(--font-main)}
+.radar-btn:hover{border-color:rgba(255,255,255,0.15);color:var(--text-primary)}
+.radar-btn.sel{background:linear-gradient(135deg,rgba(123,94,247,0.2),rgba(94,234,212,0.1));color:var(--accent-2);border-color:rgba(94,234,212,0.3)}
+@media(max-width:768px){.charts-duo{grid-template-columns:1fr}.echart-box{height:350px}.echart-box-sm{height:280px}}
+    </style>
+</head>
+<body>
+<a class="skip-link" href="#tier-list">Saltar al contenido</a>
+
+<!-- Animated background particles -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- Hero Section -->
+<header class="hero" id="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <p class="hero-badge">ANÁLISIS COMPETITIVO · MARZO 2026</p>
+        <h1 class="hero-title">
+            <span class="title-line">Junglas</span>
+            <span class="title-line gradient-text">Élite</span>
+            <span class="title-line small">League of Legends</span>
+        </h1>
+        <p class="hero-subtitle">Tier list analítico de junglas con paso por LCS y escena internacional — clasificación <strong>S / A / B / C</strong> ponderada por títulos, premios, estadísticas y reputación.</p>
+        <a href="#tier-list" class="hero-cta">
+            <span>Explorar Tier List</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </a>
+    </div>
+</header>
+
+<!-- Navigation -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="#hero" class="nav-logo">JGL<span class="accent">TIER</span></a>
+        <div class="nav-links">
+            <a href="#tier-list">Tier List</a>
+            <a href="#tabla">Tabla</a>
+            <a href="#chart">Score Ranking</a>
+            <a href="#breakdown">Anatomía</a>
+            <a href="#timeline">Timeline</a>
+            <a href="#titles-timeline">Títulos</a>
+            <a href="#worlds-meta">Meta x Worlds</a>
+            <a href="#h2h">H2H</a>
+            <a href="#eficiencia">Eficiencia</a>
+            <a href="#metodologia">Metodología</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Executive Summary -->
+<section class="section summary-section" id="resumen">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">01</span>
+            <h2>Resumen Ejecutivo</h2>
+        </div>
+        <div class="summary-grid">
+            <div class="summary-card glass">
+                <div class="summary-icon">📋</div>
+                <h3>Metodología</h3>
+                <p>Ponderación que prioriza <strong>títulos internacionales</strong> (Worlds, MSI, First Stand), luego títulos domésticos, premios individuales, estadísticas competitivas y reputación documentada.</p>
+            </div>
+            <div class="summary-card glass">
+                <div class="summary-icon">🌍</div>
+                <h3>Alcance</h3>
+                <p>Junglas con paso por <strong>LCS</strong> (histórica y/o retorno 2026) y junglas de equipos internacionales top (LCK/LPL/LEC) marcados como "sin LCS".</p>
+            </div>
+            <div class="summary-card glass">
+                <div class="summary-icon">📅</div>
+                <h3>Corte Temporal</h3>
+                <p>Hasta el <strong>29 de marzo de 2026</strong>. Incluye el retorno de la LCS en 2026 según comunicación oficial de LoL Esports.</p>
+            </div>
+            <div class="summary-card glass">
+                <div class="summary-icon">📊</div>
+                <h3>Fuentes</h3>
+                <p>LoL Esports / Riot Games, Games of Legends (gol.gg), Leaguepedia, Liquipedia, Dot Esports, Inven Global, Red Bull Esports y más.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Tier List Section -->
+<section class="section tier-section" id="tier-list">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">02</span>
+            <h2>Tier List Final</h2>
+        </div>
+
+        <!-- Search & Filter Toolbar -->
+        <div class="filter-bar" id="filter-bar">
+            <div class="search-box">
+                <span class="search-icon">⌕</span>
+                <input type="search" id="player-search" placeholder="Buscar jugador, equipo o logro..." autocomplete="off">
+            </div>
+            <div class="filter-sep"></div>
+            <button class="filter-btn active" data-filter-tier="all">Todos</button>
+            <button class="filter-btn" data-filter-tier="S">S Tier</button>
+            <button class="filter-btn" data-filter-tier="A">A Tier</button>
+            <button class="filter-btn" data-filter-tier="B">B Tier</button>
+            <button class="filter-btn" data-filter-tier="C">C Tier</button>
+            <div class="filter-sep"></div>
+            <button class="filter-btn" data-filter-status="LCS">LCS</button>
+            <button class="filter-btn" data-filter-status="Sin LCS">Sin LCS</button>
+        </div>
+
+        <!-- S Tier -->
+        <div class="tier-block" data-tier="S">
+            <div class="tier-label tier-s">
+                <span class="tier-letter">S</span>
+                <span class="tier-desc">Generacional</span>
+            </div>
+            <div class="tier-players">
+                <div class="player-card tier-s-card" data-score="80">
+                    <div class="player-card-top">
+                        <div class="player-avatar">
+                            <div class="avatar-ring"></div>
+                            <img class="avatar-img" src="./img/fotos_pro_players/canyon_ia.webp" alt="Canyon" loading="lazy" onerror="this.outerHTML='<span class=avatar-text>CY</span>'">
+                        </div>
+                        <div class="player-info">
+                            <h3>Canyon</h3>
+                            <p class="player-real-name">Kim "Canyon" Geon-bu</p>
+                            <div class="player-tags">
+                                <span class="tag tag-region">🇰🇷 KR</span>
+                                <span class="tag tag-no-lcs">Sin LCS</span>
+                            </div>
+                        </div>
+                        <div class="player-score">
+                            <span class="score-number">80</span>
+                            <span class="score-label">Score</span>
+                        </div>
+                    </div>
+                    <div class="player-card-body">
+                        <div class="stat-row">
+                            <span class="stat-label">Equipos</span>
+                            <span class="stat-value">Gen.G · Damwon/DWG KIA/Dplus</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Años</span>
+                            <span class="stat-value">2018–2026</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Títulos</span>
+                            <span class="stat-value">Worlds 2020 🏆 · MSI 2024 🏆 · MSI 2025 🏆 · 5x LCK</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Premios</span>
+                            <span class="stat-value">Finals MVP Worlds 2020 · MVP LCK Spring 2021</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Stats</span>
+                            <span class="stat-value">Worlds 2020: 78.3% WR, 6.1 KDA · Worlds 2021: 73.7% WR, 5.4 KDA</span>
+                        </div>
+                        <div class="stats-ext">
+                            <div class="stat-chip"><span class="stat-chip-val">6.3</span><span class="stat-chip-lbl">CSPM '20</span></div>
+                            <div class="stat-chip"><span class="stat-chip-val">285.9</span><span class="stat-chip-lbl">DPM '20</span></div>
+                            <div class="stat-chip"><span class="stat-chip-val">18.8%</span><span class="stat-chip-lbl">Gold% '20</span></div>
+                            <div class="stat-chip"><span class="stat-chip-val">1.87</span><span class="stat-chip-lbl">VSPM '20</span></div>
+                            <div class="stat-chip"><span class="stat-chip-val">65.3%</span><span class="stat-chip-lbl">KP '21</span></div>
+                            <div class="stat-chip"><span class="stat-chip-val">252.7</span><span class="stat-chip-lbl">DPM '21</span></div>
+                        </div>
+                    </div>
+                    <p class="player-note">Perfil más completo del recorte: pico histórico con Worlds + Finals MVP, doble MSI con otro core, y 5 LCK con dominancia estadística. Deltas tempranos positivos (CSD@15 +7.4, GD@15 +286).</p>
+                    <blockquote class="player-quote">"Best in the world… undisputed" — incluso sin título internacional en 2021, lo ponen como ganador claro de Best Jungler en su ranking anual.<cite>— Inven Global, 2021</cite></blockquote>
+                </div>
+
+                <div class="player-card tier-s-card" data-score="80">
+                    <div class="player-card-top">
+                        <div class="player-avatar">
+                            <div class="avatar-ring"></div>
+                            <img class="avatar-img" src="./img/fotos_pro_players/oner_ia.webp" alt="Oner" loading="lazy" onerror="this.outerHTML='<span class=avatar-text>ON</span>'">
+                        </div>
+                        <div class="player-info">
+                            <h3>Oner</h3>
+                            <p class="player-real-name">Mun "Oner" Hyeon-jun</p>
+                            <div class="player-tags">
+                                <span class="tag tag-region">🇰🇷 KR</span>
+                                <span class="tag tag-no-lcs">Sin LCS</span>
+                            </div>
+                        </div>
+                        <div class="player-score">
+                            <span class="score-number">80</span>
+                            <span class="score-label">Score</span>
+                        </div>
+                    </div>
+                    <div class="player-card-body">
+                        <div class="stat-row">
+                            <span class="stat-label">Equipos</span>
+                            <span class="stat-value">T1</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Años</span>
+                            <span class="stat-value">2020–2026</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Títulos</span>
+                            <span class="stat-value">Worlds 2023 🏆 · Worlds 2024 🏆 · Worlds 2025 🏆</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Premios</span>
+                            <span class="stat-value">LCK Finals MVP · "Jungler of the Year" x4 · All-Pro</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Stats</span>
+                            <span class="stat-value">Worlds 2023: 84.2% WR, 5.4 KDA, 73.3% KP · Worlds 2024: KDA 5.9, KP 72.2%</span>
+                        </div>
+                        <div class="stats-ext">
+                            <div class="stat-chip"><span class="stat-chip-val">256.6</span><span class="stat-chip-lbl">DPM '23</span></div>
+                            <div class="stat-chip"><span class="stat-chip-val">1.96</span><span class="stat-chip-lbl">VSPM '23</span></div>
+                            <div class="stat-chip"><span class="stat-chip-val">57.9%</span><span class="stat-chip-lbl">FB% '23</span></div>
+                            <div class="stat-chip"><span class="stat-chip-val">≈11</span><span class="stat-chip-lbl">First Bloods</span></div>
+                        </div>
+                    </div>
+                    <p class="player-note">Three-peat en Worlds (2023–2025). Pool de control/utility (Poppy, Rell, Maokai) + engage (Vi) + playmaking (Lee Sin). Jungla de coordinación de pelea y "timing windows".</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- A Tier -->
+        <div class="tier-block" data-tier="A">
+            <div class="tier-label tier-a">
+                <span class="tier-letter">A</span>
+                <span class="tier-desc">Élite Mundial</span>
+            </div>
+            <div class="tier-players">
+                <div class="player-card tier-a-card" data-score="66">
+                    <div class="player-card-top">
+                        <div class="player-avatar">
+                            <div class="avatar-ring"></div>
+                            <img class="avatar-img" src="./img/fotos_pro_players/peanut_ia.webp" alt="Peanut" loading="lazy" onerror="this.outerHTML='<span class=avatar-text>PN</span>'">
+                        </div>
+                        <div class="player-info">
+                            <h3>Peanut</h3>
+                            <p class="player-real-name">Han "Peanut" Wang-ho</p>
+                            <div class="player-tags">
+                                <span class="tag tag-region">🇰🇷 KR</span>
+                                <span class="tag tag-no-lcs">Sin LCS</span>
+                                <span class="tag tag-retired">Retirado</span>
+                            </div>
+                        </div>
+                        <div class="player-score">
+                            <span class="score-number">66</span>
+                            <span class="score-label">Score</span>
+                        </div>
+                    </div>
+                    <div class="player-card-body">
+                        <div class="stat-row">
+                            <span class="stat-label">Equipos</span>
+                            <span class="stat-value">SKT/T1 · Gen.G · Hanwha Life</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Años</span>
+                            <span class="stat-value">2015–2025</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Títulos</span>
+                            <span class="stat-value">MSI 2017 🏆 · Worlds 2017 (sub) · 7x LCK · First Stand 2025 🏆</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Premios</span>
+                            <span class="stat-value">LCK Season MVP · Finals MVP x2 · Múltiples All-Pro</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Stats</span>
+                            <span class="stat-value">Worlds 2017: 60% WR (9-6) · KP 70.7% · Pool: Sejuani, Gragas, Rek'Sai</span>
+                        </div>
+                    </div>
+                    <p class="player-note">GOAT por longevidad: MSI, subcampeón de Worlds y 7 títulos LCK. El benchmark histórico de junglas engage en LCK. La gran deuda es el título de Worlds.</p>
+                </div>
+
+                <div class="player-card tier-a-card" data-score="59">
+                    <div class="player-card-top">
+                        <div class="player-avatar">
+                            <div class="avatar-ring"></div>
+                            <img class="avatar-img" src="./img/fotos_pro_players/kanavi_ia.webp" alt="Kanavi" loading="lazy" onerror="this.outerHTML='<span class=avatar-text>KV</span>'">
+                        </div>
+                        <div class="player-info">
+                            <h3>Kanavi</h3>
+                            <p class="player-real-name">Seo "Kanavi" Jin-hyeok</p>
+                            <div class="player-tags">
+                                <span class="tag tag-region">🇰🇷 KR</span>
+                                <span class="tag tag-no-lcs">Sin LCS</span>
+                            </div>
+                        </div>
+                        <div class="player-score">
+                            <span class="score-number">59</span>
+                            <span class="score-label">Score</span>
+                        </div>
+                    </div>
+                    <div class="player-card-body">
+                        <div class="stat-row">
+                            <span class="stat-label">Equipos</span>
+                            <span class="stat-value">Hanwha Life · JDG · Top Esports</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Años</span>
+                            <span class="stat-value">2019–2026</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Títulos</span>
+                            <span class="stat-value">MSI 2023 🏆 · 5x LPL · Worlds 2023 (3°–4°)</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Premios</span>
+                            <span class="stat-value">"Player of the Year" 2023 · All-Pro LPL</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-label">Stats</span>
+                            <span class="stat-value">Worlds 2022: 71.4% WR, 21.7% Gold%, 6.8 CSPM · Worlds 2025: 67% KP, 7.0 CSPM</span>
+                        </div>
+                    </div>
+                    <p class="player-note">Carry-jungle por excelencia. Top 4 en Worlds 2022, 2023 y 2025 + campeonato MSI 2023. Player of the Year 2023.</p>
+                    <blockquote class="player-quote">"Epitome of a carry-style jungler" — afirman que "proved himself as the best jungler in the world" previo a Worlds 2023.<cite>— Inven Global, 2023</cite></blockquote>
+                </div>
+            </div>
+        </div>
+
+        <!-- B Tier -->
+        <div class="tier-block" data-tier="B">
+            <div class="tier-label tier-b">
+                <span class="tier-letter">B</span>
+                <span class="tier-desc">Élite Fuerte</span>
+            </div>
+            <div class="tier-players tier-players-grid">
+                <!-- Jankos -->
+                <div class="player-card-compact tier-b-card" data-score="49">
+                    <div class="compact-top">
+                        <div class="player-avatar small"><img class="avatar-img" src="./img/fotos_pro_players/jankos_ia.webp" alt="Jankos" loading="lazy" onerror="this.outerHTML='<span class=avatar-text>'+'JK'+'</span>'"></div>
+                        <div>
+                            <h3>Jankos</h3>
+                            <p class="player-real-name">Marcin "Jankos" Jankowski</p>
+                        </div>
+                        <div class="player-score small"><span class="score-number">49</span></div>
+                    </div>
+                    <div class="player-tags">
+                        <span class="tag tag-region">🇵🇱 PL</span>
+                        <span class="tag tag-no-lcs">Sin LCS</span>
+                        <span class="tag tag-retired">Creador</span>
+                    </div>
+                    <p class="compact-info"><strong>G2 Esports</strong> · 2014–2023<br>MSI 2019 🏆 · Worlds 2019 (sub) · 5x LEC</p>
+                    <p class="compact-note">Mejor perfil occidental: MSI campeón (3–0) + Worlds final (0–3 ante Tian/FPX). "EU's best jungler" en macro y creatividad en ventanas de tempo.</p>
+                </div>
+
+                <!-- Xun -->
+                <div class="player-card-compact tier-b-card" data-score="46">
+                    <div class="compact-top">
+                        <div class="player-avatar small"><img class="avatar-img" src="./img/fotos_pro_players/xun_ia.webp" alt="Xun" loading="lazy" onerror="this.outerHTML='<span class=avatar-text>'+'XN'+'</span>'"></div>
+                        <div>
+                            <h3>Xun</h3>
+                            <p class="player-real-name">Peng "Xun" Li-Xun</p>
+                        </div>
+                        <div class="player-score small"><span class="score-number">46</span></div>
+                    </div>
+                    <div class="player-tags">
+                        <span class="tag tag-region">🇨🇳 CN</span>
+                        <span class="tag tag-no-lcs">Sin LCS</span>
+                    </div>
+                    <p class="compact-info"><strong>BLG</strong> · 2020–2026<br>First Stand 2026 🏆 · LPL 2026 Split 1 🏆 · Worlds 2024 (sub) · MSI 2023 (sub) · Worlds 2023 (3º–4º)</p>
+                    <p class="compact-note">"Deep runs" en pocas oportunidades: mejor ratio oportunidad/resultado del tier. Pool flexible con Pantheon, Poppy, Xin Zhao.</p>
+                </div>
+
+                <!-- Tian -->
+                <div class="player-card-compact tier-b-card" data-score="44">
+                    <div class="compact-top">
+                        <div class="player-avatar small"><img class="avatar-img" src="./img/fotos_pro_players/tian_ia.webp" alt="Tian" loading="lazy" onerror="this.outerHTML='<span class=avatar-text>'+'TN'+'</span>'"></div>
+                        <div>
+                            <h3>Tian</h3>
+                            <p class="player-real-name">Gao "Tian" Tianliang</p>
+                        </div>
+                        <div class="player-score small"><span class="score-number">44</span></div>
+                    </div>
+                    <div class="player-tags">
+                        <span class="tag tag-region">🇨🇳 CN</span>
+                        <span class="tag tag-no-lcs">Sin LCS</span>
+                    </div>
+                    <p class="compact-info"><strong>FPX · Top Esports</strong> · 2017–2026<br>Worlds 2019 🏆 + Finals MVP · LPL Summer 2019 🏆<br>Worlds 2019: KDA 5.2, KP 69.2% · Pool: Lee Sin, Gragas, Elise</p>
+                    <p class="compact-note">Peak explosivo: MVP de la final más importante del año. "Su techo está históricamente probado."</p>
+                </div>
+
+                <!-- Blaber -->
+                <div class="player-card-compact tier-b-card" data-score="44">
+                    <div class="compact-top">
+                        <div class="player-avatar small"><img class="avatar-img" src="./img/fotos_pro_players/blaber_ia.webp" alt="Blaber" loading="lazy" onerror="this.outerHTML='<span class=avatar-text>'+'BL'+'</span>'"></div>
+                        <div>
+                            <h3>Blaber</h3>
+                            <p class="player-real-name">Robert "Blaber" Huang</p>
+                        </div>
+                        <div class="player-score small"><span class="score-number">44</span></div>
+                    </div>
+                    <div class="player-tags">
+                        <span class="tag tag-region">🇺🇸 NA</span>
+                        <span class="tag tag-lcs">LCS</span>
+                    </div>
+                    <p class="compact-info"><strong>Cloud9</strong> · 2018–2026<br>4x LCS 🏆 · Top 4 Worlds 2018 · Top 8 Worlds 2021</p>
+                    <p class="compact-note">Referencia NA moderna: múltiples títulos y MVPs. Spring 2020 KDA 6.6.</p>
+                </div>
+
+                <!-- Wei -->
+                <div class="player-card-compact tier-b-card" data-score="43">
+                    <div class="compact-top">
+                        <div class="player-avatar small"><img class="avatar-img" src="./img/fotos_pro_players/wei_ia.webp" alt="Wei" loading="lazy" onerror="this.outerHTML='<span class=avatar-text>'+'WI'+'</span>'"></div>
+                        <div>
+                            <h3>Wei</h3>
+                            <p class="player-real-name">Yan "Wei" Yangwei</p>
+                        </div>
+                        <div class="player-score small"><span class="score-number">43</span></div>
+                    </div>
+                    <div class="player-tags">
+                        <span class="tag tag-region">🇨🇳 CN</span>
+                        <span class="tag tag-no-lcs">Sin LCS</span>
+                    </div>
+                    <p class="compact-info"><strong>RNG · iG</strong> · 2020–2026<br>MSI 2021 🏆 · MSI 2022 🏆 · 2x LPL Spring</p>
+                    <p class="compact-note">Finals MVP MSI 2022. MSI 2022 winrate 83.3%, KDA 7.4.</p>
+                </div>
+
+                <!-- Xmithie -->
+                <div class="player-card-compact tier-b-card" data-score="42">
+                    <div class="compact-top">
+                        <div class="player-avatar small"><img class="avatar-img" src="./img/fotos_pro_players/xmithie_ia.webp" alt="Xmithie" loading="lazy" onerror="this.outerHTML='<span class=avatar-text>'+'XM'+'</span>'"></div>
+                        <div>
+                            <h3>Xmithie</h3>
+                            <p class="player-real-name">Jake "Xmithie" Puchero</p>
+                        </div>
+                        <div class="player-score small"><span class="score-number">42</span></div>
+                    </div>
+                    <div class="player-tags">
+                        <span class="tag tag-region">🇺🇸 NA</span>
+                        <span class="tag tag-lcs">LCS</span>
+                        <span class="tag tag-retired">Retirado</span>
+                    </div>
+                    <p class="compact-info"><strong>TL · CLG · IMT</strong> · 2012–2020<br>6x LCS 🏆 · MSI 2019 (sub)</p>
+                    <p class="compact-note">El jungla más ganador en NA. Finals MVP LCS 2018 Summer.</p>
+                </div>
+
+                <!-- Jiejie -->
+                <div class="player-card-compact tier-b-card" data-score="37">
+                    <div class="compact-top">
+                        <div class="player-avatar small"><img class="avatar-img" src="./img/fotos_pro_players/jiejie_ia.webp" alt="Jiejie" loading="lazy" onerror="this.outerHTML='<span class=avatar-text>'+'JJ'+'</span>'"></div>
+                        <div>
+                            <h3>Jiejie</h3>
+                            <p class="player-real-name">Zhao "Jiejie" Li-Jie</p>
+                        </div>
+                        <div class="player-score small"><span class="score-number">37</span></div>
+                    </div>
+                    <div class="player-tags">
+                        <span class="tag tag-region">🇨🇳 CN</span>
+                        <span class="tag tag-no-lcs">Sin LCS</span>
+                    </div>
+                    <p class="compact-info"><strong>EDG · Weibo Gaming</strong> · 2019–2026<br>Worlds 2021 🏆 · LPL Summer 2021 🏆<br>Worlds 2021: 68.8% WR, 5.1 KDA, 71.6% KP, 256.5 DPM, 1.83 VSPM</p>
+                    <p class="compact-note">"Canyon Killer": ganó la final 3–2 contra el jungla tratado como el mejor del mundo ese año.</p>
+                    <blockquote class="player-quote">"Overpower Canyon" en la final de Worlds 2021 y conduce a la victoria de EDG.<cite>— Inven Global, 2021</cite></blockquote>
+                </div>
+
+                <!-- Inspired -->
+                <div class="player-card-compact tier-b-card" data-score="32">
+                    <div class="compact-top">
+                        <div class="player-avatar small"><img class="avatar-img" src="./img/fotos_pro_players/inspired_ia.webp" alt="Inspired" loading="lazy" onerror="this.outerHTML='<span class=avatar-text>'+'IN'+'</span>'"></div>
+                        <div>
+                            <h3>Inspired</h3>
+                            <p class="player-real-name">Kacper "Inspired" Słoma</p>
+                        </div>
+                        <div class="player-score small"><span class="score-number">32</span></div>
+                    </div>
+                    <div class="player-tags">
+                        <span class="tag tag-region">🇵🇱 PL</span>
+                        <span class="tag tag-lcs">LCS</span>
+                    </div>
+                    <p class="compact-info"><strong>Rogue · EG · LYON</strong> · 2019–2026<br>LCS Spring 2022 🏆 · Agregado: 60.7% WR, 4.9 KDA, 69.4% KP<br>MSI 2024: 319.4 DPM · Pool: Sejuani, Maokai, Graves, Wukong, Viego</p>
+                    <p class="compact-note">Único en ganar MVP en LEC (2021) y LCS (2022). Techo regional alto; la brecha está en conversión internacional.</p>
+                </div>
+
+                <!-- Svenskeren -->
+                <div class="player-card-compact tier-b-card" data-score="32">
+                    <div class="compact-top">
+                        <div class="player-avatar small"><img class="avatar-img" src="./img/fotos_pro_players/svenskeren_ia.webp" alt="Svenskeren" loading="lazy" onerror="this.outerHTML='<span class=avatar-text>'+'SV'+'</span>'"></div>
+                        <div>
+                            <h3>Svenskeren</h3>
+                            <p class="player-real-name">Dennis "Svenskeren" Johnsen</p>
+                        </div>
+                        <div class="player-score small"><span class="score-number">32</span></div>
+                    </div>
+                    <div class="player-tags">
+                        <span class="tag tag-region">🇩🇰 DK</span>
+                        <span class="tag tag-lcs">LCS</span>
+                        <span class="tag tag-retired">Retirado</span>
+                    </div>
+                    <p class="compact-info"><strong>TSM · Cloud9 · EG</strong> · 2013–2023<br>3x LCS 🏆 · Worlds 2018 (semi)<br>Worlds 2016: 50% WR, 3.1 KDA, 66.7% KP, 18.8% Gold%</p>
+                    <p class="compact-note">MVP LCS Summer 2019. Worlds Play-In 2018 KDA 7.2, KP 82.2%. Figura histórica de NA/EU, jungla de early y gank.</p>
+                </div>
+
+                <!-- Pyosik -->
+                <div class="player-card-compact tier-b-card" data-score="30">
+                    <div class="compact-top">
+                        <div class="player-avatar small"><img class="avatar-img" src="./img/fotos_pro_players/pyosik_ia.webp" alt="Pyosik" loading="lazy" onerror="this.outerHTML='<span class=avatar-text>'+'PY'+'</span>'"></div>
+                        <div>
+                            <h3>Pyosik</h3>
+                            <p class="player-real-name">Hong "Pyosik" Chang-hyeon</p>
+                        </div>
+                        <div class="player-score small"><span class="score-number">30</span></div>
+                    </div>
+                    <div class="player-tags">
+                        <span class="tag tag-region">🇰🇷 KR</span>
+                        <span class="tag tag-lcs">LCS</span>
+                    </div>
+                    <p class="compact-info"><strong>DRX · Team Liquid · DN SOOPers</strong> · 2020–2026<br>Worlds 2022 🏆 (final 3–2 vs T1)<br>Agregado: 72.3% KP, 328.7 DPM, 6.1 CSPM, 1.69 VSPM</p>
+                    <p class="compact-note">Peak de torneo máximo: campeón de Worlds con campaña extensa (Play-In→Final). Presencia de mapa + output, no solo utility.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- C Tier -->
+        <div class="tier-block" data-tier="C">
+            <div class="tier-label tier-c">
+                <span class="tier-letter">C</span>
+                <span class="tier-desc">Muy Buenos</span>
+            </div>
+            <div class="tier-players tier-players-grid">
+                <!-- Broxah -->
+                <div class="player-card-compact tier-c-card" data-score="26">
+                    <div class="compact-top">
+                        <div class="player-avatar small"><img class="avatar-img" src="./img/fotos_pro_players/broxah_ia.webp" alt="Broxah" loading="lazy" onerror="this.outerHTML='<span class=avatar-text>'+'BX'+'</span>'"></div>
+                        <div>
+                            <h3>Broxah</h3>
+                            <p class="player-real-name">Mads "Broxah" Brock-Pedersen</p>
+                        </div>
+                        <div class="player-score small"><span class="score-number">26</span></div>
+                    </div>
+                    <div class="player-tags">
+                        <span class="tag tag-region">🇩🇰 DK</span>
+                        <span class="tag tag-lcs">LCS</span>
+                        <span class="tag tag-retired">Creador</span>
+                    </div>
+                    <p class="compact-info"><strong>Fnatic · Team Liquid</strong> · 2014–2020<br>Worlds 2018 (sub) · EU LCS 2018 Summer 🏆<br>Worlds 2018: FB% 23.5% · Xin Zhao 5 mapas, 100% WR · Pool: Lee Sin, Xin Zhao, Olaf</p>
+                    <p class="compact-note">Pico europeo con tempo agresivo en meta de 2018. KDA 6.2, KP 72.1% en el torneo.</p>
+                </div>
+
+                <!-- Spica -->
+                <div class="player-card-compact tier-c-card" data-score="19">
+                    <div class="compact-top">
+                        <div class="player-avatar small"><img class="avatar-img" src="./img/fotos_pro_players/spica_ia.webp" alt="Spica" loading="lazy" onerror="this.outerHTML='<span class=avatar-text>'+'SP'+'</span>'"></div>
+                        <div>
+                            <h3>Spica</h3>
+                            <p class="player-real-name">Mingyi "Spica" Lu</p>
+                        </div>
+                        <div class="player-score small"><span class="score-number">19</span></div>
+                    </div>
+                    <div class="player-tags">
+                        <span class="tag tag-region">🇺🇸 NA</span>
+                        <span class="tag tag-lcs">LCS</span>
+                    </div>
+                    <p class="compact-info"><strong>TSM</strong> · 2019–2022<br>LCS 2020 Summer 🏆<br>Worlds 2020: 324.5 DPM, 19.9% Dmg% · Pool: Nidalee, Graves, Lillia</p>
+                    <p class="compact-note">MVP LCS 2021 Summer. Pool alineado con meta farm-carry de 2020. Innovador: jungle Shen.</p>
+                </div>
+
+                <!-- Closer -->
+                <div class="player-card-compact tier-c-card" data-score="16">
+                    <div class="compact-top">
+                        <div class="player-avatar small"><img class="avatar-img" src="./img/fotos_pro_players/closer_ia.webp" alt="Closer" loading="lazy" onerror="this.outerHTML='<span class=avatar-text>'+'CL'+'</span>'"></div>
+                        <div>
+                            <h3>Closer</h3>
+                            <p class="player-real-name">Can "Closer" Çelik</p>
+                        </div>
+                        <div class="player-score small"><span class="score-number">16</span></div>
+                    </div>
+                    <div class="player-tags">
+                        <span class="tag tag-region">🇹🇷 TR</span>
+                        <span class="tag tag-lcs">LCS</span>
+                    </div>
+                    <p class="compact-info"><strong>100 Thieves · GGS</strong> · 2020–2023<br>LCS 2021 🏆<br>Worlds 2021 pool: Lee Sin, Viego, Jarvan IV, Trundle</p>
+                    <p class="compact-note">Playmaker agresivo, KP ~70.9% global. Enfrentó rivales de élite con meta de skirmish explosivo.</p>
+                </div>
+
+                <!-- Tarzan -->
+                <div class="player-card-compact tier-c-card" data-score="15">
+                    <div class="compact-top">
+                        <div class="player-avatar small"><img class="avatar-img" src="./img/fotos_pro_players/tarzan_ia.webp" alt="Tarzan" loading="lazy" onerror="this.outerHTML='<span class=avatar-text>'+'TZ'+'</span>'"></div>
+                        <div>
+                            <h3>Tarzan</h3>
+                            <p class="player-real-name">Lee "Tarzan" Seung-yong</p>
+                        </div>
+                        <div class="player-score small"><span class="score-number">15</span></div>
+                    </div>
+                    <div class="player-tags">
+                        <span class="tag tag-region">🇰🇷 KR</span>
+                        <span class="tag tag-no-lcs">Sin LCS</span>
+                    </div>
+                    <p class="compact-info"><strong>Griffin · LNG · Anyone's Legend</strong> · 2018–2026<br>MSI 2025 (3º) · Worlds 2021: 71.4% WR, 5.9 KDA, 71.6% KP, 1.7 VSPM, 61.9% FB%<br>Worlds 2025: 62.5% WR, 70.2% KP, 6.8 CSPM</p>
+                    <p class="compact-note">Jungla de lectura y control, reputación fuerte en LCK/LPL. Habilita side lanes sin perder eficiencia — impacto alto aun en draft caótico.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Comparative Table -->
+<section class="section table-section" id="tabla">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">03</span>
+            <h2>Tabla Comparativa</h2>
+        </div>
+        <div class="table-wrapper glass">
+            <table class="data-table" id="data-table">
+                <thead>
+                    <tr>
+                        <th data-sort="name">Jugador <span class="sort-icon">⇅</span></th>
+                        <th data-sort="team">Equipos</th>
+                        <th data-sort="years">Años</th>
+                        <th data-sort="titles">Títulos Principales</th>
+                        <th data-sort="awards">Premios</th>
+                        <th data-sort="score" class="sorted-desc">Score <span class="sort-icon">⇅</span></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-tier="S">
+                        <td><strong>Canyon</strong><br><small>🇰🇷 Sin LCS</small></td>
+                        <td>Gen.G · DWG KIA</td>
+                        <td>2018–2026</td>
+                        <td>Worlds 2020 🏆 · MSI 2024 🏆 · MSI 2025 🏆 · 5x LCK</td>
+                        <td>Finals MVP Worlds 2020 · MVP LCK Spring 2021</td>
+                        <td class="score-cell"><span class="tier-badge tier-s-badge">80</span></td>
+                    </tr>
+                    <tr data-tier="S">
+                        <td><strong>Oner</strong><br><small>🇰🇷 Sin LCS</small></td>
+                        <td>T1</td>
+                        <td>2020–2026</td>
+                        <td>Worlds 2023 🏆 · Worlds 2024 🏆 · Worlds 2025 🏆</td>
+                        <td>LCK Finals MVP · "Jungler of the Year" x4</td>
+                        <td class="score-cell"><span class="tier-badge tier-s-badge">80</span></td>
+                    </tr>
+                    <tr data-tier="A">
+                        <td><strong>Peanut</strong><br><small>🇰🇷 Sin LCS · Retirado</small></td>
+                        <td>SKT/T1 · Gen.G · HLE</td>
+                        <td>2015–2025</td>
+                        <td>MSI 2017 🏆 · 7x LCK · First Stand 2025 🏆</td>
+                        <td>LCK Season MVP · Finals MVP x2</td>
+                        <td class="score-cell"><span class="tier-badge tier-a-badge">66</span></td>
+                    </tr>
+                    <tr data-tier="A">
+                        <td><strong>Kanavi</strong><br><small>🇰🇷 Sin LCS</small></td>
+                        <td>HLE · JDG · TES</td>
+                        <td>2019–2026</td>
+                        <td>MSI 2023 🏆 · 5x LPL</td>
+                        <td>"Player of the Year" 2023</td>
+                        <td class="score-cell"><span class="tier-badge tier-a-badge">59</span></td>
+                    </tr>
+                    <tr data-tier="B">
+                        <td><strong>Jankos</strong><br><small>🇵🇱 Sin LCS</small></td>
+                        <td>G2 Esports</td>
+                        <td>2014–2023</td>
+                        <td>MSI 2019 🏆 · Worlds 2019 (sub) · 5x LEC</td>
+                        <td>—</td>
+                        <td class="score-cell"><span class="tier-badge tier-b-badge">49</span></td>
+                    </tr>
+                    <tr data-tier="B">
+                        <td><strong>Xun</strong><br><small>🇨🇳 Sin LCS</small></td>
+                        <td>Bilibili Gaming</td>
+                        <td>2020–2026</td>
+                        <td>First Stand 2026 🏆 · LPL Split 1 2026 🏆</td>
+                        <td>"Jungler of the Year" 2024 LPL</td>
+                        <td class="score-cell"><span class="tier-badge tier-b-badge">46</span></td>
+                    </tr>
+                    <tr data-tier="B">
+                        <td><strong>Tian</strong><br><small>🇨🇳 Sin LCS</small></td>
+                        <td>FPX · TES</td>
+                        <td>2017–2026</td>
+                        <td>Worlds 2019 🏆 · LPL Summer 2019 🏆</td>
+                        <td>Finals MVP Worlds 2019 · MVP LPL</td>
+                        <td class="score-cell"><span class="tier-badge tier-b-badge">44</span></td>
+                    </tr>
+                    <tr data-tier="B">
+                        <td><strong>Blaber</strong><br><small>🇺🇸 LCS</small></td>
+                        <td>Cloud9</td>
+                        <td>2018–2026</td>
+                        <td>4x LCS 🏆 · Top 4 Worlds 2018</td>
+                        <td>MVP LCS x2 · All-Pro</td>
+                        <td class="score-cell"><span class="tier-badge tier-b-badge">44</span></td>
+                    </tr>
+                    <tr data-tier="B">
+                        <td><strong>Wei</strong><br><small>🇨🇳 Sin LCS</small></td>
+                        <td>iG · RNG</td>
+                        <td>2020–2026</td>
+                        <td>MSI 2021 🏆 · MSI 2022 🏆 · 2x LPL</td>
+                        <td>Finals MVP MSI 2022</td>
+                        <td class="score-cell"><span class="tier-badge tier-b-badge">43</span></td>
+                    </tr>
+                    <tr data-tier="B">
+                        <td><strong>Xmithie</strong><br><small>🇺🇸 LCS · Retirado</small></td>
+                        <td>TL · CLG · IMT</td>
+                        <td>2012–2020</td>
+                        <td>6x LCS 🏆 · MSI 2019 (sub)</td>
+                        <td>Finals MVP LCS 2018 Summer</td>
+                        <td class="score-cell"><span class="tier-badge tier-b-badge">42</span></td>
+                    </tr>
+                    <tr data-tier="B">
+                        <td><strong>Jiejie</strong><br><small>🇨🇳 Sin LCS</small></td>
+                        <td>EDG · Weibo</td>
+                        <td>2019–2026</td>
+                        <td>Worlds 2021 🏆 · LPL Summer 2021 🏆</td>
+                        <td>All-Pro LPL</td>
+                        <td class="score-cell"><span class="tier-badge tier-b-badge">37</span></td>
+                    </tr>
+                    <tr data-tier="B">
+                        <td><strong>Inspired</strong><br><small>🇵🇱 LCS</small></td>
+                        <td>Rogue · EG · LYON</td>
+                        <td>2019–2026</td>
+                        <td>LCS Spring 2022 🏆</td>
+                        <td>MVP LEC 2021 · MVP LCS 2022</td>
+                        <td class="score-cell"><span class="tier-badge tier-b-badge">32</span></td>
+                    </tr>
+                    <tr data-tier="B">
+                        <td><strong>Svenskeren</strong><br><small>🇩🇰 LCS · Retirado</small></td>
+                        <td>TSM · C9 · EG</td>
+                        <td>2013–2023</td>
+                        <td>3x LCS 🏆 · Worlds 2018 (semi)</td>
+                        <td>MVP LCS Summer 2019</td>
+                        <td class="score-cell"><span class="tier-badge tier-b-badge">32</span></td>
+                    </tr>
+                    <tr data-tier="B">
+                        <td><strong>Pyosik</strong><br><small>🇰🇷 LCS</small></td>
+                        <td>DRX · TL · DN SOOPers</td>
+                        <td>2020–2026</td>
+                        <td>Worlds 2022 🏆</td>
+                        <td>Primer pentakill de jungla en LCS</td>
+                        <td class="score-cell"><span class="tier-badge tier-b-badge">30</span></td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td><strong>Broxah</strong><br><small>🇩🇰 LCS · Creador</small></td>
+                        <td>Fnatic · TL</td>
+                        <td>2014–2020</td>
+                        <td>Worlds 2018 (sub) · EU LCS Summer 2018 🏆</td>
+                        <td>All-Pro 1st team x2</td>
+                        <td class="score-cell"><span class="tier-badge tier-c-badge">26</span></td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td><strong>Spica</strong><br><small>🇺🇸 LCS</small></td>
+                        <td>TSM</td>
+                        <td>2019–2022</td>
+                        <td>LCS 2020 Summer 🏆</td>
+                        <td>MVP LCS 2021 Summer</td>
+                        <td class="score-cell"><span class="tier-badge tier-c-badge">19</span></td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td><strong>Closer</strong><br><small>🇹🇷 LCS</small></td>
+                        <td>100T · GGS</td>
+                        <td>2020–2023</td>
+                        <td>LCS 2021 🏆</td>
+                        <td>—</td>
+                        <td class="score-cell"><span class="tier-badge tier-c-badge">16</span></td>
+                    </tr>
+                    <tr data-tier="C">
+                        <td><strong>Tarzan</strong><br><small>🇰🇷 Sin LCS</small></td>
+                        <td>Griffin · LNG · AL</td>
+                        <td>2018–2026</td>
+                        <td>—</td>
+                        <td>KDA Leader LCK 2019</td>
+                        <td class="score-cell"><span class="tier-badge tier-c-badge">15</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- Chart Section — Score Ranking (ECharts) -->
+<section class="section chart-section chart-section-new" id="chart">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">04</span>
+            <h2>Score Ranking</h2>
+        </div>
+        <p class="chart-subtitle">Ranking de los 18 junglas ordenado por score total. Cada barra refleja peso internacional, doméstico, premios, stats y reputación. Hover para ver el desglose.</p>
+        <div class="chart-glass chart-glass-gold">
+            <div id="echarts-score" class="echart-box"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Chart Section — Score Breakdown Radar + Distribución (Chart.js) -->
+<section class="section chart-section-new" id="breakdown">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">04b</span>
+            <h2>Anatomía del Score</h2>
+        </div>
+        <div class="charts-duo">
+            <div class="chart-glass">
+                <div class="chart-title"><span class="ct-icon">🔮</span> Radar de Perfil Competitivo</div>
+                <p class="chart-subtitle">Compará el ADN competitivo de cada jungla. Seleccioná hasta 4 jugadores para superponer sus perfiles.</p>
+                <div class="radar-controls" id="radar-controls"></div>
+                <div class="cjs-canvas-wrap" style="max-width:500px">
+                    <canvas id="cjs-radar"></canvas>
+                </div>
+            </div>
+            <div>
+                <div class="chart-glass" style="margin-bottom:24px">
+                    <div class="chart-title"><span class="ct-icon">⬡</span> Distribución por Tier</div>
+                    <p class="chart-subtitle">Densidad de cada clasificación en el pool de 18 junglas élite.</p>
+                    <div class="cjs-canvas-wrap" style="max-width:280px">
+                        <canvas id="cjs-tier-donut"></canvas>
+                    </div>
+                </div>
+                <div class="chart-glass">
+                    <div class="chart-title"><span class="ct-icon">⚔️</span> LCS vs Sin LCS</div>
+                    <p class="chart-subtitle">Score promedio según si el jugador pasó por la liga norteamericana.</p>
+                    <div class="cjs-canvas-wrap" style="max-width:320px">
+                        <canvas id="cjs-lcs-compare"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Titles Timeline (ECharts scatter) -->
+<section class="section chart-section-new" id="titles-timeline">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">04c</span>
+            <h2>Mapa de Títulos Internacionales</h2>
+        </div>
+        <p class="chart-subtitle">Cada punto es un título internacional (Worlds, MSI, First Stand) ganado por un jungla del tier list. Tamaño = importancia del torneo. Hover para detalles.</p>
+        <div class="chart-glass">
+            <div id="echarts-titles" class="echart-box-sm"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Timeline Section -->
+<section class="section timeline-section" id="timeline">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">05</span>
+            <h2>Timeline de Hitos</h2>
+        </div>
+        <div class="timeline" id="timeline-content">
+            <div class="timeline-item" data-year="2017">
+                <div class="timeline-marker"></div>
+                <div class="timeline-card glass">
+                    <span class="timeline-year">2017</span>
+                    <ul>
+                        <li>🏆 MSI 2017 campeón — <strong>Peanut</strong> con SKT</li>
+                        <li>🥈 Worlds 2017 runner-up — SKT</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item" data-year="2018">
+                <div class="timeline-marker"></div>
+                <div class="timeline-card glass">
+                    <span class="timeline-year">2018</span>
+                    <ul>
+                        <li>🥈 Worlds 2018 runner-up — <strong>Broxah</strong> con Fnatic</li>
+                        <li>🏅 Top 4 Worlds 2018 — <strong>Blaber</strong> con C9</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item" data-year="2019">
+                <div class="timeline-marker"></div>
+                <div class="timeline-card glass">
+                    <span class="timeline-year">2019</span>
+                    <ul>
+                        <li>🏆 Worlds 2019 campeón + Finals MVP — <strong>Tian</strong> con FPX</li>
+                        <li>🥈 Worlds 2019 runner-up — G2/<strong>Jankos</strong></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item" data-year="2020">
+                <div class="timeline-marker"></div>
+                <div class="timeline-card glass">
+                    <span class="timeline-year">2020</span>
+                    <ul>
+                        <li>🏆 Worlds 2020 campeón + Finals MVP — <strong>Canyon</strong> con DAMWON</li>
+                        <li>🏆 LCS 2020 Spring campeón — <strong>Blaber</strong>/C9</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item" data-year="2021">
+                <div class="timeline-marker"></div>
+                <div class="timeline-card glass">
+                    <span class="timeline-year">2021</span>
+                    <ul>
+                        <li>🏆 Worlds 2021 campeón — <strong>Jiejie</strong> con EDG</li>
+                        <li>🏆 MSI 2021 campeón — <strong>Wei</strong> con RNG</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item" data-year="2022">
+                <div class="timeline-marker"></div>
+                <div class="timeline-card glass">
+                    <span class="timeline-year">2022</span>
+                    <ul>
+                        <li>🏆 MSI 2022 campeón + Finals MVP — <strong>Wei</strong> con RNG</li>
+                        <li>🏆 Worlds 2022 campeón — <strong>Pyosik</strong> con DRX</li>
+                        <li>🏆 LCK Spring 2022 campeón — <strong>Oner</strong> con T1</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item" data-year="2023">
+                <div class="timeline-marker"></div>
+                <div class="timeline-card glass">
+                    <span class="timeline-year">2023</span>
+                    <ul>
+                        <li>🏆 MSI 2023 campeón — <strong>Kanavi</strong> con JDG</li>
+                        <li>🏆 Worlds 2023 campeón — T1/<strong>Oner</strong></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item" data-year="2024">
+                <div class="timeline-marker"></div>
+                <div class="timeline-card glass">
+                    <span class="timeline-year">2024</span>
+                    <ul>
+                        <li>🏆 MSI 2024 campeón — Gen.G/<strong>Canyon</strong></li>
+                        <li>🏆 Worlds 2024 campeón — T1/<strong>Oner</strong></li>
+                        <li>🏅 <strong>Xun</strong> llega a finales profundas (MSI/Worlds)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item" data-year="2025">
+                <div class="timeline-marker"></div>
+                <div class="timeline-card glass">
+                    <span class="timeline-year">2025</span>
+                    <ul>
+                        <li>🏆 Worlds 2025 campeón — T1/<strong>Oner</strong></li>
+                        <li>🏆 MSI 2025 campeón — Gen.G/<strong>Canyon</strong></li>
+                        <li>🏆 First Stand 2025 campeón — <strong>Peanut</strong></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item" data-year="2026">
+                <div class="timeline-marker"></div>
+                <div class="timeline-card glass">
+                    <span class="timeline-year">2026</span>
+                    <ul>
+                        <li>🏆 First Stand 2026 campeón — BLG/<strong>Xun</strong></li>
+                        <li>📢 La LCS vuelve en 2026 (LoL Esports)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Methodology Section -->
+<section class="section methodology-section" id="metodologia">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">06</span>
+            <h2>Metodología de Ponderación</h2>
+        </div>
+        <div class="methodology-grid">
+            <div class="method-card glass">
+                <div class="method-header">
+                    <div class="method-icon">🌐</div>
+                    <h3>Logro Internacional</h3>
+                    <span class="method-max">máx. 45 pts</span>
+                </div>
+                <ul>
+                    <li>Worlds campeón = <strong>15</strong> c/u</li>
+                    <li>Worlds subcampeón = <strong>7</strong></li>
+                    <li>Worlds semifinal = <strong>4</strong></li>
+                    <li>MSI campeón = <strong>7</strong></li>
+                    <li>MSI subcampeón = <strong>4</strong></li>
+                    <li>First Stand campeón = <strong>5</strong></li>
+                    <li>First Stand subcampeón = <strong>2</strong></li>
+                </ul>
+                <div class="method-bar"><div class="method-bar-fill" style="width:45%"></div></div>
+            </div>
+            <div class="method-card glass">
+                <div class="method-header">
+                    <div class="method-icon">🏠</div>
+                    <h3>Títulos Domésticos</h3>
+                    <span class="method-max">máx. 20 pts</span>
+                </div>
+                <ul>
+                    <li><strong>4 pts</strong> por título de liga mayor (LCK/LPL/LEC/LCS)</li>
+                    <li>Tope: 5 títulos contados</li>
+                </ul>
+                <div class="method-bar"><div class="method-bar-fill" style="width:20%"></div></div>
+            </div>
+            <div class="method-card glass">
+                <div class="method-header">
+                    <div class="method-icon">🏅</div>
+                    <h3>Premios Individuales</h3>
+                    <span class="method-max">máx. 15 pts</span>
+                </div>
+                <ul>
+                    <li>Worlds Finals MVP = <strong>6</strong></li>
+                    <li>MSI Finals MVP = <strong>4</strong></li>
+                    <li>MVP de split = <strong>3</strong></li>
+                    <li>"Role of the Year" = <strong>2</strong></li>
+                    <li>All-Pro = <strong>1</strong></li>
+                </ul>
+                <div class="method-bar"><div class="method-bar-fill" style="width:15%"></div></div>
+            </div>
+            <div class="method-card glass">
+                <div class="method-header">
+                    <div class="method-icon">📈</div>
+                    <h3>Stats Competitivas</h3>
+                    <span class="method-max">máx. 10 pts</span>
+                </div>
+                <ul>
+                    <li>KDA / KP / pool en torneos emblemáticos</li>
+                    <li>Se priorizan Worlds/MSI/First Stand y playoffs</li>
+                </ul>
+                <div class="method-bar"><div class="method-bar-fill" style="width:10%"></div></div>
+            </div>
+            <div class="method-card glass">
+                <div class="method-header">
+                    <div class="method-icon">💬</div>
+                    <h3>Reputación</h3>
+                    <span class="method-max">máx. 10 pts</span>
+                </div>
+                <ul>
+                    <li>Frases y caracterizaciones de casters, analistas y prensa</li>
+                    <li>Se evita depender solo de opinión comunitaria</li>
+                </ul>
+                <div class="method-bar"><div class="method-bar-fill" style="width:10%"></div></div>
+            </div>
+        </div>
+        <p class="method-note glass">💡 En caso de tensión entre <strong>hardware</strong> y <strong>reputación</strong>, el score favorece hardware, pero permite que "picos" (ej. campeón de Worlds) eviten castigos excesivos por falta de títulos domésticos.</p>
+    </div>
+</section>
+
+<!-- Meta de Jungla por Worlds -->
+<section class="section" id="worlds-meta">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">07</span>
+            <h2>Meta de Jungla por Worlds</h2>
+        </div>
+        <div class="meta-grid">
+            <div class="meta-card glass">
+                <div class="meta-year-title gradient-text">2017</div>
+                <span class="meta-type engage">Engage / Tanque</span>
+                <ul class="meta-picks">
+                    <li>🛡️ <strong>Sejuani</strong> (44 picks) — gank setup y control de peleas</li>
+                    <li>⚔️ <strong>Jarvan IV</strong> (37) — engage de área</li>
+                    <li>🍺 <strong>Gragas</strong> (36) — peel y displace</li>
+                </ul>
+            </div>
+            <div class="meta-card glass">
+                <div class="meta-year-title gradient-text">2018</div>
+                <span class="meta-type skirmish">Early Pressure / Skirmish</span>
+                <ul class="meta-picks">
+                    <li>🗡️ <strong>Xin Zhao</strong> (25) — duelos tempranos</li>
+                    <li>🌙 <strong>Nocturne</strong> (22) — globals y dives</li>
+                    <li>🍺 <strong>Gragas</strong> (21) — flexibilidad</li>
+                </ul>
+            </div>
+            <div class="meta-card glass">
+                <div class="meta-year-title gradient-text">2019</div>
+                <span class="meta-type skirmish">Playmaking / Gank</span>
+                <ul class="meta-picks">
+                    <li>🥊 <strong>Lee Sin</strong> (42) — mecánica en ventanas cortas</li>
+                    <li>🍺 <strong>Gragas</strong> (34) — setup de pelea</li>
+                    <li>🕷️ <strong>Elise</strong> (23) — presión de tower dive</li>
+                </ul>
+            </div>
+            <div class="meta-card glass">
+                <div class="meta-year-title gradient-text">2020</div>
+                <span class="meta-type carry">Farm-Carry</span>
+                <ul class="meta-picks">
+                    <li>🔫 <strong>Graves</strong> (52) — carry de resources/scaling</li>
+                    <li>🌸 <strong>Lillia</strong> (25) — tempo de campamentos</li>
+                    <li>🗡️ <strong>Nidalee</strong> (20) — high CS farming</li>
+                </ul>
+            </div>
+            <div class="meta-card glass">
+                <div class="meta-year-title gradient-text">2021</div>
+                <span class="meta-type skirmish">Skirmish Explosivo</span>
+                <ul class="meta-picks">
+                    <li>🥊 <strong>Lee Sin</strong> (37) — pelea en ríos y entradas</li>
+                    <li>🗡️ <strong>Xin Zhao</strong> (30) — control de zona</li>
+                    <li>⚔️ <strong>Jarvan IV</strong> (28) — engage de área</li>
+                    <li>👻 <strong>Viego</strong> (18) · 🗡️ <strong>Talon</strong> (12) · ⚡ <strong>Qiyana</strong> (10)</li>
+                </ul>
+            </div>
+            <div class="meta-card glass">
+                <div class="meta-year-title gradient-text">2022</div>
+                <span class="meta-type utility">Peel/Anti-dive + Reset</span>
+                <ul class="meta-picks">
+                    <li>👻 <strong>Viego</strong> (30) — reset y carry</li>
+                    <li>🔫 <strong>Graves</strong> (25) — farming</li>
+                    <li>🛡️ <strong>Sejuani</strong> (19) — engage</li>
+                    <li>🔨 <strong>Poppy</strong> (13) · 💪 <strong>Vi</strong> (12) — anti-dive</li>
+                </ul>
+            </div>
+            <div class="meta-card glass">
+                <div class="meta-year-title gradient-text">2023</div>
+                <span class="meta-type utility">Engage / Utility</span>
+                <ul class="meta-picks">
+                    <li>⚔️ <strong>Jarvan IV</strong> (30) — iniciación confiable</li>
+                    <li>💪 <strong>Vi</strong> (24) — pick y lockdown</li>
+                    <li>🌳 <strong>Maokai</strong> (22) — control y visión</li>
+                    <li>🛡️ <strong>Sejuani</strong> (17) · 🐴 <strong>Rell</strong> (16)</li>
+                </ul>
+            </div>
+            <div class="meta-card glass">
+                <div class="meta-year-title gradient-text">2024</div>
+                <span class="meta-type engage">Iniciación + Pick Tools</span>
+                <ul class="meta-picks">
+                    <li>🦂 <strong>Skarner</strong> (33) — rework con alta presencia</li>
+                    <li>🛡️ <strong>Sejuani</strong> (25) — pilar de engage</li>
+                    <li>💪 <strong>Vi</strong> (25) — lockdown</li>
+                    <li>🌙 <strong>Nocturne</strong> (21) — presión global</li>
+                </ul>
+            </div>
+            <div class="meta-card glass">
+                <div class="meta-year-title gradient-text">2025</div>
+                <span class="meta-type skirmish">Fearless Draft / Diversidad</span>
+                <ul class="meta-picks">
+                    <li>🗡️ <strong>Xin Zhao</strong> (28) — luchador versátil</li>
+                    <li>⚔️ <strong>Jarvan IV</strong> (21) · 🐒 <strong>Wukong</strong> (21)</li>
+                    <li>🧊 <strong>Trundle</strong> (17) · 💪 <strong>Vi</strong> (16)</li>
+                    <li>⚡ <strong>Qiyana</strong> (15) · 🛡️ <strong>Pantheon</strong> (11)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Head-to-Head Internacional -->
+<section class="section" id="h2h">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">08</span>
+            <h2>Head-to-Head Internacional</h2>
+        </div>
+        <div class="h2h-grid">
+            <div class="h2h-card glass">
+                <div class="h2h-vs">
+                    <span class="h2h-player winner">Canyon</span>
+                    <span class="h2h-icon">VS</span>
+                    <span class="h2h-player">Oner</span>
+                </div>
+                <p class="h2h-result"><strong>DWG KIA 3–2 T1</strong></p>
+                <p class="h2h-context">Worlds 2021 · Semifinales · El head-to-head más directo entre ambos en un Bo5 de eliminación</p>
+            </div>
+            <div class="h2h-card glass">
+                <div class="h2h-vs">
+                    <span class="h2h-player">Canyon</span>
+                    <span class="h2h-icon">VS</span>
+                    <span class="h2h-player winner">Jiejie</span>
+                </div>
+                <p class="h2h-result"><strong>EDG 3–2 DWG KIA</strong></p>
+                <p class="h2h-context">Worlds 2021 · Final · Jiejie "overpower Canyon" y conduce a EDG al título</p>
+            </div>
+            <div class="h2h-card glass">
+                <div class="h2h-vs">
+                    <span class="h2h-player">Kanavi</span>
+                    <span class="h2h-icon">VS</span>
+                    <span class="h2h-player winner">Oner</span>
+                </div>
+                <p class="h2h-result"><strong>T1 3–1 JDG</strong> (Worlds 2022 semis) · <strong>T1 3–1 JDG</strong> (Worlds 2023 semis)</p>
+                <p class="h2h-context">Oner domina el head-to-head en Worlds: 2–0 en series Bo5 contra Kanavi en rondas altas</p>
+            </div>
+            <div class="h2h-card glass">
+                <div class="h2h-vs">
+                    <span class="h2h-player">Jankos</span>
+                    <span class="h2h-icon">VS</span>
+                    <span class="h2h-player winner">Tian</span>
+                </div>
+                <p class="h2h-result"><strong>FPX 3–0 G2</strong></p>
+                <p class="h2h-context">Worlds 2019 · Final · Tian es coronado Finals MVP; Jankos cae en la mayor final de su carrera</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Eficiencia Oportunidad / Resultado -->
+<section class="section" id="eficiencia">
+    <div class="container">
+        <div class="section-header">
+            <span class="section-tag">09</span>
+            <h2>Eficiencia: Oportunidad vs Resultado</h2>
+        </div>
+        <p class="method-note glass" style="margin-bottom:24px">💡 ¿Quién rindió más <strong>por encima de las expectativas</strong> de su equipo? Mide conversión de oportunidades internacionales en títulos o runs profundas.</p>
+        <div class="eff-grid">
+            <div class="eff-card glass">
+                <span class="eff-rank">#1</span>
+                <div class="eff-name gradient-text">Oner</div>
+                <p class="eff-reason"><strong>Three-peat en Worlds (2023–2025)</strong> — por definición, conversión extrema de oportunidades al título. Acompañado de Jungle of the Year repetido. La máxima eficiencia posible en el torneo más difícil.</p>
+            </div>
+            <div class="eff-card glass">
+                <span class="eff-rank">#2</span>
+                <div class="eff-name gradient-text">Pyosik</div>
+                <p class="eff-reason"><strong>Worlds 2022 campeón</strong> con DRX (3–2 vs T1). Convertir una sola oportunidad en un título de Worlds es el máximo rendimiento "por encima de expectativas". Campaña completa Play-In → Final.</p>
+            </div>
+            <div class="eff-card glass">
+                <span class="eff-rank">#3</span>
+                <div class="eff-name gradient-text">Jiejie</div>
+                <p class="eff-reason">Diferencial en la final de <strong>Worlds 2021 contra Canyon</strong>, tratado como el mejor del mundo ese año. Eficiencia de pico: ganar el match más caro del año contra el favorito indiscutido.</p>
+            </div>
+            <div class="eff-card glass">
+                <span class="eff-rank">#4</span>
+                <div class="eff-name gradient-text">Xun</div>
+                <p class="eff-reason"><strong>MSI 2023 subcampeón + Worlds 2023 top 4</strong> en horizonte corto. Dos resultados de élite en pocas oportunidades: patrón claro de "deep runs" con alta ratio de conversión competitiva.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <p class="footer-brand">JGL<span class="accent">TIER</span> — Análisis competitivo de junglas</p>
+            <p class="footer-sources">Fuentes: LoL Esports, Games of Legends (gol.gg), Leaguepedia, Liquipedia, Dot Esports, Inven Global, Sheep Esports, Red Bull Esports, ESPN, TyC Sports.</p>
+            <p class="footer-date">Informe generado: 29 de marzo de 2026</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+(function(){const c=document.getElementById('particles-canvas'),x=c.getContext('2d');let w,h,ps=[];function rs(){w=c.width=innerWidth;h=c.height=innerHeight}addEventListener('resize',rs);rs();class P{constructor(){this.r()}r(){this.x=Math.random()*w;this.y=Math.random()*h;this.s=Math.random()*1.8+.5;this.sx=(Math.random()-.5)*.3;this.sy=(Math.random()-.5)*.3;this.o=Math.random()*.3+.05}u(){this.x+=this.sx;this.y+=this.sy;if(this.x<0||this.x>w||this.y<0||this.y>h)this.r()}d(){x.beginPath();x.arc(this.x,this.y,this.s,0,Math.PI*2);x.fillStyle=`rgba(123,94,247,${this.o})`;x.fill()}}const n=Math.min(80,Math.floor(w*h/15000));for(let i=0;i<n;i++)ps.push(new P);(function a(){x.clearRect(0,0,w,h);ps.forEach(p=>{p.u();p.d()});requestAnimationFrame(a)})()})();
+(function(){const n=document.getElementById('nav'),h=document.getElementById('hero');new IntersectionObserver(([e])=>n.classList.toggle('visible',!e.isIntersecting),{threshold:.1}).observe(h)})();
+(function(){const s=document.querySelectorAll('.section,.tier-block,.player-card,.player-card-compact,.timeline-item,.method-card,.summary-card,.meta-card,.h2h-card,.eff-card,.chart-glass');s.forEach(e=>e.classList.add('reveal'));const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.05,rootMargin:'0px 0px -40px 0px'});s.forEach(e=>o.observe(e))})();
+// ==== CHART DATA ====
+const PLAYERS=[
+{n:'Canyon',s:80,t:'S',intl:30,dom:20,prem:12,stat:8,rep:10,lcs:false},
+{n:'Oner',s:80,t:'S',intl:38,dom:16,prem:12,stat:6,rep:8,lcs:false},
+{n:'Peanut',s:66,t:'A',intl:19,dom:20,prem:12,stat:7,rep:8,lcs:false},
+{n:'Kanavi',s:59,t:'A',intl:14,dom:20,prem:7,stat:8,rep:10,lcs:false},
+{n:'Jankos',s:49,t:'B',intl:14,dom:20,prem:4,stat:4,rep:7,lcs:false},
+{n:'Xun',s:46,t:'B',intl:12,dom:16,prem:5,stat:6,rep:7,lcs:false},
+{n:'Tian',s:44,t:'B',intl:15,dom:8,prem:10,stat:5,rep:6,lcs:false},
+{n:'Blaber',s:44,t:'B',intl:4,dom:16,prem:8,stat:8,rep:8,lcs:true},
+{n:'Wei',s:43,t:'B',intl:14,dom:12,prem:7,stat:5,rep:5,lcs:false},
+{n:'Xmithie',s:42,t:'B',intl:4,dom:20,prem:4,stat:7,rep:7,lcs:true},
+{n:'Jiejie',s:37,t:'B',intl:15,dom:8,prem:3,stat:5,rep:6,lcs:false},
+{n:'Inspired',s:32,t:'B',intl:4,dom:8,prem:8,stat:6,rep:6,lcs:true},
+{n:'Svenskeren',s:32,t:'B',intl:4,dom:12,prem:5,stat:5,rep:6,lcs:true},
+{n:'Pyosik',s:30,t:'B',intl:15,dom:4,prem:3,stat:4,rep:4,lcs:true},
+{n:'Broxah',s:26,t:'C',intl:7,dom:8,prem:3,stat:4,rep:4,lcs:true},
+{n:'Spica',s:19,t:'C',intl:0,dom:4,prem:5,stat:5,rep:5,lcs:true},
+{n:'Closer',s:16,t:'C',intl:0,dom:4,prem:1,stat:6,rep:5,lcs:true},
+{n:'Tarzan',s:15,t:'C',intl:3,dom:0,prem:2,stat:6,rep:4,lcs:false}
+];
+const TC={S:'#f59e0b',A:'#a78bfa',B:'#38bdf8',C:'#6ee7b7'};
+const CAT_COLORS=['#c7953c','#8b6cdb','#2ea4d8','#3ec9a0','#e06040'];
+
+// ==== 1. ECharts — Score Ranking ====
+(function(){
+const el=document.getElementById('echarts-score');if(!el)return;
+const ch=echarts.init(el,null,{renderer:'canvas'});
+const sorted=[...PLAYERS].reverse();
+const names=sorted.map(p=>p.n);
+const cats=['Internacional','Doméstico','Premios','Stats','Reputación'];
+const keys=['intl','dom','prem','stat','rep'];
+ch.setOption({
+tooltip:{trigger:'axis',axisPointer:{type:'shadow'},backgroundColor:'rgba(10,10,15,0.92)',borderColor:'rgba(123,94,247,0.3)',textStyle:{fontFamily:'Inter',color:'#eaeaf0',fontSize:12},
+formatter:function(ps){let h='<b style="color:'+TC[sorted[ps[0].dataIndex].t]+'">'+ps[0].name+'</b> — <b>'+sorted[ps[0].dataIndex].s+'</b> pts<br/>';ps.forEach(p=>{if(p.value>0)h+='<span style="color:'+p.color+'">●</span> '+p.seriesName+': <b>'+p.value+'</b><br/>'});return h}},
+grid:{left:90,right:24,top:16,bottom:24},
+xAxis:{type:'value',max:85,axisLine:{show:false},axisTick:{show:false},splitLine:{lineStyle:{color:'rgba(255,255,255,0.04)'}},axisLabel:{color:'#66667a',fontFamily:'Inter',fontSize:11}},
+yAxis:{type:'category',data:names,axisLine:{show:false},axisTick:{show:false},axisLabel:{color:'#eaeaf0',fontFamily:'Outfit',fontWeight:600,fontSize:12,formatter:function(v){return v}}},
+series:cats.map((c,i)=>({name:c,type:'bar',stack:'total',data:sorted.map(p=>p[keys[i]]),itemStyle:{color:CAT_COLORS[i],borderRadius:i===4?[2,2,2,2]:0},barWidth:18,emphasis:{itemStyle:{shadowBlur:12,shadowColor:'rgba(123,94,247,0.3)'}}})),
+animationDuration:1200,animationEasing:'cubicOut'
+});
+addEventListener('resize',()=>ch.resize());
+// Lazy init on scroll
+let inited=false;
+new IntersectionObserver(([e])=>{if(e.isIntersecting&&!inited){inited=true;ch.resize()}},{threshold:.2}).observe(el);
+})();
+
+// ==== 2. Chart.js — Radar ====
+(function(){
+const ctx=document.getElementById('cjs-radar');if(!ctx)return;
+const labels=['Internacional','Doméstico','Premios','Stats','Reputación'];
+const maxes=[45,20,15,10,10];
+const palette=['rgba(245,158,11,0.7)','rgba(167,139,250,0.7)','rgba(56,189,248,0.7)','rgba(110,231,183,0.7)'];
+const bgPalette=['rgba(245,158,11,0.12)','rgba(167,139,250,0.12)','rgba(56,189,248,0.12)','rgba(110,231,183,0.12)'];
+let selected=['Canyon','Oner','Peanut','Kanavi'];
+const chart=new Chart(ctx,{type:'radar',data:{labels:labels,datasets:[]},options:{
+responsive:true,maintainAspectRatio:true,
+scales:{r:{angleLines:{color:'rgba(255,255,255,0.06)'},grid:{color:'rgba(255,255,255,0.06)'},pointLabels:{color:'#9999aa',font:{family:'Inter',size:11,weight:600}},ticks:{display:false},suggestedMin:0,suggestedMax:100,beginAtZero:true}},
+plugins:{legend:{display:true,position:'bottom',labels:{color:'#9999aa',font:{family:'Inter',size:11},usePointStyle:true,pointStyle:'circle',padding:16}},
+tooltip:{backgroundColor:'rgba(10,10,15,0.92)',borderColor:'rgba(123,94,247,0.3)',titleFont:{family:'Outfit',weight:700},bodyFont:{family:'Inter'},titleColor:'#eaeaf0',bodyColor:'#9999aa',callbacks:{label:function(c){return c.dataset.label+': '+Math.round(c.raw)+'%'}}}},
+animation:{duration:800,easing:'easeOutQuart'}
+}});
+function updateRadar(){
+chart.data.datasets=selected.map((name,i)=>{
+const p=PLAYERS.find(x=>x.n===name);if(!p)return null;
+const vals=[p.intl/maxes[0]*100,p.dom/maxes[1]*100,p.prem/maxes[2]*100,p.stat/maxes[3]*100,p.rep/maxes[4]*100];
+return{label:name,data:vals,borderColor:palette[i%4],backgroundColor:bgPalette[i%4],borderWidth:2,pointBackgroundColor:palette[i%4],pointRadius:4,pointHoverRadius:6}
+}).filter(Boolean);
+chart.update();
+}
+// Build buttons
+const ctrl=document.getElementById('radar-controls');
+PLAYERS.forEach(p=>{
+const btn=document.createElement('button');btn.className='radar-btn'+(selected.includes(p.n)?' sel':'');btn.textContent=p.n;btn.style.borderColor=TC[p.t];
+btn.addEventListener('click',()=>{
+if(selected.includes(p.n)){selected=selected.filter(x=>x!==p.n);btn.classList.remove('sel')}
+else{if(selected.length>=4)return;selected.push(p.n);btn.classList.add('sel')}
+updateRadar()});
+ctrl.appendChild(btn)});
+updateRadar();
+})();
+
+// ==== 3. Chart.js — Doughnut ====
+(function(){
+const ctx=document.getElementById('cjs-tier-donut');if(!ctx)return;
+const counts={S:0,A:0,B:0,C:0};PLAYERS.forEach(p=>counts[p.t]++);
+new Chart(ctx,{type:'doughnut',data:{
+labels:['S — Generacional ('+counts.S+')','A — Élite ('+counts.A+')','B — Fuerte ('+counts.B+')','C — Muy Bueno ('+counts.C+')'],
+datasets:[{data:[counts.S,counts.A,counts.B,counts.C],backgroundColor:['rgba(245,158,11,0.7)','rgba(167,139,250,0.7)','rgba(56,189,248,0.7)','rgba(110,231,183,0.7)'],borderColor:['rgba(245,158,11,0.3)','rgba(167,139,250,0.3)','rgba(56,189,248,0.3)','rgba(110,231,183,0.3)'],borderWidth:2,hoverOffset:8}]},
+options:{responsive:true,cutout:'62%',plugins:{legend:{position:'bottom',labels:{color:'#9999aa',font:{family:'Inter',size:11},usePointStyle:true,pointStyle:'rectRounded',padding:12}},
+tooltip:{backgroundColor:'rgba(10,10,15,0.92)',borderColor:'rgba(123,94,247,0.3)',titleFont:{family:'Outfit',weight:700},bodyFont:{family:'Inter'},titleColor:'#eaeaf0',bodyColor:'#9999aa'}},
+animation:{animateRotate:true,duration:1000}}});
+})();
+
+// ==== 4. Chart.js — LCS vs Sin LCS ====
+(function(){
+const ctx=document.getElementById('cjs-lcs-compare');if(!ctx)return;
+const lcs=PLAYERS.filter(p=>p.lcs),noLcs=PLAYERS.filter(p=>!p.lcs);
+const avgLcs=Math.round(lcs.reduce((a,p)=>a+p.s,0)/lcs.length);
+const avgNo=Math.round(noLcs.reduce((a,p)=>a+p.s,0)/noLcs.length);
+new Chart(ctx,{type:'bar',data:{
+labels:['LCS ('+lcs.length+' jugadores)','Sin LCS ('+noLcs.length+' jugadores)'],
+datasets:[{label:'Score Promedio',data:[avgLcs,avgNo],backgroundColor:['rgba(94,234,212,0.5)','rgba(249,115,22,0.5)'],borderColor:['rgba(94,234,212,0.8)','rgba(249,115,22,0.8)'],borderWidth:2,borderRadius:8,barPercentage:0.6}]},
+options:{responsive:true,indexAxis:'y',
+scales:{x:{grid:{color:'rgba(255,255,255,0.04)'},ticks:{color:'#66667a',font:{family:'Inter'}},max:60},y:{grid:{display:false},ticks:{color:'#eaeaf0',font:{family:'Outfit',weight:600,size:12}}}},
+plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(10,10,15,0.92)',borderColor:'rgba(123,94,247,0.3)',titleFont:{family:'Outfit',weight:700},bodyFont:{family:'Inter'},titleColor:'#eaeaf0',bodyColor:'#9999aa'}},
+animation:{duration:800}}});
+})();
+
+// ==== 5. ECharts — Titles Timeline Scatter ====
+(function(){
+const el=document.getElementById('echarts-titles');if(!el)return;
+const ch=echarts.init(el,null,{renderer:'canvas'});
+const titles=[
+{y:2017,p:'Peanut',ev:'MSI 2017 🏆',sz:14},{y:2018,p:'Broxah',ev:'Worlds 2018 Sub',sz:10},
+{y:2019,p:'Tian',ev:'Worlds 2019 🏆 + FMVP',sz:20},{y:2019,p:'Jankos',ev:'MSI 2019 🏆',sz:14},
+{y:2020,p:'Canyon',ev:'Worlds 2020 🏆 + FMVP',sz:20},{y:2021,p:'Wei',ev:'MSI 2021 🏆',sz:14},
+{y:2021,p:'Jiejie',ev:'Worlds 2021 🏆',sz:20},{y:2022,p:'Wei',ev:'MSI 2022 🏆 + FMVP',sz:16},
+{y:2022,p:'Pyosik',ev:'Worlds 2022 🏆',sz:20},{y:2023,p:'Kanavi',ev:'MSI 2023 🏆',sz:14},
+{y:2023,p:'Oner',ev:'Worlds 2023 🏆',sz:20},{y:2024,p:'Canyon',ev:'MSI 2024 🏆',sz:14},
+{y:2024,p:'Oner',ev:'Worlds 2024 🏆',sz:20},{y:2025,p:'Canyon',ev:'MSI 2025 🏆',sz:14},
+{y:2025,p:'Oner',ev:'Worlds 2025 🏆',sz:20},{y:2025,p:'Peanut',ev:'First Stand 2025 🏆',sz:10},
+{y:2026,p:'Xun',ev:'First Stand 2026 🏆',sz:10}
+];
+const uniqueP=[...new Set(titles.map(t=>t.p))];
+ch.setOption({
+tooltip:{trigger:'item',backgroundColor:'rgba(10,10,15,0.92)',borderColor:'rgba(245,158,11,0.3)',textStyle:{fontFamily:'Inter',color:'#eaeaf0',fontSize:12},
+formatter:function(p){return'<b style="color:#f59e0b">'+p.data[3]+'</b><br/>'+p.data[2]+'<br/><span style="color:#66667a">'+p.data[0]+'</span>'}},
+grid:{left:100,right:30,top:20,bottom:36},
+xAxis:{type:'value',min:2016.5,max:2026.5,interval:1,axisLine:{lineStyle:{color:'rgba(255,255,255,0.08)'}},axisTick:{show:false},splitLine:{show:false},axisLabel:{color:'#9999aa',fontFamily:'Outfit',fontWeight:600,fontSize:12,formatter:v=>String(Math.round(v))}},
+yAxis:{type:'category',data:uniqueP,axisLine:{show:false},axisTick:{show:false},axisLabel:{color:'#eaeaf0',fontFamily:'Outfit',fontWeight:600,fontSize:12}},
+series:[{type:'scatter',symbolSize:function(d){return d[4]},data:titles.map(t=>[t.y,t.p,t.ev,t.p,t.sz]),itemStyle:{color:function(p){const pl=PLAYERS.find(x=>x.n===p.data[3]);return pl?TC[pl.t]:'#f59e0b'},shadowBlur:12,shadowColor:'rgba(245,158,11,0.2)'},emphasis:{itemStyle:{shadowBlur:20,shadowColor:'rgba(245,158,11,0.4)'}}}],
+animationDuration:1400,animationEasing:'elasticOut'
+});
+addEventListener('resize',()=>ch.resize());
+})();
+(function(){const t=document.getElementById('data-table');if(!t)return;const hs=t.querySelectorAll('thead th');let cs={col:5,dir:'desc'};hs.forEach((h,i)=>{h.addEventListener('click',()=>{const dr=(cs.col===i&&cs.dir==='asc')?'desc':'asc';cs={col:i,dir:dr};const tb=t.querySelector('tbody'),rs=Array.from(tb.querySelectorAll('tr'));rs.sort((a,b)=>{let av=a.cells[i].textContent.trim(),bv=b.cells[i].textContent.trim();const an=parseFloat(av),bn=parseFloat(bv);if(!isNaN(an)&&!isNaN(bn))return dr==='asc'?an-bn:bn-an;return dr==='asc'?av.localeCompare(bv):bv.localeCompare(av)});rs.forEach(r=>tb.appendChild(r))})})})();
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
+// ---- Search & Filter ----
+(function initFilters(){
+const searchInput=document.getElementById('player-search');
+if(!searchInput)return;
+let activeTier='all',activeStatus=null;
+function norm(s){return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim()}
+function applyFilters(){
+const q=norm(searchInput.value);
+// Filter tier blocks and cards
+document.querySelectorAll('.tier-block').forEach(block=>{
+const tier=block.dataset.tier;
+const tierMatch=activeTier==='all'||tier===activeTier;
+const cards=block.querySelectorAll('.player-card,.player-card-compact');
+let visCount=0;
+cards.forEach(card=>{
+const text=norm(card.textContent);
+const hasLCS=!text.includes('sin lcs');
+const statusMatch=!activeStatus||(activeStatus==='LCS'?hasLCS:!hasLCS);
+const queryMatch=!q||text.includes(q);
+const show=tierMatch&&statusMatch&&queryMatch;
+card.classList.toggle('hidden-by-filter',!show);
+if(show)visCount++;
+});
+block.classList.toggle('hidden-by-filter',visCount===0);
+});
+// Filter table rows
+document.querySelectorAll('#data-table tbody tr').forEach(row=>{
+const tier=row.dataset.tier;
+const text=norm(row.textContent);
+const tierMatch=activeTier==='all'||tier===activeTier;
+const hasLCS=!text.includes('sin lcs');
+const statusMatch=!activeStatus||(activeStatus==='LCS'?hasLCS:!hasLCS);
+const queryMatch=!q||text.includes(q);
+row.classList.toggle('hidden-by-filter',!(tierMatch&&statusMatch&&queryMatch));
+});
+}
+// Tier buttons
+document.querySelectorAll('[data-filter-tier]').forEach(btn=>{
+btn.addEventListener('click',()=>{
+activeTier=btn.dataset.filterTier;
+document.querySelectorAll('[data-filter-tier]').forEach(b=>{b.classList.remove('active');b.classList.remove('active-lcs');b.classList.remove('active-nolcs')});
+btn.classList.add('active');
+applyFilters();
+});
+});
+// Status buttons
+document.querySelectorAll('[data-filter-status]').forEach(btn=>{
+btn.addEventListener('click',()=>{
+const val=btn.dataset.filterStatus;
+if(activeStatus===val){activeStatus=null;btn.classList.remove('active-lcs','active-nolcs');}
+else{document.querySelectorAll('[data-filter-status]').forEach(b=>{b.classList.remove('active-lcs','active-nolcs')});activeStatus=val;btn.classList.add(val==='LCS'?'active-lcs':'active-nolcs');}
+applyFilters();
+});
+});
+searchInput.addEventListener('input',applyFilters);
+})();
+</script>
+</body>
+</html>

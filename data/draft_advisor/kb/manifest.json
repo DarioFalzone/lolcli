@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "last_updated": "2026-04-08",
+  "sources": [
+    {
+      "source_id": "src-manual-expert-v1",
+      "file_path": null,
+      "source_type": "expert_curation",
+      "origin_url": null,
+      "capture_date": "2026-04-08",
+      "patch_relevance": "16.7",
+      "trust_level": "authoritative",
+      "review_status": "reviewed",
+      "linked_research_notes": [],
+      "linked_structured_updates": [
+        "champion_base.json",
+        "adc_profiles.json",
+        "priority_profiles.json",
+        "scoring_weights.json"
+      ],
+      "notes": "Initial expert-curated data for all 3 tiers + scoring weights. Baseline for the system."
+    },
+    {
+      "source_id": "src-kb-initial-research-v1",
+      "file_path": null,
+      "source_type": "expert_analysis",
+      "origin_url": null,
+      "capture_date": "2026-04-08",
+      "patch_relevance": "16.7",
+      "trust_level": "expert",
+      "review_status": "reviewed",
+      "linked_research_notes": [
+        "adc-jinx-front-to-back",
+        "thr-zed-vs-immobile-adcs",
+        "syn-nautilus-adc-synergies",
+        "arch-front-to-back"
+      ],
+      "linked_structured_updates": [
+        "kb/structured/comp_archetypes.json"
+      ],
+      "notes": "Initial KB research notes created alongside the knowledge base system. Expert-level analysis based on established draft theory."
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "schema_version": "1.0",
+  "patch": "16.7",
+  "last_updated": "2026-04-08",
+  "description": "Patch-specific score adjustments. Applied automatically at load time for the active patch. Each override is logged, reversible, and expires at a specified patch.",
+  "overrides": []
+}

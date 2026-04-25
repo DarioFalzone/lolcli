@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0",
+  "last_updated": "2026-04-08",
+  "description": "Comp archetype definitions for the draft advisor. Used by the analyzer to classify team compositions and adjust scoring weights.",
+  "archetypes": {
+    "front_to_back": {
+      "id": "front_to_back",
+      "display_name": "Front-to-Back Teamfight",
+      "description": "Frontline engages and peels while backline carry outputs maximum sustained DPS.",
+      "detection_rules": {
+        "min_frontline": 2,
+        "min_peel_sources": 1,
+        "excluded_shapes": ["split"]
+      },
+      "adc_preferences": {
+        "boost_traits": ["synergy_frontline_comp", "synergy_peel_comp", "teamfight_consistency", "scaling"],
+        "penalize_traits": [],
+        "preferred_adcs": ["Jinx", "KogMaw", "Aphelios", "Twitch", "Tristana"],
+        "avoid_adcs": ["Ezreal", "Lucian", "Draven"]
+      },
+      "weight_adjustments": {
+        "scaling_fit": 0.05,
+        "blind_pick_safety": -0.05
+      },
+      "research_notes": ["adc-jinx-front-to-back", "arch-front-to-back"]
+    },
+    "dive": {
+      "id": "dive",
+      "display_name": "Dive Composition",
+      "description": "Team dives onto enemy backline with multiple mobile threats. ADC plays cleanup or split-map.",
+      "detection_rules": {
+        "min_dive_threats": 2,
+        "high_team_mobility": true
+      },
+      "adc_preferences": {
+        "boost_traits": ["skirmish_power", "mobility", "self_peel"],
+        "penalize_traits": ["dependence_on_frontline", "dependence_on_peel"],
+        "preferred_adcs": ["Kaisa", "Lucian", "Samira", "Tristana", "Nilah"],
+        "avoid_adcs": ["KogMaw", "Aphelios", "Jinx"]
+      },
+      "weight_adjustments": {
+        "ally_synergy": -0.05,
+        "scaling_fit": -0.05,
+        "solo_queue_reliability": 0.05,
+        "comp_gap_fill": 0.05
+      },
+      "research_notes": []
+    },
+    "poke_siege": {
+      "id": "poke_siege",
+      "display_name": "Poke / Siege",
+      "description": "Team pokes enemies from range and takes towers without hard engaging.",
+      "detection_rules": {
+        "min_poke_sources": 2,
+        "has_waveclear": true
+      },
+      "adc_preferences": {
+        "boost_traits": ["siege_value", "effective_range", "anti_poke"],
+        "penalize_traits": ["dependence_on_frontline"],
+        "preferred_adcs": ["Caitlyn", "Ezreal", "Varus", "Jhin", "Senna"],
+        "avoid_adcs": ["Vayne", "Nilah", "Samira"]
+      },
+      "weight_adjustments": {
+        "comp_gap_fill": 0.05,
+        "enemy_matchup": -0.05
+      },
+      "research_notes": []
+    },
+    "pick": {
+      "id": "pick",
+      "display_name": "Pick Composition",
+      "description": "Team catches isolated enemies with CC chains and vision control.",
+      "detection_rules": {
+        "min_pick_potential_sources": 2,
+        "has_cc_chain": true
+      },
+      "adc_preferences": {
+        "boost_traits": ["pick_potential", "skirmish_power"],
+        "penalize_traits": [],
+        "preferred_adcs": ["Ashe", "Jhin", "Varus", "Caitlyn", "Kaisa"],
+        "avoid_adcs": ["KogMaw", "Smolder"]
+      },
+      "weight_adjustments": {
+        "comp_gap_fill": 0.05,
+        "scaling_fit": -0.05
+      },
+      "research_notes": []
+    },
+    "split": {
+      "id": "split",
+      "display_name": "Split Push",
+      "description": "Allied split-pusher draws pressure while rest of team holds mid. ADC must waveclear and survive 4v4/4v5.",
+      "detection_rules": {
+        "has_split_pusher": true,
+        "split_pusher_roles": ["Top"]
+      },
+      "adc_preferences": {
+        "boost_traits": ["siege_value", "self_peel", "anti_dive"],
+        "penalize_traits": ["dependence_on_frontline"],
+        "preferred_adcs": ["Sivir", "Ezreal", "Caitlyn", "Xayah", "Tristana"],
+        "avoid_adcs": ["KogMaw", "Aphelios"]
+      },
+      "weight_adjustments": {
+        "blind_pick_safety": 0.05,
+        "scaling_fit": -0.05
+      },
+      "research_notes": []
+    }
+  }
+}
