@@ -2,19 +2,16 @@
 Setup Script - Inicializa BD, carga datos, levanta API y dashboard
 """
 
-import sys
 import argparse
 from pathlib import Path
 from datetime import datetime
 import json
 
-# Agregar root del repo al path
-sys.path.insert(0, str(Path(__file__).parent.parent))
-
-# Imports del proyecto
-from src.riot_lol_cli.database.models import DatabaseManager
-from src.riot_lol_cli.dashboard import save_dashboard
-from src.riot_lol_cli.dashboard_enhanced import save_enhanced_dashboard
+from riot_lol_cli.dashboard import save_dashboard
+from riot_lol_cli.dashboard_enhanced import save_enhanced_dashboard
+from riot_lol_cli.database.models import DatabaseManager
+from riot_lol_cli.paths import BASE_DIR
+from riot_lol_cli.settings import get_meta_api_port
 
 
 def setup_database(db_path: str = "data/meta_analyzer.db"):
@@ -36,7 +33,7 @@ def generate_demo_data(db: DatabaseManager):
     print("📈 GENERANDO DATOS DE DEMO")
     print("="*60)
     
-    from src.riot_lol_cli.database.models import (
+    from riot_lol_cli.database.models import (
         ChampionHourly, Anomaly, TierList, AnomalyTypeEnum, SeverityEnum, TierEnum
     )
     from datetime import datetime, timedelta
@@ -51,7 +48,7 @@ def generate_demo_data(db: DatabaseManager):
         # Cargar ADCs de Data Dragon
         print("🔄 Cargando ADCs de Data Dragon...")
         try:
-            with open(Path(__file__).parent / 'data' / 'adc_champions.json', 'r') as f:
+            with open(BASE_DIR / "data" / "adc_champions.json", "r", encoding="utf-8") as f:
                 adc_data = json.load(f)
                 adc_list = adc_data.get('adcs_with_yasuo', [])
         except FileNotFoundError:
@@ -193,8 +190,9 @@ def generate_frontend(output_path: str = "outputs/meta-analyzer-dashboard.html")
     save_enhanced_dashboard("outputs/meta-analyzer-dashboard-enhanced.html")
     
     print(f"📱 Dashboards disponibles en:")
-    print(f"   - Original: http://localhost:8000/dashboard")
-    print(f"   - Enhanced: http://localhost:8000/dashboard-enhanced (RECOMENDADO)")
+    api_port = get_meta_api_port()
+    print(f"   - Original: http://localhost:{api_port}/dashboard")
+    print(f"   - Enhanced: http://localhost:{api_port}/dashboard-enhanced (RECOMENDADO)")
 
     
 
@@ -226,9 +224,10 @@ def print_summary(db_path: str):
     print(f"   Tablas: 8 (raw_matches, champion_hourly, anomalies, tier_lists, etc)")
     
     print("\n🚀 API Backend:")
-    print(f"   URL: http://localhost:8000")
-    print(f"   Docs: http://localhost:8000/docs")
-    print(f"   OpenAPI: http://localhost:8000/openapi.json")
+    api_port = get_meta_api_port()
+    print(f"   URL: http://localhost:{api_port}")
+    print(f"   Docs: http://localhost:{api_port}/docs")
+    print(f"   OpenAPI: http://localhost:{api_port}/openapi.json")
     
     print("\n🎨 Frontend Dashboard:")
     print(f"   URL: http://localhost:3000 (o archivo local)")
@@ -242,7 +241,7 @@ def print_summary(db_path: str):
     
     print("\n🎯 Próximos pasos:")
     print(f"   1. Instalar dependencias: pip install -r requirements.txt")
-    print(f"   2. LevantarAPI: python -m uvicorn src.riot_lol_cli.api_server:app --reload")
+    print(f"   2. Levantar API: python -m riot_lol_cli.api_server")
     print(f"   3. Abrir Dashboard: abre outputs/meta-analyzer-dashboard.html en navegador")
     print(f"   4. Recolectar datos: python main.py --collect-meta")
     

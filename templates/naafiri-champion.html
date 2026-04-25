@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naafiri - The Hound of a Hundred Bites - Universe of League of Legends</title>
+  <meta name="description" content="The Hound of a Hundred Bites">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spiegel:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Universe Theme Colors */
+      --color-primary: #c89b3c;
+      --color-primary-bright: #f0e6d2;
+      --color-primary-dark: #785a28;
+      --color-bg-dark: #0a0a0c;
+      --color-bg-darker: #000000;
+      --color-bg-panel: #1a1a1c;
+      --color-bg-overlay: rgba(10, 10, 12, 0.95);
+      --color-text-primary: #f0e6d2;
+      --color-text-secondary: #a09b8c;
+      --color-text-muted: #5b5a56;
+      --color-border: rgba(200, 155, 60, 0.2);
+      --color-shurima: #f4c97c;
+      --color-darkin: #c41e3a;
+      --shadow-glow: 0 0 40px rgba(200, 155, 60, 0.3);
+      --shadow-strong: 0 10px 50px rgba(0, 0, 0, 0.7);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Spiegel', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      background: var(--color-bg-darker);
+      color: var(--color-text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Header Navigation */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: var(--color-bg-overlay);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--color-border);
+      padding: 20px 40px;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-primary);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        linear-gradient(180deg, transparent 0%, var(--color-bg-darker) 100%),
+        linear-gradient(0deg, rgba(196, 30, 58, 0.2) 0%, transparent 50%);
+      z-index: 1;
+    }
+
+    .hero-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      opacity: 0.7;
+      filter: brightness(0.8);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 1200px;
+      padding: 0 40px;
+      animation: fadeInUp 1s ease-out;
+    }
+
+    .champion-role {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--color-darkin);
+      margin-bottom: 20px;
+      text-shadow: 0 0 20px rgba(196, 30, 58, 0.8);
+    }
+
+    .champion-name {
+      font-size: 120px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 10px;
+      color: var(--color-primary-bright);
+      margin-bottom: 20px;
+      text-shadow: 
+        0 0 40px rgba(200, 155, 60, 0.5),
+        0 10px 30px rgba(0, 0, 0, 0.8);
+      line-height: 1;
+    }
+
+    .champion-title {
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--color-text-secondary);
+      letter-spacing: 2px;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+    }
+
+    .champion-region {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 30px;
+      background: rgba(244, 201, 124, 0.1);
+      border: 2px solid var(--color-shurima);
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-shurima);
+      backdrop-filter: blur(10px);
+    }
+
+    .region-icon {
+      width: 24px;
+      height: 24px;
+      background: var(--color-shurima);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    /* Scroll Indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      animation: bounce 2s infinite;
+    }
+
+    .scroll-arrow {
+      width: 30px;
+      height: 50px;
+      border: 2px solid var(--color-primary);
+      border-radius: 25px;
+      position: relative;
+    }
+
+    .scroll-arrow::after {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 6px;
+      background: var(--color-primary);
+      border-radius: 50%;
+      animation: scroll 2s infinite;
+    }
+
+    /* Main Content */
+    .main-content {
+      position: relative;
+      z-index: 2;
+      background: var(--color-bg-dark);
+      padding: 100px 40px;
+    }
+
+    .content-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Champion Stats */
+    .champion-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-bottom: 80px;
+      padding: 60px;
+      background: linear-gradient(135deg, rgba(196, 30, 58, 0.1) 0%, rgba(10, 10, 12, 0.8) 100%);
+      border: 1px solid rgba(196, 30, 58, 0.3);
+      border-radius: 20px;
+      box-shadow: var(--shadow-strong);
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-text-muted);
+      margin-bottom: 10px;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--color-primary);
+      text-transform: uppercase;
+    }
+
+    /* Biography Section */
+    .biography-section {
+      margin-bottom: 80px;
+    }
+
+    .section-title {
+      font-size: 48px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: var(--color-primary);
+      margin-bottom: 40px;
+      position: relative;
+      padding-bottom: 20px;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--color-primary) 0%, transparent 100%);
+    }
+
+    .biography-content {
+      display: grid;
+      gap: 30px;
+    }
+
+    .bio-paragraph {
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--color-text-secondary);
+      padding: 30px;
+      background: var(--color-bg-panel);
+      border-left: 4px solid var(--color-darkin);
+      border-radius: 8px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .bio-paragraph:first-letter {
+      font-size: 72px;
+      font-weight: 900;
+      float: left;
+      line-height: 60px;
+      padding-right: 15px;
+      color: var(--color-primary);
+      text-shadow: var(--shadow-glow);
+    }
+
+    /* Quote Section */
+    .quote-section {
+      margin: 80px 0;
+      padding: 80px 60px;
+      background: 
+        linear-gradient(135deg, rgba(196, 30, 58, 0.15) 0%, transparent 100%),
+        var(--color-bg-panel);
+      border: 1px solid rgba(196, 30, 58, 0.3);
+      border-radius: 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-section::before {
+      content: '"';
+      position: absolute;
+      top: -40px;
+      left: 40px;
+      font-size: 200px;
+      font-weight: 900;
+      color: rgba(196, 30, 58, 0.1);
+      font-family: Georgia, serif;
+    }
+
+    .quote-text {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.6;
+      color: var(--color-primary-bright);
+      font-style: italic;
+      position: relative;
+      z-index: 1;
+    }
+
+    .quote-author {
+      margin-top: 30px;
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-darkin);
+    }
+
+    /* Related Champions */
+    .related-section {
+      padding: 80px 0;
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .related-card {
+      background: var(--color-bg-panel);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .related-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-glow);
+      border-color: var(--color-primary);
+    }
+
+    .related-card-image {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, rgba(196, 30, 58, 0.3), rgba(244, 201, 124, 0.3));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--color-primary);
+    }
+
+    .related-card-content {
+      padding: 20px;
+    }
+
+    .related-card-name {
+      font-size: 20px;
+      font-weight: 900;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: 5px;
+    }
+
+    .related-card-title {
+      font-size: 14px;
+      color: var(--color-text-muted);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--color-bg-darker);
+      border-top: 1px solid var(--color-border);
+      padding: 60px 40px 40px;
+      margin-top: 100px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-size: 24px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: var(--color-primary);
+      margin-bottom: 20px;
+    }
+
+    .footer-text {
+      font-size: 14px;
+      color: var(--color-text-muted);
+      margin-bottom: 30px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      list-style: none;
+      margin-bottom: 30px;
+    }
+
+    .footer-links a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--color-primary);
+    }
+
+    .copyright {
+      font-size: 12px;
+      color: var(--color-text-muted);
+      padding-top: 30px;
+      border-top: 1px solid rgba(200, 155, 60, 0.1);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      40% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+      60% {
+        transform: translateX(-50%) translateY(-5px);
+      }
+    }
+
+    @keyframes scroll {
+      0% {
+        opacity: 0;
+        top: 10px;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        top: 30px;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header {
+        padding: 15px 20px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .champion-name {
+        font-size: 60px;
+        letter-spacing: 5px;
+      }
+
+      .champion-title {
+        font-size: 18px;
+      }
+
+      .section-title {
+        font-size: 32px;
+      }
+
+      .bio-paragraph {
+        font-size: 16px;
+        padding: 20px;
+      }
+
+      .quote-text {
+        font-size: 24px;
+      }
+
+      .champion-stats {
+        padding: 30px;
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header Navigation -->
+  <header class="header">
+    <nav class="nav-container">
+      <a href="#" class="logo">Universe</a>
+      <ul class="nav-links">
+        <li><a href="#">Champions</a></li>
+        <li><a href="#">Regions</a></li>
+        <li><a href="#">Stories</a></li>
+        <li><a href="#">Comics</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <img src="../assets/splash_arts/Naafiri/Naafiri_Classic.jpg" 
+         alt="Naafiri Splash Art" 
+         class="hero-image">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <div class="champion-role">Darkin • Assassin</div>
+      <h1 class="champion-name">Naafiri</h1>
+      <p class="champion-title">The Hound of a Hundred Bites</p>
+      <div class="champion-region">
+        <span class="region-icon">☀</span>
+        Shurima
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="content-container">
+      
+      <!-- Champion Stats -->
+      <div class="champion-stats">
+        <div class="stat-item">
+          <div class="stat-label">Region</div>
+          <div class="stat-value">Shurima</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Species</div>
+          <div class="stat-value">Darkin</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Role</div>
+          <div class="stat-value">Assassin</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-label">Type</div>
+          <div class="stat-value">Melee</div>
+        </div>
+      </div>
+
+      <!-- Biography Section -->
+      <section class="biography-section">
+        <h2 class="section-title">Biography</h2>
+        <div class="biography-content">
+          <div class="bio-paragraph">
+            In the pitch black Shuriman night, few sounds are as terrifying as the howls of the dune hound. Those who hear their piercing call on the arid wind know to keep a hand on their sword hilt, and their horse well rested, for the ravenous packs that rove these sands will chase whatever game they can find in their desert.
+          </div>
+          
+          <div class="bio-paragraph">
+            One pack, in particular, is driven by a hunger that is deeper—and more ancient—than that of any mere beast. It is the hunger of a creature who spent ages eating nothing at all.
+          </div>
+          
+          <div class="bio-paragraph">
+            For centuries, Naafiri remained in a crypt, her spirit bound to an ancient throwing dagger. Unable to move or speak, the weapon lay inert as her soul pondered the past: Naafiri was powerful, having almost led the Darkin. How easily she could have bested any of them in combat to become their rightful ruler... yet how easily she'd been tricked by that awful Aspect, Myisha, and cursed to embody these inanimate steel blades.
+          </div>
+          
+          <div class="bio-paragraph">
+            Shame and regret consumed her thoughts. If she could get another chance... If she could only find another host. A new vessel. All she needed was a hand to grip her blade. Just a touch.
+          </div>
+          
+          <div class="bio-paragraph">
+            At last, the day came when the doors of her tomb burst open. She sensed the sweet relief of a fresh desert wind—her first in ages—and something else... A human presence. He has come. My host. My sweet, unwitting vessel, thought the Darkin soul.
+          </div>
+          
+          <div class="bio-paragraph">
+            But the visitor was aware of her magic. He carefully picked up her dagger with metal tongs and placed it onto a thick, lead-lined cloth. Wrapping the blade tightly, he took great care not to touch it and set off across the desert under the late afternoon sun.
+          </div>
+          
+          <div class="bio-paragraph">
+            Despair overcame Naafiri as she felt the plodding movements of the man's horse across the sands. Was she doomed to this form, this waking nightmare of impotence, for eternity?
+          </div>
+          
+          <div class="bio-paragraph">
+            She felt the steps of the horse quickening as sunset approached and sensed the distant howls of the dune hounds carried by the wind. This was her opportunity.
+          </div>
+          
+          <div class="bio-paragraph">
+            Without sound or words, the Darkin called out to the beasts, hoping to bring them to this prey—that he might somehow slip. Just a glancing touch of his hand, and the host would be hers. Then she could use him to fulfill the ambitions she had held for so long, and vanquish her regrets.
+          </div>
+          
+          <div class="bio-paragraph">
+            The hounds appeared, salivating with teeth bared. Naafiri's captor clung to the wrapped dagger with one arm, keenly aware of what would happen if it came loose. With his other arm, he drew his sword and attempted to defend himself from the pack. Jaws snapped at the man and his horse from all sides, tearing at them, devouring them piece by piece until nothing remained.
+          </div>
+        </div>
+      </section>
+
+      <!-- Quote Section -->
+      <section class="quote-section">
+        <blockquote>
+          <p class="quote-text">
+            "The pack is the entity that dominates all. Separately, we starve. Together, we feast."
+          </p>
+          <cite class="quote-author">— Naafiri</cite>
+        </blockquote>
+      </section>
+
+      <!-- Biography Continued -->
+      <section class="biography-section">
+        <h2 class="section-title">The Awakening</h2>
+        <div class="biography-content">
+          <div class="bio-paragraph">
+            Naafiri felt the world crash into focus as she became overwhelmed by senses. For the first time in ages, she smelled the dry air, which parched her nostrils. The metallic taste of hot blood still coated her mouth. She could see each of the dogs as if from the eyes of a separate packmate.
+          </div>
+          
+          <div class="bio-paragraph">
+            Confusion set in as she felt her sense of self crumble away. She had become the dune hounds—not one of them, but the entire pack—her shattered consciousness resonating throughout the body of each dog.
+          </div>
+          
+          <div class="bio-paragraph">
+            It seemed a cruel irony. She had found not one vessel, but dozens, and none of them were useful in her grand ambitions. She resented the hounds—hated their smell, their fleas, and, most of all, their need for companionship.
+          </div>
+          
+          <div class="bio-paragraph">
+            But, in time, the Darkin's bitterness subsided as she began to grasp the true nature of her hosts. Though feral, their collective thoughts formed a wisdom all its own. Separately, the dogs would starve. Together, they were an apex predator, feasting on whatever game they fancied. There were no individuals—the pack was the entity that dominated all.
+          </div>
+          
+          <div class="bio-paragraph">
+            Naafiri realized this concept was not limited to dune hounds. It applied to fish, ants, and humans. It even applied to Darkin.
+          </div>
+          
+          <div class="bio-paragraph">
+            She thought again of her past: personal grudges and petty agendas tearing the Darkin asunder, which in turn toppled them from their rightful place as the regnant killers of Runeterra.
+          </div>
+          
+          <div class="bio-paragraph">
+            She knew how to restore them. Now she just needed to find her siblings and share with them the wisdom of the pack.
+          </div>
+        </div>
+      </section>
+
+      <!-- Related Champions -->
+      <section class="related-section">
+        <h2 class="section-title">Related Champions</h2>
+        <div class="related-grid">
+          <div class="related-card">
+            <div class="related-card-image">Aatrox</div>
+            <div class="related-card-content">
+              <h3 class="related-card-name">Aatrox</h3>
+              <p class="related-card-title">The Darkin Blade</p>
+            </div>
+          </div>
+          <div class="related-card">
+            <div class="related-card-image">Rhaast</div>
+            <div class="related-card-content">
+              <h3 class="related-card-name">Kayn</h3>
+              <p class="related-card-title">The Shadow Reaper</p>
+            </div>
+          </div>
+          <div class="related-card">
+            <div class="related-card-image">Varus</div>
+            <div class="related-card-content">
+              <h3 class="related-card-name">Varus</h3>
+              <p class="related-card-title">The Arrow of Retribution</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">League of Legends</div>
+      <p class="footer-text">Explore the Universe of League of Legends</p>
+      <ul class="footer-links">
+        <li><a href="#">Champions</a></li>
+        <li><a href="#">Regions</a></li>
+        <li><a href="#">Stories</a></li>
+        <li><a href="#">Comics</a></li>
+        <li><a href="#">Support</a></li>
+      </ul>
+      <p class="copyright">
+        © 2024 Riot Games, Inc. League of Legends and all related logos, characters, names and distinctive likenesses thereof are exclusive property of Riot Games, Inc. All Rights Reserved.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Parallax effect on hero image
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const heroImage = document.querySelector('.hero-image');
+      if (heroImage) {
+        heroImage.style.transform = `translateY(${scrolled * 0.5}px)`;
+      }
+    });
+
+    // Hide scroll indicator after scrolling
+    window.addEventListener('scroll', () => {
+      const indicator = document.querySelector('.scroll-indicator');
+      if (window.scrollY > 100) {
+        indicator.style.opacity = '0';
+      } else {
+        indicator.style.opacity = '1';
+      }
+    });
+  </script>
+</body>
+</html>

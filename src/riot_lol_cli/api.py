@@ -5,7 +5,7 @@ import requests
 
 
 class RiotAPIError(Exception):
-    pass
+    """Error de alto nivel para fallos del cliente Riot/Data Dragon."""
 
 
 class RiotClient:
@@ -15,54 +15,70 @@ class RiotClient:
         self.regional = regional.lower()
         self.timeout = timeout
         self.session = requests.Session()
-        self.session.headers.update({
-            "X-Riot-Token": self.api_key,
-        })
+        self.session.headers.update({"X-Riot-Token": self.api_key})
         self.platform_base = f"https://{self.platform}.api.riotgames.com"
         self.regional_base = f"https://{self.regional}.api.riotgames.com"
 
-    def _request(self, method: str, url: str, params: Optional[Dict[str, Any]] = None, retries: int = 3) -> Any:
+    def _request_json(
+        self,
+        method: str,
+        url: str,
+        params: Optional[Dict[str, Any]] = None,
+        retries: int = 3,
+    ) -> Any:
         attempt = 0
         backoff = 1.0
+
         while True:
-            resp = self.session.request(method, url, params=params, timeout=self.timeout)
-            if resp.status_code == 429:
-                retry_after = resp.headers.get("Retry-After")
-                sleep_s = float(retry_after) if retry_after and retry_after.isdigit() else backoff
-                time.sleep(sleep_s)
+            try:
+                response = self.session.request(method, url, params=params, timeout=self.timeout)
+            except requests.RequestException as exc:
+                raise RiotAPIError(f"Error de red consultando '{url}': {exc}") from exc
+
+            if response.status_code == 429:
+                retry_after = response.headers.get("Retry-After")
+                try:
+                    sleep_seconds = float(retry_after) if retry_after else backoff
+                except ValueError:
+                    sleep_seconds = backoff
+
+                time.sleep(sleep_seconds)
                 attempt += 1
                 backoff = min(backoff * 2, 10)
                 if attempt > retries:
                     raise RiotAPIError("Rate limit excedido repetidamente (429)")
                 continue
-            if resp.status_code == 200:
-                return resp.json()
-            if resp.status_code in (401, 403):
-                detail = resp.text.strip()
-                raise RiotAPIError(f"No autorizado (401/403). Detalle: {detail}")
-            if resp.status_code == 404:
-                raise RiotAPIError("Recurso no encontrado (404)")
-            # Otros códigos
-            raise RiotAPIError(f"Error de Riot API: {resp.status_code} - {resp.text}")
 
-    # Summoner-V4
+            if response.status_code == 200:
+                try:
+                    return response.json()
+                except ValueError as exc:
+                    raise RiotAPIError(f"Respuesta JSON inválida para '{url}'") from exc
+
+            if response.status_code in (401, 403):
+                detail = response.text.strip()
+                raise RiotAPIError(f"No autorizado (401/403). Detalle: {detail}")
+
+            if response.status_code == 404:
+                raise RiotAPIError("Recurso no encontrado (404)")
+
+            raise RiotAPIError(f"Error de Riot API: {response.status_code} - {response.text}")
+
     def get_summoner_by_name(self, summoner_name: str) -> Dict[str, Any]:
         url = f"{self.platform_base}/lol/summoner/v4/summoners/by-name/{requests.utils.quote(summoner_name)}"
-        return self._request("GET", url)
+        return self._request_json("GET", url)
 
     def get_summoner_by_puuid(self, puuid: str) -> Dict[str, Any]:
         url = f"{self.platform_base}/lol/summoner/v4/summoners/by-puuid/{requests.utils.quote(puuid)}"
-        return self._request("GET", url)
+        return self._request_json("GET", url)
 
-    # Account-V1 (por Riot ID)
     def get_account_by_riot_id(self, game_name: str, tag_line: str) -> Dict[str, Any]:
         url = (
             f"{self.regional_base}/riot/account/v1/accounts/by-riot-id/"
             f"{requests.utils.quote(game_name)}/{requests.utils.quote(tag_line)}"
         )
-        return self._request("GET", url)
+        return self._request_json("GET", url)
 
-    # Match-V5
     def get_match_ids_by_puuid(
         self,
         puuid: str,
@@ -77,50 +93,38 @@ class RiotClient:
             params["startTime"] = int(start_time)
         if end_time is not None:
             params["endTime"] = int(end_time)
-        data = self._request("GET", url, params=params)
+
+        data = self._request_json("GET", url, params=params)
         if not isinstance(data, list):
             raise RiotAPIError("Respuesta inesperada al listar ids de partidas")
         return data
 
     def get_match(self, match_id: str) -> Dict[str, Any]:
         url = f"{self.regional_base}/lol/match/v5/matches/{match_id}"
-        return self._request("GET", url)
+        return self._request_json("GET", url)
 
-    # Data Dragon
     def get_ddragon_versions(self) -> List[str]:
-        url = "https://ddragon.leagueoflegends.com/api/versions.json"
-        resp = requests.get(url, timeout=self.timeout)
-        if resp.status_code != 200:
-            raise RiotAPIError(f"No se pudieron obtener versiones de Data Dragon: {resp.status_code}")
-        data = resp.json()
+        data = self._request_json("GET", "https://ddragon.leagueoflegends.com/api/versions.json", retries=1)
         if not isinstance(data, list) or not data:
             raise RiotAPIError("Respuesta inesperada de Data Dragon versions")
         return data
 
     def get_ddragon_summoner_spells(self, version: str) -> Dict[str, Any]:
-        """Obtiene el catálogo de hechizos de invocador de Data Dragon para una versión.
-        Devuelve el JSON completo tal como viene de DDragon.
-        """
         url = f"https://ddragon.leagueoflegends.com/cdn/{version}/data/en_US/summoner.json"
-        resp = requests.get(url, timeout=self.timeout)
-        if resp.status_code != 200:
-            raise RiotAPIError(f"No se pudieron obtener summoner spells: {resp.status_code}")
-        return resp.json()
+        data = self._request_json("GET", url, retries=1)
+        if not isinstance(data, dict):
+            raise RiotAPIError("Respuesta inesperada de summoner.json")
+        return data
 
     def get_ddragon_runes(self, version: str) -> List[Dict[str, Any]]:
-        """Obtiene runesReforged (árboles y runas) para una versión.
-        Devuelve una lista de árboles con sus runas.
-        """
         url = f"https://ddragon.leagueoflegends.com/cdn/{version}/data/en_US/runesReforged.json"
-        resp = requests.get(url, timeout=self.timeout)
-        if resp.status_code != 200:
-            raise RiotAPIError(f"No se pudieron obtener runesReforged: {resp.status_code}")
-        return resp.json()
+        data = self._request_json("GET", url, retries=1)
+        if not isinstance(data, list):
+            raise RiotAPIError("Respuesta inesperada de runesReforged.json")
+        return data
 
     def get_queues(self) -> List[Dict[str, Any]]:
-        """Obtiene el catálogo estático de colas para mapear queueId -> descripción."""
-        url = "https://static.developer.riotgames.com/docs/lol/queues.json"
-        resp = requests.get(url, timeout=self.timeout)
-        if resp.status_code != 200:
-            raise RiotAPIError(f"No se pudieron obtener queues.json: {resp.status_code}")
-        return resp.json()
+        data = self._request_json("GET", "https://static.developer.riotgames.com/docs/lol/queues.json", retries=1)
+        if not isinstance(data, list):
+            raise RiotAPIError("Respuesta inesperada de queues.json")
+        return data

@@ -5,17 +5,12 @@ Incluye: daño, oro, visión, duración, nivel del campeón, etc.
 import argparse
 import json
 import os
-import sys
 import time
 from datetime import datetime
 from pathlib import Path
 
-# Asegurar que el repo root esté en sys.path
-_REPO_ROOT = Path(__file__).parent.parent
-sys.path.insert(0, str(_REPO_ROOT))
-os.chdir(_REPO_ROOT)
-
-from src.riot_lol_cli.api import RiotClient
+from riot_lol_cli.api import RiotClient
+from riot_lol_cli.paths import BASE_DIR
 
 # Configuración por defecto (se puede sobreescribir por args/env)
 DEFAULT_GAME_NAME = os.getenv("GAME_NAME", "Deshu")
