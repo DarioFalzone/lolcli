@@ -21,13 +21,13 @@ ENHANCED_DASHBOARD_HTML = """
 
         :root {
             --primary: #0a1e3d;
-            --secondary: #785a28;
-            --accent: #c89b3c;
-            --success: #0ac800;
-            --danger: #ff3d3d;
-            --warning: #ff9900;
+            --arc-gold-dark: #785a28;
+            --arc-gold: #c89b3c;
+            --state-success: #0ac800;
+            --state-error: #ff3d3d;
+            --state-warning: #ff9900;
             --info: #00a8ff;
-            --dark: #010a13;
+            --forge-black: #010a13;
             --light: #f0f0f0;
             --border-radius: 8px;
             --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -35,7 +35,7 @@ ENHANCED_DASHBOARD_HTML = """
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+            background: linear-gradient(135deg, var(--forge-black) 0%, var(--primary) 100%);
             color: var(--light);
             min-height: 100vh;
         }
@@ -43,7 +43,7 @@ ENHANCED_DASHBOARD_HTML = """
         /* Header */
         header {
             background: var(--primary);
-            border-bottom: 3px solid var(--secondary);
+            border-bottom: 3px solid var(--arc-gold-dark);
             padding: 20px;
             box-shadow: var(--box-shadow);
             position: sticky;
@@ -53,7 +53,7 @@ ENHANCED_DASHBOARD_HTML = """
 
         header h1 {
             font-size: 28px;
-            color: var(--accent);
+            color: var(--arc-gold);
             margin-bottom: 10px;
         }
 
@@ -81,7 +81,7 @@ ENHANCED_DASHBOARD_HTML = """
             width: 10px;
             height: 10px;
             border-radius: 50%;
-            background: var(--success);
+            background: var(--state-success);
             animation: pulse 2s infinite;
         }
 
@@ -100,7 +100,7 @@ ENHANCED_DASHBOARD_HTML = """
         /* Card */
         .card {
             background: rgba(10, 30, 61, 0.8);
-            border: 1px solid var(--secondary);
+            border: 1px solid var(--arc-gold-dark);
             border-radius: var(--border-radius);
             padding: 20px;
             box-shadow: var(--box-shadow);
@@ -109,9 +109,9 @@ ENHANCED_DASHBOARD_HTML = """
 
         .card-title {
             font-size: 18px;
-            color: var(--accent);
+            color: var(--arc-gold);
             margin-bottom: 15px;
-            border-bottom: 2px solid var(--secondary);
+            border-bottom: 2px solid var(--arc-gold-dark);
             padding-bottom: 10px;
         }
 
@@ -120,7 +120,7 @@ ENHANCED_DASHBOARD_HTML = """
             display: flex;
             gap: 10px;
             margin-bottom: 20px;
-            border-bottom: 2px solid var(--secondary);
+            border-bottom: 2px solid var(--arc-gold-dark);
             flex-wrap: wrap;
         }
 
@@ -138,12 +138,12 @@ ENHANCED_DASHBOARD_HTML = """
         }
 
         .tab:hover {
-            color: var(--accent);
+            color: var(--arc-gold);
         }
 
         .tab.active {
-            color: var(--accent);
-            border-bottom-color: var(--accent);
+            color: var(--arc-gold);
+            border-bottom-color: var(--arc-gold);
         }
 
         .tab-content {
@@ -177,7 +177,7 @@ ENHANCED_DASHBOARD_HTML = """
 
         .filter-group label {
             font-size: 12px;
-            color: var(--accent);
+            color: var(--arc-gold);
             font-weight: bold;
             text-transform: uppercase;
         }
@@ -186,7 +186,7 @@ ENHANCED_DASHBOARD_HTML = """
         input[type="number"],
         select {
             background: rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--secondary);
+            border: 1px solid var(--arc-gold-dark);
             color: var(--light);
             padding: 8px 12px;
             border-radius: 4px;
@@ -197,7 +197,7 @@ ENHANCED_DASHBOARD_HTML = """
         input[type="number"]:focus,
         select:focus {
             outline: none;
-            border-color: var(--accent);
+            border-color: var(--arc-gold);
             box-shadow: 0 0 8px rgba(200, 155, 60, 0.3);
         }
 
@@ -221,8 +221,8 @@ ENHANCED_DASHBOARD_HTML = """
         th {
             padding: 12px;
             text-align: left;
-            border-bottom: 2px solid var(--secondary);
-            color: var(--accent);
+            border-bottom: 2px solid var(--arc-gold-dark);
+            color: var(--arc-gold);
             font-weight: bold;
             font-size: 12px;
             text-transform: uppercase;
@@ -265,17 +265,17 @@ ENHANCED_DASHBOARD_HTML = """
 
         /* Trend Badge */
         .trend-up {
-            color: var(--success);
+            color: var(--state-success);
             font-weight: bold;
         }
 
         .trend-down {
-            color: var(--danger);
+            color: var(--state-error);
             font-weight: bold;
         }
 
         .trend-stable {
-            color: var(--warning);
+            color: var(--state-warning);
             font-weight: bold;
         }
 
@@ -300,7 +300,7 @@ ENHANCED_DASHBOARD_HTML = """
 
         .modal-content {
             background: rgba(10, 30, 61, 0.95);
-            border: 2px solid var(--secondary);
+            border: 2px solid var(--arc-gold-dark);
             border-radius: 8px;
             padding: 30px;
             max-width: 900px;
@@ -314,7 +314,7 @@ ENHANCED_DASHBOARD_HTML = """
             position: absolute;
             top: 10px;
             right: 10px;
-            background: var(--danger);
+            background: var(--state-error);
             color: white;
             border: none;
             width: 30px;
@@ -333,7 +333,7 @@ ENHANCED_DASHBOARD_HTML = """
 
         .modal-title {
             font-size: 24px;
-            color: var(--accent);
+            color: var(--arc-gold);
             margin-bottom: 20px;
             display: flex;
             align-items: center;
@@ -348,7 +348,7 @@ ENHANCED_DASHBOARD_HTML = """
 
         .modal-section-title {
             font-size: 16px;
-            color: var(--accent);
+            color: var(--arc-gold);
             font-weight: bold;
             margin-bottom: 10px;
         }
@@ -369,7 +369,7 @@ ENHANCED_DASHBOARD_HTML = """
         .stat-value {
             font-size: 32px;
             font-weight: bold;
-            color: var(--accent);
+            color: var(--arc-gold);
             margin-bottom: 5px;
         }
 
@@ -383,7 +383,7 @@ ENHANCED_DASHBOARD_HTML = """
         .loading {
             text-align: center;
             padding: 40px;
-            color: var(--accent);
+            color: var(--arc-gold);
         }
 
         .no-data {
@@ -394,9 +394,9 @@ ENHANCED_DASHBOARD_HTML = """
 
         .mb-20 { margin-bottom: 20px; }
         .mt-10 { margin-top: 10px; }
-        .text-success { color: var(--success); }
-        .text-danger { color: var(--danger); }
-        .text-warning { color: var(--warning); }
+        .text-success { color: var(--state-success); }
+        .text-danger { color: var(--state-error); }
+        .text-warning { color: var(--state-warning); }
         .text-info { color: var(--info); }
 
         /* Responsivo */
@@ -718,17 +718,17 @@ ENHANCED_DASHBOARD_HTML = """
                     
                     html += \`
                         <div class="mb-20">
-                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 2px solid var(--secondary);">
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 2px solid var(--arc-gold-dark);">
                                 <div style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: \${tierInfo.bg}; color: white; font-weight: bold; font-size: 20px;">\${tier}</div>
-                                <div><strong>Tier \${tier} - \${tierInfo.name}</strong> <span style="color: var(--accent);">(\${champions.length})</span></div>
+                                <div><strong>Tier \${tier} - \${tierInfo.name}</strong> <span style="color: var(--arc-gold);">(\${champions.length})</span></div>
                             </div>
                             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px;">
                     \`;
                     
                     champions.forEach(champ => {
                         html += \`
-                            <div style="background: rgba(0, 0, 0, 0.3); border: 1px solid var(--secondary); border-radius: 4px; padding: 10px; text-align: center; cursor: pointer; transition: all 0.3s ease;" onclick="showChampionDetails('\${champ.name}')">
-                                <div style="font-weight: bold; color: var(--accent); margin-bottom: 5px; font-size: 12px;">\${champ.name}</div>
+                            <div style="background: rgba(0, 0, 0, 0.3); border: 1px solid var(--arc-gold-dark); border-radius: 4px; padding: 10px; text-align: center; cursor: pointer; transition: all 0.3s ease;" onclick="showChampionDetails('\${champ.name}')">
+                                <div style="font-weight: bold; color: var(--arc-gold); margin-bottom: 5px; font-size: 12px;">\${champ.name}</div>
                                 <div style="font-size: 11px; color: #aaa;">
                                     <div>WR: <span class="text-success">\${champ.winrate.toFixed(1)}%</span></div>
                                     <div>PR: <span class="text-info">\${champ.pickrate.toFixed(1)}%</span></div>
@@ -849,7 +849,7 @@ ENHANCED_DASHBOARD_HTML = """
                 
                 tbody.innerHTML = data.map((row, idx) => \`
                     <tr onclick="showChampionDetails('\${row.champion}')">
-                        <td style="cursor: pointer; color: var(--accent); font-weight: bold;">\${row.champion}</td>
+                        <td style="cursor: pointer; color: var(--arc-gold); font-weight: bold;">\${row.champion}</td>
                         <td>\${new Date(row.hour).toLocaleString('es-ES')}</td>
                         <td>\${row.matches}</td>
                         <td class="text-success">\${row.winrate?.toFixed(1)}%</td>
@@ -898,7 +898,7 @@ ENHANCED_DASHBOARD_HTML = """
                                 </tr>
                                 <tr>
                                     <td style="padding: 5px;"><strong>Tierrada:</strong></td>
-                                    <td style="color: var(--accent);">\${stats.tier || 'N/A'}</td>
+                                    <td style="color: var(--arc-gold);">\${stats.tier || 'N/A'}</td>
                                 </tr>
                             </table>
                         </div>
@@ -913,7 +913,7 @@ ENHANCED_DASHBOARD_HTML = """
                     
                     data.anomalies.forEach(anom => {
                         html += \`
-                            <div style="background: rgba(255, 153, 0, 0.1); border-left: 3px solid var(--warning); padding: 10px; margin-bottom: 10px; border-radius: 4px;">
+                            <div style="background: rgba(255, 153, 0, 0.1); border-left: 3px solid var(--state-warning); padding: 10px; margin-bottom: 10px; border-radius: 4px;">
                                 <div><strong>\${anom.type}</strong> - Confianza: <span class="text-warning">\${(anom.confidence * 100).toFixed(0)}%</span></div>
                                 <div style="margin-top: 5px; color: #ccc;">\${anom.description}</div>
                             </div>
@@ -977,10 +977,10 @@ ENHANCED_DASHBOARD_HTML = """
             
             if (isOnline) {
                 statusEl.textContent = 'Conectado';
-                dotEl.style.background = 'var(--success)';
+                dotEl.style.background = 'var(--state-success)';
             } else {
                 statusEl.textContent = 'Desconectado';
-                dotEl.style.background = 'var(--danger)';
+                dotEl.style.background = 'var(--state-error)';
             }
         }
 
