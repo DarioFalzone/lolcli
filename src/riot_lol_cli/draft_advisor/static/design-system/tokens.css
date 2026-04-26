@@ -159,42 +159,6 @@
   --focus-ring:    0 0 0 2px rgba(200, 155, 60, 0.6), 0 0 0 4px rgba(200, 155, 60, 0.2);
 }
 
-/* ============================================================
-   COMPAT - shared tokens used by claude-4-5.html and splash-viewer.html
-   These are SAFE to alias because the original values match canonical
-   exactly (verified against templates/claude-4-5.html lines 14-43).
-
-   For SPA-specific or Dashboard-specific tokens that differ in value,
-   see compat-spa.css and compat-dashboard.css respectively.
-   Delete this block once Match History + Splash Viewer use canonical names.
-   ============================================================ */
-:root {
-  --hextech-gold:        var(--arc-gold);
-  --hextech-gold-bright: var(--arc-gold-bright);
-  --hextech-gold-dark:   var(--arc-gold-dark);
-  --hextech-gold-accent: var(--arc-gold-accent);
-  --hextech-blue:        var(--arc-cyan);
-  --hextech-blue-dark:   var(--arc-cyan-dark);
-  --hextech-blue-bright: var(--arc-cyan-bright);
-  --piltover-black:      var(--forge-black);
-  --piltover-dark:       var(--forge-dark);
-  --piltover-darker:     var(--forge-darker);
-  --magic-glow:          var(--state-info);
-  --victory:             var(--state-success);
-  --victory-dark:        var(--state-success-dim);
-  --defeat:              var(--state-error);
-  --defeat-dark:         var(--state-error-dim);
-  --remake:              var(--state-neutral);
-  --shape-radius-sm:     var(--radius-xs);
-  --shape-radius-md:     var(--radius-sm);
-  --shape-radius-lg:     var(--radius-md);
-  --shape-radius-xl:     var(--radius-lg);
-  --shadow-depth-1:      var(--elevation-1);
-  --shadow-depth-2:      var(--elevation-2);
-  --shadow-depth-3:      var(--elevation-3);
-  --shadow-hextech:      var(--glow-cyan);
-  --shadow-gold:         var(--glow-gold);
-}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

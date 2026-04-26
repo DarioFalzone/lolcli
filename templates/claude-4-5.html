@@ -46,11 +46,11 @@
       --border-metal: rgba(200,155,60,0.2);
       --border-metal-strong: rgba(200,155,60,0.4);
       --border-blue: rgba(11,198,227,0.3);
-      --shadow-depth-1: 0 2px 8px rgba(0,0,0,0.4);
-      --shadow-depth-2: 0 8px 24px rgba(0,0,0,0.5);
-      --shadow-depth-3: 0 16px 48px rgba(0,0,0,0.6);
-      --shadow-hextech: 0 0 24px rgba(11,198,227,0.4), 0 0 48px rgba(11,198,227,0.2);
-      --shadow-gold: 0 0 20px rgba(200,155,60,0.4), 0 0 40px rgba(200,155,60,0.2);
+      --elevation-1: 0 2px 8px rgba(0,0,0,0.4);
+      --elevation-2: 0 8px 24px rgba(0,0,0,0.5);
+      --elevation-3: 0 16px 48px rgba(0,0,0,0.6);
+      --glow-cyan: 0 0 24px rgba(11,198,227,0.4), 0 0 48px rgba(11,198,227,0.2);
+      --glow-gold: 0 0 20px rgba(200,155,60,0.4), 0 0 40px rgba(200,155,60,0.2);
       
       /* Hextech Shapes */
       --radius-xs: 4px;
@@ -141,8 +141,8 @@
       align-items: center;
       gap: 24px;
       box-shadow: 
-        var(--shadow-depth-3),
-        var(--shadow-hextech),
+        var(--elevation-3),
+        var(--glow-cyan),
         inset 0 2px 0 rgba(200,155,60,0.25),
         inset 0 -1px 0 rgba(11,198,227,0.15);
       margin-bottom: 20px;
@@ -344,7 +344,7 @@
       font-weight: 700;
       color: var(--text-primary);
       box-shadow: 
-        var(--shadow-depth-1),
+        var(--elevation-1),
         inset 0 1px 0 rgba(200,155,60,0.2);
       backdrop-filter: blur(12px);
       position: relative;
