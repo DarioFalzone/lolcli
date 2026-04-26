@@ -11,12 +11,23 @@ const state = {
   allies: [null, null, null, null],       // 4 ally slots
   enemies: [null, null, null, null, null], // 5 enemy slots
   poolMode: 'unrestricted',
-  poolChampions: [],    // ADC IDs in user pool
+  poolChampions: [],    // IDs in user pool
   comfort: {},          // { champId: score 1-10 }
   modalTarget: null,    // { team: 'ally'|'enemy'|'pool', index: number }
   roleFilter: 'all',
   recommendation: null,
+  targetRole: 'support', // default
 };
+
+function changeTargetRole(role) {
+  state.targetRole = role;
+  const label = document.getElementById('target-role-label');
+  if (label) label.textContent = role === 'support' ? 'SUPP' : 'ADC';
+  state.poolChampions = [];
+  state.comfort = {};
+  renderPool();
+}
+
 
 // ==========================================================================
 // Init
@@ -31,12 +42,12 @@ async function init() {
     // Fetch telemetry for patch info
     const telemetry = await fetch('/api/v1/draft/meta/version-info');
     const info = await telemetry.json();
-    document.getElementById('patch-badge').textContent = `Patch ${info.live_patch_label} (Data: ${info.static_data_version})`;
+    document.getElementById('patch-badge').textContent = `Parche ${info.live_patch_label} (Datos: ${info.static_data_version})`;
 
     renderChampionGrid();
   } catch (e) {
     console.error('Failed to init:', e);
-    document.getElementById('patch-badge').textContent = 'Error loading data';
+    document.getElementById('patch-badge').textContent = 'Error cargando datos';
   }
 }
 
@@ -56,11 +67,12 @@ function openChampionPicker(team, index) {
     b.classList.toggle('active', b.dataset.role === 'all');
   });
 
-  // If picking for pool, only show ADCs
+  // If picking for pool, filter by target role
   if (team === 'pool') {
-    filterByRole('Bot');
+    const role = state.targetRole === 'support' ? 'Support' : 'Bot';
+    filterByRole(role);
     document.querySelectorAll('.role-filter').forEach(b => {
-      b.classList.toggle('active', b.dataset.role === 'Bot');
+      b.classList.toggle('active', b.dataset.role === role);
     });
   }
 
@@ -100,9 +112,13 @@ function renderChampionGrid() {
     );
   }
 
-  // If pool mode, only show ADCs
+  // If pool mode, restrict based on target role
   if (state.modalTarget && state.modalTarget.team === 'pool') {
-    filtered = filtered.filter(c => c.is_adc);
+    if (state.targetRole === 'adc') {
+      filtered = filtered.filter(c => c.is_adc);
+    } else {
+      filtered = filtered.filter(c => c.is_support);
+    }
   }
 
   grid.innerHTML = filtered.map(c => {
@@ -233,9 +249,9 @@ function renderPool() {
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
         <span style="width:100px;font-size:0.8rem;color:var(--text-secondary)">${name}</span>
         <input type="range" min="1" max="10" value="${val}"
-               style="flex:1;accent-color:var(--gold)"
+               style="flex:1;accent-color:var(--arc-gold)"
                oninput="state.comfort['${id}']=parseInt(this.value);this.nextElementSibling.textContent=this.value">
-        <span style="width:20px;font-size:0.8rem;font-weight:600;color:var(--gold);text-align:right">${val}</span>
+        <span style="width:20px;font-size:0.8rem;font-weight:600;color:var(--arc-gold);text-align:right">${val}</span>
       </div>
     `;
   }).join('');
@@ -254,7 +270,7 @@ function removeFromPool(champId) {
 async function getRecommendation() {
   const btn = document.getElementById('recommend-btn');
   btn.classList.add('loading');
-  btn.innerHTML = '<span class="spinner"></span> Analyzing...';
+  btn.innerHTML = '<span class="spinner"></span> Analizando...';
 
   try {
     const draftState = {
@@ -271,6 +287,7 @@ async function getRecommendation() {
         champions: state.poolChampions,
         comfort: state.comfort,
       },
+      target_role: state.targetRole,
     };
 
     const res = await fetch('/api/v1/draft/recommend', {
@@ -291,7 +308,7 @@ async function getRecommendation() {
     alert('Error: ' + e.message);
   } finally {
     btn.classList.remove('loading');
-    btn.innerHTML = 'Recommend ADC';
+    btn.innerHTML = 'Recomendar Pick';
   }
 }
 
@@ -328,7 +345,7 @@ function renderDraftSummary(analysis) {
 
   container.innerHTML = `
     <div class="draft-summary-item">
-      <div class="label">Allied Composition</div>
+      <div class="label">Composición Aliada</div>
       <div class="value" style="display:flex;flex-wrap:wrap;gap:8px;font-size:0.8rem;">
         ${boolBadge(allied.has_frontline, 'Frontline')}
         ${boolBadge(allied.has_engage, 'Engage')}
@@ -337,15 +354,15 @@ function renderDraftSummary(analysis) {
       </div>
     </div>
     <div class="draft-summary-item">
-      <div class="label">Teamfight Shape</div>
+      <div class="label">Estilo de Teamfight</div>
       <div class="value">${formatShape(allied.teamfight_shape)}</div>
     </div>
     <div class="draft-summary-item">
-      <div class="label">ADC Threat Level</div>
+      <div class="label">Nivel de Amenaza</div>
       <div class="value" style="color:${threatColor(enemy.threat_level_to_adc)}">${enemy.threat_level_to_adc.toUpperCase()}</div>
     </div>
     <div class="draft-summary-item">
-      <div class="label">Confidence</div>
+      <div class="label">Confianza</div>
       <div class="value">${analysis.confidence.toUpperCase()}</div>
     </div>
   `;
@@ -357,12 +374,12 @@ function renderTopPick(pick) {
   const raw = pick.score_breakdown.raw;
 
   const factors = [
-    { label: 'Ally Synergy', key: 'ally_synergy' },
-    { label: 'Enemy Matchup', key: 'enemy_matchup' },
-    { label: 'Blind Safety', key: 'blind_pick_safety' },
-    { label: 'Comp Gap Fill', key: 'comp_gap_fill' },
-    { label: 'Solo Q Reliability', key: 'solo_queue_reliability' },
-    { label: 'Scaling Fit', key: 'scaling_fit' },
+    { label: 'Sinergia Aliada', key: 'ally_synergy' },
+    { label: 'Matchup Enemigo', key: 'enemy_matchup' },
+    { label: 'Seguridad Blind', key: 'blind_pick_safety' },
+    { label: 'Cubre Huecos', key: 'comp_gap_fill' },
+    { label: 'Conf. SoloQ', key: 'solo_queue_reliability' },
+    { label: 'Sinergia de Escalado', key: 'scaling_fit' },
   ];
 
   card.innerHTML = `
@@ -371,12 +388,12 @@ function renderTopPick(pick) {
         <img src="${imgSrc}" alt="${pick.display_name}">
       </div>
       <div class="top-pick-info">
-        <div class="top-pick-label">&#9733; Top Recommendation</div>
+        <div class="top-pick-label">&#9733; Recomendación Principal</div>
         <div class="top-pick-name">${pick.display_name}</div>
       </div>
       <div class="top-pick-score">
         <div class="score-value">${pick.total_score.toFixed(1)}</div>
-        <div class="score-label">Score / 100</div>
+        <div class="score-label">Puntaje / 100</div>
       </div>
     </div>
 
@@ -394,25 +411,25 @@ function renderTopPick(pick) {
 
     <div class="explanation-grid">
       <div class="explanation-block">
-        <h4 class="strengths">&#9650; Strengths</h4>
+        <h4 class="strengths">&#9650; Fortalezas</h4>
         <ul class="strengths-list">
           ${pick.strengths_in_this_draft.map(s => `<li>${s}</li>`).join('')}
         </ul>
       </div>
       <div class="explanation-block">
-        <h4 class="risks">&#9888; Risks</h4>
+        <h4 class="risks">&#9888; Riesgos</h4>
         <ul class="risks-list">
           ${pick.risks_in_this_draft.map(r => `<li>${r}</li>`).join('')}
         </ul>
       </div>
       <div class="explanation-block">
-        <h4 class="avoid">&#10007; Not Recommended When</h4>
+        <h4 class="avoid">&#10007; No recomendado cuando</h4>
         <ul class="avoid-list">
           ${pick.not_recommended_when.map(n => `<li>${n}</li>`).join('')}
         </ul>
       </div>
       <div class="explanation-block">
-        <h4 class="pattern">&#9655; Play Pattern</h4>
+        <h4 class="pattern">&#9655; Plan de Juego</h4>
         <p class="pattern-text">${pick.enabled_play_pattern}</p>
       </div>
     </div>
@@ -453,22 +470,22 @@ function renderAlternatives(alts) {
 function formatShape(shape) {
   const map = {
     'front_to_back': 'Front-to-Back',
-    'dive': 'Dive',
-    'poke_siege': 'Poke / Siege',
-    'pick': 'Pick Comp',
+    'dive': 'Dive / Inmersión',
+    'poke_siege': 'Poke / Asedio',
+    'pick': 'Cazadas (Pick)',
     'split': 'Split Push',
-    'mixed': 'Mixed / Flexible',
+    'mixed': 'Mixto / Flexible',
   };
   return map[shape] || shape;
 }
 
 function threatColor(level) {
   const map = {
-    'critical': 'var(--red)',
-    'high': 'var(--orange)',
-    'medium': 'var(--gold)',
+    'critical': 'var(--state-error)',
+    'high': 'var(--state-warning)',
+    'medium': 'var(--arc-gold)',
     'low': 'var(--green)',
-    'minimal': 'var(--blue)',
+    'minimal': 'var(--arc-cyan-bright)',
   };
   return map[level] || 'var(--text-primary)';
 }
@@ -486,4 +503,8 @@ document.getElementById('champion-modal').addEventListener('click', e => {
 // ==========================================================================
 // Boot
 // ==========================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  const trSelect = document.getElementById('target-role');
+  if (trSelect) changeTargetRole(trSelect.value);
+});
 init();
