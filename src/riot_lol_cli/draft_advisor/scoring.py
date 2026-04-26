@@ -26,6 +26,7 @@ from .analyzer import CompositionAnalyzer
 from .champion_data import ChampionDataService
 from .schemas import (
     AdcProfile,
+    AdvisorMode,
     AlternativePick,
     DamageType,
     DraftAnalysis,
@@ -36,6 +37,8 @@ from .schemas import (
     RecommendationOutput,
     RecommendedPick,
     ScoreBreakdown,
+    SupportArchetype,
+    SupportProfile,
     TeamfightShape,
     ThreatLevel,
     WeightedScores,
@@ -54,6 +57,16 @@ class ScoringEngine:
     def recommend(self, draft_state: DraftState) -> RecommendationOutput:
         """
         Given a draft state, return the full recommendation output.
+
+        Routes to _recommend_adc() or _recommend_support() based on draft_state.target_role.
+        """
+        if draft_state.target_role == AdvisorMode.SUPPORT:
+            return self._recommend_support(draft_state)
+        return self._recommend_adc(draft_state)
+
+    def _recommend_adc(self, draft_state: DraftState) -> RecommendationOutput:
+        """
+        ADC mode (original behavior).
 
         1. Analyze compositions
         2. Determine candidate ADCs (based on pool mode)
@@ -684,4 +697,589 @@ class ScoringEngine:
         if not disadvantages:
             disadvantages.append("Slightly lower overall score in this specific draft context")
 
+        return disadvantages[:3]
+
+    # ========================================================================
+    # SUPPORT MODE — Mainear soporte
+    # ========================================================================
+
+    def _recommend_support(self, draft_state: DraftState) -> RecommendationOutput:
+        """
+        Support mode. Análogo a _recommend_adc pero usando support_profiles.
+
+        Reutiliza analyzer.analyze() (gaps de comp + threats enemy son agnósticos al rol).
+        """
+        # 1. Analyze compositions (mismo analyzer)
+        analysis = self._analyzer.analyze(draft_state)
+
+        # 2. Determine candidate pool (soportes con perfil)
+        candidates = self._get_support_candidates(draft_state)
+        if not candidates:
+            raise ValueError("No Support candidates available for scoring.")
+
+        # 3. Compute weights (mismas que ADC pero con default redistribution)
+        weights = self._compute_weights(draft_state)
+
+        # 4. Score every candidate
+        scored: list[tuple[str, float, ScoreBreakdown]] = []
+        for supp_id in candidates:
+            profile = self._data.get_support_profile(supp_id)
+            if profile is None:
+                continue
+            raw = self._compute_raw_scores_supp(profile, draft_state, analysis)
+            breakdown = self._build_breakdown_supp(raw, weights, draft_state, supp_id)
+            scored.append((supp_id, breakdown.pre_clamp_total, breakdown))
+
+        # 5. Sort
+        scored.sort(key=lambda x: x[1], reverse=True)
+
+        # 6. Build output
+        top = scored[0]
+        alternatives = scored[1:4]
+
+        top_profile = self._data.get_support_profile(top[0])
+        top_pick = self._build_top_pick_supp(top[0], top[2], top_profile, analysis, draft_state)
+
+        alt_picks = []
+        for alt_id, _, alt_breakdown in alternatives:
+            alt_profile = self._data.get_support_profile(alt_id)
+            alt_pick = self._build_alternative_supp(
+                alt_id, alt_breakdown, alt_profile, top[0], top_profile, analysis
+            )
+            alt_picks.append(alt_pick)
+
+        # 7. Hash
+        state_hash = hashlib.md5(
+            json.dumps(draft_state.model_dump(), sort_keys=True, default=str).encode()
+        ).hexdigest()[:12]
+
+        return RecommendationOutput(
+            timestamp=datetime.now(timezone.utc).isoformat(),
+            draft_state_hash=state_hash,
+            mode=draft_state.user_pool.mode,
+            top_pick=top_pick,
+            alternatives=alt_picks,
+            draft_analysis=analysis,
+        )
+
+    def _get_support_candidates(self, draft_state: DraftState) -> list[str]:
+        """Get list of Support IDs to score based on pool mode."""
+        all_supports = self._data.get_support_ids()
+        pool = draft_state.user_pool
+
+        picked = set()
+        for ally in draft_state.allies:
+            picked.add(ally.id)
+        for enemy in draft_state.enemies:
+            picked.add(enemy.id)
+        for ban in draft_state.bans:
+            picked.add(ban)
+
+        available = all_supports - picked
+
+        if pool.mode == PoolMode.POOL_ONLY:
+            return [c for c in pool.champions if c in available]
+        else:  # POOL_PREFERRED, UNRESTRICTED — score everyone available
+            return list(available)
+
+    # ------------------------------------------------------------------------
+    # Raw scores for Support
+    # ------------------------------------------------------------------------
+
+    def _compute_raw_scores_supp(
+        self,
+        profile: SupportProfile,
+        draft_state: DraftState,
+        analysis: DraftAnalysis,
+    ) -> RawScores:
+        """Compute 0-100 raw scores per factor, support edition."""
+        return RawScores(
+            ally_synergy=self._score_supp_ally_synergy(profile, draft_state, analysis),
+            enemy_matchup=self._score_supp_enemy_matchup(profile, draft_state, analysis),
+            blind_pick_safety=profile.blind_pick_safety * 10.0,
+            comp_gap_fill=self._score_supp_comp_gap_fill(profile, analysis),
+            solo_queue_reliability=self._score_supp_solo_queue(profile),
+            scaling_fit=self._score_supp_scaling_fit(profile, analysis),
+        )
+
+    def _score_supp_ally_synergy(
+        self, profile: SupportProfile, draft: DraftState, analysis: DraftAnalysis
+    ) -> float:
+        """
+        Sinergia con el equipo aliado:
+        - Fuerte premio si el ADC aliado está en best_with_adcs.
+        - Penalty si está en worst_with_adcs.
+        - Bonus por sinergia con la jungla aliada (engage vs farm).
+        - Bonus por encajar con el "shape" (scaling, dive, poke).
+        """
+        if not draft.allies:
+            return 50.0
+
+        score = 50.0
+        allied = analysis.allied_comp_profile
+
+        for ally in draft.allies:
+            ally_id = ally.id
+
+            # ADC aliado: el factor más pesado
+            if ally_id in self._data.get_adc_ids():
+                if ally_id in profile.best_with_adcs:
+                    score += 18  # Match S-tier
+                elif ally_id in profile.worst_with_adcs:
+                    score -= 12  # Anti-sinergia
+                else:
+                    score += 2  # Neutral
+
+            # Jungla aliada: detectar engage vs farm
+            ally_champ = self._data.get_champion(ally_id)
+            if ally_champ is not None and ally_champ.primary_role.value == "Jungle":
+                tags = ally_champ.tags
+                # engage jungler heuristic
+                if tags.engage >= 7 and tags.cc >= 5:
+                    score += (profile.synergy_engage_jungler - 5) * 2
+                else:
+                    score += (profile.synergy_farm_jungler - 5) * 2
+
+        # Comp shape match
+        if allied.teamfight_shape.value == "scaling" or "scaling" in allied.missing:
+            score += (profile.synergy_with_scaling_comp - 5) * 2
+        if allied.teamfight_shape.value == "dive":
+            score += (profile.synergy_with_dive_comp - 5) * 2
+        if allied.teamfight_shape.value == "poke_siege":
+            score += (profile.synergy_with_poke_comp - 5) * 2
+
+        return max(0.0, min(100.0, score))
+
+    def _score_supp_enemy_matchup(
+        self, profile: SupportProfile, draft: DraftState, analysis: DraftAnalysis
+    ) -> float:
+        """
+        Matchup vs enemy team:
+        - Anti-dive premia si hay dive enemy.
+        - Anti-assassin-peel premia vs burst.
+        - Anti-poke-in-lane premia vs poke.
+        - Bonuses específicos por enemy support en strong/weak_against_supports.
+        """
+        if not draft.enemies:
+            return 50.0
+
+        score = 50.0
+        enemy = analysis.enemy_comp_profile
+
+        if enemy.has_dive:
+            score += (profile.anti_dive - 5) * 4
+        if enemy.has_burst:
+            score += (profile.anti_assassin_peel - 5) * 3
+        if enemy.has_poke:
+            score += (profile.anti_poke_in_lane - 5) * 3
+        if enemy.has_tanks:
+            # Vs tanks, prefer poke/damage supports
+            if profile.archetype == SupportArchetype.POKE:
+                score += 8
+            elif profile.archetype == SupportArchetype.ENGAGE:
+                score -= 4  # tanks resisten engage hard
+
+        # Enemy support matchup
+        for enemy_champ in draft.enemies:
+            if enemy_champ.id in profile.strong_against_supports:
+                score += 8
+            elif enemy_champ.id in profile.weak_against_supports:
+                score -= 8
+
+        # Threat level
+        if enemy.threat_level_to_adc == ThreatLevel.CRITICAL:
+            # Need extra peel
+            score += (profile.peel_strength - 5) * 2
+
+        return max(0.0, min(100.0, score))
+
+    def _score_supp_comp_gap_fill(
+        self, profile: SupportProfile, analysis: DraftAnalysis
+    ) -> float:
+        """¿Cubrís un gap del equipo? Engage si falta engage, peel si falta peel."""
+        score = 50.0
+        allied = analysis.allied_comp_profile
+
+        if not allied.has_engage:
+            score += (profile.engage_strength - 5) * 4
+        else:
+            # If team has engage already, peel is what we need
+            score += (profile.peel_strength - 5) * 2
+
+        if not allied.has_peel:
+            score += (profile.peel_strength - 5) * 4
+
+        if not allied.has_frontline:
+            # Need a tanky support to compensate
+            if profile.archetype in (SupportArchetype.ENGAGE, SupportArchetype.CATCHER):
+                score += 10
+            elif profile.archetype == SupportArchetype.ENCHANTER:
+                score -= 6
+
+        if "physical_dps" in allied.missing or "magic_dps" in allied.missing:
+            # If team needs damage, mage support helps
+            if profile.archetype == SupportArchetype.POKE:
+                score += 12
+
+        return max(0.0, min(100.0, score))
+
+    def _score_supp_solo_queue(self, profile: SupportProfile) -> float:
+        """Reliability en solo queue: blind safety + execution simplicity."""
+        base = profile.blind_pick_safety * 10
+        difficulty_penalty = max(0, profile.execution_difficulty - 5) * 3
+        return max(0.0, min(100.0, base - difficulty_penalty))
+
+    def _score_supp_scaling_fit(
+        self, profile: SupportProfile, analysis: DraftAnalysis
+    ) -> float:
+        """Cómo encaja la curva de poder del soporte con el equipo."""
+        score = 50.0
+        # Lane phase strength important if comp is early-mid
+        score += (profile.lane_phase_strength - 5) * 2
+        score += (profile.midgame_strength - 5) * 2
+        score += (profile.lategame_strength - 5) * 2
+
+        return max(0.0, min(100.0, score))
+
+    # ------------------------------------------------------------------------
+    # Build outputs (Support)
+    # ------------------------------------------------------------------------
+
+    def _build_breakdown_supp(
+        self,
+        raw: RawScores,
+        weights: dict[str, float],
+        draft_state: DraftState,
+        supp_id: str,
+    ) -> ScoreBreakdown:
+        """Same as _build_breakdown but uses support pool for comfort bonus."""
+        raw_dict = raw.model_dump()
+        weighted_dict = {}
+        weighted_sum = 0.0
+
+        for factor, raw_value in raw_dict.items():
+            w = weights.get(factor, 0.0)
+            contribution = raw_value * w
+            weighted_dict[factor] = round(contribution, 2)
+            weighted_sum += contribution
+
+        weighted_sum = round(weighted_sum, 2)
+
+        # Comfort bonus (same logic, just using the support id)
+        comfort_bonus = self._compute_comfort_bonus(draft_state, supp_id)
+        pre_clamp = round(weighted_sum + comfort_bonus, 2)
+
+        return ScoreBreakdown(
+            raw=raw,
+            weighted=WeightedScores(**weighted_dict),
+            comfort_bonus=round(comfort_bonus, 2),
+            weighted_sum=weighted_sum,
+            pre_clamp_total=pre_clamp,
+            weights_used=weights,
+        )
+
+    def _build_top_pick_supp(
+        self,
+        supp_id: str,
+        breakdown: ScoreBreakdown,
+        profile: SupportProfile,
+        analysis: DraftAnalysis,
+        draft_state: DraftState,
+    ) -> RecommendedPick:
+        display_name = self._data.get_champion_display_name(supp_id)
+        total = max(0.0, min(100.0, breakdown.pre_clamp_total))
+
+        strengths = self._generate_strengths_supp(profile, analysis, draft_state)
+        risks = self._generate_risks_supp(profile, analysis, draft_state)
+        not_rec = profile.weaknesses[:3]
+        play_pattern = self._generate_play_pattern_supp(profile, analysis, draft_state)
+
+        return RecommendedPick(
+            id=supp_id,
+            display_name=display_name,
+            total_score=round(total, 1),
+            score_breakdown=breakdown,
+            strengths_in_this_draft=strengths,
+            risks_in_this_draft=risks,
+            not_recommended_when=not_rec,
+            enabled_play_pattern=play_pattern,
+        )
+
+    def _build_alternative_supp(
+        self,
+        alt_id: str,
+        alt_breakdown: ScoreBreakdown,
+        alt_profile: SupportProfile,
+        top_id: str,
+        top_profile: SupportProfile,
+        analysis: DraftAnalysis,
+    ) -> AlternativePick:
+        display_name = self._data.get_champion_display_name(alt_id)
+        total = max(0.0, min(100.0, alt_breakdown.pre_clamp_total))
+
+        reason = self._generate_one_liner_supp(alt_profile, top_profile, alt_breakdown)
+        advantages = self._compare_advantages_supp(alt_profile, top_profile)
+        disadvantages = self._compare_disadvantages_supp(alt_profile, top_profile)
+
+        return AlternativePick(
+            id=alt_id,
+            display_name=display_name,
+            total_score=round(total, 1),
+            score_breakdown=alt_breakdown,
+            one_line_reason=reason,
+            advantages_over_top_pick=advantages,
+            disadvantages_vs_top_pick=disadvantages,
+        )
+
+    # ------------------------------------------------------------------------
+    # Explanation generators (Support)
+    # ------------------------------------------------------------------------
+
+    def _generate_strengths_supp(
+        self, profile: SupportProfile, analysis: DraftAnalysis, draft: DraftState
+    ) -> list[str]:
+        """Generate 'Razones' for the support pick — specific to this draft."""
+        strengths: list[str] = []
+        allied = analysis.allied_comp_profile
+        enemy = analysis.enemy_comp_profile
+
+        # Sinergia con ADC aliado específica
+        for ally in draft.allies:
+            if ally.id in profile.best_with_adcs:
+                ally_name = self._data.get_champion_display_name(ally.id)
+                strengths.append(
+                    f"Sinergia top-tier con {ally_name} aliado — pareja recomendada en KB."
+                )
+
+        # Engage gap fill
+        if not allied.has_engage and profile.engage_strength >= 7:
+            strengths.append(
+                f"Tu equipo no tiene engage — {profile.display_name} lo aporta "
+                f"({profile.engage_strength}/10 engage strength)."
+            )
+
+        # Peel para ADC squishy
+        if not allied.has_peel and profile.peel_strength >= 7:
+            strengths.append(
+                f"Tu equipo necesita peel y {profile.display_name} es premier en eso "
+                f"({profile.peel_strength}/10 peel strength)."
+            )
+
+        # Anti-dive vs threats enemy
+        if enemy.has_dive and profile.anti_dive >= 7:
+            strengths.append(
+                f"Counter al dive enemigo ({enemy.primary_threat or 'múltiples threats'}) "
+                f"con tu kit de peel ({profile.anti_dive}/10 anti-dive)."
+            )
+
+        # Anti-poke
+        if enemy.has_poke and profile.anti_poke_in_lane >= 7:
+            strengths.append(
+                f"Sobrevivís el poke enemy en lane ({profile.anti_poke_in_lane}/10 anti-poke)."
+            )
+
+        # Anti-burst
+        if enemy.has_burst and profile.anti_assassin_peel >= 7:
+            strengths.append(
+                f"Tu peel anti-assassin ({profile.anti_assassin_peel}/10) salva al ADC "
+                f"contra el burst enemy."
+            )
+
+        # Strong vs enemy support
+        for enemy_champ in draft.enemies:
+            if enemy_champ.id in profile.strong_against_supports:
+                enemy_name = self._data.get_champion_display_name(enemy_champ.id)
+                strengths.append(
+                    f"Ganás lane phase contra {enemy_name} (matchup favorable)."
+                )
+
+        # Lane kill pressure si hay engage jungler aliada
+        for ally in draft.allies:
+            ally_champ = self._data.get_champion(ally.id)
+            if ally_champ and ally_champ.primary_role.value == "Jungle":
+                if ally_champ.tags.engage >= 7 and profile.lane_kill_pressure >= 7:
+                    ally_name = self._data.get_champion_display_name(ally.id)
+                    strengths.append(
+                        f"Jungla aliada ({ally_name}) tiene engage; coordiná ganks "
+                        f"con tu kill pressure ({profile.lane_kill_pressure}/10)."
+                    )
+
+        if not strengths:
+            strengths = [s for s in profile.strengths[:3]]
+
+        return strengths[:5]
+
+    def _generate_risks_supp(
+        self, profile: SupportProfile, analysis: DraftAnalysis, draft: DraftState
+    ) -> list[str]:
+        """Generate risks for the support pick in this draft."""
+        risks: list[str] = []
+        allied = analysis.allied_comp_profile
+        enemy = analysis.enemy_comp_profile
+
+        if enemy.has_dive and profile.anti_dive <= 5:
+            risks.append(
+                f"Enemy team tiene dive y {profile.display_name} no peelea bien "
+                f"({profile.anti_dive}/10 anti-dive)."
+            )
+
+        if enemy.has_poke and profile.anti_poke_in_lane <= 4:
+            risks.append(
+                f"Enemy poke heavy y {profile.display_name} cae en lane "
+                f"({profile.anti_poke_in_lane}/10 anti-poke)."
+            )
+
+        # ADC aliado en worst_with
+        for ally in draft.allies:
+            if ally.id in profile.worst_with_adcs:
+                ally_name = self._data.get_champion_display_name(ally.id)
+                risks.append(
+                    f"Anti-sinergia con {ally_name} aliado — win conditions opuestas."
+                )
+
+        # Weak vs enemy support
+        for enemy_champ in draft.enemies:
+            if enemy_champ.id in profile.weak_against_supports:
+                enemy_name = self._data.get_champion_display_name(enemy_champ.id)
+                risks.append(
+                    f"Perdés lane phase contra {enemy_name} (matchup desfavorable)."
+                )
+
+        # Engage support sin follow-up
+        if profile.archetype == SupportArchetype.ENGAGE and not allied.has_frontline and len(draft.allies) >= 2:
+            # Check if there's any damage burst follow-up
+            risks.append(
+                f"Engage support sin frontline aliada — riesgo de pickeos aislados."
+            )
+
+        # No peel para scaling ADC
+        if profile.archetype == SupportArchetype.ENGAGE:
+            for ally in draft.allies:
+                if ally.id in self._data.get_adc_ids():
+                    adc_profile = self._data.get_adc_profile(ally.id)
+                    if adc_profile and adc_profile.dependence_on_peel >= 7:
+                        ally_name = self._data.get_champion_display_name(ally.id)
+                        risks.append(
+                            f"{ally_name} aliado depende de peel ({adc_profile.dependence_on_peel}/10) "
+                            f"— engage support no se lo aporta."
+                        )
+
+        if profile.lane_phase_strength <= 4:
+            risks.append(
+                f"Lane phase débil ({profile.lane_phase_strength}/10) — depende de scalear hasta mid."
+            )
+
+        if not risks:
+            risks = profile.weaknesses[:2]
+
+        return risks[:4]
+
+    def _generate_play_pattern_supp(
+        self, profile: SupportProfile, analysis: DraftAnalysis, draft: DraftState
+    ) -> str:
+        """
+        Generate the 'Plan de Juego' by substituting placeholders in profile.play_pattern_template.
+        """
+        template = profile.play_pattern_template
+
+        # Discover placeholders
+        allied_adc_id = None
+        ally_jungler_id = None
+        for ally in draft.allies:
+            if ally.id in self._data.get_adc_ids() and allied_adc_id is None:
+                allied_adc_id = ally.id
+            ally_champ = self._data.get_champion(ally.id)
+            if ally_champ and ally_champ.primary_role.value == "Jungle" and ally_jungler_id is None:
+                ally_jungler_id = ally.id
+
+        enemy_adc_id = None
+        enemy_support_id = None
+        for enemy in draft.enemies:
+            if enemy.id in self._data.get_adc_ids() and enemy_adc_id is None:
+                enemy_adc_id = enemy.id
+            enemy_pp = self._data.get_priority_profile(enemy.id)
+            if enemy_pp and "support" in enemy_pp.category.value and enemy_support_id is None:
+                enemy_support_id = enemy.id
+
+        # Substitute (with friendly fallbacks)
+        replacements = {
+            "{allied_adc}": self._data.get_champion_display_name(allied_adc_id) if allied_adc_id else "tu ADC",
+            "{enemy_adc}": self._data.get_champion_display_name(enemy_adc_id) if enemy_adc_id else "el ADC enemigo",
+            "{enemy_support}": self._data.get_champion_display_name(enemy_support_id) if enemy_support_id else "el soporte enemigo",
+            "{ally_jungler}": self._data.get_champion_display_name(ally_jungler_id) if ally_jungler_id else "tu jungla",
+            "{primary_threat}": analysis.enemy_comp_profile.primary_threat or "los carries enemigos",
+        }
+
+        result = template
+        for placeholder, value in replacements.items():
+            result = result.replace(placeholder, value)
+
+        # Append warnings on dive heavy comp
+        if analysis.enemy_comp_profile.has_dive and profile.archetype == SupportArchetype.ENGAGE:
+            result += " ⚠ Cuidado: enemy team tiene dive — no inicies sin todo el equipo presente."
+
+        return result
+
+    def _generate_one_liner_supp(
+        self, alt: SupportProfile, top: SupportProfile, breakdown: ScoreBreakdown
+    ) -> str:
+        raw_dict = breakdown.raw.model_dump()
+        best_factor = max(raw_dict, key=raw_dict.get)
+        factor_names = {
+            "ally_synergy": "sinergia aliada",
+            "enemy_matchup": "matchup vs enemy",
+            "blind_pick_safety": "blind pick safety",
+            "comp_gap_fill": "gap fill",
+            "solo_queue_reliability": "solo queue reliability",
+            "scaling_fit": "scaling alignment",
+        }
+        best_name = factor_names.get(best_factor, best_factor)
+        return (
+            f"Fuerte en {best_name} ({raw_dict[best_factor]:.0f}/100), "
+            f"pero scorea menos que {top.display_name} en este draft."
+        )
+
+    def _compare_advantages_supp(
+        self, alt: SupportProfile, top: SupportProfile
+    ) -> list[str]:
+        """What does the alternative do better than the top?"""
+        advantages = []
+
+        if alt.engage_strength > top.engage_strength + 1:
+            advantages.append(f"Mejor engage ({alt.engage_strength} vs {top.engage_strength})")
+        if alt.peel_strength > top.peel_strength + 1:
+            advantages.append(f"Mejor peel ({alt.peel_strength} vs {top.peel_strength})")
+        if alt.poke > top.poke + 1:
+            advantages.append(f"Mejor poke ({alt.poke} vs {top.poke})")
+        if alt.disengage > top.disengage + 1:
+            advantages.append(f"Mejor disengage ({alt.disengage} vs {top.disengage})")
+        if alt.anti_dive > top.anti_dive + 1:
+            advantages.append(f"Mejor anti-dive ({alt.anti_dive} vs {top.anti_dive})")
+        if alt.lategame_strength > top.lategame_strength + 1:
+            advantages.append(f"Mejor late game ({alt.lategame_strength} vs {top.lategame_strength})")
+        if alt.execution_difficulty < top.execution_difficulty - 1:
+            advantages.append(f"Más fácil de ejecutar ({alt.execution_difficulty} vs {top.execution_difficulty})")
+
+        if not advantages:
+            advantages.append("Más versátil en ciertas situaciones de draft.")
+        return advantages[:3]
+
+    def _compare_disadvantages_supp(
+        self, alt: SupportProfile, top: SupportProfile
+    ) -> list[str]:
+        disadvantages = []
+
+        if alt.engage_strength < top.engage_strength - 1:
+            disadvantages.append(f"Menos engage ({alt.engage_strength} vs {top.engage_strength})")
+        if alt.peel_strength < top.peel_strength - 1:
+            disadvantages.append(f"Menos peel ({alt.peel_strength} vs {top.peel_strength})")
+        if alt.lane_kill_pressure < top.lane_kill_pressure - 1:
+            disadvantages.append(f"Menos kill pressure en lane ({alt.lane_kill_pressure} vs {top.lane_kill_pressure})")
+        if alt.lane_phase_strength < top.lane_phase_strength - 1:
+            disadvantages.append(f"Lane phase más débil ({alt.lane_phase_strength} vs {top.lane_phase_strength})")
+        if alt.execution_difficulty > top.execution_difficulty + 1:
+            disadvantages.append(f"Más difícil de ejecutar ({alt.execution_difficulty} vs {top.execution_difficulty})")
+
+        if not disadvantages:
+            disadvantages.append("Score ligeramente menor en este contexto específico.")
         return disadvantages[:3]

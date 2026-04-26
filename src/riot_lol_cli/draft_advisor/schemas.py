@@ -78,8 +78,22 @@ class InformationLevel(str, Enum):
 class QueueType(str, Enum):
     RANKED_SOLO = "ranked_solo"
     RANKED_FLEX = "ranked_flex"
-    NORMAL = "normal"
     CLASH = "clash"
+    NORMAL = "normal"
+
+
+class AdvisorMode(str, Enum):
+    """Modo de operación del Draft Advisor: recomendar ADC o Soporte."""
+    ADC = "adc"
+    SUPPORT = "support"
+
+
+class SupportArchetype(str, Enum):
+    ENGAGE = "engage"
+    ENCHANTER = "enchanter"
+    POKE = "poke"
+    CATCHER = "catcher"
+    WARDEN = "warden"
 
 
 class PoolMode(str, Enum):
@@ -241,6 +255,72 @@ class AdcProfilesFile(BaseModel):
 
 
 # ============================================================================
+# SCHEMA 2.5: Support Profile (Tier 2 paralelo — deep Support data)
+# ============================================================================
+
+class SupportProfile(BaseModel):
+    """Perfil detallado de un soporte para Support Advisor mode.
+
+    Análogo a AdcProfile pero con campos específicos del rol de soporte:
+    engage strength, peel strength, lane kill pressure, sinergias con ADCs aliados,
+    matchups vs otros soportes, y un play_pattern_template para generar el plan de juego.
+    """
+    id: str
+    display_name: str
+    archetype: SupportArchetype
+
+    # Core identity (1-10)
+    engage_strength: int = Field(ge=1, le=10)
+    peel_strength: int = Field(ge=1, le=10)
+    lane_kill_pressure: int = Field(ge=1, le=10)
+    disengage: int = Field(ge=1, le=10)
+    poke: int = Field(ge=1, le=10)
+    cc_chain_length: int = Field(ge=1, le=10)
+    scaling: int = Field(ge=1, le=10)
+    blind_pick_safety: int = Field(ge=1, le=10)
+    execution_difficulty: int = Field(ge=1, le=10)
+
+    # Threat response (1-10)
+    anti_dive: int = Field(ge=1, le=10)
+    anti_assassin_peel: int = Field(ge=1, le=10)
+    anti_poke_in_lane: int = Field(ge=1, le=10)
+
+    # Synergy with team (1-10)
+    synergy_engage_jungler: int = Field(ge=1, le=10)
+    synergy_farm_jungler: int = Field(ge=1, le=10)
+    synergy_with_poke_comp: int = Field(ge=1, le=10)
+    synergy_with_dive_comp: int = Field(ge=1, le=10)
+    synergy_with_scaling_comp: int = Field(ge=1, le=10)
+
+    # Phase strength (1-10)
+    lane_phase_strength: int = Field(ge=1, le=10)
+    midgame_strength: int = Field(ge=1, le=10)
+    lategame_strength: int = Field(ge=1, le=10)
+
+    # Relations (champion IDs)
+    best_with_adcs: list[str]
+    worst_with_adcs: list[str]
+    strong_against_supports: list[str]
+    weak_against_supports: list[str]
+
+    # Descriptive
+    power_spikes: list[str]
+    strengths: list[str]
+    weaknesses: list[str]
+    play_pattern_template: str
+
+
+class SupportProfilesFile(BaseModel):
+    schema_version: str
+    patch: str
+    last_updated: str
+    source: str
+    phase: str | None = None
+    notes: str | None = None
+    profiles: dict[str, SupportProfile]
+
+
+# ============================================================================
 # SCHEMA 3: Priority Profile (Tier 3 — draft-impact non-ADCs)
 # ============================================================================
 
@@ -297,6 +377,7 @@ class DraftState(BaseModel):
     bans: list[str] = Field(default_factory=list)
     context: DraftContext = Field(default_factory=DraftContext)
     user_pool: UserPool = Field(default_factory=UserPool)
+    target_role: AdvisorMode = AdvisorMode.ADC  # NUEVO: rutea a _recommend_adc() o _recommend_support()
 
 
 # ============================================================================

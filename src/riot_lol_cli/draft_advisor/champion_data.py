@@ -24,6 +24,8 @@ from .schemas import (
     PriorityProfile,
     PriorityProfilesFile,
     ScoringWeightsConfig,
+    SupportProfile,
+    SupportProfilesFile,
 )
 
 
@@ -43,6 +45,7 @@ class ChampionDataService:
         # Loaded state
         self._champion_base: dict[str, ChampionBase] = {}
         self._adc_profiles: dict[str, AdcProfile] = {}
+        self._support_profiles: dict[str, SupportProfile] = {}
         self._priority_profiles: dict[str, PriorityProfile] = {}
         self._scoring_weights: ScoringWeightsConfig | None = None
 
@@ -62,6 +65,7 @@ class ChampionDataService:
         self._load_data_manifest()
         self._load_champion_base()
         self._load_adc_profiles()
+        self._load_support_profiles()
         self._load_priority_profiles()
         self._load_scoring_weights()
         self._cross_validate()
@@ -91,6 +95,19 @@ class ChampionDataService:
 
         validated = AdcProfilesFile(**raw)
         self._adc_profiles = validated.profiles
+
+    def _load_support_profiles(self) -> None:
+        """Load Tier 2 paralelo: support_profiles.json (gracefully optional)."""
+        path = self._data_dir / "support_profiles.json"
+        if not path.exists():
+            self._support_profiles = {}
+            return
+
+        with open(path, encoding="utf-8") as f:
+            raw = json.load(f)
+
+        validated = SupportProfilesFile(**raw)
+        self._support_profiles = validated.profiles
 
     def _load_priority_profiles(self) -> None:
         """Load Tier 3: priority_profiles.json"""
@@ -131,6 +148,16 @@ class ChampionDataService:
             for ref in profile.worst_into:
                 if ref not in self._champion_base:
                     errors.append(f"ADC '{adc_id}' worst_into ref '{ref}' not in champion_base")
+
+        # Support profiles must exist in champion_base
+        for supp_id in self._support_profiles:
+            if supp_id not in self._champion_base:
+                errors.append(f"Support profile '{supp_id}' not found in champion_base")
+
+        # Note: support best_with_adcs / strong_against_supports references are
+        # NOT cross-validated strictly because they may reference champions
+        # outside champion_base (alt-spelling or missing entries). We log warnings
+        # but don't fail. This is a soft contract.
 
         if errors:
             raise ValueError(
@@ -211,6 +238,26 @@ class ChampionDataService:
     def get_adc_ids(self) -> set[str]:
         """Get all ADC champion IDs."""
         return set(self._adc_profiles.keys())
+
+    # ========================================================================
+    # Queries — Support Profiles (Tier 2 paralelo)
+    # ========================================================================
+
+    def get_support_profile(self, champion_id: str) -> SupportProfile | None:
+        """Get deep Support profile by ID."""
+        return self._support_profiles.get(champion_id)
+
+    def get_all_support_profiles(self) -> dict[str, SupportProfile]:
+        """Get all Support profiles."""
+        return self._support_profiles
+
+    def get_support_ids(self) -> set[str]:
+        """Get all Support champion IDs (with detailed profile)."""
+        return set(self._support_profiles.keys())
+
+    @property
+    def total_supports(self) -> int:
+        return len(self._support_profiles)
 
     # ========================================================================
     # Queries — Priority Profiles (Tier 3)
@@ -299,10 +346,11 @@ class ChampionDataService:
         """Return a human-readable summary of loaded data."""
         return (
             f"ChampionDataService loaded:\n"
-            f"  Patch: {self._patch}\n"
+            f"  Patch: {self.live_patch_label}\n"
             f"  Schema: v{self._schema_version}\n"
-            f"  Tier 1 (champion_base): {self.total_champions} champions\n"
-            f"  Tier 2 (adc_profiles):  {self.total_adcs} ADCs\n"
-            f"  Tier 3 (priority):      {self.total_priority} draft-impact champions\n"
-            f"  Scoring weights:        {'loaded' if self._scoring_weights else 'missing'}"
+            f"  Tier 1 (champion_base):   {self.total_champions} champions\n"
+            f"  Tier 2 (adc_profiles):    {self.total_adcs} ADCs\n"
+            f"  Tier 2 (support_profiles): {self.total_supports} supports\n"
+            f"  Tier 3 (priority):        {self.total_priority} draft-impact champions\n"
+            f"  Scoring weights:          {'loaded' if self._scoring_weights else 'missing'}"
         )

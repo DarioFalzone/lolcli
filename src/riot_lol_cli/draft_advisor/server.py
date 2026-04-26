@@ -28,9 +28,9 @@ from .api import router as draft_router
 # ============================================================================
 
 app = FastAPI(
-    title="ADC Draft Advisor",
-    description="AI-powered ADC pick recommendation for League of Legends",
-    version="1.0.0",
+    title="Draft Advisor",
+    description="Motor de recomendación de picks para League of Legends",
+    version="1.1.0",
 )
 
 # CORS

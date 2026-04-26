@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>lolcli — Plan de migración</title>
+<link rel="stylesheet" href="design-system/tokens.css?v=4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--forge-black);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: var(--leading-relaxed);
+    padding: var(--space-12) var(--space-8) var(--space-16);
+    background-image:
+      radial-gradient(ellipse at 20% 10%, rgba(11, 198, 227, 0.06), transparent 50%),
+      radial-gradient(ellipse at 80% 90%, rgba(200, 155, 60, 0.06), transparent 50%);
+    background-attachment: fixed;
+  }
+  .wrap { max-width: 920px; margin: 0 auto; }
+  h1 {
+    font-family: var(--font-display);
+    font-size: var(--font-display-xl);
+    font-weight: var(--weight-display);
+    margin: 0 0 var(--space-2);
+    background: linear-gradient(135deg, var(--arc-gold-bright), var(--arc-gold));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: var(--tracking-tighter);
+  }
+  .subtitle {
+    color: var(--text-secondary);
+    font-size: var(--font-body-lg);
+    margin-bottom: var(--space-12);
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: var(--weight-bold);
+    margin: var(--space-12) 0 var(--space-2);
+    color: var(--arc-gold-bright);
+    letter-spacing: var(--tracking-tight);
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+  }
+  h2 .phase-num {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: var(--weight-semibold);
+    color: var(--arc-gold);
+    background: rgba(200, 155, 60, 0.10);
+    border: 1px solid var(--border-metal);
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+  }
+  h3 {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: var(--weight-semibold);
+    color: var(--text-primary);
+    margin: var(--space-8) 0 var(--space-3);
+  }
+  .phase-meta {
+    color: var(--text-tertiary);
+    font-size: var(--font-body-sm);
+    margin: 0 0 var(--space-6);
+    font-family: var(--font-mono);
+  }
+  ol, ul { padding-left: var(--space-6); }
+  li { margin-bottom: var(--space-3); }
+  p { margin: 0 0 var(--space-4); }
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: rgba(200, 155, 60, 0.08);
+    color: var(--arc-gold-text);
+    padding: 2px 6px;
+    border-radius: var(--radius-xs);
+    border: 1px solid var(--border-subtle);
+  }
+  pre {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    background: var(--forge-darker);
+    color: var(--text-primary);
+    border: 1px solid var(--border-divider);
+    border-left: 2px solid var(--arc-gold);
+    padding: var(--space-4) var(--space-5);
+    border-radius: var(--radius-sm);
+    overflow-x: auto;
+    line-height: 1.55;
+    margin: var(--space-3) 0 var(--space-5);
+  }
+  pre code { background: none; border: none; padding: 0; color: inherit; }
+  pre .com { color: var(--text-tertiary); font-style: italic; }
+  pre .add { color: var(--state-success); }
+  pre .del { color: var(--state-error); }
+  pre .key { color: var(--arc-cyan); }
+  pre .str { color: var(--arc-gold-bright); }
+  .callout {
+    border-left: 3px solid;
+    padding: var(--space-4) var(--space-5);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin: var(--space-4) 0;
+    background: var(--surface-card);
+  }
+  .callout.warn { border-color: var(--state-warning); }
+  .callout.info { border-color: var(--arc-cyan); }
+  .callout.danger { border-color: var(--state-error); }
+  .callout.success { border-color: var(--state-success); }
+  .callout strong { color: var(--text-primary); }
+  .callout.warn strong { color: var(--state-warning); }
+  .callout.danger strong { color: var(--state-error); }
+  .callout.success strong { color: var(--state-success); }
+  .callout.info strong { color: var(--arc-cyan); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--space-4) 0 var(--space-6);
+    font-size: var(--font-body-sm);
+    background: var(--surface-card);
+    border: 1px solid var(--border-divider);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+  th, td {
+    padding: var(--space-3) var(--space-4);
+    text-align: left;
+    border-bottom: 1px solid var(--border-divider);
+  }
+  th {
+    background: var(--forge-dark);
+    color: var(--arc-gold-text);
+    font-weight: var(--weight-semibold);
+    font-size: var(--font-caption);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+  }
+  tr:last-child td { border-bottom: none; }
+  td code { font-size: 0.78rem; }
+  .file-path {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--arc-cyan);
+    background: rgba(11, 198, 227, 0.06);
+    padding: 3px 8px;
+    border-radius: var(--radius-xs);
+    border: 1px solid var(--border-cyan);
+    display: inline-block;
+  }
+  .step {
+    background: var(--surface-card);
+    border: 1px solid var(--border-divider);
+    border-radius: var(--radius-md);
+    padding: var(--space-5) var(--space-6);
+    margin-bottom: var(--space-4);
+    position: relative;
+  }
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-circle);
+    background: var(--arc-gold);
+    color: var(--text-on-gold);
+    font-weight: var(--weight-bold);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    margin-right: var(--space-3);
+    vertical-align: middle;
+  }
+  .step h4 {
+    margin: 0 0 var(--space-3);
+    font-size: var(--font-body-lg);
+    font-weight: var(--weight-semibold);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+  }
+  .step p { margin: 0 0 var(--space-2); }
+  .step p:last-child { margin-bottom: 0; }
+  .checkbox {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid var(--arc-gold);
+    border-radius: 3px;
+    margin-right: var(--space-2);
+    vertical-align: -2px;
+  }
+  .toc {
+    background: var(--surface-card);
+    border: 1px solid var(--border-metal);
+    border-radius: var(--radius-md);
+    padding: var(--space-5) var(--space-6);
+    margin-bottom: var(--space-12);
+  }
+  .toc-title {
+    font-family: var(--font-display);
+    font-weight: var(--weight-bold);
+    color: var(--arc-gold-text);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+    font-size: var(--font-caption);
+    margin-bottom: var(--space-3);
+  }
+  .toc ol { margin: 0; padding-left: var(--space-5); }
+  .toc li { margin-bottom: var(--space-2); }
+  .toc a { color: var(--text-primary); text-decoration: none; border-bottom: 1px dotted var(--border-metal); }
+  .toc a:hover { color: var(--arc-gold-bright); border-bottom-color: var(--arc-gold); }
+  hr { border: none; border-top: 1px solid var(--border-divider); margin: var(--space-12) 0; }
+  .footer {
+    margin-top: var(--space-16);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--border-divider);
+    color: var(--text-tertiary);
+    font-size: var(--font-body-sm);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Plan de migración</h1>
+<p class="subtitle">Aplicar el design system al repo <code>lolcli</code> sin romper nada en el camino. Cada fase es atómica y reversible — un commit por fase.</p>
+
+<div class="toc">
+  <div class="toc-title">Fases</div>
+  <ol>
+    <li><a href="#fase-0">Bajar archivos al repo</a> — 5 min, cero riesgo</li>
+    <li><a href="#fase-1">Activar capa de compatibilidad</a> — 20 min, cero riesgo</li>
+    <li><a href="#fase-2">Migrar nombres de tokens, archivo por archivo</a> — 1-2 hs</li>
+    <li><a href="#fase-3">Adoptar componentes</a> — gradual</li>
+  </ol>
+</div>
+
+<div class="callout info">
+  <p><strong>Lo que detecté en tu repo:</strong> 4 surfaces con paletas distintas — Match History (<code>claude-4-5.html</code>) y Splash Viewer usan <code>--hextech-*</code>/<code>--piltover-*</code>; el SPA Draft Advisor usa <code>--gold</code>/<code>--blue</code>/<code>--bg-*</code>; el Dashboard usa <code>--primary</code>/<code>--secondary</code>/<code>--accent</code>. Los 3 sets están cubiertos por la capa compat con archivos dedicados.</p>
+</div>
+
+<hr>
+
+<h2 id="fase-0"><span class="phase-num">FASE 0</span> Bajar archivos al repo</h2>
+<p class="phase-meta">⏱ 5 min · ⚠ cero riesgo · commit final: <code>chore(design): import design system tokens + components</code></p>
+
+<div class="step">
+  <h4><span class="step-num">1</span>Descargar 4 archivos del proyecto</h4>
+  <p>Te paso los archivos cuando me digas. Los 4 son:</p>
+  <ul>
+    <li><code>design-system/tokens.css</code> — paleta canónica + compat para Match History/Splash Viewer</li>
+    <li><code>design-system/components.css</code> — clases drop-in (botones, cards, pills, etc.)</li>
+    <li><code>design-system/compat-spa.css</code> — compat específico para el Draft Advisor SPA</li>
+    <li><code>design-system/compat-dashboard.css</code> — compat específico para <code>dashboard_enhanced.py</code></li>
+  </ul>
+</div>
+
+<div class="step">
+  <h4><span class="step-num">2</span>Crear estructura en el repo</h4>
+  <p>El SPA monta <code>StaticFiles</code> en <code>src/riot_lol_cli/draft_advisor/static/</code> (lo confirmé en <code>server.py</code>). Ahí adentro creá la carpeta:</p>
+<pre><code>src/riot_lol_cli/draft_advisor/static/
+├── design-system/
+│   ├── tokens.css
+│   ├── components.css
+│   ├── compat-spa.css
+│   └── compat-dashboard.css
+├── styles.css         <span class="com">// queda como está por ahora</span>
+├── app.js
+└── index.html</code></pre>
+  <div class="callout warn">
+    <p><strong>Para los templates server-side</strong> (<code>templates/claude-4-5.html</code>, <code>splash-viewer.html</code>, dashboard) vas a necesitar montar otra carpeta estática o copiar los CSS adonde el render los pueda servir. Si me confirmás cómo se sirven hoy los templates de Match History, te marco la línea exacta a agregar en el server.</p>
+  </div>
+</div>
+
+<div class="step">
+  <h4><span class="step-num">3</span>Smoke test</h4>
+  <p>Levantá el server (<code>python -m riot_lol_cli.draft_advisor.server</code>), abrí en el browser:</p>
+  <pre><code>http://localhost:8001/static/design-system/tokens.css</code></pre>
+  <p>Si ves el CSS de los tokens, FASE 0 ✅ listo. Commit y seguís.</p>
+</div>
+
+<hr>
+
+<h2 id="fase-1"><span class="phase-num">FASE 1</span> Activar capa de compatibilidad</h2>
+<p class="phase-meta">⏱ 20 min · ⚠ cero riesgo (solo agregás un &lt;link&gt;) · commit por surface</p>
+
+<div class="callout success">
+  <p><strong>Objetivo:</strong> que cargues los tokens canónicos en paralelo a los actuales y todo siga viéndose <em>idéntico</em>. La capa compat traduce los nombres viejos a los nuevos.</p>
+</div>
+
+<h3>1.1 — Draft Advisor SPA</h3>
+
+<div class="step">
+  <h4><span class="step-num">4</span>Editar <code>src/riot_lol_cli/draft_advisor/static/index.html</code></h4>
+  <p>Línea 8 actual:</p>
+<pre><code><span class="del">- &lt;link rel="stylesheet" href="/static/styles.css?v=2"&gt;</span></code></pre>
+  <p>Reemplazar por:</p>
+<pre><code><span class="add">+ &lt;link rel="stylesheet" href="/static/design-system/tokens.css?v=1"&gt;</span>
+<span class="add">+ &lt;link rel="stylesheet" href="/static/design-system/compat-spa.css?v=1"&gt;</span>
+<span class="add">+ &lt;link rel="stylesheet" href="/static/styles.css?v=3"&gt;</span></code></pre>
+  <div class="callout warn">
+    <p><strong>El orden importa.</strong> <code>tokens.css</code> primero (define los canónicos), <code>compat-spa.css</code> segundo (define los aliases SPA-específicos), <code>styles.css</code> al final (consume los tokens). Bumpear el <code>?v=</code> a 3 fuerza al browser a olvidar el caché.</p>
+  </div>
+</div>
+
+<div class="step">
+  <h4><span class="step-num">5</span>Borrar el bloque <code>:root</code> viejo de <code>styles.css</code></h4>
+  <p>Las líneas <strong>13 a 65</strong> (el <code>:root { --bg-primary: #0a0e1a; ... }</code> entero, hasta el <code>}</code>). El resto del archivo no se toca.</p>
+  <p>La capa compat ahora provee TODOS esos tokens con los mismos valores. Los <code>var(--gold)</code>, <code>var(--bg-card)</code>, etc. del resto del CSS siguen funcionando.</p>
+</div>
+
+<div class="step">
+  <h4><span class="step-num">6</span>Probar el SPA</h4>
+  <p>Refrescar <code>http://localhost:8001/draft</code>. Debe verse <strong>idéntico</strong> a antes. Si algo cambió, mandame captura — significa que un token se me escapó del audit.</p>
+  <p>Commit: <code>refactor(draft-advisor): wire design system via compat layer</code></p>
+</div>
+
+<h3>1.2 — Match History (<code>templates/claude-4-5.html</code>)</h3>
+
+<div class="step">
+  <h4><span class="step-num">7</span>Verificar cómo se sirve este template</h4>
+  <p>Necesito que me confirmes: ¿este HTML lo renderiza una ruta de FastAPI con Jinja2, o es export estático autocontenido? Eso decide si linkear los CSS o seguir embebiendo.</p>
+  <p>Mientras tanto, opción <strong>conservadora</strong> (funciona en ambos casos): mantener el <code>:root</code> embebido tal cual está y NO hacer nada en FASE 1 para este archivo. Pasa directo a FASE 2.</p>
+</div>
+
+<h3>1.3 — Splash Viewer (<code>templates/splash-viewer.html</code>)</h3>
+
+<div class="step">
+  <h4><span class="step-num">8</span>Mismo patrón que Match History</h4>
+  <p>El <code>:root</code> está minificado en una sola línea (línea 11). Misma decisión que el paso 7.</p>
+</div>
+
+<h3>1.4 — Dashboard (<code>dashboard_enhanced.py</code>)</h3>
+
+<div class="step">
+  <h4><span class="step-num">9</span>Editar el f-string del dashboard</h4>
+  <p>El <code>:root</code> vive embebido en Python (líneas 22-34 de <code>dashboard_enhanced.py</code>). Dos opciones:</p>
+  <p><strong>Opción A — extraer a archivo</strong> (recomendado). Sacá las líneas 22-34, guardalas en <code>design-system/compat-dashboard.css</code> (ya las tenés ahí), y en el HTML embebido reemplazá el bloque por:</p>
+<pre><code>&lt;link rel="stylesheet" href="/static/design-system/tokens.css"&gt;
+&lt;link rel="stylesheet" href="/static/design-system/compat-dashboard.css"&gt;</code></pre>
+  <p><strong>Opción B — conservadora</strong>: dejar embebido. Saltar a FASE 2.</p>
+  <p>Necesito saber qué server monta el dashboard y qué carpeta estática tiene disponible para elegir A o B. Decímelo.</p>
+</div>
+
+<hr>
+
+<h2 id="fase-2"><span class="phase-num">FASE 2</span> Migrar nombres de tokens, archivo por archivo</h2>
+<p class="phase-meta">⏱ 1-2 horas · ⚠ riesgo bajo (find &amp; replace mecánico) · commit por archivo</p>
+
+<div class="callout info">
+  <p><strong>Objetivo:</strong> dejar de depender de la capa compat. Cada surface usa los nombres canónicos directamente.</p>
+</div>
+
+<h3>2.1 — Tabla de mapeo (find &amp; replace)</h3>
+
+<table>
+  <thead>
+    <tr><th>Surface</th><th>Token viejo</th><th>Token canónico</th></tr>
+  </thead>
+  <tbody>
+    <tr><td rowspan="6">SPA<br><span class="file-path">styles.css</span><br><span class="file-path">app.js</span></td><td><code>--gold</code></td><td><code>--arc-gold</code></td></tr>
+    <tr><td><code>--gold-dim</code></td><td><code>--arc-gold-dark</code></td></tr>
+    <tr><td><code>--blue</code></td><td><code>--arc-cyan-bright</code></td></tr>
+    <tr><td><code>--red</code></td><td><code>--state-error</code></td></tr>
+    <tr><td><code>--orange</code></td><td><code>--state-warning</code></td></tr>
+    <tr><td><code>--shadow-lg</code></td><td><code>--elevation-4</code></td></tr>
+    <tr><td rowspan="6">Match History<br><span class="file-path">claude-4-5.html</span></td><td><code>--hextech-gold</code></td><td><code>--arc-gold</code></td></tr>
+    <tr><td><code>--hextech-blue</code></td><td><code>--arc-cyan</code></td></tr>
+    <tr><td><code>--piltover-black</code></td><td><code>--forge-black</code></td></tr>
+    <tr><td><code>--victory</code></td><td><code>--state-success</code></td></tr>
+    <tr><td><code>--defeat</code></td><td><code>--state-error</code></td></tr>
+    <tr><td><code>--shape-radius-md</code></td><td><code>--radius-sm</code></td></tr>
+    <tr><td rowspan="4">Dashboard<br><span class="file-path">dashboard_enhanced.py</span></td><td><code>--accent</code></td><td><code>--arc-gold</code></td></tr>
+    <tr><td><code>--secondary</code></td><td><code>--arc-gold-dark</code></td></tr>
+    <tr><td><code>--dark</code></td><td><code>--forge-black</code></td></tr>
+    <tr><td><code>--danger</code></td><td><code>--state-error</code></td></tr>
+  </tbody>
+</table>
+
+<div class="callout warn">
+  <p><strong>Tokens que NO se migran 1:1</strong> (valores SPA-específicos que difieren del canónico): <code>--bg-primary</code>, <code>--bg-tertiary</code>, <code>--gold-light</code>, <code>--cyan</code>, <code>--green</code>, <code>--red-dim</code>, <code>--text-primary</code>. Estos quedan en <code>compat-spa.css</code> permanentemente o decidís reconciliarlos al canónico (te aviso cuando lleguemos ahí).</p>
+</div>
+
+<div class="step">
+  <h4><span class="step-num">10</span>Empezar por el archivo más chico: Splash Viewer</h4>
+  <p>Find &amp; replace en <code>templates/splash-viewer.html</code> con la tabla de mapeo (sección Match History — usa los mismos tokens hextech/piltover). Probar. Commit.</p>
+</div>
+
+<div class="step">
+  <h4><span class="step-num">11</span>Match History</h4>
+  <p>Mismo patrón sobre <code>templates/claude-4-5.html</code>. Probar. Commit.</p>
+</div>
+
+<div class="step">
+  <h4><span class="step-num">12</span>Draft Advisor SPA</h4>
+  <p>Find &amp; replace en <code>styles.css</code> + <code>app.js</code> (chequear si hay <code>var(--gold)</code> en JS strings). Después de migrar, podés <strong>borrar</strong> el <code>&lt;link&gt;</code> a <code>compat-spa.css</code> en <code>index.html</code>. Probar. Commit.</p>
+</div>
+
+<div class="step">
+  <h4><span class="step-num">13</span>Dashboard</h4>
+  <p>Mismo patrón sobre el f-string en <code>dashboard_enhanced.py</code>. Borrar el <code>&lt;link&gt;</code> a <code>compat-dashboard.css</code>. Commit.</p>
+</div>
+
+<div class="step">
+  <h4><span class="step-num">14</span>Limpiar la capa compat de <code>tokens.css</code></h4>
+  <p>Cuando los 4 surfaces estén migrados, borrá el segundo bloque <code>:root</code> de <code>tokens.css</code> (el que tiene los aliases <code>--hextech-*</code> y <code>--piltover-*</code>). Solo queda el canónico. Commit final: <code>refactor(design): drop compat layer, canonical tokens only</code></p>
+</div>
+
+<hr>
+
+<h2 id="fase-3"><span class="phase-num">FASE 3</span> Adoptar componentes</h2>
+<p class="phase-meta">⏱ gradual, sin deadline · ⚠ por componente, no por archivo</p>
+
+<div class="callout info">
+  <p><strong>Objetivo:</strong> reemplazar CSS custom suelto con clases del system (<code>.btn-primary</code>, <code>.card</code>, <code>.pill</code>, etc.). Esto reduce el peso de <code>styles.css</code> y unifica el look entre surfaces.</p>
+</div>
+
+<div class="step">
+  <h4><span class="step-num">15</span>Linkear <code>components.css</code> donde lo quieras usar</h4>
+<pre><code>&lt;link rel="stylesheet" href="/static/design-system/components.css"&gt;</code></pre>
+  <p>Las clases legacy del SPA (<code>.recommend-btn</code>, <code>.champion-slot</code>, <code>.score-bar-fill</code>) <strong>siguen funcionando</strong>. La adopción es opcional y por componente.</p>
+</div>
+
+<div class="step">
+  <h4><span class="step-num">16</span>Migrar de a un componente</h4>
+  <p>Te paso ejemplos antes/después concretos cuando arranques. Orden sugerido (impacto/dificultad):</p>
+  <ol>
+    <li><strong>Botones</strong> — el SPA tiene 3 estilos distintos, unificar a <code>.btn .btn-primary</code> / <code>.btn-secondary</code> / <code>.btn-ghost</code></li>
+    <li><strong>Pills/badges</strong> — roles, regiones, tier (S/A/B/C/D)</li>
+    <li><strong>Cards</strong> — recommend cards, match cards, champion cards</li>
+    <li><strong>Score bars</strong> — variantes con etiqueta y sin</li>
+    <li><strong>Modals</strong> — explicación, comparator del Splash Viewer</li>
+  </ol>
+</div>
+
+<hr>
+
+<h2>Qué hago YO en este flujo</h2>
+
+<ol>
+  <li><strong>Empaqueto los 4 archivos como zip</strong> cuando arranques FASE 0. Decímelo.</li>
+  <li><strong>FASE 1.4 / 2.4 (Dashboard)</strong>: necesito que me confirmes <em>cómo se monta y se sirve el dashboard</em> (¿qué FastAPI, qué ruta, qué <code>StaticFiles</code>?) para darte la línea exacta a tocar.</li>
+  <li><strong>FASE 1.2 / 1.3 (Match History + Splash Viewer)</strong>: ¿estos templates los renderiza un server con Jinja2 o se exportan como HTML autocontenido (para email/share)? Eso cambia si los pasamos a <code>&lt;link&gt;</code> o seguimos embebiendo el CSS.</li>
+  <li><strong>Si algo se rompe en cualquier fase</strong>: captura + el archivo donde pasó, lo diagnostico y te paso el patch exacto.</li>
+  <li><strong>FASE 3 ejemplos antes/después</strong>: cuando arranques componentes, te paso el HTML antes y después por cada uno.</li>
+</ol>
+
+<h2>Próxima decisión tuya</h2>
+
+<div class="callout success">
+  <p><strong>3 preguntas para arrancar FASE 0:</strong></p>
+  <ol>
+    <li>¿Te empaqueto los 4 archivos del design system como zip ahora?</li>
+    <li>¿Cómo se sirve <code>templates/claude-4-5.html</code>? (ruta del server, o export estático)</li>
+    <li>¿El dashboard de <code>dashboard_enhanced.py</code> en qué puerto/ruta corre y desde dónde sirve archivos estáticos?</li>
+  </ol>
+</div>
+
+<div class="footer">
+  Plan generado contra <code>DarioFalzone/lolcli@main</code> — 4 surfaces auditadas, 36 tokens mapeados.
+</div>
+
+</div>
+</body>
+</html>

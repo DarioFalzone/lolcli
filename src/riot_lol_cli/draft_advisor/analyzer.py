@@ -139,10 +139,13 @@ class CompositionAnalyzer:
         if magic_damage_count < 1:
             missing.append("magic_dps")
         # ADC role itself is always missing (that's what we're recommending)
-        if "physical_dps" not in missing:
-            # If we already have physical, we might still need sustained DPS
-            pass
-        missing.append("objective_damage")  # Most comps need ADC for objectives
+        # Only add objective_damage if no marksman is already in allies
+        has_marksman = any(
+            self._data.get_champion(a.id) and self._data.get_champion(a.id).combat_class.value == "Marksman"
+            for a in allies
+        )
+        if not has_marksman:
+            missing.append("objective_damage")
 
         return AlliedCompProfile(
             has_frontline=has_frontline,

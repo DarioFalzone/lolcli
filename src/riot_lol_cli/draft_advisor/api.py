@@ -1,11 +1,11 @@
 """
-Draft Advisor API — FastAPI router for ADC recommendation.
+Draft Advisor API — Router FastAPI para recomendaciones de draft.
 
 Endpoints:
-    POST /api/v1/draft/recommend     — Get ADC recommendation from draft state
-    GET  /api/v1/draft/champions     — Get all champions for UI
-    GET  /api/v1/draft/champions/adcs — Get ADC subset
-    GET  /api/v1/draft/health        — Health check
+    POST /api/v1/draft/recommend     — Obtener recomendación según estado del draft
+    GET  /api/v1/draft/champions     — Listar todos los campeones para la UI
+    GET  /api/v1/draft/champions/adcs — Subconjunto de ADCs
+    GET  /api/v1/draft/health        — Chequeo de salud
 """
 
 from __future__ import annotations
@@ -14,7 +14,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 
 from .champion_data import ChampionDataService
-from .schemas import DraftState, RecommendationOutput
+from .schemas import AdvisorMode, DraftState, RecommendationOutput
 from .scoring import ScoringEngine
 
 # ============================================================================
@@ -53,6 +53,7 @@ class ChampionListItem(BaseModel):
     damage_type: str
     range_type: str
     is_adc: bool
+    is_support: bool
     has_priority_profile: bool
 
 
@@ -76,7 +77,7 @@ class VersionInfoResponse(BaseModel):
 
 @router.get("/health", response_model=HealthResponse)
 async def health():
-    """Health check — confirms data is loaded."""
+    """Chequeo de salud — confirma que los datos están cargados."""
     svc, _ = _get_services()
     return HealthResponse(
         status="ok",
@@ -101,9 +102,10 @@ async def version_info():
 
 @router.get("/champions", response_model=list[ChampionListItem])
 async def get_champions():
-    """Get all champions for the UI champion selector."""
+    """Listar todos los campeones para el selector de la UI."""
     svc, _ = _get_services()
     adc_ids = svc.get_adc_ids()
+    support_ids = svc.get_support_ids()
     result = []
 
     for champ_id, champ in svc.get_all_champions().items():
@@ -115,6 +117,7 @@ async def get_champions():
             damage_type=champ.damage_type.value,
             range_type=champ.range_type.value,
             is_adc=champ.id in adc_ids,
+            is_support=champ.id in support_ids,
             has_priority_profile=svc.is_priority_champion(champ.id),
         ))
 
@@ -150,25 +153,27 @@ async def get_adcs():
 @router.post("/recommend", response_model=RecommendationOutput)
 async def recommend(draft_state: DraftState):
     """
-    Get ADC recommendation from draft state.
+    Obtener recomendación de pick según el estado del draft.
 
-    Accepts allies, enemies, bans, context, and user pool.
-    Returns top pick + up to 3 alternatives with full score breakdown
-    and structured explainability.
+    Acepta aliados, enemigos, bans, contexto y pool del usuario.
+    Devuelve top pick + hasta 3 alternativas con desglose de puntaje
+    y explicaciones estructuradas.
     """
     svc, engine = _get_services()
 
-    # Validate champion IDs
+    # Validar IDs de campeones
     all_ids = svc.get_all_champion_ids()
     for ally in draft_state.allies:
         if ally.id not in all_ids:
-            raise HTTPException(400, f"Unknown champion ID: {ally.id}")
+            raise HTTPException(400, f"ID de campeón desconocido: {ally.id}")
     for enemy in draft_state.enemies:
         if enemy.id not in all_ids:
-            raise HTTPException(400, f"Unknown champion ID: {enemy.id}")
+            raise HTTPException(400, f"ID de campeón desconocido: {enemy.id}")
     for champ_id in draft_state.user_pool.champions:
-        if champ_id not in svc.get_adc_ids():
-            raise HTTPException(400, f"Champion '{champ_id}' is not in ADC profiles")
+        if draft_state.target_role == AdvisorMode.SUPPORT and champ_id not in svc.get_support_ids():
+            raise HTTPException(400, f"Campeón '{champ_id}' no está en los perfiles de Soporte")
+        elif draft_state.target_role == AdvisorMode.ADC and champ_id not in svc.get_adc_ids():
+            raise HTTPException(400, f"Campeón '{champ_id}' no está en los perfiles de ADC")
 
     try:
         result = engine.recommend(draft_state)
