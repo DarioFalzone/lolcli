@@ -17,7 +17,7 @@ CLI en Python para League of Legends con múltiples subsistemas: consulta de mat
 | API Server | `src/riot_lol_cli/api_server.py` | FastAPI, Uvicorn | Activo | Backend REST para meta analyzer |
 | Dashboard | `src/riot_lol_cli/dashboard*.py` | HTML/JS embebido | Activo | Generador de dashboards HTML con Chart.js |
 | Meta Analyzer | `src/riot_lol_cli/meta_analyzer/` | SQLAlchemy, estadísticas | Activo | Detección de anomalías, tier lists |
-| Draft Advisor | `src/riot_lol_cli/draft_advisor/` | FastAPI, Pydantic | Activo | Recomendador de picks ADC |
+| Draft Advisor | `src/riot_lol_cli/draft_advisor/` | FastAPI, Pydantic | Activo | Recomendador de picks ADC y Support |
 | Database | `src/riot_lol_cli/database/` | SQLAlchemy ORM | Activo | Modelos y gestión de BD SQLite |
 
 ## Arquitectura General
@@ -68,6 +68,7 @@ Ver `.agent/rules/` para detalles completos:
 - **Commits:** Conventional Commits (`feat:`, `fix:`, `chore:`, `docs:`, `refactor:`)
 - **Idioma:** Documentación y comentarios en español, código en inglés
 - **Secretos:** NUNCA commitear `.env`, usar `.env.example` como template
+- **Documentación antidraft:** toda iteración significativa actualiza docs en el mismo commit — ver `.agent/rules/documentation-protocol.md`
 
 ## Cómo Navegar Este Repo (para agentes)
 

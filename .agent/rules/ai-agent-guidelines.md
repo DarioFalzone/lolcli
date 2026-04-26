@@ -35,7 +35,7 @@ Flujo recomendado:
 3. **No tocar paths de otros subsistemas** sin verificar dependencias cruzadas
 4. **Si movés archivos:** usar `git mv` para preservar historial
 5. **Si tocás `cli.py`:** verificar que `BASE_DIR` y paths derivados siguen funcionando
-6. **Bitácora de Cambios:** SIEMPRE que completes una iteración significativa (ej. implementar un feature, refactorizar, resolver un bug complejo), debés actualizar el archivo `bitacora_de_cambios.md` en la raíz del repositorio agregando una nueva entrada con la fecha y un resumen detallado de lo que hiciste.
+6. **Documentación antidraft:** SIEMPRE actualizar la documentación en el mismo commit que el código. Ver protocolo completo en `.agent/rules/documentation-protocol.md` y el checklist en `CLAUDE.md`.
 
 ### Cosas que NO hacer
 
