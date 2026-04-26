@@ -192,7 +192,7 @@ function renderTeamSlots(team, slots, containerId) {
         <img class="slot-img" src="${imgSrc}" alt="${champ.display_name}"
              onerror="this.style.display='none'">
         <span class="slot-name">${champ.display_name}</span>
-        <button class="remove-btn" onclick="event.stopPropagation(); removeChampion('${team}', ${i})">&times;</button>
+        <button class="remove-btn" onclick="event.stopPropagation(); removeChampion('${team}', ${i})" aria-label="Quitar ${champ.display_name}">&times;</button>
       `;
       el.onclick = () => openChampionPicker(team, i);
     } else {
@@ -341,12 +341,12 @@ function renderDraftSummary(analysis) {
   const enemy = analysis.enemy_comp_profile;
 
   const boolBadge = (val, label) =>
-    `<span style="color:${val ? 'var(--green)' : 'var(--text-muted)'}">${val ? '&#10003;' : '&#10007;'} ${label}</span>`;
+    `<span class="comp-badge ${val ? 'comp-badge--active' : 'comp-badge--inactive'}">${val ? '✓' : '✗'} ${label}</span>`;
 
   container.innerHTML = `
     <div class="draft-summary-item">
       <div class="label">Composición Aliada</div>
-      <div class="value" style="display:flex;flex-wrap:wrap;gap:8px;font-size:0.8rem;">
+      <div class="value" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:2px;">
         ${boolBadge(allied.has_frontline, 'Frontline')}
         ${boolBadge(allied.has_engage, 'Engage')}
         ${boolBadge(allied.has_peel, 'Peel')}
@@ -354,16 +354,16 @@ function renderDraftSummary(analysis) {
       </div>
     </div>
     <div class="draft-summary-item">
-      <div class="label">Estilo de Teamfight</div>
+      <div class="label">Estilo de Lucha</div>
       <div class="value">${formatShape(allied.teamfight_shape)}</div>
     </div>
     <div class="draft-summary-item">
-      <div class="label">Nivel de Amenaza</div>
-      <div class="value" style="color:${threatColor(enemy.threat_level_to_adc)}">${enemy.threat_level_to_adc.toUpperCase()}</div>
+      <div class="label">Amenaza Enemiga</div>
+      <div class="value" style="color:${threatColor(enemy.threat_level_to_adc)}">${threatLevelEs(enemy.threat_level_to_adc)}</div>
     </div>
     <div class="draft-summary-item">
       <div class="label">Confianza</div>
-      <div class="value">${analysis.confidence.toUpperCase()}</div>
+      <div class="value">${confidenceEs(analysis.confidence)}</div>
     </div>
   `;
 }
@@ -402,7 +402,7 @@ function renderTopPick(pick) {
         <div class="score-factor">
           <span class="score-factor-label">${f.label}</span>
           <div class="score-bar-track">
-            <div class="score-bar-fill" style="width:${raw[f.key]}%"></div>
+            <div class="score-bar-fill" style="width:${raw[f.key]}%;background:${scoreBarGradient(raw[f.key])}"></div>
           </div>
           <span class="score-factor-value">${raw[f.key].toFixed(0)}</span>
         </div>
@@ -440,23 +440,26 @@ function renderAlternatives(alts) {
   const grid = document.getElementById('alternatives-grid');
   grid.innerHTML = alts.map(alt => {
     const imgSrc = `/assets/splash_arts/${alt.id}/${alt.id}_Classic.jpg`;
+    const pros = alt.advantages_over_top_pick;
+    const cons = alt.disadvantages_vs_top_pick;
     return `
       <div class="alt-card">
         <div class="alt-header">
           <div class="alt-portrait">
             <img src="${imgSrc}" alt="${alt.display_name}">
           </div>
-          <div class="alt-name">${alt.display_name}</div>
-          <div class="alt-score">${alt.total_score.toFixed(1)}</div>
+          <div class="alt-info">
+            <div class="alt-name">${alt.display_name}</div>
+            <div class="alt-reason">${alt.one_line_reason}</div>
+          </div>
+          <div class="alt-score">
+            <div class="alt-score-number">${alt.total_score.toFixed(1)}</div>
+            <span class="alt-score-label">puntaje</span>
+          </div>
         </div>
-        <div class="alt-reason">${alt.one_line_reason}</div>
         <div class="alt-compare">
-          <div class="alt-pros">
-            ${alt.advantages_over_top_pick.map(a => `<span>+ ${a}</span>`).join('')}
-          </div>
-          <div class="alt-cons">
-            ${alt.disadvantages_vs_top_pick.map(d => `<span>- ${d}</span>`).join('')}
-          </div>
+          ${pros.length ? `<div class="alt-pros-section">${pros.map(a => `<span class="alt-pro-item">+ ${a}</span>`).join('')}</div>` : ''}
+          ${cons.length ? `<div class="alt-cons-section">${cons.map(d => `<span class="alt-con-item">− ${d}</span>`).join('')}</div>` : ''}
         </div>
       </div>
     `;
@@ -488,6 +491,22 @@ function threatColor(level) {
     'minimal': 'var(--arc-cyan-bright)',
   };
   return map[level] || 'var(--text-primary)';
+}
+
+function threatLevelEs(level) {
+  const map = { critical: 'Crítico', high: 'Alto', medium: 'Medio', low: 'Bajo', minimal: 'Mínimo' };
+  return map[level] || level;
+}
+
+function confidenceEs(level) {
+  const map = { high: 'Alta', medium: 'Media', low: 'Baja' };
+  return map[level] || level;
+}
+
+function scoreBarGradient(value) {
+  if (value >= 70) return 'linear-gradient(90deg, var(--arc-cyan-bright), var(--arc-gold))';
+  if (value >= 45) return 'linear-gradient(90deg, var(--arc-gold-dark), var(--arc-gold))';
+  return 'linear-gradient(90deg, var(--state-error-dim), var(--state-warning))';
 }
 
 // Close modal on escape

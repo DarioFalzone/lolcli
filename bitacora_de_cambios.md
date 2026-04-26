@@ -6,6 +6,28 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-04-26] UI Redesign — Draft Advisor SPA (dark navy, WCAG AA, i18n parcial)
+
+### Motivación
+
+La UI tenía fondos grises demasiado claros, barras de score de 6px ilegibles, tarjetas de alternativas con layout roto (texto desbordando columnas de 2-col), y términos de UI en inglés (MEDIUM, LOW, HIGH) mezclados con la interfaz en español.
+
+### Cambios
+
+- **`compat-spa.css`**: paleta midnight navy (`--bg-primary: #04080f`, `--bg-card: #091520`), bordes más visibles, texto secundario más contrastado para WCAG AA.
+- **`styles.css`**: barras de score `6px → 10px`, labels `130px → 182px`, valores en Outfit Bold. Alt cards rediseñadas con `.alt-info` + `.alt-score-number` + `.alt-compare` vertical. Nuevas clases `.comp-badge`. Reduced-motion explícito.
+- **`app.js`**: `threatLevelEs()` y `confidenceEs()` traducen nivel de amenaza y confianza a español. `scoreBarGradient()` colorea barras dinámicamente. `renderAlternatives()` con nuevo HTML. `renderDraftSummary()` con `.comp-badge` en lugar de estilos inline.
+- **Accesibilidad**: `aria-label` en `.modal-close` y `.remove-btn`. Desktop-first documentado en `CLAUDE.md`.
+
+### Archivos modificados
+- `src/riot_lol_cli/draft_advisor/static/design-system/compat-spa.css`
+- `src/riot_lol_cli/draft_advisor/static/styles.css`
+- `src/riot_lol_cli/draft_advisor/static/app.js`
+- `src/riot_lol_cli/draft_advisor/static/index.html`
+- `CLAUDE.md`
+
+---
+
 ## [2026-04-26] Design System Unificado + Support Advisor MVP
 
 ### Support Advisor (target_role: ADC | SUPPORT)

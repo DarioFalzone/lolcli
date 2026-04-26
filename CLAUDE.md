@@ -112,10 +112,26 @@ docs/                             → Documentación técnica del proyecto
 
 ---
 
+## Decisiones de producto confirmadas
+
+- **Desktop-first**: el SPA está diseñado para pantallas ≥1024px. No es objetivo inmediato el responsive mobile. Los breakpoints existentes (`max-width: 768px`, `1024px`) son un mínimo funcional, no diseño mobile-first.
+- **Idioma único**: español argentino. Sin i18n planificado.
+- **Fuentes**: Google Fonts CDN (Inter + Outfit). Self-hosting no es prioridad.
+
+## Accesibilidad — estado actual
+
+- ✅ `prefers-reduced-motion` aplicado: `tokens.css` (global) + `styles.css` (animaciones específicas)
+- ✅ `aria-label` en botones icon-only: modal-close (×) y remove-btn (× en slots)
+- ✅ `lang="es"` en `<html>`
+- ⚠️ WCAG AA contrast: **pendiente de medición manual** — usar Chrome DevTools (click en el cuadradito de color en el panel de Estilos y buscar el ratio). El gold (`#c89b3c`) sobre navy oscuro es el caso a verificar. Si el ratio < 4.5:1 para texto normal o < 3:1 para texto grande, ajustar el valor de `--arc-gold-bright` para textos sobre fondo oscuro.
+- ❌ ARIA roles explícitos en modal (falta `role="dialog"`, `aria-modal="true"`)
+- ❌ Focus trap en modal (Tab no queda atrapado dentro del modal al estar abierto)
+- ❌ Skip-to-content link
+
 ## Upgrades conocidos (NO implementar sin pedido explícito)
 
 - **Pool de Campeones**: comentado en `index.html` — backend ya implementado
 - **14 soportes fase 2**: Blitzcrank, Rakan, Rell, Alistar, Nami, Yuumi, Renata, Zyra, Brand, Xerath, Vel'Koz, Swain, Senna, Bard
-- **Accesibilidad ARIA**: botones icon-only sin `aria-label`, sin `prefers-reduced-motion` en SPA
+- **ARIA modal completo**: `role="dialog"`, `aria-modal`, focus trap — no implementado
 - **Migración tokens SPA NO MIGRAR**: `--bg-primary`, `--text-primary`, `--green` tienen valores distintos al canónico
 - **Dashboard a Jinja2**: `dashboard_enhanced.py` tiene HTML embebido en f-string Python
