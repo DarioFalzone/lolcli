@@ -16,7 +16,7 @@
     <header class="header">
         <h1>Draft Advisor</h1>
         <p class="subtitle">Motor de puntuación multifactorial para selección óptima de draft</p>
-        <span class="patch-badge" id="patch-badge">Cargando...</span>
+        <span class="patch-badge pill pill-gold" id="patch-badge">Cargando...</span>
     </header>
 
     <!-- Main grid: Draft input + Config -->
@@ -44,7 +44,7 @@
                             <span class="slot-placeholder">+</span>
                         </div>
                         <div class="champion-slot disabled" id="target-role-slot" style="opacity:0.3;pointer-events:none;">
-                            <span class="slot-placeholder" id="target-role-label" style="font-size:0.6rem;color:var(--gold);">ADC</span>
+                            <span class="slot-placeholder" id="target-role-label" style="font-size:0.6rem;color:var(--arc-gold);">ADC</span>
                         </div>
                     </div>
                 </div>
@@ -101,21 +101,36 @@
             </div>
         </div>
 
-        <!-- Right: Pool & Config -->
+        <!--
+        UPGRADE FUTURO: Pool de Campeones
+        ===================================
+        Este panel permite al usuario definir un pool personal de campeones
+        y asignarles niveles de confort (1-10) para que el motor de scoring
+        los priorice en las recomendaciones.
+
+        Modos disponibles (implementados en app.js + scoring.py):
+          - "unrestricted"   → Mejor Teórico (ignora el pool, recomienda global)
+          - "pool_preferred" → Priorizar Pool (bonus de scoring a campeones del pool)
+          - "pool_only"      → Solo del Pool (restringe candidatos al pool)
+
+        Para activar: descomentar este bloque y agregar la lógica de confort
+        en app.js (funciones: setPoolMode, renderComfortSliders, etc.).
+        El backend ya soporta pool_mode y comfort en DraftState (schemas.py).
+
         <div class="card">
             <div class="card-header">
                 <h2><span class="icon">&#9733;</span> Pool de Campeones</h2>
             </div>
             <div class="card-body">
                 <div class="pool-toggle" id="pool-toggle">
-                    <button class="active" data-mode="unrestricted" onclick="setPoolMode('unrestricted')">Mejor Teórico</button>
-                    <button data-mode="pool_preferred" onclick="setPoolMode('pool_preferred')">Priorizar Pool</button>
-                    <button data-mode="pool_only" onclick="setPoolMode('pool_only')">Solo del Pool</button>
+                    <button class="btn btn-ghost active" data-mode="unrestricted" onclick="setPoolMode('unrestricted')">Mejor Teórico</button>
+                    <button class="btn btn-ghost" data-mode="pool_preferred" onclick="setPoolMode('pool_preferred')">Priorizar Pool</button>
+                    <button class="btn btn-ghost" data-mode="pool_only" onclick="setPoolMode('pool_only')">Solo del Pool</button>
                 </div>
 
                 <div id="pool-config" style="display:none;">
                     <div class="pool-champions" id="pool-champions"></div>
-                    <button class="pool-add-btn" id="pool-add-btn" onclick="openChampionPicker('pool', -1)">+ Agregar al pool</button>
+                    <button class="btn btn-secondary pool-add-btn" id="pool-add-btn" onclick="openChampionPicker('pool', -1)">+ Agregar al pool</button>
 
                     <div style="margin-top:16px;">
                         <label style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);display:block;margin-bottom:6px;">Niveles de Confort</label>
@@ -124,11 +139,12 @@
                 </div>
             </div>
         </div>
+        -->
     </div>
 
     <!-- Recommend Button -->
     <div class="recommend-section">
-        <button class="recommend-btn" id="recommend-btn" onclick="getRecommendation()">
+        <button class="btn btn-primary recommend-btn" id="recommend-btn" onclick="getRecommendation()">
             Recomendar Pick
         </button>
     </div>
@@ -158,15 +174,15 @@
     <div class="modal">
         <div class="modal-header">
             <input type="text" id="champion-search" placeholder="Buscar campeón..." oninput="filterChampions(this.value)" autofocus>
-            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <button class="btn btn-ghost modal-close" onclick="closeModal()">&times;</button>
         </div>
         <div class="role-filters" id="role-filters">
-            <button class="role-filter active" data-role="all" onclick="filterByRole('all')">Todos</button>
-            <button class="role-filter" data-role="Top" onclick="filterByRole('Top')">Top</button>
-            <button class="role-filter" data-role="Jungle" onclick="filterByRole('Jungle')">Jungla</button>
-            <button class="role-filter" data-role="Mid" onclick="filterByRole('Mid')">Mid</button>
-            <button class="role-filter" data-role="Bot" onclick="filterByRole('Bot')">ADC</button>
-            <button class="role-filter" data-role="Support" onclick="filterByRole('Support')">Soporte</button>
+            <button class="btn btn-ghost role-filter active" data-role="all" onclick="filterByRole('all')">Todos</button>
+            <button class="btn btn-ghost role-filter" data-role="Top" onclick="filterByRole('Top')">Top</button>
+            <button class="btn btn-ghost role-filter" data-role="Jungle" onclick="filterByRole('Jungle')">Jungla</button>
+            <button class="btn btn-ghost role-filter" data-role="Mid" onclick="filterByRole('Mid')">Mid</button>
+            <button class="btn btn-ghost role-filter" data-role="Bot" onclick="filterByRole('Bot')">ADC</button>
+            <button class="btn btn-ghost role-filter" data-role="Support" onclick="filterByRole('Support')">Soporte</button>
         </div>
         <div class="champion-grid" id="champion-grid"></div>
     </div>

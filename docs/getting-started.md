@@ -111,13 +111,33 @@ Output: `outputs/meta-analyzer-dashboard-enhanced.html`
 
 ## 4. Draft Advisor
 
-Motor de recomendación de picks ADC.
+Motor de recomendación de picks para **ADC y Soporte** en ranked/clash.
 
 ```bash
-# Levantar servidor
-cd src && python -m riot_lol_cli.draft_advisor.server
+# Levantar servidor (desde la raíz del repo, no desde src/)
+python -m riot_lol_cli.draft_advisor.server
+
+# Abrir en browser
+start http://localhost:8001/draft
 ```
-Acceder a http://localhost:8001/draft (puerto 8001 para no chocar con el Meta Analyzer API)
+
+Puerto **8001** (separado del Meta Analyzer en 8000).
+
+**Flujo de uso:**
+1. Seleccionar Rol Objetivo (ADC / Soporte) en el select inferior izquierdo
+2. Ir agregando los picks del equipo aliado con el botón `+` a medida que el draft avanza
+3. Agregar picks enemigos en la fila inferior
+4. Seleccionar Posición de Pick (Blind / Rotación Temprana / Late Counter) y Tipo de Cola
+5. Hacer clic en **Recomendar Pick**
+6. La card superior muestra el mejor pick con score, razones y plan de juego
+7. Las 3 cards inferiores muestran alternativas
+
+**Datos cargados al levantar:**
+- `data/draft_advisor/champion_base.json` — 171 campeones
+- `data/draft_advisor/adc_profiles.json` — 24 perfiles ADC detallados
+- `data/draft_advisor/support_profiles.json` — 10 perfiles Support (Leona, Nautilus, Thresh, Lulu, Janna, Soraka, Milio, Lux, Pyke, Karma)
+- `data/draft_advisor/priority_profiles.json` — 41 perfiles de prioridad
+- `data/draft_advisor/scoring_weights.json` — pesos del motor de scoring
 
 ---
 
