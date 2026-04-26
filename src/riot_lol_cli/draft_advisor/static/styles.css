@@ -7,62 +7,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
 
-/* ============================================================================
-   CSS Custom Properties
-   ============================================================================ */
-:root {
-  /* Core palette */
-  --bg-primary:    #0a0e1a;
-  --bg-secondary:  #111827;
-  --bg-tertiary:   #1a2035;
-  --bg-card:       #151c2e;
-  --bg-card-hover: #1c2540;
-  --bg-input:      #0d1220;
-
-  /* Accents */
-  --gold:          #c89b3c;
-  --gold-light:    #e8c97a;
-  --gold-dim:      #785a28;
-  --blue:          #0ac8b9;
-  --blue-light:    #3dd8cc;
-  --blue-dim:      #0a7a72;
-  --cyan:          #00d4aa;
-  --purple:        #7b61ff;
-  --red:           #ff4655;
-  --red-dim:       #cc3a46;
-  --green:         #2dcc70;
-  --orange:        #ff9a3c;
-
-  /* Text */
-  --text-primary:  #e4e4e7;
-  --text-secondary:#9ca3af;
-  --text-muted:    #6b7280;
-  --text-gold:     #c89b3c;
-
-  /* Borders */
-  --border:        #1f2937;
-  --border-gold:   rgba(200, 155, 60, 0.3);
-  --border-blue:   rgba(10, 200, 185, 0.3);
-
-  /* Glass */
-  --glass-bg:      rgba(21, 28, 46, 0.85);
-  --glass-border:  rgba(200, 155, 60, 0.15);
-
-  /* Shadows */
-  --shadow-lg:     0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  --shadow-glow:   0 0 40px rgba(10, 200, 185, 0.1);
-  --shadow-gold:   0 0 30px rgba(200, 155, 60, 0.15);
-
-  /* Spacing */
-  --gap: 16px;
-  --radius: 12px;
-  --radius-sm: 8px;
-  --radius-lg: 16px;
-
-  /* Transitions */
-  --transition: 200ms ease;
-  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
-}
 
 /* ============================================================================
    Reset & Base

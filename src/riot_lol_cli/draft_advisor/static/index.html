@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ADC Draft Advisor — League of Legends</title>
-    <meta name="description" content="AI-powered ADC pick recommendation engine for League of Legends ranked draft. Get expert-level champion suggestions based on your team composition.">
-    <link rel="stylesheet" href="/static/styles.css?v=2">
+    <title>Draft Advisor — League of Legends</title>
+    <meta name="description" content="Motor de recomendación de picks asistido por IA para drafts de League of Legends. Obtené sugerencias de campeones a nivel experto basadas en tu composición de equipo.">
+    <link rel="stylesheet" href="/static/design-system/tokens.css?v=1">
+    <link rel="stylesheet" href="/static/design-system/compat-spa.css?v=1">
+    <link rel="stylesheet" href="/static/styles.css?v=3">
 </head>
 <body>
 <div class="app">
     <!-- Header -->
     <header class="header">
-        <h1>ADC Draft Advisor</h1>
-        <p class="subtitle">Multi-factor scoring engine for optimal marksman selection</p>
-        <span class="patch-badge" id="patch-badge">Loading...</span>
+        <h1>Draft Advisor</h1>
+        <p class="subtitle">Motor de puntuación multifactorial para selección óptima de draft</p>
+        <span class="patch-badge" id="patch-badge">Cargando...</span>
     </header>
 
     <!-- Main grid: Draft input + Config -->
@@ -21,12 +23,12 @@
         <!-- Left: Draft Board -->
         <div class="card">
             <div class="card-header">
-                <h2><span class="icon">&#9876;</span> Draft Board</h2>
+                <h2><span class="icon">&#9876;</span> Tablero de Draft</h2>
             </div>
             <div class="card-body">
                 <!-- Allies -->
                 <div class="team-section">
-                    <div class="team-label ally">&#9650; Allied Team (your side)</div>
+                    <div class="team-label ally">&#9650; Equipo Aliado (tu lado)</div>
                     <div class="champion-slots" id="ally-slots">
                         <div class="champion-slot" data-team="ally" data-index="0" onclick="openChampionPicker('ally', 0)">
                             <span class="slot-placeholder">+</span>
@@ -40,15 +42,15 @@
                         <div class="champion-slot" data-team="ally" data-index="3" onclick="openChampionPicker('ally', 3)">
                             <span class="slot-placeholder">+</span>
                         </div>
-                        <div class="champion-slot disabled" style="opacity:0.3;pointer-events:none;">
-                            <span class="slot-placeholder" style="font-size:0.6rem;color:var(--gold);">ADC</span>
+                        <div class="champion-slot disabled" id="target-role-slot" style="opacity:0.3;pointer-events:none;">
+                            <span class="slot-placeholder" id="target-role-label" style="font-size:0.6rem;color:var(--gold);">ADC</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Enemies -->
                 <div class="team-section">
-                    <div class="team-label enemy">&#9660; Enemy Team</div>
+                    <div class="team-label enemy">&#9660; Equipo Enemigo</div>
                     <div class="champion-slots" id="enemy-slots">
                         <div class="champion-slot" data-team="enemy" data-index="0" onclick="openChampionPicker('enemy', 0)">
                             <span class="slot-placeholder">+</span>
@@ -71,20 +73,27 @@
                 <!-- Context -->
                 <div class="context-row">
                     <div class="context-group">
-                        <label>Pick Position</label>
+                        <label>Posición de Pick</label>
                         <select id="pick-position">
-                            <option value="blind">Blind Pick</option>
-                            <option value="early">Early Rotation</option>
+                            <option value="blind">Blind Pick (A ciegas)</option>
+                            <option value="early">Rotación Temprana</option>
                             <option value="late" selected>Late / Counter</option>
                         </select>
                     </div>
                     <div class="context-group">
-                        <label>Queue Type</label>
+                        <label>Tipo de Cola</label>
                         <select id="queue-type">
-                            <option value="ranked_solo" selected>Ranked Solo</option>
-                            <option value="ranked_flex">Ranked Flex</option>
+                            <option value="ranked_solo" selected>Clasificatoria Solo/Dúo</option>
+                            <option value="ranked_flex">Clasificatoria Flex</option>
                             <option value="clash">Clash</option>
                             <option value="normal">Normal</option>
+                        </select>
+                    </div>
+                    <div class="context-group">
+                        <label>Rol Objetivo</label>
+                        <select id="target-role" onchange="changeTargetRole(this.value)">
+                            <option value="adc">ADC</option>
+                            <option value="support" selected>Soporte</option>
                         </select>
                     </div>
                 </div>
@@ -94,21 +103,21 @@
         <!-- Right: Pool & Config -->
         <div class="card">
             <div class="card-header">
-                <h2><span class="icon">&#9733;</span> Champion Pool</h2>
+                <h2><span class="icon">&#9733;</span> Pool de Campeones</h2>
             </div>
             <div class="card-body">
                 <div class="pool-toggle" id="pool-toggle">
-                    <button class="active" data-mode="unrestricted" onclick="setPoolMode('unrestricted')">Best Theoretical</button>
-                    <button data-mode="pool_preferred" onclick="setPoolMode('pool_preferred')">Pool Preferred</button>
-                    <button data-mode="pool_only" onclick="setPoolMode('pool_only')">Pool Only</button>
+                    <button class="active" data-mode="unrestricted" onclick="setPoolMode('unrestricted')">Mejor Teórico</button>
+                    <button data-mode="pool_preferred" onclick="setPoolMode('pool_preferred')">Priorizar Pool</button>
+                    <button data-mode="pool_only" onclick="setPoolMode('pool_only')">Solo del Pool</button>
                 </div>
 
                 <div id="pool-config" style="display:none;">
                     <div class="pool-champions" id="pool-champions"></div>
-                    <button class="pool-add-btn" onclick="openChampionPicker('pool', -1)">+ Add ADC to pool</button>
+                    <button class="pool-add-btn" id="pool-add-btn" onclick="openChampionPicker('pool', -1)">+ Agregar al pool</button>
 
                     <div style="margin-top:16px;">
-                        <label style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);display:block;margin-bottom:6px;">Comfort Scores</label>
+                        <label style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);display:block;margin-bottom:6px;">Niveles de Confort</label>
                         <div id="comfort-sliders"></div>
                     </div>
                 </div>
@@ -119,7 +128,7 @@
     <!-- Recommend Button -->
     <div class="recommend-section">
         <button class="recommend-btn" id="recommend-btn" onclick="getRecommendation()">
-            Recommend ADC
+            Recomendar Pick
         </button>
     </div>
 
@@ -134,7 +143,7 @@
         <!-- Alternatives -->
         <div class="card" style="margin-top:16px;">
             <div class="card-header">
-                <h2><span class="icon">&#9881;</span> Alternatives</h2>
+                <h2><span class="icon">&#9881;</span> Alternativas</h2>
             </div>
             <div class="card-body">
                 <div class="alternatives-grid" id="alternatives-grid"></div>
@@ -147,16 +156,16 @@
 <div class="modal-overlay" id="champion-modal">
     <div class="modal">
         <div class="modal-header">
-            <input type="text" id="champion-search" placeholder="Search champion..." oninput="filterChampions(this.value)" autofocus>
+            <input type="text" id="champion-search" placeholder="Buscar campeón..." oninput="filterChampions(this.value)" autofocus>
             <button class="modal-close" onclick="closeModal()">&times;</button>
         </div>
         <div class="role-filters" id="role-filters">
-            <button class="role-filter active" data-role="all" onclick="filterByRole('all')">All</button>
+            <button class="role-filter active" data-role="all" onclick="filterByRole('all')">Todos</button>
             <button class="role-filter" data-role="Top" onclick="filterByRole('Top')">Top</button>
-            <button class="role-filter" data-role="Jungle" onclick="filterByRole('Jungle')">Jungle</button>
+            <button class="role-filter" data-role="Jungle" onclick="filterByRole('Jungle')">Jungla</button>
             <button class="role-filter" data-role="Mid" onclick="filterByRole('Mid')">Mid</button>
-            <button class="role-filter" data-role="Bot" onclick="filterByRole('Bot')">Bot</button>
-            <button class="role-filter" data-role="Support" onclick="filterByRole('Support')">Support</button>
+            <button class="role-filter" data-role="Bot" onclick="filterByRole('Bot')">ADC</button>
+            <button class="role-filter" data-role="Support" onclick="filterByRole('Support')">Soporte</button>
         </div>
         <div class="champion-grid" id="champion-grid"></div>
     </div>
