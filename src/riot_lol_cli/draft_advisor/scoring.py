@@ -811,6 +811,7 @@ class ScoringEngine:
         - Penalty si está en worst_with_adcs.
         - Bonus por sinergia con la jungla aliada (engage vs farm).
         - Bonus por encajar con el "shape" (scaling, dive, poke).
+        - **NotebookLM 2026-04-27**: bonus por sinergia medida 2v2 (measured_synergies.json).
         """
         if not draft.allies:
             return 50.0
@@ -829,6 +830,9 @@ class ScoringEngine:
                     score -= 12  # Anti-sinergia
                 else:
                     score += 2  # Neutral
+
+                # NotebookLM bonus: sinergia medida con WR comprobado/heurístico
+                score += self._score_measured_synergy_bonus(ally_id, profile.id)
 
             # Jungla aliada: detectar engage vs farm
             ally_champ = self._data.get_champion(ally_id)
@@ -850,6 +854,39 @@ class ScoringEngine:
 
         return max(0.0, min(100.0, score))
 
+    def _score_measured_synergy_bonus(self, adc_id: str, supp_id: str) -> float:
+        """NotebookLM 2026-04-27: bonus por sinergia medida 2v2.
+
+        Si la pareja {ADC aliado, supp candidato} está en measured_synergies.json:
+        - confidence='measured' con WR > 50%: bonus interpolado (cada 1pp sobre 50% = +3,
+          cap 15pts)
+        - confidence='heuristic' (sin WR comprobado): bonus reducido por factor 0.6
+          (cap 9pts)
+
+        Si no hay match, devuelve 0.
+        """
+        entry = self._data.get_measured_synergy(adc_id, supp_id)
+        if entry is None:
+            return 0.0
+
+        cfg = self._data.get_measured_synergy_config()
+        threshold = cfg.get("wr_threshold_for_bonus", 0.50)
+        max_bonus = cfg.get("max_bonus", 15.0)
+        h_factor = cfg.get("heuristic_confidence_factor", 0.6)
+        h_max = cfg.get("heuristic_max_bonus", 9.0)
+
+        confidence = entry.get("confidence", "heuristic")
+
+        if confidence == "measured":
+            wr = entry.get("winrate")
+            if wr is None or wr <= threshold:
+                return 0.0
+            excess_pp = (wr - threshold) * 100  # 0.537 → 3.7
+            return min(max_bonus, excess_pp * 3.0)
+
+        # heuristic: bonus base fijo modulado por h_factor (asume ~52% efectivo)
+        return min(h_max, 12.0 * h_factor)
+
     def _score_supp_enemy_matchup(
         self, profile: SupportProfile, draft: DraftState, analysis: DraftAnalysis
     ) -> float:
@@ -859,6 +896,8 @@ class ScoringEngine:
         - Anti-assassin-peel premia vs burst.
         - Anti-poke-in-lane premia vs poke.
         - Bonuses específicos por enemy support en strong/weak_against_supports.
+        - **NotebookLM 2026-04-27**: triángulo Engage > Poke > Sustain con eje invertido
+          Disengage > Engage (strategic_triangle.json).
         """
         if not draft.enemies:
             return 50.0
@@ -886,12 +925,54 @@ class ScoringEngine:
             elif enemy_champ.id in profile.weak_against_supports:
                 score -= 8
 
+        # NotebookLM strategic triangle: aplica una vez por enemy support detectado
+        score += self._apply_strategic_triangle_bonus(profile.id, draft)
+
         # Threat level
         if enemy.threat_level_to_adc == ThreatLevel.CRITICAL:
             # Need extra peel
             score += (profile.peel_strength - 5) * 2
 
         return max(0.0, min(100.0, score))
+
+    def _apply_strategic_triangle_bonus(self, candidate_supp_id: str, draft: DraftState) -> float:
+        """NotebookLM 2026-04-27: aplica el triángulo Engage > Poke > Sustain.
+
+        Detecta el archetype fine-grained del candidate y de los enemy supports
+        identificables en draft.enemies. Devuelve:
+        - +10 score por cada enemy supp que el candidate counterea ('beats')
+        - -8 score por cada enemy supp al que el candidate pierde ('loses_to')
+        - Cap por defensa: máximo +-12 total para no eclipsar otros factores.
+        """
+        triangle = self._data.get_strategic_triangle()
+        if not triangle:
+            return 0.0
+
+        my_arch = self._data.classify_supp_archetype_fine(candidate_supp_id)
+        if my_arch is None:
+            return 0.0
+
+        triangle_rules = triangle.get("triangle", {}).get(my_arch, {})
+        beats = set(triangle_rules.get("beats", []))
+        loses_to = set(triangle_rules.get("loses_to", []))
+
+        scoring_cfg = triangle.get("scoring", {})
+        beats_bonus = scoring_cfg.get("beats_bonus", 10.0)
+        loses_penalty = scoring_cfg.get("loses_to_penalty", -8.0)
+        cap = scoring_cfg.get("max_total_modifier_per_pick", 12.0)
+
+        delta = 0.0
+        for enemy_champ in draft.enemies:
+            enemy_arch = self._data.classify_supp_archetype_fine(enemy_champ.id)
+            if enemy_arch is None:
+                continue
+            if enemy_arch in beats:
+                delta += beats_bonus
+            elif enemy_arch in loses_to:
+                delta += loses_penalty
+
+        # Cap simétrico
+        return max(-cap, min(cap, delta))
 
     def _score_supp_comp_gap_fill(
         self, profile: SupportProfile, analysis: DraftAnalysis

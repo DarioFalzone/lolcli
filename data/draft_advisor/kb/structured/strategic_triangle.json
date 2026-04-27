@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0",
+  "patch": "16.7",
+  "last_updated": "2026-04-27",
+  "description": "Triángulo estratégico Engage > Poke > Sustain > Engage + eje invertido Disengage > Engage. Consumido por scoring.py::_apply_strategic_triangle(). Fuente: KB/notebooklm/Support_Architecture_Dossier.pdf p6.",
+
+  "fine_grained_archetypes": {
+    "engage": {
+      "description": "Tank/semi-tank con hard CC para iniciar fights",
+      "champions": ["Leona", "Nautilus", "Rell", "Alistar"]
+    },
+    "poke": {
+      "description": "Mage support con range largo y daño residual",
+      "champions": ["Lux", "Brand", "Zyra", "Xerath", "Vel'Koz", "Swain"]
+    },
+    "enchanter_disengage": {
+      "description": "Enchanter con herramientas de disengage hard (R Janna, R Lulu, R Milio, W Renata, RE Karma)",
+      "champions": ["Janna", "Lulu", "Milio", "Renata", "Karma"]
+    },
+    "enchanter_pure": {
+      "description": "Enchanter con sustain pero sin disengage hard. Vulnerable a Poke continuo.",
+      "champions": ["Soraka", "Yuumi", "Nami"]
+    },
+    "catcher": {
+      "description": "Hook/throw based supports que crean ventajas numéricas via picks",
+      "champions": ["Thresh", "Blitzcrank", "Pyke"]
+    }
+  },
+
+  "triangle": {
+    "engage": {
+      "beats": ["poke", "enchanter_pure"],
+      "loses_to": ["enchanter_disengage", "catcher"],
+      "reason_beats_poke": "Engage asesina rápidamente a frágiles inmóviles de poke",
+      "reason_beats_enchanter_pure": "Sin disengage, las curaciones no compensan el burst inicial",
+      "reason_loses_to_enchanter_disengage": "Wardens invalidan inversión total del iniciador (eje invertido)",
+      "reason_loses_to_catcher": "Hooks/CC chains pueden interrumpir el engage antes que conecte"
+    },
+    "poke": {
+      "beats": ["enchanter_pure", "enchanter_disengage"],
+      "loses_to": ["engage", "catcher"],
+      "reason_beats_enchanter": "Daño constante supera la regeneración; carecen de cierre de brecha",
+      "reason_loses_to_engage": "Poke es frágil e inmóvil; engage closer cierra la brecha y mata",
+      "reason_loses_to_catcher": "Catchers tienen range similar para hook/CC + más durabilidad"
+    },
+    "enchanter_disengage": {
+      "beats": ["engage"],
+      "loses_to": ["poke", "catcher"],
+      "reason_beats_engage": "EJE INVERTIDO: tools de disengage anulan el iniciador",
+      "reason_loses_to_poke": "Sustain no compensa daño residual sin gap close",
+      "reason_loses_to_catcher": "Sin hard CC del propio supp, los hooks acaban con el ADC peelable"
+    },
+    "enchanter_pure": {
+      "beats": [],
+      "loses_to": ["engage", "poke", "catcher"],
+      "reason_loses_to_all": "Sin disengage hard ni hard CC, vulnerable a casi todo. Solo viable si la comp aliada provee frontline + control."
+    },
+    "catcher": {
+      "beats": ["poke", "enchanter_pure", "enchanter_disengage"],
+      "loses_to": ["engage"],
+      "reason_beats_poke": "Range similar + hook hard CC supera la zone control",
+      "reason_beats_enchanter_pure": "Hook + burst follow-up insta-kill al peeler frágil",
+      "reason_beats_enchanter_disengage": "Si el hook conecta antes del disengage, ADC peelable cae",
+      "reason_loses_to_engage": "Engage tank tiene mejor stat profile en peleas extendidas; catcher cae si pierde el hook inicial"
+    }
+  },
+
+  "scoring": {
+    "beats_bonus": 10.0,
+    "loses_to_penalty": -8.0,
+    "neutral_score": 0.0,
+    "applied_to_factor": "enemy_matchup",
+    "max_total_modifier_per_pick": 12.0
+  },
+
+  "examples": [
+    {
+      "scenario": "Tu candidate=Leona (engage), enemy supp=Lux (poke)",
+      "result": "+10 score (Leona beats Lux)",
+      "explanation": "Leona cierra distancia y burst kills. Lux es frágil e inmóvil."
+    },
+    {
+      "scenario": "Tu candidate=Leona (engage), enemy supp=Janna (enchanter_disengage)",
+      "result": "-8 score (Leona loses to Janna)",
+      "explanation": "Janna R (Monsoon) anula el engage de Leona. Eje invertido Disengage > Engage."
+    },
+    {
+      "scenario": "Tu candidate=Lux (poke), enemy supp=Soraka (enchanter_pure)",
+      "result": "+10 score (Lux beats Soraka)",
+      "explanation": "Daño residual de Lux supera la regen de Soraka. Sin disengage hard, Soraka muere por atrición."
+    },
+    {
+      "scenario": "Tu candidate=Thresh (catcher), enemy supp=Lulu (enchanter_disengage)",
+      "result": "+10 score (Thresh beats Lulu)",
+      "explanation": "Hook conecta antes de R Wild Growth; Thresh + ADC burst el ADC enemy peelable."
+    },
+    {
+      "scenario": "Tu candidate=Thresh (catcher), enemy supp=Leona (engage)",
+      "result": "-8 score (Thresh loses to Leona)",
+      "explanation": "Leona engage tank wins extended fights vs Thresh squishy. Single hook missed = lane lost."
+    }
+  ]
+}

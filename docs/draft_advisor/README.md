@@ -87,11 +87,28 @@ src/riot_lol_cli/draft_advisor/
 
 | Factor | Peso | Descripción |
 |--------|------|-------------|
-| Sinergia con ADC aliado | 35% | `best_with_adcs` / `worst_with_adcs` |
-| Matchup vs enemigos | 20% | `anti_dive`, `anti_poke`, `anti_assassin` |
+| Sinergia con ADC aliado | 35% | `best_with_adcs` / `worst_with_adcs` + **bonus de sinergia medida** |
+| Matchup vs enemigos | 20% | `anti_dive`, `anti_poke`, `anti_assassin` + **triángulo Engage/Poke/Sustain** |
 | Gap fill composición | 20% | Engage gap, peel gap, frontline gap, AP gap |
 | Escalado / fase de juego | 15% | `lane_phase_strength` + `lategame_strength` |
 | Solo queue safety | 10% | `blind_pick_safety` — `execution_difficulty` |
+
+### Modificadores aditivos (NotebookLM 2026-04-27)
+
+**Sinergias medidas (`measured_synergies.json`):**
+- Si la pareja `{ADC aliado, supp candidato}` está en el JSON con `confidence: "measured"` y WR > 50%, aplica bonus interpolado: cada 1 punto de WR sobre 50% → +3 score (cap 15pts).
+- Ej: `Ashe + Seraphine` (54.7% WR) → +14.1 score al `ally_synergy`.
+- Heurísticas pro-scene (`confidence: "heuristic"`) reciben bonus reducido: factor 0.6 (cap 9pts).
+
+**Triángulo estratégico (`strategic_triangle.json`):**
+- Detecta el archetype del enemy support (5 categorías fine-grained: `engage`, `poke`, `enchanter_disengage`, `enchanter_pure`, `catcher`).
+- Si el supp candidato counterea al enemy → +10 al `enemy_matchup`.
+- Si es counter-pickeable → -8 al `enemy_matchup`.
+- Reglas: Engage > Poke; Poke > Enchanter; Enchanter Disengage > Engage (eje invertido); Catcher > Poke + Enchanter pure.
+
+**Predominancia de comp (`comp_predominance.json`, futuro):**
+- Aplica al ciclo Attack > Siege > Protect > Catch > Attack.
+- No integrado al motor en esta iteración; queda como upgrade.
 
 ---
 

@@ -49,6 +49,12 @@ class ChampionDataService:
         self._priority_profiles: dict[str, PriorityProfile] = {}
         self._scoring_weights: ScoringWeightsConfig | None = None
 
+        # NotebookLM 2026-04-27: extended KB JSON (loaded gracefully — optional)
+        self._measured_synergies: list[dict] = []
+        self._measured_synergies_config: dict = {}
+        self._strategic_triangle: dict = {}
+        self._comp_predominance: dict = {}
+
         # Metadata
         self._manifest: DataManifestFile | None = None
         self._schema_version: str = ""
@@ -68,7 +74,36 @@ class ChampionDataService:
         self._load_support_profiles()
         self._load_priority_profiles()
         self._load_scoring_weights()
+        self._load_extended_kb()
         self._cross_validate()
+
+    def _load_extended_kb(self) -> None:
+        """Load extended KB JSON (NotebookLM 2026-04-27): measured synergies, strategic triangle, comp predominance.
+
+        Estos archivos son opcionales. Si faltan, el motor sigue funcionando con
+        sus heurísticas anteriores; los nuevos modificadores devuelven 0.
+        """
+        kb_dir = self._data_dir / "kb" / "structured"
+
+        # measured_synergies.json
+        path = kb_dir / "measured_synergies.json"
+        if path.exists():
+            with open(path, encoding="utf-8") as f:
+                raw = json.load(f)
+            self._measured_synergies = raw.get("synergies", [])
+            self._measured_synergies_config = raw.get("scoring", {})
+
+        # strategic_triangle.json
+        path = kb_dir / "strategic_triangle.json"
+        if path.exists():
+            with open(path, encoding="utf-8") as f:
+                self._strategic_triangle = json.load(f)
+
+        # comp_predominance.json (loaded but not consumed in current sprint)
+        path = kb_dir / "comp_predominance.json"
+        if path.exists():
+            with open(path, encoding="utf-8") as f:
+                self._comp_predominance = json.load(f)
 
     def _load_data_manifest(self) -> None:
         """Load Global Metadata: data_manifest.json"""
@@ -284,6 +319,43 @@ class ChampionDataService:
         if self._scoring_weights is None:
             raise RuntimeError("Scoring weights not loaded")
         return self._scoring_weights
+
+    # ========================================================================
+    # Queries — Extended KB (NotebookLM 2026-04-27)
+    # ========================================================================
+
+    def get_measured_synergy(self, adc_id: str, supp_id: str) -> dict | None:
+        """Look up a measured (or heuristic) ADC+Support synergy entry.
+
+        Returns the dict with `winrate`, `confidence`, `engine`, `reason` if a
+        match exists in measured_synergies.json. Returns None otherwise.
+        """
+        for entry in self._measured_synergies:
+            if entry.get("adc") == adc_id and entry.get("supp") == supp_id:
+                return entry
+        return None
+
+    def get_measured_synergy_config(self) -> dict:
+        """Return the scoring config for measured synergies (thresholds, max bonus)."""
+        return self._measured_synergies_config
+
+    def get_strategic_triangle(self) -> dict:
+        """Return the strategic triangle definition (Engage > Poke > Sustain + invariants)."""
+        return self._strategic_triangle
+
+    def classify_supp_archetype_fine(self, supp_id: str) -> str | None:
+        """Classify a support into the 5 fine-grained triangle archetypes.
+
+        Returns one of: "engage", "poke", "enchanter_disengage", "enchanter_pure",
+        "catcher", or None if not classified.
+        """
+        if not self._strategic_triangle:
+            return None
+        archetypes = self._strategic_triangle.get("fine_grained_archetypes", {})
+        for arch_id, arch_def in archetypes.items():
+            if supp_id in arch_def.get("champions", []):
+                return arch_id
+        return None
 
     # ========================================================================
     # Queries — Composite

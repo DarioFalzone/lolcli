@@ -6,6 +6,36 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-04-27] KB extendida con material NotebookLM + nuevas reglas de scoring
+
+### Motivación
+
+Dario sumó 4 fuentes pesadas a `KB/notebooklm/` (2 PDFs, 1 infografía, 1 guía de estudio en texto plano) extraídos de NotebookLM. Las fuentes contienen conceptos avanzados que el motor del Draft Advisor no estaba aplicando: el triángulo estratégico fino (Engage > Poke > Sustain con eje invertido Disengage > Engage), sinergias 2v2 con winrate medido, predominancia entre las 5 composiciones canónicas, y vocabulario nuevo (J Prox, B Prox, Crash & Move, Regla de los 3 Chequeos).
+
+### Cambios
+
+**KB humano (markdown):**
+- 10 docs nuevos en `KB/notebooklm/sintesis/` (INDEX + 9 ejes temáticos): paradigma del arquitecto, jerarquía de pick order, las 5 composiciones, triángulo Engage/Poke/Sustain, sinergias medidas, economía asimétrica, regla de los 3 chequeos, Crash & Move, meta regional LCK vs LPL.
+- `KB/README.md` extendido con sección "Material extendido NotebookLM".
+
+**Datos estructurados (3 JSON nuevos consumidos por el motor):**
+- `data/draft_advisor/kb/structured/measured_synergies.json` — 4 sinergias 2v2 con WR medido (Samira+Naut 53.7%, Lucian+Nami 54.0%, Ashe+Sera 54.7%, Jinx+Thresh 54.3%) + 10 heurísticas pro-scene. Confidence dual: `measured` vs `heuristic` con bonus diferenciado.
+- `data/draft_advisor/kb/structured/strategic_triangle.json` — Triángulo fine-grained: subdivide enchanter en `enchanter_disengage` (Janna, Lulu, Milio, Renata, Karma) vs `enchanter_pure` (Soraka, Yuumi, Nami). Aplica el eje invertido Disengage > Engage (Wardens invalidan iniciadores).
+- `data/draft_advisor/kb/structured/comp_predominance.json` — Ciclo piedra-papel-tijera entre las 5 comps (Attack > Siege > Protect > Catch > Attack > Siege; Split asimétrica).
+
+**Lógica del motor (scoring.py):**
+- `_score_measured_synergy(adc_id, supp_id)` — busca pareja en JSON, devuelve bonus interpolado por WR (cada 1pp sobre 50% = +3 score, hasta 15pts).
+- `_apply_strategic_triangle(my_archetype, enemy_supp_archetype)` — devuelve +10 si counterea, -8 si es counter-pickeable.
+- Integración en `_recommend_support()` como bonificadores aditivos al `enemy_matchup` y `ally_synergy`.
+
+### Archivos modificados clave
+- `KB/README.md` — sección "Material extendido NotebookLM"
+- `src/riot_lol_cli/draft_advisor/scoring.py` — 2 funciones nuevas + integración en pipeline de scoring
+- `src/riot_lol_cli/draft_advisor/champion_data.py` — loaders de los 3 JSON nuevos
+- `docs/draft_advisor/README.md` — sección "Reglas de scoring (sinergias medidas + triángulo)"
+
+---
+
 ## [2026-04-26] UI Redesign — Draft Advisor SPA (dark navy, WCAG AA, i18n parcial)
 
 ### Motivación
