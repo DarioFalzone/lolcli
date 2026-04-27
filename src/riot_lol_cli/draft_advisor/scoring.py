@@ -1149,7 +1149,7 @@ class ScoringEngine:
         if profile.archetype == SupportArchetype.ENGAGE and not allied.has_frontline and len(draft.allies) >= 2:
             # Check if there's any damage burst follow-up
             risks.append(
-                f"Engage support sin frontline aliada — riesgo de pickeos aislados."
+                "Engage support sin frontline aliada — riesgo de pickeos aislados."
             )
 
         # No peel para scaling ADC
