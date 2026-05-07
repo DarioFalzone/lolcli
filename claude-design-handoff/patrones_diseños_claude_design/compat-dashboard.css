@@ -1,0 +1,35 @@
+/* ============================================================
+   lolcli - Compat layer for Dashboard (dashboard_enhanced.py)
+   ============================================================
+   The dashboard is rendered server-side from a Python f-string.
+   Its :root block lives at src/riot_lol_cli/dashboard_enhanced.py
+   lines 22-34.
+
+   STRATEGY: same as compat-spa.css - keep dashboard token NAMES
+   alive, map to canonical, override when needed.
+
+   USAGE: In dashboard_enhanced.py, add at the top of the <style>
+   block (or as a separate <link>):
+
+     <link rel="stylesheet" href="/static/design-system/tokens.css">
+     <link rel="stylesheet" href="/static/design-system/compat-dashboard.css">
+
+   Then DELETE the existing :root block from the f-string.
+   ============================================================ */
+
+:root {
+  --primary:   #0a1e3d;                /* dashboard-specific deep navy */
+  --secondary: var(--arc-gold-dark);   /* #785a28 - matches */
+  --accent:    var(--arc-gold);        /* #c89b3c - matches */
+
+  --success: #0ac800;                  /* dashboard-specific bright green */
+  --danger:  var(--state-error);       /* #ff3d3d vs #ff4655 - very close */
+  --warning: #ff9900;                  /* dashboard-specific */
+  --info:    #00a8ff;                  /* dashboard-specific blue */
+
+  --dark:  var(--forge-black);         /* #010a13 - matches */
+  --light: #f0f0f0;                    /* dashboard-specific - cooler than canonical */
+
+  --border-radius: var(--radius-sm);
+  --box-shadow:    var(--elevation-1);
+}
