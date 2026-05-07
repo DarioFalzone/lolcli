@@ -1,0 +1,1575 @@
+{
+  "schema_version": "1.1",
+  "scraped_at": "2026-05-01T04:15:41.559922+00:00",
+  "patch": "26.9",
+  "role": "adc",
+  "elo_filter": "emerald_plus",
+  "sources": [
+    "lolalytics",
+    "opgg",
+    "ugg"
+  ],
+  "champion_count": 60,
+  "champions": [
+    {
+      "id": "Karthus",
+      "display_name": "Karthus",
+      "stats": {
+        "win_rate": 56.26,
+        "pick_rate": 0.92,
+        "ban_rate": 1.68,
+        "games_analyzed": 75527725939,
+        "tier": "S",
+        "climb_score": 94.52
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 56.57,
+          "pick_rate": 0.85,
+          "ban_rate": 1.75,
+          "games_analyzed": 75527725356
+        },
+        "opgg": {
+          "win_rate": 56.3,
+          "pick_rate": 0.91,
+          "ban_rate": 1.48,
+          "games_analyzed": 0
+        },
+        "ugg": {
+          "win_rate": 55.92,
+          "pick_rate": 1,
+          "ban_rate": 1.8,
+          "games_analyzed": 583
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Xerath",
+      "display_name": "Xerath",
+      "stats": {
+        "win_rate": 56.41,
+        "pick_rate": 0.58,
+        "ban_rate": 8.67,
+        "games_analyzed": 44318663508,
+        "tier": "S",
+        "climb_score": 92.65
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 54.98,
+          "pick_rate": 0.57,
+          "ban_rate": 8.44,
+          "games_analyzed": 44318663157
+        },
+        "ugg": {
+          "win_rate": 57.83,
+          "pick_rate": 0.6,
+          "ban_rate": 8.9,
+          "games_analyzed": 351
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Ashe",
+      "display_name": "Ashe",
+      "stats": {
+        "win_rate": 53.09,
+        "pick_rate": 14.65,
+        "ban_rate": 7.85,
+        "games_analyzed": 6442472973994,
+        "tier": "S",
+        "climb_score": 88.48
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 53.15,
+          "pick_rate": 14.51,
+          "ban_rate": 7.64,
+          "games_analyzed": 6442472965257
+        },
+        "opgg": {
+          "win_rate": 53.29,
+          "pick_rate": 14.33,
+          "ban_rate": 8.1,
+          "games_analyzed": 0
+        },
+        "ugg": {
+          "win_rate": 52.84,
+          "pick_rate": 15.1,
+          "ban_rate": 7.8,
+          "games_analyzed": 8737
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Seraphine",
+      "display_name": "Seraphine",
+      "stats": {
+        "win_rate": 54.69,
+        "pick_rate": 3.91,
+        "ban_rate": 2.38,
+        "games_analyzed": 62426620508,
+        "tier": "S",
+        "climb_score": 87.47
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 55.58,
+          "pick_rate": 0.82,
+          "ban_rate": 2.62,
+          "games_analyzed": 62426614657
+        },
+        "opgg": {
+          "win_rate": 55.94,
+          "pick_rate": 0.82,
+          "ban_rate": 2.32,
+          "games_analyzed": 0
+        },
+        "ugg": {
+          "win_rate": 52.54,
+          "pick_rate": 10.1,
+          "ban_rate": 2.2,
+          "games_analyzed": 5851
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Vladimir",
+      "display_name": "Vladimir",
+      "stats": {
+        "win_rate": 55.36,
+        "pick_rate": 0.54,
+        "ban_rate": 5.08,
+        "games_analyzed": 26215832396,
+        "tier": "S",
+        "climb_score": 86.5
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 55.09,
+          "pick_rate": 0.49,
+          "ban_rate": 5.26,
+          "games_analyzed": 26215832058
+        },
+        "ugg": {
+          "win_rate": 55.62,
+          "pick_rate": 0.6,
+          "ban_rate": 4.9,
+          "games_analyzed": 338
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Cassiopeia",
+      "display_name": "Cassiopeia",
+      "stats": {
+        "win_rate": 54.93,
+        "pick_rate": 0.31,
+        "ban_rate": 1.34,
+        "games_analyzed": 34110059455,
+        "tier": "S",
+        "climb_score": 84.47
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 54.93,
+          "pick_rate": 0.31,
+          "ban_rate": 1.34,
+          "games_analyzed": 34110059455
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Brand",
+      "display_name": "Brand",
+      "stats": {
+        "win_rate": 54.53,
+        "pick_rate": 2.7,
+        "ban_rate": 4.96,
+        "games_analyzed": 331081921282,
+        "tier": "S",
+        "climb_score": 83.75
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 54.41,
+          "pick_rate": 2.51,
+          "ban_rate": 5.33,
+          "games_analyzed": 331081919557
+        },
+        "opgg": {
+          "win_rate": 54.8,
+          "pick_rate": 2.6,
+          "ban_rate": 4.95,
+          "games_analyzed": 0
+        },
+        "ugg": {
+          "win_rate": 54.38,
+          "pick_rate": 3,
+          "ban_rate": 4.6,
+          "games_analyzed": 1725
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Ziggs",
+      "display_name": "Ziggs",
+      "stats": {
+        "win_rate": 54.11,
+        "pick_rate": 1.43,
+        "ban_rate": 0.48,
+        "games_analyzed": 819,
+        "tier": "S",
+        "climb_score": 80.6
+      },
+      "source_breakdown": {
+        "opgg": {
+          "win_rate": 53.64,
+          "pick_rate": 1.46,
+          "ban_rate": 0.47,
+          "games_analyzed": 0
+        },
+        "ugg": {
+          "win_rate": 54.58,
+          "pick_rate": 1.4,
+          "ban_rate": 0.5,
+          "games_analyzed": 819
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Riven",
+      "display_name": "Riven",
+      "stats": {
+        "win_rate": 53.54,
+        "pick_rate": 4.2,
+        "ban_rate": 2.6,
+        "games_analyzed": 2402,
+        "tier": "A",
+        "climb_score": 79.75
+      },
+      "source_breakdown": {
+        "ugg": {
+          "win_rate": 53.54,
+          "pick_rate": 4.2,
+          "ban_rate": 2.6,
+          "games_analyzed": 2402
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Jinx",
+      "display_name": "Jinx",
+      "stats": {
+        "win_rate": 52.02,
+        "pick_rate": 11.77,
+        "ban_rate": 3.74,
+        "games_analyzed": 702039197259,
+        "tier": "S",
+        "climb_score": 79.31
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 52.08,
+          "pick_rate": 12.03,
+          "ban_rate": 3.7,
+          "games_analyzed": 702039197259
+        },
+        "opgg": {
+          "win_rate": 51.96,
+          "pick_rate": 11.52,
+          "ban_rate": 3.78,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Warwick",
+      "display_name": "Warwick",
+      "stats": {
+        "win_rate": 53.92,
+        "pick_rate": 1.2,
+        "ban_rate": 1.5,
+        "games_analyzed": 664,
+        "tier": "A",
+        "climb_score": 78.6
+      },
+      "source_breakdown": {
+        "ugg": {
+          "win_rate": 53.92,
+          "pick_rate": 1.2,
+          "ban_rate": 1.5,
+          "games_analyzed": 664
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Lux",
+      "display_name": "Lux",
+      "stats": {
+        "win_rate": 54.03,
+        "pick_rate": 0.77,
+        "ban_rate": 2.88,
+        "games_analyzed": 403230411669,
+        "tier": "S",
+        "climb_score": 78.28
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 54.12,
+          "pick_rate": 0.71,
+          "ban_rate": 3.4,
+          "games_analyzed": 403230411156
+        },
+        "opgg": {
+          "win_rate": 54.94,
+          "pick_rate": 0.71,
+          "ban_rate": 2.53,
+          "games_analyzed": 0
+        },
+        "ugg": {
+          "win_rate": 53.02,
+          "pick_rate": 0.9,
+          "ban_rate": 2.7,
+          "games_analyzed": 513
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Katarina",
+      "display_name": "Katarina",
+      "stats": {
+        "win_rate": 54.4,
+        "pick_rate": 0.69,
+        "ban_rate": 10.72,
+        "games_analyzed": 3222074903,
+        "tier": "S",
+        "climb_score": 78.01
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 53.23,
+          "pick_rate": 0.64,
+          "ban_rate": 11.32,
+          "games_analyzed": 3222074458
+        },
+        "opgg": {
+          "win_rate": 52.9,
+          "pick_rate": 0.62,
+          "ban_rate": 9.55,
+          "games_analyzed": 0
+        },
+        "ugg": {
+          "win_rate": 57.08,
+          "pick_rate": 0.8,
+          "ban_rate": 11.3,
+          "games_analyzed": 445
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Camille",
+      "display_name": "Camille",
+      "stats": {
+        "win_rate": 53.27,
+        "pick_rate": 3.3,
+        "ban_rate": 1.0,
+        "games_analyzed": 1881,
+        "tier": "A",
+        "climb_score": 77.16
+      },
+      "source_breakdown": {
+        "ugg": {
+          "win_rate": 53.27,
+          "pick_rate": 3.3,
+          "ban_rate": 1,
+          "games_analyzed": 1881
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Swain",
+      "display_name": "Swain",
+      "stats": {
+        "win_rate": 53.55,
+        "pick_rate": 1.43,
+        "ban_rate": 2.48,
+        "games_analyzed": 575463111355,
+        "tier": "A",
+        "climb_score": 75.98
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 53.92,
+          "pick_rate": 1.42,
+          "ban_rate": 2.57,
+          "games_analyzed": 575463111355
+        },
+        "opgg": {
+          "win_rate": 53.17,
+          "pick_rate": 1.44,
+          "ban_rate": 2.39,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Soraka",
+      "display_name": "Soraka",
+      "stats": {
+        "win_rate": 52.62,
+        "pick_rate": 6.1,
+        "ban_rate": 2.6,
+        "games_analyzed": 3508,
+        "tier": "S",
+        "climb_score": 75.97
+      },
+      "source_breakdown": {
+        "ugg": {
+          "win_rate": 52.62,
+          "pick_rate": 6.1,
+          "ban_rate": 2.6,
+          "games_analyzed": 3508
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Janna",
+      "display_name": "Janna",
+      "stats": {
+        "win_rate": 52.83,
+        "pick_rate": 4.4,
+        "ban_rate": 1.1,
+        "games_analyzed": 2548,
+        "tier": "A",
+        "climb_score": 75.58
+      },
+      "source_breakdown": {
+        "ugg": {
+          "win_rate": 52.83,
+          "pick_rate": 4.4,
+          "ban_rate": 1.1,
+          "games_analyzed": 2548
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "AurelionSol",
+      "display_name": "AurelionSol",
+      "stats": {
+        "win_rate": 53.53,
+        "pick_rate": 0.85,
+        "ban_rate": 1.02,
+        "games_analyzed": 9326663958,
+        "tier": "A",
+        "climb_score": 75.54
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 53.83,
+          "pick_rate": 0.82,
+          "ban_rate": 1.09,
+          "games_analyzed": 9326663457
+        },
+        "opgg": {
+          "win_rate": 53.87,
+          "pick_rate": 0.82,
+          "ban_rate": 0.97,
+          "games_analyzed": 0
+        },
+        "ugg": {
+          "win_rate": 52.89,
+          "pick_rate": 0.9,
+          "ban_rate": 1,
+          "games_analyzed": 501
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Smolder",
+      "display_name": "Smolder",
+      "stats": {
+        "win_rate": 51.86,
+        "pick_rate": 10.34,
+        "ban_rate": 5.86,
+        "games_analyzed": 0,
+        "tier": "A",
+        "climb_score": 75.44
+      },
+      "source_breakdown": {
+        "opgg": {
+          "win_rate": 51.86,
+          "pick_rate": 10.34,
+          "ban_rate": 5.86,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Volibear",
+      "display_name": "Volibear",
+      "stats": {
+        "win_rate": 53.23,
+        "pick_rate": 2.2,
+        "ban_rate": 2.2,
+        "games_analyzed": 1253,
+        "tier": "A",
+        "climb_score": 74.92
+      },
+      "source_breakdown": {
+        "ugg": {
+          "win_rate": 53.23,
+          "pick_rate": 2.2,
+          "ban_rate": 2.2,
+          "games_analyzed": 1253
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Nilah",
+      "display_name": "Nilah",
+      "stats": {
+        "win_rate": 53.4,
+        "pick_rate": 1.36,
+        "ban_rate": 2.68,
+        "games_analyzed": 70444379486,
+        "tier": "A",
+        "climb_score": 74.77
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 53.64,
+          "pick_rate": 1.36,
+          "ban_rate": 2.7,
+          "games_analyzed": 70444378657
+        },
+        "opgg": {
+          "win_rate": 53.59,
+          "pick_rate": 1.32,
+          "ban_rate": 2.64,
+          "games_analyzed": 0
+        },
+        "ugg": {
+          "win_rate": 52.96,
+          "pick_rate": 1.4,
+          "ban_rate": 2.7,
+          "games_analyzed": 829
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Velkoz",
+      "display_name": "Velkoz",
+      "stats": {
+        "win_rate": 53.38,
+        "pick_rate": 0.73,
+        "ban_rate": 1.14,
+        "games_analyzed": 444,
+        "tier": "A",
+        "climb_score": 74.28
+      },
+      "source_breakdown": {
+        "opgg": {
+          "win_rate": 53.15,
+          "pick_rate": 0.65,
+          "ban_rate": 1.07,
+          "games_analyzed": 0
+        },
+        "ugg": {
+          "win_rate": 53.6,
+          "pick_rate": 0.8,
+          "ban_rate": 1.2,
+          "games_analyzed": 444
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Zac",
+      "display_name": "Zac",
+      "stats": {
+        "win_rate": 53.0,
+        "pick_rate": 2.5,
+        "ban_rate": 1.3,
+        "games_analyzed": 1466,
+        "tier": "A",
+        "climb_score": 74.05
+      },
+      "source_breakdown": {
+        "ugg": {
+          "win_rate": 53,
+          "pick_rate": 2.5,
+          "ban_rate": 1.3,
+          "games_analyzed": 1466
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Shyvana",
+      "display_name": "Shyvana",
+      "stats": {
+        "win_rate": 52.57,
+        "pick_rate": 5.6,
+        "ban_rate": 6.4,
+        "games_analyzed": 3232,
+        "tier": "S",
+        "climb_score": 73.59
+      },
+      "source_breakdown": {
+        "ugg": {
+          "win_rate": 52.57,
+          "pick_rate": 5.6,
+          "ban_rate": 6.4,
+          "games_analyzed": 3232
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Malphite",
+      "display_name": "Malphite",
+      "stats": {
+        "win_rate": 54.12,
+        "pick_rate": 0.8,
+        "ban_rate": 19.6,
+        "games_analyzed": 486,
+        "tier": "S",
+        "climb_score": 73.1
+      },
+      "source_breakdown": {
+        "ugg": {
+          "win_rate": 54.12,
+          "pick_rate": 0.8,
+          "ban_rate": 19.6,
+          "games_analyzed": 486
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Naafiri",
+      "display_name": "Naafiri",
+      "stats": {
+        "win_rate": 54.14,
+        "pick_rate": 2.8,
+        "ban_rate": 28.1,
+        "games_analyzed": 1596,
+        "tier": "S",
+        "climb_score": 73.07
+      },
+      "source_breakdown": {
+        "ugg": {
+          "win_rate": 54.14,
+          "pick_rate": 2.8,
+          "ban_rate": 28.1,
+          "games_analyzed": 1596
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Rell",
+      "display_name": "Rell",
+      "stats": {
+        "win_rate": 52.62,
+        "pick_rate": 3.4,
+        "ban_rate": 1.0,
+        "games_analyzed": 1986,
+        "tier": "A",
+        "climb_score": 72.75
+      },
+      "source_breakdown": {
+        "ugg": {
+          "win_rate": 52.62,
+          "pick_rate": 3.4,
+          "ban_rate": 1,
+          "games_analyzed": 1986
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Qiyana",
+      "display_name": "Qiyana",
+      "stats": {
+        "win_rate": 52.8,
+        "pick_rate": 2.8,
+        "ban_rate": 2.7,
+        "games_analyzed": 1610,
+        "tier": "A",
+        "climb_score": 72.57
+      },
+      "source_breakdown": {
+        "ugg": {
+          "win_rate": 52.8,
+          "pick_rate": 2.8,
+          "ban_rate": 2.7,
+          "games_analyzed": 1610
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Veigar",
+      "display_name": "Veigar",
+      "stats": {
+        "win_rate": 53.11,
+        "pick_rate": 0.85,
+        "ban_rate": 1.15,
+        "games_analyzed": 23227637157,
+        "tier": "A",
+        "climb_score": 72.56
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 52.7,
+          "pick_rate": 0.85,
+          "ban_rate": 1.23,
+          "games_analyzed": 23227637157
+        },
+        "opgg": {
+          "win_rate": 53.51,
+          "pick_rate": 0.85,
+          "ban_rate": 1.07,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Sion",
+      "display_name": "Sion",
+      "stats": {
+        "win_rate": 53.04,
+        "pick_rate": 0.9,
+        "ban_rate": 1.2,
+        "games_analyzed": 494,
+        "tier": "A",
+        "climb_score": 72.12
+      },
+      "source_breakdown": {
+        "ugg": {
+          "win_rate": 53.04,
+          "pick_rate": 0.9,
+          "ban_rate": 1.2,
+          "games_analyzed": 494
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "RekSai",
+      "display_name": "Reksai",
+      "stats": {
+        "win_rate": 52.77,
+        "pick_rate": 2.3,
+        "ban_rate": 2.0,
+        "games_analyzed": 1355,
+        "tier": "A",
+        "climb_score": 71.91
+      },
+      "source_breakdown": {
+        "ugg": {
+          "win_rate": 52.77,
+          "pick_rate": 2.3,
+          "ban_rate": 2,
+          "games_analyzed": 1355
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Ivern",
+      "display_name": "Ivern",
+      "stats": {
+        "win_rate": 52.7,
+        "pick_rate": 1.5,
+        "ban_rate": 0.4,
+        "games_analyzed": 852,
+        "tier": "A",
+        "climb_score": 70.86
+      },
+      "source_breakdown": {
+        "ugg": {
+          "win_rate": 52.7,
+          "pick_rate": 1.5,
+          "ban_rate": 0.4,
+          "games_analyzed": 852
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Anivia",
+      "display_name": "Anivia",
+      "stats": {
+        "win_rate": 52.91,
+        "pick_rate": 1.1,
+        "ban_rate": 5.3,
+        "games_analyzed": 654,
+        "tier": "A",
+        "climb_score": 70.05
+      },
+      "source_breakdown": {
+        "ugg": {
+          "win_rate": 52.91,
+          "pick_rate": 1.1,
+          "ban_rate": 5.3,
+          "games_analyzed": 654
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Poppy",
+      "display_name": "Poppy",
+      "stats": {
+        "win_rate": 52.78,
+        "pick_rate": 1.2,
+        "ban_rate": 3.3,
+        "games_analyzed": 720,
+        "tier": "A",
+        "climb_score": 69.99
+      },
+      "source_breakdown": {
+        "ugg": {
+          "win_rate": 52.78,
+          "pick_rate": 1.2,
+          "ban_rate": 3.3,
+          "games_analyzed": 720
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Hwei",
+      "display_name": "Hwei",
+      "stats": {
+        "win_rate": 52.71,
+        "pick_rate": 0.59,
+        "ban_rate": 1.74,
+        "games_analyzed": 0,
+        "tier": "A",
+        "climb_score": 69.19
+      },
+      "source_breakdown": {
+        "opgg": {
+          "win_rate": 52.71,
+          "pick_rate": 0.59,
+          "ban_rate": 1.74,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Morgana",
+      "display_name": "Morgana",
+      "stats": {
+        "win_rate": 53.26,
+        "pick_rate": 0.5,
+        "ban_rate": 15.0,
+        "games_analyzed": 291,
+        "tier": "A",
+        "climb_score": 68.27
+      },
+      "source_breakdown": {
+        "ugg": {
+          "win_rate": 53.26,
+          "pick_rate": 0.5,
+          "ban_rate": 15,
+          "games_analyzed": 291
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "KogMaw",
+      "display_name": "Kogmaw",
+      "stats": {
+        "win_rate": 52.29,
+        "pick_rate": 1.68,
+        "ban_rate": 0.49,
+        "games_analyzed": 0,
+        "tier": "B",
+        "climb_score": 68.21
+      },
+      "source_breakdown": {
+        "opgg": {
+          "win_rate": 52.29,
+          "pick_rate": 1.68,
+          "ban_rate": 0.49,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Yasuo",
+      "display_name": "Yasuo",
+      "stats": {
+        "win_rate": 53.13,
+        "pick_rate": 1.1,
+        "ban_rate": 18.22,
+        "games_analyzed": 9043422468,
+        "tier": "A",
+        "climb_score": 67.07
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 53.43,
+          "pick_rate": 1.05,
+          "ban_rate": 18.9,
+          "games_analyzed": 9043421757
+        },
+        "opgg": {
+          "win_rate": 53.37,
+          "pick_rate": 1.05,
+          "ban_rate": 17.65,
+          "games_analyzed": 0
+        },
+        "ugg": {
+          "win_rate": 52.6,
+          "pick_rate": 1.2,
+          "ban_rate": 18.1,
+          "games_analyzed": 711
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Lucian",
+      "display_name": "Lucian",
+      "stats": {
+        "win_rate": 50.52,
+        "pick_rate": 9.16,
+        "ban_rate": 3.53,
+        "games_analyzed": 431301025956,
+        "tier": "B",
+        "climb_score": 65.23
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 50.58,
+          "pick_rate": 9.24,
+          "ban_rate": 3.43,
+          "games_analyzed": 431301025956
+        },
+        "opgg": {
+          "win_rate": 50.47,
+          "pick_rate": 9.09,
+          "ban_rate": 3.62,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Jhin",
+      "display_name": "Jhin",
+      "stats": {
+        "win_rate": 49.29,
+        "pick_rate": 15.31,
+        "ban_rate": 1.67,
+        "games_analyzed": 0,
+        "tier": "B",
+        "climb_score": 64.05
+      },
+      "source_breakdown": {
+        "opgg": {
+          "win_rate": 49.29,
+          "pick_rate": 15.31,
+          "ban_rate": 1.67,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Zed",
+      "display_name": "Zed",
+      "stats": {
+        "win_rate": 53.08,
+        "pick_rate": 0.5,
+        "ban_rate": 24.8,
+        "games_analyzed": 292,
+        "tier": "A",
+        "climb_score": 63.58
+      },
+      "source_breakdown": {
+        "ugg": {
+          "win_rate": 53.08,
+          "pick_rate": 0.5,
+          "ban_rate": 24.8,
+          "games_analyzed": 292
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Twitch",
+      "display_name": "Twitch",
+      "stats": {
+        "win_rate": 51.31,
+        "pick_rate": 4.7,
+        "ban_rate": 6.41,
+        "games_analyzed": 345154454357,
+        "tier": "A",
+        "climb_score": 63.51
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 51.41,
+          "pick_rate": 4.74,
+          "ban_rate": 6.34,
+          "games_analyzed": 345154454357
+        },
+        "opgg": {
+          "win_rate": 51.21,
+          "pick_rate": 4.65,
+          "ban_rate": 6.48,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Tristana",
+      "display_name": "Tristana",
+      "stats": {
+        "win_rate": 51.29,
+        "pick_rate": 3.43,
+        "ban_rate": 1.22,
+        "games_analyzed": 0,
+        "tier": "A",
+        "climb_score": 63.4
+      },
+      "source_breakdown": {
+        "opgg": {
+          "win_rate": 51.29,
+          "pick_rate": 3.43,
+          "ban_rate": 1.22,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Samira",
+      "display_name": "Samira",
+      "stats": {
+        "win_rate": 51.12,
+        "pick_rate": 5.19,
+        "ban_rate": 6.83,
+        "games_analyzed": 14171269257,
+        "tier": "A",
+        "climb_score": 62.72
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 51.18,
+          "pick_rate": 5.26,
+          "ban_rate": 7.01,
+          "games_analyzed": 14171269257
+        },
+        "opgg": {
+          "win_rate": 51.07,
+          "pick_rate": 5.11,
+          "ban_rate": 6.65,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "MissFortune",
+      "display_name": "Missfortune",
+      "stats": {
+        "win_rate": 50.71,
+        "pick_rate": 5.79,
+        "ban_rate": 1.28,
+        "games_analyzed": 0,
+        "tier": "B",
+        "climb_score": 62.63
+      },
+      "source_breakdown": {
+        "opgg": {
+          "win_rate": 50.71,
+          "pick_rate": 5.79,
+          "ban_rate": 1.28,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Vayne",
+      "display_name": "Vayne",
+      "stats": {
+        "win_rate": 50.89,
+        "pick_rate": 7.77,
+        "ban_rate": 13.34,
+        "games_analyzed": 264256612957,
+        "tier": "B",
+        "climb_score": 62.44
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 50.87,
+          "pick_rate": 7.88,
+          "ban_rate": 13.26,
+          "games_analyzed": 264256612957
+        },
+        "opgg": {
+          "win_rate": 50.91,
+          "pick_rate": 7.65,
+          "ban_rate": 13.42,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Senna",
+      "display_name": "Senna",
+      "stats": {
+        "win_rate": 51.01,
+        "pick_rate": 3.75,
+        "ban_rate": 1.41,
+        "games_analyzed": 0,
+        "tier": "A",
+        "climb_score": 61.83
+      },
+      "source_breakdown": {
+        "opgg": {
+          "win_rate": 51.01,
+          "pick_rate": 3.75,
+          "ban_rate": 1.41,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Caitlyn",
+      "display_name": "Caitlyn",
+      "stats": {
+        "win_rate": 50.14,
+        "pick_rate": 14.72,
+        "ban_rate": 26.29,
+        "games_analyzed": 7491314557,
+        "tier": "B",
+        "climb_score": 61.38
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 50.14,
+          "pick_rate": 15.08,
+          "ban_rate": 26.2,
+          "games_analyzed": 7491314557
+        },
+        "opgg": {
+          "win_rate": 50.14,
+          "pick_rate": 14.36,
+          "ban_rate": 26.37,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Xayah",
+      "display_name": "Xayah",
+      "stats": {
+        "win_rate": 50.72,
+        "pick_rate": 3.17,
+        "ban_rate": 0.63,
+        "games_analyzed": 0,
+        "tier": "B",
+        "climb_score": 59.26
+      },
+      "source_breakdown": {
+        "opgg": {
+          "win_rate": 50.72,
+          "pick_rate": 3.17,
+          "ban_rate": 0.63,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Aphelios",
+      "display_name": "Aphelios",
+      "stats": {
+        "win_rate": 50.37,
+        "pick_rate": 4.69,
+        "ban_rate": 2.39,
+        "games_analyzed": 0,
+        "tier": "B",
+        "climb_score": 58.32
+      },
+      "source_breakdown": {
+        "opgg": {
+          "win_rate": 50.37,
+          "pick_rate": 4.69,
+          "ban_rate": 2.39,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Kaisa",
+      "display_name": "Kaisa",
+      "stats": {
+        "win_rate": 48.42,
+        "pick_rate": 17.81,
+        "ban_rate": 3.2,
+        "games_analyzed": 0,
+        "tier": "B",
+        "climb_score": 57.42
+      },
+      "source_breakdown": {
+        "opgg": {
+          "win_rate": 48.42,
+          "pick_rate": 17.81,
+          "ban_rate": 3.2,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Sivir",
+      "display_name": "Sivir",
+      "stats": {
+        "win_rate": 50.11,
+        "pick_rate": 4.21,
+        "ban_rate": 3.43,
+        "games_analyzed": 0,
+        "tier": "B",
+        "climb_score": 55.46
+      },
+      "source_breakdown": {
+        "opgg": {
+          "win_rate": 50.11,
+          "pick_rate": 4.21,
+          "ban_rate": 3.43,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Draven",
+      "display_name": "Draven",
+      "stats": {
+        "win_rate": 50.67,
+        "pick_rate": 4.62,
+        "ban_rate": 16.61,
+        "games_analyzed": 0,
+        "tier": "B",
+        "climb_score": 55.34
+      },
+      "source_breakdown": {
+        "opgg": {
+          "win_rate": 50.67,
+          "pick_rate": 4.62,
+          "ban_rate": 16.61,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Kalista",
+      "display_name": "Kalista",
+      "stats": {
+        "win_rate": 50.34,
+        "pick_rate": 1.43,
+        "ban_rate": 0.25,
+        "games_analyzed": 0,
+        "tier": "B",
+        "climb_score": 54.29
+      },
+      "source_breakdown": {
+        "opgg": {
+          "win_rate": 50.34,
+          "pick_rate": 1.43,
+          "ban_rate": 0.25,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Yunara",
+      "display_name": "Yunara",
+      "stats": {
+        "win_rate": 49.17,
+        "pick_rate": 6.86,
+        "ban_rate": 2.56,
+        "games_analyzed": 0,
+        "tier": "B",
+        "climb_score": 52.9
+      },
+      "source_breakdown": {
+        "opgg": {
+          "win_rate": 49.17,
+          "pick_rate": 6.86,
+          "ban_rate": 2.56,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Ezreal",
+      "display_name": "Ezreal",
+      "stats": {
+        "win_rate": 47.83,
+        "pick_rate": 20.42,
+        "ban_rate": 13.08,
+        "games_analyzed": 0,
+        "tier": "B",
+        "climb_score": 49.83
+      },
+      "source_breakdown": {
+        "opgg": {
+          "win_rate": 47.83,
+          "pick_rate": 20.42,
+          "ban_rate": 13.08,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Corki",
+      "display_name": "Corki",
+      "stats": {
+        "win_rate": 49.34,
+        "pick_rate": 2.73,
+        "ban_rate": 0.63,
+        "games_analyzed": 0,
+        "tier": "B",
+        "climb_score": 48.98
+      },
+      "source_breakdown": {
+        "opgg": {
+          "win_rate": 49.34,
+          "pick_rate": 2.73,
+          "ban_rate": 0.63,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Varus",
+      "display_name": "Varus",
+      "stats": {
+        "win_rate": 48.13,
+        "pick_rate": 3.58,
+        "ban_rate": 3.7,
+        "games_analyzed": 0,
+        "tier": "C",
+        "climb_score": 40.63
+      },
+      "source_breakdown": {
+        "opgg": {
+          "win_rate": 48.13,
+          "pick_rate": 3.58,
+          "ban_rate": 3.7,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Zeri",
+      "display_name": "Zeri",
+      "stats": {
+        "win_rate": 46.8,
+        "pick_rate": 4.15,
+        "ban_rate": 0.68,
+        "games_analyzed": 0,
+        "tier": "C",
+        "climb_score": 33.17
+      },
+      "source_breakdown": {
+        "opgg": {
+          "win_rate": 46.8,
+          "pick_rate": 4.15,
+          "ban_rate": 0.68,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Mel",
+      "display_name": "Mel",
+      "stats": {
+        "win_rate": 46.2,
+        "pick_rate": 0.83,
+        "ban_rate": 28.24,
+        "games_analyzed": 0,
+        "tier": "C",
+        "climb_score": 14.68
+      },
+      "source_breakdown": {
+        "opgg": {
+          "win_rate": 46.2,
+          "pick_rate": 0.83,
+          "ban_rate": 28.24,
+          "games_analyzed": 0
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    }
+  ]
+}

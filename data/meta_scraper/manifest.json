@@ -1,0 +1,92 @@
+{
+  "last_scrape": "2026-05-03T20:59:02.416780+00:00",
+  "patch": "26.9",
+  "snapshots": [
+    {
+      "timestamp": "2026-04-28T14:39:43.817748+00:00",
+      "sources": [
+        "opgg"
+      ],
+      "champion_count": 46,
+      "file": "normalized\\history\\2026-04-28T11-39-43_merged.json"
+    },
+    {
+      "timestamp": "2026-05-01T01:48:15.660920+00:00",
+      "role": "adc",
+      "sources": [
+        "opgg"
+      ],
+      "champion_count": 38,
+      "file": "normalized\\history\\2026-04-30T22-48-15_merged.json"
+    },
+    {
+      "timestamp": "2026-05-01T01:57:00.802895+00:00",
+      "role": "adc",
+      "sources": [
+        "lolalytics",
+        "opgg",
+        "ugg"
+      ],
+      "champion_count": 62,
+      "file": "normalized\\history\\2026-04-30T22-57-00_merged.json"
+    },
+    {
+      "timestamp": "2026-05-01T04:15:41.568344+00:00",
+      "role": "adc",
+      "sources": [
+        "lolalytics",
+        "opgg",
+        "ugg"
+      ],
+      "champion_count": 60,
+      "file": "normalized\\history\\2026-05-01T01-15-41_merged.json"
+    },
+    {
+      "timestamp": "2026-05-01T04:15:49.729374+00:00",
+      "role": "support",
+      "sources": [
+        "lolalytics",
+        "opgg",
+        "ugg"
+      ],
+      "champion_count": 70,
+      "file": "normalized\\history\\2026-05-01T01-15-49_merged.json"
+    },
+    {
+      "timestamp": "2026-05-02T05:29:24.121286+00:00",
+      "role": "adc",
+      "sources": [
+        "lolalytics",
+        "opgg",
+        "ugg"
+      ],
+      "champion_count": 58,
+      "file": "normalized\\history\\2026-05-02T02-29-24_merged.json"
+    },
+    {
+      "timestamp": "2026-05-03T20:59:02.416780+00:00",
+      "role": "support",
+      "sources": [
+        "lolalytics",
+        "opgg",
+        "ugg"
+      ],
+      "champion_count": 72,
+      "file": "normalized\\history\\2026-05-03T17-59-02_merged.json"
+    }
+  ],
+  "latest_by_role": {
+    "adc": {
+      "timestamp": "2026-05-02T05:29:24.121286+00:00",
+      "patch": "26.9",
+      "champion_count": 58,
+      "file": "normalized\\history\\2026-05-02T02-29-24_merged.json"
+    },
+    "support": {
+      "timestamp": "2026-05-03T20:59:02.416780+00:00",
+      "patch": "26.9",
+      "champion_count": 72,
+      "file": "normalized\\history\\2026-05-03T17-59-02_merged.json"
+    }
+  }
+}

@@ -1,0 +1,189 @@
+{
+  "platform": "lolalytics",
+  "patch": "16.9",
+  "elo": "emerald_plus",
+  "role": "support",
+  "scraped_at": "2026-05-01T04:15:33.049182+00:00",
+  "champions": [
+    {
+      "id": "Rell",
+      "display_name": "Rell",
+      "win_rate": 52.95,
+      "pick_rate": 3.5,
+      "ban_rate": 1,
+      "games_analyzed": 9112793557,
+      "tier_raw": "S+"
+    },
+    {
+      "id": "Nami",
+      "display_name": "Nami",
+      "win_rate": 51.21,
+      "pick_rate": 13.82,
+      "ban_rate": 3.82,
+      "games_analyzed": 8211445482357,
+      "tier_raw": "S+"
+    },
+    {
+      "id": "Seraphine",
+      "display_name": "Seraphine",
+      "win_rate": 54.46,
+      "pick_rate": 8.34,
+      "ban_rate": 2.61,
+      "games_analyzed": 6134268894657,
+      "tier_raw": "S"
+    },
+    {
+      "id": "Thresh",
+      "display_name": "Thresh",
+      "win_rate": 50.98,
+      "pick_rate": 13.06,
+      "ban_rate": 7.78,
+      "games_analyzed": 787420942157,
+      "tier_raw": "S"
+    },
+    {
+      "id": "Janna",
+      "display_name": "Janna",
+      "win_rate": 52.23,
+      "pick_rate": 3.97,
+      "ban_rate": 1.11,
+      "games_analyzed": 117128085057,
+      "tier_raw": "S"
+    },
+    {
+      "id": "AurelionSol",
+      "display_name": "AurelionSol",
+      "win_rate": 52.92,
+      "pick_rate": 0.08,
+      "ban_rate": 1.09,
+      "games_analyzed": 902743457,
+      "tier_raw": "S-"
+    },
+    {
+      "id": "Bard",
+      "display_name": "Bard",
+      "win_rate": 51.06,
+      "pick_rate": 6.71,
+      "ban_rate": 3.85,
+      "games_analyzed": 854216435155,
+      "tier_raw": "S-"
+    },
+    {
+      "id": "Lulu",
+      "display_name": "Lulu",
+      "win_rate": 50.53,
+      "pick_rate": 10.33,
+      "ban_rate": 10.22,
+      "games_analyzed": 221333044156,
+      "tier_raw": "S-"
+    },
+    {
+      "id": "Sona",
+      "display_name": "Sona",
+      "win_rate": 52.44,
+      "pick_rate": 3.69,
+      "ban_rate": 0.61,
+      "games_analyzed": 6171189110056,
+      "tier_raw": "S-"
+    },
+    {
+      "id": "Syndra",
+      "display_name": "Syndra",
+      "win_rate": 53.21,
+      "pick_rate": 0.1,
+      "ban_rate": 3.03,
+      "games_analyzed": 303124858,
+      "tier_raw": "A+"
+    },
+    {
+      "id": "Senna",
+      "display_name": "Senna",
+      "win_rate": 51.1,
+      "pick_rate": 4.49,
+      "ban_rate": 1.37,
+      "games_analyzed": 373144767456,
+      "tier_raw": "A+"
+    },
+    {
+      "id": "Rakan",
+      "display_name": "Rakan",
+      "win_rate": 50.85,
+      "pick_rate": 3.19,
+      "ban_rate": 0.34,
+      "games_analyzed": 341102994957,
+      "tier_raw": "A+"
+    },
+    {
+      "id": "Elise",
+      "display_name": "Elise",
+      "win_rate": 51.76,
+      "pick_rate": 1.2,
+      "ban_rate": 2.08,
+      "games_analyzed": 8238548955,
+      "tier_raw": "A+"
+    },
+    {
+      "id": "Nidalee",
+      "display_name": "Nidalee",
+      "win_rate": 51.45,
+      "pick_rate": 0.33,
+      "ban_rate": 1.16,
+      "games_analyzed": 16010676655,
+      "tier_raw": "A+"
+    },
+    {
+      "id": "Taric",
+      "display_name": "Taric",
+      "win_rate": 53.34,
+      "pick_rate": 1.08,
+      "ban_rate": 0.22,
+      "games_analyzed": 22334897358,
+      "tier_raw": "A"
+    },
+    {
+      "id": "Soraka",
+      "display_name": "Soraka",
+      "win_rate": 51.66,
+      "pick_rate": 5.22,
+      "ban_rate": 2.76,
+      "games_analyzed": 7661682311655,
+      "tier_raw": "A"
+    },
+    {
+      "id": "Zilean",
+      "display_name": "Zilean",
+      "win_rate": 52.9,
+      "pick_rate": 2.61,
+      "ban_rate": 1.43,
+      "games_analyzed": 436840110756,
+      "tier_raw": "A"
+    },
+    {
+      "id": "Nunu",
+      "display_name": "Nunu",
+      "win_rate": 52.43,
+      "pick_rate": 0.09,
+      "ban_rate": 0.67,
+      "games_analyzed": 6702885657,
+      "tier_raw": "A"
+    },
+    {
+      "id": "Blitzcrank",
+      "display_name": "Blitzcrank",
+      "win_rate": 51.54,
+      "pick_rate": 4.95,
+      "ban_rate": 11.63,
+      "games_analyzed": 6361597110656,
+      "tier_raw": "A"
+    },
+    {
+      "id": "Milio",
+      "display_name": "Milio",
+      "win_rate": 51.36,
+      "pick_rate": 7.01,
+      "ban_rate": 5.25,
+      "games_analyzed": 2572258710157,
+      "tier_raw": "A"
+    }
+  ]
+}
