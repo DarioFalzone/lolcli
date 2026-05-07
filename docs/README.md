@@ -1,45 +1,50 @@
-# Documentación — riot_lol_cli
+# Documentacion - riot_lol_cli
 
-Indice de toda la documentación del proyecto.
+Indice de documentacion activa del proyecto. El mapa operativo por proyecto vive
+en `../projects/README.md`.
 
-## Guías Principales
+## Guias Principales
 
-| Documento | Descripción |
+| Documento | Descripcion |
 |-----------|-------------|
-| [getting-started.md](getting-started.md) | Guía de inicio rápido para todos los subsistemas |
-| [api-guide.md](api-guide.md) | Configuración de API key y uso de endpoints |
-| [splash-viewer.md](splash-viewer.md) | Guía completa del visor de splash arts |
+| [getting-started.md](getting-started.md) | Guia de inicio rapido para todos los subsistemas |
+| [api-guide.md](api-guide.md) | Riot API y APIs locales |
+| [splash-viewer.md](splash-viewer.md) | Visor de splash arts |
+| [design-system.md](design-system.md) | Tokens CSS y componentes visuales |
 
-## Por Subsistema
+## Subsistemas
 
-### Dashboard Mejorado
-| Documento | Descripción |
+| Documento | Descripcion |
 |-----------|-------------|
-| [dashboard/DASHBOARD_ENHANCED.md](dashboard/DASHBOARD_ENHANCED.md) | Referencia completa del dashboard mejorado |
-| [dashboard/QUICKSTART.md](dashboard/QUICKSTART.md) | Inicio rápido del dashboard |
-| [dashboard/FILTERS_AND_SOURCES.md](dashboard/FILTERS_AND_SOURCES.md) | Filtros y fuentes de datos |
-| [dashboard/VISUAL_GUIDE.md](dashboard/VISUAL_GUIDE.md) | Guía visual |
+| [dashboard/README.md](dashboard/README.md) | Dashboard del Meta Analyzer: tabs, filtros, endpoints y troubleshooting |
+| [meta_analyzer/README.md](meta_analyzer/README.md) | Meta Analyzer: arquitectura, DB, ADC Tracker, anomalias, tier lists y API |
+| [draft_advisor/README.md](draft_advisor/README.md) | Draft Advisor: API, datos, scoring y SPA |
 
-### Meta Analyzer
-| Documento | Descripción |
-|-----------|-------------|
-| [meta_analyzer/META_ANALYZER_GUIA_COMPLETA.md](meta_analyzer/META_ANALYZER_GUIA_COMPLETA.md) | Guía completa del sistema de detección de meta |
-| [meta_analyzer/META_ANALYZER_README.md](meta_analyzer/META_ANALYZER_README.md) | README del módulo |
-| [meta_analyzer/META_DETECTION_SYSTEM.md](meta_analyzer/META_DETECTION_SYSTEM.md) | Referencia técnica del sistema de detección |
+## Documentacion por Proyecto
 
-### ADC Tracker
-| Documento | Descripción |
-|-----------|-------------|
-| [adc_tracker/ADC_TRACKER_COMPLETE.md](adc_tracker/ADC_TRACKER_COMPLETE.md) | Documentación completa del tracker de ADC |
-| [adc_tracker/ADC_TRACKER_INFO.md](adc_tracker/ADC_TRACKER_INFO.md) | Información de ADCs trackeados |
+Los manifiestos de `../projects/active/` son la entrada recomendada cuando se
+trabaja por subsistema. Incluyen rutas reales de codigo/datos, comandos, deuda
+conocida y docs relacionadas.
 
-### Draft Advisor
-| Documento | Descripción |
-|-----------|-------------|
-| [draft_advisor/README.md](draft_advisor/README.md) | Contexto y arquitectura del sistema de recomendación de picks |
+| Proyecto | Manifest |
+|----------|----------|
+| CLI Match History | `../projects/active/cli-match-history/README.md` |
+| Splash Gallery | `../projects/active/splash-gallery/README.md` |
+| Draft Advisor | `../projects/active/draft-advisor/README.md` |
+| Meta Analyzer + Dashboard | `../projects/active/meta-analyzer-dashboard/README.md` |
+| Meta Scraper | `../projects/active/meta-scraper/README.md` |
+| Assets y datos Riot | `../projects/active/assets-and-data/README.md` |
+| Junglas Pro | `../projects/active/junglas-pro/README.md` |
 
-### Changelog
-| Documento | Descripción |
-|-----------|-------------|
-| [changelog/DASHBOARD_CHANGELOG.md](changelog/DASHBOARD_CHANGELOG.md) | Historial de cambios del dashboard |
-| [changelog/DASHBOARD_SUMMARY.md](changelog/DASHBOARD_SUMMARY.md) | Resumen de mejoras del dashboard |
+## Documentacion Externa a `docs/`
+
+| Path | Uso |
+|------|-----|
+| `AGENTS.md` | Mapa maestro para agentes IA |
+| `projects/README.md` | Mapa por proyectos activos y legacy |
+| `CLAUDE.md` | Shim corto para Claude Code; reglas largas en `.agent/rules/` |
+| `KB/README.md` | Base de conocimiento estrategica |
+| `bitacora_de_cambios.md` | Registro de cambios significativos |
+| `claude-design-handoff/README.md` | Handoff visual para Claude Design |
+
+Los reportes antiguos de auditoria, el ADC Tracker separado y los documentos historicos duplicados fueron absorbidos en estos documentos, reglas de agentes y bitacora. No crear nuevos reportes Markdown fuera del mapa canonico salvo decision explicita.

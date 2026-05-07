@@ -3,7 +3,7 @@ Dashboard Mejorado - HTML/JS con tabs avanzados para Meta Analyzer
 Incluye: Dashboard, Matchups, Items, Raw Data con filtros y clicks interactivos
 """
 
-ENHANCED_DASHBOARD_HTML = """
+ENHANCED_DASHBOARD_HTML = r"""
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -492,7 +492,7 @@ ENHANCED_DASHBOARD_HTML = """
         <div id="matchups" class="tab-content">
             <div class="card">
                 <div class="card-title">Historial de Matchups - Por Campeón</div>
-                
+
                 <!-- Filters -->
                 <div class="filters">
                     <div class="filter-group">
@@ -538,7 +538,7 @@ ENHANCED_DASHBOARD_HTML = """
         <div id="items" class="tab-content">
             <div class="card">
                 <div class="card-title">Construcción de Items - Por Campeón</div>
-                
+
                 <!-- Filters -->
                 <div class="filters">
                     <div class="filter-group">
@@ -576,7 +576,7 @@ ENHANCED_DASHBOARD_HTML = """
         <div id="raw-data" class="tab-content">
             <div class="card">
                 <div class="card-title">Datos Sin Filtrar - Raw Data</div>
-                
+
                 <!-- Filters -->
                 <div class="filters">
                     <div class="filter-group">
@@ -643,16 +643,16 @@ ENHANCED_DASHBOARD_HTML = """
                 // Cargar lista de campeones
                 const response = await axios.get(`${API_BASE}/champions/list`);
                 allChampions = response.data.champions || [];
-                
+
                 // Llenar selects
                 populateSelects();
-                
+
                 // Cargar datos iniciales
                 await Promise.all([
                     updateDashboard(),
                     loadRawData()
                 ]);
-                
+
                 setSystemStatus(true);
             } catch (error) {
                 console.error("Error initializing:", error);
@@ -666,7 +666,7 @@ ENHANCED_DASHBOARD_HTML = """
                 'items-champion-filter',
                 'raw-champion-filter'
             ];
-            
+
             selects.forEach(selectId => {
                 const select = document.getElementById(selectId);
                 allChampions.forEach(champ => {
@@ -682,7 +682,7 @@ ENHANCED_DASHBOARD_HTML = """
             // Remove active from all tabs
             document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
             document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
-            
+
             // Add active to selected
             event.target.classList.add("active");
             document.getElementById(tabName).classList.add("active");
@@ -692,20 +692,20 @@ ENHANCED_DASHBOARD_HTML = """
             try {
                 const response = await axios.get(`${API_BASE}/tier-list/current`);
                 const tiers = response.data;
-                
+
                 let html = '';
-                
+
                 // Contar estadísticas
                 let totalChamps = 0;
                 let totalMatches = 0;
                 let tierSCount = tiers.S?.length || 0;
-                
+
                 Object.keys(tiers).forEach(tier => {
                     const champions = tiers[tier] || [];
                     if (champions.length === 0) return;
-                    
+
                     totalChamps += champions.length;
-                    
+
                     const tierColors = {
                         S: { bg: 'linear-gradient(135deg, #ff6b6b, #ff4444)', name: 'OP' },
                         A: { bg: 'linear-gradient(135deg, #ffa500, #ff8c00)', name: 'Muy Bueno' },
@@ -713,9 +713,9 @@ ENHANCED_DASHBOARD_HTML = """
                         C: { bg: 'linear-gradient(135deg, #95e1d3, #38a169)', name: 'Aceptable' },
                         D: { bg: 'linear-gradient(135deg, #cccccc, #999999)', name: 'Débil' }
                     };
-                    
+
                     const tierInfo = tierColors[tier] || { bg: '#666', name: tier };
-                    
+
                     html += \`
                         <div class="mb-20">
                             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 2px solid var(--arc-gold-dark);">
@@ -724,7 +724,7 @@ ENHANCED_DASHBOARD_HTML = """
                             </div>
                             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px;">
                     \`;
-                    
+
                     champions.forEach(champ => {
                         html += \`
                             <div style="background: rgba(0, 0, 0, 0.3); border: 1px solid var(--arc-gold-dark); border-radius: 4px; padding: 10px; text-align: center; cursor: pointer; transition: all 0.3s ease;" onclick="showChampionDetails('\${champ.name}')">
@@ -736,13 +736,13 @@ ENHANCED_DASHBOARD_HTML = """
                             </div>
                         \`;
                     });
-                    
+
                     html += '</div></div>';
                 });
-                
+
                 document.getElementById("tier-list-content").innerHTML = html;
                 document.getElementById("stat-champions").textContent = totalChamps;
-                
+
             } catch (error) {
                 console.error("Error updating dashboard:", error);
             }
@@ -751,27 +751,27 @@ ENHANCED_DASHBOARD_HTML = """
         async function loadMatchupData() {
             const champion = document.getElementById('matchup-champion-filter').value;
             if (!champion) {
-                document.getElementById('matchup-table').querySelector('tbody').innerHTML = 
+                document.getElementById('matchup-table').querySelector('tbody').innerHTML =
                     '<tr><td colspan="8" class="no-data">Selecciona un campeón</td></tr>';
                 return;
             }
-            
+
             try {
                 const hours = document.getElementById('matchup-hours-filter').value;
                 const limit = document.getElementById('matchup-limit-filter').value;
-                
+
                 const response = await axios.get(
                     `\${API_BASE}/champions/\${champion}/matchups?limit=\${limit}&hours=\${hours}`
                 );
-                
+
                 const data = response.data.data || [];
                 const tbody = document.getElementById('matchup-table').querySelector('tbody');
-                
+
                 if (data.length === 0) {
                     tbody.innerHTML = '<tr><td colspan="8" class="no-data">Sin datos</td></tr>';
                     return;
                 }
-                
+
                 tbody.innerHTML = data.map(row => \`
                     <tr>
                         <td>\${new Date(row.hour).toLocaleString('es-ES')}</td>
@@ -784,10 +784,10 @@ ENHANCED_DASHBOARD_HTML = """
                         <td><span class="source-badge">\${row.source}</span></td>
                     </tr>
                 \`).join('');
-                
+
             } catch (error) {
                 console.error("Error loading matchups:", error);
-                document.getElementById('matchup-table').querySelector('tbody').innerHTML = 
+                document.getElementById('matchup-table').querySelector('tbody').innerHTML =
                     '<tr><td colspan="8" class="text-danger">Error al cargar datos</td></tr>';
             }
         }
@@ -795,25 +795,25 @@ ENHANCED_DASHBOARD_HTML = """
         async function loadItemsData() {
             const champion = document.getElementById('items-champion-filter').value;
             if (!champion) {
-                document.getElementById('items-table').querySelector('tbody').innerHTML = 
+                document.getElementById('items-table').querySelector('tbody').innerHTML =
                     '<tr><td colspan="4" class="no-data">Selecciona un campeón</td></tr>';
                 return;
             }
-            
+
             try {
                 const limit = document.getElementById('items-limit-filter').value;
                 const response = await axios.get(
                     `\${API_BASE}/champions/\${champion}/items?limit=\${limit}`
                 );
-                
+
                 const data = response.data.data || [];
                 const tbody = document.getElementById('items-table').querySelector('tbody');
-                
+
                 if (data.length === 0) {
                     tbody.innerHTML = '<tr><td colspan="4" class="no-data">Sin datos</td></tr>';
                     return;
                 }
-                
+
                 tbody.innerHTML = data.map(row => \`
                     <tr>
                         <td>\${row.item_id}</td>
@@ -822,10 +822,10 @@ ENHANCED_DASHBOARD_HTML = """
                         <td><span class="source-badge">\${row.source}</span></td>
                     </tr>
                 \`).join('');
-                
+
             } catch (error) {
                 console.error("Error loading items:", error);
-                document.getElementById('items-table').querySelector('tbody').innerHTML = 
+                document.getElementById('items-table').querySelector('tbody').innerHTML =
                     '<tr><td colspan="4" class="text-danger">Error al cargar datos</td></tr>';
             }
         }
@@ -834,19 +834,19 @@ ENHANCED_DASHBOARD_HTML = """
             try {
                 const champion = document.getElementById('raw-champion-filter').value;
                 const limit = document.getElementById('raw-limit-filter').value;
-                
+
                 let url = `\${API_BASE}/champions/all/raw-data?limit=\${limit}`;
                 if (champion) url += `&champion=\${champion}`;
-                
+
                 const response = await axios.get(url);
                 const data = response.data.data || [];
                 const tbody = document.getElementById('raw-table').querySelector('tbody');
-                
+
                 if (data.length === 0) {
                     tbody.innerHTML = '<tr><td colspan="6" class="no-data">Sin datos</td></tr>';
                     return;
                 }
-                
+
                 tbody.innerHTML = data.map((row, idx) => \`
                     <tr onclick="showChampionDetails('\${row.champion}')">
                         <td style="cursor: pointer; color: var(--arc-gold); font-weight: bold;">\${row.champion}</td>
@@ -857,27 +857,27 @@ ENHANCED_DASHBOARD_HTML = """
                         <td><span class="source-badge">\${row.source}</span></td>
                     </tr>
                 \`).join('');
-                
+
                 document.getElementById("stat-matches").textContent = data.length;
-                
+
             } catch (error) {
                 console.error("Error loading raw data:", error);
-                document.getElementById('raw-table').querySelector('tbody').innerHTML = 
+                document.getElementById('raw-table').querySelector('tbody').innerHTML =
                     '<tr><td colspan="6" class="text-danger">Error al cargar datos</td></tr>';
             }
         }
 
         async function showChampionDetails(championName) {
             currentModalChampion = championName;
-            
+
             try {
                 const response = await axios.get(
                     `\${API_BASE}/champions/\${championName}/details`
                 );
-                
+
                 const data = response.data;
                 let html = '';
-                
+
                 if (data.champion_data) {
                     const stats = data.champion_data;
                     html += \`
@@ -904,13 +904,13 @@ ENHANCED_DASHBOARD_HTML = """
                         </div>
                     \`;
                 }
-                
+
                 if (data.anomalies && data.anomalies.length > 0) {
                     html += \`
                         <div class="modal-section">
                             <div class="modal-section-title">⚠️ Anomalías Detectadas</div>
                     \`;
-                    
+
                     data.anomalies.forEach(anom => {
                         html += \`
                             <div style="background: rgba(255, 153, 0, 0.1); border-left: 3px solid var(--state-warning); padding: 10px; margin-bottom: 10px; border-radius: 4px;">
@@ -919,10 +919,10 @@ ENHANCED_DASHBOARD_HTML = """
                             </div>
                         \`;
                     });
-                    
+
                     html += '</div>';
                 }
-                
+
                 html += \`
                     <div class="modal-section">
                         <div class="modal-section-title">ℹ️ Información</div>
@@ -932,15 +932,15 @@ ENHANCED_DASHBOARD_HTML = """
                         </div>
                     </div>
                 \`;
-                
+
                 document.getElementById('modal-champion-name').textContent = championName;
                 document.getElementById('modal-source').textContent = data.source;
                 document.getElementById('modal-body').innerHTML = html;
                 document.getElementById('champion-modal').classList.add('active');
-                
+
             } catch (error) {
                 console.error("Error loading champion details:", error);
-                document.getElementById('modal-body').innerHTML = 
+                document.getElementById('modal-body').innerHTML =
                     '<div class="text-danger">Error al cargar detalles del campeón</div>';
             }
         }
@@ -953,28 +953,28 @@ ENHANCED_DASHBOARD_HTML = """
             const table = document.getElementById(tableId);
             const tbody = table.querySelector('tbody');
             const rows = Array.from(tbody.querySelectorAll('tr'));
-            
+
             rows.sort((a, b) => {
                 const aVal = a.cells[columnIndex].textContent.trim();
                 const bVal = b.cells[columnIndex].textContent.trim();
-                
+
                 const aNum = parseFloat(aVal);
                 const bNum = parseFloat(bVal);
-                
+
                 if (!isNaN(aNum) && !isNaN(bNum)) {
                     return aNum - bNum;
                 }
-                
+
                 return aVal.localeCompare(bVal);
             });
-            
+
             rows.forEach(row => tbody.appendChild(row));
         }
 
         function setSystemStatus(isOnline) {
             const statusEl = document.getElementById('system-status');
             const dotEl = document.querySelector('.status-dot');
-            
+
             if (isOnline) {
                 statusEl.textContent = 'Conectado';
                 dotEl.style.background = 'var(--state-success)';
@@ -1007,15 +1007,18 @@ ENHANCED_DASHBOARD_HTML = """
 </html>
 """
 
+
 def save_enhanced_dashboard(output_path: str = "outputs/meta-analyzer-dashboard-enhanced.html"):
     """Guarda el dashboard mejorado en archivo"""
     import logging
     from pathlib import Path
+
     _logger = logging.getLogger(__name__)
     Path(output_path).parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(ENHANCED_DASHBOARD_HTML)
     _logger.info("Dashboard mejorado guardado en: %s", output_path)
+
 
 if __name__ == "__main__":
     save_enhanced_dashboard()

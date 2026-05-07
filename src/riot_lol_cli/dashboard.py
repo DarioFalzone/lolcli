@@ -584,7 +584,7 @@ DASHBOARD_HTML = """
             try {
                 const response = await axios.get(`${API_BASE}/dashboard/summary`);
                 const data = response.data.summary;
-                
+
                 document.getElementById("stat-anomalies").textContent = data.active_anomalies || 0;
                 document.getElementById("stat-champions").textContent = data.champions_tracked || 0;
                 document.getElementById("total-matches").textContent = data.total_matches || 0;
@@ -597,13 +597,13 @@ DASHBOARD_HTML = """
             try {
                 const response = await axios.get(`${API_BASE}/tier-list/current`);
                 const tiers = response.data;
-                
+
                 renderTier("s", tiers.tier_s || []);
                 renderTier("a", tiers.tier_a || []);
                 renderTier("b", tiers.tier_b || []);
                 renderTier("c", tiers.tier_c || []);
                 renderTier("d", tiers.tier_d || []);
-                
+
                 // Actualizar stats
                 document.getElementById("stat-tier-s").textContent = (tiers.tier_s || []).length;
                 document.getElementById("stat-tier-a").textContent = (tiers.tier_a || []).length;
@@ -615,13 +615,13 @@ DASHBOARD_HTML = """
         function renderTier(tier, champions) {
             const container = document.getElementById(`tier-${tier}-list`);
             const count = document.getElementById(`count-${tier}`);
-            
+
             if (!champions || champions.length === 0) {
                 container.innerHTML = '<p style="color: #aaa; grid-column: 1/-1;">Sin datos</p>';
                 count.textContent = 0;
                 return;
             }
-            
+
             count.textContent = champions.length;
             container.innerHTML = champions.map(c => `
                 <div class="champion-card">
@@ -638,13 +638,13 @@ DASHBOARD_HTML = """
             try {
                 const response = await axios.get(`${API_BASE}/anomalies/high-confidence?min_confidence=0.85`);
                 const anomalies = response.data.data || [];
-                
+
                 const container = document.getElementById("anomalies-list");
                 if (!anomalies || anomalies.length === 0) {
                     container.innerHTML = '<p style="color: #aaa; text-align: center;">Sin anomalías detectadas</p>';
                     return;
                 }
-                
+
                 container.innerHTML = anomalies.slice(0, 20).map(a => `
                     <div class="anomaly-item">
                         <div>
@@ -669,16 +669,16 @@ DASHBOARD_HTML = """
             try {
                 const response = await axios.get(`${API_BASE}/stats/latest?limit=100`);
                 const stats = response.data.data || [];
-                
+
                 // Top 10 por Winrate
                 const topWR = stats
                     .sort((a, b) => (b.winrate || 0) - (a.winrate || 0))
                     .slice(0, 10);
-                
+
                 const topPR = stats
                     .sort((a, b) => (b.pickrate || 0) - (a.pickrate || 0))
                     .slice(0, 10);
-                
+
                 renderChart("winrate-chart", topWR.map(s => s.champion_name), topWR.map(s => s.winrate || 0), "Winrate %");
                 renderChart("pickrate-chart", topPR.map(s => s.champion_name), topPR.map(s => s.pickrate || 0), "Pickrate %");
             } catch (error) {
@@ -689,11 +689,11 @@ DASHBOARD_HTML = """
         function renderChart(canvasId, labels, data, label) {
             const ctx = document.getElementById(canvasId);
             if (!ctx) return;
-            
+
             if (chartsCache[canvasId]) {
                 chartsCache[canvasId].destroy();
             }
-            
+
             chartsCache[canvasId] = new Chart(ctx, {
                 type: "horizontalBar",
                 data: {
@@ -730,7 +730,7 @@ DASHBOARD_HTML = """
             // Hide all
             document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
             document.querySelectorAll(".tab").forEach(el => el.classList.remove("active"));
-            
+
             // Show selected
             document.getElementById(tabName).classList.add("active");
             event.target.classList.add("active");
@@ -745,15 +745,18 @@ DASHBOARD_HTML = """
 </html>
 """
 
+
 def save_dashboard(output_path: str = "outputs/meta-analyzer-dashboard.html"):
     """Guarda el dashboard en archivo"""
     import logging
     from pathlib import Path
+
     _logger = logging.getLogger(__name__)
     Path(output_path).parent.mkdir(parents=True, exist_ok=True)
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(DASHBOARD_HTML)
     _logger.info("Dashboard guardado en: %s", output_path)
+
 
 if __name__ == "__main__":
     save_dashboard()

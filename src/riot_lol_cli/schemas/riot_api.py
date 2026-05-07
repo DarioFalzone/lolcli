@@ -22,6 +22,7 @@ from pydantic import BaseModel, Field
 # Participant → Perks
 # ---------------------------------------------------------------------------
 
+
 class PerkSelection(BaseModel, extra="allow"):
     perk: int = 0
     var1: int = 0
@@ -43,6 +44,7 @@ class Perks(BaseModel, extra="allow"):
 # ---------------------------------------------------------------------------
 # Participant
 # ---------------------------------------------------------------------------
+
 
 class ParticipantDto(BaseModel, extra="allow"):
     """Datos de un jugador dentro de un match."""
@@ -118,6 +120,7 @@ class ParticipantDto(BaseModel, extra="allow"):
 # Match Info
 # ---------------------------------------------------------------------------
 
+
 class MatchInfoDto(BaseModel, extra="allow"):
     game_creation: int = Field(default=0, alias="gameCreation")
     game_creation_time: int = Field(default=0, alias="gameCreationTime")
@@ -131,6 +134,7 @@ class MatchInfoDto(BaseModel, extra="allow"):
 # ---------------------------------------------------------------------------
 # Top-level Match
 # ---------------------------------------------------------------------------
+
 
 class MatchMetadataDto(BaseModel, extra="allow"):
     data_version: str = Field(default="", alias="dataVersion")
@@ -148,6 +152,7 @@ class MatchDto(BaseModel, extra="allow"):
 # ---------------------------------------------------------------------------
 # Processed match (salida del data collector)
 # ---------------------------------------------------------------------------
+
 
 class ChampionStats(BaseModel):
     kills: int = 0

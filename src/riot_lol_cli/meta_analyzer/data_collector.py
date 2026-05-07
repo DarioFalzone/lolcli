@@ -29,9 +29,7 @@ class MetaDataCollector:
         self.data_dir = Path(__file__).parent.parent.parent.parent / "data" / "meta"
         self.data_dir.mkdir(parents=True, exist_ok=True)
 
-    def collect_matches_batch(
-        self, summoners: list[str], count_per_summoner: int = 20
-    ) -> list[dict[str, Any]]:
+    def collect_matches_batch(self, summoners: list[str], count_per_summoner: int = 20) -> list[dict[str, Any]]:
         """
         Recolecta partidas de múltiples jugadores.
 
@@ -50,9 +48,7 @@ class MetaDataCollector:
                 account = self.client.get_account_by_riot_id(game_name, tag_line)
                 puuid = account["puuid"]
 
-                match_ids = self.client.get_match_ids_by_puuid(
-                    puuid, start=0, count=count_per_summoner
-                )
+                match_ids = self.client.get_match_ids_by_puuid(puuid, start=0, count=count_per_summoner)
 
                 for match_id in match_ids:
                     try:
@@ -81,9 +77,7 @@ class MetaDataCollector:
         processed = ProcessedMatch.from_match_dto(match_dto, match_id)
         return processed.model_dump()
 
-    def save_matches(
-        self, matches: list[dict[str, Any]], timestamp: Optional[str] = None
-    ) -> Path:
+    def save_matches(self, matches: list[dict[str, Any]], timestamp: Optional[str] = None) -> Path:
         """Guarda matches en archivo JSON con timestamp."""
         if timestamp is None:
             timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M")
@@ -165,9 +159,7 @@ class MetaDataCollector:
                 "avg_vision": round(data["total_vision"] / count, 1),
                 "items_top3": [
                     item_id
-                    for item_id, _ in sorted(
-                        data["items_counter"].items(), key=lambda x: x[1], reverse=True
-                    )[:3]
+                    for item_id, _ in sorted(data["items_counter"].items(), key=lambda x: x[1], reverse=True)[:3]
                 ],
                 "roles": {
                     role: {

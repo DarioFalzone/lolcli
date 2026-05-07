@@ -26,6 +26,7 @@ class RiotAPIError(Exception):
 # Sync client (usado por CLI, scripts y collectors existentes)
 # ---------------------------------------------------------------------------
 
+
 class RiotClient:
     """Cliente síncrono para Riot API y Data Dragon."""
 
@@ -98,10 +99,7 @@ class RiotClient:
         return self._request_json("GET", url)
 
     def get_account_by_riot_id(self, game_name: str, tag_line: str) -> dict[str, Any]:
-        url = (
-            f"{self.regional_base}/riot/account/v1/accounts/by-riot-id/"
-            f"{quote(game_name)}/{quote(tag_line)}"
-        )
+        url = f"{self.regional_base}/riot/account/v1/accounts/by-riot-id/{quote(game_name)}/{quote(tag_line)}"
         return self._request_json("GET", url)
 
     # -- Match ----------------------------------------------------------------
@@ -162,6 +160,7 @@ class RiotClient:
 # ---------------------------------------------------------------------------
 # Async client (para batch collection, API server, etc.)
 # ---------------------------------------------------------------------------
+
 
 class AsyncRiotClient:
     """Cliente asíncrono para Riot API con httpx y backoff exponencial."""
@@ -247,10 +246,7 @@ class AsyncRiotClient:
     # -- Summoner / Account ---------------------------------------------------
 
     async def get_account_by_riot_id(self, game_name: str, tag_line: str) -> dict[str, Any]:
-        url = (
-            f"{self.regional_base}/riot/account/v1/accounts/by-riot-id/"
-            f"{quote(game_name)}/{quote(tag_line)}"
-        )
+        url = f"{self.regional_base}/riot/account/v1/accounts/by-riot-id/{quote(game_name)}/{quote(tag_line)}"
         return await self._request_json("GET", url)
 
     # -- Match ----------------------------------------------------------------
@@ -282,9 +278,7 @@ class AsyncRiotClient:
     # -- Data Dragon ----------------------------------------------------------
 
     async def get_ddragon_versions(self) -> list[str]:
-        data = await self._request_json(
-            "GET", "https://ddragon.leagueoflegends.com/api/versions.json", retries=1
-        )
+        data = await self._request_json("GET", "https://ddragon.leagueoflegends.com/api/versions.json", retries=1)
         if not isinstance(data, list) or not data:
             raise RiotAPIError("Respuesta inesperada de Data Dragon versions")
         return data

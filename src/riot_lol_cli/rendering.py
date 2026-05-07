@@ -59,9 +59,7 @@ def _render_items(items: Any, ddragon_version: str) -> str:
             item_id = int(items.get(str(index), 0) or 0)
             if item_id > 0:
                 item_url = get_item_icon(item_id, ddragon_version)
-                item_img = (
-                    f'<img src="{item_url}" class="item-icon" alt="Item {item_id}" loading="lazy">'
-                )
+                item_img = f'<img src="{item_url}" class="item-icon" alt="Item {item_id}" loading="lazy">'
                 items_html.append(f'<div class="item" data-item-id="{item_id}">{item_img}</div>')
             else:
                 items_html.append('<div class="item-empty"></div>')
@@ -70,8 +68,7 @@ def _render_items(items: Any, ddragon_version: str) -> str:
         if trinket_id > 0:
             trinket_url = get_item_icon(trinket_id, ddragon_version)
             trinket_img = (
-                f'<img src="{trinket_url}" class="item-icon trinket" '
-                f'alt="Trinket {trinket_id}" loading="lazy">'
+                f'<img src="{trinket_url}" class="item-icon trinket" alt="Trinket {trinket_id}" loading="lazy">'
             )
             items_html.append(f'<div class="item trinket" data-item-id="{trinket_id}">{trinket_img}</div>')
         else:
@@ -156,14 +153,14 @@ def generate_match_history_html(template: str, data: dict[str, Any], template_na
                 if d_name or f_name:
                     spells_html = (
                         f'<div class="badge" title="Hechizos">Spells: <strong>{d_name}</strong> '
-                        f'/ <strong>{f_name}</strong></div>'
+                        f"/ <strong>{f_name}</strong></div>"
                     )
 
                 runes_html = ""
                 if p_style or s_style or p_runes or s_runes:
                     runes_html = (
                         '<div class="badge" title="Runas">'
-                        f'Runas: <strong>{p_style}</strong>'
+                        f"Runas: <strong>{p_style}</strong>"
                         + (f" ({p_runes})" if p_runes else "")
                         + (f" • <strong>{s_style}</strong>" if s_style else "")
                         + (f" ({s_runes})" if s_runes else "")
@@ -173,9 +170,7 @@ def generate_match_history_html(template: str, data: dict[str, Any], template_na
                 queue_role_html = ""
                 if queue_text or role_text:
                     separator = " • " if queue_text and role_text else ""
-                    queue_role_html = (
-                        f'<div class="badge" title="Cola y rol">{queue_text}{separator}{role_text}</div>'
-                    )
+                    queue_role_html = f'<div class="badge" title="Cola y rol">{queue_text}{separator}{role_text}</div>'
 
                 extras_meta_html = (
                     '<div class="badge" title="CS / Visión / Multikills">'
@@ -257,7 +252,9 @@ def generate_match_history_html(template: str, data: dict[str, Any], template_na
     display_name = data.get("display_name") or data.get("summoner_name") or "Invocador"
 
     replacements = {
-        "{{matches_rows}}": "".join(matches_html) if matches_html else '<tr><td colspan="4">No se encontraron partidas</td></tr>',
+        "{{matches_rows}}": "".join(matches_html)
+        if matches_html
+        else '<tr><td colspan="4">No se encontraron partidas</td></tr>',
         "{{generated_at}}": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "{{version}}": f"v{version}",
         "{{template_name}}": _escape_text(template_name),

@@ -25,7 +25,9 @@ def cli() -> None:
 
 
 @cli.command()
-@click.option("--read-json", type=click.Path(exists=True), required=True, help="Ruta al archivo JSON con datos de partidas")
+@click.option(
+    "--read-json", type=click.Path(exists=True), required=True, help="Ruta al archivo JSON con datos de partidas"
+)
 @click.option("--html-template", default="default", show_default=True, help="Nombre de la plantilla HTML a utilizar")
 @click.option("--output", "-o", help="Ruta de salida para el archivo HTML")
 def generate(read_json: str, html_template: str, output: Optional[str]) -> None:

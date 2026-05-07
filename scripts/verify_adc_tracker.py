@@ -37,7 +37,7 @@ def main() -> None:
     print("=" * 70)
     print("TOP 10 ADCs POR WINRATE")
     print("=" * 70)
-    print(f'{"#":2} {"Champion":15} {"WR":>6} {"PR":>6} {"Stats":>5}')
+    print(f"{'#':2} {'Champion':15} {'WR':>6} {'PR':>6} {'Stats':>5}")
     print("-" * 70)
     for index, (champ, count, wr, pr) in enumerate(cursor.fetchall()[:10], 1):
         print(f"{index:2}. {champ:15} {wr:5.1f}%  {pr:5.1f}%  {count:5}")
