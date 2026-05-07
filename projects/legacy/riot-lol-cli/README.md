@@ -1,4 +1,41 @@
-# riot-lol-cli
+# riot-lol-cli (legacy)
+
+> **Estado:** archivado en `projects/legacy/riot-lol-cli/`.
+> El paquete activo equivalente vive en `src/riot_lol_cli/` (raiz del repo) y se invoca via `main.py` desde la raiz.
+> Esta copia se preserva como referencia historica y porque contiene el output canonico del perfil **deshu**.
+
+## Contexto
+
+Este fue el primer proyecto del repo: una CLI que consultaba Riot API para el summoner **deshu** (LAS / `la2`),
+descargaba historial de partidas y lo exportaba a HTML con la plantilla `claude-4-5`.
+Cuando se reorganizo el repo a un unico paquete Python, su codigo se absorbio en el paquete activo
+(`src/riot_lol_cli/cli.py`, `api.py`, `rendering.py`) y la copia original se movio aqui.
+
+## Frontend exportado
+
+El artefacto canonico es el reporte HTML generado para deshu:
+
+- **Reporte:** [`outputs/claude-4-5/deshu-las-claude-4-5.html`](outputs/claude-4-5/deshu-las-claude-4-5.html)
+- **Plantilla origen:** [`templates/claude-4-5.html`](templates/claude-4-5.html) y backups con timestamp en [`templates/`](templates/)
+- **Dataset:** [`data/cache/matches.json`](data/cache/matches.json) (cache local de Match-V5)
+
+El frontend muestra invocador, nivel, KDA por partida, win/loss, queue, fecha, y splash arts asociados.
+Estilo "Hextech-like" con acento dorado/cyan, tipografia oscura.
+
+## Migracion al paquete activo
+
+Para correr equivalentes de este CLI sobre el paquete activo:
+
+```powershell
+# Desde la raiz del repo (no desde projects/legacy/riot-lol-cli)
+python main.py --platform la2 --summoner "deshu#TAG" --count 20 --html-template claude-4-5
+```
+
+Las plantillas activas viven en `templates/` (raiz). Esta copia legacy mantiene su propia plantilla por reproducibilidad historica.
+
+---
+
+## Documentacion historica
 
 CLI simple en Python para consultar la API de League of Legends (Riot) y obtener:
 

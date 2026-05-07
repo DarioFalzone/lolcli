@@ -3,11 +3,10 @@ line-length = 120
 target-version = "py39"
 src = ["src", "scripts"]
 exclude = [
-    "_archive",
-    "_quarantine",
     ".venv",
     "outputs",
     "templates",
+    "projects/legacy",
 ]
 
 [tool.ruff.lint]

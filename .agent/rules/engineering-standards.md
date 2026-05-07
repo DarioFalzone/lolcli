@@ -28,7 +28,7 @@ Configuracion vigente en `pyproject.toml`:
 - line length 120;
 - target Python 3.9;
 - `src = ["src", "scripts"]`;
-- exclusiones para `_archive`, `_quarantine`, `.venv`, `outputs` y `templates`.
+- exclusiones para `.venv`, `outputs`, `templates` y `projects/legacy`.
 
 Comandos:
 

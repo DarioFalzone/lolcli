@@ -17,7 +17,7 @@ Reglas operativas para agentes IA que trabajen en este repositorio.
 - Documentacion tecnica activa: `docs/`.
 - Base estrategica humana del Draft Advisor: `KB/`.
 - Reglas de agentes: `.agent/rules/`.
-- Historico no runtime: `_archive/`, `_quarantine/`, `projects/legacy/`.
+- Historico no runtime: `projects/legacy/`.
 
 No mover `src/`, `data/`, `assets/`, `templates/` o `scripts/` sin plan explicito de imports, rutas, docs y tests.
 
@@ -28,7 +28,8 @@ No mover `src/`, `data/`, `assets/`, `templates/` o `scripts/` sin plan explicit
 - Templates runtime activos: `templates/` en la raiz. No reintroducir `src/riot_lol_cli/templates/`.
 - Rendering activo: `src/riot_lol_cli/rendering.py`; `html.py` es legado.
 - `projects/legacy/riot-lol-cli/` no es el paquete activo.
-- Meta Scraper requiere Playwright para scraping real, pero no correr scraping salvo pedido explicito.
+- Meta Scraper requiere Playwright para scraping real (declarado en `requirements.txt` + `playwright install chromium`), pero no correr scraping salvo pedido explicito.
+- Los 3 adapters de Meta Scraper tienen maps de nombres por plataforma; cualquier campeon nuevo en uno debe ir a los 3. `tests/meta_scraper/test_adapter_name_maps.py` detecta drift.
 - `data/meta_analyzer.db`, caches, outputs y snapshots generados no son fuente de verdad.
 - `projects/active/junglas-pro/` es standalone; no copiar su investigacion completa a `KB/`.
 - `support_profiles.json` tiene drift historico de conteos; no corregir incidentalmente.
