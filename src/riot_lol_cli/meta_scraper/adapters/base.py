@@ -5,6 +5,8 @@ Cada plataforma (LoLalytics, OP.GG, etc.) implementa esta interfaz.
 El orquestador llama a estos métodos de forma uniforme.
 """
 
+from __future__ import annotations
+
 import logging
 import random
 import time

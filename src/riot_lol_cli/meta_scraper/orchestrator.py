@@ -5,6 +5,8 @@ Coordina la ejecución de los adaptadores, gestiona rate-limiting global,
 guarda datos raw por plataforma y dispara la normalización.
 """
 
+from __future__ import annotations
+
 import json
 import logging
 from datetime import datetime, timezone

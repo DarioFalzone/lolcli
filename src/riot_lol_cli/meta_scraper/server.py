@@ -6,6 +6,8 @@ Endpoints: tier list, detalle de campeón, trigger de scraping, health.
 Sirve el frontend estático para el dashboard de meta.
 """
 
+from __future__ import annotations
+
 import logging
 from pathlib import Path
 

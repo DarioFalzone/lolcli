@@ -9,6 +9,8 @@ DOM pattern: tabla React (.rt-tr) con celdas .rt-td indexadas:
 Links de campeon: /lol/champions/{slug}/build/{role}
 """
 
+from __future__ import annotations
+
 import logging
 import re
 from datetime import datetime, timezone
