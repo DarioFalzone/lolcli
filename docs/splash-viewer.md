@@ -8,13 +8,16 @@ Visor interactivo de splash arts de League of Legends con navegación avanzada, 
 
 ## Inicio Rápido
 
-### 1. Descargar splash arts (solo primera vez)
+### 1. Actualizar assets
 ```bash
-python scripts/download_splash_arts.py
+python scripts/update_ddragon_assets.py
 ```
-Descarga **2019 imágenes** de **171 campeones** desde Data Dragon CDN en `assets/splash_arts/`.
+Actualiza iconos de items, CSV de items y splash arts desde Data Dragon CDN. No requiere API key.
+Cuando sincroniza splash arts tambien regenera `data/ddragon-splash-catalog.json`,
+`data/splash-manifest.json` y `outputs/splash-viewer.html`, por lo que las skins
+nuevas quedan agregadas al front automaticamente.
 
-### 2. Generar el visor
+### 2. Regenerar el visor manualmente
 ```bash
 # Windows (abre automáticamente)
 scripts\bat\regenerar_splash_viewer.bat
@@ -33,10 +36,11 @@ Doble clic en `outputs/splash-viewer.html`
 
 ### Navegación y Búsqueda
 - **Navegación A-Z lateral**: alfabeto interactivo con letras habilitadas/deshabilitadas
-- **Buscador incremental**: busca campeones en tiempo real
+- **Buscador incremental**: busca campeones y nombres de skins en español/inglés, tolerando acentos
 - **Mini-rostros (Contact sheet)**: avatares laterales para saltar rápido
 - **Breadcrumbs dinámicos**: ubicación actual + contador de resultados
 - **Acordeones por campeón**: secciones expandibles/colapsables
+- **Familias dinámicas**: el filtro de familias se arma desde familias presentes en el manifest
 
 ### Visualización
 - **Grid responsivo**: skins en tarjetas adaptables
@@ -60,8 +64,9 @@ Doble clic en `outputs/splash-viewer.html`
 
 | Archivo | Descripción |
 |---------|-------------|
-| `data/splash-manifest.json` | Índice de todos los splash arts (893KB) |
-| `outputs/splash-viewer.html` | Visor HTML autocontenido (612KB) |
+| `data/ddragon-splash-catalog.json` | Catalogo Data Dragon localizado con parche, fecha de importacion y nombres de skins |
+| `data/splash-manifest.json` | Indice generado de todos los splash arts |
+| `outputs/splash-viewer.html` | Visor HTML autocontenido generado |
 
 ## Fuente de Datos
 
@@ -69,6 +74,7 @@ Las imágenes se obtienen de la CDN pública de Data Dragon:
 - `https://ddragon.leagueoflegends.com/cdn/img/champion/splash/{Champion}_{SkinNum}.jpg`
 - No requiere API key
 - La versión de DDragon se detecta automáticamente
+- El front muestra el parche Data Dragon y la fecha/hora de importacion tomada del manifest
 
 ## Estructura de Assets
 

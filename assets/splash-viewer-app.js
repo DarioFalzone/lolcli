@@ -1,12 +1,31 @@
 // Splash Arts Viewer App - League of Legends
 const MANIFEST_URL = document.currentScript.dataset.manifestUrl || '../data/splash-manifest.json';
 const ITEMS_PER_PAGE = 12;
+const FAMILY_FILTERS = [
+  'Pandemonium',
+  'Demoncursed',
+  'Maleficio Demoniaco',
+  'Flora Fatalis',
+  'Petricite',
+  'Firecracker',
+  'Winter Wonder',
+  'Winterblessed',
+  'Petals of Spring',
+  'Sunken Shadows',
+  'Warhound',
+  'Battle Academia',
+  'PROJECT',
+  'Star Guardian',
+  'K/DA',
+  'Spirit Blossom'
+];
 
 const app = {
   data: {
     champions: [],
     images: [],
-    championImages: {}
+    championImages: {},
+    meta: {}
   },
   
   state: {
@@ -35,6 +54,7 @@ const app = {
     this.loadFavorites();
     await this.loadManifest();
     this.renderColorChips();
+    this.renderFamilyOptions();
     this.renderAlphabet();
     this.renderChampionsList();
     this.renderMainContent();
@@ -48,6 +68,7 @@ const app = {
       // 1) Priorizar manifest inline si existe (compatibilidad file://)
       const inline = window.__INLINE_MANIFEST__;
       if (inline && inline.champions && inline.images) {
+        this.data.meta = inline || {};
         this.data.champions = inline.champions || [];
         this.data.images = inline.images || [];
         this.indexImages();
@@ -57,6 +78,7 @@ const app = {
       // 2) Si no hay inline, intentar fetch normal
       const resp = await fetch(MANIFEST_URL, { cache: 'no-store' });
       const data = await resp.json();
+      this.data.meta = data || {};
       this.data.champions = data.champions || [];
       this.data.images = data.images || [];
       this.indexImages();
@@ -64,6 +86,7 @@ const app = {
       // 3) Fallback final: si existe inline aunque el fetch falle, usarlo
       if (window.__INLINE_MANIFEST__ && window.__INLINE_MANIFEST__.champions) {
         const data = window.__INLINE_MANIFEST__;
+        this.data.meta = data || {};
         this.data.champions = data.champions || [];
         this.data.images = data.images || [];
         this.indexImages();
@@ -138,8 +161,22 @@ const app = {
   },
   matchesFamily(img) {
     if (!this.state.familyFilter) return true;
-    const name = (img.skinName || '').toLowerCase();
-    return name.includes(this.state.familyFilter.toLowerCase());
+    return this.imageSearchText(img).includes(this.normalizeText(this.state.familyFilter));
+  },
+
+  renderFamilyOptions() {
+    const select = document.getElementById('family-filter');
+    if (!select) return;
+
+    const presentFamilies = FAMILY_FILTERS
+      .filter(family => this.data.images.some(img => this.imageSearchText(img).includes(this.normalizeText(family))))
+      .sort((a, b) => a.localeCompare(b, 'es', { sensitivity: 'base' }));
+
+    select.innerHTML = [
+      '<option value="">Familias: Todas</option>',
+      ...presentFamilies.map(family => `<option value="${family}">${family}</option>`)
+    ].join('');
+    select.value = this.state.familyFilter || '';
   },
 
   // ========= Shuffle with seed =========
@@ -150,7 +187,7 @@ const app = {
     if (x === 0) x = 0x9e3779b9;
     return () => {
       x ^= x << 13; x ^= x >>> 17; x ^= x << 5; x >>>= 0;
-      return (x & 0xffffffff) / 0x100000000;
+      return x / 0x100000000;
     };
   },
   shuffleArraySeeded(arr, seed) {
@@ -215,6 +252,29 @@ const app = {
       return `<div class="alphabet-letter ${hasChamps ? '' : 'disabled'}" data-letter="${l}" onclick="app.filterByLetter('${l}')">${l}</div>`;
     }).join('');
   },
+
+  normalizeText(value) {
+    return String(value || '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
+  },
+
+  championSearchText(champ) {
+    return this.normalizeText([champ.id, champ.name, champ.nameEn].filter(Boolean).join(' '));
+  },
+
+  imageSearchText(img) {
+    return this.normalizeText([img.skinName, img.skinNameEn, img.file].filter(Boolean).join(' '));
+  },
+
+  championMatchesQuery(champ, query) {
+    return this.championSearchText(champ).includes(query);
+  },
+
+  imageMatchesQuery(img, query) {
+    return this.imageSearchText(img).includes(query);
+  },
   
   filterByLetter(letter) {
     if (this.state.selectedLetter === letter) {
@@ -229,6 +289,7 @@ const app = {
     this.renderMainContent();
     this.updateAlphabetUI();
     this.updateBreadcrumbs();
+    this.saveStateToHash();
   },
   
   updateAlphabetUI() {
@@ -246,7 +307,7 @@ const app = {
         <div class="champion-avatar">${c.name[0]}</div>
         <div class="champion-info">
           <div class="champion-name">${c.name}</div>
-          <div class="champion-count">${c.count} skins</div>
+          <div class="champion-count">${this.getDisplayImagesForChampion(c).length} skins</div>
         </div>
       </li>
     `).join('');
@@ -262,6 +323,7 @@ const app = {
   },
   
   getFilteredChampions() {
+    const sortByName = (a, b) => (a.name || a.id).localeCompare(b.name || b.id, 'es', { sensitivity: 'base' });
     let filtered = this.data.champions;
     
     if (this.state.selectedLetter) {
@@ -269,11 +331,16 @@ const app = {
     }
     
     if (this.state.searchQuery) {
-      const q = this.state.searchQuery.toLowerCase();
-      filtered = filtered.filter(c => c.name.toLowerCase().includes(q));
+      const q = this.normalizeText(this.state.searchQuery);
+      filtered = filtered.filter(c => {
+        if (this.championMatchesQuery(c, q)) return true;
+        return (this.data.championImages[c.id] || []).some(img => this.imageMatchesQuery(img, q));
+      });
     }
+
+    filtered = filtered.filter(c => this.getDisplayImagesForChampion(c).length > 0);
     
-    return filtered;
+    return filtered.slice().sort(sortByName);
   },
   
   scrollToChampion(champId) {
@@ -314,22 +381,49 @@ const app = {
     
     main.innerHTML = filtered.map(champ => this.renderChampionSection(champ)).join('');
   },
-  
-  renderChampionSection(champ) {
+
+  getDisplayImagesForChampion(champ) {
+    const query = this.normalizeText(this.state.searchQuery);
+    const championMatchesSearch = query ? this.championMatchesQuery(champ, query) : true;
     let images = this.data.championImages[champ.id] || [];
-    // aplicar filtros
+
     images = images.filter(img => this.matchesFamily(img) && this.matchesBadge(img) && this.matchesColor(img));
+
+    if (query && !championMatchesSearch) {
+      images = images.filter(img => this.imageMatchesQuery(img, query));
+    }
+
     if (this.state.favoritesOnly) {
       images = images.filter(img => this.state.favorites.has(this.keyFor(img)));
     }
-    // ordenar cronológicamente si está activado
+
+    const bySkinNum = (a, b) => {
+      const aNum = Number.isFinite(a.skinNum) ? a.skinNum : 999999;
+      const bNum = Number.isFinite(b.skinNum) ? b.skinNum : 999999;
+      if (aNum !== bNum) return aNum - bNum;
+      return (a.skinName || a.file || '').localeCompare(b.skinName || b.file || '', 'es', { sensitivity: 'base' });
+    };
+
     if (this.state.sortOrder === 'chrono') {
-      images = images.slice().sort((a,b) => (a.releaseYear || 9999) - (b.releaseYear || 9999));
+      images = images.slice().sort((a, b) => {
+        const aYear = Number.isFinite(a.releaseYear) ? a.releaseYear : 999999;
+        const bYear = Number.isFinite(b.releaseYear) ? b.releaseYear : 999999;
+        if (aYear !== bYear) return aYear - bYear;
+        return bySkinNum(a, b);
+      });
+    } else {
+      images = images.slice().sort(bySkinNum);
     }
-    // shuffle determinístico si hay seed
+
     if (this.state.shuffleSeed) {
       images = this.shuffleArraySeeded(images, this.state.shuffleSeed + ':' + champ.id);
     }
+
+    return images;
+  },
+
+  renderChampionSection(champ) {
+    const images = this.getDisplayImagesForChampion(champ);
     const visible = this.state.visibleCounts[champ.id] || ITEMS_PER_PAGE;
     const visibleImages = images.slice(0, visible);
     const hasMore = visible < images.length;
@@ -339,7 +433,7 @@ const app = {
         <div class="section-header" onclick="app.toggleSection('${champ.id}')">
           <div class="section-title">
             <span>${champ.name}</span>
-            <span class="section-count">${champ.count} skins</span>
+            <span class="section-count">${images.length} skins</span>
           </div>
           <div class="section-toggle">▼</div>
         </div>
@@ -398,8 +492,9 @@ const app = {
   
   openFilmstrip(champId, idx) {
     this.state.currentChampion = champId;
-    this.state.allImages = this.data.championImages[champId] || [];
-    this.state.currentIndex = idx;
+    const champ = this.data.champions.find(c => c.id === champId);
+    this.state.allImages = champ ? this.getDisplayImagesForChampion(champ) : [];
+    this.state.currentIndex = Math.max(0, Math.min(idx, this.state.allImages.length - 1));
     
     document.getElementById('filmstrip-modal').classList.add('active');
     document.body.style.overflow = 'hidden';
@@ -503,6 +598,7 @@ const app = {
       this.renderMainContent();
       this.updateAlphabetUI();
       this.updateBreadcrumbs();
+      this.saveStateToHash();
     });
     
     // Keyboard shortcuts
@@ -555,6 +651,9 @@ const app = {
     if (this.state.selectedLetter) params.set('letter', this.state.selectedLetter);
     if (this.state.currentIndex > 0) params.set('idx', this.state.currentIndex);
     if (this.state.familyFilter) params.set('fam', this.state.familyFilter);
+    if (this.state.badgeFilter) params.set('badge', this.state.badgeFilter);
+    if (this.state.colorFilter) params.set('color', this.state.colorFilter);
+    if (this.state.sortOrder !== 'default') params.set('sort', this.state.sortOrder);
     if (this.state.favoritesOnly) params.set('fav', '1');
     if (this.state.shuffleSeed) params.set('seed', this.state.shuffleSeed);
     
@@ -566,44 +665,50 @@ const app = {
   
   restoreStateFromHash() {
     const params = new URLSearchParams(window.location.hash.slice(1));
-    
-    if (params.has('q')) {
-      this.state.searchQuery = params.get('q');
-      document.getElementById('search-input').value = this.state.searchQuery;
-    }
-    
-    if (params.has('letter')) {
-      this.state.selectedLetter = params.get('letter');
-      this.updateAlphabetUI();
-    }
-    if (params.has('fam')) {
-      this.state.familyFilter = params.get('fam');
-      const ff = document.getElementById('family-filter');
-      if (ff) ff.value = this.state.familyFilter;
-    }
-    if (params.has('fav')) {
-      this.state.favoritesOnly = params.get('fav') === '1';
-      const btn = document.getElementById('favorites-toggle');
-      if (btn) btn.textContent = `★ Favoritos: ${this.state.favoritesOnly ? 'on' : 'off'}`;
-    }
-    if (params.has('seed')) {
-      this.state.shuffleSeed = params.get('seed');
-    }
-    
-    if (params.has('champ')) {
-      this.state.currentChampion = params.get('champ');
-      this.updateChampionListUI();
-      
+
+    this.state.searchQuery = params.get('q') || '';
+    this.state.selectedLetter = params.get('letter') || '';
+    this.state.familyFilter = params.get('fam') || '';
+    this.state.badgeFilter = params.get('badge') || '';
+    this.state.colorFilter = params.get('color') || '';
+    this.state.sortOrder = params.get('sort') || 'default';
+    this.state.favoritesOnly = params.get('fav') === '1';
+    this.state.shuffleSeed = params.get('seed') || '';
+    this.state.currentChampion = params.get('champ') || null;
+
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) searchInput.value = this.state.searchQuery;
+
+    const familyFilter = document.getElementById('family-filter');
+    if (familyFilter) familyFilter.value = this.state.familyFilter;
+
+    const badgeFilter = document.getElementById('badge-filter');
+    if (badgeFilter) badgeFilter.value = this.state.badgeFilter;
+
+    const sortOrder = document.getElementById('sort-order');
+    if (sortOrder) sortOrder.value = this.state.sortOrder;
+
+    const favoritesBtn = document.getElementById('favorites-toggle');
+    if (favoritesBtn) favoritesBtn.textContent = `★ Favoritos: ${this.state.favoritesOnly ? 'on' : 'off'}`;
+
+    document.querySelectorAll('.color-chip').forEach(el => {
+      el.classList.toggle('active', el.dataset.color === this.state.colorFilter);
+    });
+
+    this.renderChampionsList();
+    this.renderMainContent();
+    this.updateAlphabetUI();
+    this.updateChampionListUI();
+    this.updateBreadcrumbs();
+
+    if (this.state.currentChampion) {
       if (params.has('idx')) {
         const idx = parseInt(params.get('idx'), 10);
-        this.openFilmstrip(this.state.currentChampion, idx);
+        this.openFilmstrip(this.state.currentChampion, Number.isFinite(idx) ? idx : 0);
       } else {
         this.scrollToChampion(this.state.currentChampion);
       }
     }
-    
-    this.updateBreadcrumbs();
-    this.renderMainContent();
   },
   
   updateBreadcrumbs() {
@@ -638,9 +743,34 @@ const app = {
     }
   },
   
+  formatManifestDate(value) {
+    if (!value) return 'N/D';
+
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return value;
+
+    return date.toLocaleString('es-AR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false
+    });
+  },
+
   updateStats() {
     const badge = document.getElementById('stats-badge');
-    badge.textContent = `${this.data.champions.length} Campeones • ${this.data.images.length} Skins`;
+    if (badge) {
+      badge.textContent = `${this.data.champions.length} Campeones • ${this.data.images.length} Skins`;
+    }
+
+    const sourceBadge = document.getElementById('asset-source-badge');
+    if (sourceBadge) {
+      const patch = this.data.meta.ddragonVersion || 'N/D';
+      const importedAt = this.formatManifestDate(this.data.meta.assetsImportedAt || this.data.meta.generatedAt);
+      sourceBadge.textContent = `DDragon ${patch} • Importado ${importedAt}`;
+    }
   },
 
   // ========= Phase 3: Color filter =========
