@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "last_updated": "2026-04-08",
+  "last_updated": "2026-05-03",
   "source": "data_dragon + manual_curation",
   "champions": {
     "Aatrox": {
@@ -397,7 +397,7 @@
     },
     "Bard": {
       "id": "Bard",
-      "display_name": "Bard",
+      "display_name": "Bardo",
       "title": "the Wandering Caretaker",
       "primary_role": "Support",
       "off_roles": [],
@@ -482,7 +482,8 @@
       "title": "the Burning Vengeance",
       "primary_role": "Support",
       "off_roles": [
-        "Mid"
+        "Mid",
+        "Bot"
       ],
       "class": "Mage",
       "subclass": "Burst",
@@ -1658,7 +1659,8 @@
       "title": "the Deathsinger",
       "primary_role": "Jungle",
       "off_roles": [
-        "Mid"
+        "Mid",
+        "Bot"
       ],
       "class": "Mage",
       "subclass": "Battlemage",
@@ -2240,7 +2242,7 @@
     },
     "MasterYi": {
       "id": "MasterYi",
-      "display_name": "Master Yi",
+      "display_name": "Maestro Yi",
       "title": "the Wuju Bladesman",
       "primary_role": "Jungle",
       "off_roles": [],
@@ -3611,7 +3613,8 @@
       "title": "the Noxian Grand General",
       "primary_role": "Support",
       "off_roles": [
-        "Mid"
+        "Mid",
+        "Bot"
       ],
       "class": "Mage",
       "subclass": "Battlemage",
@@ -4285,7 +4288,8 @@
       "title": "the Crimson Reaper",
       "primary_role": "Mid",
       "off_roles": [
-        "Top"
+        "Top",
+        "Bot"
       ],
       "class": "Mage",
       "subclass": "Battlemage",

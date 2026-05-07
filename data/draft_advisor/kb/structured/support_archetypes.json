@@ -4,8 +4,8 @@
   "last_updated": "2026-04-24",
   "archetypes": {
     "engage": {
-      "name": "Engage Support",
-      "description": "Tank/semi-tank supports that initiate teamfights with hard CC. Create constant kill threat in lane and open fights at favorable timings.",
+      "name": "Support de engage",
+      "description": "Supports tanque o semi-tanque que inician teamfights con hard CC. Crean amenaza constante de kill en línea y abren peleas en ventanas favorables.",
       "core_traits": {
         "engage_strength": 9,
         "peel_strength": 4,
@@ -13,22 +13,22 @@
         "scaling": 5
       },
       "ideal_with": [
-        "Burst ADCs with high follow-up (MissFortune R, Samira R, Draven, Lucian)",
-        "Farm-oriented junglers (Karthus, Master Yi) — engage support compensates lack of jungle initiation",
-        "Comps with damage burst mids (Syndra, Veigar, Ahri)",
-        "Vs immobile enemy ADCs (KogMaw, Jinx, Twitch)"
+        "ADCs de burst con buen follow-up (R de Miss Fortune, R de Samira, Draven, Lucian)",
+        "Junglas orientados a farmear (Karthus, Maestro Yi): el support de engage compensa la falta de iniciación del jungla",
+        "Composiciones con mids de burst (Syndra, Veigar, Ahri)",
+        "Contra ADCs enemigos inmóviles (Kog'Maw, Jinx, Twitch)"
       ],
       "avoid_with": [
-        "Self-peel scaling ADCs (Vayne, KogMaw without frontline)",
-        "Enemy team with 2+ dive (Zed, Akali, Vi, Camille) — need peel",
-        "Allied control mage mid without follow-up (Veigar)"
+        "ADCs de escalado con auto-peel (Vayne, Kog'Maw sin frontline)",
+        "Equipo enemigo con 2+ amenazas de dive (Zed, Akali, Vi, Camille): hace falta peel",
+        "Mago de control aliado en mid sin follow-up claro (Veigar)"
       ],
       "champions": ["Leona", "Nautilus", "Rell", "Alistar"]
     },
 
     "engage_hybrid": {
-      "name": "Engage Hybrid (Roam-focused)",
-      "description": "Engage supports with strong roam potential and assassin-like execute or stealth tools.",
+      "name": "Engage híbrido orientado a roam",
+      "description": "Supports de engage con alto potencial de roam y herramientas de execute, sigilo o entrada tipo asesino.",
       "core_traits": {
         "engage_strength": 8,
         "peel_strength": 3,
@@ -36,20 +36,20 @@
         "scaling": 4
       },
       "ideal_with": [
-        "Lane-dominant ADCs (Draven, Lucian)",
-        "Junglers with early ganks (Elise, Lee Sin, Camille)",
-        "Comps that need pick potential"
+        "ADCs dominantes de línea (Draven, Lucian)",
+        "Junglas con ganks tempranos (Elise, Lee Sin, Camille)",
+        "Composiciones que necesitan potencial de pick"
       ],
       "avoid_with": [
-        "Scaling hypercarry ADCs (KogMaw, Twitch, Vayne)",
-        "Tanky enemy comps (Pyke falls off vs full tanks)"
+        "Hypercarrys de escalado (Kog'Maw, Twitch, Vayne)",
+        "Composiciones enemigas muy tanque (Pyke cae contra tanques completos)"
       ],
       "champions": ["Pyke"]
     },
 
     "enchanter": {
-      "name": "Enchanter Support",
-      "description": "Long-range fragile supports focused on keeping the ADC alive and empowered. Excel at peel against dive and providing buffs.",
+      "name": "Support enchanter",
+      "description": "Supports frágiles de rango que mantienen vivo y potenciado al ADC. Destacan por peel contra dive y buffs defensivos/ofensivos.",
       "core_traits": {
         "engage_strength": 2,
         "peel_strength": 9,
@@ -57,22 +57,22 @@
         "scaling": 8
       },
       "ideal_with": [
-        "Hypercarry scaling ADCs (Jinx, KogMaw, Aphelios, Twitch, Vayne)",
-        "Enemy team with 2+ dive (Zed, Camille, Vi, Hecarim)",
-        "Junglers with engage (Vi, Sejuani, Wukong) — they engage, you peel",
-        "Comps with frontline but squishy ADC"
+        "Hypercarrys de escalado (Jinx, Kog'Maw, Aphelios, Twitch, Vayne)",
+        "Equipo enemigo con 2+ amenazas de dive (Zed, Camille, Vi, Hecarim)",
+        "Junglas con engage (Vi, Sejuani, Wukong): ellos inician, vos peeleás",
+        "Composiciones con frontline pero ADC frágil"
       ],
       "avoid_with": [
-        "Comps without engage anywhere else",
-        "Enemy lane bully ADC (Draven with Pyke)",
-        "Full poke siege comp (need mage support instead)"
+        "Composiciones sin engage en otro rol",
+        "Lane bully enemigo como Draven + Pyke",
+        "Composición full poke/siege que necesita support mago"
       ],
       "champions": ["Lulu", "Janna", "Soraka", "Milio", "Nami", "Yuumi", "Renata", "Karma"]
     },
 
     "poke": {
-      "name": "Poke / Mage Support",
-      "description": "Traditional mages played as support. Long-range skillshots for poke, zone control, and sustained damage. High skill ceiling.",
+      "name": "Support de poke/mago",
+      "description": "Magos jugados como support. Aportan skillshots de largo rango, control de zona y daño sostenido. Alto techo de habilidad.",
       "core_traits": {
         "engage_strength": 3,
         "peel_strength": 4,
@@ -81,22 +81,22 @@
         "poke": 9
       },
       "ideal_with": [
-        "Poke ADCs (Caitlyn, Jhin, Varus, Ezreal) — poke siege comp",
-        "Allied comp WITHOUT AP damage (compensates damage type)",
-        "Enemy team with multiple tanks (need scaled damage)",
-        "Weak lane phase enemy bot (Soraka, Yuumi to punish)"
+        "ADCs de poke (Caitlyn, Jhin, Varus, Ezreal): composición de poke/siege",
+        "Composición aliada sin daño AP",
+        "Equipo enemigo con varios tanques que necesita daño escalado",
+        "Bot lane enemiga débil de línea (Soraka, Yuumi) para castigar"
       ],
       "avoid_with": [
-        "Scaling ADCs that need peel (KogMaw, Vayne)",
-        "Dive-heavy enemy comps — squishy and no peel",
-        "Allied AP mid (redundant damage)"
+        "ADCs de escalado que necesitan peel (Kog'Maw, Vayne)",
+        "Composiciones enemigas cargadas de dive: sos frágil y tenés poco peel",
+        "Mid AP aliado, porque duplica demasiado el tipo de daño"
       ],
       "champions": ["Lux", "Brand", "Zyra", "Xerath", "Vel'Koz", "Swain"]
     },
 
     "catcher": {
-      "name": "Catcher / Pick Support",
-      "description": "Hook/throw based supports that create numerical advantages via picks. High skill ceiling. Lane bullies that snowball.",
+      "name": "Support catcher/de pick",
+      "description": "Supports basados en hooks o herramientas de catch que crean ventajas numéricas con picks. Alto techo de habilidad. Dominan línea cuando snowballean.",
       "core_traits": {
         "engage_strength": 7,
         "peel_strength": 5,
@@ -104,14 +104,14 @@
         "scaling": 7
       },
       "ideal_with": [
-        "Lane-bully ADCs (Draven, Lucian)",
-        "Junglers with early ganks (Elise, Lee Sin)",
-        "Comps that need pick potential (vs scaling enemy comp)",
-        "Enemy ADC immobile (KogMaw, Jinx, Twitch)"
+        "ADCs lane bully (Draven, Lucian)",
+        "Junglas con ganks tempranos (Elise, Lee Sin)",
+        "Composiciones que necesitan pick potential contra escalado enemigo",
+        "ADC enemigo inmóvil (Kog'Maw, Jinx, Twitch)"
       ],
       "avoid_with": [
-        "Scaling ADCs that need peel (Vayne, KogMaw)",
-        "Enemy team with disciplined positioning (multiple tanks frontline)"
+        "ADCs de escalado que necesitan peel (Vayne, Kog'Maw)",
+        "Equipo enemigo con posicionamiento disciplinado y múltiples tanques de frontline"
       ],
       "champions": ["Thresh", "Blitzcrank"]
     }
@@ -122,31 +122,31 @@
       "best_archetypes": ["enchanter"],
       "ok_archetypes": ["catcher"],
       "bad_archetypes": ["engage", "poke"],
-      "reason": "Need peel and disengage. Engage support is risk-on with no peel. Mage support is squishy."
+      "reason": "Hace falta peel y disengage. El support de engage queda muy riesgoso sin peel. El support mago es demasiado frágil."
     },
     "vs_poke_comp": {
       "best_archetypes": ["engage", "engage_hybrid"],
       "ok_archetypes": ["catcher", "enchanter"],
       "bad_archetypes": ["poke"],
-      "reason": "Need to close distance and force fights. Engage hard breaks the siege pattern."
+      "reason": "Hace falta cerrar distancia y forzar peleas. El engage duro rompe el patrón de siege."
     },
     "vs_pick_comp": {
       "best_archetypes": ["enchanter"],
       "ok_archetypes": ["catcher"],
       "bad_archetypes": ["poke", "engage"],
-      "reason": "Need vision control + tools to negate hooks. R disengage / W polymorph counter picks."
+      "reason": "Hace falta control de visión y herramientas para negar hooks. Disengage con R o polymorph con W castigan los picks."
     },
     "vs_scaling_comp": {
       "best_archetypes": ["engage", "engage_hybrid", "catcher"],
       "ok_archetypes": ["poke"],
       "bad_archetypes": ["enchanter"],
-      "reason": "Need to snowball lane and force objectives before they scale. Lane bullies preferred."
+      "reason": "Hay que snowballear línea y forzar objetivos antes de que escalen. Se prefieren lane bullies."
     },
     "vs_tank_heavy_comp": {
       "best_archetypes": ["poke"],
       "ok_archetypes": ["catcher"],
       "bad_archetypes": ["engage", "enchanter"],
-      "reason": "Need scaled magical damage to break tanks. Engage gets stuck in front of immortal frontline."
+      "reason": "Hace falta daño mágico escalado para romper tanques. El engage se queda trabado frente a una frontline inmortal."
     }
   }
 }

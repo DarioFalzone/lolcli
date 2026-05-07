@@ -1,316 +1,2501 @@
 {
   "schema_version": "1.0",
-  "patch": "16.7",
-  "last_updated": "2026-04-24",
+  "patch": "16.9",
+  "last_updated": "2026-05-03",
   "source": "manual_expert_curation",
-  "phase": "1_mvp",
-  "notes": "10 soportes core. Phase 2 completa los 14 restantes (Blitzcrank, Rakan, Rell, Alistar, Nami, Yuumi, Renata, Zyra, Brand, Xerath, VelKoz, Swain, Senna, Bard).",
+  "phase": "3_complete",
+  "notes": "34 soportes cubiertos. Roster auditado 2026-05-03: Engage (7), Enchanter (10), Poke/Mage (7), Warden (5), Catcher (5).",
   "profiles": {
     "Leona": {
-      "id": "Leona", "display_name": "Leona",
+      "id": "Leona",
+      "display_name": "Leona",
       "archetype": "engage",
-      "engage_strength": 10, "peel_strength": 4, "lane_kill_pressure": 9, "disengage": 1, "poke": 1,
-      "cc_chain_length": 9, "scaling": 5, "blind_pick_safety": 7, "execution_difficulty": 4,
-      "anti_dive": 6, "anti_assassin_peel": 3, "anti_poke_in_lane": 3,
-      "synergy_engage_jungler": 6, "synergy_farm_jungler": 9,
-      "synergy_with_poke_comp": 4, "synergy_with_dive_comp": 8, "synergy_with_scaling_comp": 5,
-      "lane_phase_strength": 9, "midgame_strength": 8, "lategame_strength": 7,
-      "best_with_adcs": ["MissFortune", "Samira", "Draven", "Lucian", "Kalista"],
-      "worst_with_adcs": ["Caitlyn", "Jhin", "Vayne", "Ezreal"],
-      "strong_against_supports": ["Soraka", "Yuumi", "Senna"],
-      "weak_against_supports": ["Janna", "Lulu", "Lux", "Xerath"],
-      "power_spikes": ["level 2 (E+Q stun)", "level 6 (R)", "Locket completion"],
-      "strengths": ["Hardest engage chains in lane", "Stun chains long enough for full ADC ult cycles", "Tanky frontline in teamfights", "Easy to execute mechanically"],
-      "weaknesses": ["No peel for self-peel ADCs", "Vulnerable to range/poke before levels", "Falls off late game vs scaling carries", "All-in support — bad in defensive teams"],
-      "play_pattern_template": "Lane: presión nivel 2 buscando E+Q vs {enemy_support}. Mantené ward defensivo en tribush. Spike fuerte nivel 6 — buscar all-in con R en {enemy_adc}. Coordiná con {ally_jungler} para gank. Mid: roams a mid después de prio bot, abrí teamfights cerca de drake/herald. Late: front-line tanky, R en >=2 enemies para iniciar — esperá que {allied_adc} y el equipo tengan ult disponible."
+      "engage_strength": 10,
+      "peel_strength": 4,
+      "lane_kill_pressure": 9,
+      "disengage": 1,
+      "poke": 1,
+      "cc_chain_length": 9,
+      "scaling": 5,
+      "blind_pick_safety": 7,
+      "execution_difficulty": 4,
+      "anti_dive": 6,
+      "anti_assassin_peel": 3,
+      "anti_poke_in_lane": 3,
+      "synergy_engage_jungler": 6,
+      "synergy_farm_jungler": 9,
+      "synergy_with_poke_comp": 4,
+      "synergy_with_dive_comp": 8,
+      "synergy_with_scaling_comp": 5,
+      "lane_phase_strength": 9,
+      "midgame_strength": 8,
+      "lategame_strength": 7,
+      "best_with_adcs": [
+        "MissFortune",
+        "Samira",
+        "Draven",
+        "Lucian",
+        "Kalista"
+      ],
+      "worst_with_adcs": [
+        "Caitlyn",
+        "Jhin",
+        "Vayne",
+        "Ezreal"
+      ],
+      "strong_against_supports": [
+        "Soraka",
+        "Yuumi",
+        "Senna"
+      ],
+      "weak_against_supports": [
+        "Janna",
+        "Lulu",
+        "Lux",
+        "Xerath"
+      ],
+      "power_spikes": [
+        "nivel 2 (stun E+Q)",
+        "nivel 6 (R)",
+        "completar Locket"
+      ],
+      "strengths": [
+        "Cadenas de engage más largas de la lane",
+        "Stun lo suficientemente largo para ciclos completos de ult del ADC",
+        "Frontline tanque en teamfights",
+        "Fácil de ejecutar mecánicamente"
+      ],
+      "weaknesses": [
+        "Sin peel para ADCs que dependen del auto-peel",
+        "Vulnerable al rango/poke antes de subir de nivel",
+        "Cae en late game vs carries de escalado",
+        "Soporte all-in — mala en equipos defensivos"
+      ],
+      "play_pattern_template": "Línea: presión nivel 2 buscando E+Q vs {enemy_support}. Mantené ward defensivo en tribush. Pico fuerte nivel 6 — buscar all-in con R en {enemy_adc}. Coordiná con {ally_jungler} para gank. Mid game: roams a mid después de prio bot, abrí teamfights cerca de drake/herald. Late game: frontline tanque, R en >=2 enemigos para iniciar — esperá que {allied_adc} y el equipo tengan ult disponible.",
+      "item_path": {
+        "evolution": "Solstice Sleigh",
+        "core_items": [
+          "Locket of the Iron Solari",
+          "Knight's Vow"
+        ],
+        "situational_items": [
+          "Mikael's Blessing vs CC chains",
+          "Zeke's Convergence con ADC hypercarry"
+        ],
+        "boots": "Boots of Mobility",
+        "first_back": "Solstice Sleigh + Boots1"
+      }
     },
     "Nautilus": {
-      "id": "Nautilus", "display_name": "Nautilus",
+      "id": "Nautilus",
+      "display_name": "Nautilus",
       "archetype": "engage",
-      "engage_strength": 9, "peel_strength": 5, "lane_kill_pressure": 8, "disengage": 2, "poke": 2,
-      "cc_chain_length": 8, "scaling": 6, "blind_pick_safety": 8, "execution_difficulty": 4,
-      "anti_dive": 5, "anti_assassin_peel": 4, "anti_poke_in_lane": 3,
-      "synergy_engage_jungler": 7, "synergy_farm_jungler": 9,
-      "synergy_with_poke_comp": 4, "synergy_with_dive_comp": 7, "synergy_with_scaling_comp": 6,
-      "lane_phase_strength": 8, "midgame_strength": 8, "lategame_strength": 7,
-      "best_with_adcs": ["Jinx", "Kaisa", "Aphelios", "MissFortune", "Samira", "Draven", "Lucian"],
-      "worst_with_adcs": ["Caitlyn", "Jhin", "Ezreal"],
-      "strong_against_supports": ["Soraka", "Yuumi", "Senna"],
-      "weak_against_supports": ["Janna", "Lulu", "Lux"],
-      "power_spikes": ["level 2 (Q+passive)", "level 6 (R)", "Locket completion"],
-      "strengths": ["Reliable hook engage from range", "Passive root guarantees stun chain", "Versatile — works with both burst and scaling ADCs", "Tanky frontline"],
-      "weaknesses": ["Q is slow projectile, dodgeable", "Weak vs poke comps in lane", "Limited peel for self-peel ADCs", "Predictable engage pattern"],
-      "play_pattern_template": "Lane: buscar Q hooks oportunistas vs {enemy_support}. Ward defensivo. Spike nivel 6 — R + passive en {enemy_adc} = kill confirmada con follow-up de {allied_adc}. Coordiná con {ally_jungler}. Mid: roam con jungla en herald/drake — tu R inicia objetivos. Late: peek vision, Q a backline o R a {primary_threat} para iniciar."
+      "engage_strength": 9,
+      "peel_strength": 5,
+      "lane_kill_pressure": 8,
+      "disengage": 2,
+      "poke": 2,
+      "cc_chain_length": 8,
+      "scaling": 6,
+      "blind_pick_safety": 8,
+      "execution_difficulty": 4,
+      "anti_dive": 5,
+      "anti_assassin_peel": 4,
+      "anti_poke_in_lane": 3,
+      "synergy_engage_jungler": 7,
+      "synergy_farm_jungler": 9,
+      "synergy_with_poke_comp": 4,
+      "synergy_with_dive_comp": 7,
+      "synergy_with_scaling_comp": 6,
+      "lane_phase_strength": 8,
+      "midgame_strength": 8,
+      "lategame_strength": 7,
+      "best_with_adcs": [
+        "Jinx",
+        "Kaisa",
+        "Aphelios",
+        "MissFortune",
+        "Samira",
+        "Draven",
+        "Lucian"
+      ],
+      "worst_with_adcs": [
+        "Caitlyn",
+        "Jhin",
+        "Ezreal"
+      ],
+      "strong_against_supports": [
+        "Soraka",
+        "Yuumi",
+        "Senna"
+      ],
+      "weak_against_supports": [
+        "Janna",
+        "Lulu",
+        "Lux"
+      ],
+      "power_spikes": [
+        "nivel 2 (Q+pasivo)",
+        "nivel 6 (R)",
+        "completar Locket"
+      ],
+      "strengths": [
+        "Engage confiable con hook a distancia",
+        "La raíz del pasivo garantiza la cadena de stun",
+        "Versátil — funciona tanto con ADCs de burst como de escalado",
+        "Frontline tanque"
+      ],
+      "weaknesses": [
+        "La Q es un proyectil lento, evadible",
+        "Débil vs comps de poke en lane",
+        "Peel limitado para ADCs de auto-peel",
+        "Patrón de engage predecible"
+      ],
+      "play_pattern_template": "Línea: buscar Q hooks oportunistas vs {enemy_support}. Ward defensivo. Pico nivel 6 — R + pasiva en {enemy_adc} = kill confirmada con follow-up de {allied_adc}. Coordiná con {ally_jungler}. Mid game: roam con jungla en herald/drake — tu R inicia objetivos. Late game: peek vision, Q a backline o R a {primary_threat} para iniciar.",
+      "item_path": {
+        "evolution": "Solstice Sleigh",
+        "core_items": [
+          "Locket of the Iron Solari",
+          "Knight's Vow"
+        ],
+        "situational_items": [
+          "Mikael's Blessing vs CC chains",
+          "Abyssal Mask vs AP heavy"
+        ],
+        "boots": "Boots of Mobility",
+        "first_back": "Solstice Sleigh + Boots1"
+      }
     },
     "Thresh": {
-      "id": "Thresh", "display_name": "Thresh",
+      "id": "Thresh",
+      "display_name": "Thresh",
       "archetype": "catcher",
-      "engage_strength": 7, "peel_strength": 7, "lane_kill_pressure": 8, "disengage": 6, "poke": 2,
-      "cc_chain_length": 7, "scaling": 7, "blind_pick_safety": 6, "execution_difficulty": 7,
-      "anti_dive": 7, "anti_assassin_peel": 6, "anti_poke_in_lane": 3,
-      "synergy_engage_jungler": 8, "synergy_farm_jungler": 8,
-      "synergy_with_poke_comp": 5, "synergy_with_dive_comp": 7, "synergy_with_scaling_comp": 7,
-      "lane_phase_strength": 8, "midgame_strength": 9, "lategame_strength": 8,
-      "best_with_adcs": ["Kaisa", "Lucian", "Aphelios", "Samira", "Draven", "Jinx"],
-      "worst_with_adcs": ["Yuumi"],
-      "strong_against_supports": ["Soraka", "Yuumi", "Senna"],
+      "engage_strength": 7,
+      "peel_strength": 7,
+      "lane_kill_pressure": 8,
+      "disengage": 6,
+      "poke": 2,
+      "cc_chain_length": 7,
+      "scaling": 7,
+      "blind_pick_safety": 6,
+      "execution_difficulty": 7,
+      "anti_dive": 7,
+      "anti_assassin_peel": 6,
+      "anti_poke_in_lane": 3,
+      "synergy_engage_jungler": 8,
+      "synergy_farm_jungler": 8,
+      "synergy_with_poke_comp": 5,
+      "synergy_with_dive_comp": 7,
+      "synergy_with_scaling_comp": 7,
+      "lane_phase_strength": 8,
+      "midgame_strength": 9,
+      "lategame_strength": 8,
+      "best_with_adcs": [
+        "Kaisa",
+        "Lucian",
+        "Aphelios",
+        "Samira",
+        "Draven",
+        "Jinx"
+      ],
+      "worst_with_adcs": [
+        "Yuumi"
+      ],
+      "strong_against_supports": [
+        "Soraka",
+        "Yuumi",
+        "Senna"
+      ],
       "weak_against_supports": [],
-      "power_spikes": ["level 2 (Q+E)", "level 6", "souls scaling"],
-      "strengths": ["Most versatile support — engage, peel, save, zone all in one kit", "Lantern saves provide ADC mobility", "Hooks create kill threat constantly", "Scales with passive souls"],
-      "weaknesses": ["High skill ceiling — bad Thresh = useless", "Q is a slow projectile, dodgeable by good positioning", "No sustain in lane", "Weak vs heavy poke without engage windows"],
-      "play_pattern_template": "Lane: Q hooks oportunistas vs {enemy_support}. Spike nivel 2 con Q+E. Ward + souls farming siempre. Mid: roams agresivos, lantern al ADC para ult plays. Late: peek hooks pre-fight, lantern save para {allied_adc} cuando dive {primary_threat}, box zoning en chokes."
+      "power_spikes": [
+        "nivel 2 (Q+E)",
+        "nivel 6",
+        "escalado de almas"
+      ],
+      "strengths": [
+        "El soporte más versátil — engage, peel, salvar, zonear en un solo kit",
+        "Las salvas de la linterna dan movilidad al ADC",
+        "Los hooks crean amenaza de kill constantemente",
+        "Escala con las almas del pasivo"
+      ],
+      "weaknesses": [
+        "Techo de habilidad alto — un Thresh malo = inútil",
+        "La Q es un proyectil lento, evadible con buen posicionamiento",
+        "Sin sustain en lane",
+        "Débil vs poke pesado sin ventanas de engage"
+      ],
+      "play_pattern_template": "Línea: Q hook oportunista en {enemy_adc} cuando va por CS. Flay peel si {enemy_support} engage. Linterna defensiva para {allied_adc}. Pico nivel 6: R box zoning + Q engage. Mid game: **Crash & Move**: después del crash bot, roam a mid con amenaza de Q. Linterna + {ally_jungler} = setup de gank. **3 chequeos antes de roam**: ¿ADC tiene linterna disponible? ¿La wave crasheó? ¿Objetivo real? Volvé cuando oleada rebota (~45s). Late game: picks pre-fight con Q, linterna defensiva, R zoning en chokes.",
+      "item_path": {
+        "evolution": "Solstice Sleigh",
+        "core_items": [
+          "Locket of the Iron Solari",
+          "Knight's Vow"
+        ],
+        "situational_items": [
+          "Zeke's Convergence con hypercarry",
+          "Redemption vs poke"
+        ],
+        "boots": "Boots of Mobility",
+        "first_back": "Solstice Sleigh + Boots1"
+      }
     },
     "Pyke": {
-      "id": "Pyke", "display_name": "Pyke",
+      "id": "Pyke",
+      "display_name": "Pyke",
       "archetype": "catcher",
-      "engage_strength": 8, "peel_strength": 3, "lane_kill_pressure": 9, "disengage": 4, "poke": 3,
-      "cc_chain_length": 6, "scaling": 4, "blind_pick_safety": 5, "execution_difficulty": 7,
-      "anti_dive": 4, "anti_assassin_peel": 3, "anti_poke_in_lane": 4,
-      "synergy_engage_jungler": 7, "synergy_farm_jungler": 6,
-      "synergy_with_poke_comp": 5, "synergy_with_dive_comp": 7, "synergy_with_scaling_comp": 4,
-      "lane_phase_strength": 9, "midgame_strength": 8, "lategame_strength": 5,
-      "best_with_adcs": ["Draven", "Lucian", "Samira", "MissFortune"],
-      "worst_with_adcs": ["KogMaw", "Twitch", "Vayne", "Aphelios"],
-      "strong_against_supports": ["Soraka", "Yuumi"],
-      "weak_against_supports": ["Janna", "Lulu", "Milio"],
-      "power_spikes": ["level 6 (R execute)", "Duskblade completion"],
-      "strengths": ["Roam king — global threat from level 6", "R execute shares gold with allies", "Stealth (W) makes him unpredictable", "Lane bully with Q+E poke"],
-      "weaknesses": ["Extremely squishy — no HP scaling", "Falls off hard late vs tanks", "No protection for ADC against burst", "Hooks dodgeable, R execute requires HP threshold"],
-      "play_pattern_template": "Lane: stealth en bush, hook engage opportunistic vs {enemy_support}. Pre-6 farmeás zero — sos puro support gold. Spike nivel 6 — R execute window cuando {enemy_adc} bajo 35% HP. Mid: roams agresivos a mid/top — TP value en R+W stealth. Late: pick comp pre-fight, R execute squishies. Cuidado con tanks ({primary_threat}) si los hay."
+      "engage_strength": 8,
+      "peel_strength": 3,
+      "lane_kill_pressure": 9,
+      "disengage": 4,
+      "poke": 3,
+      "cc_chain_length": 6,
+      "scaling": 4,
+      "blind_pick_safety": 5,
+      "execution_difficulty": 7,
+      "anti_dive": 4,
+      "anti_assassin_peel": 3,
+      "anti_poke_in_lane": 4,
+      "synergy_engage_jungler": 7,
+      "synergy_farm_jungler": 6,
+      "synergy_with_poke_comp": 5,
+      "synergy_with_dive_comp": 7,
+      "synergy_with_scaling_comp": 4,
+      "lane_phase_strength": 9,
+      "midgame_strength": 8,
+      "lategame_strength": 5,
+      "best_with_adcs": [
+        "Draven",
+        "Lucian",
+        "Samira",
+        "MissFortune"
+      ],
+      "worst_with_adcs": [
+        "KogMaw",
+        "Twitch",
+        "Vayne",
+        "Aphelios"
+      ],
+      "strong_against_supports": [
+        "Soraka",
+        "Yuumi"
+      ],
+      "weak_against_supports": [
+        "Janna",
+        "Lulu",
+        "Milio"
+      ],
+      "power_spikes": [
+        "nivel 6 (ejecución de R)",
+        "completar Duskblade"
+      ],
+      "strengths": [
+        "Rey del roam — amenaza global desde nivel 6",
+        "La ejecución de la R comparte oro con los aliados",
+        "El sigilo (W) lo hace impredecible",
+        "Lane bully con poke Q+E"
+      ],
+      "weaknesses": [
+        "Extremadamente frágil — sin escalado de HP",
+        "Cae fuerte en late vs tanques",
+        "Sin protección para el ADC contra el burst",
+        "El hook es evadible, la ejecución de R requiere umbral de HP"
+      ],
+      "play_pattern_template": "Línea: W con sigilo en bush para hook. Pre-6 cero farm — puro oro de support. Pico nivel 6 — R de execute (HP < 35%). Coordiná con {ally_jungler}. Mid game: **Crash & Move**: después de crash bot a torre, tenés ~30s de ventana de roaming. W con sigilo + E dash para roams a mid/top. Cada execute de R = oro compartido para {allied_adc}. **3 chequeos antes de roam**: ¿ADC seguro? ¿La wave crasheó? ¿Hay objetivo real? Volvé cuando la oleada rebota (~45s). Late game: picks con E+Q, R de execute en squishies.",
+      "item_path": {
+        "evolution": "Bloodsong",
+        "core_items": [
+          "Umbral Glaive",
+          "Edge of Night"
+        ],
+        "situational_items": [
+          "Youmuu's Ghostblade vs kite",
+          "Guardian Angel"
+        ],
+        "boots": "Boots of Mobility",
+        "first_back": "Bloodsong + Serrated Dirk"
+      }
     },
     "Lulu": {
-      "id": "Lulu", "display_name": "Lulu",
+      "id": "Lulu",
+      "display_name": "Lulu",
       "archetype": "enchanter",
-      "engage_strength": 2, "peel_strength": 9, "lane_kill_pressure": 5, "disengage": 7, "poke": 4,
-      "cc_chain_length": 5, "scaling": 8, "blind_pick_safety": 7, "execution_difficulty": 5,
-      "anti_dive": 9, "anti_assassin_peel": 9, "anti_poke_in_lane": 6,
-      "synergy_engage_jungler": 9, "synergy_farm_jungler": 6,
-      "synergy_with_poke_comp": 6, "synergy_with_dive_comp": 5, "synergy_with_scaling_comp": 9,
-      "lane_phase_strength": 7, "midgame_strength": 8, "lategame_strength": 9,
-      "best_with_adcs": ["Jinx", "KogMaw", "Twitch", "Vayne", "Aphelios", "Kaisa"],
-      "worst_with_adcs": ["Draven", "Samira"],
-      "strong_against_supports": ["Leona", "Nautilus", "Rell", "Pyke"],
-      "weak_against_supports": ["Lux", "Xerath", "Brand", "Zyra"],
-      "power_spikes": ["level 2 (Q+E)", "level 6 (R)", "Moonstone completion"],
-      "strengths": ["Best peel-against-dive support in the game", "W polymorph counters engage and assassin all-ins", "R turns hypercarry ADCs into raid bosses", "Strong solo lane phase"],
-      "weaknesses": ["Squishy — pickable by hooks/catches", "Low engage capability", "R cooldown management critical", "Weak vs poke comps with range advantage"],
-      "play_pattern_template": "Lane: trade pasivo con E shield + autos. W polymorph al engage de {enemy_support} si es engage. Ward defensivo. Spike nivel 6 — R + W ready para counter-dive. Mid: stick con {allied_adc}. R/W disponibles para counter-pick. Late: posicionamiento detrás de {allied_adc}. R + W contra {primary_threat} cuando dive — your ADC vive, enemy diver muere."
+      "engage_strength": 2,
+      "peel_strength": 9,
+      "lane_kill_pressure": 5,
+      "disengage": 7,
+      "poke": 4,
+      "cc_chain_length": 5,
+      "scaling": 8,
+      "blind_pick_safety": 7,
+      "execution_difficulty": 5,
+      "anti_dive": 9,
+      "anti_assassin_peel": 9,
+      "anti_poke_in_lane": 6,
+      "synergy_engage_jungler": 9,
+      "synergy_farm_jungler": 6,
+      "synergy_with_poke_comp": 6,
+      "synergy_with_dive_comp": 5,
+      "synergy_with_scaling_comp": 9,
+      "lane_phase_strength": 7,
+      "midgame_strength": 8,
+      "lategame_strength": 9,
+      "best_with_adcs": [
+        "Jinx",
+        "KogMaw",
+        "Twitch",
+        "Vayne",
+        "Aphelios",
+        "Kaisa"
+      ],
+      "worst_with_adcs": [
+        "Draven",
+        "Samira"
+      ],
+      "strong_against_supports": [
+        "Leona",
+        "Nautilus",
+        "Rell",
+        "Pyke"
+      ],
+      "weak_against_supports": [
+        "Lux",
+        "Xerath",
+        "Brand",
+        "Zyra"
+      ],
+      "power_spikes": [
+        "nivel 2 (Q+E)",
+        "nivel 6 (R)",
+        "completar Moonstone"
+      ],
+      "strengths": [
+        "Mejor soporte de peel-contra-dive del juego",
+        "El polimorfismo de W countera el engage y los all-ins de asesinos",
+        "La R convierte a los ADC hypercarry en raid bosses",
+        "Fuerte lane phase individual"
+      ],
+      "weaknesses": [
+        "Frágil — pickeable por hooks/capturas",
+        "Baja capacidad de engage",
+        "El manejo del cooldown de la R es crítico",
+        "Débil vs comps de poke con ventaja de rango"
+      ],
+      "play_pattern_template": "Línea: trade pasivo con E shield + autos. W polymorph al engage de {enemy_support} si es engage. Ward defensivo. Pico nivel 6 — R + W lista para counter-dive. Mid game: quedate con {allied_adc}. R/W disponibles para counter-pick. Late game: posicionamiento detrás de {allied_adc}. R + W contra {primary_threat} cuando dive — tu ADC vive, diver enemigo muere.",
+      "item_path": {
+        "evolution": "Dream Maker",
+        "core_items": [
+          "Moonstone Renewer",
+          "Staff of Flowing Water"
+        ],
+        "situational_items": [
+          "Mikael's Blessing vs CC",
+          "Redemption vs poke"
+        ],
+        "boots": "Ionian Boots of Lucidity",
+        "first_back": "Dream Maker + Amplifying Tome"
+      }
     },
     "Janna": {
-      "id": "Janna", "display_name": "Janna",
+      "id": "Janna",
+      "display_name": "Janna",
       "archetype": "enchanter",
-      "engage_strength": 1, "peel_strength": 10, "lane_kill_pressure": 4, "disengage": 10, "poke": 3,
-      "cc_chain_length": 4, "scaling": 7, "blind_pick_safety": 8, "execution_difficulty": 5,
-      "anti_dive": 10, "anti_assassin_peel": 9, "anti_poke_in_lane": 7,
-      "synergy_engage_jungler": 9, "synergy_farm_jungler": 6,
-      "synergy_with_poke_comp": 7, "synergy_with_dive_comp": 4, "synergy_with_scaling_comp": 9,
-      "lane_phase_strength": 7, "midgame_strength": 7, "lategame_strength": 9,
-      "best_with_adcs": ["Jinx", "KogMaw", "Aphelios", "Twitch", "Caitlyn", "Ezreal", "Vayne"],
-      "worst_with_adcs": ["Draven", "Samira", "MissFortune"],
-      "strong_against_supports": ["Leona", "Nautilus", "Pyke", "Blitzcrank"],
-      "weak_against_supports": ["Lux", "Xerath", "Brand"],
-      "power_spikes": ["level 6 (R)", "Moonstone completion", "scaling MR/AD items"],
-      "strengths": ["Best disengage in the game (R)", "Tornado interrupts channels (Caitlyn ult, Xerath W)", "Shield AD steroid for trade wins", "Strong vs all dive comps"],
-      "weaknesses": ["Zero kill pressure pre-6", "Very squishy with no escape", "Dependent on ADC follow-up", "Falls off if ADC behind — no carry potential alone"],
-      "play_pattern_template": "Lane: trade pasivo con shield + autos. Tornado defensivo si {enemy_support} engage. Tornado interrumpe {enemy_adc} channels (Cait W, Jhin W). Spike nivel 6 — R disengage para counter-dive. Mid: stick con {allied_adc}. R en cualquier engage enemy. Late: posicionamiento extremo backline. R cualquier dive a {allied_adc} — {primary_threat} tirada lejos, ADC vivo."
+      "engage_strength": 1,
+      "peel_strength": 10,
+      "lane_kill_pressure": 4,
+      "disengage": 10,
+      "poke": 3,
+      "cc_chain_length": 4,
+      "scaling": 7,
+      "blind_pick_safety": 8,
+      "execution_difficulty": 5,
+      "anti_dive": 10,
+      "anti_assassin_peel": 9,
+      "anti_poke_in_lane": 7,
+      "synergy_engage_jungler": 9,
+      "synergy_farm_jungler": 6,
+      "synergy_with_poke_comp": 7,
+      "synergy_with_dive_comp": 4,
+      "synergy_with_scaling_comp": 9,
+      "lane_phase_strength": 7,
+      "midgame_strength": 7,
+      "lategame_strength": 9,
+      "best_with_adcs": [
+        "Jinx",
+        "KogMaw",
+        "Aphelios",
+        "Twitch",
+        "Caitlyn",
+        "Ezreal",
+        "Vayne"
+      ],
+      "worst_with_adcs": [
+        "Draven",
+        "Samira",
+        "MissFortune"
+      ],
+      "strong_against_supports": [
+        "Leona",
+        "Nautilus",
+        "Pyke",
+        "Blitzcrank"
+      ],
+      "weak_against_supports": [
+        "Lux",
+        "Xerath",
+        "Brand"
+      ],
+      "power_spikes": [
+        "nivel 6 (R)",
+        "completar Moonstone",
+        "items de MR/AD de escalado"
+      ],
+      "strengths": [
+        "Mejor disengage del juego (R)",
+        "El tornado interrumpe canales (ult Caitlyn, W Xerath)",
+        "El escudo como esteroide de AD para ganar trades",
+        "Fuerte vs todas las comps de dive"
+      ],
+      "weaknesses": [
+        "Sin presión de kill antes del nivel 6",
+        "Muy frágil sin escape",
+        "Dependiente del follow-up del ADC",
+        "Cae si el ADC va atrás — sin potencial de carrear sola"
+      ],
+      "play_pattern_template": "Línea: trade pasivo con shield + autos. Tornado defensivo si {enemy_support} engage. Tornado interrumpe {enemy_adc} canalizaciones (Cait W, Jhin W). Pico nivel 6 — R disengage para counter-dive. Mid game: quedate con {allied_adc}. R en cualquier engage enemigo. Late game: posicionamiento extremo backline. R cualquier dive a {allied_adc} — {primary_threat} tirada lejos, ADC vivo.",
+      "item_path": {
+        "evolution": "Dream Maker",
+        "core_items": [
+          "Moonstone Renewer",
+          "Staff of Flowing Water"
+        ],
+        "situational_items": [
+          "Mikael's Blessing vs CC",
+          "Redemption"
+        ],
+        "boots": "Boots of Mobility",
+        "first_back": "Dream Maker + Boots1"
+      }
     },
     "Soraka": {
-      "id": "Soraka", "display_name": "Soraka",
+      "id": "Soraka",
+      "display_name": "Soraka",
       "archetype": "enchanter",
-      "engage_strength": 1, "peel_strength": 7, "lane_kill_pressure": 3, "disengage": 5, "poke": 5,
-      "cc_chain_length": 3, "scaling": 6, "blind_pick_safety": 6, "execution_difficulty": 5,
-      "anti_dive": 4, "anti_assassin_peel": 4, "anti_poke_in_lane": 8,
-      "synergy_engage_jungler": 7, "synergy_farm_jungler": 7,
-      "synergy_with_poke_comp": 6, "synergy_with_dive_comp": 4, "synergy_with_scaling_comp": 9,
-      "lane_phase_strength": 6, "midgame_strength": 7, "lategame_strength": 8,
-      "best_with_adcs": ["Aphelios", "KogMaw", "Twitch", "Jinx", "Ezreal", "Caitlyn"],
-      "worst_with_adcs": ["Draven", "Samira", "MissFortune"],
+      "engage_strength": 1,
+      "peel_strength": 7,
+      "lane_kill_pressure": 3,
+      "disengage": 5,
+      "poke": 5,
+      "cc_chain_length": 3,
+      "scaling": 6,
+      "blind_pick_safety": 6,
+      "execution_difficulty": 5,
+      "anti_dive": 4,
+      "anti_assassin_peel": 4,
+      "anti_poke_in_lane": 8,
+      "synergy_engage_jungler": 7,
+      "synergy_farm_jungler": 7,
+      "synergy_with_poke_comp": 6,
+      "synergy_with_dive_comp": 4,
+      "synergy_with_scaling_comp": 9,
+      "lane_phase_strength": 6,
+      "midgame_strength": 7,
+      "lategame_strength": 8,
+      "best_with_adcs": [
+        "Aphelios",
+        "KogMaw",
+        "Twitch",
+        "Jinx",
+        "Ezreal",
+        "Caitlyn"
+      ],
+      "worst_with_adcs": [
+        "Draven",
+        "Samira",
+        "MissFortune"
+      ],
       "strong_against_supports": [],
-      "weak_against_supports": ["Leona", "Nautilus", "Lux", "Brand", "Zyra", "Pyke"],
-      "power_spikes": ["level 6 (global R)", "Chemtech completion", "scaling AP"],
-      "strengths": ["Infinite sustain through poke comps", "Global R saves ADC from cross-map dive", "Strong vs poke matchups in lane", "Scales into reliable late-game peeler"],
-      "weaknesses": ["Zero kill threat in lane", "Vulnerable to all-in engage (Leona stomps her)", "Squishy with no escape — pickeable", "Can't force trades — purely reactive"],
-      "play_pattern_template": "Lane: defensivo extremo. Heal + Q poke a distancia. Stick to {allied_adc}, NUNCA vayas pickeable. Spike nivel 6 — R global ready para split o cross-map saves. Mid: stick con ADC. R global value en early objs. Late: posicionamiento absurdamente atrás. R global durante teamfights — tu vida = ADC vivo."
+      "weak_against_supports": [
+        "Leona",
+        "Nautilus",
+        "Lux",
+        "Brand",
+        "Zyra",
+        "Pyke"
+      ],
+      "power_spikes": [
+        "nivel 6 (R global)",
+        "completar Chemtech",
+        "escalado de AP"
+      ],
+      "strengths": [
+        "Sustain infinito ante comps de poke",
+        "La R global salva al ADC del dive desde cualquier punto del mapa",
+        "Fuerte vs matchups de poke en lane",
+        "Escala en un peleador confiable de late game"
+      ],
+      "weaknesses": [
+        "Sin amenaza de kill en lane",
+        "Vulnerable al engage all-in (Leona la destroza)",
+        "Frágil sin escape — pickeable",
+        "No puede forzar trades — puramente reactiva"
+      ],
+      "play_pattern_template": "Línea: defensivo extremo. Heal + Q poke a distancia. Quedate cerca de {allied_adc}, NUNCA vayas pickeable. Pico nivel 6 — R global para salvadas cross-map. Mid game: **B-Prox alta** — quedate cerca del ADC. Crash & Move NO aplica (sin movilidad). Solo abandonás carril para R global o teamfight directo. Late game: posicionamiento absurdamente atrás. R global durante teamfights — tu vida = ADC vivo.",
+      "item_path": {
+        "evolution": "Dream Maker",
+        "core_items": [
+          "Moonstone Renewer",
+          "Redemption"
+        ],
+        "situational_items": [
+          "Warmog's Armor (HP > heal cost)",
+          "Mikael's Blessing"
+        ],
+        "boots": "Ionian Boots of Lucidity",
+        "first_back": "Dream Maker + Kindlegem"
+      }
     },
     "Milio": {
-      "id": "Milio", "display_name": "Milio",
+      "id": "Milio",
+      "display_name": "Milio",
       "archetype": "enchanter",
-      "engage_strength": 1, "peel_strength": 9, "lane_kill_pressure": 4, "disengage": 7, "poke": 4,
-      "cc_chain_length": 3, "scaling": 8, "blind_pick_safety": 7, "execution_difficulty": 5,
-      "anti_dive": 9, "anti_assassin_peel": 9, "anti_poke_in_lane": 6,
-      "synergy_engage_jungler": 9, "synergy_farm_jungler": 6,
-      "synergy_with_poke_comp": 6, "synergy_with_dive_comp": 5, "synergy_with_scaling_comp": 10,
-      "lane_phase_strength": 7, "midgame_strength": 8, "lategame_strength": 9,
-      "best_with_adcs": ["Jinx", "KogMaw", "Aphelios", "Twitch", "Caitlyn", "Jhin"],
-      "worst_with_adcs": ["Draven", "Samira"],
-      "strong_against_supports": ["Leona", "Nautilus", "Yuumi"],
-      "weak_against_supports": ["Lux", "Brand", "Xerath"],
-      "power_spikes": ["level 6 (R cleanse)", "Moonstone completion", "scaling AP/AH"],
-      "strengths": ["Range extension passive — best for auto-attacking ADCs", "R cleanses all CC = anti-wombo combo tool", "E shield + slow self for peel", "Excellent scaling enchanter"],
-      "weaknesses": ["No engage capability", "Limited damage poke", "Weak vs poke comps in extended lane", "R cooldown management — wasted R = lost teamfight"],
-      "play_pattern_template": "Lane: passive range para {allied_adc} = trades favorables. E shield contra {enemy_support} engage. Trade safe con autos boosteados. Spike nivel 6 — R cleanse ready. Mid: stick con ADC, R en cualquier hard CC enemy. Late: backline posicional. R contra wombo combo de {primary_threat}, E shield para divers — {allied_adc} libre de CC = teamfight ganado."
+      "engage_strength": 1,
+      "peel_strength": 9,
+      "lane_kill_pressure": 4,
+      "disengage": 7,
+      "poke": 4,
+      "cc_chain_length": 3,
+      "scaling": 8,
+      "blind_pick_safety": 7,
+      "execution_difficulty": 5,
+      "anti_dive": 9,
+      "anti_assassin_peel": 9,
+      "anti_poke_in_lane": 6,
+      "synergy_engage_jungler": 9,
+      "synergy_farm_jungler": 6,
+      "synergy_with_poke_comp": 6,
+      "synergy_with_dive_comp": 5,
+      "synergy_with_scaling_comp": 10,
+      "lane_phase_strength": 7,
+      "midgame_strength": 8,
+      "lategame_strength": 9,
+      "best_with_adcs": [
+        "Jinx",
+        "KogMaw",
+        "Aphelios",
+        "Twitch",
+        "Caitlyn",
+        "Jhin"
+      ],
+      "worst_with_adcs": [
+        "Draven",
+        "Samira"
+      ],
+      "strong_against_supports": [
+        "Leona",
+        "Nautilus",
+        "Yuumi"
+      ],
+      "weak_against_supports": [
+        "Lux",
+        "Brand",
+        "Xerath"
+      ],
+      "power_spikes": [
+        "nivel 6 (limpieza de R)",
+        "completar Moonstone",
+        "escalado de AP/Haste"
+      ],
+      "strengths": [
+        "Pasivo de extensión de rango — el mejor para ADCs de auto-ataque",
+        "La R limpia todo el CC = herramienta anti-wombo combo",
+        "Escudo E + auto-slow para peel",
+        "Excelente encantador de escalado"
+      ],
+      "weaknesses": [
+        "Sin capacidad de engage",
+        "Poke de daño limitado",
+        "Débil vs comps de poke en lane extendida",
+        "Manejo del cooldown de la R — R malgastada = teamfight perdida"
+      ],
+      "play_pattern_template": "Línea: rango de pasiva para {allied_adc} = trades favorables. E shield contra {enemy_support} engage. Trade seguro con autos boosteados. Pico nivel 6 — R cleanse lista. Mid game: **B-Prox alta** — quedate con ADC. Crash & Move NO aplica (kit centrado en peel). R cleanse en cualquier hard CC enemigo. Late game: backline posicional. R contra wombo combo de {primary_threat}, E shield para divers — {allied_adc} libre de CC = teamfight ganado.",
+      "item_path": {
+        "evolution": "Dream Maker",
+        "core_items": [
+          "Moonstone Renewer",
+          "Redemption"
+        ],
+        "situational_items": [
+          "Staff of Flowing Water",
+          "Mikael's Blessing"
+        ],
+        "boots": "Ionian Boots of Lucidity",
+        "first_back": "Dream Maker + Amplifying Tome"
+      }
     },
     "Lux": {
-      "id": "Lux", "display_name": "Lux",
+      "id": "Lux",
+      "display_name": "Lux",
       "archetype": "poke",
-      "engage_strength": 4, "peel_strength": 4, "lane_kill_pressure": 7, "disengage": 5, "poke": 9,
-      "cc_chain_length": 4, "scaling": 7, "blind_pick_safety": 6, "execution_difficulty": 6,
-      "anti_dive": 4, "anti_assassin_peel": 4, "anti_poke_in_lane": 5,
-      "synergy_engage_jungler": 6, "synergy_farm_jungler": 7,
-      "synergy_with_poke_comp": 9, "synergy_with_dive_comp": 4, "synergy_with_scaling_comp": 6,
-      "lane_phase_strength": 8, "midgame_strength": 8, "lategame_strength": 7,
-      "best_with_adcs": ["Caitlyn", "Jhin", "Varus", "Ezreal"],
-      "worst_with_adcs": ["Draven", "Samira", "Vayne"],
-      "strong_against_supports": ["Soraka", "Yuumi", "Senna", "Leona"],
-      "weak_against_supports": ["Brand", "Xerath", "Janna"],
-      "power_spikes": ["level 2 (Q)", "level 6 (R)", "Luden's completion"],
-      "strengths": ["Long range Q poke — lane bully", "Q root sets up kills (Cait trap combo)", "Significant damage contribution to team", "E shield provides some peel"],
-      "weaknesses": ["Skillshot dependent — bad accuracy = bad Lux", "Squishy with no escape", "Weak peel against dive", "Falls off vs late-game scaling carries"],
-      "play_pattern_template": "Lane: Q poke max range vs {enemy_support}. Coordiná con {allied_adc} (Caitlyn trap + Q combo). Spike nivel 6 — Q+E+R kill window en {enemy_adc}. Mid: empujá tower bot, roam mid o river. Tu daño AP es crítico para el equipo. Late: posicionamiento backline lateral. Q poke pre-fight, E shield + R nuke a {primary_threat} cuando se commit."
+      "engage_strength": 4,
+      "peel_strength": 4,
+      "lane_kill_pressure": 7,
+      "disengage": 5,
+      "poke": 9,
+      "cc_chain_length": 4,
+      "scaling": 7,
+      "blind_pick_safety": 6,
+      "execution_difficulty": 6,
+      "anti_dive": 4,
+      "anti_assassin_peel": 4,
+      "anti_poke_in_lane": 5,
+      "synergy_engage_jungler": 6,
+      "synergy_farm_jungler": 7,
+      "synergy_with_poke_comp": 9,
+      "synergy_with_dive_comp": 4,
+      "synergy_with_scaling_comp": 6,
+      "lane_phase_strength": 8,
+      "midgame_strength": 8,
+      "lategame_strength": 7,
+      "best_with_adcs": [
+        "Caitlyn",
+        "Jhin",
+        "Varus",
+        "Ezreal"
+      ],
+      "worst_with_adcs": [
+        "Draven",
+        "Samira",
+        "Vayne"
+      ],
+      "strong_against_supports": [
+        "Soraka",
+        "Yuumi",
+        "Senna",
+        "Leona"
+      ],
+      "weak_against_supports": [
+        "Brand",
+        "Xerath",
+        "Janna"
+      ],
+      "power_spikes": [
+        "nivel 2 (Q)",
+        "nivel 6 (R)",
+        "completar Luden's"
+      ],
+      "strengths": [
+        "Poke de Q a largo rango — lane bully",
+        "La raíz de Q prepara kills (combo trampa Cait)",
+        "Contribución de daño significativa al equipo",
+        "El escudo E provee algo de peel"
+      ],
+      "weaknesses": [
+        "Dependiente de skillshots — mala puntería = Lux mala",
+        "Frágil sin escape",
+        "Peel débil contra el dive",
+        "Cae vs carries de escalado de late game"
+      ],
+      "play_pattern_template": "Línea: Q poke rango máximo vs {enemy_support}. Coordiná con {allied_adc} (trampa de Caitlyn + Q combo). Pico nivel 6 — Q+E+R ventana de kill en {enemy_adc}. Mid game: empujá torre bot, roam mid o river. Tu daño AP es crítico para el equipo. Late game: posicionamiento backline lateral. Q poke pre-fight, E shield + R nuke a {primary_threat} cuando se compromete.",
+      "item_path": {
+        "evolution": "Zaz'Zak's Realmspike",
+        "core_items": [
+          "Luden's Companion",
+          "Shadowflame"
+        ],
+        "situational_items": [
+          "Zhonya's Hourglass vs dive",
+          "Horizon Focus vs poke"
+        ],
+        "boots": "Sorcerer's Shoes",
+        "first_back": "Zaz'Zak's + Lost Chapter"
+      }
     },
     "Karma": {
-      "id": "Karma", "display_name": "Karma",
+      "id": "Karma",
+      "display_name": "Karma",
       "archetype": "enchanter",
-      "engage_strength": 3, "peel_strength": 7, "lane_kill_pressure": 6, "disengage": 8, "poke": 7,
-      "cc_chain_length": 4, "scaling": 6, "blind_pick_safety": 7, "execution_difficulty": 6,
-      "anti_dive": 7, "anti_assassin_peel": 6, "anti_poke_in_lane": 6,
-      "synergy_engage_jungler": 7, "synergy_farm_jungler": 7,
-      "synergy_with_poke_comp": 8, "synergy_with_dive_comp": 6, "synergy_with_scaling_comp": 7,
-      "lane_phase_strength": 8, "midgame_strength": 7, "lategame_strength": 7,
-      "best_with_adcs": ["Lucian", "Caitlyn", "Ezreal", "Senna", "Jhin"],
-      "worst_with_adcs": ["Draven", "Samira", "MissFortune"],
-      "strong_against_supports": ["Soraka", "Yuumi", "Leona"],
-      "weak_against_supports": ["Brand", "Xerath", "Lux"],
-      "power_spikes": ["level 2 (RQ)", "level 6 (RE)", "Moonstone completion"],
-      "strengths": ["Hybrid poke + enchanter — adaptable to most comps", "R-Q is one of the strongest level 1-2 abilities", "Shield + speed boost for kiting and trades", "Lane bully with significant damage"],
-      "weaknesses": ["Mantra cooldown management is critical", "Weaker peel than pure enchanters", "Less damage than pure mages", "Identity blur — tries to do everything but masters nothing"],
-      "play_pattern_template": "Lane: R-Q poke nivel 2 vs {enemy_support} = trade demoledor. E shield para kitear. Trade agresivo. Spike nivel 6 — RE shield AOE para teamfight inicio. Mid: roams con {ally_jungler}, prio bot. Late: backline poke con Q max range, RE shield + speed para {allied_adc} cuando dive {primary_threat}."
+      "engage_strength": 3,
+      "peel_strength": 7,
+      "lane_kill_pressure": 6,
+      "disengage": 8,
+      "poke": 7,
+      "cc_chain_length": 4,
+      "scaling": 6,
+      "blind_pick_safety": 7,
+      "execution_difficulty": 6,
+      "anti_dive": 7,
+      "anti_assassin_peel": 6,
+      "anti_poke_in_lane": 6,
+      "synergy_engage_jungler": 7,
+      "synergy_farm_jungler": 7,
+      "synergy_with_poke_comp": 8,
+      "synergy_with_dive_comp": 6,
+      "synergy_with_scaling_comp": 7,
+      "lane_phase_strength": 8,
+      "midgame_strength": 7,
+      "lategame_strength": 7,
+      "best_with_adcs": [
+        "Lucian",
+        "Caitlyn",
+        "Ezreal",
+        "Senna",
+        "Jhin"
+      ],
+      "worst_with_adcs": [
+        "Draven",
+        "Samira",
+        "MissFortune"
+      ],
+      "strong_against_supports": [
+        "Soraka",
+        "Yuumi",
+        "Leona"
+      ],
+      "weak_against_supports": [
+        "Brand",
+        "Xerath",
+        "Lux"
+      ],
+      "power_spikes": [
+        "nivel 2 (RQ)",
+        "nivel 6 (RE)",
+        "completar Moonstone"
+      ],
+      "strengths": [
+        "Híbrido poke + encantador — adaptable a la mayoría de comps",
+        "R-Q es una de las habilidades de nivel 1-2 más fuertes",
+        "Escudo + impulso de velocidad para kiting y trades",
+        "Lane bully con daño significativo"
+      ],
+      "weaknesses": [
+        "El manejo del cooldown de Mantra es crítico",
+        "Menos peel que los encantadores puros",
+        "Menos daño que los magos puros",
+        "Identidad difusa — intenta hacerlo todo pero no domina nada"
+      ],
+      "play_pattern_template": "Línea: R-Q poke nivel 2 vs {enemy_support} = trade demoledor. E shield para kitear. Trade agresivo. Pico nivel 6 — RE shield AOE para teamfight inicio. Mid game: roams con {ally_jungler}, prio bot. Late game: backline poke con Q rango máximo, RE shield + speed para {allied_adc} cuando dive {primary_threat}.",
+      "item_path": {
+        "evolution": "Dream Maker",
+        "core_items": [
+          "Moonstone Renewer",
+          "Staff of Flowing Water"
+        ],
+        "situational_items": [
+          "Ardent Censer con ADC AS-based",
+          "Redemption vs poke siege"
+        ],
+        "boots": "Ionian Boots of Lucidity",
+        "first_back": "Dream Maker + Amplifying Tome"
+      }
     },
     "Braum": {
-      "id": "Braum", "display_name": "Braum",
+      "id": "Braum",
+      "display_name": "Braum",
       "archetype": "warden",
-      "engage_strength": 5, "peel_strength": 10, "lane_kill_pressure": 5, "disengage": 8, "poke": 1,
-      "cc_chain_length": 6, "scaling": 7, "blind_pick_safety": 8, "execution_difficulty": 4,
-      "anti_dive": 10, "anti_assassin_peel": 8, "anti_poke_in_lane": 8,
-      "synergy_engage_jungler": 8, "synergy_farm_jungler": 7,
-      "synergy_with_poke_comp": 4, "synergy_with_dive_comp": 5, "synergy_with_scaling_comp": 9,
-      "lane_phase_strength": 6, "midgame_strength": 8, "lategame_strength": 8,
-      "best_with_adcs": ["Lucian", "Ashe", "KogMaw", "Jinx", "Aphelios", "Vayne"],
-      "worst_with_adcs": ["Ezreal", "Caitlyn"],
-      "strong_against_supports": ["Leona", "Nautilus", "Rell"],
-      "weak_against_supports": ["Zyra", "Brand", "Karma", "Xerath"],
-      "power_spikes": ["level 2 (Q+passive)", "level 6 (R)", "Locket completion"],
-      "strengths": ["E bloquea TODOS los proyectiles — niega ults enteras (Cait R, Ez R, MF R)", "Passive stun con follow-up del ADC = trades ganados", "R knockup zonal excelente para counter-engage", "Tanque frontline sólido en teamfights"],
-      "weaknesses": ["Lane pasiva sin kill pressure propio", "No tiene engage de rango — depende de Q lento", "Sufre vs poke heavy que bypasea el E (Brand, Zyra)", "No puede carrear solo si el ADC es malo"],
-      "play_pattern_template": "Lane: E listo para bloquear poke de {enemy_support}. Q slow en trades cortos. Passive stun con autos de {allied_adc}. Nivel 6: R knockup defensivo si {primary_threat} dives. Mid: stick con {allied_adc}, E bloquea projectiles en objetivos. Late: front-line, E para {allied_adc}, R counter-engage cuando {primary_threat} commitee."
+      "engage_strength": 5,
+      "peel_strength": 10,
+      "lane_kill_pressure": 5,
+      "disengage": 8,
+      "poke": 1,
+      "cc_chain_length": 6,
+      "scaling": 7,
+      "blind_pick_safety": 8,
+      "execution_difficulty": 4,
+      "anti_dive": 10,
+      "anti_assassin_peel": 8,
+      "anti_poke_in_lane": 8,
+      "synergy_engage_jungler": 8,
+      "synergy_farm_jungler": 7,
+      "synergy_with_poke_comp": 4,
+      "synergy_with_dive_comp": 5,
+      "synergy_with_scaling_comp": 9,
+      "lane_phase_strength": 6,
+      "midgame_strength": 8,
+      "lategame_strength": 8,
+      "best_with_adcs": [
+        "Lucian",
+        "Ashe",
+        "KogMaw",
+        "Jinx",
+        "Aphelios",
+        "Vayne"
+      ],
+      "worst_with_adcs": [
+        "Ezreal",
+        "Caitlyn"
+      ],
+      "strong_against_supports": [
+        "Leona",
+        "Nautilus",
+        "Rell"
+      ],
+      "weak_against_supports": [
+        "Zyra",
+        "Brand",
+        "Karma",
+        "Xerath"
+      ],
+      "power_spikes": [
+        "level 2 (Q+passive)",
+        "level 6 (R)",
+        "Locket completion"
+      ],
+      "strengths": [
+        "E bloquea TODOS los proyectiles — niega ults enteras (Cait R, Ez R, MF R)",
+        "Pasiva stun con follow-up del ADC = trades ganados",
+        "R knockup zonal excelente para counter-engage",
+        "Tanque frontline sólido en teamfights"
+      ],
+      "weaknesses": [
+        "Lane pasiva sin kill pressure propio",
+        "No tiene engage de rango — depende de Q lento",
+        "Sufre vs poke heavy que bypasea el E (Brand, Zyra)",
+        "No puede carrear solo si el ADC es malo"
+      ],
+      "play_pattern_template": "Línea: E listo para bloquear poke de {enemy_support}. Q slow en trades cortos. Pasiva stun con autos de {allied_adc}. Nivel 6: R knockup defensivo si {primary_threat} dives. Mid game: quedate con {allied_adc}, E bloquea proyectiles en objetivos. Late game: frontline, E para {allied_adc}, R counter-engage cuando {primary_threat} se compromete.",
+      "item_path": {
+        "evolution": "Celestial Opposition",
+        "core_items": [
+          "Locket of the Iron Solari",
+          "Knight's Vow"
+        ],
+        "situational_items": [
+          "Frozen Heart vs AD",
+          "Mikael's Blessing vs CC"
+        ],
+        "boots": "Mercury's Treads",
+        "first_back": "Celestial Opposition + Ruby Crystal"
+      }
     },
     "Taric": {
-      "id": "Taric", "display_name": "Taric",
+      "id": "Taric",
+      "display_name": "Taric",
       "archetype": "warden",
-      "engage_strength": 4, "peel_strength": 9, "lane_kill_pressure": 5, "disengage": 6, "poke": 1,
-      "cc_chain_length": 5, "scaling": 9, "blind_pick_safety": 6, "execution_difficulty": 6,
-      "anti_dive": 10, "anti_assassin_peel": 9, "anti_poke_in_lane": 5,
-      "synergy_engage_jungler": 9, "synergy_farm_jungler": 6,
-      "synergy_with_poke_comp": 3, "synergy_with_dive_comp": 8, "synergy_with_scaling_comp": 10,
-      "lane_phase_strength": 5, "midgame_strength": 7, "lategame_strength": 10,
-      "best_with_adcs": ["KogMaw", "Vayne", "Nilah", "Jinx", "Twitch"],
-      "worst_with_adcs": ["Ezreal", "Caitlyn", "Jhin"],
-      "strong_against_supports": ["Leona", "Nautilus", "Pyke"],
-      "weak_against_supports": ["Zyra", "Brand", "Xerath", "Karma"],
-      "power_spikes": ["level 6 (R invulnerability)", "Locket + Zeke's completion"],
-      "strengths": ["R invulnerabilidad es el peel más poderoso del juego contra burst", "E stun AOE excelente en chokepoints", "Heal + shield passive para sustain en lane y teamfights", "Escala monstruosamente — late game top-tier"],
-      "weaknesses": ["Lane phase muy débil — abusable por poke", "R tiene delay largo — timing difícil", "Nula presión de mapa (no puede roamear)", "Vulnerable a CC chain antes de castear R"],
-      "play_pattern_template": "Lane: pasivo, heal con Q para sostener trades. E stun si {enemy_support} se acerca demasiado. Spike nivel 6 — R salva de burst de {primary_threat}. Mid: stick con {allied_adc}, R en teamfights. Late: R timing crítico — cuando {primary_threat} commitee burst, R = tu equipo invulnerable 2.5s = ace."
+      "engage_strength": 4,
+      "peel_strength": 9,
+      "lane_kill_pressure": 5,
+      "disengage": 6,
+      "poke": 1,
+      "cc_chain_length": 5,
+      "scaling": 9,
+      "blind_pick_safety": 6,
+      "execution_difficulty": 6,
+      "anti_dive": 10,
+      "anti_assassin_peel": 9,
+      "anti_poke_in_lane": 5,
+      "synergy_engage_jungler": 9,
+      "synergy_farm_jungler": 6,
+      "synergy_with_poke_comp": 3,
+      "synergy_with_dive_comp": 8,
+      "synergy_with_scaling_comp": 10,
+      "lane_phase_strength": 5,
+      "midgame_strength": 7,
+      "lategame_strength": 10,
+      "best_with_adcs": [
+        "KogMaw",
+        "Vayne",
+        "Nilah",
+        "Jinx",
+        "Twitch"
+      ],
+      "worst_with_adcs": [
+        "Ezreal",
+        "Caitlyn",
+        "Jhin"
+      ],
+      "strong_against_supports": [
+        "Leona",
+        "Nautilus",
+        "Pyke"
+      ],
+      "weak_against_supports": [
+        "Zyra",
+        "Brand",
+        "Xerath",
+        "Karma"
+      ],
+      "power_spikes": [
+        "level 6 (R invulnerability)",
+        "Locket + Zeke's completion"
+      ],
+      "strengths": [
+        "R invulnerabilidad es el peel más poderoso del juego contra burst",
+        "E stun AOE excelente en chokepoints",
+        "Heal + shield passive para sustain en lane y teamfights",
+        "Escala monstruosamente — late game top-tier"
+      ],
+      "weaknesses": [
+        "Lane phase muy débil — abusable por poke",
+        "R tiene delay largo — timing difícil",
+        "Nula presión de mapa (no puede roamear)",
+        "Vulnerable a CC chain antes de castear R"
+      ],
+      "play_pattern_template": "Línea: pasivo, heal con Q para sostener trades. E stun si {enemy_support} se acerca demasiado. Pico nivel 6 — R salva de burst de {primary_threat}. Mid game: quedate con {allied_adc}, R en teamfights. Late game: R timing crítico — cuando {primary_threat} se compromete con burst, R = tu equipo invulnerable 2.5s = ace.",
+      "item_path": {
+        "evolution": "Celestial Opposition",
+        "core_items": [
+          "Locket of the Iron Solari",
+          "Zeke's Convergence"
+        ],
+        "situational_items": [
+          "Frozen Heart vs AD",
+          "Redemption"
+        ],
+        "boots": "Mercury's Treads",
+        "first_back": "Celestial Opposition + Ruby Crystal"
+      }
     },
     "Alistar": {
-      "id": "Alistar", "display_name": "Alistar",
+      "id": "Alistar",
+      "display_name": "Alistar",
       "archetype": "engage",
-      "engage_strength": 10, "peel_strength": 6, "lane_kill_pressure": 8, "disengage": 7, "poke": 1,
-      "cc_chain_length": 7, "scaling": 6, "blind_pick_safety": 7, "execution_difficulty": 5,
-      "anti_dive": 7, "anti_assassin_peel": 5, "anti_poke_in_lane": 4,
-      "synergy_engage_jungler": 6, "synergy_farm_jungler": 9,
-      "synergy_with_poke_comp": 3, "synergy_with_dive_comp": 9, "synergy_with_scaling_comp": 6,
-      "lane_phase_strength": 8, "midgame_strength": 8, "lategame_strength": 7,
-      "best_with_adcs": ["Samira", "Draven", "Lucian", "MissFortune", "Kalista"],
-      "worst_with_adcs": ["Ezreal", "Caitlyn", "Jhin", "Vayne"],
-      "strong_against_supports": ["Soraka", "Yuumi", "Senna", "Lux"],
-      "weak_against_supports": ["Janna", "Lulu", "Morgana"],
-      "power_spikes": ["level 2 (W+Q combo)", "level 6 (R damage reduction)", "Locket completion"],
-      "strengths": ["W+Q combo es el engage más rápido y fiable del juego", "R reduce 75% de daño — imposible de matar en all-in", "Headbutt (W) sirve como peel contra divers", "Versatilidad: puede iniciar O peelear según la situación"],
-      "weaknesses": ["Sin poke — lane pasiva si no hay engage window", "W+Q requiere flash para engages extendidos", "Mana-hungry si spamea habilidades", "Vulnerable a kiting prolongado"],
-      "play_pattern_template": "Lane: W+Q combo nivel 2 en {enemy_adc} o {enemy_support} = trade ganador. Flash+W+Q es kill confirmada con follow-up de {allied_adc}. Nivel 6: R antes de entrar = unkillable. Mid: roams con {ally_jungler}, W+Q en picks. Late: W+Q flash en backline enemy o W peel para {allied_adc} contra {primary_threat}."
+      "engage_strength": 10,
+      "peel_strength": 6,
+      "lane_kill_pressure": 8,
+      "disengage": 7,
+      "poke": 1,
+      "cc_chain_length": 7,
+      "scaling": 6,
+      "blind_pick_safety": 7,
+      "execution_difficulty": 5,
+      "anti_dive": 7,
+      "anti_assassin_peel": 5,
+      "anti_poke_in_lane": 4,
+      "synergy_engage_jungler": 6,
+      "synergy_farm_jungler": 9,
+      "synergy_with_poke_comp": 3,
+      "synergy_with_dive_comp": 9,
+      "synergy_with_scaling_comp": 6,
+      "lane_phase_strength": 8,
+      "midgame_strength": 8,
+      "lategame_strength": 7,
+      "best_with_adcs": [
+        "Samira",
+        "Draven",
+        "Lucian",
+        "MissFortune",
+        "Kalista"
+      ],
+      "worst_with_adcs": [
+        "Ezreal",
+        "Caitlyn",
+        "Jhin",
+        "Vayne"
+      ],
+      "strong_against_supports": [
+        "Soraka",
+        "Yuumi",
+        "Senna",
+        "Lux"
+      ],
+      "weak_against_supports": [
+        "Janna",
+        "Lulu",
+        "Morgana"
+      ],
+      "power_spikes": [
+        "level 2 (W+Q combo)",
+        "level 6 (R damage reduction)",
+        "Locket completion"
+      ],
+      "strengths": [
+        "W+Q combo es el engage más rápido y fiable del juego",
+        "R reduce 75% de daño — imposible de matar en all-in",
+        "Headbutt (W) sirve como peel contra divers",
+        "Versatilidad: puede iniciar O peelear según la situación"
+      ],
+      "weaknesses": [
+        "Sin poke — lane pasiva si no hay engage window",
+        "W+Q requiere flash para engages extendidos",
+        "Mana-hungry si spamea habilidades",
+        "Vulnerable a kiting prolongado"
+      ],
+      "play_pattern_template": "Línea: W+Q combo nivel 2 en {enemy_adc} o {enemy_support} = trade ganador. Flash+W+Q es kill confirmada con follow-up de {allied_adc}. Nivel 6: R antes de entrar = unkillable. Mid game: roams con {ally_jungler}, W+Q en picks. Late game: W+Q flash en backline enemiga o W peel para {allied_adc} contra {primary_threat}.",
+      "item_path": {
+        "evolution": "Celestial Opposition",
+        "core_items": [
+          "Locket of the Iron Solari",
+          "Knight's Vow"
+        ],
+        "situational_items": [
+          "Mikael's Blessing vs CC",
+          "Zeke's Convergence con ADC hypercarry"
+        ],
+        "boots": "Mercury's Treads",
+        "first_back": "Celestial Opposition + Boots1"
+      }
     },
     "Nami": {
-      "id": "Nami", "display_name": "Nami",
+      "id": "Nami",
+      "display_name": "Nami",
       "archetype": "enchanter",
-      "engage_strength": 4, "peel_strength": 8, "lane_kill_pressure": 6, "disengage": 7, "poke": 5,
-      "cc_chain_length": 5, "scaling": 7, "blind_pick_safety": 7, "execution_difficulty": 6,
-      "anti_dive": 7, "anti_assassin_peel": 7, "anti_poke_in_lane": 7,
-      "synergy_engage_jungler": 7, "synergy_farm_jungler": 7,
-      "synergy_with_poke_comp": 7, "synergy_with_dive_comp": 5, "synergy_with_scaling_comp": 8,
-      "lane_phase_strength": 8, "midgame_strength": 7, "lategame_strength": 7,
-      "best_with_adcs": ["Lucian", "Kaisa", "Ezreal", "Jhin", "MissFortune"],
-      "worst_with_adcs": ["Draven", "Samira"],
-      "strong_against_supports": ["Leona", "Nautilus", "Soraka"],
-      "weak_against_supports": ["Brand", "Zyra", "Xerath"],
-      "power_spikes": ["level 2 (W+E)", "level 6 (R)", "Moonstone completion"],
-      "strengths": ["E buff da daño extra + slow a los autos del ADC = trades ganados", "W bounce heal+damage es trade eficiente 2v2", "Q bubble es CC zonal que interrumpe engages", "R ola es engage O disengage según la situación"],
-      "weaknesses": ["Q bubble es lento y predecible", "Squishy — pickeable por hooks", "W bounce requiere buen posicionamiento para maximizar", "Menos peel puro que Lulu/Janna contra dive heavy"],
-      "play_pattern_template": "Lane: E en {allied_adc} para trades → autos con slow. W bounce para trade 2v2 eficiente. Q bubble si {enemy_support} engage. Nivel 6: R ola para iniciar o counter-engage. Mid: stick con ADC, R en objetivos. Late: R disengage contra {primary_threat}, E buff en {allied_adc} para DPS."
+      "engage_strength": 4,
+      "peel_strength": 8,
+      "lane_kill_pressure": 6,
+      "disengage": 7,
+      "poke": 5,
+      "cc_chain_length": 5,
+      "scaling": 7,
+      "blind_pick_safety": 7,
+      "execution_difficulty": 6,
+      "anti_dive": 7,
+      "anti_assassin_peel": 7,
+      "anti_poke_in_lane": 7,
+      "synergy_engage_jungler": 7,
+      "synergy_farm_jungler": 7,
+      "synergy_with_poke_comp": 7,
+      "synergy_with_dive_comp": 5,
+      "synergy_with_scaling_comp": 8,
+      "lane_phase_strength": 8,
+      "midgame_strength": 7,
+      "lategame_strength": 7,
+      "best_with_adcs": [
+        "Lucian",
+        "Kaisa",
+        "Ezreal",
+        "Jhin",
+        "MissFortune"
+      ],
+      "worst_with_adcs": [
+        "Draven",
+        "Samira"
+      ],
+      "strong_against_supports": [
+        "Leona",
+        "Nautilus",
+        "Soraka"
+      ],
+      "weak_against_supports": [
+        "Brand",
+        "Zyra",
+        "Xerath"
+      ],
+      "power_spikes": [
+        "level 2 (W+E)",
+        "level 6 (R)",
+        "Moonstone completion"
+      ],
+      "strengths": [
+        "E buff da daño extra + slow a los autos del ADC = trades ganados",
+        "W bounce heal+damage es trade eficiente 2v2",
+        "Q bubble es CC zonal que interrumpe engages",
+        "R ola es engage O disengage según la situación"
+      ],
+      "weaknesses": [
+        "Q bubble es lento y predecible",
+        "Squishy — pickeable por hooks",
+        "W bounce requiere buen posicionamiento para maximizar",
+        "Menos peel puro que Lulu/Janna contra dive heavy"
+      ],
+      "play_pattern_template": "Línea: E en {allied_adc} para trades → autos con slow. W bounce para trade 2v2 eficiente. Q bubble si {enemy_support} engage. Nivel 6: R ola para iniciar o counter-engage. Mid game: quedate con ADC, R en objetivos. Late game: R disengage contra {primary_threat}, E buff en {allied_adc} para DPS.",
+      "item_path": {
+        "evolution": "Dream Maker",
+        "core_items": [
+          "Moonstone Renewer",
+          "Staff of Flowing Water"
+        ],
+        "situational_items": [
+          "Mikael's Blessing",
+          "Redemption"
+        ],
+        "boots": "Ionian Boots of Lucidity",
+        "first_back": "Dream Maker + Amplifying Tome"
+      }
     },
     "Rakan": {
-      "id": "Rakan", "display_name": "Rakan",
+      "id": "Rakan",
+      "display_name": "Rakan",
       "archetype": "catcher",
-      "engage_strength": 9, "peel_strength": 6, "lane_kill_pressure": 7, "disengage": 7, "poke": 2,
-      "cc_chain_length": 6, "scaling": 7, "blind_pick_safety": 6, "execution_difficulty": 7,
-      "anti_dive": 5, "anti_assassin_peel": 5, "anti_poke_in_lane": 4,
-      "synergy_engage_jungler": 6, "synergy_farm_jungler": 8,
-      "synergy_with_poke_comp": 4, "synergy_with_dive_comp": 9, "synergy_with_scaling_comp": 6,
-      "lane_phase_strength": 7, "midgame_strength": 9, "lategame_strength": 8,
-      "best_with_adcs": ["Xayah", "Samira", "Kaisa", "MissFortune", "Draven"],
-      "worst_with_adcs": ["KogMaw", "Ezreal", "Vayne"],
-      "strong_against_supports": ["Soraka", "Yuumi", "Senna"],
-      "weak_against_supports": ["Morgana", "Lulu", "Janna"],
-      "power_spikes": ["level 2 (W+Q)", "level 6 (R+W combo)", "Shurelya's completion"],
-      "strengths": ["R+W combo es el engage más explosivo del juego — AOE charm + knockup", "Sinergia S-tier con Xayah (E recall range)", "E dash a aliado = escape y reposicionamiento", "Excelente roamer por su movilidad"],
-      "weaknesses": ["Muy squishy para ser engage — muere si falla W", "W es dash in sin escape si no hay aliado cerca para E", "Peel limitado comparado con enchanters", "Sin Xayah pierde sinergia de E"],
-      "play_pattern_template": "Lane: W engage oportunista en {enemy_support}. Q heal para sustain. E a {allied_adc} para escape. Nivel 6: R+flash+W = AOE charm+knockup en {enemy_adc}. Mid: roams agresivos, R engage en mid. Late: R+W flash en backline, E back a {allied_adc} para reposicionar."
+      "engage_strength": 9,
+      "peel_strength": 6,
+      "lane_kill_pressure": 7,
+      "disengage": 7,
+      "poke": 2,
+      "cc_chain_length": 6,
+      "scaling": 7,
+      "blind_pick_safety": 6,
+      "execution_difficulty": 7,
+      "anti_dive": 5,
+      "anti_assassin_peel": 5,
+      "anti_poke_in_lane": 4,
+      "synergy_engage_jungler": 6,
+      "synergy_farm_jungler": 8,
+      "synergy_with_poke_comp": 4,
+      "synergy_with_dive_comp": 9,
+      "synergy_with_scaling_comp": 6,
+      "lane_phase_strength": 7,
+      "midgame_strength": 9,
+      "lategame_strength": 8,
+      "best_with_adcs": [
+        "Xayah",
+        "Samira",
+        "Kaisa",
+        "MissFortune",
+        "Draven"
+      ],
+      "worst_with_adcs": [
+        "KogMaw",
+        "Ezreal",
+        "Vayne"
+      ],
+      "strong_against_supports": [
+        "Soraka",
+        "Yuumi",
+        "Senna"
+      ],
+      "weak_against_supports": [
+        "Morgana",
+        "Lulu",
+        "Janna"
+      ],
+      "power_spikes": [
+        "level 2 (W+Q)",
+        "level 6 (R+W combo)",
+        "Shurelya's completion"
+      ],
+      "strengths": [
+        "R+W combo es el engage más explosivo del juego — AOE charm + knockup",
+        "Sinergia S-tier con Xayah (E recall range)",
+        "E dash a aliado = escape y reposicionamiento",
+        "Excelente roamer por su movilidad"
+      ],
+      "weaknesses": [
+        "Muy squishy para ser engage — muere si falla W",
+        "W es dash in sin escape si no hay aliado cerca para E",
+        "Peel limitado comparado con enchanters",
+        "Sin Xayah pierde sinergia de E"
+      ],
+      "play_pattern_template": "Línea: W engage oportunista en {enemy_support}. Q heal para sustain. E a {allied_adc} para escape. Pico nivel 6: R+flash+W = AOE charm+knockup. Mid game: **Crash & Move**: después del crash bot, alta movilidad (E+W) para roams cortos a mid. R engage en mid gank = kill confirmada. **3 Chequeos**: ¿{allied_adc} seguro? ¿La wave crasheó? ¿Mid empujado? Volvé con E dash cuando oleada rebota (~45s). Late game: R+W flash en backline, E reposicionar.",
+      "item_path": {
+        "evolution": "Solstice Sleigh",
+        "core_items": [
+          "Shurelya's Battlesong",
+          "Knight's Vow"
+        ],
+        "situational_items": [
+          "Zhonya's Hourglass (R engage + invuln)",
+          "Redemption"
+        ],
+        "boots": "Boots of Mobility",
+        "first_back": "Solstice Sleigh + Aether Wisp"
+      }
     },
     "Rell": {
-      "id": "Rell", "display_name": "Rell",
+      "id": "Rell",
+      "display_name": "Rell",
       "archetype": "engage",
-      "engage_strength": 10, "peel_strength": 5, "lane_kill_pressure": 7, "disengage": 3, "poke": 1,
-      "cc_chain_length": 8, "scaling": 6, "blind_pick_safety": 6, "execution_difficulty": 6,
-      "anti_dive": 6, "anti_assassin_peel": 4, "anti_poke_in_lane": 3,
-      "synergy_engage_jungler": 5, "synergy_farm_jungler": 9,
-      "synergy_with_poke_comp": 3, "synergy_with_dive_comp": 10, "synergy_with_scaling_comp": 5,
-      "lane_phase_strength": 7, "midgame_strength": 8, "lategame_strength": 7,
-      "best_with_adcs": ["Samira", "MissFortune", "Kaisa", "Aphelios", "Draven"],
-      "worst_with_adcs": ["Ezreal", "Caitlyn", "Jhin", "Vayne"],
-      "strong_against_supports": ["Soraka", "Yuumi", "Senna", "Nami"],
-      "weak_against_supports": ["Janna", "Lulu", "Morgana"],
-      "power_spikes": ["level 2 (W+E)", "level 6 (R)", "Locket completion"],
-      "strengths": ["W crash down es engage AOE devastador", "R magnet pull agrupa enemigos para wombo combos", "Passive roba armadura/MR del enemy = ADC hace más daño", "Chain CC: W knockup → E stun → R pull = ~3.5s de CC"],
-      "weaknesses": ["W desmontada = lenta e inmóvil (comprometida)", "Sin escape si falla el engage", "Vulnerable a poke antes de poder entrar", "Necesita equipo con follow-up burst para capitalizar"],
-      "play_pattern_template": "Lane: W crash nivel 2 en {enemy_support}. E stun para chain CC. Spike nivel 6: R pull + W crash = wombo con {allied_adc}. Coordiná con {ally_jungler}. Mid: roams con W engage. Late: W+R flash en backline = agrupa a {primary_threat} para que el equipo los borre."
+      "engage_strength": 10,
+      "peel_strength": 5,
+      "lane_kill_pressure": 7,
+      "disengage": 3,
+      "poke": 1,
+      "cc_chain_length": 8,
+      "scaling": 6,
+      "blind_pick_safety": 6,
+      "execution_difficulty": 6,
+      "anti_dive": 6,
+      "anti_assassin_peel": 4,
+      "anti_poke_in_lane": 3,
+      "synergy_engage_jungler": 5,
+      "synergy_farm_jungler": 9,
+      "synergy_with_poke_comp": 3,
+      "synergy_with_dive_comp": 10,
+      "synergy_with_scaling_comp": 5,
+      "lane_phase_strength": 7,
+      "midgame_strength": 8,
+      "lategame_strength": 7,
+      "best_with_adcs": [
+        "Samira",
+        "MissFortune",
+        "Kaisa",
+        "Aphelios",
+        "Draven"
+      ],
+      "worst_with_adcs": [
+        "Ezreal",
+        "Caitlyn",
+        "Jhin",
+        "Vayne"
+      ],
+      "strong_against_supports": [
+        "Soraka",
+        "Yuumi",
+        "Senna",
+        "Nami"
+      ],
+      "weak_against_supports": [
+        "Janna",
+        "Lulu",
+        "Morgana"
+      ],
+      "power_spikes": [
+        "level 2 (W+E)",
+        "level 6 (R)",
+        "Locket completion"
+      ],
+      "strengths": [
+        "W crash down es engage AOE devastador",
+        "R magnet pull agrupa enemigos para wombo combos",
+        "La pasiva roba armadura/MR del enemigo = ADC hace más daño",
+        "Chain CC: W knockup → E stun → R pull = ~3.5s de CC"
+      ],
+      "weaknesses": [
+        "W desmontada = lenta e inmóvil (comprometida)",
+        "Sin escape si falla el engage",
+        "Vulnerable a poke antes de poder entrar",
+        "Necesita equipo con follow-up burst para capitalizar"
+      ],
+      "play_pattern_template": "Línea: W crash nivel 2 en {enemy_support}. E stun para chain CC. Pico nivel 6: R pull + W crash = wombo con {allied_adc}. Coordiná con {ally_jungler}. Mid game: roams con W engage. Late game: W+R flash en backline = agrupa a {primary_threat} para que el equipo los borre.",
+      "item_path": {
+        "evolution": "Celestial Opposition",
+        "core_items": [
+          "Locket of the Iron Solari",
+          "Zeke's Convergence"
+        ],
+        "situational_items": [
+          "Knight's Vow",
+          "Thornmail vs heavy AD"
+        ],
+        "boots": "Boots of Mobility",
+        "first_back": "Celestial Opposition + Boots1"
+      }
     },
     "Blitzcrank": {
-      "id": "Blitzcrank", "display_name": "Blitzcrank",
+      "id": "Blitzcrank",
+      "display_name": "Blitzcrank",
       "archetype": "catcher",
-      "engage_strength": 8, "peel_strength": 4, "lane_kill_pressure": 9, "disengage": 3, "poke": 2,
-      "cc_chain_length": 6, "scaling": 5, "blind_pick_safety": 5, "execution_difficulty": 6,
-      "anti_dive": 4, "anti_assassin_peel": 4, "anti_poke_in_lane": 3,
-      "synergy_engage_jungler": 7, "synergy_farm_jungler": 8,
-      "synergy_with_poke_comp": 4, "synergy_with_dive_comp": 6, "synergy_with_scaling_comp": 4,
-      "lane_phase_strength": 9, "midgame_strength": 7, "lategame_strength": 6,
-      "best_with_adcs": ["Draven", "Lucian", "MissFortune", "Samira", "Kaisa"],
-      "worst_with_adcs": ["KogMaw", "Vayne", "Twitch", "Ezreal"],
-      "strong_against_supports": ["Soraka", "Yuumi", "Senna", "Lux"],
-      "weak_against_supports": ["Morgana", "Leona", "Braum"],
-      "power_spikes": ["level 2 (Q+E)", "level 6 (R silence)", "Locket completion"],
-      "strengths": ["Q hook es la habilidad más castigadora del juego — un hook = una kill", "E knockup garantiza combo después del hook", "R silence AOE interrumpe channels y deniega escapes", "Zone control pasivo — el enemigo juega con miedo por la amenaza de Q"],
-      "weaknesses": ["Q fallado = 20s de ventana sin presión", "Inútil detrás de minions — necesita ángulos", "Falls off late — no tanquea bien, no peelea bien", "Si el enemigo tiene Morgana, el hook es inútil (Black Shield)"],
-      "play_pattern_template": "Lane: Q hook desde bush o ángulos laterales vs {enemy_adc}. E knockup + R silence combo. Zone con amenaza de Q (no necesitás hookear, solo estar ahí). Nivel 6: Q+E+R silence = kill confirmada con {allied_adc}. Mid: roams a mid, Q pick en river. Late: Q pre-fight en {primary_threat} = catch → ace. NUNCA hookees tanks."
+      "engage_strength": 8,
+      "peel_strength": 4,
+      "lane_kill_pressure": 9,
+      "disengage": 3,
+      "poke": 2,
+      "cc_chain_length": 6,
+      "scaling": 5,
+      "blind_pick_safety": 5,
+      "execution_difficulty": 6,
+      "anti_dive": 4,
+      "anti_assassin_peel": 4,
+      "anti_poke_in_lane": 3,
+      "synergy_engage_jungler": 7,
+      "synergy_farm_jungler": 8,
+      "synergy_with_poke_comp": 4,
+      "synergy_with_dive_comp": 6,
+      "synergy_with_scaling_comp": 4,
+      "lane_phase_strength": 9,
+      "midgame_strength": 7,
+      "lategame_strength": 6,
+      "best_with_adcs": [
+        "Draven",
+        "Lucian",
+        "MissFortune",
+        "Samira",
+        "Kaisa"
+      ],
+      "worst_with_adcs": [
+        "KogMaw",
+        "Vayne",
+        "Twitch",
+        "Ezreal"
+      ],
+      "strong_against_supports": [
+        "Soraka",
+        "Yuumi",
+        "Senna",
+        "Lux"
+      ],
+      "weak_against_supports": [
+        "Morgana",
+        "Leona",
+        "Braum"
+      ],
+      "power_spikes": [
+        "level 2 (Q+E)",
+        "level 6 (R silence)",
+        "Locket completion"
+      ],
+      "strengths": [
+        "Q hook es la habilidad más castigadora del juego — un hook = una kill",
+        "E knockup garantiza combo después del hook",
+        "R silence AOE interrumpe canalizaciones y deniega escapes",
+        "Zoneá control pasivo — el enemigo juega con miedo por la amenaza de Q"
+      ],
+      "weaknesses": [
+        "Q fallado = 20s de ventana sin presión",
+        "Inútil detrás de minions — necesita ángulos",
+        "Falls off late — no tanquea bien, no peelea bien",
+        "Si el enemigo tiene Morgana, el hook es inútil (Black Shield)"
+      ],
+      "play_pattern_template": "Línea: Q hook desde bush o ángulos laterales vs {enemy_adc}. E knockup + R silence combo. Zoneá con amenaza de Q (no necesitás hookear, solo estar ahí). Nivel 6: Q+E+R silence = kill confirmada con {allied_adc}. Mid game: roams a mid, Q pick en river. Late game: Q pre-fight en {primary_threat} = catch → ace. NUNCA hookees tanks.",
+      "item_path": {
+        "evolution": "Solstice Sleigh",
+        "core_items": [
+          "Locket of the Iron Solari",
+          "Knight's Vow"
+        ],
+        "situational_items": [
+          "Zeke's Convergence",
+          "Frozen Heart vs AD heavy"
+        ],
+        "boots": "Boots of Mobility",
+        "first_back": "Solstice Sleigh + Boots1"
+      }
+    },
+    "Yuumi": {
+      "id": "Yuumi",
+      "display_name": "Yuumi",
+      "archetype": "enchanter",
+      "engage_strength": 1,
+      "peel_strength": 6,
+      "lane_kill_pressure": 2,
+      "disengage": 3,
+      "poke": 4,
+      "cc_chain_length": 3,
+      "scaling": 10,
+      "blind_pick_safety": 3,
+      "execution_difficulty": 3,
+      "anti_dive": 3,
+      "anti_assassin_peel": 3,
+      "anti_poke_in_lane": 5,
+      "synergy_engage_jungler": 5,
+      "synergy_farm_jungler": 5,
+      "synergy_with_poke_comp": 4,
+      "synergy_with_dive_comp": 3,
+      "synergy_with_scaling_comp": 10,
+      "lane_phase_strength": 3,
+      "midgame_strength": 6,
+      "lategame_strength": 10,
+      "best_with_adcs": [
+        "Zeri",
+        "Ezreal",
+        "Sivir",
+        "Jinx",
+        "Twitch"
+      ],
+      "worst_with_adcs": [
+        "Draven",
+        "Samira",
+        "MissFortune",
+        "Lucian"
+      ],
+      "strong_against_supports": [],
+      "weak_against_supports": [
+        "Leona",
+        "Nautilus",
+        "Pyke",
+        "Blitzcrank",
+        "Thresh"
+      ],
+      "power_spikes": [
+        "nivel 6 (R)",
+        "completar Moonstone",
+        "3+ items (escalado)"
+      ],
+      "strengths": [
+        "Inobjetivable mientras está adjunta — imposible de matar",
+        "Curación infinita que escala con AP",
+        "La W buffea al carry con fuerza adaptativa",
+        "La R provee el mejor CC de engage para un encantador pasivo"
+      ],
+      "weaknesses": [
+        "La peor lane phase de cualquier soporte — 2v1 si se desadjunta",
+        "Depende completamente de la calidad del carry",
+        "Inútil si está adjunta a un carry que va perdiendo",
+        "Pick ciego extremadamente débil — countered por todo el engage"
+      ],
+      "play_pattern_template": "Línea: defensivo extremo pre-6. Pegate a {allied_adc}. Despegate solo para auto poke SEGURO. E heal constante. Pico nivel 6: R para engage zonal. Mid game: **B-Prox máxima** — anclada al ADC. Crash & Move NO aplica. Solo te detachás para ward rápido o activar pasiva. Late game: attach permanente a hypercarry. R en teamfights para CC AOE. NO te detachés — sos pickeable.",
+      "item_path": {
+        "evolution": "Dream Maker",
+        "core_items": [
+          "Moonstone Renewer",
+          "Staff of Flowing Water"
+        ],
+        "situational_items": [
+          "Ardent Censer con ADC AS",
+          "Redemption"
+        ],
+        "boots": "Ionian Boots of Lucidity",
+        "first_back": "Dream Maker + Amplifying Tome"
+      }
+    },
+    "Renata": {
+      "id": "Renata",
+      "display_name": "Renata Glasc",
+      "archetype": "enchanter",
+      "engage_strength": 3,
+      "peel_strength": 8,
+      "lane_kill_pressure": 5,
+      "disengage": 8,
+      "poke": 3,
+      "cc_chain_length": 5,
+      "scaling": 8,
+      "blind_pick_safety": 6,
+      "execution_difficulty": 7,
+      "anti_dive": 8,
+      "anti_assassin_peel": 8,
+      "anti_poke_in_lane": 5,
+      "synergy_engage_jungler": 7,
+      "synergy_farm_jungler": 7,
+      "synergy_with_poke_comp": 5,
+      "synergy_with_dive_comp": 6,
+      "synergy_with_scaling_comp": 9,
+      "lane_phase_strength": 6,
+      "midgame_strength": 8,
+      "lategame_strength": 9,
+      "best_with_adcs": [
+        "Jinx",
+        "Aphelios",
+        "KogMaw",
+        "Twitch",
+        "Draven"
+      ],
+      "worst_with_adcs": [
+        "Ezreal",
+        "Caitlyn"
+      ],
+      "strong_against_supports": [
+        "Leona",
+        "Nautilus",
+        "Rell"
+      ],
+      "weak_against_supports": [
+        "Brand",
+        "Xerath",
+        "Zyra"
+      ],
+      "power_spikes": [
+        "nivel 6 (R Toma Hostil)",
+        "completar Moonstone"
+      ],
+      "strengths": [
+        "La W Rescate revive al ADC si consigue una kill — roto vs dive",
+        "La R fuerza al equipo enemigo a atacarse entre sí",
+        "La Q raíz prepara ganks y picks",
+        "Escudo E + reducción de daño para peel"
+      ],
+      "weaknesses": [
+        "La W tiene cooldown largo — W malgastada = sin red de seguridad",
+        "La R es difícil de aterrizar de forma óptima",
+        "Lane phase débil vs poke pesado",
+        "Techo de habilidad alto — Renata mala = poco valor"
+      ],
+      "play_pattern_template": "Línea: Q root para setear ganks de {ally_jungler}. W lista para salvar a {allied_adc} si {enemy_support} all-ins. Nivel 6: R en teamfights — {primary_threat} se ataca entre sí. Mid game: W para plays agresivas de {allied_adc}. Late game: R positioning clave — bushes/chokes para máximo AOE.",
+      "item_path": {
+        "evolution": "Dream Maker",
+        "core_items": [
+          "Moonstone Renewer",
+          "Redemption"
+        ],
+        "situational_items": [
+          "Mikael's Blessing vs CC chains",
+          "Shurelya's Battlesong vs kite comps"
+        ],
+        "boots": "Ionian Boots of Lucidity",
+        "first_back": "Dream Maker + Amplifying Tome"
+      }
+    },
+    "Zyra": {
+      "id": "Zyra",
+      "display_name": "Zyra",
+      "archetype": "poke",
+      "engage_strength": 5,
+      "peel_strength": 5,
+      "lane_kill_pressure": 8,
+      "disengage": 6,
+      "poke": 9,
+      "cc_chain_length": 5,
+      "scaling": 7,
+      "blind_pick_safety": 5,
+      "execution_difficulty": 6,
+      "anti_dive": 5,
+      "anti_assassin_peel": 5,
+      "anti_poke_in_lane": 6,
+      "synergy_engage_jungler": 7,
+      "synergy_farm_jungler": 6,
+      "synergy_with_poke_comp": 9,
+      "synergy_with_dive_comp": 4,
+      "synergy_with_scaling_comp": 6,
+      "lane_phase_strength": 9,
+      "midgame_strength": 8,
+      "lategame_strength": 7,
+      "best_with_adcs": [
+        "Caitlyn",
+        "Jhin",
+        "Varus",
+        "Ashe",
+        "MissFortune"
+      ],
+      "worst_with_adcs": [
+        "KogMaw",
+        "Vayne",
+        "Twitch"
+      ],
+      "strong_against_supports": [
+        "Leona",
+        "Nautilus",
+        "Soraka",
+        "Yuumi"
+      ],
+      "weak_against_supports": [
+        "Brand",
+        "Xerath",
+        "Blitzcrank"
+      ],
+      "power_spikes": [
+        "nivel 2 (Q+W)",
+        "nivel 6 (R)",
+        "completar Liandry's"
+      ],
+      "strengths": [
+        "Mayor DPS de mago soporte en lane — plantas pokean constantemente",
+        "La R knockup provee control de zona en objetivos",
+        "Las plantas dan control de arbustos y visión",
+        "Daño AP masivo si va adelante — lleva los teamfights"
+      ],
+      "weaknesses": [
+        "Muy frágil — muere instantáneamente al dive",
+        "Las plantas son frágiles y objetivables",
+        "Sin sustain ni escudo para el ADC",
+        "Cae si va atrás — sin utilidad sin items"
+      ],
+      "play_pattern_template": "Línea: W+Q poke constante con plantas. Plantas en bushes para vision. Pico nivel 6 — R knockup + W plantas = control de zona total. Coordiná con {allied_adc} para poke chains. Mid game: empujá torre bot, roam a objetivos con R zoning. Late game: R en chokepoints pre-drake/baron. Posición lateral — cuidado dive de {primary_threat}.",
+      "item_path": {
+        "evolution": "Zaz'Zak's Realmspike",
+        "core_items": [
+          "Liandry's Anguish",
+          "Rylai's Crystal Scepter"
+        ],
+        "situational_items": [
+          "Zhonya's Hourglass vs dive",
+          "Morellonomicon vs healing"
+        ],
+        "boots": "Sorcerer's Shoes",
+        "first_back": "Zaz'Zak's + Blasting Wand"
+      }
+    },
+    "Brand": {
+      "id": "Brand",
+      "display_name": "Brand",
+      "archetype": "poke",
+      "engage_strength": 3,
+      "peel_strength": 3,
+      "lane_kill_pressure": 9,
+      "disengage": 3,
+      "poke": 9,
+      "cc_chain_length": 4,
+      "scaling": 8,
+      "blind_pick_safety": 5,
+      "execution_difficulty": 6,
+      "anti_dive": 3,
+      "anti_assassin_peel": 3,
+      "anti_poke_in_lane": 5,
+      "synergy_engage_jungler": 7,
+      "synergy_farm_jungler": 6,
+      "synergy_with_poke_comp": 8,
+      "synergy_with_dive_comp": 4,
+      "synergy_with_scaling_comp": 6,
+      "lane_phase_strength": 9,
+      "midgame_strength": 8,
+      "lategame_strength": 8,
+      "best_with_adcs": [
+        "Caitlyn",
+        "Jhin",
+        "MissFortune",
+        "Ashe",
+        "Varus"
+      ],
+      "worst_with_adcs": [
+        "KogMaw",
+        "Vayne",
+        "Twitch",
+        "Draven"
+      ],
+      "strong_against_supports": [
+        "Lulu",
+        "Lux",
+        "Karma",
+        "Soraka",
+        "Yuumi"
+      ],
+      "weak_against_supports": [
+        "Blitzcrank",
+        "Nautilus",
+        "Leona"
+      ],
+      "power_spikes": [
+        "nivel 2 (W+E)",
+        "nivel 6 (R)",
+        "completar Liandry's"
+      ],
+      "strengths": [
+        "Mayor daño de soporte del juego — quemadura de % HP máximo del pasivo",
+        "La R rebota en 2v2 = trades devastadores",
+        "Lane bully que puede solo-kill al ADC enemigo",
+        "Escalado anti-tank con daño de % HP"
+      ],
+      "weaknesses": [
+        "Sin peel — el ADC se vale por sí mismo",
+        "Muy frágil sin escape",
+        "La R depende de la proximidad — enemigos dispersos = R mala",
+        "Cae si va atrás sin utilidad"
+      ],
+      "play_pattern_template": "Línea: W+E poke combo. Pasiva de 3 stacks = stun + burst. Pico nivel 6 — R en {enemy_adc} cuando {enemy_support} está cerca = bounce kills. Anti-tank pick si enemigo tiene tanques. Mid game: daño AP crítico para el equipo. Late game: backline posición, R en clusters — {primary_threat} agrupado cerca = devastador. Cuidado dive.",
+      "item_path": {
+        "evolution": "Zaz'Zak's Realmspike",
+        "core_items": [
+          "Liandry's Anguish",
+          "Rylai's Crystal Scepter"
+        ],
+        "situational_items": [
+          "Zhonya's Hourglass vs dive",
+          "Void Staff vs MR stacking"
+        ],
+        "boots": "Sorcerer's Shoes",
+        "first_back": "Zaz'Zak's + Blasting Wand"
+      }
+    },
+    "Xerath": {
+      "id": "Xerath",
+      "display_name": "Xerath",
+      "archetype": "poke",
+      "engage_strength": 2,
+      "peel_strength": 3,
+      "lane_kill_pressure": 7,
+      "disengage": 4,
+      "poke": 10,
+      "cc_chain_length": 3,
+      "scaling": 7,
+      "blind_pick_safety": 4,
+      "execution_difficulty": 7,
+      "anti_dive": 3,
+      "anti_assassin_peel": 3,
+      "anti_poke_in_lane": 5,
+      "synergy_engage_jungler": 6,
+      "synergy_farm_jungler": 6,
+      "synergy_with_poke_comp": 10,
+      "synergy_with_dive_comp": 3,
+      "synergy_with_scaling_comp": 5,
+      "lane_phase_strength": 8,
+      "midgame_strength": 7,
+      "lategame_strength": 6,
+      "best_with_adcs": [
+        "Caitlyn",
+        "Jhin",
+        "Varus",
+        "Ezreal",
+        "Ashe"
+      ],
+      "worst_with_adcs": [
+        "KogMaw",
+        "Vayne",
+        "Draven",
+        "Samira"
+      ],
+      "strong_against_supports": [
+        "Soraka",
+        "Yuumi",
+        "Leona",
+        "Nautilus"
+      ],
+      "weak_against_supports": [
+        "Blitzcrank",
+        "Pyke",
+        "Brand"
+      ],
+      "power_spikes": [
+        "nivel 2 (Q+W)",
+        "nivel 6 (R)",
+        "completar Luden's"
+      ],
+      "strengths": [
+        "Poke de mayor rango del juego — Q desde 2 pantallas de distancia",
+        "Slow de W + stun de E para preparar picks",
+        "Artillería de R desde rango global",
+        "Lane bully vs soportes cuerpo a cuerpo"
+      ],
+      "weaknesses": [
+        "Inmóvil — fácil objetivo para hooks y dive",
+        "Todos skillshots — mala puntería = sin valor",
+        "Sin peel para el ADC",
+        "Cae vs gap closers y sustain"
+      ],
+      "play_pattern_template": "Línea: Q poke rango máximo vs {enemy_support}. W slow + E stun si se acercan. Zoneá control con rango. Pico nivel 6: R artillery para finish kills o poke pre-obj. Mid game: empujá torre bot, daño AP para equipo. Late game: backline extremo, Q poke pre-fight. Cuidado {primary_threat} dive — flash defensivo.",
+      "item_path": {
+        "evolution": "Zaz'Zak's Realmspike",
+        "core_items": [
+          "Luden's Companion",
+          "Horizon Focus"
+        ],
+        "situational_items": [
+          "Shadowflame",
+          "Zhonya's Hourglass vs dive"
+        ],
+        "boots": "Sorcerer's Shoes",
+        "first_back": "Zaz'Zak's + Lost Chapter"
+      }
+    },
+    "Velkoz": {
+      "id": "Velkoz",
+      "display_name": "Vel'Koz",
+      "archetype": "poke",
+      "engage_strength": 2,
+      "peel_strength": 4,
+      "lane_kill_pressure": 7,
+      "disengage": 5,
+      "poke": 9,
+      "cc_chain_length": 4,
+      "scaling": 7,
+      "blind_pick_safety": 4,
+      "execution_difficulty": 7,
+      "anti_dive": 4,
+      "anti_assassin_peel": 4,
+      "anti_poke_in_lane": 5,
+      "synergy_engage_jungler": 6,
+      "synergy_farm_jungler": 6,
+      "synergy_with_poke_comp": 9,
+      "synergy_with_dive_comp": 3,
+      "synergy_with_scaling_comp": 5,
+      "lane_phase_strength": 8,
+      "midgame_strength": 7,
+      "lategame_strength": 7,
+      "best_with_adcs": [
+        "Caitlyn",
+        "Jhin",
+        "Varus",
+        "Ashe"
+      ],
+      "worst_with_adcs": [
+        "KogMaw",
+        "Vayne",
+        "Draven",
+        "Samira"
+      ],
+      "strong_against_supports": [
+        "Soraka",
+        "Yuumi",
+        "Leona"
+      ],
+      "weak_against_supports": [
+        "Blitzcrank",
+        "Pyke",
+        "Brand",
+        "Nautilus"
+      ],
+      "power_spikes": [
+        "nivel 2 (Q+W)",
+        "nivel 6 (R)",
+        "completar Luden's"
+      ],
+      "strengths": [
+        "El pasivo de daño verdadero (Deconstrucción Orgánica) destroza tanques",
+        "La R láser hace daño AOE masivo en teamfights",
+        "La geometría de la Q permite ángulos creativos",
+        "La E knockup provee algo de auto-peel"
+      ],
+      "weaknesses": [
+        "Inmóvil — fácil objetivo de dive",
+        "La R canaliza = interrumpible",
+        "Todos skillshots — alta tasa de fallo",
+        "Sin escudo ni curación para el ADC"
+      ],
+      "play_pattern_template": "Línea: Q angles para poke desde ángulos creativos. W+E combo para trades. Stacks de pasiva para daño verdadero. Pico nivel 6: R laser en {enemy_adc} = 60%+ HP burst. Mid game: daño AP para equipo, R en objetivos. Late game: R en chokes — cuidado con {primary_threat} interrupt.",
+      "item_path": {
+        "evolution": "Zaz'Zak's Realmspike",
+        "core_items": [
+          "Luden's Companion",
+          "Shadowflame"
+        ],
+        "situational_items": [
+          "Void Staff vs MR stacking",
+          "Zhonya's Hourglass"
+        ],
+        "boots": "Sorcerer's Shoes",
+        "first_back": "Zaz'Zak's + Lost Chapter"
+      }
+    },
+    "Swain": {
+      "id": "Swain",
+      "display_name": "Swain",
+      "archetype": "poke",
+      "engage_strength": 5,
+      "peel_strength": 4,
+      "lane_kill_pressure": 7,
+      "disengage": 4,
+      "poke": 7,
+      "cc_chain_length": 5,
+      "scaling": 8,
+      "blind_pick_safety": 5,
+      "execution_difficulty": 5,
+      "anti_dive": 5,
+      "anti_assassin_peel": 4,
+      "anti_poke_in_lane": 5,
+      "synergy_engage_jungler": 8,
+      "synergy_farm_jungler": 6,
+      "synergy_with_poke_comp": 6,
+      "synergy_with_dive_comp": 7,
+      "synergy_with_scaling_comp": 8,
+      "lane_phase_strength": 7,
+      "midgame_strength": 8,
+      "lategame_strength": 8,
+      "best_with_adcs": [
+        "MissFortune",
+        "Samira",
+        "Draven",
+        "Lucian",
+        "Jhin"
+      ],
+      "worst_with_adcs": [
+        "KogMaw",
+        "Vayne",
+        "Ezreal"
+      ],
+      "strong_against_supports": [
+        "Soraka",
+        "Yuumi",
+        "Lux"
+      ],
+      "weak_against_supports": [
+        "Janna",
+        "Lulu",
+        "Karma"
+      ],
+      "power_spikes": [
+        "nivel 2 (E+W)",
+        "nivel 6 (drenaje de R)",
+        "completar Liandry's"
+      ],
+      "strengths": [
+        "Tirar con E + raíz con W = preparación para ganks y follow-up del ADC",
+        "El modo tanque de drenaje de R lo convierte en frontline secundaria",
+        "El stackeo de almas del pasivo = HP gratis escalada",
+        "Excelente en CC de seguimiento de ganks del jungla"
+      ],
+      "weaknesses": [
+        "La E es lenta y predecible",
+        "La R drena maná rápido — sin maná = sin amenaza",
+        "Necesita estar en rango cuerpo a cuerpo para la R = arriesgado",
+        "Cae vs sustain pesado que sana más que el drenaje de R"
+      ],
+      "play_pattern_template": "Línea: E pull en {enemy_adc} + W root para CC chain con {allied_adc}. Almas de la pasiva para HP extra. Pico nivel 6: R drain tank mode en 2v2 — sos un pseudo-frontline. Mid game: R en objetivos, drain sustain. Late game: R+flash en backline, E pull en {primary_threat} = AOE CC + drain.",
+      "item_path": {
+        "evolution": "Zaz'Zak's Realmspike",
+        "core_items": [
+          "Liandry's Anguish",
+          "Zhonya's Hourglass"
+        ],
+        "situational_items": [
+          "Rylai's Crystal Scepter",
+          "Spirit Visage vs AP"
+        ],
+        "boots": "Sorcerer's Shoes",
+        "first_back": "Zaz'Zak's + Blasting Wand"
+      }
+    },
+    "Senna": {
+      "id": "Senna",
+      "display_name": "Senna",
+      "archetype": "enchanter",
+      "engage_strength": 2,
+      "peel_strength": 5,
+      "lane_kill_pressure": 6,
+      "disengage": 4,
+      "poke": 7,
+      "cc_chain_length": 3,
+      "scaling": 10,
+      "blind_pick_safety": 6,
+      "execution_difficulty": 6,
+      "anti_dive": 4,
+      "anti_assassin_peel": 4,
+      "anti_poke_in_lane": 6,
+      "synergy_engage_jungler": 6,
+      "synergy_farm_jungler": 6,
+      "synergy_with_poke_comp": 8,
+      "synergy_with_dive_comp": 4,
+      "synergy_with_scaling_comp": 10,
+      "lane_phase_strength": 7,
+      "midgame_strength": 7,
+      "lategame_strength": 10,
+      "best_with_adcs": [
+        "Jhin",
+        "Ezreal",
+        "Ashe",
+        "Varus"
+      ],
+      "worst_with_adcs": [
+        "Draven",
+        "Samira",
+        "KogMaw"
+      ],
+      "strong_against_supports": [
+        "Soraka",
+        "Yuumi",
+        "Braum"
+      ],
+      "weak_against_supports": [
+        "Leona",
+        "Nautilus",
+        "Blitzcrank",
+        "Pyke"
+      ],
+      "power_spikes": [
+        "nivel 2 (Q+auto)",
+        "50 almas (crit + rango)",
+        "100+ almas (escalado)"
+      ],
+      "strengths": [
+        "Escalado infinito — se convierte en carry con almas",
+        "La R global cura y hace daño, provee presión de mapa",
+        "El camuflaje E para rotaciones del equipo",
+        "Híbrido poke + sustain — laner versátil"
+      ],
+      "weaknesses": [
+        "Frágil — vulnerable al engage all-in",
+        "Necesita tiempo para acumular almas — débil en el early",
+        "Poco peel vs dive pesado",
+        "Pick codicioso — el equipo carece de soporte tradicional"
+      ],
+      "play_pattern_template": "Línea: Q poke + auto farmeo de almas. E camouflage para trades seguros. Pico 50 almas: rango + crit. Mid game: R global para cross-map fights. Farmeo de almas en waves. Late game: sos un segundo carry — Q heal + R global. E para rotaciones de equipo. Cuidado {primary_threat} dive.",
+      "item_path": {
+        "evolution": "Bloodsong",
+        "core_items": [
+          "Umbral Glaive",
+          "Rapid Firecannon"
+        ],
+        "situational_items": [
+          "Edge of Night vs engage",
+          "The Collector si snowball"
+        ],
+        "boots": "Boots of Swiftness",
+        "first_back": "Bloodsong + Serrated Dirk"
+      }
+    },
+    "Bard": {
+      "id": "Bard",
+      "display_name": "Bardo",
+      "archetype": "catcher",
+      "engage_strength": 5,
+      "peel_strength": 6,
+      "lane_kill_pressure": 6,
+      "disengage": 7,
+      "poke": 5,
+      "cc_chain_length": 5,
+      "scaling": 8,
+      "blind_pick_safety": 5,
+      "execution_difficulty": 9,
+      "anti_dive": 6,
+      "anti_assassin_peel": 6,
+      "anti_poke_in_lane": 5,
+      "synergy_engage_jungler": 8,
+      "synergy_farm_jungler": 6,
+      "synergy_with_poke_comp": 6,
+      "synergy_with_dive_comp": 7,
+      "synergy_with_scaling_comp": 7,
+      "lane_phase_strength": 6,
+      "midgame_strength": 9,
+      "lategame_strength": 8,
+      "best_with_adcs": [
+        "Ezreal",
+        "Sivir",
+        "Xayah",
+        "Caitlyn",
+        "Jhin"
+      ],
+      "worst_with_adcs": [
+        "KogMaw",
+        "Vayne",
+        "Draven"
+      ],
+      "strong_against_supports": [
+        "Soraka",
+        "Yuumi",
+        "Lux"
+      ],
+      "weak_against_supports": [
+        "Leona",
+        "Nautilus",
+        "Blitzcrank"
+      ],
+      "power_spikes": [
+        "nivel 2 (Q+pasivo)",
+        "nivel 6 (R)",
+        "escalado de meeps"
+      ],
+      "strengths": [
+        "El viaje mágico E crea caminos de roam únicos",
+        "La R Sino Templado es la habilidad más versátil del juego",
+        "Q doble stun a través de minions/paredes",
+        "El pasivo de meeps escala infinitamente — autos slow + burst"
+      ],
+      "weaknesses": [
+        "El mayor techo de habilidad del juego: un Bardo mal usado no aporta valor",
+        "Deja al ADC solo durante la recolección de campanillas y los roams",
+        "La R puede salvar enemigos o congelar aliados en el momento equivocado",
+        "Poco peel directo — depende del stun Q y el timing de la R"
+      ],
+      "play_pattern_template": "Línea: Q stun atravesando minions sobre {enemy_support}. Meeps de la pasiva para slow. Campanillas cerca de la línea. Pico nivel 6: R sobre {enemy_adc} para setup. Mid game: **Crash & Move maestro**: después del crash bot, la E te da el roam más rápido del mapa. Recolectá campanillas en río mientras rotás. **3 chequeos**: ¿{allied_adc} puede sobrevivir 30s? ¿La wave crasheó? ¿Mid está empujado o el cangrejo está en disputa? Volvé con E cuando la wave rebote (~45s). Late game: R para engage/disengage. Q doble stun en pasillos.",
+      "item_path": {
+        "evolution": "Solstice Sleigh",
+        "core_items": [
+          "Shurelya's Battlesong",
+          "Redemption"
+        ],
+        "situational_items": [
+          "Rapid Firecannon (meep range)",
+          "Zhonya's Hourglass"
+        ],
+        "boots": "Boots of Mobility",
+        "first_back": "Solstice Sleigh + Boots1"
+      }
+    },
+    "Sona": {
+      "id": "Sona",
+      "display_name": "Sona",
+      "archetype": "enchanter",
+      "engage_strength": 3,
+      "peel_strength": 6,
+      "lane_kill_pressure": 4,
+      "disengage": 5,
+      "poke": 6,
+      "cc_chain_length": 4,
+      "scaling": 9,
+      "blind_pick_safety": 5,
+      "execution_difficulty": 3,
+      "anti_dive": 5,
+      "anti_assassin_peel": 5,
+      "anti_poke_in_lane": 6,
+      "synergy_engage_jungler": 7,
+      "synergy_farm_jungler": 6,
+      "synergy_with_poke_comp": 7,
+      "synergy_with_dive_comp": 4,
+      "synergy_with_scaling_comp": 9,
+      "lane_phase_strength": 5,
+      "midgame_strength": 7,
+      "lategame_strength": 9,
+      "best_with_adcs": [
+        "Jinx",
+        "KogMaw",
+        "Aphelios",
+        "Twitch",
+        "Jhin",
+        "Ezreal"
+      ],
+      "worst_with_adcs": [
+        "Draven",
+        "Samira",
+        "MissFortune"
+      ],
+      "strong_against_supports": [
+        "Soraka",
+        "Yuumi"
+      ],
+      "weak_against_supports": [
+        "Leona",
+        "Nautilus",
+        "Blitzcrank",
+        "Pyke",
+        "Brand"
+      ],
+      "power_spikes": [
+        "nivel 6 (R Crescendo)",
+        "completar Moonstone",
+        "3+ items (auras de escalado)"
+      ],
+      "strengths": [
+        "Las auras de equipo (daño Q, curación W, velocidad E) amplifican a cada aliado",
+        "La R Crescendo es una de las mejores ults de teamfight — stun AOE",
+        "Escalado extremo de late game con pasivo + auras",
+        "Baja dificultad de ejecución — accesible para todos los niveles de habilidad"
+      ],
+      "weaknesses": [
+        "La peor lane phase después de Yuumi — frágil sin escape",
+        "Hambrienta de maná en el early — se queda sin maná en trades extendidos",
+        "Completamente dependiente del equipo — no puede carrear sola",
+        "Vulnerable al engage all-in y los hooks"
+      ],
+      "play_pattern_template": "Línea: Q poke + auto (Acorde de Poder) para trades cortos. W heal para sustain. Defensivo extremo — NO tradees extendido. Pico nivel 6: R stun AOE. Mid game: **B-Prox alta** — quedate con {allied_adc}. Crash & Move NO aplica (sin movilidad). Auras buffean a todo el equipo en teamfights. Late game: R en 3+ enemigos = teamfight ganada. W heal + E speed para kite. Posición backline extremo — sos pickeable.",
+      "item_path": {
+        "evolution": "Dream Maker",
+        "core_items": [
+          "Moonstone Renewer",
+          "Staff of Flowing Water"
+        ],
+        "situational_items": [
+          "Lich Bane (late game burst)",
+          "Redemption"
+        ],
+        "boots": "Ionian Boots of Lucidity",
+        "first_back": "Dream Maker + Tear of the Goddess"
+      }
+    },
+    "Poppy": {
+      "disengage": 9,
+      "poke": 5,
+      "scaling": 5,
+      "anti_dive": 10,
+      "anti_assassin_peel": 5,
+      "anti_poke_in_lane": 5,
+      "synergy_engage_jungler": 5,
+      "synergy_farm_jungler": 5,
+      "synergy_with_poke_comp": 5,
+      "synergy_with_dive_comp": 5,
+      "synergy_with_scaling_comp": 5,
+      "best_with_adcs": [],
+      "worst_with_adcs": [],
+      "strong_against_supports": [],
+      "weak_against_supports": [],
+      "power_spikes": [
+        "Nivel 2",
+        "Nivel 6"
+      ],
+      "strengths": [
+        "Anti-meta playmaker"
+      ],
+      "weaknesses": [
+        "Débil a ciegas",
+        "Requiere ejecución precisa"
+      ],
+      "id": "Poppy",
+      "archetype": "warden",
+      "lane_phase_strength": 6,
+      "midgame_strength": 8,
+      "lategame_strength": 6,
+      "engage_strength": 8,
+      "peel_strength": 9,
+      "lane_kill_pressure": 7,
+      "blind_pick_safety": 2,
+      "execution_difficulty": 7,
+      "cc_chain_length": 8,
+      "item_path": {
+        "evolution": "solstice_sleigh",
+        "core_items": [
+          "Locket of the Iron Solari",
+          "Knight's Vow"
+        ],
+        "situational_items": [
+          "Zeke's Convergence"
+        ],
+        "boots": "Plated Steelcaps",
+        "first_back": "Ruby Crystal + Boots"
+      },
+      "play_pattern_template": "Anti-meta Warden: Usa tu W para bloquear todo el engage enemigo. Si no hay dashes que bloquear, guarda W para peel pasivo.",
+      "display_name": "Poppy"
+    },
+    "Camille": {
+      "disengage": 5,
+      "poke": 2,
+      "scaling": 5,
+      "anti_dive": 5,
+      "anti_assassin_peel": 5,
+      "anti_poke_in_lane": 5,
+      "synergy_engage_jungler": 5,
+      "synergy_farm_jungler": 5,
+      "synergy_with_poke_comp": 5,
+      "synergy_with_dive_comp": 9,
+      "synergy_with_scaling_comp": 5,
+      "best_with_adcs": [],
+      "worst_with_adcs": [],
+      "strong_against_supports": [],
+      "weak_against_supports": [],
+      "power_spikes": [
+        "Nivel 2",
+        "Nivel 6"
+      ],
+      "strengths": [
+        "Anti-meta playmaker"
+      ],
+      "weaknesses": [
+        "Débil a ciegas",
+        "Requiere ejecución precisa"
+      ],
+      "id": "Camille",
+      "archetype": "engage",
+      "lane_phase_strength": 8,
+      "midgame_strength": 7,
+      "lategame_strength": 5,
+      "engage_strength": 9,
+      "peel_strength": 2,
+      "lane_kill_pressure": 9,
+      "blind_pick_safety": 1,
+      "execution_difficulty": 8,
+      "cc_chain_length": 6,
+      "item_path": {
+        "evolution": "bloodsong",
+        "core_items": [
+          "Eclipse",
+          "Sterak's Gage"
+        ],
+        "situational_items": [
+          "Sundered Sky"
+        ],
+        "boots": "Plated Steelcaps",
+        "first_back": "Long Sword + Boots"
+      },
+      "play_pattern_template": "Anti-meta Engage: Ignora el poke y salta directo a la cara del enchanter enemigo nivel 2/3. Eres un asesino en botlane.",
+      "display_name": "Camille"
+    },
+    "Pantheon": {
+      "disengage": 5,
+      "poke": 5,
+      "scaling": 5,
+      "anti_dive": 6,
+      "anti_assassin_peel": 5,
+      "anti_poke_in_lane": 5,
+      "synergy_engage_jungler": 5,
+      "synergy_farm_jungler": 5,
+      "synergy_with_poke_comp": 5,
+      "synergy_with_dive_comp": 5,
+      "synergy_with_scaling_comp": 5,
+      "best_with_adcs": [],
+      "worst_with_adcs": [],
+      "strong_against_supports": [],
+      "weak_against_supports": [],
+      "power_spikes": [
+        "Nivel 2",
+        "Nivel 6"
+      ],
+      "strengths": [
+        "Anti-meta playmaker"
+      ],
+      "weaknesses": [
+        "Débil a ciegas",
+        "Requiere ejecución precisa"
+      ],
+      "id": "Pantheon",
+      "archetype": "engage",
+      "lane_phase_strength": 9,
+      "midgame_strength": 6,
+      "lategame_strength": 4,
+      "engage_strength": 8,
+      "peel_strength": 4,
+      "lane_kill_pressure": 10,
+      "blind_pick_safety": 3,
+      "execution_difficulty": 5,
+      "cc_chain_length": 5,
+      "item_path": {
+        "evolution": "bloodsong",
+        "core_items": [
+          "Umbral Glaive",
+          "Eclipse"
+        ],
+        "situational_items": [
+          "Black Cleaver"
+        ],
+        "boots": "Boots of Swiftness",
+        "first_back": "Serrated Dirk"
+      },
+      "play_pattern_template": "Anti-meta Engage: Destruye la línea nivel 2 con W. Nivel 6 usa R para gankear mid o asistir al jungla.",
+      "display_name": "Pantheon"
+    },
+    "Shen": {
+      "disengage": 5,
+      "poke": 5,
+      "scaling": 5,
+      "anti_dive": 5,
+      "anti_assassin_peel": 8,
+      "anti_poke_in_lane": 5,
+      "synergy_engage_jungler": 5,
+      "synergy_farm_jungler": 5,
+      "synergy_with_poke_comp": 5,
+      "synergy_with_dive_comp": 5,
+      "synergy_with_scaling_comp": 5,
+      "best_with_adcs": [],
+      "worst_with_adcs": [],
+      "strong_against_supports": [],
+      "weak_against_supports": [],
+      "power_spikes": [
+        "Nivel 2",
+        "Nivel 6"
+      ],
+      "strengths": [
+        "Anti-meta playmaker"
+      ],
+      "weaknesses": [
+        "Débil a ciegas",
+        "Requiere ejecución precisa"
+      ],
+      "id": "Shen",
+      "archetype": "warden",
+      "lane_phase_strength": 6,
+      "midgame_strength": 8,
+      "lategame_strength": 7,
+      "engage_strength": 7,
+      "peel_strength": 8,
+      "lane_kill_pressure": 6,
+      "blind_pick_safety": 3,
+      "execution_difficulty": 6,
+      "cc_chain_length": 5,
+      "item_path": {
+        "evolution": "celestial_opposition",
+        "core_items": [
+          "Locket of the Iron Solari",
+          "Knight's Vow"
+        ],
+        "situational_items": [
+          "Redemption"
+        ],
+        "boots": "Ionian Boots of Lucidity",
+        "first_back": "Ruby Crystal + Boots"
+      },
+      "play_pattern_template": "Anti-meta Warden: Usa W para bloquear el daño principal del ADC enemigo o engages basados en AA.",
+      "display_name": "Shen"
+    },
+    "Sylas": {
+      "disengage": 5,
+      "poke": 5,
+      "scaling": 5,
+      "anti_dive": 5,
+      "anti_assassin_peel": 5,
+      "anti_poke_in_lane": 5,
+      "synergy_engage_jungler": 5,
+      "synergy_farm_jungler": 5,
+      "synergy_with_poke_comp": 5,
+      "synergy_with_dive_comp": 8,
+      "synergy_with_scaling_comp": 5,
+      "best_with_adcs": [],
+      "worst_with_adcs": [],
+      "strong_against_supports": [],
+      "weak_against_supports": [],
+      "power_spikes": [
+        "Nivel 2",
+        "Nivel 6"
+      ],
+      "strengths": [
+        "Anti-meta playmaker"
+      ],
+      "weaknesses": [
+        "Débil a ciegas",
+        "Requiere ejecución precisa"
+      ],
+      "id": "Sylas",
+      "archetype": "engage",
+      "lane_phase_strength": 5,
+      "midgame_strength": 9,
+      "lategame_strength": 8,
+      "engage_strength": 8,
+      "peel_strength": 3,
+      "lane_kill_pressure": 7,
+      "blind_pick_safety": 1,
+      "execution_difficulty": 8,
+      "cc_chain_length": 4,
+      "item_path": {
+        "evolution": "zaz_zaks_realmspike",
+        "core_items": [
+          "Hextech Rocketbelt",
+          "Zhonya's Hourglass"
+        ],
+        "situational_items": [
+          "Cryptbloom"
+        ],
+        "boots": "Sorcerer's Shoes",
+        "first_back": "Hextech Alternator"
+      },
+      "play_pattern_template": "Anti-meta Engage: Pick situacional para castigar composiciones enemigas con ultimates devastadores.",
+      "display_name": "Sylas"
+    },
+    "Maokai": {
+      "disengage": 8,
+      "poke": 5,
+      "scaling": 5,
+      "anti_dive": 8,
+      "anti_assassin_peel": 5,
+      "anti_poke_in_lane": 5,
+      "synergy_engage_jungler": 5,
+      "synergy_farm_jungler": 5,
+      "synergy_with_poke_comp": 5,
+      "synergy_with_dive_comp": 5,
+      "synergy_with_scaling_comp": 5,
+      "best_with_adcs": [],
+      "worst_with_adcs": [],
+      "strong_against_supports": [],
+      "weak_against_supports": [],
+      "power_spikes": [
+        "Nivel 2",
+        "Nivel 6"
+      ],
+      "strengths": [
+        "Anti-meta playmaker"
+      ],
+      "weaknesses": [
+        "Débil a ciegas",
+        "Requiere ejecución precisa"
+      ],
+      "id": "Maokai",
+      "archetype": "warden",
+      "lane_phase_strength": 6,
+      "midgame_strength": 8,
+      "lategame_strength": 8,
+      "engage_strength": 8,
+      "peel_strength": 9,
+      "lane_kill_pressure": 5,
+      "blind_pick_safety": 5,
+      "execution_difficulty": 4,
+      "cc_chain_length": 9,
+      "item_path": {
+        "evolution": "solstice_sleigh",
+        "core_items": [
+          "Locket of the Iron Solari",
+          "Trailblazer"
+        ],
+        "situational_items": [
+          "Imperial Mandate"
+        ],
+        "boots": "Ionian Boots of Lucidity",
+        "first_back": "Ruby Crystal + Boots"
+      },
+      "play_pattern_template": "Anti-meta Warden: Domina la visión con saplings. Usa Q para desenganchar cualquier intento de dive.",
+      "display_name": "Maokai"
+    },
+    "Ashe": {
+      "disengage": 5,
+      "poke": 9,
+      "scaling": 5,
+      "anti_dive": 3,
+      "anti_assassin_peel": 5,
+      "anti_poke_in_lane": 5,
+      "synergy_engage_jungler": 5,
+      "synergy_farm_jungler": 5,
+      "synergy_with_poke_comp": 5,
+      "synergy_with_dive_comp": 5,
+      "synergy_with_scaling_comp": 5,
+      "best_with_adcs": [],
+      "worst_with_adcs": [],
+      "strong_against_supports": [],
+      "weak_against_supports": [],
+      "power_spikes": [
+        "Nivel 2",
+        "Nivel 6"
+      ],
+      "strengths": [
+        "Anti-meta playmaker"
+      ],
+      "weaknesses": [
+        "Débil a ciegas",
+        "Requiere ejecución precisa"
+      ],
+      "id": "Ashe",
+      "archetype": "poke",
+      "lane_phase_strength": 8,
+      "midgame_strength": 6,
+      "lategame_strength": 5,
+      "engage_strength": 6,
+      "peel_strength": 4,
+      "lane_kill_pressure": 6,
+      "blind_pick_safety": 2,
+      "execution_difficulty": 5,
+      "cc_chain_length": 5,
+      "item_path": {
+        "evolution": "zaz_zaks_realmspike",
+        "core_items": [
+          "Imperial Mandate",
+          "Umbral Glaive"
+        ],
+        "situational_items": [
+          "Axiom Arc"
+        ],
+        "boots": "Ionian Boots of Lucidity",
+        "first_back": "Tear of the Goddess"
+      },
+      "play_pattern_template": "Anti-meta Poke: Abusa de tu rango infinito de W y kiting pasivo contra soportes melee inmovibles.",
+      "display_name": "Ashe"
     }
   }
 }

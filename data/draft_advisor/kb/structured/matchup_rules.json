@@ -1,6 +1,314 @@
 {
-  "schema_version": "1.0",
-  "last_updated": "2026-04-08",
-  "description": "Specific matchup scoring rules. Each rule applies a score adjustment when a specific champion interaction is detected in the draft.",
-  "rules": []
+  "schema_version": "1.2",
+  "last_updated": "2026-04-27",
+  "description": "Reglas de matchup de línea y reglas de arquetipo contra composición. Fuente: KB/matchups-supp-vs-supp.md + KB/amenazas-y-respuestas.md. Consumido por scoring.py::_score_supp_enemy_matchup().",
+  "archetype_vs_enemy_comp": {
+    "vs_dive_comp": {
+      "best_archetypes": [
+        "enchanter",
+        "warden"
+      ],
+      "ok_archetypes": [
+        "catcher"
+      ],
+      "bad_archetypes": [
+        "engage",
+        "poke"
+      ],
+      "reason": "Hace falta peel y disengage. Wardens como Braum o Taric frenan dives. Enchanters con disengage como Janna R o Lulu R cancelan engage."
+    },
+    "vs_poke_comp": {
+      "best_archetypes": [
+        "engage"
+      ],
+      "ok_archetypes": [
+        "catcher",
+        "enchanter"
+      ],
+      "bad_archetypes": [
+        "poke"
+      ],
+      "reason": "Hace falta cerrar distancia y forzar peleas. El engage duro rompe el patrón de siege."
+    },
+    "vs_pick_comp": {
+      "best_archetypes": [
+        "enchanter",
+        "warden"
+      ],
+      "ok_archetypes": [
+        "catcher"
+      ],
+      "bad_archetypes": [
+        "poke",
+        "engage"
+      ],
+      "reason": "Hace falta control de visión y herramientas para negar hooks. R de disengage o W polymorph castigan picks."
+    },
+    "vs_scaling_comp": {
+      "best_archetypes": [
+        "engage",
+        "catcher"
+      ],
+      "ok_archetypes": [
+        "poke"
+      ],
+      "bad_archetypes": [
+        "enchanter"
+      ],
+      "reason": "Hay que snowballear línea y forzar objetivos antes de que escalen. Se prefieren lane bullies."
+    },
+    "vs_tank_heavy_comp": {
+      "best_archetypes": [
+        "poke"
+      ],
+      "ok_archetypes": [
+        "catcher"
+      ],
+      "bad_archetypes": [
+        "engage",
+        "enchanter"
+      ],
+      "reason": "Hace falta daño mágico escalado para romper tanques. El engage se queda trabado frente a una frontline inmortal."
+    }
+  },
+  "lane_matchups": {
+    "Janna": {
+      "Leona": "favored",
+      "Nautilus": "skill",
+      "Thresh": "skill",
+      "Lux": "slight_favor",
+      "Soraka": "favored",
+      "Yuumi": "favored",
+      "Brand": "unfavored",
+      "Xerath": "unfavored",
+      "Karma": "unfavored"
+    },
+    "Karma": {
+      "Leona": "favored",
+      "Soraka": "favored",
+      "Lux": "skill",
+      "Janna": "favored",
+      "Brand": "unfavored",
+      "Xerath": "skill"
+    },
+    "Leona": {
+      "Soraka": "favored",
+      "Yuumi": "favored",
+      "Janna": "unfavored",
+      "Lulu": "unfavored",
+      "Nami": "skill",
+      "Lux": "unfavored",
+      "Thresh": "skill",
+      "Pyke": "favored",
+      "Braum": "unfavored"
+    },
+    "Lulu": {
+      "Leona": "favored",
+      "Nautilus": "favored",
+      "Soraka": "skill",
+      "Janna": "skill",
+      "Lux": "unfavored",
+      "Pyke": "unfavored"
+    },
+    "Lux": {
+      "Leona": "favored",
+      "Lulu": "favored",
+      "Soraka": "favored",
+      "Janna": "skill",
+      "Brand": "unfavored",
+      "Xerath": "unfavored"
+    },
+    "Milio": {
+      "Leona": "favored",
+      "Soraka": "skill",
+      "Janna": "skill",
+      "Yuumi": "favored",
+      "Brand": "unfavored",
+      "Xerath": "unfavored"
+    },
+    "Nautilus": {
+      "Soraka": "favored",
+      "Yuumi": "favored",
+      "Lulu": "unfavored",
+      "Janna": "unfavored",
+      "Thresh": "skill",
+      "Braum": "unfavored"
+    },
+    "Pyke": {
+      "Soraka": "favored",
+      "Lulu": "favored",
+      "Leona": "unfavored",
+      "Thresh": "skill",
+      "Yuumi": "favored"
+    },
+    "Soraka": {
+      "Leona": "unfavored",
+      "Lulu": "skill",
+      "Janna": "unfavored",
+      "Karma": "unfavored",
+      "Lux": "unfavored",
+      "Nautilus": "unfavored",
+      "Thresh": "unfavored",
+      "Pyke": "unfavored"
+    },
+    "Thresh": {
+      "Soraka": "favored",
+      "Yuumi": "favored",
+      "Leona": "skill",
+      "Nautilus": "skill",
+      "Janna": "skill",
+      "Lux": "skill"
+    },
+    "Braum": {
+      "Leona": "favored",
+      "Nautilus": "favored",
+      "Rell": "favored",
+      "Zyra": "unfavored",
+      "Brand": "unfavored",
+      "Karma": "unfavored",
+      "Xerath": "unfavored"
+    },
+    "Taric": {
+      "Leona": "favored",
+      "Nautilus": "favored",
+      "Pyke": "favored",
+      "Zyra": "unfavored",
+      "Brand": "unfavored",
+      "Xerath": "unfavored",
+      "Karma": "unfavored"
+    },
+    "Poppy": {
+      "Rakan": "hard_counter",
+      "Leona": "hard_counter",
+      "Pyke": "hard_counter",
+      "Alistar": "hard_counter",
+      "LeeSin": "hard_counter",
+      "Xerath": "unfavored",
+      "Velkoz": "unfavored",
+      "Brand": "unfavored"
+    },
+    "Camille": {
+      "Soraka": "hard_counter",
+      "Sona": "hard_counter",
+      "Yuumi": "hard_counter",
+      "Milio": "hard_counter",
+      "Poppy": "unfavored",
+      "Janna": "unfavored",
+      "Thresh": "unfavored"
+    },
+    "Pantheon": {
+      "Sona": "hard_counter",
+      "Senna": "hard_counter",
+      "Nami": "favored",
+      "Braum": "unfavored",
+      "Taric": "unfavored",
+      "Leona": "unfavored"
+    },
+    "Shen": {
+      "Leona": "hard_counter",
+      "Nautilus": "favored",
+      "Pyke": "favored",
+      "Brand": "unfavored",
+      "Zyra": "unfavored",
+      "Xerath": "unfavored"
+    },
+    "Sylas": {
+      "Alistar": "hard_counter",
+      "Renata": "hard_counter",
+      "Malphite": "hard_counter",
+      "Janna": "unfavored",
+      "Lulu": "unfavored",
+      "Poppy": "unfavored"
+    },
+    "Maokai": {
+      "Rakan": "hard_counter",
+      "Leona": "favored",
+      "Alistar": "favored",
+      "Milio": "unfavored",
+      "Soraka": "unfavored",
+      "Sona": "unfavored"
+    },
+    "Ashe": {
+      "Braum": "hard_counter",
+      "TahmKench": "hard_counter",
+      "Taric": "hard_counter",
+      "Nautilus": "unfavored",
+      "Leona": "unfavored",
+      "Pyke": "unfavored"
+    }
+  },
+  "adc_lane_veto_rules": {
+    "exact_pairs": [
+      {
+        "id": "nilah_soraka_vs_caitlyn_nautilus",
+        "adc": "Nilah",
+        "ally_support": "Soraka",
+        "enemy_adc": "Caitlyn",
+        "enemy_support": "Nautilus",
+        "score_delta": -35.0,
+        "top_pick_block": true,
+        "reason": "Nilah + Soraka no tiene prioridad contra Caitlyn + Nautilus: pierde rango, crash de oleada y queda expuesta a hook/all-in. En late, la falta de rango de Nilah limita el DPS seguro."
+      }
+    ],
+    "general_rules": [
+      {
+        "id": "low_range_sustain_vs_range_bully_engage",
+        "adc_effective_range_max": 4,
+        "ally_support_archetypes": ["enchanter"],
+        "ally_support_lane_kill_pressure_max": 4,
+        "enemy_adc_effective_range_min": 8,
+        "enemy_adc_lane_priority_min": 7,
+        "enemy_support_archetypes": ["engage", "catcher"],
+        "enemy_support_lane_kill_pressure_min": 7,
+        "score_delta": -25.0,
+        "top_pick_block": true,
+        "reason": "ADC de rango muy bajo con support sustain y poca presión de kill contra bully de rango + engage: no hay prioridad de línea, el crash queda en manos enemigas y el late se juega sin rango seguro."
+      }
+    ]
+  },
+  "adc_matchup_bonus_rules": [
+    {
+      "id": "xayah_vs_predecible_frontal_engage",
+      "adc": "Xayah",
+      "enemy_any": ["Malphite"],
+      "score_delta": 14.0,
+      "reason": "Xayah sube contra engage frontal predecible como Malphite: puede negar la entrada con R y convertir el follow-up en root con plumas."
+    },
+    {
+      "id": "xayah_vs_melee_warden_frontline",
+      "adc": "Xayah",
+      "enemy_any": ["TahmKench"],
+      "score_delta": 8.0,
+      "reason": "Xayah castiga frontlines melee como Tahm Kench cuando tienen que caminar sobre sus plumas; es valor de control y seguridad, no de anti-tank puro."
+    }
+  ],
+  "matchup_scoring": {
+    "favored": 6.0,
+    "slight_favor": 3.0,
+    "skill": 0.0,
+    "unfavored": -5.0,
+    "hard_counter": 45.0
+  },
+  "lane_bullies": [
+    "Thresh",
+    "Camille",
+    "Pantheon",
+    "Brand",
+    "Poppy",
+    "Karma",
+    "Pyke",
+    "Xerath",
+    "Leona",
+    "Lux",
+    "Nautilus"
+  ],
+  "lane_scalers": [
+    "Soraka",
+    "Yuumi",
+    "Janna",
+    "Milio",
+    "Lulu",
+    "Senna",
+    "Sona"
+  ]
 }

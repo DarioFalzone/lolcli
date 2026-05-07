@@ -2,7 +2,7 @@
 schema_version: "1.0"
 kb_version: "1"
 id: "thr-zed-vs-immobile-adcs"
-title: "Zed as a Threat to Immobile ADCs"
+title: "Zed como amenaza para ADCs inmóviles"
 type: "threat_note"
 domain: "draft_advisor"
 patch: "*"
@@ -22,51 +22,51 @@ supersedes: []
 superseded_by: []
 ---
 
-## Summary
+## Resumen
 
-Zed is the archetype ADC-killer assassin. His W+R combo provides guaranteed access to any backline target, and his burst combo deletes squishies in < 1 second. The threat level Zed poses to ADCs is directly proportional to their immobility — champions without dashes, blinks, or untargetability frames are essentially dead on R cooldown.
+Zed es el arquetipo de asesino anti-ADC. Su combo W+R le da acceso garantizado a targets de backline y su burst puede borrar campeones frágiles en menos de un segundo. La amenaza que representa escala directamente con la inmovilidad del ADC: campeones sin dash, blink o untargetability mueren si no tienen peel cuando Zed tiene R.
 
-## Key Findings
+## Hallazgos Clave
 
-- **Zed R is point-click and untargetable during the dash.** No amount of kiting skill prevents the initial gap close. The ADC's survival depends entirely on post-R tools.
-- **ADC survival tier vs Zed:**
-  - **Can self-survive:** Ezreal (E blink), Xayah (R untargetable), Kai'Sa (R + E stealth), Tristana (R knockback), Vayne (R+Q stealth)
-  - **Needs team peel:** Jinx, Jhin, Ashe, Miss Fortune, Sivir, Senna
-  - **Dead on sight:** Kog'Maw, Aphelios, Varus, Draven (if axes are mid-catch)
-- **The scoring engine already penalizes immobile ADCs** when `enemy.has_burst` via the `self_peel` and `mobility` factors, but the **Zed-specific threat** is more acute than generic burst because of the untargetable R dash.
-- **Itemization counterplay** (Zhonya's, Guardian Angel) delays death by 2.5s but does not prevent the zone control — Zed forces ADC to play 600 units further back, reducing their damage contribution.
+- **La R de Zed es point-click y lo vuelve no targeteable durante el dash.** El kiteo no impide la entrada inicial; la supervivencia del ADC depende de herramientas post-R.
+- **Tier de supervivencia ADC contra Zed:**
+  - **Puede sobrevivir solo:** Ezreal (blink con E), Xayah (R no targeteable), Kai'Sa (R + E con invisibilidad), Tristana (R knockback), Vayne (R+Q con invisibilidad).
+  - **Necesita peel del equipo:** Jinx, Jhin, Ashe, Miss Fortune, Sivir, Senna.
+  - **Muere si queda expuesto:** Kog'Maw, Aphelios, Varus, Draven si está atrapado cazando hachas.
+- **El motor ya penaliza ADCs inmóviles** cuando `enemy.has_burst` mediante `self_peel` y `mobility`, pero la amenaza específica de Zed es más fuerte que el burst genérico por la R no targeteable.
+- **El counterplay por ítems** como Zhonya o Ángel Guardián compra tiempo, pero no elimina el control de zona: Zed obliga al ADC a jugar más atrás y reduce su aporte de daño.
 
-## Draft Implications
+## Implicancias de Draft
 
-- When Zed is picked on enemy team, the recommendation engine should strongly prefer ADCs with `self_peel >= 6` and `mobility >= 6`.
-- Kog'Maw, Aphelios, and Varus should have their enemy_matchup score heavily penalized (they are in `worst_into` for Zed).
-- The `blind_pick_safety` score for immobile ADCs should carry extra weight when draft information is partial (Zed is a common mid pick that may not be visible early).
+- Si Zed está en el equipo enemigo, el motor debe preferir ADCs con `self_peel >= 6` y `mobility >= 6`.
+- Kog'Maw, Aphelios y Varus deben recibir una penalización fuerte en `enemy_matchup` porque están en `worst_into` contra Zed.
+- `blind_pick_safety` debe pesar más para ADCs inmóviles cuando el draft tiene información parcial, porque Zed es un mid común que puede aparecer después.
 
-## When This Matters
+## Cuándo Importa
 
-- Enemy mid laner is Zed (confirmed or suspected).
-- Enemy team has 2+ assassination threats (Zed + Nocturne, Zed + Camille).
-- Your team lacks reliable exhaust or targeted CC to peel Zed off ADC.
+- El mid enemigo es Zed, confirmado o muy probable.
+- El equipo enemigo tiene 2+ amenazas de asesinato, por ejemplo Zed + Nocturne o Zed + Camille.
+- Tu equipo no tiene exhaust confiable ni CC dirigido para sacar a Zed del ADC.
 
-## Caveats
+## Advertencias
 
-- In lower elos, Zed players may not execute the full combo, reducing the threat.
-- If allied support is Lulu/Janna with exhaust, the threat is partially mitigated but not eliminated.
-- This note is patch-agnostic (`*`) because Zed's fundamental kit threat doesn't change between patches — only numbers shift.
+- En elos bajos, los Zed pueden no ejecutar el combo completo y la amenaza real baja.
+- Si el support aliado es Lulu o Janna con exhaust, la amenaza se mitiga parcialmente, pero no desaparece.
+- Esta nota es agnóstica de parche (`*`) porque la amenaza central del kit de Zed no cambia entre parches; cambian los números.
 
-## Extractable Claims
+## Claims Extraíbles
 
-- `enemy.contains("Zed")` + `adc.self_peel <= 4` → `enemy_matchup_penalty: -15`
-- `enemy.contains("Zed")` + `adc.mobility <= 3` → `enemy_matchup_penalty: -10` (stacks with above)
-- `enemy.contains("Zed")` + `adc.id in ["KogMaw", "Aphelios", "Varus"]` → `should_not_recommend` unless team has Lulu/Janna + exhaust
-- `enemy.contains("Zed")` + `adc.id in ["Ezreal", "Xayah", "Kaisa"]` → `enemy_matchup_bonus: +10`
+- `enemy.contains("Zed")` + `adc.self_peel <= 4` -> `enemy_matchup_penalty: -15`
+- `enemy.contains("Zed")` + `adc.mobility <= 3` -> `enemy_matchup_penalty: -10` (se acumula con la anterior)
+- `enemy.contains("Zed")` + `adc.id in ["KogMaw", "Aphelios", "Varus"]` -> `should_not_recommend` salvo que el equipo tenga Lulu/Janna + exhaust
+- `enemy.contains("Zed")` + `adc.id in ["Ezreal", "Xayah", "Kaisa"]` -> `enemy_matchup_bonus: +10`
 
-## Related Champions / Comps
+## Campeones / Composiciones Relacionadas
 
-- **Similar threats:** Akali (sustain assassin), LeBlanc (burst mage assassin), Fizz (E untargetable), Katarina (resets)
-- **Peel counters:** Lulu (W polymorph stops combo), Janna (R disengage), exhaust (reduces burst by 40%)
-- **Item counters:** Zhonya's (2.5s stasis), Guardian Angel (revive but 5min CD), Immortal Shieldbow (shield on lethal)
+- **Amenazas parecidas:** Akali (asesina sostenida), LeBlanc (mago asesino de burst), Fizz (E no targeteable), Katarina (resets).
+- **Counters por peel:** Lulu (W polymorph corta combo), Janna (R disengage), exhaust (reduce burst).
+- **Counters por ítems:** Zhonya (stasis), Ángel Guardián (revive con cooldown largo), Arcoescudo Inmortal (escudo al borde de muerte).
 
-## Source Notes
+## Notas de Fuente
 
-Core draft theory — Zed's R interaction with ADC mobility is fundamental League of Legends knowledge. This analysis codifies it into a structured threat model for the recommendation engine.
+Teoría central de draft: la interacción entre la R de Zed y la movilidad del ADC es conocimiento fundamental de League of Legends. Esta nota lo codifica como modelo de amenaza estructurado para el motor de recomendaciones.

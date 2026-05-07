@@ -2,11 +2,11 @@
   "schema_version": "1.0",
   "patch": "16.7",
   "last_updated": "2026-04-27",
-  "description": "Sinergias 2v2 ADC+Support con winrate medido o heurístico de la pro scene. Consumido por scoring.py::_score_measured_synergy(). Fuente: KB/notebooklm/Support_Architecture_Dossier.pdf p7 + heurísticas conocidas.",
+  "description": "Sinergias 2v2 ADC+Support con winrate medido o heurístico de la escena pro. Consumido por scoring.py::_score_measured_synergy(). Fuente: KB/notebooklm/Support_Architecture_Dossier.pdf p7 + heurísticas conocidas.",
   "scoring": {
     "wr_threshold_for_bonus": 0.50,
     "max_bonus": 15.0,
-    "interpolation": "lineal: cada 1 punto de WR sobre 50% = +3 score (ej: 53.7% → 11.1pts)",
+    "interpolation": "lineal: cada 1 punto de WR sobre 50% = +3 puntos de score (ej: 53.7% -> 11.1 pts)",
     "heuristic_confidence_factor": 0.6,
     "heuristic_max_bonus": 9.0
   },
@@ -27,7 +27,7 @@
       "engine": "burst",
       "confidence": "measured",
       "source": "Support_Architecture_Dossier.pdf p7",
-      "reason": "La E de Nami (Tidecaller's Blessing) desencadena la pasiva de Lucian (Lightslinger), maximizando daño explosivo."
+      "reason": "La E de Nami (Tidecaller's Blessing) activa la pasiva de Lucian (Lightslinger) y maximiza daño explosivo."
     },
     {
       "adc": "Ashe",
@@ -36,7 +36,7 @@
       "engine": "rooted",
       "confidence": "measured",
       "source": "Support_Architecture_Dossier.pdf p7",
-      "reason": "Pasiva de Ashe ralentiza con cada AA; E de Seraphine enraíza targets ralentizados. Root automático en lane."
+      "reason": "La pasiva de Ashe ralentiza con cada auto; la E de Seraphine rootea targets ralentizados. Root automático en línea."
     },
     {
       "adc": "Jinx",
@@ -45,7 +45,7 @@
       "engine": "repositioning",
       "confidence": "measured",
       "source": "Support_Architecture_Dossier.pdf p7",
-      "reason": "Linterna (W) compensa nula movilidad de Jinx; gancho (Q) asegura las trampas (E) en lane."
+      "reason": "La linterna (W) compensa la falta de movilidad de Jinx; el gancho (Q) asegura trampas (E) en línea."
     },
     {
       "adc": "Draven",
@@ -53,8 +53,8 @@
       "winrate": null,
       "engine": "execute_snowball",
       "confidence": "heuristic",
-      "source": "pro scene heuristic",
-      "reason": "Pyke R ejecuta + redistribuye gold. Draven Adoration stacks. Combo de snowball lane temprano."
+      "source": "heurística pro scene",
+      "reason": "Pyke ejecuta con R y redistribuye oro. Draven acumula Adoration. Combo de snowball temprano en línea."
     },
     {
       "adc": "MissFortune",
@@ -62,8 +62,8 @@
       "winrate": null,
       "engine": "wombo_combo",
       "confidence": "heuristic",
-      "source": "pro scene heuristic",
-      "reason": "Leona R+Q lock-in setea Bullet Time de MF. Sinergia clásica de Attack Matrix."
+      "source": "heurística pro scene",
+      "reason": "Leona R+Q fija objetivos para Bullet Time de Miss Fortune. Sinergia clásica de matriz de ataque."
     },
     {
       "adc": "Caitlyn",
@@ -71,8 +71,8 @@
       "winrate": null,
       "engine": "poke_root_combo",
       "confidence": "heuristic",
-      "source": "pro scene heuristic",
-      "reason": "Lux Q (root) + Caitlyn W (trap) + headshot = burst poke teórico de 70%+ HP."
+      "source": "heurística pro scene",
+      "reason": "Lux Q (root) + Caitlyn W (trampa) + headshot = burst de poke teórico muy alto."
     },
     {
       "adc": "Vayne",
@@ -80,8 +80,8 @@
       "winrate": null,
       "engine": "peel_for_hypercarry",
       "confidence": "heuristic",
-      "source": "pro scene heuristic",
-      "reason": "Janna E (shield+AD buff) + R (disengage) maximiza supervivencia + DPS de Vayne. Pareja de scaling pura."
+      "source": "heurística pro scene",
+      "reason": "Janna E (escudo + buff de AD) y R (disengage) maximizan supervivencia + DPS de Vayne. Pareja de escalado pura."
     },
     {
       "adc": "KogMaw",
@@ -89,8 +89,8 @@
       "winrate": null,
       "engine": "buff_for_hypercarry",
       "confidence": "heuristic",
-      "source": "pro scene heuristic",
-      "reason": "Lulu R (Wild Growth) + W (Whimsy AS buff) convierte a KogMaw en torreta indestructible. Teamfight definitorio."
+      "source": "heurística pro scene",
+      "reason": "Lulu R (Wild Growth) + W (Whimsy con buff de velocidad de ataque) convierte a Kog'Maw en torreta indestructible. Define teamfights."
     },
     {
       "adc": "Aphelios",
@@ -98,8 +98,8 @@
       "winrate": null,
       "engine": "buff_for_hypercarry",
       "confidence": "heuristic",
-      "source": "pro scene heuristic",
-      "reason": "Aphelios escala como pocos; Lulu es el peel más fuerte vs dive. R Wild Growth durante teamfight."
+      "source": "heurística pro scene",
+      "reason": "Aphelios escala como pocos; Lulu aporta uno de los peels más fuertes contra dive. Wild Growth en teamfight cambia la pelea."
     },
     {
       "adc": "Zeri",
@@ -107,8 +107,8 @@
       "winrate": null,
       "engine": "uncatchable_carry",
       "confidence": "heuristic",
-      "source": "pro scene heuristic",
-      "reason": "Yuumi anclada a Zeri = imposible de matar (movilidad+heal+buff). Pareja de catch-me-if-you-can."
+      "source": "heurística pro scene",
+      "reason": "Yuumi anclada a Zeri la vuelve muy difícil de matar por movilidad, heal y buffs. Pareja de catch-me-if-you-can."
     },
     {
       "adc": "Twitch",
@@ -116,8 +116,8 @@
       "winrate": null,
       "engine": "scaling_sustain",
       "confidence": "heuristic",
-      "source": "pro scene heuristic",
-      "reason": "Twitch necesita escalar safe; Soraka heal/silence permite rezar al stealth scaling. Lane phase aburrida pero late game brutal."
+      "source": "heurística pro scene",
+      "reason": "Twitch necesita escalar seguro; Soraka aporta heal y silence para sostener el stealth scaling. Línea pasiva, late game brutal."
     },
     {
       "adc": "Senna",
@@ -125,8 +125,8 @@
       "winrate": null,
       "engine": "soul_farm_protection",
       "confidence": "heuristic",
-      "source": "pro scene heuristic",
-      "reason": "Tahm W (devour ally) salva a Senna durante recogida de souls. Senna escala scaling indefinido. Comp Catch."
+      "source": "heurística pro scene",
+      "reason": "Tahm W devora aliados y salva a Senna durante la recolección de almas. Senna escala indefinidamente. Funciona bien en composición de catch."
     },
     {
       "adc": "Kalista",
@@ -134,8 +134,8 @@
       "winrate": null,
       "engine": "ult_combo",
       "confidence": "heuristic",
-      "source": "pro scene heuristic",
-      "reason": "Kalista R toma a Thresh y lo lanza con flay+stun = engage devastador con CC chain inevitable."
+      "source": "heurística pro scene",
+      "reason": "Kalista R toma a Thresh y lo lanza para flay + stun: engage devastador con cadena de CC casi inevitable."
     }
   ]
 }

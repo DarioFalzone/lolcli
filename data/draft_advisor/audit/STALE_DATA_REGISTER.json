@@ -4,7 +4,7 @@
     "location": "proyecto lol/lol_patch_notes.json",
     "current_value": "Patch 25.17 / TFT notes mentioned",
     "expected_value": "No TFT mixup, realistic version matching LoL API",
-    "source_of_truth": "Official Riot DDragon API (16.7.1)",
+    "source_of_truth": "Official Riot DDragon API, current static data 16.9.1",
     "severity": "low",
     "correction_type": "deprecation / exclude from draft_advisor pipeline"
   }

@@ -1,11 +1,11 @@
 """
-Composition Analyzer — Analyzes allied and enemy team compositions.
+Analizador de composicion.
 
-Takes the draft state and produces structured profiles describing:
-- What your team already has (frontline, engage, peel, poke, damage type)
-- What your team is missing (gaps the ADC should fill)
-- What threats the enemy comp presents to your ADC
-- The teamfight shape your comp enables
+Toma el estado del draft y produce perfiles estructurados que describen:
+- que tiene tu equipo (frontline, engage, peel, poke, tipo de daño)
+- que le falta a tu equipo (gaps que el ADC puede cubrir)
+- que amenazas presenta la composicion enemiga contra tu ADC
+- que forma de teamfight habilita tu composicion
 """
 
 from __future__ import annotations
@@ -27,13 +27,13 @@ from .schemas import (
 # Thresholds for boolean flags
 # ============================================================================
 
-_FRONTLINE_THRESHOLD = 7     # tankiness tag >= 7 counts as frontline
-_ENGAGE_THRESHOLD = 7        # engage tag >= 7 counts as engage
-_PEEL_THRESHOLD = 7          # peel tag >= 7 counts as peel
-_POKE_THRESHOLD = 7          # poke tag >= 7 counts as poke
-_DIVE_THRESHOLD = 7          # engage + mobility >= 14 counts as dive threat
-_BURST_THRESHOLD = 8         # burst tag >= 8 counts as burst threat
-_TANK_THRESHOLD = 7          # tankiness >= 7 counts as tank presence
+_FRONTLINE_THRESHOLD = 7  # tankiness tag >= 7 counts as frontline
+_ENGAGE_THRESHOLD = 7  # engage tag >= 7 counts as engage
+_PEEL_THRESHOLD = 7  # peel tag >= 7 counts as peel
+_POKE_THRESHOLD = 7  # poke tag >= 7 counts as poke
+_DIVE_THRESHOLD = 7  # engage + mobility >= 14 counts as dive threat
+_BURST_THRESHOLD = 8  # burst tag >= 8 counts as burst threat
+_TANK_THRESHOLD = 7  # tankiness >= 7 counts as tank presence
 
 
 class CompositionAnalyzer:
@@ -69,9 +69,7 @@ class CompositionAnalyzer:
     def _analyze_allies(self, allies: list[DraftChampion]) -> AlliedCompProfile:
         """Analyze what the allied team brings and what's missing."""
         if not allies:
-            return AlliedCompProfile(
-                missing=["frontline", "engage", "peel", "poke", "physical_dps", "magic_dps"]
-            )
+            return AlliedCompProfile(missing=["frontline", "engage", "peel", "poke", "physical_dps", "magic_dps"])
 
         has_frontline = False
         has_engage = False
@@ -120,8 +118,7 @@ class CompositionAnalyzer:
 
         # Determine teamfight shape
         teamfight_shape = self._infer_teamfight_shape(
-            has_frontline, has_engage, has_peel, has_poke,
-            engage_score_sum, peel_score_sum, dive_score_sum, len(allies)
+            has_frontline, has_engage, has_peel, has_poke, engage_score_sum, peel_score_sum, dive_score_sum, len(allies)
         )
 
         # Determine what's missing
@@ -194,7 +191,7 @@ class CompositionAnalyzer:
     # ========================================================================
 
     def _analyze_enemies(self, enemies: list[DraftChampion]) -> EnemyCompProfile:
-        """Analyze enemy threats to the ADC."""
+        """Analizar amenazas enemigas contra el ADC."""
         if not enemies:
             return EnemyCompProfile(
                 threat_level_to_adc=ThreatLevel.MEDIUM,

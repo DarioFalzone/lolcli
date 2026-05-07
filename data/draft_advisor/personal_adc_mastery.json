@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "role": "adc",
+  "source_image": "KB/tier list adc 04 05 2026.png",
+  "last_updated": "2026-05-04",
+  "notes": "Tier list personal del usuario. Esta es la fuente editable para maestria ADC; la imagen queda como evidencia visual.",
+  "excluded_from_recommendations": [
+    "Vladimir"
+  ],
+  "never_top_pick": [
+    "Ezreal"
+  ],
+  "tiers": {
+    "S": [
+      "Brand",
+      "Jinx",
+      "MissFortune",
+      "Yasuo",
+      "Tristana",
+      "Sivir",
+      "Xayah",
+      "Kalista",
+      "Samira",
+      "Nilah"
+    ],
+    "A": [
+      "Ezreal",
+      "Twitch",
+      "Ashe",
+      "Jhin",
+      "Aphelios",
+      "Kaisa",
+      "Lucian",
+      "Vayne"
+    ],
+    "B": [
+      "Caitlyn",
+      "Swain",
+      "KogMaw",
+      "Varus",
+      "Zeri",
+      "Smolder",
+      "Senna",
+      "Draven"
+    ],
+    "C": [],
+    "D": []
+  },
+  "needs_review": [
+    {
+      "slot": "B-2",
+      "candidate_ids": [
+        "Azir",
+        "Kayle"
+      ],
+      "reason": "Icono ambiguo en la captura; no se usa para scoring hasta confirmacion."
+    }
+  ]
+}

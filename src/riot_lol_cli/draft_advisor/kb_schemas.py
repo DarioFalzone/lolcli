@@ -33,6 +33,7 @@ def validate_patch(v: str) -> str:
 # ENUMS
 # ============================================================================
 
+
 class NoteType(str, Enum):
     ADC_CHAMPION_NOTE = "adc_champion_note"
     SUPPORT_SYNERGY_NOTE = "support_synergy_note"
@@ -79,6 +80,7 @@ class TrustLevel(str, Enum):
 # RESEARCH NOTE FRONTMATTER
 # ============================================================================
 
+
 class ResearchNoteMeta(BaseModel):
     """Parsed YAML frontmatter from a research markdown note."""
 
@@ -117,15 +119,14 @@ class ResearchNoteMeta(BaseModel):
         # ID must start with a valid note type prefix
         valid_prefixes = ("adc-", "syn-", "thr-", "arch-", "mu-", "patch-", "heur-", "meta-")
         if not any(v.startswith(p) for p in valid_prefixes):
-            raise ValueError(
-                f"Note ID '{v}' must start with one of: {', '.join(valid_prefixes)}"
-            )
+            raise ValueError(f"Note ID '{v}' must start with one of: {', '.join(valid_prefixes)}")
         return v
 
 
 # ============================================================================
 # SOURCE MANIFEST
 # ============================================================================
+
 
 class SourceManifestEntry(BaseModel):
     """A single entry in the source manifest."""
@@ -160,6 +161,7 @@ class SourceManifest(BaseModel):
 # ============================================================================
 # PATCH OVERRIDES
 # ============================================================================
+
 
 class PatchOverride(BaseModel):
     """A single patch-specific score override."""
@@ -197,6 +199,7 @@ class PatchOverridesFile(BaseModel):
 # ============================================================================
 # COMP ARCHETYPES
 # ============================================================================
+
 
 class ArchetypeDetectionRules(BaseModel):
     min_frontline: int | None = None
@@ -240,6 +243,7 @@ class CompArchetypesFile(BaseModel):
 # MATCHUP RULES
 # ============================================================================
 
+
 class MatchupRule(BaseModel):
     """A specific scoring rule triggered by champion interactions."""
 
@@ -260,6 +264,7 @@ class MatchupRulesFile(BaseModel):
 # ============================================================================
 # GOLDEN DRAFT CASES
 # ============================================================================
+
 
 class GoldenDraftState(BaseModel):
     """A draft state for evaluation."""

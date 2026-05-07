@@ -13,6 +13,7 @@ from pydantic import BaseModel, Field, field_validator
 # ENUMS
 # ============================================================================
 
+
 class GameplayRole(str, Enum):
     TOP = "Top"
     JUNGLE = "Jungle"
@@ -84,6 +85,7 @@ class QueueType(str, Enum):
 
 class AdvisorMode(str, Enum):
     """Modo de operación del Draft Advisor: recomendar ADC o Soporte."""
+
     ADC = "adc"
     SUPPORT = "support"
 
@@ -146,6 +148,7 @@ class ThreatLevel(str, Enum):
 # SCHEMA 1: Champion Base (Tier 1 — all champions)
 # ============================================================================
 
+
 class ChampionTags(BaseModel):
     engage: int = Field(ge=0, le=10)
     disengage: int = Field(ge=0, le=10)
@@ -164,8 +167,8 @@ class ChampionTags(BaseModel):
 
 
 class ChampionBase(BaseModel):
-    id: str                                     # Data Dragon canonical key
-    display_name: str                           # Human-readable name
+    id: str  # Data Dragon canonical key
+    display_name: str  # Human-readable name
     title: str = ""
     primary_role: GameplayRole
     off_roles: list[GameplayRole] = []
@@ -196,6 +199,7 @@ class ChampionBaseFile(BaseModel):
 # ============================================================================
 # SCHEMA 2: ADC Profile (Tier 2 — deep ADC data)
 # ============================================================================
+
 
 class AdcProfile(BaseModel):
     id: str
@@ -241,8 +245,8 @@ class AdcProfile(BaseModel):
     power_spikes: list[str]
     strengths: list[str]
     weaknesses: list[str]
-    best_with: list[str]       # Champion IDs
-    worst_into: list[str]      # Champion IDs
+    best_with: list[str]  # Champion IDs
+    worst_into: list[str]  # Champion IDs
     draft_notes: str
 
 
@@ -258,6 +262,23 @@ class AdcProfilesFile(BaseModel):
 # SCHEMA 2.5: Support Profile (Tier 2 paralelo — deep Support data)
 # ============================================================================
 
+
+class ItemPath(BaseModel):
+    """Build path recomendado para un soporte.
+
+    Fuente: KB/notebooklm/sintesis/06-economia-asimetrica.md.
+    La evolución del oro de soporte (World Atlas → evolución) define el rol post-laning.
+    """
+
+    evolution: str = Field(
+        description="Evolución del ítem de soporte: Bloodsong/Solstice Sleigh/Celestial Opposition/Zaz'Zak/Dream Maker"
+    )
+    core_items: list[str] = Field(description="2-3 core items en orden de compra")
+    situational_items: list[str] = Field(default_factory=list, description="Items situacionales condicionales")
+    boots: str = Field(default="Boots of Mobility", description="Botas recomendadas")
+    first_back: str = Field(default="", description="Objetivo de la primera vuelta a base")
+
+
 class SupportProfile(BaseModel):
     """Perfil detallado de un soporte para Support Advisor mode.
 
@@ -265,6 +286,7 @@ class SupportProfile(BaseModel):
     engage strength, peel strength, lane kill pressure, sinergias con ADCs aliados,
     matchups vs otros soportes, y un play_pattern_template para generar el plan de juego.
     """
+
     id: str
     display_name: str
     archetype: SupportArchetype
@@ -309,6 +331,9 @@ class SupportProfile(BaseModel):
     weaknesses: list[str]
     play_pattern_template: str
 
+    # D6 Auditoría 2026-04-27: item build path (optional para backwards compat)
+    item_path: ItemPath | None = None
+
 
 class SupportProfilesFile(BaseModel):
     schema_version: str
@@ -323,6 +348,7 @@ class SupportProfilesFile(BaseModel):
 # ============================================================================
 # SCHEMA 3: Priority Profile (Tier 3 — draft-impact non-ADCs)
 # ============================================================================
+
 
 class PriorityProfile(BaseModel):
     id: str
@@ -346,6 +372,7 @@ class PriorityProfilesFile(BaseModel):
 # SCHEMA 4: Draft State (Engine Input)
 # ============================================================================
 
+
 class DraftChampion(BaseModel):
     id: str
     role: GameplayRole | None = None
@@ -360,7 +387,7 @@ class DraftContext(BaseModel):
 class UserPool(BaseModel):
     mode: PoolMode = PoolMode.UNRESTRICTED
     champions: list[str] = []
-    comfort: dict[str, int] = {}     # champion_id -> 1-10
+    comfort: dict[str, int] = {}  # champion_id -> 1-10
 
     @field_validator("comfort")
     @classmethod
@@ -384,9 +411,10 @@ class DraftState(BaseModel):
 # SCHEMA 5: Recommendation Output (Engine Output)
 # ============================================================================
 
+
 class RawScores(BaseModel):
     ally_synergy: float = Field(ge=0, le=100)
-    enemy_matchup: float = Field(ge=0, le=100)
+    enemy_matchup: float = Field(ge=0, le=200)
     blind_pick_safety: float = Field(ge=0, le=100)
     comp_gap_fill: float = Field(ge=0, le=100)
     solo_queue_reliability: float = Field(ge=0, le=100)
@@ -409,6 +437,20 @@ class ScoreBreakdown(BaseModel):
     weighted_sum: float
     pre_clamp_total: float
     weights_used: dict[str, float]
+    draft_fit_score: float | None = None
+    personal_mastery_score: float | None = None
+    meta_strength_score: float | None = None
+    adc_priority_score: float | None = None
+
+
+class AdcPickContext(BaseModel):
+    personal_tier: str | None = None
+    meta_tier: str | None = None
+    meta_climb_score: float | None = None
+    meta_patch: str | None = None
+    meta_scraped_at: str | None = None
+    eligibility: str | None = None
+    eligibility_reason: str | None = None
 
 
 class RecommendedPick(BaseModel):
@@ -416,6 +458,7 @@ class RecommendedPick(BaseModel):
     display_name: str
     total_score: float = Field(ge=0, le=100)
     score_breakdown: ScoreBreakdown
+    adc_context: AdcPickContext | None = None
     strengths_in_this_draft: list[str]
     risks_in_this_draft: list[str]
     not_recommended_when: list[str]
@@ -427,6 +470,7 @@ class AlternativePick(BaseModel):
     display_name: str
     total_score: float = Field(ge=0, le=100)
     score_breakdown: ScoreBreakdown
+    adc_context: AdcPickContext | None = None
     one_line_reason: str
     advantages_over_top_pick: list[str]
     disadvantages_vs_top_pick: list[str]
@@ -458,6 +502,20 @@ class DraftAnalysis(BaseModel):
     confidence: Confidence
 
 
+class AdcPriorityContext(BaseModel):
+    status: str = "not_applicable"
+    warning: str | None = None
+    meta_patch: str | None = None
+    meta_scraped_at: str | None = None
+    meta_sources: list[str] = Field(default_factory=list)
+    meta_champion_count: int = 0
+    meta_age_hours: float | None = None
+    stale_after_hours: int = 72
+    eligible_count: int = 0
+    fallback_count: int = 0
+    meta_only_missing_profiles: list[str] = Field(default_factory=list)
+
+
 class RecommendationOutput(BaseModel):
     timestamp: str
     draft_state_hash: str
@@ -465,11 +523,13 @@ class RecommendationOutput(BaseModel):
     top_pick: RecommendedPick
     alternatives: list[AlternativePick] = Field(default_factory=list, max_length=3)
     draft_analysis: DraftAnalysis
+    adc_priority_context: AdcPriorityContext | None = None
 
 
 # ============================================================================
 # SCHEMA 6: Scoring Weights Config
 # ============================================================================
+
 
 class ScoringWeightsConfig(BaseModel):
     schema_version: str

@@ -132,17 +132,19 @@ class KnowledgeRetriever:
                 logger.warning(f"Failed to read body of {filepath}: {e}")
                 body = ""
 
-            results.append(RetrievedNote(
-                meta=meta,
-                file_path=filepath,
-                body=body,
-                relevance_score=relevance,
-            ))
+            results.append(
+                RetrievedNote(
+                    meta=meta,
+                    file_path=filepath,
+                    body=body,
+                    relevance_score=relevance,
+                )
+            )
 
         # Sort by relevance descending
         results.sort(key=lambda r: r.relevance_score, reverse=True)
 
-        return results[:query.max_results]
+        return results[: query.max_results]
 
     def get_note_by_id(self, note_id: str) -> RetrievedNote | None:
         """Retrieve a specific note by its ID."""
@@ -215,6 +217,6 @@ class KnowledgeRetriever:
         if text.startswith("---"):
             end_idx = text.find("---", 3)
             if end_idx != -1:
-                return text[end_idx + 3:].strip()
+                return text[end_idx + 3 :].strip()
 
         return text.strip()

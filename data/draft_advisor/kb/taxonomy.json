@@ -1,16 +1,16 @@
 {
   "schema_version": "1.0",
-  "description": "Controlled vocabulary for the Draft Advisor Knowledge Base. All markdown frontmatter and structured data must use values from these enums.",
+  "description": "Vocabulario controlado para la Knowledge Base del Draft Advisor. Todo frontmatter Markdown y dato estructurado debe usar valores de estos enums.",
 
   "note_types": {
-    "adc_champion_note":    {"prefix": "adc-",   "folder": "research/adcs/",       "description": "Strategic analysis of a specific ADC"},
-    "support_synergy_note": {"prefix": "syn-",   "folder": "research/supports/",   "description": "How a support interacts with ADCs"},
-    "threat_note":          {"prefix": "thr-",   "folder": "research/threats/",     "description": "How an enemy champion threatens ADCs"},
-    "archetype_note":       {"prefix": "arch-",  "folder": "research/archetypes/",  "description": "Comp archetype definition and ADC fit"},
-    "matchup_note":         {"prefix": "mu-",    "folder": "research/matchups/",    "description": "Specific lane or game matchup analysis"},
-    "patch_summary":        {"prefix": "patch-", "folder": "research/patches/",     "description": "Patch impact on ADC meta"},
-    "heuristic_note":       {"prefix": "heur-",  "folder": "research/heuristics/",  "description": "Draft decision rule or principle"},
-    "meta_snapshot":        {"prefix": "meta-",  "folder": "research/meta/",        "description": "Point-in-time meta state summary"}
+    "adc_champion_note":    {"prefix": "adc-",   "folder": "research/adcs/",       "description": "Analisis estrategico de un ADC especifico"},
+    "support_synergy_note": {"prefix": "syn-",   "folder": "research/supports/",   "description": "Como interactua un support con ADCs"},
+    "threat_note":          {"prefix": "thr-",   "folder": "research/threats/",     "description": "Como amenaza un campeon enemigo a los ADCs"},
+    "archetype_note":       {"prefix": "arch-",  "folder": "research/archetypes/",  "description": "Definicion de arquetipo de composicion y fit ADC"},
+    "matchup_note":         {"prefix": "mu-",    "folder": "research/matchups/",    "description": "Analisis de matchup especifico de linea o partida"},
+    "patch_summary":        {"prefix": "patch-", "folder": "research/patches/",     "description": "Impacto del parche en el meta ADC"},
+    "heuristic_note":       {"prefix": "heur-",  "folder": "research/heuristics/",  "description": "Regla o principio de decision de draft"},
+    "meta_snapshot":        {"prefix": "meta-",  "folder": "research/meta/",        "description": "Resumen puntual del estado del meta"}
   },
 
   "confidence_levels": ["high", "medium", "low", "speculative"],
@@ -48,7 +48,7 @@
 
   "patch_format": {
     "pattern": "^\\d+\\.\\d+$",
-    "description": "Major.Minor format, e.g. '16.7'. Use '*' for patch-agnostic notes.",
+    "description": "Formato Major.Minor, por ejemplo '16.7'. Usar '*' para notas agnosticas de parche.",
     "examples": ["16.7", "16.8", "*"]
   }
 }

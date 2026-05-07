@@ -10,6 +10,14 @@ Carpeta de **estudio y razonamiento** que respalda las recomendaciones del Suppo
 - **Para implementar/extender:** estos docs son el **input** para los JSON. Si querés cambiar cómo razona el sistema, primero edita acá, después ajustá `scoring.py` y los JSON.
 - **Para agentes de IA:** leé este README, después `filosofia-de-pickeo.md`, y consultá los archivos específicos según el contexto del cambio.
 
+## Maestria ADC personal
+
+La captura [`tier list adc 04 05 2026.png`](tier%20list%20adc%2004%2005%202026.png) es evidencia visual de la maestria ADC del usuario.
+
+La fuente editable que consume el Draft Advisor vive en `data/draft_advisor/personal_adc_mastery.json`. No leer la imagen directamente desde el motor: si cambia la tier list, actualizar primero ese JSON y dejar entradas dudosas en `needs_review`.
+
+Esta maestria no reemplaza la KB estrategica: funciona como gate de recomendacion ADC junto con el snapshot de meta en `data/meta_scraper/normalized/latest_adc_tier.json`.
+
 ## Índice
 
 | Documento | Propósito |
@@ -32,7 +40,7 @@ Carpeta de **estudio y razonamiento** que respalda las recomendaciones del Suppo
 | [notebooklm/Nación_Digital_LoL.pdf](notebooklm/Nación_Digital_LoL.pdf) | PDF (12 pp) | Análisis sociocultural y sistémico de LoL: roles como especialización, ecosistema piedra-papel-tijera, evolución del oro, individualismo vs colectivismo regional. |
 | [notebooklm/imagen guia de estrategia de seleccion y macrogame.png](notebooklm/imagen%20guia%20de%20estrategia%20de%20seleccion%20y%20macrogame.png) | Infografía | Guía maestra del soporte (visual). |
 | [notebooklm/guia de estudio estrategia de soporte](notebooklm/guia%20de%20estudio%20estrategia%20de%20soporte) | Texto plano | Guía de estudio: quiz, respuestas, glosario técnico. |
-| [notebooklm/sintesis/](notebooklm/sintesis/) | 10 .md | **Síntesis procesable** de las fuentes. Cada doc cubre un eje aplicable al motor. |
+| [notebooklm/sintesis/README.md](notebooklm/sintesis/README.md) | Markdown consolidado | **Sintesis procesable** de las fuentes. Resume los ejes aplicables al motor. |
 
 ### Hallazgos integrados al motor (2026-04-27)
 
@@ -42,11 +50,11 @@ Carpeta de **estudio y razonamiento** que respalda las recomendaciones del Suppo
 - **`data/draft_advisor/kb/structured/strategic_triangle.json`** — Triángulo Engage > Poke > Sustain + eje invertido Disengage > Engage. Subdivide enchanters en `enchanter_disengage` (Janna, Lulu, Milio, Renata, Karma) vs `enchanter_pure` (Soraka, Yuumi, Nami).
 - **`data/draft_advisor/kb/structured/comp_predominance.json`** — Ciclo piedra-papel-tijera entre las 5 composiciones (Attack > Siege > Protect > Catch > Attack).
 
-Ver [`notebooklm/sintesis/INDEX.md`](notebooklm/sintesis/INDEX.md) para el índice completo y `bitacora_de_cambios.md` para el detalle del commit.
+Ver [`notebooklm/sintesis/README.md`](notebooklm/sintesis/README.md) para el indice consolidado y `bitacora_de_cambios.md` para el detalle historico.
 
-## Cobertura actual (Phase 2 — Expandida)
+## Cobertura actual (Phase 2 — Expandida + Audit 2026-04-27)
 
-17 soportes cubiertos en detalle:
+17 soportes cubiertos en detalle (support_profiles.json):
 
 **Engage (4):** Leona, Nautilus, Alistar, Rell
 **Enchanter (5):** Lulu, Janna, Soraka, Milio, Nami
@@ -54,11 +62,62 @@ Ver [`notebooklm/sintesis/INDEX.md`](notebooklm/sintesis/INDEX.md) para el índi
 **Warden (2):** Braum, Taric
 **Catcher (4):** Thresh, Pyke, Rakan, Blitzcrank
 
+**Triángulo estratégico (strategic_triangle.json v1.1):** 6 archetypes fine-grained:
+- `engage`, `poke`, `enchanter_disengage`, `enchanter_pure`, `catcher`, `warden`
+- Warden (Braum, Taric, TahmKench) beats engage+catcher, loses to poke
+- Rakan clasificado como `catcher`
+
 **Próxima fase:** sumar Yuumi, Renata, Zyra, Brand, Xerath, Vel'Koz, Swain, Senna, Bard.
 
 ## Versión
 
-- **Phase:** 2 (Expandida)
+- **Phase:** 2 (Expandida + Audit)
 - **Patch base:** 16.7
-- **Última actualización:** 2026-04-25
+- **Última actualización:** 2026-04-27
 - **Soportes:** 17 perfiles detallados
+- **strategic_triangle.json:** v1.1 (6 archetypes)
+- **comp_predominance.json:** v1.0 (consumido en scoring)
+
+## Fuentes de scraping y jungla
+
+Esta seccion absorbe las notas sueltas `fuentes-de-datos-scraping.md` y `jungla-draft-notes.md`.
+
+### Fuentes de datos para scraping
+
+Fuentes base para Meta Scraper y analisis de datos:
+
+- U.GG: SoloQ, Pro Play, winrate, runas, builds core y situacionales.
+- OP.GG: tendencias populares, elo alto y contexto asiatico.
+- LoLalytics: estadisticas detalladas por parche, elo, region y sinergias.
+- Blitz.gg: metricas rapidas de matchups y builds desde ecosistema cliente.
+- Mobalytics: explicaciones textuales de matchups, picos de poder y consejos.
+- Probuilds.net: builds de jugadores profesionales en SoloQ.
+- METAsrc: tier lists y winrates consolidados.
+
+Fuentes avanzadas a evaluar por adapter:
+
+- Onetricks.gg: adaptaciones de OTPs, runas, maxeo y matchups escondidos por promedios.
+- LeagueOfGraphs: macroestadisticas, popularidad, duracion de partidas y evolucion temporal.
+- Gol.gg: fuente fuerte para Pro Play, composiciones, presencia y torneos.
+- DeepLoL.gg: datos coreanos de elo alto, impacto temprano y lane dominance.
+
+No asumir que una fuente externa es verdad absoluta: cada adapter debe documentar origen, fecha, rol, patch y limitaciones.
+
+### Criterio para jungla y Draft Advisor
+
+La investigacion completa de jugadores profesionales vive en `projects/active/junglas-pro/`. A `KB/` solo entra lo que pueda convertirse en regla de draft o scoring:
+
+- arquetipos de jungla y su impacto en bot lane;
+- ventanas de presion temprana, pathing y cobertura de dive;
+- sinergias ADC/Support/Jungla;
+- respuestas ante composiciones de pick, dive, poke o scaling;
+- heuristicas verificables que puedan terminar en JSON estructurado.
+
+No entra a `KB/`:
+
+- perfiles completos de jugadores profesionales;
+- rankings historicos sin uso directo en draft;
+- imagenes, portal HTML o material visual;
+- metodologia interna de `junglas-pro` que no afecte al motor.
+
+Si una nota de jungla se usa para scoring, documentar primero el razonamiento en esta KB y luego sincronizar el JSON correspondiente en `data/draft_advisor/kb/structured/`.

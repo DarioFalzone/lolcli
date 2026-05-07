@@ -5,189 +5,274 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Draft Advisor — League of Legends</title>
     <meta name="description" content="Motor de recomendación de picks asistido por IA para drafts de League of Legends. Obtené sugerencias de campeones a nivel experto basadas en tu composición de equipo.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Beaufort+for+LOL:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/design-system/tokens.css?v=2">
     <link rel="stylesheet" href="/static/design-system/compat-spa.css?v=2">
-    <link rel="stylesheet" href="/static/design-system/components.css?v=1">
-    <link rel="stylesheet" href="/static/styles.css?v=4">
+    <link rel="stylesheet" href="/static/styles.css?v=11">
 </head>
 <body>
-<div class="app">
-    <!-- Header -->
-    <header class="header">
-        <h1>Draft Advisor</h1>
-        <p class="subtitle">Motor de puntuación multifactorial para selección óptima de draft</p>
-        <span class="patch-badge pill pill-gold" id="patch-badge">Cargando...</span>
+
+<div class="app-shell">
+
+    <!-- ═══════════════════════════════════════════
+         HEADER
+    ══════════════════════════════════════════════ -->
+    <header class="site-header" role="banner">
+        <div class="header-inner">
+            <div class="header-brand">
+                <div class="brand-icon" aria-hidden="true">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 2L28 8V24L16 30L4 24V8L16 2Z" stroke="url(#gHex)" stroke-width="1.5"/>
+                        <path d="M16 7L23 11V19L16 23L9 19V11L16 7Z" fill="url(#gHexFill)" opacity="0.3"/>
+                        <path d="M16 12L19 14V18L16 20L13 18V14L16 12Z" fill="url(#gCore)"/>
+                        <defs>
+                            <linearGradient id="gHex" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#c89b3c"/>
+                                <stop offset="1" stop-color="#0ac8b9"/>
+                            </linearGradient>
+                            <linearGradient id="gHexFill" x1="9" y1="7" x2="23" y2="23" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#c89b3c"/>
+                                <stop offset="1" stop-color="#0ac8b9"/>
+                            </linearGradient>
+                            <linearGradient id="gCore" x1="13" y1="12" x2="19" y2="20" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#e4c870"/>
+                                <stop offset="1" stop-color="#0ac8b9"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <h1 class="brand-title">Draft Advisor</h1>
+                    <p class="brand-sub">Motor de puntuación multifactorial</p>
+                </div>
+            </div>
+            <div class="header-meta">
+                <span class="patch-badge" id="patch-badge" aria-live="polite">
+                    <span class="patch-dot" aria-hidden="true"></span>
+                    Cargando…
+                </span>
+            </div>
+        </div>
     </header>
 
-    <!-- Main grid: Draft input + Config -->
-    <div class="main-grid">
-        <!-- Left: Draft Board -->
-        <div class="card">
-            <div class="card-header">
-                <h2><span class="icon">&#9876;</span> Tablero de Draft</h2>
+    <!-- ═══════════════════════════════════════════
+         MAIN LAYOUT
+    ══════════════════════════════════════════════ -->
+    <main class="main-layout" role="main">
+
+        <!-- ── COLUMNA IZQUIERDA: Tablero de Draft ───────── -->
+        <aside class="panel panel-draft" aria-label="Tablero de draft">
+            <div class="panel-head">
+                <span class="panel-icon" aria-hidden="true">
+                    <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                        <path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm0 14A6 6 0 1110 4a6 6 0 010 12z"/>
+                        <path d="M10 6a1 1 0 011 1v2h2a1 1 0 010 2h-2v2a1 1 0 01-2 0v-2H7a1 1 0 010-2h2V7a1 1 0 011-1z"/>
+                    </svg>
+                </span>
+                <h2 class="panel-title">Tablero de Draft</h2>
+                <button class="btn-clear" onclick="clearBoard()" title="Limpiar todos los campeones para una nueva partida" aria-label="Nueva partida: limpiar tablero">
+                    <svg viewBox="0 0 16 16" fill="currentColor" width="12" height="12" aria-hidden="true"><path d="M2 3h12v1.5L12 6v7a1 1 0 01-1 1H5a1 1 0 01-1-1V6L2 4.5V3zm3 3v6h1V6H5zm3 0v6h1V6H8zm2 0v6h1V6h-1zM5.5 1h5a.5.5 0 010 1h-5a.5.5 0 010-1z"/></svg>
+                    Nueva partida
+                </button>
             </div>
-            <div class="card-body">
-                <!-- Allies -->
-                <div class="team-section">
-                    <div class="team-label ally">&#9650; Equipo Aliado (tu lado)</div>
-                    <div class="champion-slots" id="ally-slots">
-                        <div class="champion-slot" data-team="ally" data-index="0" onclick="openChampionPicker('ally', 0)">
-                            <span class="slot-placeholder">+</span>
+            <div class="panel-body">
+
+                <!-- Equipo Aliado -->
+                <section class="team-section" aria-label="Equipo aliado">
+                    <div class="team-label team-label--ally">
+                        <span class="team-line" aria-hidden="true"></span>
+                        <span>Equipo Aliado</span>
+                        <span class="team-line" aria-hidden="true"></span>
+                    </div>
+                    <div class="champion-slots" id="ally-slots" role="list" aria-label="Slots del equipo aliado">
+                        <div class="champion-slot" role="listitem" data-team="ally" data-index="0" onclick="openChampionPicker('ally', 0)" tabindex="0" aria-label="Slot aliado 1, vacío">
+                            <span class="slot-plus" aria-hidden="true">+</span>
                         </div>
-                        <div class="champion-slot" data-team="ally" data-index="1" onclick="openChampionPicker('ally', 1)">
-                            <span class="slot-placeholder">+</span>
+                        <div class="champion-slot" role="listitem" data-team="ally" data-index="1" onclick="openChampionPicker('ally', 1)" tabindex="0" aria-label="Slot aliado 2, vacío">
+                            <span class="slot-plus" aria-hidden="true">+</span>
                         </div>
-                        <div class="champion-slot" data-team="ally" data-index="2" onclick="openChampionPicker('ally', 2)">
-                            <span class="slot-placeholder">+</span>
+                        <div class="champion-slot" role="listitem" data-team="ally" data-index="2" onclick="openChampionPicker('ally', 2)" tabindex="0" aria-label="Slot aliado 3, vacío">
+                            <span class="slot-plus" aria-hidden="true">+</span>
                         </div>
-                        <div class="champion-slot" data-team="ally" data-index="3" onclick="openChampionPicker('ally', 3)">
-                            <span class="slot-placeholder">+</span>
+                        <div class="champion-slot" role="listitem" data-team="ally" data-index="3" onclick="openChampionPicker('ally', 3)" tabindex="0" aria-label="Slot aliado 4, vacío">
+                            <span class="slot-plus" aria-hidden="true">+</span>
                         </div>
-                        <div class="champion-slot disabled" id="target-role-slot" style="opacity:0.3;pointer-events:none;">
-                            <span class="slot-placeholder" id="target-role-label" style="font-size:0.6rem;color:var(--arc-gold);">ADC</span>
+                        <div class="champion-slot slot--role-locked" id="target-role-slot" aria-label="Tu pick (bloqueado)" tabindex="-1">
+                            <span class="slot-role-label" id="target-role-label">ADC</span>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <!-- Enemies -->
-                <div class="team-section">
-                    <div class="team-label enemy">&#9660; Equipo Enemigo</div>
-                    <div class="champion-slots" id="enemy-slots">
-                        <div class="champion-slot" data-team="enemy" data-index="0" onclick="openChampionPicker('enemy', 0)">
-                            <span class="slot-placeholder">+</span>
+                <!-- Línea divisoria vs. -->
+                <div class="vs-divider" aria-hidden="true"><span>VS</span></div>
+
+                <!-- Equipo Enemigo -->
+                <section class="team-section" aria-label="Equipo enemigo">
+                    <div class="team-label team-label--enemy">
+                        <span class="team-line" aria-hidden="true"></span>
+                        <span>Equipo Enemigo</span>
+                        <span class="team-line" aria-hidden="true"></span>
+                    </div>
+                    <div class="champion-slots" id="enemy-slots" role="list" aria-label="Slots del equipo enemigo">
+                        <div class="champion-slot" role="listitem" data-team="enemy" data-index="0" onclick="openChampionPicker('enemy', 0)" tabindex="0" aria-label="Slot enemigo 1, vacío">
+                            <span class="slot-plus" aria-hidden="true">+</span>
                         </div>
-                        <div class="champion-slot" data-team="enemy" data-index="1" onclick="openChampionPicker('enemy', 1)">
-                            <span class="slot-placeholder">+</span>
+                        <div class="champion-slot" role="listitem" data-team="enemy" data-index="1" onclick="openChampionPicker('enemy', 1)" tabindex="0" aria-label="Slot enemigo 2, vacío">
+                            <span class="slot-plus" aria-hidden="true">+</span>
                         </div>
-                        <div class="champion-slot" data-team="enemy" data-index="2" onclick="openChampionPicker('enemy', 2)">
-                            <span class="slot-placeholder">+</span>
+                        <div class="champion-slot" role="listitem" data-team="enemy" data-index="2" onclick="openChampionPicker('enemy', 2)" tabindex="0" aria-label="Slot enemigo 3, vacío">
+                            <span class="slot-plus" aria-hidden="true">+</span>
                         </div>
-                        <div class="champion-slot" data-team="enemy" data-index="3" onclick="openChampionPicker('enemy', 3)">
-                            <span class="slot-placeholder">+</span>
+                        <div class="champion-slot" role="listitem" data-team="enemy" data-index="3" onclick="openChampionPicker('enemy', 3)" tabindex="0" aria-label="Slot enemigo 4, vacío">
+                            <span class="slot-plus" aria-hidden="true">+</span>
                         </div>
-                        <div class="champion-slot" data-team="enemy" data-index="4" onclick="openChampionPicker('enemy', 4)">
-                            <span class="slot-placeholder">+</span>
+                        <div class="champion-slot" role="listitem" data-team="enemy" data-index="4" onclick="openChampionPicker('enemy', 4)" tabindex="0" aria-label="Slot enemigo 5, vacío">
+                            <span class="slot-plus" aria-hidden="true">+</span>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <!-- Context -->
-                <div class="context-row">
-                    <div class="context-group">
-                        <label>Posición de Pick</label>
-                        <select id="pick-position">
-                            <option value="blind">Blind Pick (A ciegas)</option>
-                            <option value="early">Rotación Temprana</option>
-                            <option value="late" selected>Late / Counter</option>
+                <!-- Configuración de Contexto -->
+                <div class="context-panel">
+                    <div class="context-field">
+                        <label class="ctx-label" for="target-role">Rol objetivo</label>
+                        <select class="ctx-select" id="target-role" onchange="changeTargetRole(this.value)">
+                            <option value="adc" selected>ADC</option>
+                            <option value="support">Soporte</option>
                         </select>
                     </div>
-                    <div class="context-group">
-                        <label>Tipo de Cola</label>
-                        <select id="queue-type">
+                    <div class="context-field">
+                        <label class="ctx-label" for="pick-position">Posición de pick</label>
+                        <select class="ctx-select" id="pick-position">
+                            <option value="blind">A ciegas</option>
+                            <option value="early">Rotación temprana</option>
+                            <option value="late" selected>Tardío / Counter</option>
+                        </select>
+                    </div>
+                    <div class="context-field">
+                        <label class="ctx-label" for="queue-type">Tipo de cola</label>
+                        <select class="ctx-select" id="queue-type">
                             <option value="ranked_solo" selected>Clasificatoria Solo/Dúo</option>
                             <option value="ranked_flex">Clasificatoria Flex</option>
                             <option value="clash">Clash</option>
                             <option value="normal">Normal</option>
                         </select>
                     </div>
-                    <div class="context-group">
-                        <label>Rol Objetivo</label>
-                        <select id="target-role" onchange="changeTargetRole(this.value)">
-                            <option value="adc">ADC</option>
-                            <option value="support" selected>Soporte</option>
-                        </select>
+                </div>
+
+                <!-- Botón de análisis -->
+                <button class="btn-analyze" id="recommend-btn" onclick="getRecommendation()" aria-label="Analizar el draft y obtener recomendación">
+                    <span class="btn-analyze-icon" aria-hidden="true">⚡</span>
+                    <span class="btn-analyze-text">Analizar Draft</span>
+                </button>
+
+            </div>
+        </aside>
+
+        <!-- ── COLUMNA DERECHA: Resultados ───────────────── -->
+        <div class="results-column">
+            <div class="results-empty" id="results-empty" aria-live="polite">
+                <div class="empty-icon" aria-hidden="true">
+                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M32 8L52 18V46L32 56L12 46V18L32 8Z" stroke="url(#eHex)" stroke-width="1.5" stroke-linejoin="round"/>
+                        <path d="M32 20L42 26V38L32 44L22 38V26L32 20Z" fill="url(#eHexF)" opacity="0.15"/>
+                        <circle cx="32" cy="32" r="6" fill="url(#eCore)" opacity="0.5"/>
+                        <defs>
+                            <linearGradient id="eHex" x1="12" y1="8" x2="52" y2="56" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#c89b3c" stop-opacity="0.4"/>
+                                <stop offset="1" stop-color="#0ac8b9" stop-opacity="0.4"/>
+                            </linearGradient>
+                            <linearGradient id="eHexF" x1="22" y1="20" x2="42" y2="44" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#c89b3c"/>
+                                <stop offset="1" stop-color="#0ac8b9"/>
+                            </linearGradient>
+                            <linearGradient id="eCore" x1="26" y1="26" x2="38" y2="38" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#e4c870"/>
+                                <stop offset="1" stop-color="#0ac8b9"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <p class="empty-title">Sin análisis todavía</p>
+                <p class="empty-sub">Agregá campeones al tablero y presioná <strong>Analizar Draft</strong></p>
+            </div>
+
+            <div class="results-section" id="results-section" aria-live="polite">
+
+                <!-- Resumen del Draft -->
+                <div class="draft-summary" id="draft-summary"></div>
+
+                <!-- Pick principal -->
+                <div class="top-pick-card" id="top-pick-card"></div>
+
+                <!-- Alternativas -->
+                <div class="results-block" id="alternatives-block" style="display:none;">
+                    <div class="block-head">
+                        <span class="block-icon" aria-hidden="true">≡</span>
+                        <h3 class="block-title">Alternativas</h3>
                     </div>
+                    <div class="alternatives-grid" id="alternatives-grid"></div>
                 </div>
+
             </div>
         </div>
 
-        <!--
-        UPGRADE FUTURO: Pool de Campeones
-        ===================================
-        Este panel permite al usuario definir un pool personal de campeones
-        y asignarles niveles de confort (1-10) para que el motor de scoring
-        los priorice en las recomendaciones.
+    </main>
+</div>
 
-        Modos disponibles (implementados en app.js + scoring.py):
-          - "unrestricted"   → Mejor Teórico (ignora el pool, recomienda global)
-          - "pool_preferred" → Priorizar Pool (bonus de scoring a campeones del pool)
-          - "pool_only"      → Solo del Pool (restringe candidatos al pool)
+<!-- ═══════════════════════════════════════════
+     MODAL: Selector de Campeón
+══════════════════════════════════════════════ -->
+<div class="modal-backdrop" id="champion-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-box">
 
-        Para activar: descomentar este bloque y agregar la lógica de confort
-        en app.js (funciones: setPoolMode, renderComfortSliders, etc.).
-        El backend ya soporta pool_mode y comfort en DraftState (schemas.py).
-
-        <div class="card">
-            <div class="card-header">
-                <h2><span class="icon">&#9733;</span> Pool de Campeones</h2>
-            </div>
-            <div class="card-body">
-                <div class="pool-toggle" id="pool-toggle">
-                    <button class="btn btn-ghost active" data-mode="unrestricted" onclick="setPoolMode('unrestricted')">Mejor Teórico</button>
-                    <button class="btn btn-ghost" data-mode="pool_preferred" onclick="setPoolMode('pool_preferred')">Priorizar Pool</button>
-                    <button class="btn btn-ghost" data-mode="pool_only" onclick="setPoolMode('pool_only')">Solo del Pool</button>
-                </div>
-
-                <div id="pool-config" style="display:none;">
-                    <div class="pool-champions" id="pool-champions"></div>
-                    <button class="btn btn-secondary pool-add-btn" id="pool-add-btn" onclick="openChampionPicker('pool', -1)">+ Agregar al pool</button>
-
-                    <div style="margin-top:16px;">
-                        <label style="font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-secondary);display:block;margin-bottom:6px;">Niveles de Confort</label>
-                        <div id="comfort-sliders"></div>
-                    </div>
-                </div>
-            </div>
+        <div class="modal-top">
+            <h2 class="modal-title" id="modal-title">Seleccionar Campeón</h2>
+            <button class="modal-close-btn" onclick="closeModal()" aria-label="Cerrar selector">
+                <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18">
+                    <path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"/>
+                </svg>
+            </button>
         </div>
-        -->
-    </div>
 
-    <!-- Recommend Button -->
-    <div class="recommend-section">
-        <button class="btn btn-primary recommend-btn" id="recommend-btn" onclick="getRecommendation()">
-            Recomendar Pick
-        </button>
-    </div>
-
-    <!-- Results -->
-    <div class="results-section" id="results-section">
-        <!-- Draft Analysis Summary -->
-        <div class="draft-summary" id="draft-summary"></div>
-
-        <!-- Top Pick -->
-        <div class="top-pick-card" id="top-pick-card"></div>
-
-        <!-- Alternatives -->
-        <div class="card" style="margin-top:16px;">
-            <div class="card-header">
-                <h2><span class="icon">&#9881;</span> Alternativas</h2>
+        <div class="modal-search-row">
+            <div class="search-wrapper">
+                <span class="search-icon" aria-hidden="true">
+                    <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+                    </svg>
+                </span>
+                <input
+                    type="search"
+                    id="champion-search"
+                    class="search-input"
+                    placeholder="Buscar campeón… (Enter para agregar el primero)"
+                    oninput="filterChampions(this.value)"
+                    onkeydown="handleSearchKeydown(event)"
+                    autocomplete="off"
+                    spellcheck="false"
+                    aria-label="Buscar campeón"
+                >
             </div>
-            <div class="card-body">
-                <div class="alternatives-grid" id="alternatives-grid"></div>
-            </div>
+            <div class="search-hint" id="search-hint" aria-live="polite"></div>
         </div>
+
+        <nav class="role-filters" aria-label="Filtrar por rol">
+            <button class="role-pill role-pill--active" data-role="all" onclick="filterByRole('all')" aria-pressed="true">Todos</button>
+            <button class="role-pill" data-role="Top" onclick="filterByRole('Top')" aria-pressed="false">Top</button>
+            <button class="role-pill" data-role="Jungle" onclick="filterByRole('Jungle')" aria-pressed="false">Jungla</button>
+            <button class="role-pill" data-role="Mid" onclick="filterByRole('Mid')" aria-pressed="false">Mid</button>
+            <button class="role-pill" data-role="Bot" onclick="filterByRole('Bot')" aria-pressed="false">ADC</button>
+            <button class="role-pill" data-role="Support" onclick="filterByRole('Support')" aria-pressed="false">Soporte</button>
+        </nav>
+
+        <div class="champion-grid" id="champion-grid" role="list" aria-label="Lista de campeones"></div>
+
     </div>
 </div>
 
-<!-- Champion Picker Modal -->
-<div class="modal-overlay" id="champion-modal">
-    <div class="modal">
-        <div class="modal-header">
-            <input type="text" id="champion-search" placeholder="Buscar campeón..." oninput="filterChampions(this.value)" autofocus>
-            <button class="btn btn-ghost modal-close" onclick="closeModal()" aria-label="Cerrar modal">&times;</button>
-        </div>
-        <div class="role-filters" id="role-filters">
-            <button class="btn btn-ghost role-filter active" data-role="all" onclick="filterByRole('all')">Todos</button>
-            <button class="btn btn-ghost role-filter" data-role="Top" onclick="filterByRole('Top')">Top</button>
-            <button class="btn btn-ghost role-filter" data-role="Jungle" onclick="filterByRole('Jungle')">Jungla</button>
-            <button class="btn btn-ghost role-filter" data-role="Mid" onclick="filterByRole('Mid')">Mid</button>
-            <button class="btn btn-ghost role-filter" data-role="Bot" onclick="filterByRole('Bot')">ADC</button>
-            <button class="btn btn-ghost role-filter" data-role="Support" onclick="filterByRole('Support')">Soporte</button>
-        </div>
-        <div class="champion-grid" id="champion-grid"></div>
-    </div>
-</div>
-
-<script src="/static/app.js?v=3"></script>
+<script src="/static/app.js?v=17"></script>
 </body>
 </html>

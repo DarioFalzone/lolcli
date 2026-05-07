@@ -2,7 +2,7 @@
 schema_version: "1.0"
 kb_version: "1"
 id: "adc-jinx-front-to-back"
-title: "Jinx in Front-to-Back Compositions"
+title: "Jinx en composiciones de teamfight frontal"
 type: "adc_champion_note"
 domain: "draft_advisor"
 patch: "16.7"
@@ -22,47 +22,47 @@ supersedes: []
 superseded_by: []
 ---
 
-## Summary
+## Resumen
 
-Jinx is the premier front-to-back teamfight hypercarry. With rocket launcher range (at max level, 725 range), AOE splash damage, and snowballing resets on kills/assists, she is the ADC that benefits most from traditional front-to-back compositions where a frontline engages and peels while she free-hits from the backline.
+Jinx es una hypercarry premium para teamfight frontal. Con el rango del lanzacohetes, daño AOE y resets de velocidad al participar en kills, es uno de los ADCs que más aprovecha una composición donde la frontline inicia y peelea mientras ella pega desde backline.
 
-## Key Findings
+## Hallazgos Clave
 
-- Jinx's teamfight damage output scales non-linearly with protection: each additional second of uninterrupted auto-attacking in rocket form compounds AOE damage across the entire enemy team.
-- Her passive (Get Excited!) converts any kill/assist into a massive movement speed + attack speed steroid, enabling pentakill chains that no other ADC can replicate.
-- With 2+ frontline champions AND reliable peel (e.g., Nautilus + Maokai, or Maokai + Lulu), Jinx's theoretical teamfight DPS is the highest among all ADCs.
-- Without frontline, Jinx drops from S-tier to C-tier. Her 325 base MS and zero dashes make her a free kill for any diver.
+- El daño de Jinx en teamfight escala de forma no lineal con la protección: cada segundo extra de autos ininterrumpidos con cohetes multiplica daño AOE sobre todo el equipo enemigo.
+- Su pasiva convierte cualquier kill o asistencia en una ventana enorme de velocidad de movimiento y velocidad de ataque, habilitando cadenas de resets que pocos ADCs pueden igualar.
+- Con 2+ campeones de frontline y peel confiable (por ejemplo Nautilus + Maokai, o Maokai + Lulu), su DPS teórico en teamfight está entre los más altos del rol.
+- Sin frontline, Jinx cae de S-tier a C-tier. Su velocidad base baja y ausencia de dash la dejan expuesta contra cualquier diver.
 
-## Draft Implications
+## Implicancias de Draft
 
-- **Pick Jinx when:** Allied team has 2+ frontline members AND at least one peel source (enchanter or CC tank). Enemy team lacks more than one mobile assassin.
-- **Avoid Jinx when:** Allied team has no frontline, enemy has multiple divers (Camille + Nocturne, Zed + Vi), or the game is expected to end before 3 items.
-- **Scoring impact:** Jinx's `synergy_frontline_comp: 9` and `synergy_peel_comp: 9` already reflect this, but the magnitude of the interaction is larger than the numbers suggest — she goes from unplayable to best-in-class.
+- **Elegí Jinx cuando:** tu equipo tiene 2+ fuentes de frontline y al menos una fuente de peel (enchanter o tanque con CC). El enemigo no tiene más de un asesino móvil.
+- **Evitá Jinx cuando:** tu equipo no tiene frontline, el enemigo tiene múltiples divers (Camille + Nocturne, Zed + Vi), o la partida parece resolverse antes de 3 ítems.
+- **Impacto de scoring:** `synergy_frontline_comp: 9` y `synergy_peel_comp: 9` ya reflejan el patrón, pero la magnitud real es mayor: Jinx pasa de muy castigable a win condition central.
 
-## When This Matters
+## Cuándo Importa
 
-- Allied team has locked in 2+ of: Maokai, Ornn, Sion, Sejuani, Nautilus, Braum, Alistar, Thresh.
-- Enemy team has at most 1 dive assassin (manageable with exhaust + peel).
-- Game is expected to go 25+ minutes (scaling comp, not early-game-only strategy).
+- El equipo aliado ya eligió 2+ de: Maokai, Ornn, Sion, Sejuani, Nautilus, Braum, Alistar, Thresh.
+- El enemigo tiene como máximo 1 asesino de dive, manejable con exhaust + peel.
+- La partida apunta a 25+ minutos, con composición de escalado y no solo snowball temprano.
 
-## Caveats
+## Advertencias
 
-- This analysis assumes competent positioning from the Jinx player. In low elo, even with perfect comp, Jinx may int forward.
-- Patch-dependent: if Jinx's items (IE, RFC, Runaan's) are nerfed, the scaling ceiling drops.
-- Does not account for specific enemy ADC — lane matchup is analyzed separately.
+- El análisis asume posicionamiento competente. En elos bajos, Jinx puede regalarse incluso con composición perfecta.
+- Depende de parche: si los ítems de Jinx bajan mucho, su techo de escalado también baja.
+- No evalúa matchup específico contra el ADC enemigo; eso se analiza en otra capa.
 
-## Extractable Claims
+## Claims Extraíbles
 
-- `Jinx` + `frontline_count >= 2` + `peel_count >= 1` → `synergy_boost: +15` (beyond base rating)
-- `Jinx` + `frontline_count == 0` → `should_not_recommend` unless no alternatives
-- `Jinx` + `enemy_dive_count >= 2` → `risk: critical` regardless of allied peel
+- `Jinx` + `frontline_count >= 2` + `peel_count >= 1` -> `synergy_boost: +15` (más allá del rating base)
+- `Jinx` + `frontline_count == 0` -> `should_not_recommend` salvo que no haya alternativas
+- `Jinx` + `enemy_dive_count >= 2` -> `risk: critical` incluso con peel aliado
 
-## Related Champions / Comps
+## Campeones / Composiciones Relacionadas
 
-- **Best frontline partners:** Maokai (W root + saplings for vision), Ornn (upgrades + engage), Nautilus (hook + passive root chain)
-- **Best peel partners:** Lulu (W polymorph + R knockup), Janna (tornado + R disengage), Braum (passive stun + shield)
-- **Worst enemy matchups when unprotected:** Zed, Camille, Nocturne, Vi (all point-click or undodgeable gap closers)
+- **Mejores socios de frontline:** Maokai (W root + saplings para visión), Ornn (mejoras + engage), Nautilus (hook + cadena de root pasivo).
+- **Mejores socios de peel:** Lulu (W polymorph + R knockup), Janna (tornado + R disengage), Braum (stun pasivo + escudo).
+- **Peores amenazas si no está protegida:** Zed, Camille, Nocturne, Vi.
 
-## Source Notes
+## Notas de Fuente
 
-Expert analysis based on champion kit mechanics, patch 16.7 state, and established draft theory. No specific external source — this is original strategic analysis.
+Análisis experto basado en mecánicas del kit, estado de parche 16.7 y teoría de draft establecida. No usa una fuente externa específica; es análisis estratégico original.

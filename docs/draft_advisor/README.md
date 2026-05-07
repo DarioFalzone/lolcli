@@ -1,7 +1,7 @@
 # Draft Advisor — Documentación Técnica
 
 > Motor de recomendación de picks para ranked/clash de League of Legends.
-> Soporta roles **ADC** y **Soporte**. Última actualización: 2026-04-26.
+> Soporta roles **ADC** y **Soporte**. Ultima actualizacion: 2026-05-05.
 
 ---
 
@@ -49,7 +49,7 @@ src/riot_lol_cli/draft_advisor/
 | `GET` | `/api/v1/draft/champions` | Lista todos los campeones base |
 | `GET` | `/api/v1/draft/champions/adcs` | Lista ADCs con perfil detallado |
 | `GET` | `/api/v1/draft/champions/supports` | Lista Supports con perfil detallado |
-| `GET` | `/api/v1/draft/meta/version-info` | Versión de patch y datos |
+| `GET` | `/api/v1/draft/meta/version-info` | Version de patch, datos y snapshot ADC |
 | `POST` | `/api/v1/draft/recommend` | Recomienda pick dado un DraftState |
 | `GET` | `/api/v1/draft/health` | Estado del servicio |
 
@@ -67,7 +67,20 @@ src/riot_lol_cli/draft_advisor/
 }
 ```
 
-`target_role` acepta `"adc"` o `"support"`. Default: `"support"`.
+`target_role` acepta `"adc"` o `"support"`. Default del schema y del front: `"adc"`.
+
+### Respuesta ADC
+
+En modo ADC, cada `top_pick` y alternativa incluye `adc_context`:
+
+- `personal_tier`: tier de `personal_adc_mastery.json`.
+- `meta_tier`, `meta_climb_score`, `meta_patch`, `meta_scraped_at`: datos del ultimo snapshot ADC.
+- `eligibility`: `core`, `fallback_meta_soft`, `fallback_meta_low`, `fallback_lane_veto`, `fallback_draft_veto`, `fallback_meta_missing`, `fallback_personal_b_meta_s` o `fallback_meta_unavailable`.
+- `eligibility_reason`: texto corto para auditar por que entro o quedo como fallback.
+
+`RecommendationOutput.adc_priority_context` agrega estado global del snapshot,
+warning de stale/missing, cantidad de candidatos elegibles y campeones detectados
+por scraping que todavia no tienen perfil local.
 
 ---
 
@@ -75,13 +88,30 @@ src/riot_lol_cli/draft_advisor/
 
 ### Modo ADC
 
-| Factor | Peso | Descripción |
-|--------|------|-------------|
-| Synergy con aliados | 35% | Fit con jungla, mid, support aliados |
-| Counter a enemigos | 25% | Matchup vs ADC/support enemigo |
-| Gap fill composición | 20% | Cubre frontline/engage/peel faltante |
-| Blind pick safety | 10% | Seguridad en pick ciego |
-| Comfort (pool) | 10% | Penalización por baja familiaridad |
+ADC usa una politica de prioridad antes de ordenar recomendaciones:
+
+| Capa | Peso final | Fuente |
+|------|------------|--------|
+| Maestría personal | 30% | `data/draft_advisor/personal_adc_mastery.json` |
+| Meta ADC vigente | 30% | `data/meta_scraper/normalized/latest_adc_tier.json` |
+| Fit de draft | 40% | scoring multifactor existente + KB |
+
+Reglas vigentes:
+
+- Top pick ADC requiere tier personal `S/A` y meta fuerte real: tier de scraping `S` o `climb_score >= 80`.
+- Tier personal `B` solo entra como fallback si el scraping lo marca `S`.
+- Meta `A` con `climb_score < 80` queda como `fallback_meta_soft`; meta `B` o inferior queda como `fallback_meta_low`.
+- Reglas KB de linea pueden marcar `fallback_lane_veto`; por ejemplo Nilah + Soraka contra Caitlyn + Nautilus no puede ser primera opcion si existe cualquier ADC no vetado.
+- Reglas KB de matchup pueden sumar fit tactico sin saltarse el gate de meta/maestria; por ejemplo Xayah recibe bonus contra Malphite y Tahm Kench por negar engage frontal y castigar frontlines melee con plumas.
+- Reglas tácticas internas pueden marcar `fallback_draft_veto`, por ejemplo hypercarries sin movilidad/frontline contra dive o burst pesado.
+- `excluded_from_recommendations` bloquea campeones que no queres jugar aunque el scraping los marque fuerte.
+- `never_top_pick` permite que un campeon aparezca como alternativa, pero nunca como primera opcion.
+- Si el snapshot ADC falta o tiene mas de 72 horas, el motor muestra warning y cae a fallback de maestria personal.
+- Los campeones que aparecen en scraping pero no tienen perfil local en `adc_profiles.json` se reportan como `meta_only_missing_profiles`, no se recomiendan.
+
+El fit de draft calcula sinergias, counters, macro/micro, seguridad blind, gap
+fill, SoloQ y escalado. Ese puntaje queda como `draft_fit_score` dentro del
+`score_breakdown` y pesa 40% dentro de los candidatos que pasaron los gates.
 
 ### Modo Support
 
@@ -101,8 +131,8 @@ src/riot_lol_cli/draft_advisor/
 - Heurísticas pro-scene (`confidence: "heuristic"`) reciben bonus reducido: factor 0.6 (cap 9pts).
 
 **Triángulo estratégico (`strategic_triangle.json`):**
-- Detecta el archetype del enemy support (5 categorías fine-grained: `engage`, `poke`, `enchanter_disengage`, `enchanter_pure`, `catcher`).
-- Si el supp candidato counterea al enemy → +10 al `enemy_matchup`.
+- Detecta el arquetipo del support enemigo (5 categorías fine-grained: `engage`, `poke`, `enchanter_disengage`, `enchanter_pure`, `catcher`).
+- Si el support candidato counterea al enemigo, suma +10 al `enemy_matchup`.
 - Si es counter-pickeable → -8 al `enemy_matchup`.
 - Reglas: Engage > Poke; Poke > Enchanter; Enchanter Disengage > Engage (eje invertido); Catcher > Poke + Enchanter pure.
 
@@ -114,24 +144,99 @@ src/riot_lol_cli/draft_advisor/
 
 ## Datos
 
+### data_manifest.json
+Metadata visible del servicio: `live_patch_label` actual `16.9`, `static_data_version` actual `16.9.1`, `last_verified_at` `2026-05-04T11:48:07-03:00`. El header de la SPA muestra `Parche`, `Data Dragon` y fecha/hora de ultimo update.
+
+`live_patch_label` y `static_data_version` no son exactamente lo mismo:
+
+- `live_patch_label`: parche jugable/meta usado para balance y decisiones de draft.
+- `static_data_version`: version tecnica de Data Dragon/CDN para campeones, items, splash arts y metadata estatica. Puede tener sufijos como `.1` aunque el parche visible siga siendo `16.9`.
+
 ### champion_base.json
-171 campeones con: `id`, `name`, `roles[]`, `damage_type`, `range_type`.
+172 campeones con: `id`, `display_name`, roles, clase, daño, rango, tags y metadatos de Data Dragon.
 
 ### adc_profiles.json
-24 ADCs con perfiles detallados. Campos clave:
-- `lane_kill_pressure`, `teamfight_scaling`, `blind_pick_safety`
-- `best_with_supports[]`, `weak_against_adcs[]`
-- `play_pattern_template` (con placeholders `{ally_support}`, `{primary_threat}`)
+32 perfiles ADC con scoring profundo. Campos clave:
+- factores 1-10: rango efectivo, movilidad, self peel, dificultad, seguridad blind, prioridad de lane, scaling, anti-tank, anti-dive, anti-poke
+- relaciones canonicas: `best_with[]`, `worst_into[]`
+- notas: `power_spikes[]`, `strengths[]`, `weaknesses[]`, `draft_notes`
+
+### personal_adc_mastery.json
+Tier list personal del usuario para ADC:
+- path: `data/draft_advisor/personal_adc_mastery.json`
+- fuente visual: `KB/tier list adc 04 05 2026.png`
+- campos consumidos: `tiers.S/A/B/C/D`, `last_updated`, `source_image`, `needs_review`
+- campos de control: `excluded_from_recommendations`, `never_top_pick`
+- solo campeones con perfil local en `adc_profiles.json` son recomendables
+- entradas en `needs_review` no afectan scoring hasta confirmacion manual
+
+### latest_adc_tier.json
+Snapshot opcional generado por Meta Scraper (3 fuentes: OP.GG, LoLalytics, U.GG):
+- path: `data/meta_scraper/normalized/latest_adc_tier.json`
+- endpoints: `POST /api/v1/meta/scrape/adc`, `GET /api/v1/meta/adc/tier`
+- campos consumidos: `scraped_at`, `patch`, `sources`, `stats.tier`, `stats.win_rate`, `stats.pick_rate`, `stats.ban_rate`, `stats.climb_score`
+- stale si `scraped_at` supera 72 horas
+- las tarjetas de recomendacion muestran patch, fecha de scrape y chips de meta; el header solo muestra version general de datos
+
+### latest_support_tier.json
+Snapshot opcional generado por Meta Scraper (mismas fuentes):
+- path: `data/meta_scraper/normalized/latest_support_tier.json`
+- endpoints: `POST /api/v1/meta/scrape`, `GET /api/v1/meta/support/tier`
+- campos consumidos: `stats.win_rate`, `stats.pick_rate`, `stats.ban_rate`
+- el factor `solo_queue_reliability` de Support incorpora este bonus acotado a `[-10, +12]`
+- sin `climb_score` (el normalizer no lo calcula para support)
+
+### Proveniencia y sanitizacion de datos
+
+Los reportes historicos de auditoria quedaron absorbidos en esta seccion para evitar auditorias sueltas fuera de la doc canonica.
+
+Decisiones vigentes:
+
+- Separar `live_patch_label` del `static_data_version`: el primero es el parche visible para jugadores; el segundo es la version tecnica de Data Dragon que alimenta assets/datos estaticos.
+- Validar el roster base contra Data Dragon antes de tratar `champion_base.json` como confiable.
+- Mantener ADC roster, support roster y priority profiles como subconjuntos curados del proyecto, no como reflejo automatico de todo Data Dragon.
+- Usar siempre IDs canonicos de `champion_base.json` en perfiles y relaciones: `JarvanIV`, no `Jarvan`; `KogMaw`, no `Kog'Maw`; `TahmKench`, no `Tahm Kench`.
+- Proteger el pipeline contra contaminacion LoL/TFT y notas de parche de otros productos.
+- Mostrar en UI el contexto correcto del dato: no presentar version tecnica de DDragon como si fuera parche live.
+
+Campos auditados historicamente:
+
+| Dataset | Fuente esperada | Riesgo a vigilar |
+|---------|-----------------|------------------|
+| `champion_base.json` | Data Dragon + curacion local | drift de roster o version conflada |
+| `adc_profiles.json` | Curacion experta | alias no canonicos en relaciones |
+| `support_profiles.json` | Curacion experta + KB | alias no canonicos o counters stale |
+| `priority_profiles.json` | Curacion experta | claims sin fuente actualizada |
+| `kb/research/**/*.md` | notas con frontmatter | patch labels stale |
+| `scoring_weights.json` | arquitectura del motor | cambios sin evals |
+
+### Contrato de integridad
+
+`ChampionDataService` valida al iniciar. Si hay una referencia invalida en los JSON, `/api/v1/draft/health` y `/api/v1/draft/champions` pueden devolver 500 y el picker del front queda vacio.
+
+Verificacion minima al tocar datos/scoring:
+
+```bash
+pytest tests/draft_advisor/test_data_integrity.py
+pytest tests/draft_advisor
+ruff check src/riot_lol_cli/draft_advisor tests/draft_advisor
+ruff format --check src/riot_lol_cli/draft_advisor tests/draft_advisor
+```
 
 ### support_profiles.json
-10 soportes core (fase 1). Campos clave:
-- `archetype`: `engage | enchanter | poke | catcher`
+34 perfiles Support con scoring profundo. Campos clave:
+- `archetype`: `engage | enchanter | poke | catcher | warden`
 - `engage_strength`, `peel_strength`, `anti_dive`, `anti_assassin_peel`
 - `best_with_adcs[]`, `weak_against_supports[]`
 - `play_pattern_template`
 
-**Soportes fase 1:** Leona, Nautilus, Thresh, Lulu, Janna, Soraka, Milio, Lux, Pyke, Karma.
-**Soportes fase 2 (pendiente):** Blitzcrank, Rakan, Rell, Alistar, Nami, Yuumi, Renata, Zyra, Brand, Xerath, Vel'Koz, Swain, Senna, Bard.
+Roster actual: Alistar, Ashe, Bardo, Blitzcrank, Brand, Braum, Camille, Janna, Karma, Leona, Lulu, Lux, Maokai, Milio, Nami, Nautilus, Pantheon, Poppy, Pyke, Rakan, Rell, Renata, Senna, Shen, Sona, Soraka, Swain, Sylas, Taric, Thresh, Vel'Koz, Xerath, Yuumi, Zyra.
+
+### Política de idioma
+
+- La UI, API visible, perfiles JSON y notas activas de KB deben estar en español rioplatense claro.
+- Los IDs internos siguen siendo los canónicos de Data Dragon (`Bard`, `MasterYi`, `KogMaw`) aunque el `display_name` visible use español (`Bardo`, `Maestro Yi`, `Kog'Maw`).
+- Se permiten tecnicismos de LoL cuando son más claros que una traducción forzada: `ADC`, `draft`, `teamfight`, `stun`, `dive`, `peel`, `poke`, `engage`, `roam`, `gank`, `matchup`, `all-in`, `frontline`, `wave`, `burst`, `scaling`.
 
 ### KB/ (Knowledge Base)
 Documentos markdown con el razonamiento estratégico detrás del scoring:
@@ -151,16 +256,17 @@ Stack: **HTML + CSS + JavaScript vanilla**. Sin React, sin bundler, sin TypeScri
 ### Flujo de interacción
 
 ```
-Init → GET /api/v1/draft/champions + /api/v1/draft/meta/version-info
-     → renderiza patch-badge
+Init -> GET /api/v1/draft/champions + /api/v1/draft/meta/version-info
+     -> renderiza patch-badge con parche, version Data Dragon y fecha/hora de ultimo update
 
-Click slot vacío → openChampionPicker(team, index)
-     → Modal con search + role filters
-     → click campeón → asigna slot, cierra modal
+Click slot vacio -> openChampionPicker(team, index)
+     -> Modal con search + role filters
+     -> click campeon -> asigna slot, cierra modal
 
-Click "Recomendar Pick" → POST /api/v1/draft/recommend
-     → renderResults() → Top Pick Card + 3 Alternatives
-     → scroll automático a resultados
+Click "Analizar Draft" -> POST /api/v1/draft/recommend
+     -> renderResults() -> Recomendación principal + 3 alternativas
+     -> chips: Maestría, Meta, Subida, Scraping, Alternativa
+     -> scroll automatico a resultados
 ```
 
 ### State global (app.js)
@@ -176,7 +282,7 @@ const state = {
   modalTarget: null,
   roleFilter: 'all',
   recommendation: null,
-  targetRole: 'support',  // default actual
+  targetRole: 'adc',  // default actual del front
 };
 ```
 

@@ -6,47 +6,47 @@
 
   "predominance": {
     "attack_matrix": {
-      "display_name": "Attack Matrix (Wombo Combo)",
+      "display_name": "Matriz de ataque (wombo combo)",
       "essence": "Iniciación masiva multi-target, burst 5v5 instantáneo",
-      "detection_hints": "Multiple AoE ults (Malphite, Yasuo, Orianna, Kennen, Wukong)",
+      "detection_hints": "Múltiples ultis AOE (Malphite, Yasuo, Orianna, Kennen, Wukong)",
       "beats": ["poke_siege"],
       "loses_to": ["pick"],
-      "reason_beats": "Engage hard rompe la zone control del siege antes que el poke acumule",
+      "reason_beats": "El engage duro rompe el control de zona del siege antes de que el poke acumule daño",
       "reason_loses": "Catchers desarman al iniciador antes que pueda conectar el wombo",
       "supp_archetypes_recommended": ["engage", "catcher"]
     },
     "pick": {
-      "display_name": "Catch (Captura)",
-      "essence": "Eliminar objetivos desposicionados via hooks/CC + visión asimétrica",
-      "detection_hints": "Hook champs (Naut, Thresh, Blitz, Morgana), Ashe, Jhin, Vex",
+      "display_name": "Catch (captura)",
+      "essence": "Eliminar objetivos desposicionados vía hooks/CC + visión asimétrica",
+      "detection_hints": "Campeones con hook o catch (Nautilus, Thresh, Blitzcrank, Morgana), Ashe, Jhin, Vex",
       "beats": ["attack_matrix"],
       "loses_to": ["front_to_back"],
       "reason_beats": "Hook/CC desarma al iniciador antes del wombo combo",
-      "reason_loses": "Frontline fuerte mitiga los picks individuales; backline carry escala",
+      "reason_loses": "Una frontline fuerte mitiga los picks individuales; el carry de backline escala",
       "supp_archetypes_recommended": ["catcher", "enchanter_disengage"]
     },
     "front_to_back": {
-      "display_name": "Protect (Hyper-Carry)",
-      "essence": "Frontline engages, backline carry escala y outputs DPS sostenido",
-      "detection_hints": "Hyper ADC (KogMaw, Jinx, Aphelios, Twitch) + 2+ frontline",
+      "display_name": "Protección de hypercarry",
+      "essence": "Frontline inicia, backline carry escala y aplica DPS sostenido",
+      "detection_hints": "Hyper ADC (Kog'Maw, Jinx, Aphelios, Twitch) + 2+ fuentes de frontline",
       "beats": ["pick"],
       "loses_to": ["poke_siege"],
-      "reason_beats": "Frontline tanky mitiga hooks; carry escalado supera burst de catchers",
-      "reason_loses": "Poke siege fuerza pelea o pierde objs sin permitir engage del tank",
+      "reason_beats": "La frontline tanky mitiga hooks; el carry escalado supera el burst de catchers",
+      "reason_loses": "Poke siege fuerza al tanque a pelear desgastado o ceder objetivos",
       "supp_archetypes_recommended": ["enchanter_disengage", "enchanter_pure"]
     },
     "poke_siege": {
-      "display_name": "Siege & Poke (Asedio)",
+      "display_name": "Asedio y poke",
       "essence": "Desgaste a distancia; toma torres sin engage hard",
-      "detection_hints": "Caitlyn, Jhin, Varus, Ezreal + supps poke (Lux, Xerath, Zyra)",
+      "detection_hints": "Caitlyn, Jhin, Varus, Ezreal + supports de poke (Lux, Xerath, Zyra)",
       "beats": ["front_to_back"],
       "loses_to": ["attack_matrix"],
       "reason_beats": "Daño residual desgasta al frontline antes que escale el carry",
-      "reason_loses": "Wombo combo cierra distancia y mata a los pokers frágiles inmóviles",
+      "reason_loses": "Wombo combo cierra distancia y mata a los campeones de poke frágiles e inmóviles",
       "supp_archetypes_recommended": ["poke", "enchanter_disengage"]
     },
     "split": {
-      "display_name": "Split Push (1-3-1)",
+      "display_name": "Split push (1-3-1)",
       "essence": "Presión lateral constante; requiere wave clear + disengage",
       "detection_hints": "Top splitter (Camille, Jax, Tryndamere) + ADC waveclear (Sivir, Tristana)",
       "beats": [],

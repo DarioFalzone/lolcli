@@ -1,0 +1,64 @@
+{
+  "schema_version": "1.0",
+  "patch": "16.7",
+  "last_updated": "2026-04-27",
+  "description": "Clasificacion de junglas por arquetipo para mejorar la sinergia support-jungla. Fuente: KB/SUPPORT_THEORY.md §2.1, KB/notebooklm/sintesis/07-roaming-3-chequeos.md. Consumido por scoring.py via champion_data.py::classify_jungler_archetype(). Las listas usan IDs canonicos de champion_base.json.",
+
+  "archetypes": {
+    "engage": {
+      "description": "Jungla con CC duro que inicia peleas. El support puede ir enchanter porque la jungla ya aporta engage.",
+      "champions": ["Vi", "Sejuani", "MonkeyKing", "Amumu", "Zac", "Maokai", "JarvanIV", "RekSai", "Rammus"],
+      "supp_synergy": "Si jungla=engage, support enchanter/poke es complemento ideal. No necesitás doble engage."
+    },
+    "farm_scaling": {
+      "description": "Jungla de farmeo que escala. Sin iniciacion propia. El support debe aportar engage o catch.",
+      "champions": ["Karthus", "MasterYi", "Viego", "Kayn", "Shyvana", "Kindred", "Belveth", "Graves", "Lillia"],
+      "supp_synergy": "Si jungla=farm, support engage (Leona, Nautilus) o catcher (Thresh, Blitzcrank) compensa la falta de iniciacion temprana."
+    },
+    "early_gank": {
+      "description": "Jungla con ganks tempranos. Doble presion temprana con catcher/engage = snowball.",
+      "champions": ["LeeSin", "Elise", "RekSai", "XinZhao", "Nidalee", "Pantheon", "Warwick", "Volibear", "Rengar"],
+      "supp_synergy": "Si jungla=early_gank, support catcher/engage crea doble presion. Hook + gank = kills garantizadas."
+    },
+    "control": {
+      "description": "Jungla de control de objetivos. Flexible: cualquier arquetipo de support funciona.",
+      "champions": ["Ivern", "Nunu", "Skarner", "Udyr", "Trundle", "Poppy"],
+      "supp_synergy": "Si jungla=control, cualquier support funciona. Ambos controlan objetivos y vision."
+    }
+  },
+
+  "scoring_modifiers": {
+    "engage_jungler": {
+      "boost_archetypes": ["enchanter", "poke"],
+      "neutral_archetypes": ["catcher", "warden"],
+      "penalize_archetypes": ["engage"],
+      "boost_value": 5.0,
+      "penalty_value": -3.0,
+      "reason": "Doble engage es redundante. Enchanter complementa engage jungla."
+    },
+    "farm_scaling_jungler": {
+      "boost_archetypes": ["engage", "catcher"],
+      "neutral_archetypes": ["poke"],
+      "penalize_archetypes": ["enchanter"],
+      "boost_value": 5.0,
+      "penalty_value": -3.0,
+      "reason": "Sin iniciacion del jungla, support engage/catcher es necesario."
+    },
+    "early_gank_jungler": {
+      "boost_archetypes": ["catcher", "engage"],
+      "neutral_archetypes": ["enchanter", "poke"],
+      "penalize_archetypes": [],
+      "boost_value": 4.0,
+      "penalty_value": 0.0,
+      "reason": "Doble presion temprana maximiza snowball."
+    },
+    "control_jungler": {
+      "boost_archetypes": [],
+      "neutral_archetypes": ["engage", "enchanter", "poke", "catcher", "warden"],
+      "penalize_archetypes": [],
+      "boost_value": 0.0,
+      "penalty_value": 0.0,
+      "reason": "Jungla de control es flexible: sin preferencia fuerte."
+    }
+  }
+}

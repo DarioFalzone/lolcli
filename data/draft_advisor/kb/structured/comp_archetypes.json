@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
   "last_updated": "2026-04-08",
-  "description": "Comp archetype definitions for the draft advisor. Used by the analyzer to classify team compositions and adjust scoring weights.",
+  "description": "Definiciones de arquetipos de composición para el Draft Advisor. El analizador las usa para clasificar composiciones y ajustar pesos de scoring.",
   "archetypes": {
     "front_to_back": {
       "id": "front_to_back",
-      "display_name": "Front-to-Back Teamfight",
-      "description": "Frontline engages and peels while backline carry outputs maximum sustained DPS.",
+      "display_name": "Teamfight frontal",
+      "description": "La frontline inicia y peelea mientras el carry de backline aplica DPS sostenido desde atrás.",
       "detection_rules": {
         "min_frontline": 2,
         "min_peel_sources": 1,
@@ -26,8 +26,8 @@
     },
     "dive": {
       "id": "dive",
-      "display_name": "Dive Composition",
-      "description": "Team dives onto enemy backline with multiple mobile threats. ADC plays cleanup or split-map.",
+      "display_name": "Composición de dive",
+      "description": "El equipo divea la backline enemiga con varias amenazas móviles. El ADC juega cleanup o mapa dividido.",
       "detection_rules": {
         "min_dive_threats": 2,
         "high_team_mobility": true
@@ -48,8 +48,8 @@
     },
     "poke_siege": {
       "id": "poke_siege",
-      "display_name": "Poke / Siege",
-      "description": "Team pokes enemies from range and takes towers without hard engaging.",
+      "display_name": "Poke / asedio",
+      "description": "El equipo desgasta desde rango y toma torres sin forzar hard engage.",
       "detection_rules": {
         "min_poke_sources": 2,
         "has_waveclear": true
@@ -68,8 +68,8 @@
     },
     "pick": {
       "id": "pick",
-      "display_name": "Pick Composition",
-      "description": "Team catches isolated enemies with CC chains and vision control.",
+      "display_name": "Composición de cazadas",
+      "description": "El equipo captura enemigos aislados con cadenas de CC y control de visión.",
       "detection_rules": {
         "min_pick_potential_sources": 2,
         "has_cc_chain": true
@@ -88,8 +88,8 @@
     },
     "split": {
       "id": "split",
-      "display_name": "Split Push",
-      "description": "Allied split-pusher draws pressure while rest of team holds mid. ADC must waveclear and survive 4v4/4v5.",
+      "display_name": "Split push",
+      "description": "El split-pusher aliado atrae presión lateral mientras el resto sostiene mid. El ADC necesita waveclear y sobrevivir 4v4/4v5.",
       "detection_rules": {
         "has_split_pusher": true,
         "split_pusher_roles": ["Top"]

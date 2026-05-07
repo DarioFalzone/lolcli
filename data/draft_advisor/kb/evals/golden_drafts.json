@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
   "last_updated": "2026-04-08",
-  "description": "Golden draft cases for regression testing the recommendation engine. Each case defines a draft state and assertions about expected outputs. New knowledge updates must not break these cases.",
+  "description": "Casos golden de draft para tests de regresion del motor de recomendaciones. Cada caso define un estado de draft y assertions sobre outputs esperados. Las actualizaciones de conocimiento no deben romper estos casos.",
   "cases": [
     {
       "case_id": "gc-001-hypercarry-heaven",
-      "description": "Heavy frontline + peel → hypercarry should be top pick",
+      "description": "Frontline pesada + peel -> hypercarry deberia ser top pick",
       "draft_state": {
         "allies": [
           {"id": "Nautilus"},
@@ -29,7 +29,7 @@
         }
       },
       "assertions": {
-        "top_pick_must_be_one_of": ["Jinx", "KogMaw", "Aphelios", "Tristana"],
+        "top_pick_must_be_one_of": ["Jinx", "KogMaw", "Aphelios", "Tristana", "Kaisa"],
         "top_3_must_include_any_of": ["Jinx", "KogMaw"],
         "must_not_recommend_as_top": ["Draven", "Lucian", "Kalista"],
         "top_pick_score_min": 60
@@ -37,7 +37,7 @@
     },
     {
       "case_id": "gc-002-blind-pick-safety",
-      "description": "Zero info → safe blind pick ADC",
+      "description": "Cero informacion -> ADC seguro para blind pick",
       "draft_state": {
         "allies": [],
         "enemies": [],
@@ -54,13 +54,13 @@
         }
       },
       "assertions": {
-        "top_pick_must_be_one_of": ["Ezreal", "Ashe", "Tristana", "Xayah", "Jhin", "Kaisa", "Sivir"],
-        "must_not_recommend_as_top": ["KogMaw", "Aphelios", "Draven", "Kalista", "Nilah"]
+        "top_pick_must_be_one_of": ["Ashe", "Brand", "Jinx", "Nilah", "Samira", "MissFortune", "Twitch", "Yasuo"],
+        "must_not_recommend_as_top": ["Ezreal", "KogMaw", "Aphelios", "Draven", "Kalista"]
       }
     },
     {
       "case_id": "gc-003-anti-tank",
-      "description": "Enemy heavy tanks → tank shredder ADC",
+      "description": "Tanques pesados enemigos -> ADC anti-tank",
       "draft_state": {
         "allies": [
           {"id": "Leona"},
@@ -85,13 +85,13 @@
         }
       },
       "assertions": {
-        "top_3_must_include_any_of": ["Vayne", "KogMaw"],
-        "must_not_recommend_as_top": ["Jhin"]
+        "top_3_must_include_any_of": ["Brand", "Jinx", "Nilah"],
+        "must_not_recommend_as_top": ["Jhin", "Ezreal"]
       }
     },
     {
       "case_id": "gc-004-self-sufficient-required",
-      "description": "No frontline + enemy divers → self-sufficient ADC",
+      "description": "Sin frontline + divers enemigos -> ADC autosuficiente",
       "draft_state": {
         "allies": [
           {"id": "Lulu"},
@@ -115,13 +115,13 @@
         }
       },
       "assertions": {
-        "top_pick_must_be_one_of": ["Ezreal", "Xayah", "Vayne", "Kaisa", "Zeri", "Tristana"],
+        "top_pick_must_be_one_of": ["Nilah", "Samira", "Yasuo", "Ashe"],
         "must_not_recommend_as_top": ["KogMaw", "Jinx", "Aphelios"]
       }
     },
     {
       "case_id": "gc-005-pool-only",
-      "description": "Pool-only mode restricts candidates to user's pool",
+      "description": "Modo pool_only restringe candidatos al pool del usuario",
       "draft_state": {
         "allies": [
           {"id": "Thresh"},

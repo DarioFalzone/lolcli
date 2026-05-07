@@ -4,46 +4,374 @@
   "last_updated": "2026-04-08",
   "source": "manual_expert_curation",
   "profiles": {
-    "Nautilus":    {"id":"Nautilus","display_name":"Nautilus","category":"engage_support","bot_lane_impact":"high","adc_threat_level":0,"adc_synergy_level":9,"adc_interaction_notes":"Premier engage support. Hook + passive root guarantee kills in lane. Heavy CC peel in teamfights. Jinx/Kai'Sa/Aphelios thrive with Nautilus."},
-    "Leona":      {"id":"Leona","display_name":"Leona","category":"engage_support","bot_lane_impact":"high","adc_threat_level":0,"adc_synergy_level":9,"adc_interaction_notes":"Hardest engage support. Chains CC locks down targets for your ADC to free-hit. Best with burst ADCs (MF, Samira, Draven) who capitalize on locked targets."},
-    "Thresh":     {"id":"Thresh","display_name":"Thresh","category":"engage_support","bot_lane_impact":"high","adc_threat_level":0,"adc_synergy_level":9,"adc_interaction_notes":"Swiss army knife support. Hook for picks, flay for peel, lantern for saves. Works with every ADC. Kalista/Kai'Sa benefit most from his versatility."},
-    "Blitzcrank": {"id":"Blitzcrank","display_name":"Blitzcrank","category":"engage_support","bot_lane_impact":"high","adc_threat_level":0,"adc_synergy_level":7,"adc_interaction_notes":"One hook wins lane. Creates kill threat from range. Best with burst ADCs who need one target delivered. Less reliable peel than other engage supports."},
-    "Rakan":      {"id":"Rakan","display_name":"Rakan","category":"engage_support","bot_lane_impact":"high","adc_threat_level":0,"adc_synergy_level":8,"adc_interaction_notes":"Fastest engage in the game. Xayah synergy is unique (shared recall, feather interaction). Provides both engage and disengage. Good with any ADC that can follow up."},
-    "Rell":       {"id":"Rell","display_name":"Rell","category":"engage_support","bot_lane_impact":"high","adc_threat_level":0,"adc_synergy_level":8,"adc_interaction_notes":"AOE engage with W + R. Gravitational pull groups enemies for AOE ADCs (MF, Jinx, Aphelios). Tankier than most engage supports. Slow dismount is a weakness."},
-    "Alistar":    {"id":"Alistar","display_name":"Alistar","category":"engage_support","bot_lane_impact":"high","adc_threat_level":0,"adc_synergy_level":8,"adc_interaction_notes":"WQ combo is reliable engage. R makes him almost unkillable. Excellent at peeling divers off ADC. Samira and Kalista love the all-in potential."},
-    "Lulu":       {"id":"Lulu","display_name":"Lulu","category":"enchanter_support","bot_lane_impact":"high","adc_threat_level":0,"adc_synergy_level":10,"adc_interaction_notes":"The ultimate ADC-empowering support. W attack speed steroid, E shield, R knockup + health. Turns any hypercarry into a raid boss. KogMaw/Jinx/Twitch are her best partners."},
-    "Janna":      {"id":"Janna","display_name":"Janna","category":"enchanter_support","bot_lane_impact":"high","adc_threat_level":0,"adc_synergy_level":9,"adc_interaction_notes":"Best peeler in the game. Tornado and R disengage protect ADC from any dive. Shield provides AD steroid. Perfect for immobile hypercarries who need to be untouched."},
-    "Nami":       {"id":"Nami","display_name":"Nami","category":"enchanter_support","bot_lane_impact":"high","adc_threat_level":0,"adc_synergy_level":8,"adc_interaction_notes":"Strong lane trading with W bounce and E auto-enhance. Lucian + Nami is a premier lane duo. R provides disengage and engage. Excellent sustain and poke."},
-    "Soraka":     {"id":"Soraka","display_name":"Soraka","category":"enchanter_support","bot_lane_impact":"high","adc_threat_level":0,"adc_synergy_level":8,"adc_interaction_notes":"Infinite sustain keeps ADC healthy through any poke or trade. Global R saves ADC from cross-map. Best with scaling ADCs who need to survive lane phase."},
-    "Milio":      {"id":"Milio","display_name":"Milio","category":"enchanter_support","bot_lane_impact":"high","adc_threat_level":0,"adc_synergy_level":8,"adc_interaction_notes":"Range extension passive + cleansing R. Empowers auto-attacking ADCs with extra range and fire damage. R cleanses all CC from allies. Excellent with immobile carries."},
-    "Yuumi":      {"id":"Yuumi","display_name":"Yuumi","category":"enchanter_support","bot_lane_impact":"high","adc_threat_level":0,"adc_synergy_level":7,"adc_interaction_notes":"Untargetable enchanter that attaches to ADC. Provides adaptive stats, healing, and R root. Twitch/Zeri love her. Weak lane but scales into monster. ADC must survive 2v1 moments."},
-    "Renata":     {"id":"Renata","display_name":"Renata Glasc","category":"enchanter_support","bot_lane_impact":"high","adc_threat_level":0,"adc_synergy_level":7,"adc_interaction_notes":"W revive window saves ADC from lethal burst. R forces enemies to attack each other. Best when ADC will be dove — her W punishes assassin all-ins."},
-    "Karma":      {"id":"Karma","display_name":"Karma","category":"enchanter_support","bot_lane_impact":"medium","adc_threat_level":0,"adc_synergy_level":6,"adc_interaction_notes":"Strong poke with R-Q in lane. Shield + speed with E provides movespeed for kiting. Good lane bully but weaker scaling than pure enchanters. Best with mobile ADCs."},
-    "Lux":        {"id":"Lux","display_name":"Lux","category":"mage_support","bot_lane_impact":"high","adc_threat_level":0,"adc_synergy_level":6,"adc_interaction_notes":"Poke and burst mage support. Q root sets up kills. Best with Caitlyn (trap + Q combo). Provides shield but is more damage-oriented than true enchanters."},
-    "Zyra":       {"id":"Zyra","display_name":"Zyra","category":"mage_support","bot_lane_impact":"high","adc_threat_level":0,"adc_synergy_level":6,"adc_interaction_notes":"Zone control with plants. R provides massive AOE knockup in teamfights. Strong lane presence and damage. Caitlyn/Jhin/MF pair well for kill lane potential."},
-    "Brand":      {"id":"Brand","display_name":"Brand","category":"mage_support","bot_lane_impact":"medium","adc_threat_level":0,"adc_synergy_level":5,"adc_interaction_notes":"Pure damage support. Passive burn + R bounces provide huge teamfight damage. Steals kills from ADC but provides waveclear and pressure. Best in poke/damage heavy compositions."},
-    "Xerath":     {"id":"Xerath","display_name":"Xerath","category":"mage_support","bot_lane_impact":"medium","adc_threat_level":0,"adc_synergy_level":5,"adc_interaction_notes":"Artillery poke from extreme range. Lane bully with Q+W harass. Less peel than other supports. Best with Jhin (W+W chain CC) or safe ADCs who don't need babysitting."},
-    "Velkoz":     {"id":"Velkoz","display_name":"Vel'Koz","category":"mage_support","bot_lane_impact":"medium","adc_threat_level":0,"adc_synergy_level":5,"adc_interaction_notes":"Similar to Xerath — long range poke and burst damage. R melts frontline in teamfights. E knockup provides some peel. Low survivability if engaged on."},
-    "Pyke":       {"id":"Pyke","display_name":"Pyke","category":"engage_support","bot_lane_impact":"high","adc_threat_level":0,"adc_synergy_level":7,"adc_interaction_notes":"Assassin support with execute R that shares gold. Hook + stun provides catch. Best with lane-dominant ADCs (Draven, Lucian, MF). Falls off late but gold sharing keeps ADC rich."},
-    "Swain":      {"id":"Swain","display_name":"Swain","category":"mage_support","bot_lane_impact":"medium","adc_threat_level":0,"adc_synergy_level":5,"adc_interaction_notes":"Drain tank mage. E root sets up combos. R provides sustained teamfight presence. Functions as secondary frontline. Less traditional peel but adds damage and tankiness."},
-    "Zed":        {"id":"Zed","display_name":"Zed","category":"dive_assassin","bot_lane_impact":"high","adc_threat_level":10,"adc_synergy_level":0,"adc_interaction_notes":"The iconic ADC killer. W+R combo deletes squishies instantly. Untargetable during R dash. ADCs without self-peel (Jinx, KogMaw, Aphelios) are free kills."},
-    "Akali":      {"id":"Akali","display_name":"Akali","category":"dive_assassin","bot_lane_impact":"high","adc_threat_level":9,"adc_synergy_level":0,"adc_interaction_notes":"Shroud makes her untargetable by ADC autos. Multiple dashes to reach backline. Sustained assassination pattern — hard to peel because she's elusive. Needs hard CC to stop."},
-    "Leblanc":    {"id":"Leblanc","display_name":"LeBlanc","category":"dive_assassin","bot_lane_impact":"high","adc_threat_level":9,"adc_synergy_level":0,"adc_interaction_notes":"W dash + Q + R one-shots squishy ADCs from fog. Returns to W pad making her nearly untradeable. ADCs need Zhonya's or perfect positioning."},
-    "Katarina":   {"id":"Katarina","display_name":"Katarina","category":"dive_assassin","bot_lane_impact":"high","adc_threat_level":9,"adc_synergy_level":0,"adc_interaction_notes":"Resets on kills make teamfights a nightmare for ADCs. If she kills one person, she can chain-kill the entire backline. Hard CC counters her completely."},
-    "Fizz":       {"id":"Fizz","display_name":"Fizz","category":"dive_assassin","bot_lane_impact":"high","adc_threat_level":9,"adc_synergy_level":0,"adc_interaction_notes":"E untargetability dodges ADC damage, R fish amplifies his burst. One-shots ADCs with a single combo. ADCs need positioning discipline or Banshee/Edge."},
-    "Talon":      {"id":"Talon","display_name":"Talon","category":"dive_assassin","bot_lane_impact":"medium","adc_threat_level":8,"adc_synergy_level":0,"adc_interaction_notes":"Roams bot from mid with E wall jump. Fast combo kills ADC before they can react. Strong early roams make bot lane a gank target from level 6."},
-    "Qiyana":     {"id":"Qiyana","display_name":"Qiyana","category":"dive_assassin","bot_lane_impact":"medium","adc_threat_level":8,"adc_synergy_level":0,"adc_interaction_notes":"R stun + terrain interaction. Can one-shot ADC with element combos. Stealth from brush element makes her approach unpredictable. River fights near dragon are especially dangerous."},
-    "Camille":    {"id":"Camille","display_name":"Camille","category":"dive_fighter","bot_lane_impact":"high","adc_threat_level":9,"adc_synergy_level":0,"adc_interaction_notes":"R traps ADC in hexagon — no escape possible. E hookshot gap close is very long range. Isolation zone + true damage makes her an ADC's worst nightmare."},
-    "Irelia":     {"id":"Irelia","display_name":"Irelia","category":"dive_fighter","bot_lane_impact":"medium","adc_threat_level":8,"adc_synergy_level":0,"adc_interaction_notes":"Multiple Q dashes to dive backline. Sustain with passive + Q makes her hard to burst. ADCs need to avoid her E stun marks. Particularly dangerous with reset passive fully stacked."},
-    "Nocturne":   {"id":"Nocturne","display_name":"Nocturne","category":"dive_fighter","bot_lane_impact":"high","adc_threat_level":9,"adc_synergy_level":0,"adc_interaction_notes":"R grants vision denial AND point-click dash. Completely eliminates ADC vision before diving them. Spell shield blocks one defensive ability. Terrifying for immobile ADCs."},
-    "Hecarim":    {"id":"Hecarim","display_name":"Hecarim","category":"dive_fighter","bot_lane_impact":"medium","adc_threat_level":7,"adc_synergy_level":0,"adc_interaction_notes":"R fear displaces entire backline. Extremely fast engage from fog. ADCs need flash or dash to survive his charge. Becomes a problem if he gets early leads."},
-    "Vi":         {"id":"Vi","display_name":"Vi","category":"dive_fighter","bot_lane_impact":"medium","adc_threat_level":8,"adc_synergy_level":0,"adc_interaction_notes":"R is point-click unstoppable dash that locks down ADC. Cannot be peeled. ADC must have tools to survive the follow-up (Xayah R, Ezreal E, Tristana R)."},
-    "Renekton":   {"id":"Renekton","display_name":"Renekton","category":"dive_fighter","bot_lane_impact":"medium","adc_threat_level":7,"adc_synergy_level":0,"adc_interaction_notes":"E double dash into W empowered stun. Strong early/mid threat to ADC in teamfights. Falls off late but can delete ADC during his window of strength. Flash + W is undodgeable."},
-    "Maokai":     {"id":"Maokai","display_name":"Maokai","category":"tank_frontline","bot_lane_impact":"high","adc_threat_level":2,"adc_synergy_level":7,"adc_interaction_notes":"When allied: excellent peel with W root, E vision, and R wave engage. Massive frontline that ADCs can free-hit behind. When enemy: R engage + W root can reach backline."},
-    "Ornn":       {"id":"Ornn","display_name":"Ornn","category":"tank_frontline","bot_lane_impact":"medium","adc_threat_level":3,"adc_synergy_level":7,"adc_interaction_notes":"Allied Ornn provides upgraded items that make ADC stronger. R engage is one of the best team-fight openers. Massive frontline presence. ADC thrives behind Ornn's tankiness."},
-    "Sejuani":    {"id":"Sejuani","display_name":"Sejuani","category":"tank_frontline","bot_lane_impact":"medium","adc_threat_level":3,"adc_synergy_level":6,"adc_interaction_notes":"Engage + peel tank. R is a massive AOE stun. Passive provides melee allies with stun procs. Good frontline for ADC. E freeze + R stun provides heavy CC layering."},
-    "Malphite":   {"id":"Malphite","display_name":"Malphite","category":"tank_frontline","bot_lane_impact":"high","adc_threat_level":5,"adc_synergy_level":6,"adc_interaction_notes":"R is the most iconic engage in the game. When allied: ADC just needs to follow up on Malphite R. When enemy: ADC must respect R flash range at all times."},
-    "Sion":       {"id":"Sion","display_name":"Sion","category":"tank_frontline","bot_lane_impact":"medium","adc_threat_level":3,"adc_synergy_level":5,"adc_interaction_notes":"Massive health pool tank. R engage from distance. Q charged is a huge AOE knockup. Allied Sion provides a meat shield that ADC can DPS behind."},
-    "KSante":     {"id":"KSante","display_name":"K'Sante","category":"tank_frontline","bot_lane_impact":"medium","adc_threat_level":5,"adc_synergy_level":5,"adc_interaction_notes":"R grabs a target and walls them away. Can isolate enemy frontline away from the fight, letting ADC hit backline freely. Dual identity (tank/skirmisher) makes him versatile."}
+    "Nautilus": {
+      "id": "Nautilus",
+      "display_name": "Nautilus",
+      "category": "engage_support",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 0,
+      "adc_synergy_level": 9,
+      "adc_interaction_notes": "Support de engage principal. Hook + root pasivo garantizan kills en línea. Mucho CC para peel en teamfights. Jinx, Kai'Sa y Aphelios aprovechan muy bien a Nautilus."
+    },
+    "Leona": {
+      "id": "Leona",
+      "display_name": "Leona",
+      "category": "engage_support",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 0,
+      "adc_synergy_level": 9,
+      "adc_interaction_notes": "Uno de los engages más duros del rol. Encadena CC y deja objetivos quietos para que el ADC pegue libremente. Mejor con ADCs de burst como Miss Fortune, Samira, Draven o Lucian."
+    },
+    "Thresh": {
+      "id": "Thresh",
+      "display_name": "Thresh",
+      "category": "engage_support",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 0,
+      "adc_synergy_level": 9,
+      "adc_interaction_notes": "Support muy versátil: hook para picks, flay para peel y linterna para salvar. Funciona con casi cualquier ADC. Kalista y Kai'Sa aprovechan especialmente esa flexibilidad."
+    },
+    "Blitzcrank": {
+      "id": "Blitzcrank",
+      "display_name": "Blitzcrank",
+      "category": "engage_support",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 0,
+      "adc_synergy_level": 7,
+      "adc_interaction_notes": "Un hook puede ganar la línea. Genera amenaza de kill desde rango. Brilla con ADCs de burst que quieren un objetivo entregado. Su peel es menos confiable que el de otros supports de engage."
+    },
+    "Rakan": {
+      "id": "Rakan",
+      "display_name": "Rakan",
+      "category": "engage_support",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 0,
+      "adc_synergy_level": 8,
+      "adc_interaction_notes": "Engage extremadamente rápido. La sinergia con Xayah es única por el recall compartido y las plumas. Aporta engage y disengage. Funciona bien con ADCs que puedan seguir la entrada."
+    },
+    "Rell": {
+      "id": "Rell",
+      "display_name": "Rell",
+      "category": "engage_support",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 0,
+      "adc_synergy_level": 8,
+      "adc_interaction_notes": "Engage AOE con W + R. Agrupa enemigos para ADCs de daño en área como Miss Fortune, Jinx o Aphelios. Es más tanque que la mayoría de supports de engage, pero desmontada queda lenta."
+    },
+    "Alistar": {
+      "id": "Alistar",
+      "display_name": "Alistar",
+      "category": "engage_support",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 0,
+      "adc_synergy_level": 8,
+      "adc_interaction_notes": "El combo WQ es un engage confiable. La R lo vuelve muy difícil de matar. Excelente para sacar divers de encima del ADC. Samira y Kalista aprovechan mucho su all-in."
+    },
+    "Lulu": {
+      "id": "Lulu",
+      "display_name": "Lulu",
+      "category": "enchanter_support",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 0,
+      "adc_synergy_level": 10,
+      "adc_interaction_notes": "La enchanter que más potencia al ADC. W da velocidad de ataque, E escudo y R vida + knockup. Convierte a un hypercarry en win condition. Kog'Maw, Jinx y Twitch son sus mejores socios."
+    },
+    "Janna": {
+      "id": "Janna",
+      "display_name": "Janna",
+      "category": "enchanter_support",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 0,
+      "adc_synergy_level": 9,
+      "adc_interaction_notes": "Una de las mejores fuentes de peel del juego. Tornado y R protegen al ADC de casi cualquier dive. El escudo suma daño. Ideal para hypercarries inmóviles que necesitan jugar intocables."
+    },
+    "Nami": {
+      "id": "Nami",
+      "display_name": "Nami",
+      "category": "enchanter_support",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 0,
+      "adc_synergy_level": 8,
+      "adc_interaction_notes": "Muy fuerte tradeando en línea con W y potenciando autos con E. Lucian + Nami sigue siendo una dupla premium. La R sirve para engage y disengage. Aporta sustain y poke."
+    },
+    "Soraka": {
+      "id": "Soraka",
+      "display_name": "Soraka",
+      "category": "enchanter_support",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 0,
+      "adc_synergy_level": 8,
+      "adc_interaction_notes": "Sustain constante para mantener sano al ADC contra poke o trades. La R global salva peleas fuera de pantalla. Mejor con ADCs de escalado que necesitan sobrevivir la línea."
+    },
+    "Milio": {
+      "id": "Milio",
+      "display_name": "Milio",
+      "category": "enchanter_support",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 0,
+      "adc_synergy_level": 8,
+      "adc_interaction_notes": "Extiende rango y limpia CC con R. Potencia ADCs de autos con rango extra y daño de fuego. Excelente con carries inmóviles que necesitan jugar a distancia."
+    },
+    "Yuumi": {
+      "id": "Yuumi",
+      "display_name": "Yuumi",
+      "category": "enchanter_support",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 0,
+      "adc_synergy_level": 7,
+      "adc_interaction_notes": "Enchanter que se adhiere al ADC y no puede ser targeteada mientras está unida. Aporta stats, curación y root con R. Twitch y Zeri la aprovechan mucho. Línea débil, pero escala fuerte; el ADC debe sobrevivir momentos 2v1."
+    },
+    "Renata": {
+      "id": "Renata",
+      "display_name": "Renata Glasc",
+      "category": "enchanter_support",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 0,
+      "adc_synergy_level": 7,
+      "adc_interaction_notes": "La W abre una ventana de revive para salvar al ADC de burst letal. La R fuerza a los enemigos a atacarse entre sí. Es mejor cuando el ADC va a recibir dive: su W castiga all-ins de asesinos."
+    },
+    "Karma": {
+      "id": "Karma",
+      "display_name": "Karma",
+      "category": "enchanter_support",
+      "bot_lane_impact": "medium",
+      "adc_threat_level": 0,
+      "adc_synergy_level": 6,
+      "adc_interaction_notes": "Poke fuerte con R-Q en línea. Escudo + velocidad con E ayudan al kiteo. Muy buena bully de línea, pero escala peor que las enchanters puras. Mejor con ADCs móviles."
+    },
+    "Lux": {
+      "id": "Lux",
+      "display_name": "Lux",
+      "category": "mage_support",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 0,
+      "adc_synergy_level": 6,
+      "adc_interaction_notes": "Maga support de poke y burst. La Q rootea y arma kills. Mejor con Caitlyn por combo de trampa + Q. Aporta escudo, pero su identidad principal es daño."
+    },
+    "Zyra": {
+      "id": "Zyra",
+      "display_name": "Zyra",
+      "category": "mage_support",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 0,
+      "adc_synergy_level": 6,
+      "adc_interaction_notes": "Control de zona con plantas. La R aporta knockup AOE en teamfights. Mucha presión de línea y daño. Caitlyn, Jhin y Miss Fortune combinan bien para líneas de kill."
+    },
+    "Brand": {
+      "id": "Brand",
+      "display_name": "Brand",
+      "category": "mage_support",
+      "bot_lane_impact": "medium",
+      "adc_threat_level": 0,
+      "adc_synergy_level": 5,
+      "adc_interaction_notes": "Support de daño puro. Pasiva + rebotes de R aportan muchísimo daño en teamfight. Puede quedarse kills, pero compensa con waveclear y presión. Mejor en composiciones de poke o daño pesado."
+    },
+    "Xerath": {
+      "id": "Xerath",
+      "display_name": "Xerath",
+      "category": "mage_support",
+      "bot_lane_impact": "medium",
+      "adc_threat_level": 0,
+      "adc_synergy_level": 5,
+      "adc_interaction_notes": "Poke de artillería desde rango extremo. Bully de línea con Q+W. Tiene menos peel que otros supports. Mejor con Jhin por cadena W+W o con ADCs seguros que no necesitan babysitting."
+    },
+    "Velkoz": {
+      "id": "Velkoz",
+      "display_name": "Vel'Koz",
+      "category": "mage_support",
+      "bot_lane_impact": "medium",
+      "adc_threat_level": 0,
+      "adc_synergy_level": 5,
+      "adc_interaction_notes": "Parecido a Xerath: poke de largo rango y burst. La R derrite frontline en teamfights. La E aporta algo de peel con knockup. Sobrevive poco si lo enganchan."
+    },
+    "Pyke": {
+      "id": "Pyke",
+      "display_name": "Pyke",
+      "category": "engage_support",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 0,
+      "adc_synergy_level": 7,
+      "adc_interaction_notes": "Support asesino con execute en R que comparte oro. Hook + stun generan catch. Mejor con ADCs dominantes de línea como Draven, Lucian o Miss Fortune. Cae en late, pero el oro compartido mantiene rico al ADC."
+    },
+    "Swain": {
+      "id": "Swain",
+      "display_name": "Swain",
+      "category": "mage_support",
+      "bot_lane_impact": "medium",
+      "adc_threat_level": 0,
+      "adc_synergy_level": 5,
+      "adc_interaction_notes": "Mago drain tank. La E rootea y arma combos. La R le da presencia sostenida en teamfight. Funciona como frontline secundaria. Tiene menos peel tradicional, pero suma daño y aguante."
+    },
+    "Zed": {
+      "id": "Zed",
+      "display_name": "Zed",
+      "category": "dive_assassin",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 10,
+      "adc_synergy_level": 0,
+      "adc_interaction_notes": "El asesino clásico contra ADCs. Combo W+R borra objetivos frágiles. Durante la R no puede ser targeteado. ADCs sin auto-peel como Jinx, Kog'Maw o Aphelios son kills gratis si quedan expuestos."
+    },
+    "Akali": {
+      "id": "Akali",
+      "display_name": "Akali",
+      "category": "dive_assassin",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 9,
+      "adc_synergy_level": 0,
+      "adc_interaction_notes": "El humo impide que el ADC la castigue con autos. Tiene varios dashes para llegar a backline. Su patrón de asesinato sostenido es difícil de peelar porque entra y sale con movilidad. Necesita hard CC para frenarla."
+    },
+    "Leblanc": {
+      "id": "Leblanc",
+      "display_name": "LeBlanc",
+      "category": "dive_assassin",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 9,
+      "adc_synergy_level": 0,
+      "adc_interaction_notes": "W + Q + R puede borrar ADCs frágiles desde niebla de guerra. Vuelve al punto de W y resulta difícil de tradear. El ADC necesita posicionamiento perfecto o recursos defensivos."
+    },
+    "Katarina": {
+      "id": "Katarina",
+      "display_name": "Katarina",
+      "category": "dive_assassin",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 9,
+      "adc_synergy_level": 0,
+      "adc_interaction_notes": "Los resets por kills convierten los teamfights en una amenaza enorme para ADCs. Si mata a una persona, puede encadenar toda la backline. El hard CC la contrarresta por completo."
+    },
+    "Fizz": {
+      "id": "Fizz",
+      "display_name": "Fizz",
+      "category": "dive_assassin",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 9,
+      "adc_synergy_level": 0,
+      "adc_interaction_notes": "La E esquiva daño del ADC y la R amplifica el burst. Puede borrar ADCs con un combo. El ADC necesita disciplina de posicionamiento o herramientas defensivas."
+    },
+    "Talon": {
+      "id": "Talon",
+      "display_name": "Talon",
+      "category": "dive_assassin",
+      "bot_lane_impact": "medium",
+      "adc_threat_level": 8,
+      "adc_synergy_level": 0,
+      "adc_interaction_notes": "Rota a bot desde mid saltando paredes con E. Su combo rápido mata al ADC antes de que pueda reaccionar. Sus roams tempranos convierten bot lane en objetivo de gank desde nivel 6."
+    },
+    "Qiyana": {
+      "id": "Qiyana",
+      "display_name": "Qiyana",
+      "category": "dive_assassin",
+      "bot_lane_impact": "medium",
+      "adc_threat_level": 8,
+      "adc_synergy_level": 0,
+      "adc_interaction_notes": "R con stun e interacción con terreno. Puede matar al ADC con combos de elementos. La invisibilidad del elemento de arbusto vuelve impredecible su entrada. Peleas de río cerca de dragón son especialmente peligrosas."
+    },
+    "Camille": {
+      "id": "Camille",
+      "display_name": "Camille",
+      "category": "dive_fighter",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 9,
+      "adc_synergy_level": 0,
+      "adc_interaction_notes": "La R encierra al ADC y elimina la salida. La E tiene un gap close muy largo. Zona de aislamiento + daño verdadero la vuelven una amenaza extrema para ADCs."
+    },
+    "Irelia": {
+      "id": "Irelia",
+      "display_name": "Irelia",
+      "category": "dive_fighter",
+      "bot_lane_impact": "medium",
+      "adc_threat_level": 8,
+      "adc_synergy_level": 0,
+      "adc_interaction_notes": "Tiene múltiples Q para llegar a backline. El sustain con pasiva + Q la vuelve difícil de burstar. Los ADCs deben esquivar la E y no regalar marcas de stun. Es peligrosa con la pasiva cargada."
+    },
+    "Nocturne": {
+      "id": "Nocturne",
+      "display_name": "Nocturne",
+      "category": "dive_fighter",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 9,
+      "adc_synergy_level": 0,
+      "adc_interaction_notes": "La R niega visión y agrega dash point-click. El ADC pierde información justo antes del dive. El escudo bloquea una herramienta defensiva. Muy peligroso contra ADCs inmóviles."
+    },
+    "Hecarim": {
+      "id": "Hecarim",
+      "display_name": "Hecarim",
+      "category": "dive_fighter",
+      "bot_lane_impact": "medium",
+      "adc_threat_level": 7,
+      "adc_synergy_level": 0,
+      "adc_interaction_notes": "La R mete fear y desplaza toda la backline. Entra muy rápido desde niebla de guerra. El ADC necesita flash o dash para sobrevivir a la carga. Se vuelve problema si consigue ventaja temprana."
+    },
+    "Vi": {
+      "id": "Vi",
+      "display_name": "Vi",
+      "category": "dive_fighter",
+      "bot_lane_impact": "medium",
+      "adc_threat_level": 8,
+      "adc_synergy_level": 0,
+      "adc_interaction_notes": "La R es un dash point-click imparable que fija al ADC. No se puede peelar durante la entrada. El ADC necesita herramientas para sobrevivir el follow-up, como R de Xayah, E de Ezreal o R de Tristana."
+    },
+    "Renekton": {
+      "id": "Renekton",
+      "display_name": "Renekton",
+      "category": "dive_fighter",
+      "bot_lane_impact": "medium",
+      "adc_threat_level": 7,
+      "adc_synergy_level": 0,
+      "adc_interaction_notes": "Doble dash con E hacia W potenciada para stun. Amenaza fuerte de early/mid game contra ADCs en teamfights. Cae en late, pero durante su ventana puede borrar al carry. Flash + W es muy difícil de esquivar."
+    },
+    "Maokai": {
+      "id": "Maokai",
+      "display_name": "Maokai",
+      "category": "tank_frontline",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 2,
+      "adc_synergy_level": 7,
+      "adc_interaction_notes": "Aliado: excelente peel con W root, visión con E y engage de ola con R. Frontline enorme para que el ADC pegue detrás. Enemigo: R engage + W root pueden alcanzar backline."
+    },
+    "Ornn": {
+      "id": "Ornn",
+      "display_name": "Ornn",
+      "category": "tank_frontline",
+      "bot_lane_impact": "medium",
+      "adc_threat_level": 3,
+      "adc_synergy_level": 7,
+      "adc_interaction_notes": "Ornn aliado mejora objetos y vuelve más fuerte al ADC. La R es una de las mejores aperturas de teamfight. Aporta frontline masiva, ideal para que el ADC pegue protegido."
+    },
+    "Sejuani": {
+      "id": "Sejuani",
+      "display_name": "Sejuani",
+      "category": "tank_frontline",
+      "bot_lane_impact": "medium",
+      "adc_threat_level": 3,
+      "adc_synergy_level": 6,
+      "adc_interaction_notes": "Tanque de engage + peel. La R es un stun AOE muy fuerte. La pasiva permite procs de stun con aliados melee. Buena frontline para ADC; E + R apilan mucho CC."
+    },
+    "Malphite": {
+      "id": "Malphite",
+      "display_name": "Malphite",
+      "category": "tank_frontline",
+      "bot_lane_impact": "high",
+      "adc_threat_level": 5,
+      "adc_synergy_level": 6,
+      "adc_interaction_notes": "La R es uno de los engages más icónicos del juego. Aliado: el ADC solo tiene que seguir el follow-up. Enemigo: el ADC debe respetar rango de R + flash todo el tiempo."
+    },
+    "Sion": {
+      "id": "Sion",
+      "display_name": "Sion",
+      "category": "tank_frontline",
+      "bot_lane_impact": "medium",
+      "adc_threat_level": 3,
+      "adc_synergy_level": 5,
+      "adc_interaction_notes": "Tanque con muchísima vida. R engage desde larga distancia. La Q cargada mete un knockup AOE enorme. Sion aliado funciona como escudo humano para que el ADC haga DPS detrás."
+    },
+    "KSante": {
+      "id": "KSante",
+      "display_name": "K'Sante",
+      "category": "tank_frontline",
+      "bot_lane_impact": "medium",
+      "adc_threat_level": 5,
+      "adc_synergy_level": 5,
+      "adc_interaction_notes": "La R agarra a un objetivo y lo separa con paredes. Puede aislar la frontline enemiga y abrir espacio para que el ADC golpee libremente. Su doble identidad de tanque/skirmisher lo vuelve versátil."
+    }
   }
 }

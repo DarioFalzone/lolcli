@@ -1,11 +1,11 @@
 """
-Draft Advisor - ADC Pick Recommendation Engine for League of Legends.
+Draft Advisor - motor de recomendacion ADC para League of Legends.
 
-Provides multi-factor scoring to recommend the best ADC pick based on:
-- allied team composition
-- enemy team composition
-- draft context (blind/early/late pick)
-- optional user champion pool and comfort bias
+Aplica scoring multifactor para recomendar el mejor ADC segun:
+- composicion aliada
+- composicion enemiga
+- contexto de draft (pick ciego, temprano o tardio)
+- pool/comfort opcional del usuario
 """
 
 __version__ = "1.0.0"

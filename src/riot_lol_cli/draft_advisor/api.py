@@ -45,6 +45,7 @@ router = APIRouter(prefix="/api/v1/draft", tags=["draft"])
 # Models for simplified responses
 # ============================================================================
 
+
 class ChampionListItem(BaseModel):
     id: str
     display_name: str
@@ -69,11 +70,20 @@ class VersionInfoResponse(BaseModel):
     static_data_version: str
     last_verified_at: str
     validator_status: str
+    adc_meta_patch: str | None = None
+    adc_meta_scraped_at: str | None = None
+    adc_meta_status: str = "missing"
+    adc_meta_sources: list[str] = []
+    adc_meta_champion_count: int = 0
+    adc_meta_age_hours: float | None = None
+    adc_mastery_last_updated: str | None = None
+    adc_mastery_source_image: str | None = None
 
 
 # ============================================================================
 # Endpoints
 # ============================================================================
+
 
 @router.get("/health", response_model=HealthResponse)
 async def health():
@@ -92,11 +102,21 @@ async def version_info():
     """Get decoupled telemetry version context."""
     svc, _ = _get_services()
     manifest = svc.manifest
+    adc_meta = svc.get_adc_meta_snapshot_info()
+    adc_mastery = svc.get_personal_adc_mastery_info()
     return VersionInfoResponse(
         live_patch_label=manifest.live_patch_label if manifest else "unknown",
         static_data_version=manifest.static_data_version if manifest else "unknown",
         last_verified_at=manifest.last_verified_at if manifest else "unknown",
         validator_status=manifest.validator_status if manifest else "unknown",
+        adc_meta_patch=adc_meta.get("patch"),
+        adc_meta_scraped_at=adc_meta.get("scraped_at"),
+        adc_meta_status=adc_meta.get("status", "missing"),
+        adc_meta_sources=adc_meta.get("sources", []),
+        adc_meta_champion_count=adc_meta.get("champion_count", 0),
+        adc_meta_age_hours=adc_meta.get("age_hours"),
+        adc_mastery_last_updated=adc_mastery.get("last_updated"),
+        adc_mastery_source_image=adc_mastery.get("source_image"),
     )
 
 
@@ -108,18 +128,20 @@ async def get_champions():
     support_ids = svc.get_support_ids()
     result = []
 
-    for champ_id, champ in svc.get_all_champions().items():
-        result.append(ChampionListItem(
-            id=champ.id,
-            display_name=champ.display_name,
-            primary_role=champ.primary_role.value,
-            combat_class=champ.combat_class.value,
-            damage_type=champ.damage_type.value,
-            range_type=champ.range_type.value,
-            is_adc=champ.id in adc_ids,
-            is_support=champ.id in support_ids,
-            has_priority_profile=svc.is_priority_champion(champ.id),
-        ))
+    for champ in svc.get_all_champions().values():
+        result.append(
+            ChampionListItem(
+                id=champ.id,
+                display_name=champ.display_name,
+                primary_role=champ.primary_role.value,
+                combat_class=champ.combat_class.value,
+                damage_type=champ.damage_type.value,
+                range_type=champ.range_type.value,
+                is_adc=champ.id in adc_ids,
+                is_support=champ.id in support_ids,
+                has_priority_profile=svc.is_priority_champion(champ.id),
+            )
+        )
 
     result.sort(key=lambda x: x.display_name)
     return result
@@ -135,16 +157,19 @@ async def get_adcs():
     for adc_id in adc_ids:
         champ = svc.get_champion(adc_id)
         if champ:
-            result.append(ChampionListItem(
-                id=champ.id,
-                display_name=champ.display_name,
-                primary_role=champ.primary_role.value,
-                combat_class=champ.combat_class.value,
-                damage_type=champ.damage_type.value,
-                range_type=champ.range_type.value,
-                is_adc=True,
-                has_priority_profile=svc.is_priority_champion(champ.id),
-            ))
+            result.append(
+                ChampionListItem(
+                    id=champ.id,
+                    display_name=champ.display_name,
+                    primary_role=champ.primary_role.value,
+                    combat_class=champ.combat_class.value,
+                    damage_type=champ.damage_type.value,
+                    range_type=champ.range_type.value,
+                    is_adc=True,
+                    is_support=False,
+                    has_priority_profile=svc.is_priority_champion(champ.id),
+                )
+            )
 
     result.sort(key=lambda x: x.display_name)
     return result
@@ -179,6 +204,99 @@ async def recommend(draft_state: DraftState):
         result = engine.recommend(draft_state)
         return result
     except ValueError as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(400, str(e)) from e
     except Exception as e:
-        raise HTTPException(500, f"Scoring engine error: {str(e)}")
+        raise HTTPException(500, f"Scoring engine error: {str(e)}") from e
+
+
+# ============================================================================
+# Endpoints — Knowledge Base Inspection
+# ============================================================================
+
+
+class StrategicTriangleResponse(BaseModel):
+    champion_id: str
+    display_name: str
+    fine_grained_archetype: str | None
+    coarse_archetype: str | None
+    beats: list[str]
+    loses_to: list[str]
+    archetype_description: str
+
+
+@router.get("/strategic-triangle/{champion_id}", response_model=StrategicTriangleResponse)
+async def get_strategic_triangle(champion_id: str):
+    """Inspeccionar la posición de un campeón en el triángulo estratégico.
+
+    Devuelve el arquetipo fine-grained, qué arquetipos counterea (beats)
+    y cuáles lo counterean (loses_to).
+    """
+    svc, _ = _get_services()
+
+    if not svc.champion_exists(champion_id):
+        raise HTTPException(404, f"Campeón '{champion_id}' no encontrado")
+
+    fine_arch = svc.classify_supp_archetype_fine(champion_id)
+    supp_profile = svc.get_support_profile(champion_id)
+    coarse_arch = supp_profile.archetype.value if supp_profile else None
+
+    triangle = svc.get_strategic_triangle()
+    triangle_data = triangle.get("triangle", {})
+
+    beats: list[str] = []
+    loses_to: list[str] = []
+    description = ""
+
+    if fine_arch and fine_arch in triangle_data:
+        arch_rules = triangle_data[fine_arch]
+        beats = arch_rules.get("beats", [])
+        loses_to = arch_rules.get("loses_to", [])
+
+    archetypes = triangle.get("fine_grained_archetypes", {})
+    if fine_arch and fine_arch in archetypes:
+        description = archetypes[fine_arch].get("description", "")
+
+    return StrategicTriangleResponse(
+        champion_id=champion_id,
+        display_name=svc.get_champion_display_name(champion_id),
+        fine_grained_archetype=fine_arch,
+        coarse_archetype=coarse_arch,
+        beats=beats,
+        loses_to=loses_to,
+        archetype_description=description,
+    )
+
+
+class SupportRosterItem(BaseModel):
+    id: str
+    display_name: str
+    archetype: str
+    fine_grained_archetype: str | None
+    engage_strength: int
+    peel_strength: int
+    blind_pick_safety: int
+    scaling: int
+
+
+@router.get("/champions/supports", response_model=list[SupportRosterItem])
+async def get_supports():
+    """Listar todos los soportes con perfil detallado."""
+    svc, _ = _get_services()
+    result = []
+
+    for supp_id, profile in svc.get_all_support_profiles().items():
+        result.append(
+            SupportRosterItem(
+                id=profile.id,
+                display_name=profile.display_name,
+                archetype=profile.archetype.value,
+                fine_grained_archetype=svc.classify_supp_archetype_fine(supp_id),
+                engage_strength=profile.engage_strength,
+                peel_strength=profile.peel_strength,
+                blind_pick_safety=profile.blind_pick_safety,
+                scaling=profile.scaling,
+            )
+        )
+
+    result.sort(key=lambda x: x.display_name)
+    return result

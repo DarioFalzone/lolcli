@@ -2,7 +2,7 @@
 schema_version: "1.0"
 kb_version: "1"
 id: "arch-front-to-back"
-title: "Front-to-Back Teamfight Archetype"
+title: "Arquetipo de teamfight frontal"
 type: "archetype_note"
 domain: "draft_advisor"
 patch: "*"
@@ -22,57 +22,57 @@ supersedes: []
 superseded_by: []
 ---
 
-## Summary
+## Resumen
 
-Front-to-back is the most ADC-centric teamfight archetype. The team's frontline engages and absorbs enemy cooldowns while peelers protect the backline carry, who outputs maximum sustained DPS from safety. This is the composition where ADC champion selection matters most — the wrong ADC in a front-to-back comp wastes the entire team's strategy.
+El teamfight frontal es el arquetipo más centrado en el ADC. La frontline aliada inicia y absorbe cooldowns enemigos mientras las fuentes de peel protegen al carry de backline, que aplica DPS sostenido desde una posición segura. Es la composición donde la elección del ADC importa más: un ADC que no aprovecha frontline y peel desperdicia toda la estrategia del equipo.
 
-## Key Findings
+## Hallazgos Clave
 
-- **Defining conditions for front-to-back:**
-  1. Allied team has 2+ members who can effectively frontline (tanks, bruisers with engage)
-  2. Allied team has at least 1 reliable peel source (enchanter, CC support, or peeling tank)
-  3. Allied win condition is "protect the carry" — not split-push, not pick, not early-game snowball
-- **ADC ranking in front-to-back:**
-  - **S-tier:** Kog'Maw (highest DPS if protected), Jinx (resets + AOE), Aphelios (weapon versatility)
-  - **A-tier:** Twitch (stealth flank + R AOE), Vayne (tank shred + self-peel), Tristana (range + R self-peel)
-  - **B-tier:** Xayah (R safety), Sivir (R utility), Kai'Sa (R reposition)
-  - **C-tier (poor fit):** Ezreal (doesn't utilize frontline well), Lucian (short range wastes frontline), Draven (needs kills, not sustained DPS)
-- **The critical dependency chain:** Frontline absorbs → Carry DPS's → Peel protects carry. If any link breaks, the comp fails.
-- **Scaling alignment:** Front-to-back comps inherently favor late game because they require items on both frontline and ADC to function.
+- **Condiciones que definen el teamfight frontal:**
+  1. El equipo aliado tiene 2+ campeones capaces de hacer frontline (tanques o bruisers con engage).
+  2. El equipo aliado tiene al menos 1 fuente confiable de peel (enchanter, support con CC o tanque de peel).
+  3. La condición de victoria aliada es "proteger al carry", no split-push, pick aislado ni snowball temprano.
+- **Ranking de ADCs en teamfight frontal:**
+  - **S-tier:** Kog'Maw (DPS más alto si está protegido), Jinx (resets + AOE), Aphelios (versatilidad de armas).
+  - **A-tier:** Twitch (flanco con sigilo + R AOE), Vayne (anti-tank + auto-peel), Tristana (rango + R defensiva).
+  - **B-tier:** Xayah (seguridad con R), Sivir (utilidad con R), Kai'Sa (reposicionamiento con R).
+  - **C-tier (mal fit):** Ezreal (no aprovecha bien la frontline), Lucian (rango corto), Draven (necesita kills, no DPS sostenido).
+- **Cadena crítica de dependencia:** Frontline absorbe -> carry pega -> peel protege al carry. Si un eslabón se rompe, la composición falla.
+- **Alineación de escalado:** estas composiciones favorecen late game porque necesitan objetos tanto en frontline como en ADC.
 
-## Draft Implications
+## Implicancias de Draft
 
-- When `teamfight_shape == front_to_back`, the scoring engine should heavily weight `synergy_frontline_comp`, `synergy_peel_comp`, `teamfight_consistency`, and `scaling`.
-- ADCs with `dependence_on_frontline >= 7` should get a **bonus** in this archetype (not a penalty) because their dependency is being satisfied.
-- Conversely, self-sufficient ADCs (Ezreal, Lucian) should not be recommended in front-to-back comps because they waste the team's investment in frontline/peel.
-- **Weight adjustment proposal:** In front-to-back, `scaling_fit` weight should increase by +0.05, `blind_pick_safety` should decrease by -0.05.
+- Cuando `teamfight_shape == front_to_back`, el motor debe pesar fuerte `synergy_frontline_comp`, `synergy_peel_comp`, `teamfight_consistency` y `scaling`.
+- ADCs con `dependence_on_frontline >= 7` deben recibir **bono** en este arquetipo, no penalización, porque su dependencia está satisfecha.
+- ADCs autosuficientes como Ezreal o Lucian no deberían ser recomendación principal en teamfight frontal si hay alternativas mejores, porque no convierten bien la inversión en frontline/peel.
+- **Propuesta de peso:** en teamfight frontal, `scaling_fit` sube +0.05 y `blind_pick_safety` baja -0.05.
 
-## When This Matters
+## Cuándo Importa
 
-- Allied team has locked in 2+ of: Maokai, Ornn, Sion, Nautilus, Braum, Alistar, Sejuani, Malphite.
-- Allied support is an enchanter (Lulu, Janna, Soraka, Nami) providing the peel layer.
-- No split-push threat exists in the allied team (no Fiora, no Tryndamere side-laning).
+- El equipo aliado ya eligió 2+ de: Maokai, Ornn, Sion, Nautilus, Braum, Alistar, Sejuani, Malphite.
+- El support aliado es enchanter (Lulu, Janna, Soraka, Nami) y aporta la capa de peel.
+- No existe amenaza real de split-push aliado que cambie el plan macro (sin Fiora o Tryndamere side-laneando).
 
-## Caveats
+## Advertencias
 
-- Front-to-back fails against extreme poke (Xerath + Jayce) that chips the frontline before engagement.
-- If enemy has flankers (Zed, Akali side-access), the backline may not be truly safe regardless of frontline.
-- In solo queue, front-to-back requires team coordination that may not exist — this reduces its reliability below Diamond.
+- El teamfight frontal falla contra poke extremo (Xerath + Jayce) que desgasta la frontline antes del engage.
+- Si el enemigo tiene flankers como Zed o Akali con acceso lateral, la backline puede no estar realmente segura.
+- En SoloQ requiere coordinación; por eso su fiabilidad cae por debajo de Diamante.
 
-## Extractable Claims
+## Claims Extraíbles
 
-- `teamfight_shape == "front_to_back"` + `adc.synergy_frontline_comp >= 8` → `comp_gap_fill_bonus: +10`
-- `teamfight_shape == "front_to_back"` + `adc.teamfight_consistency >= 7` → `scaling_fit_bonus: +8`
-- `teamfight_shape == "front_to_back"` + `adc.dependence_on_frontline >= 7` → `convert penalty to bonus: +5` (dependency satisfied)
-- `teamfight_shape == "front_to_back"` + `adc.id in ["Ezreal", "Lucian"]` → `comp_gap_fill_penalty: -10` (wastes comp strategy)
+- `teamfight_shape == "front_to_back"` + `adc.synergy_frontline_comp >= 8` -> `comp_gap_fill_bonus: +10`
+- `teamfight_shape == "front_to_back"` + `adc.teamfight_consistency >= 7` -> `scaling_fit_bonus: +8`
+- `teamfight_shape == "front_to_back"` + `adc.dependence_on_frontline >= 7` -> `convert penalty to bonus: +5` (dependencia satisfecha)
+- `teamfight_shape == "front_to_back"` + `adc.id in ["Ezreal", "Lucian"]` -> `comp_gap_fill_penalty: -10` (desperdicia la estrategia)
 
-## Related Champions / Comps
+## Campeones / Composiciones Relacionadas
 
-- **Core frontline champions:** Maokai, Ornn, Sion, Malphite, Sejuani, K'Sante
-- **Core peel champions:** Lulu, Janna, Braum, Thresh, Nami
-- **Counter archetypes:** Dive comps (bypass frontline), poke comps (chip from range), split-push (avoid teamfight entirely)
-- **Related notes:** [adc-jinx-front-to-back](adc-jinx-front-to-back.md)
+- **Frontline central:** Maokai, Ornn, Sion, Malphite, Sejuani, K'Sante.
+- **Peel central:** Lulu, Janna, Braum, Thresh, Nami.
+- **Arquetipos que la castigan:** dive (salta la frontline), poke (desgasta desde rango), split-push (evita teamfight).
+- **Notas relacionadas:** [adc-jinx-front-to-back](../adcs/adc-jinx-front-to-back.md)
 
-## Source Notes
+## Notas de Fuente
 
-Fundamental League of Legends comp theory. Front-to-back is the oldest and most well-understood teamfight archetype. This note codifies the ADC selection implications for the scoring engine.
+Teoría fundamental de composiciones en League of Legends. El teamfight frontal es uno de los arquetipos más antiguos y entendidos; esta nota codifica sus implicancias para la selección de ADC en el motor de scoring.

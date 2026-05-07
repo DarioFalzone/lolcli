@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "patch": "16.7",
+  "last_updated": "2026-04-27",
+  "description": "Heurísticas de estilo por tipo de cola. Modula preferencias de arquetipo según el contexto competitivo. Fuente: KB/notebooklm/sintesis/09-meta-regional-lck-lpl.md + Nación_Digital_LoL.pdf p10. Consumido por scoring.py vía ajustes de contexto de pesos.",
+
+  "queue_hints": {
+    "ranked_solo": {
+      "description": "Estilo individualista (Platino/Esmeralda+): no podés depender del micro-game del ADC. Se priorizan playmakers con agency propia y magos de daño.",
+      "weight_adjustments": {
+        "enemy_matchup": 0.03,
+        "solo_queue_reliability": 0.04,
+        "blind_pick_safety": -0.02,
+        "comp_gap_fill": -0.05
+      },
+      "archetype_boosts": {
+        "engage": 4.0,
+        "catcher": 4.0,
+        "enchanter": -3.0,
+        "poke": 3.0,
+        "warden": -2.0
+      },
+      "reasoning": "En SoloQ Platino/Esmeralda, playmakers como Thresh o Nautilus y magos como Zyra o Brand generan ventaja propia o controlan la línea. Enchanters pasivos son más coinflip porque dependen del micro-game inconsistente del ADC."
+    },
+    "ranked_flex": {
+      "description": "Equipo parcialmente coordinado: pesa más la utilidad de equipo.",
+      "weight_adjustments": {
+        "ally_synergy": 0.03,
+        "comp_gap_fill": 0.02,
+        "solo_queue_reliability": -0.03,
+        "blind_pick_safety": -0.02
+      },
+      "archetype_boosts": {
+        "engage": 3.0,
+        "catcher": 2.0,
+        "warden": 2.0,
+        "enchanter": 0.0,
+        "poke": 0.0
+      },
+      "reasoning": "Flex tiene más coordinación; engage y catchers que requieren follow-up rinden mejor."
+    },
+    "clash": {
+      "description": "Coordinación máxima: meta picks, composiciones teorizadas y comunicación perfecta.",
+      "weight_adjustments": {
+        "ally_synergy": 0.05,
+        "comp_gap_fill": 0.03,
+        "scaling_fit": 0.02,
+        "solo_queue_reliability": -0.05,
+        "blind_pick_safety": -0.05
+      },
+      "archetype_boosts": {
+        "engage": 4.0,
+        "catcher": 3.0,
+        "warden": 3.0,
+        "enchanter": 2.0,
+        "poke": 1.0
+      },
+      "reasoning": "Clash maximiza la composición de equipo. Los picks de alto techo de habilidad como Thresh o Bardo rinden al máximo con comms."
+    },
+    "normal": {
+      "description": "Casual: comfort por encima de teoría.",
+      "weight_adjustments": {
+        "blind_pick_safety": 0.05,
+        "solo_queue_reliability": 0.03,
+        "ally_synergy": -0.03,
+        "comp_gap_fill": -0.05
+      },
+      "archetype_boosts": {
+        "enchanter": 2.0,
+        "poke": 2.0,
+        "engage": 0.0,
+        "catcher": 0.0,
+        "warden": 0.0
+      },
+      "reasoning": "En normales, comfort y diversión importan más que la composición óptima. Enchanters y poke son opciones de bajo riesgo."
+    }
+  }
+}

@@ -6,17 +6,18 @@ Documento maestro que explica **cómo razona el Support Advisor**. Define pesos,
 
 Cuando vas a pickear soporte en ranked, ves un draft con N picks ya hechos (entre aliados y enemies). Tu trabajo es elegir el soporte que **maximice el éxito del equipo** dado ese contexto. No hay un "mejor soporte absoluto" — hay el mejor soporte **para esta partida puntual**.
 
-## Los 5 factores que decide el sistema
+## Los 6 factores que decide el sistema
 
-Basado en el `scoring_weights.json` actual (ADC mode), adaptado para soporte:
+Basado en el `scoring_weights.json` v1.1 (actualizado auditoría 2026-04-27):
 
 | Factor | Peso | Qué evalúa |
 |--------|------|-----------|
-| **Sinergia con ADC aliado** | 35% | El soporte trabaja con el ADC durante 25-30 min de lane y midgame. Esta sinergia es lo más importante. |
-| **Matchup contra threats enemigos** | 20% | ¿Tu soporte puede peelear los assassins enemigos? ¿Tu engage abre el frontline enemigo? |
-| **Cubrir gaps de tu comp** | 20% | Si tu equipo no tiene engage, conviene un soporte engage. Si tu ADC es squishy + immobile, conviene peel. |
-| **Sinergia con jungla aliada** | 10% | Si la jungla ya provee CC (Vi, Sejuani), el soporte puede ser enchanter. Si es farm jungler (Karthus), conviene engage. |
-| **Blind pick safety + Comfort** | 15% | Pickear algo que no domines en ranked es subóptimo. Premiamos comfort y blind safety. |
+| **Sinergia con ADC aliado** | 30% | El soporte trabaja con el ADC durante 25-30 min de lane y midgame. Esta sinergia es lo más importante. Usa `synergy_matrix.json` (escala 1-10 cuantitativa) + `measured_synergies.json` (WR comprobado). |
+| **Matchup contra threats enemigos** | 20% | ¿Tu soporte puede peelear los assassins enemigos? ¿Tu engage abre el frontline enemigo? Incluye triángulo estratégico + matchups lane individuales. |
+| **Cubrir gaps de tu comp** | 20% | Si tu equipo no tiene engage, conviene un soporte engage. Si tu ADC es squishy + immobile, conviene peel. Incluye comp predominance (piedra-papel-tijera). |
+| **Seguridad de blind pick** | 5% | ¿Cuántos counters duros tiene tu pick? Peso bajo porque la información del draft reduce su importancia. |
+| **Confiabilidad en SoloQ** | 10% | Consistencia en partidas sin coordinación. Soportes simples de ejecutar puntúan alto. |
+| **Sinergia de escalado** | 15% | ¿Tu pick encaja con el plan de juego de la comp (early/mid/late)? |
 
 ## Reglas heurísticas (el "sentido común" codificado)
 
@@ -82,4 +83,4 @@ Tras sustitución: `"Lane: agresivo nivel 2 con E+Q vs Soraka. Spike fuerte nive
 - **No considera el patch específico de buffs/nerfs recientes** — el patch base es 16.7. Si hay un cambio reciente que invierte un matchup, hay que actualizar el JSON.
 - **No considera la duración estimada de la partida** — un soporte scaling como Yuumi pierde valor en partidas de 22min.
 
-Estas limitaciones se documentan también en `data/draft_advisor/audit/STALE_DATA_REGISTER.json`.
+Estas limitaciones se documentan tambien en `docs/draft_advisor/README.md`, seccion de proveniencia y sanitizacion de datos.

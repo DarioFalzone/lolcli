@@ -1,10 +1,10 @@
 """
-Source Ingestion Scaffold — Minimal workflow for adding sources to the KB.
+Scaffold de ingesta de fuentes: flujo mínimo para agregar fuentes a la KB.
 
-Provides:
-1. register_source() — adds an entry to manifest.json
-2. create_research_template() — generates a research note template from a source
-3. Stub for future PDF text extraction
+Provee:
+1. register_source() — agrega una entrada a manifest.json
+2. create_research_template() — genera una plantilla de nota desde una fuente
+3. Stub para extracción futura de texto desde PDF
 
 Usage:
     python data/draft_advisor/kb/scripts/ingest_scaffold.py register \\
@@ -12,11 +12,11 @@ Usage:
         --source-type "riot_patch_notes" \\
         --patch "16.8" \\
         --trust-level "authoritative" \\
-        --notes "Patch 16.8 notes scraped from Riot website"
+        --notes "Notas del parche 16.8 extraídas del sitio de Riot"
 
     python data/draft_advisor/kb/scripts/ingest_scaffold.py template \\
         --note-id "patch-16-8-adc-summary" \\
-        --title "Patch 16.8 ADC Impact Summary" \\
+        --title "Resumen de impacto ADC del parche 16.8" \\
         --note-type "patch_summary" \\
         --patch "16.8" \\
         --champions "Jinx,Ezreal,Caitlyn"
@@ -143,49 +143,49 @@ def create_research_template(
     superseded_by: []
     ---
 
-    ## Summary
+    ## Resumen
 
-    [One paragraph executive summary]
+    [Resumen ejecutivo de un parrafo]
 
-    ## Key Findings
+    ## Hallazgos Clave
 
-    - [Finding 1]
-    - [Finding 2]
+    - [Hallazgo 1]
+    - [Hallazgo 2]
 
-    ## Draft Implications
+    ## Implicancias de Draft
 
-    [How this affects ADC pick decisions]
+    [Como afecta las decisiones de pick ADC]
 
-    ## When This Matters
+    ## Cuando Importa
 
-    - [Condition 1]
-    - [Condition 2]
+    - [Condicion 1]
+    - [Condicion 2]
 
-    ## Caveats
+    ## Advertencias
 
-    - [Limitation 1]
+    - [Limitacion 1]
 
-    ## Extractable Claims
+    ## Claims Extraibles
 
-    - [Conditional claim in pseudo-rule format]
+    - [Claim condicional en formato pseudo-regla]
 
-    ## Related Champions / Comps
+    ## Campeones / Composiciones Relacionadas
 
-    - [Related items]
+    - [Items relacionados]
 
-    ## Source Notes
+    ## Notas de Fuente
 
-    [Attribution and source quality notes]
+    [Atribucion y notas de calidad de la fuente]
     """)
 
     filepath.write_text(template, encoding="utf-8")
-    print(f"Created research template: {filepath}")
+    print(f"Plantilla de investigacion creada: {filepath}")
     return filepath
 
 
 def extract_pdf_text_stub(pdf_path: Path) -> str:
     """
-    Stub for PDF text extraction.
+    Stub para extraccion de texto desde PDF.
     V1: Returns a placeholder message.
     V2: Will use pdfplumber or pymupdf for actual extraction.
     """
@@ -206,7 +206,7 @@ def extract_pdf_text_stub(pdf_path: Path) -> str:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="KB Source Ingestion Scaffold")
+    parser = argparse.ArgumentParser(description="Scaffold de ingesta de fuentes KB")
     subparsers = parser.add_subparsers(dest="command")
 
     # Register command
