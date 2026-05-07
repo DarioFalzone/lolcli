@@ -17,6 +17,9 @@ dist/
 build/
 *.whl
 
+# ---------- Ruff cache ----------
+.ruff_cache/
+
 # ---------- Virtual environments ----------
 .venv/
 venv/
@@ -49,6 +52,7 @@ nul
 
 # ---------- Logs ----------
 *.log
+logs/
 
 # ---------- Archivos temporales ----------
 *.tmp

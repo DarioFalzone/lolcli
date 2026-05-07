@@ -1,61 +1,32 @@
-[build-system]
-requires = ["setuptools>=68", "wheel"]
-build-backend = "setuptools.build_meta"
-
-[project]
-name = "riot-lol-cli"
-dynamic = ["version"]
-description = "CLI y servicios de análisis para League of Legends."
-requires-python = ">=3.9"
-dependencies = [
-    "click>=8.0.0",
-    "requests>=2.25.0",
-    "httpx>=0.27.0",
-    "sqlalchemy>=2.0.0",
-    "fastapi>=0.109.0",
-    "uvicorn[standard]>=0.27.0",
-    "pydantic>=2.0.0",
-    "python-multipart>=0.0.6",
-    "jinja2>=3.1.0",
-    "Pillow>=10.0.0",
-    "python-dotenv>=1.0.0",
-]
-
-[project.optional-dependencies]
-dev = [
-    "pytest>=7.4.0",
-    "pytest-asyncio>=0.21.0",
-    "pytest-cov>=4.1.0",
-    "httpx>=0.27.0",
-    "ruff>=0.6.0",
-]
-
-[project.scripts]
-riot-lol-cli = "riot_lol_cli.cli:main"
-riot-lol-meta-api = "riot_lol_cli.api_server:run"
-riot-lol-draft-advisor = "riot_lol_cli.draft_advisor.server:run"
-
-[tool.setuptools]
-package-dir = {"" = "src"}
-
-[tool.setuptools.packages.find]
-where = ["src"]
-
-[tool.setuptools.dynamic]
-version = {attr = "riot_lol_cli.__version__"}
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-asyncio_mode = "auto"
-
 [tool.ruff]
 line-length = 120
 target-version = "py39"
-src = ["src", "tests", "scripts"]
+src = ["src", "scripts"]
+exclude = [
+    "_archive",
+    "_quarantine",
+    ".venv",
+    "outputs",
+    "templates",
+]
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "UP"]
-ignore = ["E501"]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes (unused imports, undefined names)
+    "I",   # isort (import order)
+    "W",   # pycodestyle warnings
+    "UP",  # pyupgrade (modernización Python)
+    "B",   # flake8-bugbear (bug-likely patterns)
+]
+ignore = [
+    "E501",  # line too long (handled by formatter)
+    "E402",  # module-level import not at top (común en scripts con sys.path hack)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"scripts/*.py" = ["E402"]  # Scripts con sys.path.insert al inicio
+"src/riot_lol_cli/cli.py" = ["E501"]  # HTML/CSS embebido
 
 [tool.ruff.format]
 quote-style = "double"

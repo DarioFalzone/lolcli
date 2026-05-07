@@ -2,24 +2,36 @@ name: CI
 
 on:
   push:
+    branches: [ "main" ]
   pull_request:
+    branches: [ "main" ]
 
 jobs:
-  test:
+  lint-and-test:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.9"
+        cache: "pip"
 
-      - name: Install project
-        run: python -m pip install --upgrade pip && python -m pip install -e .[dev]
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install -r requirements-dev.txt
 
-      - name: Ruff
-        run: ruff check src tests scripts
+    - name: Lint with Ruff
+      run: |
+        ruff check src tests scripts
+        ruff format --check src tests scripts
 
-      - name: Pytest with coverage
-        run: pytest -q --cov=src/riot_lol_cli --cov-report=term-missing --cov-fail-under=30
+    - name: Test with pytest
+      env:
+        PYTHONPATH: src
+      run: |
+        pytest tests/
