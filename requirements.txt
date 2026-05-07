@@ -18,3 +18,9 @@ Pillow>=10.0.0
 
 # Runtime Utils
 python-dotenv>=1.0.0
+
+# Meta Scraper (puerto 8002)
+# Requerido por src/riot_lol_cli/meta_scraper/adapters/{opgg,ugg,lolalytics}.py.
+# Después de `pip install playwright` correr: `playwright install chromium`.
+# El servidor levanta sin Playwright (los adapters fallan con mensaje claro).
+playwright>=1.40.0

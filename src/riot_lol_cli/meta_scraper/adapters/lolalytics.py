@@ -43,7 +43,7 @@ _LOLALYTICS_NAME_MAP = {
     "chogath": "Chogath",
     "velkoz": "Velkoz",
     "renata": "Renata",
-    "ksante": "Ksante",
+    "ksante": "KSante",
     "nunu": "Nunu",
 }
 

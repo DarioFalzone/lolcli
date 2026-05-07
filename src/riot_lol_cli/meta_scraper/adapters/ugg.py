@@ -25,7 +25,7 @@ _UGG_NAME_MAP = {
     "bel-veth": "Belveth",
     "dr-mundo": "DrMundo",
     "jarvan-iv": "JarvanIV",
-    "k-sante": "Ksante",
+    "k-sante": "KSante",
     "kai-sa": "Kaisa",
     "kha-zix": "Khazix",
     "kog-maw": "KogMaw",
