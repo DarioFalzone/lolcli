@@ -7,6 +7,7 @@ cuando alguien agrega un campeon nuevo a un adapter pero olvida los otros.
 """
 
 import json
+from collections import Counter
 from pathlib import Path
 
 from riot_lol_cli.meta_scraper.adapters.lolalytics import _LOLALYTICS_NAME_MAP
@@ -19,11 +20,36 @@ def _canonical_targets(name_map: dict) -> set:
 
 
 class TestAdapterNameMapConsistency:
+    def test_ksante_platform_slugs_map_to_riot_canonical_id(self):
+        assert _OPGG_NAME_MAP["k'sante"] == "KSante"
+        assert _LOLALYTICS_NAME_MAP["ksante"] == "KSante"
+        assert _UGG_NAME_MAP["k-sante"] == "KSante"
+
     def test_opgg_and_lolalytics_share_targets(self):
         assert _canonical_targets(_OPGG_NAME_MAP) == _canonical_targets(_LOLALYTICS_NAME_MAP)
 
     def test_opgg_and_ugg_share_targets(self):
         assert _canonical_targets(_OPGG_NAME_MAP) == _canonical_targets(_UGG_NAME_MAP)
+
+    def test_duplicate_targets_are_explicitly_allowed(self):
+        allowed_duplicates = {
+            "opgg": {},
+            "lolalytics": {},
+            "ugg": {"Nunu": {"nunu", "nunu-willump"}},
+        }
+
+        for name_map, label in (
+            (_OPGG_NAME_MAP, "opgg"),
+            (_LOLALYTICS_NAME_MAP, "lolalytics"),
+            (_UGG_NAME_MAP, "ugg"),
+        ):
+            counts = Counter(name_map.values())
+            duplicated_targets = {target for target, count in counts.items() if count > 1}
+            assert duplicated_targets == set(allowed_duplicates[label])
+
+            for target in duplicated_targets:
+                keys = {key for key, value in name_map.items() if value == target}
+                assert keys == allowed_duplicates[label][target]
 
     def test_targets_are_valid_champion_ids(self):
         repo_root = Path(__file__).resolve().parents[2]
