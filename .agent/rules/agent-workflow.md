@@ -23,7 +23,7 @@ No mover `src/`, `data/`, `assets/`, `templates/` o `scripts/` sin plan explicit
 
 ## Subsistemas y gotchas
 
-- Hay cuatro FastAPI separados: Meta API `:8000`, Draft Advisor `:8001`, Meta Scraper `:8002`, Jungle Meta `:8003`.
+- Hay cinco FastAPI separados: Meta API `:8000`, Draft Advisor `:8001`, Meta Scraper `:8002`, Jungle Meta `:8003`, Items Browser `:8004`.
 - `api_server.py` es wrapper; la app real del Meta Analyzer vive en `src/riot_lol_cli/meta_api/app.py`.
 - Templates runtime activos: `templates/` en la raiz. No reintroducir `src/riot_lol_cli/templates/`.
 - Rendering activo: `src/riot_lol_cli/rendering.py`; `html.py` es legado.
@@ -45,6 +45,7 @@ Los antiguos `src/riot_lol_cli/*/AGENTS.md` fueron absorbidos. Usar estas refere
 | Database | `docs/meta_analyzer/README.md` seccion Base de Datos |
 | Meta Scraper | `projects/active/meta-scraper/README.md` |
 | Jungle Meta | `projects/active/jungle-meta/README.md` |
+| Items Browser | `projects/active/items-browser/README.md` |
 | Splash Gallery | `projects/active/splash-gallery/README.md` + `docs/splash-viewer.md` |
 
 ## Como cerrar una tarea

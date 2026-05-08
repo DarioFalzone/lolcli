@@ -270,7 +270,50 @@ curl http://localhost:8003/api/v1/jungle/champion/XinZhao
 
 ---
 
-## 7. Fetch completo de partidas
+## 7. Items Browser
+
+Catalogo navegable de todos los items de LoL (EN + ES) con filtros por grupo (botas, componentes, legendarios, consumibles, trinkets, jungla, obsoletos) y busqueda por nombre.
+
+### Setup inicial (database)
+
+```powershell
+.\.venv\Scripts\python.exe scripts/update_items_database.py
+```
+
+Genera `data/items/database.json` desde Data Dragon (en_US + es_ES) y descarga PNGs faltantes.
+
+### Levantar dashboard
+
+**Windows (script rapido):**
+```powershell
+scripts\bat\items_browser.bat
+```
+
+(Regenera automaticamente la database si no existe.)
+
+**Manual:**
+```powershell
+$env:PYTHONPATH=(Resolve-Path .\src).Path
+.\.venv\Scripts\python.exe -m riot_lol_cli.items_browser.server
+```
+
+- Dashboard: http://localhost:8004
+- API Docs: http://localhost:8004/docs
+- Health: http://localhost:8004/health (incluye version DDragon + counts)
+
+### Endpoints principales
+```bash
+curl http://localhost:8004/api/v1/items/all?include_deprecated=false
+curl http://localhost:8004/api/v1/items/6699           # Voltaic Cyclosword
+curl http://localhost:8004/api/v1/items/groups         # buckets por uso
+curl "http://localhost:8004/api/v1/items/search?q=voltaic&lang=en"
+```
+
+**Datos:** `data/items/database.json` (regenerable con el script).
+
+---
+
+## 8. Fetch completo de partidas
 
 Para obtener datos completos (daño, oro, visión, etc.):
 
@@ -296,6 +339,7 @@ Los datos se guardan en `data/cache/matches.json`.
 | `scripts/setup_meta_analyzer.py` | Setup de BD + datos demo + dashboards | `python scripts/setup_meta_analyzer.py` |
 | `scripts/generate_dashboard.py` | Genera dashboard enhanced HTML | `python scripts/generate_dashboard.py` |
 | `scripts/run_api.py` | Levanta API FastAPI | `python scripts/run_api.py` |
+| `scripts/update_items_database.py` | Genera `data/items/database.json` (Data Dragon EN+ES) | `python scripts/update_items_database.py` |
 | `scripts/fetch_adc_champions.py` | Obtiene lista de ADCs de Data Dragon | `python scripts/fetch_adc_champions.py` |
 | `scripts/verify_adc_tracker.py` | Verifica ADCs en la BD | `python scripts/verify_adc_tracker.py` |
 | `scripts/CHECK_DASHBOARD.py` | Verifica estado del dashboard | `python scripts/CHECK_DASHBOARD.py` |
@@ -310,3 +354,4 @@ Los datos se guardan en `data/cache/matches.json`.
 | `scripts/bat/download_splash_arts.bat` | Descarga splash arts (menú interactivo) |
 | `scripts/bat/meta_scraper.bat` | Levanta Meta Scraper dashboard (puerto 8002) |
 | `scripts/bat/jungle_meta.bat` | Levanta Jungle Meta dashboard (puerto 8003) |
+| `scripts/bat/items_browser.bat` | Levanta Items Browser dashboard (puerto 8004) |

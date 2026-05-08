@@ -6,6 +6,67 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-05-08] Items Browser — Catalogo de items LoL (EN+ES) + regla wrap-up
+
+### Que se hizo
+
+#### 1. Regla de cierre con lista de archivos
+- `.agent/rules/documentation-and-commits.md`: agregado paso 7 al checklist post-accion: el agente debe cerrar cada respuesta final con dos secciones explicitas — **Archivos creados** y **Archivos modificados**. Si la lista es vacia, decirlo. Esto da al usuario un mapa rapido de blast radius sin leer el diff entero. La regla aplica a cualquier iteracion, no solo features grandes.
+
+#### 2. Items Database (Data Dragon EN+ES)
+- `scripts/update_items_database.py` nuevo: resuelve version actual de Data Dragon (`versions.json`), descarga `item.json` en `en_US` y `es_ES`, construye `data/items/database.json` mezclado con: `id`, `name_en`, `name_es`, `tags`, `stats`, `gold_total/base/sell`, `purchasable`, `depth`, `from`, `into`, `maps`, `image`, `deprecated`. Marca como deprecated los items presentes en `assets/items/*.png` o CSV legacy pero ausentes en la version vigente. Descarga PNG faltantes a `assets/items/`. Tiene fallback `verify=False` para certificate stores rotos en Windows (Data Dragon es CDN publico sin auth).
+- `data/items/database.json` generado: 705 items (DDragon 16.9.1, 0 deprecated en este ciclo). Nombres canonicos confirmados: `6699` = "Voltaic Cyclosword" / "Espada ciclovoltaica", `3071` = "Black Cleaver" / "Cuchilla negra".
+
+#### 3. Items Browser FastAPI + SPA (puerto 8004)
+- Modulo nuevo `src/riot_lol_cli/items_browser/`:
+  - `loader.py`: cache en memoria, `get_item`, `list_categories` (tags Riot), `list_groups` (buckets curados: starter/boots/components/legendary/consumables/trinkets/jungle_specific/deprecated), `search_items` (substring case-insensitive en EN o ES).
+  - `server.py`: 7 endpoints, mount `/items` para PNGs locales, factory `create_app()` y `run()` con settings.
+  - SPA vanilla en `static/`: hero con DDragon version, controles (busqueda + toggle EN/ES + checkbox mostrar deprecated), tabs por grupo con badges de count, grid responsivo con item cards (icon + nombre + gold + id), modal de detalle con stats humanizados, tags Riot, plaintext bilingue, banner para deprecated.
+- `settings.py`: agregadas constantes y helpers `get_items_browser_host` / `get_items_browser_port` (`LOLCLI_ITEMS_BROWSER_*`, default 8004).
+- `scripts/bat/items_browser.bat` nuevo: levanta el server, regenera la database si no existe.
+- `projects/active/items-browser/README.md` nuevo: manifiesto del proyecto con schema, endpoints, configuracion.
+
+#### 4. Documentacion sincronizada
+- `AGENTS.md`: agregada Items Browser a Mapa de Subsistemas, tabla de servidores FastAPI, Entry Points, APIs locales, gotchas (de 4 a 5 FastAPI, puertos 8000-8004 configurables).
+- `docs/getting-started.md`: nueva seccion 7 "Items Browser" con setup + manual + endpoints; tablas de scripts actualizadas.
+- `.agent/rules/agent-workflow.md`: gotcha de FastAPI count actualizado, agregado items-browser a tabla de docs canonicas.
+
+### Archivos clave
+
+**Creados:**
+- `scripts/update_items_database.py` — script de regeneracion de la DB.
+- `data/items/database.json` — 705 items, EN+ES, version 16.9.1.
+- `src/riot_lol_cli/items_browser/__init__.py` — module marker.
+- `src/riot_lol_cli/items_browser/loader.py` — cache + groups + search.
+- `src/riot_lol_cli/items_browser/server.py` — FastAPI + factory.
+- `src/riot_lol_cli/items_browser/static/index.html` — SPA shell.
+- `src/riot_lol_cli/items_browser/static/styles.css` — design tokens reusados.
+- `src/riot_lol_cli/items_browser/static/app.js` — SPA logica.
+- `scripts/bat/items_browser.bat` — launcher Windows.
+- `projects/active/items-browser/README.md` — manifiesto.
+- `tests/items_browser/__init__.py` + `tests/items_browser/test_loader.py` — 8 tests.
+
+**Modificados:**
+- `.agent/rules/documentation-and-commits.md` — paso 7 wrap-up.
+- `.agent/rules/agent-workflow.md` — count FastAPI 4 -> 5.
+- `AGENTS.md` — Items Browser en 5 secciones.
+- `docs/getting-started.md` — seccion 7 + tablas.
+- `src/riot_lol_cli/settings.py` — host/port helpers.
+- `tests/test_server_factories.py` — 2 smoke tests nuevos.
+
+### Verificacion
+- `pytest -q` → 163 passed (153 anterior + 8 loader items_browser + 2 server factory items_browser).
+- `curl http://localhost:8004/health` → `{"status":"ok","version":"16.9.1","total_count":705}`.
+- `curl /api/v1/items/groups` → `{boots:29, components:464, legendary:157, consumables:30, trinkets:16, jungle_specific:9}`.
+- `curl /api/v1/items/6699` → `{"name_en":"Voltaic Cyclosword","name_es":"Espada ciclovoltaica","gold_total":2900}`.
+- Browser http://localhost:8004 → grid con 705 items, filtros por grupo, modal con detalle bilingue, busqueda en vivo.
+
+### Pendiente / Notas
+- Los items en builds del Jungle Meta (`data/jungle_meta/patch_26.09.json`) siguen siendo arquetipos canonicos (no slot-by-slot del video SkillCapped). Ahora con el Items Browser el usuario puede identificar IDs reales y corregir los slots.
+- Cuando Riot publique nuevos items o renombre, re-correr `scripts/update_items_database.py` para sincronizar.
+
+---
+
 ## [2026-05-08] Jungle Meta Dashboard v1.1 — Rediseño basado en SkillCapped
 
 ### Que se hizo
