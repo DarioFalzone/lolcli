@@ -57,11 +57,11 @@ if [[ "$response" =~ ^[Yy]$ ]]; then
     echo "   xdg-open outputs/meta-analyzer-dashboard.html  (Linux)"
     echo ""
     
-    python3 -m uvicorn src.riot_lol_cli.api_server:app --reload --port 8000
+    python3 -m uvicorn riot_lol_cli.api_server:app --reload --port 8000
 else
     echo ""
     echo "⚠️  API no levantado. Para levantarlo manualmente:"
-    echo "   python3 -m uvicorn src.riot_lol_cli.api_server:app --reload"
+    echo "   python3 -m uvicorn riot_lol_cli.api_server:app --reload"
     echo ""
     echo "📱 Para ver el frontend sin API (datos estáticos):"
     if [[ "$OSTYPE" == "darwin"* ]]; then

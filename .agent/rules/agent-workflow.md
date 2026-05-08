@@ -48,10 +48,16 @@ Los antiguos `src/riot_lol_cli/*/AGENTS.md` fueron absorbidos. Usar estas refere
 
 ## Como cerrar una tarea
 
-- Actualizar docs en la misma iteracion que cambia codigo, datos o estructura.
-- Registrar cambios significativos en `bitacora_de_cambios.md`.
-- Ejecutar verificaciones razonables para el alcance.
-- Informar pruebas ejecutadas y riesgos residuales.
+Antes de dar una tarea por terminada, ejecutar este checklist en orden:
+
+1. **Tests**: correr `pytest -q` y `ruff check src tests scripts`. Si alguno falla, resolver antes de continuar.
+2. **Bitacora**: si el cambio es significativo, agregar entrada en `bitacora_de_cambios.md` (fecha, que se hizo, archivos clave, resultado de verificacion). Ver criterios en `.agent/rules/documentation-and-commits.md`.
+3. **Docs tecnicas**: revisar la tabla "Documentos a revisar" en `documentation-and-commits.md` y actualizar los que apliquen.
+4. **Rules**: si el cambio introduce un gotcha nuevo, patron obligatorio o limitacion de entorno, registrarlo en la rule de `.agent/rules/` correspondiente.
+5. **Commit**: un commit por cambio logico, Conventional Commit format, descripcion en imperativo.
+6. **Informar**: reportar al usuario: que se hizo, tests ejecutados, riesgos residuales y documentos actualizados.
+
+> Omitir cualquier paso de esta lista es deuda inmediata que el proximo agente o el usuario tendran que pagar.
 
 ## Glosario minimo
 

@@ -58,7 +58,7 @@ if not errorlevel 1 (
     echo [SKIP]  Meta Analyzer  :8000  ya esta corriendo
 ) else (
     echo [START] Meta Analyzer  :8000  ...
-    start /b "" powershell -WindowStyle Hidden -Command "$env:PYTHONPATH='%PYPATH%'; Start-Process -FilePath '%PY%' -ArgumentList '-m','uvicorn','src.riot_lol_cli.api_server:app','--reload','--port','8000' -WorkingDirectory '%ROOT%' -RedirectStandardOutput '%ROOT%\logs\meta_analyzer.log' -RedirectStandardError '%ROOT%\logs\meta_analyzer.err' -WindowStyle Hidden"
+    start /b "" powershell -WindowStyle Hidden -Command "$env:PYTHONPATH='%PYPATH%'; Start-Process -FilePath '%PY%' -ArgumentList '-m','uvicorn','riot_lol_cli.api_server:app','--reload','--port','8000' -WorkingDirectory '%ROOT%' -RedirectStandardOutput '%ROOT%\logs\meta_analyzer.log' -RedirectStandardError '%ROOT%\logs\meta_analyzer.err' -WindowStyle Hidden"
 )
 
 echo.

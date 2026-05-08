@@ -45,7 +45,7 @@ SPA con tabs Soporte / ADC. Funcionalidades:
 
 ## Alertas conocidas
 
-- Depende de Playwright, pero esa dependencia no esta declarada en `requirements.txt`.
+- El paquete Playwright esta declarado en `requirements.txt`; para scraping real falta instalar el browser con `playwright install chromium`.
 - `server.py` hardcodea el puerto 8002; `settings.py` parametriza Meta API y Draft Advisor.
 - Los snapshots en `data/meta_scraper/` son datos generados, no contrato estable.
 - El Draft Advisor consume ambos snapshots de forma opcional: si no existen, el scoring conserva el comportamiento curado local.

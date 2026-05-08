@@ -166,7 +166,7 @@ python main.py --platform la2 --summoner "Nombre#TAG" --last-month --html-templa
 # Servidores standalone
 python -m riot_lol_cli.draft_advisor.server      # 8001
 python -m riot_lol_cli.meta_scraper.server       # 8002
-python -m uvicorn src.riot_lol_cli.api_server:app --reload --port 8000
+python -m uvicorn riot_lol_cli.api_server:app --reload --port 8000
 
 # Refrescar Data Dragon (assets + manifest + viewer)
 python scripts/update_ddragon_assets.py

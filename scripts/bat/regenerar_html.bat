@@ -21,7 +21,7 @@ if %ERRORLEVEL% NEQ 0 (
 )
 
 echo [2/2] Generando HTML (versión se incrementa automáticamente)...
-python -m src.riot_lol_cli.cli generate --read-json data/cache/matches.json --html-template claude-4-5 --output outputs/claude-4-5/deshu-las-claude-4-5.html
+python -m riot_lol_cli.cli generate --read-json data/cache/matches.json --html-template claude-4-5 --output outputs/claude-4-5/deshu-las-claude-4-5.html
 
 if %ERRORLEVEL% EQU 0 (
     echo.

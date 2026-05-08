@@ -62,13 +62,13 @@ echo 📝 Cuando veas "Uvicorn running on http://0.0.0.0:8000", presiona:
 echo    1. Win+R y escribe: start outputs\meta-analyzer-dashboard.html
 echo    2. O abre en navegador: http://localhost:8000/docs
 echo.
-python -m uvicorn src.riot_lol_cli.api_server:app --reload --port 8000
+python -m uvicorn riot_lol_cli.api_server:app --reload --port 8000
 goto end
 
 :skip_api
 echo.
 echo ⚠️  API no levantado. Para levantarlo manualmente:
-echo    python -m uvicorn src.riot_lol_cli.api_server:app --reload
+echo    python -m uvicorn riot_lol_cli.api_server:app --reload
 echo.
 echo 📱 Para ver el frontend sin API (datos estáticos):
 echo    start outputs\meta-analyzer-dashboard.html

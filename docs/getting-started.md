@@ -172,8 +172,7 @@ Los snapshots normalizados alimentan opcionalamente el motor de scoring del Draf
 
 ### Requisitos adicionales
 ```bash
-# Instalar Playwright (requerido para scraping)
-pip install playwright
+# Instalar browser de Playwright (el paquete Python ya viene en requirements.txt)
 playwright install chromium
 ```
 

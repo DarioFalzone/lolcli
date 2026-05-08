@@ -60,7 +60,7 @@ pueden vivir fisicamente dentro de `projects/active/` o `projects/legacy/`.
   sin plan explicito de imports, paths, docs y tests.
 - La KB (`KB/`) es conocimiento estrategico para el Draft Advisor; no es un
   destino generico para documentos de arquitectura o analisis del repo.
-- `_archive/` es historico no activo; no usarlo como fuente operacional.
+- `projects/legacy/` conserva el material historico; no usarlo como fuente operacional salvo pedido explicito.
 - Despues de cada iteracion que cambie estructura, endpoints, comandos, datos
   canonicos o docs, revisar y alinear `AGENTS.md`, `projects/README.md`,
   `docs/README.md` y `bitacora_de_cambios.md`.

@@ -7,7 +7,7 @@ LOLCLI - DOCUMENTACION CANONICA
 
 1. Contexto maestro para agentes
    - AGENTS.md
-   - .agent/rules/documentation-protocol.md
+   - .agent/rules/documentation-and-commits.md
 
 2. Indice general
    - docs/README.md
@@ -20,7 +20,7 @@ LOLCLI - DOCUMENTACION CANONICA
    - docs/splash-viewer.md
 
 4. Archivo historico
-   - _archive/README.md
+   - projects/legacy/README.md
 
 Regla operativa:
 Despues de cada iteracion significativa, revisar si AGENTS.md,

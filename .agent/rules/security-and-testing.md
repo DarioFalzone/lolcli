@@ -54,7 +54,7 @@ ruff check src tests scripts
 ruff format --check src tests scripts
 ```
 
-CI usa Python 3.9, instala `requirements.txt` y `requirements-dev.txt`, ejecuta Ruff y pytest.
+El coverage con `--cov-fail-under=30` es un check local/manual. CI usa Python 3.9, instala `requirements.txt` y `requirements-dev.txt`, ejecuta Ruff y pytest.
 
 ## Draft Advisor Data
 

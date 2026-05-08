@@ -6,6 +6,49 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-05-07] Fix CI Python 3.9 — from __future__ import annotations
+
+### Que se hizo
+- CI de GitHub Actions fallaba con exit code 2 (error de coleccion de pytest, no test failure).
+- Causa raiz: `meta_scraper` usaba sintaxis PEP 604 (`X | None`) sin `from __future__ import annotations`. Python 3.9 evalua las anotaciones en runtime y lanza `TypeError`. Local pasaba porque el entorno es Python 3.13.
+- Fix: se agrego `from __future__ import annotations` (PEP 563) al inicio de 5 archivos del modulo `meta_scraper` para hacer las anotaciones lazy y compatibles con 3.9.
+- Los 132 tests siguieron pasando tras el fix. Commit: `bfa31de`.
+
+### Archivos modificados clave
+- `src/riot_lol_cli/meta_scraper/server.py` — `from __future__ import annotations`
+- `src/riot_lol_cli/meta_scraper/orchestrator.py` — idem
+- `src/riot_lol_cli/meta_scraper/normalizer.py` — idem
+- `src/riot_lol_cli/meta_scraper/adapters/base.py` — idem
+- `src/riot_lol_cli/meta_scraper/adapters/ugg.py` — idem
+
+### Verificacion
+- `pytest -q`: 132/132 OK post-fix.
+- `ast.parse(..., feature_version=(3,9))` corrido sobre `src/`, `tests/`, `scripts/`: 0 errores.
+- CI de GitHub Actions verde tras push.
+
+---
+
+## [2026-05-07] Correccion post-auditoria independiente
+
+### Que se hizo
+- Se corrigio drift documental posterior a la auditoria `f0d0d82..67c895b`: Playwright ya esta en `requirements.txt`, y el paso manual vigente es `playwright install chromium`.
+- Se reemplazaron referencias operativas a `_archive/` por `projects/legacy/` y se marco `data/supports_list.json` como dato historico eliminado/absorbido.
+- Se cambiaron comandos runtime activos de `src.riot_lol_cli.api_server:app` a `riot_lol_cli.api_server:app`.
+- Se reforzo `tests/meta_scraper/test_adapter_name_maps.py` con asserts por plataforma para `KSante` y allowlist explicita de duplicados de U.GG.
+- Se refactorizo `ScoringEngine._get_adc_priority` en helpers de bloqueo, contexto meta, vetos, core y fallbacks sin cambiar eligibilities ni scoring.
+- Draft Advisor y Meta Scraper ahora exponen `create_app()` y mantienen `app = create_app()` para compatibilidad con imports y entrypoints actuales.
+- Se dejo el prompt documentacional para Claude en el cierre de la iteracion, sin crear un Markdown adicional.
+
+### Archivos modificados clave
+- `src/riot_lol_cli/draft_advisor/scoring.py`
+- `src/riot_lol_cli/draft_advisor/server.py`
+- `src/riot_lol_cli/meta_scraper/server.py`
+- `tests/meta_scraper/test_adapter_name_maps.py`
+- `AGENTS.md`, `README.md`, `projects/README.md`, `docs/getting-started.md`
+- `.agent/rules/security-and-testing.md`
+
+---
+
 ## [2026-05-07] Auditoría completa, cleanup git y refactors seguros
 
 ### Que se hizo
@@ -230,7 +273,7 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 - KB NotebookLM se redujo a un unico `KB/notebooklm/sintesis/README.md`; las notas sueltas de fuentes y jungla se integraron en `KB/README.md`.
 - Junglas Pro consolido sus docs operativas en `projects/active/junglas-pro/research-notes.md`.
 - El handoff visual para Claude Design quedo unificado en `claude-design-handoff/README.md`.
-- Se elimino la copia paralela de docs historicas y se absorbio el removal log en `_archive/README.md`.
+- Se elimino la copia paralela de docs historicas; ese material quedo absorbido en bitacora y luego en `projects/legacy/`.
 
 ### Archivos modificados clave
 - `.agent/rules/*.md` - nueva taxonomia de reglas para agentes.
@@ -639,7 +682,7 @@ Se extendió el Draft Advisor para recomendar **Soportes** además de ADCs, sin 
 - **`champion_data.py`**: carga de `support_profiles.json`, helpers `get_support_ids()`, `get_support_profile()`.
 - **`scoring.py`**: refactor `recommend()` enruta por `target_role`. Nuevo `_recommend_support()` con 6 factores de scoring (ally_synergy 35%, enemy_matchup 20%, comp_gap_fill 20%, scaling_fit 15%, solo_queue 10%).
 - **`api.py`**: endpoint `GET /api/v1/draft/champions/supports`.
-- **Data**: `data/draft_advisor/support_profiles.json` (10 soportes core), `data/supports_list.json`, `data/draft_advisor/kb/structured/support_archetypes.json`.
+- **Data**: `data/draft_advisor/support_profiles.json` (10 soportes core), `data/draft_advisor/kb/structured/support_archetypes.json`; el antiguo `data/supports_list.json` fue absorbido y eliminado en la limpieza 2026-05-07.
 - **KB/**: 6 documentos de base de conocimiento estratégico (filosofía, arquetipos, sinergias, matchups, game plans, amenazas).
 - **Frontend**: `state.targetRole`, select de Rol Objetivo, payload incluye `target_role`.
 

@@ -52,7 +52,6 @@ El repo esta en evolucion activa y puede tener un working tree sucio. Antes de e
 | Junglas Pro | `projects/active/junglas-pro/` | HTML, Markdown, assets | Activo/standalone | Investigacion y portal local sobre junglas profesionales |
 | Dev Scratch | `projects/dev-scratch/` | Python manual | No runtime | Scripts manuales de diagnostico no importados por el paquete |
 | Legacy Projects | `projects/legacy/` | Mixto | No activo | Copias y experimentos fuera del runtime actual |
-| Archivo | `_archive/` | Docs/assets legacy | Preservado | Material historico no activo, no borrar sin decision explicita |
 
 ## Organizacion por Proyectos
 
@@ -225,7 +224,6 @@ Playwright es requerido para scraping real. Si no esta instalado, el servidor pu
 | `KB/` | Base conceptual humana del Support/Draft Advisor |
 | `.agent/rules/` | Reglas transversales para agentes IA |
 | `claude-design-handoff/` | Contexto de producto/diseno para Claude Design |
-| `_archive/` | Documentos/artefactos historicos no organizados como proyecto |
 
 La fuente de verdad de paths runtime es `src/riot_lol_cli/paths.py`:
 
@@ -428,7 +426,7 @@ ruff check src tests scripts
 ruff format --check src tests scripts
 ```
 
-CI corre en GitHub Actions con Python 3.9, instala `requirements.txt` y `requirements-dev.txt`, ejecuta Ruff y pytest.
+El comando de coverage es una verificacion local/manual. CI corre en GitHub Actions con Python 3.9, instala `requirements.txt` y `requirements-dev.txt`, ejecuta Ruff y pytest.
 
 ## Reglas para Agentes
 
@@ -443,7 +441,7 @@ Reglas clave:
 
 1. No commitear `.env` ni claves `RGAPI-*`.
 2. No hacer requests reales a Riot en tests.
-3. No tocar `_archive/` ni `projects/legacy/` sin pedido explicito.
+3. No tocar `projects/legacy/` sin pedido explicito.
 4. No mover `assets/`, `data/`, `templates/` o `src/` sin actualizar codigo, docs y tests afectados.
 5. Usar `logging` en librerias/servidores; `click.echo()` solo para CLI.
 6. Usar modelos Pydantic para payloads complejos, no dict access fragil.
@@ -457,7 +455,7 @@ Reglas clave:
 4. **Rendering activo:** usar `rendering.py`. No reintroducir `html.py` legacy.
 5. **Legacy copy:** `projects/legacy/riot-lol-cli/` no es el paquete activo.
 6. **API key Riot:** dev keys expiran cada 24h; usar `.env`.
-7. **Playwright:** Meta Scraper depende de Playwright para scraping real, pero no esta declarado en `requirements.txt`.
+7. **Playwright:** Meta Scraper declara Playwright en `requirements.txt`, pero el browser Chromium se instala aparte con `playwright install chromium`.
 8. **Puerto 8002:** `meta_scraper.server` hardcodea puerto 8002; `settings.py` solo parametriza Meta API y Draft Advisor.
 9. **Data versioning:** `live_patch_label` es el parche jugable/meta; `static_data_version` es la version tecnica de Data Dragon/CDN y puede tener sufijos como `.1`.
 10. **Draft data IDs:** relaciones de `adc_profiles.json`, `support_profiles.json` y `personal_adc_mastery.json` deben validar contra IDs canonicos de `champion_base.json`.
@@ -474,7 +472,7 @@ Reglas clave:
 - La suite del Draft Advisor incluye `tests/draft_advisor/test_data_integrity.py` para prevenir relaciones con IDs no canonicos.
 - `docs/api-guide.md` y algunos docs de dashboard/meta pueden tener rutas antiguas comparadas con `meta_api/routes/*`.
 - `docs/draft_advisor/README.md` puede describir una fase anterior del roster de supports.
-- `Meta Scraper` requiere Playwright (`pip install playwright && playwright install chromium`) pero el paquete no esta en `requirements.txt`.
+- `Meta Scraper` requiere `playwright install chromium` para scraping real; el paquete Python ya esta declarado en `requirements.txt`.
 - `settings.py` no tiene helpers para Meta Scraper host/port.
 - `dashboard_enhanced.py` mantiene HTML embebido en Python; migrar a template solo con pedido explicito.
 - `database/` no tiene migraciones; no cambiar schema sin plan.

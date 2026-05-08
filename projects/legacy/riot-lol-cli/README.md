@@ -166,7 +166,7 @@ sudo apt update
 sudo apt install -y python3.12-venv
 
 # 1) Crear y activar un entorno virtual (recomendado)
-cd ~/lolcli/riot-lol-cli
+cd ~/lolcli/projects/legacy/riot-lol-cli
 python3 -m venv .venv
 source .venv/bin/activate
 
@@ -174,7 +174,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 
 # 3) Regenerar el HTML
-python3 -m src.riot_lol_cli.cli generate \
+python3 -m riot_lol_cli.cli generate \
   --read-json data/cache/matches.json \
   --html-template claude-4-5 \
   --output outputs/claude-4-5/deshu-las-claude-4-5.html
