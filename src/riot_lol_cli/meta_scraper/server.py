@@ -12,7 +12,7 @@ import logging
 from pathlib import Path
 
 import uvicorn
-from fastapi import BackgroundTasks, FastAPI, HTTPException
+from fastapi import APIRouter, BackgroundTasks, FastAPI, HTTPException
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -25,24 +25,8 @@ logger = logging.getLogger(__name__)
 _MODULE_DIR = Path(__file__).resolve().parent
 _STATIC_DIR = _MODULE_DIR / "static"
 
-# FastAPI app
-app = FastAPI(
-    title="Meta Scraper — LoL Support Meta Dashboard",
-    description="Scrapea y visualiza el meta de soporte de League of Legends.",
-    version="1.0.0",
-)
-
-# Servir archivos estáticos
-app.mount("/static", StaticFiles(directory=str(_STATIC_DIR)), name="static")
-
-# Servir design system desde el Draft Advisor (reutilización de tokens)
 _DESIGN_SYSTEM_DIR = _MODULE_DIR.parent / "draft_advisor" / "static" / "design-system"
-if _DESIGN_SYSTEM_DIR.exists():
-    app.mount(
-        "/design-system",
-        StaticFiles(directory=str(_DESIGN_SYSTEM_DIR)),
-        name="design-system",
-    )
+router = APIRouter()
 
 # Instancia global del orquestador
 _orchestrator = ScrapingOrchestrator()
@@ -85,7 +69,7 @@ def _get_orchestrator() -> ScrapingOrchestrator:
 # --- Frontend ---
 
 
-@app.get("/", response_class=HTMLResponse)
+@router.get("/", response_class=HTMLResponse)
 async def serve_frontend():
     """Sirve el dashboard HTML del Meta Scraper."""
     index_path = _STATIC_DIR / "index.html"
@@ -100,7 +84,7 @@ async def serve_frontend():
 # --- API Endpoints ---
 
 
-@app.get("/health")
+@router.get("/health")
 async def health():
     """Health check con estado del sistema."""
     latest_support = load_latest("support")
@@ -125,7 +109,7 @@ async def health():
     }
 
 
-@app.get("/api/v1/meta/support/tier")
+@router.get("/api/v1/meta/support/tier")
 async def get_support_tier_list():
     """
     Devuelve la tier list de soportes del último snapshot normalizado.
@@ -141,7 +125,7 @@ async def get_support_tier_list():
     return data
 
 
-@app.get("/api/v1/meta/adc/tier")
+@router.get("/api/v1/meta/adc/tier")
 async def get_adc_tier_list():
     """
     Devuelve la tier list de ADCs del ultimo snapshot normalizado.
@@ -157,7 +141,7 @@ async def get_adc_tier_list():
     return data
 
 
-@app.get("/api/v1/meta/support/champion/{champion_id}")
+@router.get("/api/v1/meta/support/champion/{champion_id}")
 async def get_champion_detail(champion_id: str):
     """
     Devuelve el detalle de un soporte específico del último snapshot.
@@ -179,7 +163,7 @@ async def get_champion_detail(champion_id: str):
     raise HTTPException(status_code=404, detail=f"Campeón '{champion_id}' no encontrado.")
 
 
-@app.get("/api/v1/meta/adc/champion/{champion_id}")
+@router.get("/api/v1/meta/adc/champion/{champion_id}")
 async def get_adc_champion_detail(champion_id: str):
     """Devuelve el detalle de un ADC especifico del ultimo snapshot."""
     data = load_latest("adc")
@@ -198,7 +182,7 @@ async def get_adc_champion_detail(champion_id: str):
     raise HTTPException(status_code=404, detail=f"ADC '{champion_id}' no encontrado.")
 
 
-@app.get("/api/v1/meta/support/history")
+@router.get("/api/v1/meta/support/history")
 async def get_scrape_history():
     """Devuelve el manifest con el historial de snapshots."""
     import json
@@ -211,7 +195,7 @@ async def get_scrape_history():
         return json.load(f)
 
 
-@app.post("/api/v1/meta/scrape")
+@router.post("/api/v1/meta/scrape")
 async def trigger_scrape(background_tasks: BackgroundTasks):
     """
     Dispara un scraping manual.
@@ -246,7 +230,7 @@ async def trigger_scrape(background_tasks: BackgroundTasks):
     }
 
 
-@app.post("/api/v1/meta/scrape/adc")
+@router.post("/api/v1/meta/scrape/adc")
 async def trigger_adc_scrape(background_tasks: BackgroundTasks):
     """Dispara un scraping manual de ADCs para climb."""
     orchestrator = _get_orchestrator()
@@ -287,6 +271,27 @@ def _run_scrape_background(orchestrator: ScrapingOrchestrator, role: str = "supp
     except Exception as e:
         logger.error("=== Scraping background fallido: %s ===", e, exc_info=True)
         _last_scrape_result = {"error": str(e)}
+
+
+def create_app() -> FastAPI:
+    """Create the Meta Scraper FastAPI application."""
+    application = FastAPI(
+        title="Meta Scraper — LoL Support Meta Dashboard",
+        description="Scrapea y visualiza el meta de soporte de League of Legends.",
+        version="1.0.0",
+    )
+    application.mount("/static", StaticFiles(directory=str(_STATIC_DIR)), name="static")
+    if _DESIGN_SYSTEM_DIR.exists():
+        application.mount(
+            "/design-system",
+            StaticFiles(directory=str(_DESIGN_SYSTEM_DIR)),
+            name="design-system",
+        )
+    application.include_router(router)
+    return application
+
+
+app = create_app()
 
 
 # --- Entry point ---

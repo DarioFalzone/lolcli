@@ -77,6 +77,15 @@ class _AdcPriority:
 
 
 @dataclass(frozen=True)
+class _AdcMetaContext:
+    meta_tier: str | None
+    meta_score: float
+    meta_climb_score: float | None
+    is_current: bool
+    is_strong: bool
+
+
+@dataclass(frozen=True)
 class _AdcLaneRuleResult:
     rule_id: str
     score_delta: float
@@ -275,19 +284,54 @@ class ScoringEngine:
         personal_score = _PERSONAL_TIER_SCORES.get(personal_tier or "", 0.0)
         can_be_top_pick = not self._data.is_adc_never_top_pick(adc_id)
 
-        if self._data.is_adc_excluded_by_user(adc_id):
-            return _AdcPriority(
-                personal_tier=personal_tier,
-                personal_score=0.0,
-                meta_tier=None,
-                meta_score=0.0,
-                meta_climb_score=None,
-                eligibility="blocked_user_excluded",
-                eligibility_reason="Bloqueado por preferencia personal del usuario.",
-                is_core=False,
-                can_be_top_pick=False,
-            )
+        blocked_priority = self._get_adc_user_block_priority(adc_id, personal_tier)
+        if blocked_priority:
+            return blocked_priority
 
+        meta_context = self._build_adc_meta_context(adc_id)
+        veto_priority = self._get_adc_veto_priority(
+            profile,
+            draft_state,
+            analysis,
+            personal_tier,
+            personal_score,
+            meta_context,
+        )
+        if veto_priority:
+            return veto_priority
+
+        core_priority = self._get_adc_core_priority(
+            personal_tier,
+            personal_score,
+            can_be_top_pick,
+            meta_context,
+        )
+        if core_priority:
+            return core_priority
+
+        return self._get_adc_fallback_priority(
+            personal_tier,
+            personal_score,
+            can_be_top_pick,
+            meta_context,
+        )
+
+    def _get_adc_user_block_priority(self, adc_id: str, personal_tier: str | None) -> _AdcPriority | None:
+        if not self._data.is_adc_excluded_by_user(adc_id):
+            return None
+        return _AdcPriority(
+            personal_tier=personal_tier,
+            personal_score=0.0,
+            meta_tier=None,
+            meta_score=0.0,
+            meta_climb_score=None,
+            eligibility="blocked_user_excluded",
+            eligibility_reason="Bloqueado por preferencia personal del usuario.",
+            is_core=False,
+            can_be_top_pick=False,
+        )
+
+    def _build_adc_meta_context(self, adc_id: str) -> _AdcMetaContext:
         meta_info = self._data.get_adc_meta_snapshot_info()
         meta_is_current = bool(meta_info) and not meta_info.get("is_stale", True)
         meta = self._data.get_adc_meta(adc_id) if meta_is_current else None
@@ -298,15 +342,32 @@ class ScoringEngine:
         meta_is_strong = meta_tier in _STRONG_META_TIERS or (
             meta_climb_score is not None and meta_climb_score >= _STRONG_META_CLIMB_SCORE
         )
+        return _AdcMetaContext(
+            meta_tier=meta_tier,
+            meta_score=meta_score,
+            meta_climb_score=meta_climb_score,
+            is_current=meta_is_current,
+            is_strong=meta_is_strong,
+        )
+
+    def _get_adc_veto_priority(
+        self,
+        profile: AdcProfile,
+        draft_state: DraftState,
+        analysis: DraftAnalysis,
+        personal_tier: str | None,
+        personal_score: float,
+        meta_context: _AdcMetaContext,
+    ) -> _AdcPriority | None:
         lane_rule = self._get_adc_lane_rule_result(profile, draft_state)
 
         if lane_rule and lane_rule.top_pick_block and personal_tier in _STRONG_PERSONAL_TIERS:
             return _AdcPriority(
                 personal_tier=personal_tier,
                 personal_score=personal_score,
-                meta_tier=meta_tier,
-                meta_score=meta_score,
-                meta_climb_score=meta_climb_score,
+                meta_tier=meta_context.meta_tier,
+                meta_score=meta_context.meta_score,
+                meta_climb_score=meta_context.meta_climb_score,
                 eligibility="fallback_lane_veto",
                 eligibility_reason=f"Alternativa vetada por draft: {lane_rule.reason}",
                 is_core=False,
@@ -318,42 +379,58 @@ class ScoringEngine:
             return _AdcPriority(
                 personal_tier=personal_tier,
                 personal_score=personal_score,
-                meta_tier=meta_tier,
-                meta_score=meta_score,
-                meta_climb_score=meta_climb_score,
+                meta_tier=meta_context.meta_tier,
+                meta_score=meta_context.meta_score,
+                meta_climb_score=meta_context.meta_climb_score,
                 eligibility="fallback_draft_veto",
                 eligibility_reason=f"Alternativa vetada por draft: {tactical_veto_reason}",
                 is_core=False,
                 can_be_top_pick=False,
             )
+        return None
 
-        if personal_tier in _STRONG_PERSONAL_TIERS and meta_is_strong:
+    @staticmethod
+    def _get_adc_core_priority(
+        personal_tier: str | None,
+        personal_score: float,
+        can_be_top_pick: bool,
+        meta_context: _AdcMetaContext,
+    ) -> _AdcPriority | None:
+        if personal_tier in _STRONG_PERSONAL_TIERS and meta_context.is_strong:
             return _AdcPriority(
                 personal_tier=personal_tier,
                 personal_score=personal_score,
-                meta_tier=meta_tier,
-                meta_score=meta_score,
-                meta_climb_score=meta_climb_score,
+                meta_tier=meta_context.meta_tier,
+                meta_score=meta_context.meta_score,
+                meta_climb_score=meta_context.meta_climb_score,
                 eligibility="core",
                 eligibility_reason="Maestría personal S/A y meta ADC fuerte vigente (tier S o climb 80+).",
                 is_core=True,
                 can_be_top_pick=can_be_top_pick,
             )
+        return None
 
-        if personal_tier == "B" and meta_tier == "S":
+    @staticmethod
+    def _get_adc_fallback_priority(
+        personal_tier: str | None,
+        personal_score: float,
+        can_be_top_pick: bool,
+        meta_context: _AdcMetaContext,
+    ) -> _AdcPriority:
+        if personal_tier == "B" and meta_context.meta_tier == "S":
             return _AdcPriority(
                 personal_tier=personal_tier,
                 personal_score=personal_score,
-                meta_tier=meta_tier,
-                meta_score=meta_score,
-                meta_climb_score=meta_climb_score,
+                meta_tier=meta_context.meta_tier,
+                meta_score=meta_context.meta_score,
+                meta_climb_score=meta_context.meta_climb_score,
                 eligibility="fallback_personal_b_meta_s",
                 eligibility_reason="Alternativa: tier personal B, pero el scraping lo marca S.",
                 is_core=False,
                 can_be_top_pick=can_be_top_pick,
             )
 
-        if personal_tier in _STRONG_PERSONAL_TIERS and not meta_is_current:
+        if personal_tier in _STRONG_PERSONAL_TIERS and not meta_context.is_current:
             return _AdcPriority(
                 personal_tier=personal_tier,
                 personal_score=personal_score,
@@ -366,7 +443,7 @@ class ScoringEngine:
                 can_be_top_pick=can_be_top_pick,
             )
 
-        if personal_tier in _STRONG_PERSONAL_TIERS and meta_tier is None:
+        if personal_tier in _STRONG_PERSONAL_TIERS and meta_context.meta_tier is None:
             return _AdcPriority(
                 personal_tier=personal_tier,
                 personal_score=personal_score,
@@ -379,15 +456,18 @@ class ScoringEngine:
                 can_be_top_pick=can_be_top_pick,
             )
 
-        if personal_tier in _STRONG_PERSONAL_TIERS and meta_tier:
+        if personal_tier in _STRONG_PERSONAL_TIERS and meta_context.meta_tier:
             return _AdcPriority(
                 personal_tier=personal_tier,
                 personal_score=personal_score,
-                meta_tier=meta_tier,
-                meta_score=meta_score,
-                meta_climb_score=meta_climb_score,
-                eligibility="fallback_meta_soft" if meta_tier == "A" else "fallback_meta_low",
-                eligibility_reason=f"Alternativa: meta ADC {meta_tier}; la recomendación principal requiere tier S o climb 80+.",
+                meta_tier=meta_context.meta_tier,
+                meta_score=meta_context.meta_score,
+                meta_climb_score=meta_context.meta_climb_score,
+                eligibility="fallback_meta_soft" if meta_context.meta_tier == "A" else "fallback_meta_low",
+                eligibility_reason=(
+                    f"Alternativa: meta ADC {meta_context.meta_tier}; "
+                    "la recomendación principal requiere tier S o climb 80+."
+                ),
                 is_core=False,
                 can_be_top_pick=can_be_top_pick,
             )
@@ -395,9 +475,9 @@ class ScoringEngine:
         return _AdcPriority(
             personal_tier=personal_tier,
             personal_score=personal_score,
-            meta_tier=meta_tier,
-            meta_score=meta_score,
-            meta_climb_score=meta_climb_score,
+            meta_tier=meta_context.meta_tier,
+            meta_score=meta_context.meta_score,
+            meta_climb_score=meta_context.meta_climb_score,
             eligibility="blocked_personal_low",
             eligibility_reason="Bloqueado: requiere maestria personal S/A; B solo entra si meta es S.",
             is_core=False,
