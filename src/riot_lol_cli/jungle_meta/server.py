@@ -2,8 +2,8 @@
 Jungle Metagame Server — FastAPI endpoint for jungle champion tiers, items, and stats.
 
 Puerto: 8003
-Endpoints: tier-list, champion detail, health check.
-Sirve el frontend SPA para el dashboard de meta jungla.
+Endpoints: tier-list, champion detail, categories, item abusers, health check.
+Sirve el frontend SPA para el dashboard de meta jungla y los iconos de items locales.
 """
 
 from __future__ import annotations
@@ -15,13 +15,22 @@ from fastapi import APIRouter, FastAPI, HTTPException
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 
-from .loader import get_champion_detail, list_champions_by_tier, load_jungle_tier_list
+from riot_lol_cli.settings import get_jungle_meta_host, get_jungle_meta_port
+
+from .loader import (
+    get_categories,
+    get_champion_detail,
+    get_item_abusers,
+    list_champions_by_tier,
+    list_used_item_ids,
+    load_jungle_tier_list,
+)
 
 logger = logging.getLogger(__name__)
 
-# Paths
 _MODULE_DIR = Path(__file__).resolve().parent
 _STATIC_DIR = _MODULE_DIR / "static"
+_ITEMS_DIR = _MODULE_DIR.parent.parent.parent / "assets" / "items"
 
 router = APIRouter()
 
@@ -52,7 +61,7 @@ async def health():
         return {
             "status": "ok",
             "service": "jungle_meta",
-            "port": 8003,
+            "port": get_jungle_meta_port(),
             "patch": tier_list.get("patch"),
             "date_updated": tier_list.get("date_updated"),
             "champion_count": len(tier_list.get("jungle_champions", [])),
@@ -70,13 +79,9 @@ async def health():
 async def get_tier_list():
     """Devuelve la tier list completa de junglas con todos sus datos."""
     try:
-        data = load_jungle_tier_list()
-        return data
+        return load_jungle_tier_list()
     except FileNotFoundError as e:
-        raise HTTPException(
-            status_code=404,
-            detail=f"Patch data not found: {e}",
-        )
+        raise HTTPException(status_code=404, detail=f"Patch data not found: {e}")
 
 
 @router.get("/api/v1/jungle/tier/{tier}")
@@ -84,10 +89,7 @@ async def get_tier(tier: str):
     """Devuelve todos los campeones de un tier específico (S, A, B, C)."""
     tier = tier.upper()
     if tier not in ["S", "A", "B", "C"]:
-        raise HTTPException(
-            status_code=400,
-            detail="Tier debe ser S, A, B o C",
-        )
+        raise HTTPException(status_code=400, detail="Tier debe ser S, A, B o C")
 
     try:
         champions = list_champions_by_tier(tier)
@@ -96,16 +98,9 @@ async def get_tier(tier: str):
                 status_code=404,
                 detail=f"No champions found in tier {tier}",
             )
-        return {
-            "tier": tier,
-            "champions": champions,
-            "count": len(champions),
-        }
+        return {"tier": tier, "champions": champions, "count": len(champions)}
     except FileNotFoundError:
-        raise HTTPException(
-            status_code=404,
-            detail="Patch data not found",
-        )
+        raise HTTPException(status_code=404, detail="Patch data not found")
 
 
 @router.get("/api/v1/jungle/champion/{champion_id}")
@@ -126,10 +121,40 @@ async def get_champion(champion_id: str):
             "date_updated": tier_list.get("date_updated"),
         }
     except FileNotFoundError:
-        raise HTTPException(
-            status_code=404,
-            detail="Patch data not found",
-        )
+        raise HTTPException(status_code=404, detail="Patch data not found")
+
+
+@router.get("/api/v1/jungle/categories")
+async def get_curated_categories():
+    """Devuelve campeones agrupados por categoría curada (OP, low elo, bans)."""
+    try:
+        return get_categories()
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Patch data not found")
+
+
+@router.get("/api/v1/jungle/items/abusers/{item_key}")
+async def get_item_abusers_route(item_key: str):
+    """Devuelve campeones que abusan de un item específico (ej. voltaic_sword_abusers)."""
+    try:
+        champions = get_item_abusers(item_key)
+        if not champions:
+            raise HTTPException(
+                status_code=404,
+                detail=f"No abusers found for item key '{item_key}'",
+            )
+        return {"item_key": item_key, "champions": champions, "count": len(champions)}
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Patch data not found")
+
+
+@router.get("/api/v1/jungle/items/used")
+async def get_used_items():
+    """Devuelve la lista de IDs de items referenciados en core_builds."""
+    try:
+        return {"item_ids": sorted(list_used_item_ids())}
+    except FileNotFoundError:
+        raise HTTPException(status_code=404, detail="Patch data not found")
 
 
 def create_app() -> FastAPI:
@@ -137,11 +162,14 @@ def create_app() -> FastAPI:
     application = FastAPI(
         title="Jungle Metagame — LoL Jungle Champion Tiers",
         description="Visualiza el meta actual de junglas por parche con items y estadísticas.",
-        version="1.0.0",
+        version="1.1.0",
     )
 
     if _STATIC_DIR.exists():
         application.mount("/static", StaticFiles(directory=str(_STATIC_DIR)), name="static")
+
+    if _ITEMS_DIR.exists():
+        application.mount("/items", StaticFiles(directory=str(_ITEMS_DIR)), name="items")
 
     application.include_router(router)
 
@@ -155,17 +183,19 @@ app = create_app()
 
 
 def run() -> None:
-    """Levanta el servidor en puerto 8003."""
+    """Levanta el servidor en puerto configurado (default 8003)."""
     import uvicorn
 
+    host = get_jungle_meta_host()
+    port = get_jungle_meta_port()
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s [%(name)s] %(levelname)s: %(message)s",
     )
-    logger.info("Levantando Jungle Meta Server en http://localhost:8003")
-    logger.info("Dashboard en http://localhost:8003")
-    logger.info("API docs en http://localhost:8003/docs")
-    uvicorn.run(app, host="0.0.0.0", port=8003, log_level="info")
+    logger.info("Levantando Jungle Meta Server en http://localhost:%d", port)
+    logger.info("Dashboard en http://localhost:%d", port)
+    logger.info("API docs en http://localhost:%d/docs", port)
+    uvicorn.run(app, host=host, port=port, log_level="info")
 
 
 if __name__ == "__main__":

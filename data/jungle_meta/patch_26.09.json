@@ -1,7 +1,16 @@
 {
   "patch": "26.09",
-  "date_updated": "2026-05-08T00:00:00Z",
+  "date_updated": "2026-05-08T18:00:00Z",
   "patch_theme": "Hail of Blades + AD items buffed, AP junglers adjusted",
+  "source": "SkillCapped Patch 26.09 Jungle Tier List",
+  "categories": {
+    "overpowered": ["XinZhao", "Shyvana"],
+    "low_elo_picks": ["Warwick", "Amumu", "Nunu", "Udyr"],
+    "bans": ["Shyvana", "Karthus", "LeeSin"]
+  },
+  "items_meta": {
+    "voltaic_sword_abusers": ["XinZhao", "Hecarim", "Kayn", "RekSai"]
+  },
   "jungle_champions": [
     {
       "id": "XinZhao",
@@ -12,8 +21,20 @@
       "banrate": 8.3,
       "primary_reason": "item_synergy",
       "reason_text": "Hail of Blades + AD item buffs. Lethal early game tempo.",
-      "core_items": ["Hail of Blades", "Warrior Enchantment", "Black Cleaver"],
-      "core_rune": "Hail of Blades",
+      "core_builds": [
+        {
+          "label": "Standard",
+          "items": [3047, 6699, 3071, 3156]
+        },
+        {
+          "label": "Crit Variant",
+          "items": [3006, 6699, 6675, 3071]
+        }
+      ],
+      "core_rune": {
+        "name": "Hail of Blades",
+        "tree": "Inspiration"
+      },
       "playstyle": "Early game aggression, objective control."
     },
     {
@@ -25,8 +46,16 @@
       "banrate": 15.0,
       "primary_reason": "champ_buff",
       "reason_text": "R cooldown reduction buff this patch. Dragons dissolving faster.",
-      "core_items": ["Warrior Enchantment", "Nashor's Tooth", "Rabadons"],
-      "core_rune": "Conqueror",
+      "core_builds": [
+        {
+          "label": "AP Hybrid",
+          "items": [3020, 3115, 3089, 3116]
+        }
+      ],
+      "core_rune": {
+        "name": "Conqueror",
+        "tree": "Precision"
+      },
       "playstyle": "Sustained DPS, teamfight carry."
     },
     {
@@ -38,8 +67,16 @@
       "banrate": 9.5,
       "primary_reason": "item_synergy",
       "reason_text": "Benefits from AD scaling buffs. Mobility gank machine.",
-      "core_items": ["Warrior Enchantment", "Trinity Force", "Black Cleaver"],
-      "core_rune": "Phase Rush",
+      "core_builds": [
+        {
+          "label": "Bruiser",
+          "items": [3047, 3078, 3071, 6630]
+        }
+      ],
+      "core_rune": {
+        "name": "Phase Rush",
+        "tree": "Sorcery"
+      },
       "playstyle": "Mobile ganking, map pressure."
     },
     {
@@ -51,8 +88,16 @@
       "banrate": 7.1,
       "primary_reason": "meta_stable",
       "reason_text": "Consistent pick, no major changes. Reliable early game.",
-      "core_items": ["Warrior Enchantment", "Manamune", "Black Cleaver"],
-      "core_rune": "Hail of Blades",
+      "core_builds": [
+        {
+          "label": "AD Lethality",
+          "items": [3047, 6699, 3071, 6692]
+        }
+      ],
+      "core_rune": {
+        "name": "Hail of Blades",
+        "tree": "Inspiration"
+      },
       "playstyle": "Early gank-focused, vision control."
     },
     {
@@ -63,9 +108,17 @@
       "pickrate": 8.6,
       "banrate": 6.2,
       "primary_reason": "meta_stable",
-      "reason_text": "Sustain jungler, scales with tankiness. Underrated pick.",
-      "core_items": ["Hollow Radiance", "Thornmail", "Abyssal Mask"],
-      "core_rune": "Predator",
+      "reason_text": "Sustain jungler, scales with tankiness. Underrated low elo pick.",
+      "core_builds": [
+        {
+          "label": "Tank Bruiser",
+          "items": [3111, 3068, 3075, 3001]
+        }
+      ],
+      "core_rune": {
+        "name": "Predator",
+        "tree": "Domination"
+      },
       "playstyle": "Tanky engage, sustained healing."
     },
     {
@@ -77,8 +130,16 @@
       "banrate": 5.8,
       "primary_reason": "champ_buff",
       "reason_text": "Q cooldown reduction. Snowball spam + team synergy.",
-      "core_items": ["Liandry's Torment", "Rylais", "Morellonomicon"],
-      "core_rune": "Electrocute",
+      "core_builds": [
+        {
+          "label": "AP Bruiser",
+          "items": [3020, 6653, 3116, 3165]
+        }
+      ],
+      "core_rune": {
+        "name": "Electrocute",
+        "tree": "Domination"
+      },
       "playstyle": "AP bruiser, team utility CC."
     },
     {
@@ -90,8 +151,16 @@
       "banrate": 4.3,
       "primary_reason": "meta_decent",
       "reason_text": "AP scaling decent but outpaced by AD junglers this patch.",
-      "core_items": ["Warrior Enchantment", "Trinity Force", "Essence Reaver"],
-      "core_rune": "Press the Attack",
+      "core_builds": [
+        {
+          "label": "Crit DPS",
+          "items": [3006, 3078, 3508, 6675]
+        }
+      ],
+      "core_rune": {
+        "name": "Press the Attack",
+        "tree": "Precision"
+      },
       "playstyle": "DPS carry, scaling into late."
     },
     {
@@ -103,8 +172,16 @@
       "banrate": 12.5,
       "primary_reason": "high_skill_floor",
       "reason_text": "Still popular but playrate high relative to WR. Skill-dependent.",
-      "core_items": ["Warrior Enchantment", "Black Cleaver", "Marakuai"],
-      "core_rune": "Electrocute",
+      "core_builds": [
+        {
+          "label": "AD Bruiser",
+          "items": [3047, 3071, 6692, 3156]
+        }
+      ],
+      "core_rune": {
+        "name": "Electrocute",
+        "tree": "Domination"
+      },
       "playstyle": "Mechanical outplay, early game."
     },
     {
@@ -116,9 +193,17 @@
       "banrate": 3.2,
       "primary_reason": "meta_stable",
       "reason_text": "Engage tank, stable but not meta this patch.",
-      "core_items": ["Sunfire Aegis", "Thornmail", "Hollow Radiance"],
-      "core_rune": "Predator",
-      "playstyle": "Tank engage, comb ult follow-up."
+      "core_builds": [
+        {
+          "label": "Tank Engage",
+          "items": [3111, 3068, 3075, 6665]
+        }
+      ],
+      "core_rune": {
+        "name": "Predator",
+        "tree": "Domination"
+      },
+      "playstyle": "Tank engage, combo ult follow-up."
     },
     {
       "id": "Gragas",
@@ -129,8 +214,16 @@
       "banrate": 2.8,
       "primary_reason": "meta_niche",
       "reason_text": "AP jungler; overshadowed by AD scaling nerfs and Xin/Shyvana.",
-      "core_items": ["Liandry's Torment", "Rylais", "Abyssal Mask"],
-      "core_rune": "Electrocute",
+      "core_builds": [
+        {
+          "label": "AP Burst",
+          "items": [3020, 6653, 3116, 3001]
+        }
+      ],
+      "core_rune": {
+        "name": "Electrocute",
+        "tree": "Domination"
+      },
       "playstyle": "AP bruiser, utility CC."
     },
     {
@@ -142,8 +235,16 @@
       "banrate": 2.1,
       "primary_reason": "meta_decent",
       "reason_text": "Sustain tank, niche situational pick in comps.",
-      "core_items": ["Liandry's Torment", "Thornmail", "Abyssal Mask"],
-      "core_rune": "Conqueror",
+      "core_builds": [
+        {
+          "label": "Tank Sustain",
+          "items": [3111, 6653, 3075, 3001]
+        }
+      ],
+      "core_rune": {
+        "name": "Conqueror",
+        "tree": "Precision"
+      },
       "playstyle": "Tanky sustain, camp control."
     },
     {
@@ -155,8 +256,16 @@
       "banrate": 1.8,
       "primary_reason": "meta_weak",
       "reason_text": "AP jungler powercrept. High risk without sufficient reward.",
-      "core_items": ["Liandry's Torment", "Demonic Embrace", "Rylais"],
-      "core_rune": "Electrocute",
+      "core_builds": [
+        {
+          "label": "AP Burst Assassin",
+          "items": [3020, 6653, 4637, 3116]
+        }
+      ],
+      "core_rune": {
+        "name": "Electrocute",
+        "tree": "Domination"
+      },
       "playstyle": "AP burst assassin, stealth ganks."
     },
     {
@@ -168,8 +277,16 @@
       "banrate": 1.2,
       "primary_reason": "meta_weak",
       "reason_text": "Tank pick, overshadowed by Hecarim/Warwick tanky options.",
-      "core_items": ["Sunfire Aegis", "Abyssal Mask", "Thornmail"],
-      "core_rune": "Predator",
+      "core_builds": [
+        {
+          "label": "AP Tank",
+          "items": [3111, 3068, 3001, 3075]
+        }
+      ],
+      "core_rune": {
+        "name": "Predator",
+        "tree": "Domination"
+      },
       "playstyle": "Tank engage, ult combo."
     },
     {
@@ -180,9 +297,17 @@
       "pickrate": 1.9,
       "banrate": 0.8,
       "primary_reason": "meta_weak",
-      "reason_text": "AP jungle struggling. Nerfed indirect nerfs to AP scaling.",
-      "core_items": ["Liandry's Torment", "Rylais", "Morellonomicon"],
-      "core_rune": "Dark Harvest",
+      "reason_text": "AP jungle struggling. Indirect nerfs to AP scaling.",
+      "core_builds": [
+        {
+          "label": "AP Carry",
+          "items": [3020, 6653, 3116, 3089]
+        }
+      ],
+      "core_rune": {
+        "name": "Dark Harvest",
+        "tree": "Domination"
+      },
       "playstyle": "AP AOE teamfight, late game."
     },
     {
@@ -194,8 +319,16 @@
       "banrate": 1.0,
       "primary_reason": "meta_niche",
       "reason_text": "Tank option but low popularity. Situational into AD comps.",
-      "core_items": ["Sunfire Aegis", "Thornmail", "Hollow Radiance"],
-      "core_rune": "Predator",
+      "core_builds": [
+        {
+          "label": "Tank CC",
+          "items": [3111, 3068, 3075, 6665]
+        }
+      ],
+      "core_rune": {
+        "name": "Predator",
+        "tree": "Domination"
+      },
       "playstyle": "Tank engage, crowd control."
     },
     {
@@ -207,8 +340,16 @@
       "banrate": 0.9,
       "primary_reason": "high_skill_floor",
       "reason_text": "Mechanical jungler. Spear damage nerfed. Low play rate among casuals.",
-      "core_items": ["Warrior Enchantment", "Trinity Force", "Liche Bane"],
-      "core_rune": "Electrocute",
+      "core_builds": [
+        {
+          "label": "AP Hybrid",
+          "items": [3020, 3115, 3100, 3089]
+        }
+      ],
+      "core_rune": {
+        "name": "Electrocute",
+        "tree": "Domination"
+      },
       "playstyle": "Skillshot poke, mobility."
     }
   ]

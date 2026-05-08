@@ -61,6 +61,9 @@ def test_jungle_meta_create_app_registers_core_routes():
     assert "/api/v1/jungle/tier-list" in paths
     assert "/api/v1/jungle/tier/{tier}" in paths
     assert "/api/v1/jungle/champion/{champion_id}" in paths
+    assert "/api/v1/jungle/categories" in paths
+    assert "/api/v1/jungle/items/abusers/{item_key}" in paths
+    assert "/api/v1/jungle/items/used" in paths
 
 
 def test_jungle_meta_create_app_serves_health_and_openapi():
@@ -75,3 +78,22 @@ def test_jungle_meta_create_app_serves_health_and_openapi():
     openapi = client.get("/openapi.json")
     assert openapi.status_code == 200
     assert openapi.json()["info"]["title"].startswith("Jungle Metagame")
+
+
+def test_jungle_meta_categories_and_item_abusers_endpoints():
+    client = TestClient(create_jungle_meta_app())
+
+    categories = client.get("/api/v1/jungle/categories")
+    assert categories.status_code == 200
+    body = categories.json()
+    assert "overpowered" in body
+    assert "low_elo_picks" in body
+    assert "bans" in body
+
+    abusers = client.get("/api/v1/jungle/items/abusers/voltaic_sword_abusers")
+    assert abusers.status_code == 200
+    assert abusers.json()["count"] >= 1
+
+    used = client.get("/api/v1/jungle/items/used")
+    assert used.status_code == 200
+    assert 6699 in used.json()["item_ids"]
