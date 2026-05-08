@@ -9,6 +9,8 @@ DEFAULT_META_SCRAPER_HOST = "0.0.0.0"
 DEFAULT_META_SCRAPER_PORT = 8002
 DEFAULT_JUNGLE_META_HOST = "0.0.0.0"
 DEFAULT_JUNGLE_META_PORT = 8003
+DEFAULT_ITEMS_BROWSER_HOST = "0.0.0.0"
+DEFAULT_ITEMS_BROWSER_PORT = 8004
 
 
 def _get_env_int(name: str, default: int) -> int:
@@ -56,3 +58,11 @@ def get_jungle_meta_host() -> str:
 
 def get_jungle_meta_port() -> int:
     return _get_env_int("LOLCLI_JUNGLE_META_PORT", DEFAULT_JUNGLE_META_PORT)
+
+
+def get_items_browser_host() -> str:
+    return os.getenv("LOLCLI_ITEMS_BROWSER_HOST", DEFAULT_ITEMS_BROWSER_HOST)
+
+
+def get_items_browser_port() -> int:
+    return _get_env_int("LOLCLI_ITEMS_BROWSER_PORT", DEFAULT_ITEMS_BROWSER_PORT)

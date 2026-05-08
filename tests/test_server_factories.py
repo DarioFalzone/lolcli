@@ -1,6 +1,7 @@
 from fastapi.testclient import TestClient
 
 from riot_lol_cli.draft_advisor.server import create_app as create_draft_advisor_app
+from riot_lol_cli.items_browser.server import create_app as create_items_browser_app
 from riot_lol_cli.jungle_meta.server import create_app as create_jungle_meta_app
 from riot_lol_cli.meta_scraper.server import create_app as create_meta_scraper_app
 
@@ -97,3 +98,39 @@ def test_jungle_meta_categories_and_item_abusers_endpoints():
     used = client.get("/api/v1/jungle/items/used")
     assert used.status_code == 200
     assert 6699 in used.json()["item_ids"]
+
+
+def test_items_browser_create_app_registers_core_routes():
+    app = create_items_browser_app()
+    paths = _route_paths(app)
+
+    assert "/" in paths
+    assert "/health" in paths
+    assert "/api/v1/items/all" in paths
+    assert "/api/v1/items/groups" in paths
+    assert "/api/v1/items/categories" in paths
+    assert "/api/v1/items/search" in paths
+    assert "/api/v1/items/{item_id}" in paths
+
+
+def test_items_browser_health_and_endpoints():
+    client = TestClient(create_items_browser_app())
+
+    health = client.get("/health")
+    assert health.status_code == 200
+    body = health.json()
+    assert body["status"] == "ok"
+    assert body["service"] == "items_browser"
+    assert body["current_count"] >= 700
+
+    voltaic = client.get("/api/v1/items/6699")
+    assert voltaic.status_code == 200
+    assert voltaic.json()["name_en"] == "Voltaic Cyclosword"
+
+    search = client.get("/api/v1/items/search", params={"q": "voltaic", "lang": "en"})
+    assert search.status_code == 200
+    assert search.json()["count"] >= 1
+
+    groups = client.get("/api/v1/items/groups")
+    assert groups.status_code == 200
+    assert "boots" in groups.json()["groups"]
