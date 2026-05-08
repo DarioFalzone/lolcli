@@ -44,6 +44,7 @@ El repo esta en evolucion activa y puede tener un working tree sucio. Antes de e
 | Draft Advisor | `src/riot_lol_cli/draft_advisor/` | FastAPI, Pydantic V2, JS vanilla | Activo | Recomendador ADC/Support y SPA en puerto 8001 |
 | Draft KB | `KB/`, `data/draft_advisor/kb/` | Markdown, JSON estructurado | Activo | Fuente conceptual y reglas estructuradas del Draft Advisor |
 | Meta Scraper | `src/riot_lol_cli/meta_scraper/` | FastAPI, Playwright, JSON | Activo | Scraping/normalizacion de meta support/ADC en puerto 8002 |
+| Jungle Meta | `src/riot_lol_cli/jungle_meta/` | FastAPI, JSON, SPA | Activo | Tier list de campeones jungla por patch en puerto 8003 |
 | Schemas Riot | `src/riot_lol_cli/schemas/` | Pydantic V2 | Activo | Modelos tipados para payloads de Match-V5 |
 | Scripts | `scripts/`, `scripts/bat/` | Python, Batch, Shell | Activo | Automatizacion de setup, fetch, dashboards y assets |
 | Tests/CI | `tests/`, `.github/workflows/ci.yml` | pytest, ruff | Activo | Unit/eval tests y CI |
@@ -119,7 +120,8 @@ Hay tres servidores FastAPI separados:
 |----------|-------------|--------|--------------|------|
 | Meta API / Meta Analyzer | `python scripts/run_api.py` | 8000 | `http://localhost:8000/dashboard-enhanced` | `http://localhost:8000/docs` |
 | Draft Advisor | `python -m riot_lol_cli.draft_advisor.server` | 8001 | `http://localhost:8001/draft` | `http://localhost:8001/docs` |
-| Meta Scraper | `cd src && python -m riot_lol_cli.meta_scraper.server` | 8002 | `http://localhost:8002` | `http://localhost:8002/docs` |
+| Meta Scraper | `python -m riot_lol_cli.meta_scraper.server` | 8002 | `http://localhost:8002` | `http://localhost:8002/docs` |
+| Jungle Meta | `python -m riot_lol_cli.jungle_meta.server` | 8003 | `http://localhost:8003` | `http://localhost:8003/docs` |
 
 ## Flujos Operativos
 
@@ -249,7 +251,8 @@ La fuente de verdad de paths runtime es `src/riot_lol_cli/paths.py`:
 | Meta API | `python scripts/run_api.py` |
 | Dashboard standalone | `python scripts/generate_dashboard.py` |
 | Draft Advisor | `python -m riot_lol_cli.draft_advisor.server` |
-| Meta Scraper | `cd src && python -m riot_lol_cli.meta_scraper.server` |
+| Meta Scraper | `python -m riot_lol_cli.meta_scraper.server` |
+| Jungle Meta | `python -m riot_lol_cli.jungle_meta.server` |
 | Fetch completo de partidas | `python scripts/fetch_matches_full.py` |
 | Tests | `pytest tests/` |
 | Lint | `ruff check src tests scripts` |
@@ -307,6 +310,18 @@ Definida en `src/riot_lol_cli/meta_scraper/server.py`.
 - `GET /api/v1/meta/adc/champion/{champion_id}`
 - `POST /api/v1/meta/scrape`
 - `POST /api/v1/meta/scrape/adc`
+
+### Jungle Meta API (`:8003`)
+
+Definida en `src/riot_lol_cli/jungle_meta/server.py`.
+
+- `GET /` (dashboard SPA)
+- `GET /health`
+- `GET /api/v1/jungle/tier-list`
+- `GET /api/v1/jungle/tier/{tier}` (S, A, B, C)
+- `GET /api/v1/jungle/champion/{champion_id}`
+- `GET /openapi.json`
+- `GET /docs`
 
 ## Datos y Knowledge Base
 
@@ -449,14 +464,14 @@ Reglas clave:
 
 ## Gotchas Globales
 
-1. **Tres FastAPI separados:** Meta API `:8000`, Draft Advisor `:8001`, Meta Scraper `:8002`.
+1. **Cuatro FastAPI separados:** Meta API `:8000`, Draft Advisor `:8001`, Meta Scraper `:8002`, Jungle Meta `:8003`.
 2. **`api_server.py` es wrapper:** la app real del Meta Analyzer vive en `meta_api/app.py`.
 3. **Templates activos:** usar `templates/` raiz. No asumir `src/riot_lol_cli/templates/`.
 4. **Rendering activo:** usar `rendering.py`. No reintroducir `html.py` legacy.
 5. **Legacy copy:** `projects/legacy/riot-lol-cli/` no es el paquete activo.
 6. **API key Riot:** dev keys expiran cada 24h; usar `.env`.
 7. **Playwright:** Meta Scraper declara Playwright en `requirements.txt`, pero el browser Chromium se instala aparte con `playwright install chromium`.
-8. **Puerto 8002:** `meta_scraper.server` hardcodea puerto 8002; `settings.py` solo parametriza Meta API y Draft Advisor.
+8. **Puertos 8000-8003:** Meta API (:8000), Draft Advisor (:8001), Meta Scraper (:8002) y Jungle Meta (:8003) usan `settings.py` para host/port configurables via `LOLCLI_*_HOST` y `LOLCLI_*_PORT`.
 9. **Data versioning:** `live_patch_label` es el parche jugable/meta; `static_data_version` es la version tecnica de Data Dragon/CDN y puede tener sufijos como `.1`.
 10. **Draft data IDs:** relaciones de `adc_profiles.json`, `support_profiles.json` y `personal_adc_mastery.json` deben validar contra IDs canonicos de `champion_base.json`.
 11. **ADC personal policy:** `excluded_from_recommendations` bloquea picks aunque sean meta; `never_top_pick` permite alternativa pero nunca primera opcion. Top ADC requiere maestria `S/A`, meta `S` o `climb_score >= 80`, y no estar vetado por reglas KB de linea como Nilah + Soraka vs Caitlyn + Nautilus ni por vetos tacticos de draft contra dive/burst sin frontline. Los bonus KB de matchup, como Xayah contra Malphite/TahmKench, solo suman fit de draft y no saltan el gate de meta/maestria.
@@ -473,7 +488,7 @@ Reglas clave:
 - `docs/api-guide.md` y algunos docs de dashboard/meta pueden tener rutas antiguas comparadas con `meta_api/routes/*`.
 - `docs/draft_advisor/README.md` puede describir una fase anterior del roster de supports.
 - `Meta Scraper` requiere `playwright install chromium` para scraping real; el paquete Python ya esta declarado en `requirements.txt`.
-- `settings.py` no tiene helpers para Meta Scraper host/port.
+- `settings.py` ya tiene helpers para Meta Scraper y Jungle Meta host/port; revisar scripts y copy visible cuando se agreguen nuevos entrypoints.
 - `dashboard_enhanced.py` mantiene HTML embebido en Python; migrar a template solo con pedido explicito.
 - `database/` no tiene migraciones; no cambiar schema sin plan.
 - `projects/active/junglas-pro/` conserva contenido de investigacion standalone; validar vigencia de fuentes antes de usarlo como dato actual.

@@ -183,6 +183,9 @@ playwright install chromium
 scripts\bat\meta_scraper.bat
 ```
 
+El script usa `8002` por default y respeta `LOLCLI_META_SCRAPER_PORT` si ya
+está definido en el entorno.
+
 **Manual (desde la raíz del repo, con venv activo):**
 ```powershell
 $env:PYTHONPATH=(Resolve-Path .\src).Path
@@ -221,7 +224,53 @@ curl http://localhost:8002/api/v1/meta/adc/tier
 
 ---
 
-## 6. Fetch completo de partidas
+## 6. Jungle Meta
+
+Dashboard de tier list de campeones de jungla por parche con estadísticas (WR, PR, BR), items core y runa keystone.
+
+### Levantar dashboard
+
+**Windows (script rápido):**
+```bash
+scripts\bat\jungle_meta.bat
+```
+
+El script levanta en puerto `8003` (respeta `LOLCLI_JUNGLE_META_PORT` si está definido).
+
+**Manual (desde la raíz del repo):**
+```powershell
+$env:PYTHONPATH=(Resolve-Path .\src).Path
+.\.venv\Scripts\python.exe -m riot_lol_cli.jungle_meta.server
+```
+
+- Dashboard: http://localhost:8003
+- API Docs: http://localhost:8003/docs
+- Health: http://localhost:8003/health
+
+### Uso
+1. Abrir http://localhost:8003
+2. Ver tier list completa (todos los campeones jungla)
+3. Hacer clic en tabs **S**, **A**, **B**, **C** para filtrar por tier
+4. Cada card muestra: nombre campeón, WR/PR/BR, items core, runa keystone y razón de fuerza
+
+### Endpoints principales
+```bash
+# Tier list completa
+curl http://localhost:8003/api/v1/jungle/tier-list
+
+# Campeones de un tier específico
+curl http://localhost:8003/api/v1/jungle/tier/S
+curl http://localhost:8003/api/v1/jungle/tier/A
+
+# Detalle de un campeón
+curl http://localhost:8003/api/v1/jungle/champion/XinZhao
+```
+
+**Datos:** `data/jungle_meta/patch_26.09.json` (16 campeones jungla por tier)
+
+---
+
+## 7. Fetch completo de partidas
 
 Para obtener datos completos (daño, oro, visión, etc.):
 
@@ -260,3 +309,4 @@ Los datos se guardan en `data/cache/matches.json`.
 | `scripts/bat/regenerar_splash_viewer.bat` | Regenera visor de splash arts |
 | `scripts/bat/download_splash_arts.bat` | Descarga splash arts (menú interactivo) |
 | `scripts/bat/meta_scraper.bat` | Levanta Meta Scraper dashboard (puerto 8002) |
+| `scripts/bat/jungle_meta.bat` | Levanta Jungle Meta dashboard (puerto 8003) |

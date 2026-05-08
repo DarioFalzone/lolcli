@@ -23,7 +23,7 @@ No mover `src/`, `data/`, `assets/`, `templates/` o `scripts/` sin plan explicit
 
 ## Subsistemas y gotchas
 
-- Hay tres FastAPI separados: Meta API `:8000`, Draft Advisor `:8001`, Meta Scraper `:8002`.
+- Hay cuatro FastAPI separados: Meta API `:8000`, Draft Advisor `:8001`, Meta Scraper `:8002`, Jungle Meta `:8003`.
 - `api_server.py` es wrapper; la app real del Meta Analyzer vive en `src/riot_lol_cli/meta_api/app.py`.
 - Templates runtime activos: `templates/` en la raiz. No reintroducir `src/riot_lol_cli/templates/`.
 - Rendering activo: `src/riot_lol_cli/rendering.py`; `html.py` es legado.
@@ -44,20 +44,22 @@ Los antiguos `src/riot_lol_cli/*/AGENTS.md` fueron absorbidos. Usar estas refere
 | Meta Analyzer | `projects/active/meta-analyzer-dashboard/README.md` + `docs/meta_analyzer/README.md` |
 | Database | `docs/meta_analyzer/README.md` seccion Base de Datos |
 | Meta Scraper | `projects/active/meta-scraper/README.md` |
+| Jungle Meta | `projects/active/jungle-meta/README.md` |
 | Splash Gallery | `projects/active/splash-gallery/README.md` + `docs/splash-viewer.md` |
 
 ## Como cerrar una tarea
 
-Antes de dar una tarea por terminada, ejecutar este checklist en orden:
+Antes de dar una tarea por terminada, revisar el checklist canonico de
+`.agent/rules/documentation-and-commits.md` y aplicar una verificacion
+proporcional al alcance:
 
-1. **Tests**: correr `pytest -q` y `ruff check src tests scripts`. Si alguno falla, resolver antes de continuar.
-2. **Bitacora**: si el cambio es significativo, agregar entrada en `bitacora_de_cambios.md` (fecha, que se hizo, archivos clave, resultado de verificacion). Ver criterios en `.agent/rules/documentation-and-commits.md`.
-3. **Docs tecnicas**: revisar la tabla "Documentos a revisar" en `documentation-and-commits.md` y actualizar los que apliquen.
-4. **Rules**: si el cambio introduce un gotcha nuevo, patron obligatorio o limitacion de entorno, registrarlo en la rule de `.agent/rules/` correspondiente.
-5. **Commit**: un commit por cambio logico, Conventional Commit format, descripcion en imperativo.
-6. **Informar**: reportar al usuario: que se hizo, tests ejecutados, riesgos residuales y documentos actualizados.
+1. **Cambios de codigo/datos runtime**: correr al menos tests focalizados y `ruff check src tests scripts`.
+2. **Cambios de doc o estructura**: hacer busquedas o checks de consistencia acordes; no forzar `pytest -q` completo si no aporta cobertura real.
+3. **Bitacora y docs**: actualizar los documentos que apliquen en la misma iteracion.
+4. **Rules**: registrar cualquier gotcha nuevo en la rule canonica correspondiente.
+5. **Informar**: cerrar con resumen, verificacion ejecutada y riesgo residual.
 
-> Omitir cualquier paso de esta lista es deuda inmediata que el proximo agente o el usuario tendran que pagar.
+> La clave no es "correr todo siempre", sino no cerrar una tarea sin la verificacion que realmente cubre el cambio hecho.
 
 ## Glosario minimo
 
