@@ -4,9 +4,9 @@
   "patch_theme": "Hail of Blades + AD items buffed, AP junglers adjusted",
   "source": "SkillCapped Patch 26.09 Jungle Tier List",
   "categories": {
-    "overpowered": ["XinZhao", "Shyvana"],
-    "low_elo_picks": ["Warwick", "Amumu", "Nunu", "Udyr"],
-    "bans": ["Shyvana", "Karthus", "LeeSin"]
+    "overpowered": ["XinZhao", "Shyvana", "Udyr", "Kayn"],
+    "low_elo_picks": ["Warwick", "Amumu", "Nunu"],
+    "bans": ["Shyvana", "Kayn", "Udyr"]
   },
   "items_meta": {
     "voltaic_sword_abusers": ["XinZhao", "Hecarim", "Kayn", "RekSai"]
@@ -23,12 +23,12 @@
       "reason_text": "Hail of Blades + AD item buffs. Lethal early game tempo.",
       "core_builds": [
         {
-          "label": "Standard",
-          "items": [3047, 6699, 3071, 3156]
+          "label": "Standard (Voltaic + Cleaver + Sundered)",
+          "items": [3047, 6699, 3071, 6610]
         },
         {
-          "label": "Crit Variant",
-          "items": [3006, 6699, 6675, 3071]
+          "label": "Bruiser (Stridebreaker + Trinity)",
+          "items": [3006, 6631, 3078, 3071]
         }
       ],
       "core_rune": {
@@ -57,6 +57,27 @@
         "tree": "Precision"
       },
       "playstyle": "Sustained DPS, teamfight carry."
+    },
+    {
+      "id": "Kayn",
+      "display_name": "Kayn (Slayer / Red)",
+      "tier": "S",
+      "winrate": 53.4,
+      "pickrate": 13.1,
+      "banrate": 11.8,
+      "primary_reason": "item_synergy",
+      "reason_text": "Red Kayn abusing Profane Hydra + Voltaic combo. Lethality + heal sustain.",
+      "core_builds": [
+        {
+          "label": "Slayer (Red) — Lethality",
+          "items": [3111, 6698, 6699, 3814]
+        }
+      ],
+      "core_rune": {
+        "name": "Hail of Blades",
+        "tree": "Inspiration"
+      },
+      "playstyle": "Pick assassin con sustain. R into backline, Hydra cleave + Voltaic Energized."
     },
     {
       "id": "Hecarim",
@@ -229,23 +250,23 @@
     {
       "id": "Udyr",
       "display_name": "Udyr",
-      "tier": "B",
-      "winrate": 50.8,
-      "pickrate": 3.9,
-      "banrate": 2.1,
-      "primary_reason": "meta_decent",
-      "reason_text": "Sustain tank, niche situational pick in comps.",
+      "tier": "S",
+      "winrate": 53.5,
+      "pickrate": 7.8,
+      "banrate": 6.5,
+      "primary_reason": "champ_buff",
+      "reason_text": "Heartsteel synergy + bear stance buffs. Tanky carry monster.",
       "core_builds": [
         {
-          "label": "Tank Sustain",
-          "items": [3111, 6653, 3075, 3001]
+          "label": "Heartsteel Tank-Carry",
+          "items": [3111, 3084, 6664, 3068]
         }
       ],
       "core_rune": {
         "name": "Conqueror",
         "tree": "Precision"
       },
-      "playstyle": "Tanky sustain, camp control."
+      "playstyle": "Stomp + Heartsteel scaling, frontline + damage hybrid."
     },
     {
       "id": "Evelynn",
