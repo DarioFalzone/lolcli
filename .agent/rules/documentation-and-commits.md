@@ -56,8 +56,13 @@ Ejecutarlo despues de cada cambio de codigo, datos o estructura, con verificacio
 4. **CI / dependencias**: si el cambio agrega, quita o modifica una dependencia o prerequisito de sistema (e.g. playwright, Python version floor, nueva env var), verificar que `requirements.txt`, `requirements-dev.txt`, `docs/getting-started.md` y el workflow de CI reflejen el cambio.
 5. **Verificacion**: si el fix cierra un bug reproducible, confirmar que existe o se agrego un test que lo habria atrapado. Para cambios de codigo usar tests focalizados como piso; correr la suite completa solo cuando el alcance o el riesgo lo justifiquen. Mencionar en la bitacora.
 6. **Reglas de agente**: si el cambio introduce una convencion nueva o un gotcha (e.g. nueva limitacion de version, patron obligatorio, exclusion de ruff), registrarla en la rule canonica de `.agent/rules/` correspondiente.
+7. **Cierre con lista de archivos (obligatorio)**: el agente debe cerrar la respuesta final al usuario con dos secciones explicitas, **incluso si parecen redundantes con el commit**:
+   - **Archivos creados** — lista bullet con paths relativos (ej. `src/riot_lol_cli/items_browser/server.py`).
+   - **Archivos modificados** — lista bullet con paths relativos.
+   - Si la lista es vacia, decir explicitamente "Sin archivos nuevos/modificados". No omitir la seccion.
+   - Esto da al usuario un mapa rapido de la blast radius sin tener que leer el diff entero.
 
-> **Por que**: la documentacion que no se actualiza en la misma iteracion que el codigo rota y acumula drift. Cada "lo hago despues" es deuda que ningun agente futuro puede resolver sin leer el codigo completo.
+> **Por que**: la documentacion que no se actualiza en la misma iteracion que el codigo rota y acumula drift. Cada "lo hago despues" es deuda que ningun agente futuro puede resolver sin leer el codigo completo. La lista de archivos al cierre es lo primero que el usuario revisa para decidir si auditar el cambio o aceptar el resumen.
 
 ## Conventional Commits
 
