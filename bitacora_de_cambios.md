@@ -6,6 +6,55 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-05-08] Jungle Meta Dashboard v1.1 — Rediseño basado en SkillCapped
+
+### Que se hizo
+- Rediseño completo del SPA para alinearlo con la estética de SkillCapped Patch 26.09 (display itálica grande tipo Anton, tier list grid con filas S/A/B/C separadas, sidebar con OP/Low Elo/Bans, hero con jungla icon).
+- **Nuevo schema de datos** en `data/jungle_meta/patch_26.09.json`:
+  - `core_builds`: array de builds por champion (Xin Zhao tiene 2 variantes según video).
+  - `core_rune`: objeto estructurado `{name, tree}`.
+  - `categories`: agrupación curada `overpowered`, `low_elo_picks`, `bans`.
+  - `items_meta.voltaic_sword_abusers`: campeones que abusan de Cicloespada Voltaica.
+  - **Items por DDragon ID (int)** en lugar de strings — sirve `assets/items/<id>.png` localmente.
+- Backend (`loader.py` + `server.py`):
+  - Nuevas funciones: `get_categories`, `get_item_abusers`, `list_used_item_ids`.
+  - Nuevos endpoints: `/api/v1/jungle/categories`, `/api/v1/jungle/items/abusers/{key}`, `/api/v1/jungle/items/used`.
+  - Mount estático `/items` que sirve los 706 PNGs de `assets/items/`.
+  - `health` y `run()` ahora usan `get_jungle_meta_host()` y `get_jungle_meta_port()` de `settings.py`.
+- Frontend (rewrite completo):
+  - `index.html` separado en estructura + `<template>` shells (overview + champion detail).
+  - `styles.css` nuevo: tokens del design system, Anton itálica display, tier-rows separadas, splash bg en detail view.
+  - `app.js` nuevo: hash router (`#overview`, `#champion/{id}`), fetch de tier-list + categorías en paralelo, render de cards expandidas con WR/PR, builds múltiples, fallback de error 404 en items.
+
+### Decisiones de UX (validadas con el usuario)
+- **Hash routing** para detail (no modal). Deeplink-friendly.
+- **Cards expandidas** (icon + nombre + WR/PR) en lugar de solo iconos.
+- **Tabs S/A/B/C mantenidos** como filtro adicional (default: ALL muestra todas las filas).
+
+### Archivos clave
+- `data/jungle_meta/patch_26.09.json` — schema nuevo.
+- `src/riot_lol_cli/jungle_meta/loader.py` — 3 funciones nuevas.
+- `src/riot_lol_cli/jungle_meta/server.py` — 3 endpoints nuevos + mount /items.
+- `src/riot_lol_cli/jungle_meta/static/index.html` — rewrite con templates.
+- `src/riot_lol_cli/jungle_meta/static/styles.css` — nuevo.
+- `src/riot_lol_cli/jungle_meta/static/app.js` — nuevo.
+- `tests/jungle_meta/test_loader.py` — 4 tests nuevos (categories, abusers, used items, multi-builds).
+- `tests/test_server_factories.py` — asserts para 3 endpoints nuevos.
+- `projects/active/jungle-meta/REDESIGN_PLAN.md` — plan de referencia.
+- `projects/active/jungle-meta/screenshots/` — 7 capturas de SkillCapped como source-of-truth visual.
+
+### Pendiente (correcciones del usuario)
+- Slot-by-slot de items por champion vs video real de SkillCapped (la estructura permite cambiar `int` por `int`).
+- Categorías `low_elo_picks` y `bans` curadas — el usuario validará vs criterio del video.
+
+### Verificación
+- `pytest -q` → 153 passed (era 148, +5 nuevos: multi-builds, categories, abusers, used IDs, endpoints smoke).
+- `curl /items/6699.png` → 200 (Cicloespada Voltaica servida local).
+- `curl /api/v1/jungle/categories` → estructura completa con champion dicts.
+- Browser http://localhost:8003 → hero + tier rows + sidebar + champion detail navegable por hash.
+
+---
+
 ## [2026-05-08] Jungle Metagame Dashboard — FastAPI + SPA (MVP patch 26.09)
 
 ### Que se hizo
