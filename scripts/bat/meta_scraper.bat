@@ -17,6 +17,9 @@ echo ║   Tier list Support / ADC — Puerto 8002                  ║
 echo ╚══════════════════════════════════════════════════════════╝
 echo.
 
+set "META_SCRAPER_PORT=%LOLCLI_META_SCRAPER_PORT%"
+if "%META_SCRAPER_PORT%"=="" set "META_SCRAPER_PORT=8002"
+
 REM Verificar que el venv existe
 if not exist ".venv\Scripts\python.exe" (
     echo ❌ No se encontro .venv\Scripts\python.exe
@@ -26,12 +29,12 @@ if not exist ".venv\Scripts\python.exe" (
     exit /b 1
 )
 
-echo [INFO] Levantando Meta Scraper en http://localhost:8002 ...
+echo [INFO] Levantando Meta Scraper en http://localhost:%META_SCRAPER_PORT% ...
 echo [INFO] Presiona Ctrl+C para detener el servidor.
 echo.
-echo   Dashboard : http://localhost:8002
-echo   API Docs  : http://localhost:8002/docs
-echo   Health    : http://localhost:8002/health
+echo   Dashboard : http://localhost:%META_SCRAPER_PORT%
+echo   API Docs  : http://localhost:%META_SCRAPER_PORT%/docs
+echo   Health    : http://localhost:%META_SCRAPER_PORT%/health
 echo.
 
 set PYTHONPATH=%CD%\src

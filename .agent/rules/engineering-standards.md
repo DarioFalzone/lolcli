@@ -19,6 +19,7 @@ El CI corre Python 3.9 (`.github/workflows/ci.yml`). El entorno local puede ser 
 - **Sintaxis PEP 604 (`X | None`, `int | str`)**: solo disponible en Python 3.10+ en runtime. Para usarla en 3.9, agregar `from __future__ import annotations` como **primera linea activa** del archivo (despues de docstring y antes de imports). Hace que todas las anotaciones sean lazy (no se evaluan en runtime).
 - **Sintaxis PEP 585 (`list[str]`, `dict[str, int]`)**: disponible nativamente desde 3.9; no requiere future import.
 - **Regla practica**: todo archivo nuevo en `src/riot_lol_cli/` que declare anotaciones con pipe-union debe incluir `from __future__ import annotations`. Si no hay pipe-unions, es opcional pero recomendado.
+- **Chequeo rapido recomendado**: antes de cerrar una iteracion con cambios de tipado, buscar `rg -n "\\| None| \\| " src tests scripts` y confirmar que cada archivo Python nuevo o modificado tenga el `future import` cuando corresponde.
 - No cambiar el CI a 3.10+ sin aprobacion explicita del usuario; 3.9 es el floor declarado del paquete.
 
 ## Patrones del repo

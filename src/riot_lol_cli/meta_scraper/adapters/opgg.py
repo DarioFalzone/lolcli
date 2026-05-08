@@ -65,7 +65,8 @@ class OpggAdapter(BaseAdapter):
             from playwright.sync_api import sync_playwright
         except ImportError as e:
             raise ImportError(
-                "Playwright no está instalado. Ejecutá:\n  pip install playwright\n  playwright install chromium"
+                "Playwright no esta disponible. Verifica las dependencias instaladas y ejecuta:\n"
+                "  playwright install chromium"
             ) from e
 
         self._playwright = sync_playwright().start()

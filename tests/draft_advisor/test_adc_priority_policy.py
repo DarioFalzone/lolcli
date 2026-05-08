@@ -75,6 +75,20 @@ def test_ezreal_is_never_first_option_even_when_only_fallbacks_exist(engine: Sco
     assert result.alternatives[0].id == "Ezreal"
 
 
+def test_never_top_pick_policy_keeps_ezreal_out_of_first_slot(engine: ScoringEngine) -> None:
+    draft = DraftState(
+        context=DraftContext(pick_position="blind", queue_type="ranked_solo"),
+        user_pool=UserPool(mode="pool_only", champions=["Ezreal", "Brand"]),
+    )
+
+    result = engine.recommend(draft)
+
+    assert result.top_pick.id == "Brand"
+    assert result.alternatives[0].id == "Ezreal"
+    assert result.alternatives[0].adc_context is not None
+    assert result.alternatives[0].adc_context.personal_tier == "A"
+
+
 def test_vladimir_is_excluded_by_personal_policy(engine: ScoringEngine) -> None:
     result = engine.recommend(DraftState())
     recommended_ids = [result.top_pick.id, *[alt.id for alt in result.alternatives]]
@@ -247,6 +261,21 @@ def test_stale_adc_snapshot_returns_warning_and_personal_fallback(data_service: 
     assert result.adc_priority_context is not None
     assert result.adc_priority_context.status == "stale"
     assert result.adc_priority_context.warning is not None
+
+
+def test_missing_meta_row_returns_meta_missing_fallback(data_service: ChampionDataService) -> None:
+    data_service._adc_meta.pop("Ashe", None)
+    engine = ScoringEngine(data_service)
+    draft = DraftState(
+        context=DraftContext(pick_position="blind", queue_type="ranked_solo"),
+        user_pool=UserPool(mode="pool_only", champions=["Ashe"]),
+    )
+
+    result = engine.recommend(draft)
+
+    assert result.top_pick.id == "Ashe"
+    assert result.top_pick.adc_context is not None
+    assert result.top_pick.adc_context.eligibility == "fallback_meta_missing"
 
 
 def test_scraper_only_adc_champions_are_reported_not_recommended(data_service: ChampionDataService) -> None:

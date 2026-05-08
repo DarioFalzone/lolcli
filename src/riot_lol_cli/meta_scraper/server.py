@@ -16,6 +16,8 @@ from fastapi import APIRouter, BackgroundTasks, FastAPI, HTTPException
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 
+from riot_lol_cli.settings import get_meta_scraper_host, get_meta_scraper_port
+
 from .normalizer import load_latest
 from .orchestrator import ScrapingOrchestrator
 
@@ -215,8 +217,7 @@ async def trigger_scrape(background_tasks: BackgroundTasks):
         raise HTTPException(
             status_code=503,
             detail=(
-                "No hay adapters disponibles. Asegurate de tener Playwright instalado:\n"
-                "  pip install playwright\n"
+                "No hay adapters disponibles. Verifica que las dependencias esten instaladas y luego ejecuta:\n"
                 "  playwright install chromium"
             ),
         )
@@ -245,8 +246,7 @@ async def trigger_adc_scrape(background_tasks: BackgroundTasks):
         raise HTTPException(
             status_code=503,
             detail=(
-                "No hay adapters disponibles. Asegurate de tener Playwright instalado:\n"
-                "  pip install playwright\n"
+                "No hay adapters disponibles. Verifica que las dependencias esten instaladas y luego ejecuta:\n"
                 "  playwright install chromium"
             ),
         )
@@ -299,14 +299,16 @@ app = create_app()
 
 def run():
     """Levanta el servidor en puerto 8002."""
+    host = get_meta_scraper_host()
+    port = get_meta_scraper_port()
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s [%(name)s] %(levelname)s: %(message)s",
     )
-    logger.info("Levantando Meta Scraper en http://localhost:8002")
-    logger.info("Dashboard en http://localhost:8002")
-    logger.info("Documentación en http://localhost:8002/docs")
-    uvicorn.run(app, host="0.0.0.0", port=8002, log_level="info")
+    logger.info("Levantando Meta Scraper en http://localhost:%d", port)
+    logger.info("Dashboard en http://localhost:%d", port)
+    logger.info("Documentacion en http://localhost:%d/docs", port)
+    uvicorn.run(app, host=host, port=port, log_level="info")
 
 
 if __name__ == "__main__":

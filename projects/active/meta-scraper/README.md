@@ -41,12 +41,12 @@ SPA con tabs Soporte / ADC. Funcionalidades:
 
 ## Puerto
 
-- Meta Scraper: `8002`
+- Meta Scraper: `8002` por defecto (`LOLCLI_META_SCRAPER_HOST` y `LOLCLI_META_SCRAPER_PORT` permiten override).
 
 ## Alertas conocidas
 
 - El paquete Playwright esta declarado en `requirements.txt`; para scraping real falta instalar el browser con `playwright install chromium`.
-- `server.py` hardcodea el puerto 8002; `settings.py` parametriza Meta API y Draft Advisor.
+- `server.py` usa `settings.py` para host/port del Meta Scraper; el copy y los scripts deben asumir `8002` solo como default.
 - Los snapshots en `data/meta_scraper/` son datos generados, no contrato estable.
 - El Draft Advisor consume ambos snapshots de forma opcional: si no existen, el scoring conserva el comportamiento curado local.
 - U.GG reporta el patch con numeracion propia (ej: "26.9") vs la convencion "16.9" de OP.GG y LoLalytics.

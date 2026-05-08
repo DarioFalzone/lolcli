@@ -6,6 +6,97 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-05-08] Jungle Metagame Dashboard — FastAPI + SPA (MVP patch 26.09)
+
+### Que se hizo
+- Se creó nuevo módulo `src/riot_lol_cli/jungle_meta/` con FastAPI + SPA para visualizar tier lists de jungla.
+- Backend: 4 endpoints (`/health`, `/api/v1/jungle/tier-list`, `/api/v1/jungle/tier/{tier}`, `/api/v1/jungle/champion/{champion_id}`).
+- Frontend: SPA vanilla HTML/CSS/JS con filtrado por tier (S/A/B/C), grid responsivo, integración DDragon para iconos.
+- Datos: `data/jungle_meta/patch_26.09.json` con 16 campeones (S/A/B/C), estadísticas (WR/PR/BR), items core, runa, razón de fortaleza.
+- Lanzador: `scripts/bat/jungle_meta.bat` para Windows + Linux equivalente.
+- Configuración: `settings.py` extendido con helpers `get_jungle_meta_host()`, `get_jungle_meta_port()` (puerto 8003).
+- Proyecto: Nuevo en `projects/active/jungle-meta/` con README completo.
+
+### Archivos nuevos
+- `src/riot_lol_cli/jungle_meta/__init__.py`, `server.py`, `loader.py`
+- `src/riot_lol_cli/jungle_meta/static/index.html`
+- `data/jungle_meta/patch_26.09.json`
+- `scripts/bat/jungle_meta.bat`
+- `projects/active/jungle-meta/README.md`
+
+### Archivos modificados
+- `src/riot_lol_cli/settings.py` — agregados helpers de host/port para puerto 8003
+
+### Design
+- Dark navy (`#010a13`) + ARC gold (`#c89b3c`) + tier colors (S=gold, A=cyan, B=gray, C=red)
+- Responsive grid, DDragon CDN para assets
+- No dependencies externas (vanilla JS)
+
+### MVP scope
+- Tier list completa patch 26.09 (16 champs)
+- Manual JSON data source (can scrape in future)
+- Responsive design, dark theme
+- API + SPA functional
+
+### Not in MVP
+- Multi-patch navigation, scraper, historical trends, build variations
+
+### Verificación
+- Manual test: http://localhost:8003 ✅
+- API endpoint tests (smoke tests pendientes)
+- DDragon assets load OK
+
+---
+
+## [2026-05-08] Prolijidad Meta Scraper: copy, puerto configurable y docs cercanas
+
+### Que se hizo
+- Se elimino el log duplicado del arranque de Meta Scraper que seguia mostrando `localhost:8002/docs` hardcodeado junto al mensaje parametrizado.
+- Se alinearon los mensajes operativos de Playwright en `server.py` y en los 3 adapters para reflejar el flujo vigente: dependencias Python ya instaladas y paso manual `playwright install chromium`.
+- Se prolijo el copy cercano al puerto configurable del Meta Scraper en `AGENTS.md`, `docs/getting-started.md`, `projects/active/meta-scraper/README.md` y `scripts/bat/meta_scraper.bat`.
+- Se mantuvo el alcance en limpieza y coherencia; no hubo cambios de logica funcional de scraping ni del Draft Advisor.
+
+### Archivos modificados clave
+- `src/riot_lol_cli/meta_scraper/server.py` - limpieza del log de arranque y copy operativo.
+- `src/riot_lol_cli/meta_scraper/adapters/{opgg,lolalytics,ugg}.py` - mensaje unificado de prerequisito Playwright.
+- `scripts/bat/meta_scraper.bat` - copy visible alineado con `LOLCLI_META_SCRAPER_PORT`.
+- `AGENTS.md`, `docs/getting-started.md`, `projects/active/meta-scraper/README.md` - docs cercanas sincronizadas.
+
+### Verificacion
+- `pytest tests/test_server_factories.py -q`
+- `pytest tests/meta_scraper/test_adapter_name_maps.py -q`
+- `ruff check src tests scripts`
+- `ruff format --check src tests scripts`
+- `pytest tests/ -q`
+- `git diff --check`
+
+---
+
+## [2026-05-07] Hardening post-auditoria: factories, fallbacks y cierre proporcional
+
+### Que se hizo
+- Se ampliaron los smoke tests de `create_app()` para Draft Advisor y Meta Scraper: ya no solo validan paths registrados, sino redirect/root, `health` y `openapi`.
+- Se agregaron regresiones focalizadas del Draft Advisor para dos ramas que el refactor habia dejado sin test directo: politica `never_top_pick` y `fallback_meta_missing`.
+- Se alineo el runtime del Meta Scraper con el resto de los servicios: ahora usa helpers de `settings.py` para host/port y el mensaje operativo de Playwright apunta al paso manual real (`playwright install chromium`).
+- Se desduplicaron y aterrizaron las rules de cierre de tarea: la verificacion ahora queda explicitamente ligada al alcance real del cambio, sin forzar siempre la suite completa.
+
+### Archivos modificados clave
+- `tests/test_server_factories.py` - smoke tests HTTP reales para las factories FastAPI.
+- `tests/draft_advisor/test_adc_priority_policy.py` - cobertura de `never_top_pick` y `fallback_meta_missing`.
+- `src/riot_lol_cli/meta_scraper/server.py` - mensaje de adapters no disponibles y host/port configurables.
+- `src/riot_lol_cli/settings.py` - helpers `get_meta_scraper_host()` y `get_meta_scraper_port()`.
+- `.agent/rules/agent-workflow.md` - cierre proporcional al alcance.
+- `.agent/rules/documentation-and-commits.md` - checklist canonico sin exigir suite completa por defecto.
+
+### Verificacion
+- `pytest tests/test_server_factories.py -q`
+- `pytest tests/meta_scraper/test_adapter_name_maps.py -q`
+- `pytest tests/draft_advisor/test_adc_priority_policy.py -q`
+- `ruff check src tests scripts`
+- `ruff format --check src tests scripts`
+
+---
+
 ## [2026-05-07] Fix CI Python 3.9 — from __future__ import annotations
 
 ### Que se hizo
