@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jungle Metagame — League of Legends</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        /* Hextech ARC palette */
+        --color-s: #f0e6d2;
+        --color-a: #a3d1e8;
+        --color-b: #888888;
+        --color-c: #d94545;
+        --color-bg-dark: #010a13;
+        --color-bg-card: #0a1428;
+        --color-text-primary: #e8e6e1;
+        --color-text-secondary: #a09b8c;
+        --color-accent-gold: #c89b3c;
+        --color-accent-cyan: #3ec8d4;
+
+        /* Fonts */
+        --font-display: "Outfit", sans-serif;
+        --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+        /* Spacing */
+        --space-xs: 4px;
+        --space-sm: 8px;
+        --space-md: 16px;
+        --space-lg: 24px;
+        --space-xl: 32px;
+      }
+
+      body {
+        font-family: var(--font-body);
+        background-color: var(--color-bg-dark);
+        color: var(--color-text-primary);
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: var(--space-lg);
+      }
+
+      /* Hero */
+      .hero {
+        text-align: center;
+        margin-bottom: var(--space-xl);
+        padding: var(--space-xl) 0;
+        border-bottom: 2px solid var(--color-accent-cyan);
+      }
+
+      .hero h1 {
+        font-family: var(--font-display);
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: var(--space-sm);
+        color: var(--color-accent-gold);
+      }
+
+      .hero p {
+        color: var(--color-text-secondary);
+        font-size: 0.95rem;
+      }
+
+      /* Tier filter tabs */
+      .tier-tabs {
+        display: flex;
+        gap: var(--space-md);
+        justify-content: center;
+        margin-bottom: var(--space-xl);
+        flex-wrap: wrap;
+      }
+
+      .tier-tab {
+        padding: var(--space-sm) var(--space-md);
+        border: 2px solid var(--color-text-secondary);
+        background-color: transparent;
+        color: var(--color-text-secondary);
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-radius: 4px;
+      }
+
+      .tier-tab:hover {
+        border-color: var(--color-accent-gold);
+        color: var(--color-accent-gold);
+      }
+
+      .tier-tab.active {
+        border-color: var(--color-accent-gold);
+        background-color: var(--color-accent-gold);
+        color: var(--color-bg-dark);
+      }
+
+      /* Tier sections */
+      .tier-section {
+        margin-bottom: var(--space-xl);
+      }
+
+      .tier-header {
+        display: flex;
+        align-items: center;
+        gap: var(--space-md);
+        margin-bottom: var(--space-lg);
+        padding-bottom: var(--space-md);
+        border-bottom: 1px solid var(--color-text-secondary);
+      }
+
+      .tier-badge {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 1.2rem;
+        color: var(--color-bg-dark);
+      }
+
+      .tier-badge.s {
+        background-color: var(--color-s);
+      }
+
+      .tier-badge.a {
+        background-color: var(--color-a);
+      }
+
+      .tier-badge.b {
+        background-color: var(--color-b);
+      }
+
+      .tier-badge.c {
+        background-color: var(--color-c);
+      }
+
+      .tier-header h2 {
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        color: var(--color-text-primary);
+      }
+
+      /* Champion grid */
+      .champion-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: var(--space-lg);
+      }
+
+      /* Champion card */
+      .champion-card {
+        background-color: var(--color-bg-card);
+        border: 1px solid var(--color-text-secondary);
+        border-radius: 8px;
+        padding: var(--space-md);
+        transition: all 0.2s ease;
+        cursor: pointer;
+      }
+
+      .champion-card:hover {
+        border-color: var(--color-accent-cyan);
+        box-shadow: 0 4px 12px rgba(62, 200, 212, 0.2);
+      }
+
+      .champion-card-header {
+        display: flex;
+        align-items: center;
+        gap: var(--space-md);
+        margin-bottom: var(--space-md);
+      }
+
+      .champion-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 4px;
+        background-color: var(--color-bg-dark);
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      .champion-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .champion-name {
+        font-family: var(--font-display);
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--color-text-primary);
+      }
+
+      .champion-stats {
+        display: flex;
+        gap: var(--space-md);
+        margin-bottom: var(--space-md);
+        font-size: 0.9rem;
+      }
+
+      .stat {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .stat-label {
+        color: var(--color-text-secondary);
+        font-size: 0.75rem;
+        text-transform: uppercase;
+      }
+
+      .stat-value {
+        color: var(--color-accent-gold);
+        font-family: var(--font-display);
+        font-weight: 600;
+      }
+
+      /* Core items */
+      .core-items {
+        display: flex;
+        gap: var(--space-sm);
+        margin-bottom: var(--space-md);
+        align-items: center;
+      }
+
+      .core-items-label {
+        font-size: 0.75rem;
+        color: var(--color-text-secondary);
+        text-transform: uppercase;
+        min-width: 50px;
+      }
+
+      .item-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 2px;
+        background-color: var(--color-bg-dark);
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      .item-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Reason + rune */
+      .champion-reason {
+        font-size: 0.85rem;
+        color: var(--color-text-secondary);
+        line-height: 1.5;
+        margin-bottom: var(--space-sm);
+      }
+
+      .champion-rune {
+        display: inline-block;
+        padding: var(--space-xs) var(--space-sm);
+        background-color: var(--color-bg-dark);
+        border-left: 2px solid var(--color-accent-cyan);
+        font-size: 0.75rem;
+        color: var(--color-accent-cyan);
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+
+      /* Loading + error states */
+      .loading {
+        text-align: center;
+        padding: var(--space-xl);
+        color: var(--color-text-secondary);
+      }
+
+      .error {
+        background-color: var(--color-bg-card);
+        border: 1px solid var(--color-c);
+        color: var(--color-c);
+        padding: var(--space-lg);
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 1.8rem;
+        }
+
+        .champion-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .tier-tabs {
+          gap: var(--space-sm);
+        }
+
+        .tier-tab {
+          padding: var(--space-xs) var(--space-sm);
+          font-size: 0.9rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Hero -->
+      <div class="hero">
+        <h1>⚔️ Jungle Metagame</h1>
+        <p id="patch-info">Cargando...</p>
+      </div>
+
+      <!-- Tier filter tabs -->
+      <div class="tier-tabs">
+        <button class="tier-tab active" data-tier="all">TODO</button>
+        <button class="tier-tab" data-tier="S">S TIER</button>
+        <button class="tier-tab" data-tier="A">A TIER</button>
+        <button class="tier-tab" data-tier="B">B TIER</button>
+        <button class="tier-tab" data-tier="C">C TIER</button>
+      </div>
+
+      <!-- Content area -->
+      <div id="content"></div>
+    </div>
+
+    <script>
+      const BASE_URL = window.location.origin;
+      let tierListData = null;
+      let currentTierFilter = "all";
+
+      // DDragon asset URLs
+      function getChampionIconURL(championId) {
+        return `https://ddragon.leagueoflegends.com/cdn/14.13.1/img/champion/${championId}.png`;
+      }
+
+      function getItemIconURL(itemId) {
+        return `https://ddragon.leagueoflegends.com/cdn/14.13.1/img/item/${itemId}.png`;
+      }
+
+      // Fetch tier list
+      async function loadTierList() {
+        try {
+          const response = await fetch(`${BASE_URL}/api/v1/jungle/tier-list`);
+          if (!response.ok) throw new Error("Failed to load tier list");
+          tierListData = await response.json();
+
+          // Update patch info
+          const patchInfo = document.getElementById("patch-info");
+          const date = new Date(tierListData.date_updated).toLocaleDateString("es-ES");
+          patchInfo.textContent = `Patch ${tierListData.patch} — Actualizado ${date}`;
+
+          render();
+        } catch (error) {
+          document.getElementById("content").innerHTML = `<div class="error">Error cargando datos: ${error.message}</div>`;
+          console.error(error);
+        }
+      }
+
+      // Render champions
+      function render() {
+        if (!tierListData) return;
+
+        let champs = tierListData.jungle_champions || [];
+
+        // Filter by tier
+        if (currentTierFilter !== "all") {
+          champs = champs.filter((c) => c.tier === currentTierFilter);
+        }
+
+        // Group by tier
+        const byTier = { S: [], A: [], B: [], C: [] };
+        champs.forEach((c) => {
+          if (byTier[c.tier]) byTier[c.tier].push(c);
+        });
+
+        // Render
+        const content = document.getElementById("content");
+        let html = "";
+
+        for (const tier of ["S", "A", "B", "C"]) {
+          const champList = byTier[tier];
+          if (champList.length === 0) continue;
+
+          html += `
+            <div class="tier-section">
+              <div class="tier-header">
+                <div class="tier-badge ${tier.toLowerCase()}">${tier}</div>
+                <h2>${tier === "S" ? "OVERPOWERED" : tier === "A" ? "GREAT" : tier === "B" ? "GOOD" : "WEAK"}</h2>
+              </div>
+              <div class="champion-grid">
+                ${champList.map((c) => renderChampion(c)).join("")}
+              </div>
+            </div>
+          `;
+        }
+
+        content.innerHTML = html;
+      }
+
+      function renderChampion(champ) {
+        const itemsHTML = champ.core_items
+          .map((itemName) => {
+            // Map item names to Riot item IDs (simplified; full mapping would be needed)
+            const itemIdMap = {
+              "Hail of Blades": "HAIL_OF_BLADES", // This would be a rune, not an item
+              "Warrior Enchantment": "3915",
+              "Black Cleaver": "3071",
+              "Trinity Force": "3078",
+              "Nashor's Tooth": "3115",
+              "Rabadons": "3089",
+              "Liandry's Torment": "3116",
+              "Rylais": "3116",
+              "Thornmail": "3075",
+              "Abyssal Mask": "3001",
+              "Sunfire Aegis": "3068",
+              "Morellonomicon": "3165",
+              "Hollow Radiance": "3001",
+              "Essence Reaver": "3508",
+              "Manamune": "3042",
+              "Marakuai": "3046",
+              "Demonic Embrace": "3001",
+              "Liche Bane": "3100",
+            };
+            const itemId = itemIdMap[itemName] || "1001"; // Default to health pot
+            const iconURL = getItemIconURL(itemId);
+            return `<div class="item-icon" title="${itemName}"><img src="${iconURL}" alt="${itemName}" onerror="this.style.display='none'" /></div>`;
+          })
+          .join("");
+
+        const champIconURL = getChampionIconURL(champ.id);
+
+        return `
+          <div class="champion-card">
+            <div class="champion-card-header">
+              <div class="champion-icon">
+                <img src="${champIconURL}" alt="${champ.display_name}" />
+              </div>
+              <div>
+                <div class="champion-name">${champ.display_name}</div>
+              </div>
+            </div>
+            <div class="champion-stats">
+              <div class="stat">
+                <span class="stat-label">WR</span>
+                <span class="stat-value">${champ.winrate.toFixed(1)}%</span>
+              </div>
+              <div class="stat">
+                <span class="stat-label">PR</span>
+                <span class="stat-value">${champ.pickrate.toFixed(1)}%</span>
+              </div>
+              <div class="stat">
+                <span class="stat-label">BR</span>
+                <span class="stat-value">${champ.banrate.toFixed(1)}%</span>
+              </div>
+            </div>
+            <div class="core-items">
+              <span class="core-items-label">Core</span>
+              ${itemsHTML}
+            </div>
+            <div class="champion-reason">${champ.reason_text}</div>
+            <div class="champion-rune">🔥 ${champ.core_rune}</div>
+          </div>
+        `;
+      }
+
+      // Tier filter tabs
+      document.querySelectorAll(".tier-tab").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".tier-tab").forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          currentTierFilter = btn.dataset.tier;
+          render();
+        });
+      });
+
+      // Initialize
+      loadTierList();
+    </script>
+  </body>
+</html>
