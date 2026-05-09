@@ -21,6 +21,7 @@ from .loader import (
     get_item,
     list_categories,
     list_groups,
+    list_items,
     load_items_database,
     search_items,
 )
@@ -55,6 +56,7 @@ async def health():
             "port": get_items_browser_port(),
             "version": db.get("version"),
             "total_count": db.get("total_count", 0),
+            "catalog_count": len(list_items(include_deprecated=False)),
             "current_count": db.get("current_count", 0),
             "deprecated_count": db.get("deprecated_count", 0),
         }
@@ -66,14 +68,14 @@ async def health():
 @router.get("/api/v1/items/all")
 async def get_all_items(
     include_deprecated: bool = Query(False, description="Incluir items obsoletos"),
+    include_variants: bool = Query(False, description="Incluir variantes duplicadas por mapa o modo"),
 ):
     try:
         db = load_items_database()
-        items = db.get("items", [])
-        if not include_deprecated:
-            items = [i for i in items if not i.get("deprecated")]
+        items = list_items(include_deprecated=include_deprecated, include_variants=include_variants)
         return {
             "version": db.get("version"),
+            "raw_total_count": db.get("total_count", 0),
             "count": len(items),
             "items": items,
         }
@@ -82,9 +84,11 @@ async def get_all_items(
 
 
 @router.get("/api/v1/items/groups")
-async def get_groups():
+async def get_groups(
+    include_variants: bool = Query(False, description="Incluir variantes duplicadas por mapa o modo"),
+):
     try:
-        return {"groups": list_groups()}
+        return {"groups": list_groups(include_variants=include_variants)}
     except FileNotFoundError as e:
         raise HTTPException(status_code=503, detail=str(e)) from e
 
@@ -101,9 +105,10 @@ async def get_categories():
 async def search(
     q: str = Query(..., min_length=1),
     lang: str = Query("en", pattern="^(en|es)$"),
+    include_variants: bool = Query(False, description="Incluir variantes duplicadas por mapa o modo"),
 ):
     try:
-        results = search_items(q, lang=lang)
+        results = search_items(q, lang=lang, include_variants=include_variants)
         return {"query": q, "lang": lang, "count": len(results), "items": results}
     except FileNotFoundError as e:
         raise HTTPException(status_code=503, detail=str(e)) from e

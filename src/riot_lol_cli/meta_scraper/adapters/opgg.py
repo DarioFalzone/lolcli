@@ -86,6 +86,10 @@ class OpggAdapter(BaseAdapter):
         """Extrae la tier list de ADC/bot lane desde OP.GG."""
         return self._fetch_tier_list(role="adc", position="adc", patch=patch, elo=elo)
 
+    def fetch_jungle_tier_list(self, patch: str = "latest", elo: str = "emerald_plus") -> dict:
+        """Extrae la tier list de jungla desde OP.GG."""
+        return self._fetch_tier_list(role="jungle", position="jungle", patch=patch, elo=elo)
+
     def _fetch_tier_list(self, role: str, position: str, patch: str, elo: str) -> dict:
         """
         Extrae una tier list por rol desde OP.GG.

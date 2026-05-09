@@ -7,13 +7,13 @@
 
 ## Overview
 
-Real-time jungle champion metagame tracker. Displays current patch tier lists (S/A/B/C) with:
+Curated jungle champion metagame tracker. Displays current patch tier lists (S/A/B/C) with:
 - Win rates, pick rates, ban rates
 - Core recommended items
 - Primary keystone rune
 - Brief explanation of why each champion is strong (buff or item synergy)
 
-Data is manually curated from professional sources (SkillCapped, U.GG) and can be extended with automatic scrapers.
+Data is manually curated from professional sources (SkillCapped, U.GG) and can be extended with automatic scrapers. Item builds use local Data Dragon IDs from `assets/items/<id>.png`.
 
 ## Features
 
@@ -63,8 +63,11 @@ Patch data lives in `data/jungle_meta/patch_XX.XX.json`:
       "banrate": 8.3,
       "primary_reason": "item_synergy",
       "reason_text": "Hail of Blades + AD item buffs. Lethal early game tempo.",
-      "core_items": ["Hail of Blades", "Warrior Enchantment", "Black Cleaver"],
-      "core_rune": "Hail of Blades",
+      "core_builds": [
+        {"label": "Statikk Rush (DPS spike)", "items": [3087, 2510, 4633]},
+        {"label": "Dusk and Dawn First (Survivability)", "items": [2510, 4633, 3087]}
+      ],
+      "core_rune": {"name": "Hail of Blades", "tree": "Inspiration"},
       "playstyle": "Early game aggression, objective control."
     },
     // ... more champions
@@ -76,7 +79,7 @@ Patch data lives in `data/jungle_meta/patch_XX.XX.json`:
 
 **Location**: `src/riot_lol_cli/jungle_meta/static/`
 - `index.html` — SPA shell + inline CSS
-- Uses **DDragon CDN** for champion and item icons
+- Uses **DDragon CDN** for champion icons and local `/items/{id}.png` for item icons
 - JavaScript vanilla (no frameworks)
 
 **Design**:
@@ -120,4 +123,4 @@ python -m riot_lol_cli.jungle_meta.server
 
 ---
 
-**Note**: This is the MVP (v1.0). Initial feature set covers tier lists + manual data. Scraper integration and advanced analytics are planned for v1.1+.
+**Note**: Current data is v1.1 style: multiple `core_builds`, curated categories and local item IDs. Keep screenshot-derived item corrections in `data/jungle_meta/patch_26.09.json` and add regression tests for champion builds that were manually verified.

@@ -61,6 +61,9 @@ def test_meta_scraper_create_app_registers_core_routes():
     assert "/health" in paths
     assert "/api/v1/meta/scrape" in paths
     assert "/api/v1/meta/scrape/adc" in paths
+    assert "/api/v1/meta/scrape/jungle" in paths
+    assert "/api/v1/meta/jungle/tier" in paths
+    assert "/api/v1/meta/jungle/champion/{champion_id}" in paths
 
 
 def test_meta_scraper_create_app_serves_health_and_openapi():
@@ -69,6 +72,7 @@ def test_meta_scraper_create_app_serves_health_and_openapi():
     health = client.get("/health")
     assert health.status_code == 200
     assert health.json()["status"] == "ok"
+    assert "jungle" in health.json()
 
     openapi = client.get("/openapi.json")
     assert openapi.status_code == 200
@@ -97,6 +101,30 @@ def test_meta_scraper_missing_adapters_returns_shared_playwright_message(monkeyp
     assert response.status_code == 503
     assert "playwright install chromium" in response.json()["detail"]
     assert "pip install playwright" not in response.json()["detail"]
+
+
+def test_meta_scraper_jungle_scrape_accepts_partial_source_gaps(monkeypatch):
+    class FakeAdapter:
+        platform_name = "fake"
+
+    class FakeOrchestrator:
+        adapters = [FakeAdapter()]
+        is_running = False
+
+        def run_full_scrape(self, role="support"):
+            return {
+                "role": role,
+                "champions": [],
+                "source_gaps": [{"source": "opgg", "reason": "blocked"}],
+            }
+
+    monkeypatch.setattr(meta_scraper_server, "_create_orchestrator", FakeOrchestrator)
+    client = TestClient(create_meta_scraper_app())
+
+    response = client.post("/api/v1/meta/scrape/jungle")
+
+    assert response.status_code == 200
+    assert response.json()["status"] == "started"
 
 
 def test_jungle_meta_create_app_registers_core_routes():
@@ -168,6 +196,7 @@ def test_items_browser_health_and_endpoints():
     assert body["status"] == "ok"
     assert body["service"] == "items_browser"
     assert body["current_count"] >= 700
+    assert body["catalog_count"] < body["current_count"]
 
     voltaic = client.get("/api/v1/items/6699")
     assert voltaic.status_code == 200
@@ -180,3 +209,8 @@ def test_items_browser_health_and_endpoints():
     groups = client.get("/api/v1/items/groups")
     assert groups.status_code == 200
     assert "boots" in groups.json()["groups"]
+
+    all_items = client.get("/api/v1/items/all", params={"include_deprecated": "true"})
+    ids = {item["id"] for item in all_items.json()["items"]}
+    assert 4633 in ids
+    assert 224633 not in ids

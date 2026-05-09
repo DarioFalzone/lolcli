@@ -168,6 +168,15 @@ class BaseAdapter(ABC):
         """
         raise NotImplementedError(f"[{self.platform_name}] fetch_adc_tier_list no implementado")
 
+    def fetch_jungle_tier_list(self, patch: str = "latest", elo: str = "emerald_plus") -> dict:
+        """
+        Extrae la tier list de jungla.
+
+        Los adapters existentes pueden sobreescribirlo. Por defecto falla de
+        forma explicita para que el orquestador reporte la plataforma como gap.
+        """
+        raise NotImplementedError(f"[{self.platform_name}] fetch_jungle_tier_list no implementado")
+
     @abstractmethod
     def fetch_champion_detail(self, champion_id: str) -> dict:
         """

@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import logging
+import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -21,8 +22,8 @@ _DATA_DIR = _BASE_DIR / "data" / "meta_scraper"
 _CHAMPION_BASE_PATH = _BASE_DIR / "data" / "draft_advisor" / "champion_base.json"
 
 # Schema version del formato normalizado
-SCHEMA_VERSION = "1.1"
-SUPPORTED_ROLES = {"support", "adc"}
+SCHEMA_VERSION = "1.2"
+SUPPORTED_ROLES = {"support", "adc", "jungle"}
 
 
 def _load_champion_base() -> dict[str, str]:
@@ -99,6 +100,7 @@ def merge_platform_data(
     platform_datasets: dict[str, dict],
     role: str = "support",
     elo_filter: str = "emerald_plus",
+    source_gaps: list[dict] | None = None,
 ) -> dict:
     """
     Mergea datos de múltiples plataformas en un dataset normalizado.
@@ -112,12 +114,25 @@ def merge_platform_data(
     role = _normalize_role(role)
     now = datetime.now(timezone.utc).isoformat()
     merged_champions: dict[str, dict] = {}
+    source_gaps = source_gaps or []
     sources = list(platform_datasets.keys())
+    source_status: list[dict] = []
     patch = "unknown"
 
     for platform, data in platform_datasets.items():
         patch = data.get("patch", patch)
         champions = data.get("champions", [])
+        source_status.append(
+            {
+                "source": platform,
+                "status": "ok",
+                "patch": data.get("patch", "unknown"),
+                "role": data.get("role", role),
+                "elo": data.get("elo", elo_filter),
+                "champion_count": len(champions),
+                "scraped_at": data.get("scraped_at"),
+            }
+        )
 
         for champ in champions:
             raw_id = champ.get("id", champ.get("champion_id", champ.get("name", "")))
@@ -143,6 +158,11 @@ def merge_platform_data(
                     "_pr_sum": 0.0,
                     "_br_sum": 0.0,
                     "_games_sum": 0,
+                    "_wr_weighted_sum": 0.0,
+                    "_pr_weighted_sum": 0.0,
+                    "_br_weighted_sum": 0.0,
+                    "_weighted_games_sum": 0,
+                    "_sources_without_games": 0,
                 }
 
             entry = merged_champions[canonical_id]
@@ -156,12 +176,22 @@ def merge_platform_data(
                 "pick_rate": pr,
                 "ban_rate": br,
                 "games_analyzed": games,
+                "tier": champ.get("tier_raw", champ.get("tier", champ.get("stats", {}).get("tier"))),
+                "patch": data.get("patch", "unknown"),
+                "scraped_at": data.get("scraped_at"),
             }
             entry["_sources_count"] += 1
             entry["_wr_sum"] += wr
             entry["_pr_sum"] += pr
             entry["_br_sum"] += br
             entry["_games_sum"] += games
+            if games > 0:
+                entry["_wr_weighted_sum"] += wr * games
+                entry["_pr_weighted_sum"] += pr * games
+                entry["_br_weighted_sum"] += br * games
+                entry["_weighted_games_sum"] += games
+            else:
+                entry["_sources_without_games"] += 1
 
             # Mantener builds/matchups/synergies del source con más partidas
             if games > entry["stats"]["games_analyzed"]:
@@ -174,13 +204,30 @@ def merge_platform_data(
 
     # Calcular promedios y tier
     champion_list = []
+    weighted_champions = 0
+    fallback_champions = 0
     for entry in merged_champions.values():
         n = entry["_sources_count"]
-        if n > 0:
+        weighted_games = entry["_weighted_games_sum"]
+        if weighted_games > 0:
+            entry["stats"]["win_rate"] = round(entry["_wr_weighted_sum"] / weighted_games, 2)
+            entry["stats"]["pick_rate"] = round(entry["_pr_weighted_sum"] / weighted_games, 2)
+            entry["stats"]["ban_rate"] = round(entry["_br_weighted_sum"] / weighted_games, 2)
+            entry["stats"]["games_analyzed"] = entry["_games_sum"]
+            weighted_champions += 1
+            if entry["_sources_without_games"] > 0:
+                entry["stats"]["aggregation_note"] = (
+                    "Fuentes sin partidas quedaron en el desglose, no en el promedio ponderado."
+                )
+        elif n > 0:
             entry["stats"]["win_rate"] = round(entry["_wr_sum"] / n, 2)
             entry["stats"]["pick_rate"] = round(entry["_pr_sum"] / n, 2)
             entry["stats"]["ban_rate"] = round(entry["_br_sum"] / n, 2)
-            entry["stats"]["games_analyzed"] = entry["_games_sum"]
+            entry["stats"]["games_analyzed"] = 0
+            entry["stats"]["aggregation_note"] = (
+                "Promedio simple por fuente: ninguna fuente trajo partidas para ponderar."
+            )
+            fallback_champions += 1
         entry["stats"]["tier"] = _compute_tier(entry["stats"]["win_rate"], entry["stats"]["pick_rate"])
         entry["stats"]["climb_score"] = _compute_climb_score(
             entry["stats"]["win_rate"],
@@ -188,7 +235,18 @@ def merge_platform_data(
             entry["stats"]["ban_rate"],
         )
         # Limpiar campos internos
-        for key in ("_sources_count", "_wr_sum", "_pr_sum", "_br_sum", "_games_sum"):
+        for key in (
+            "_sources_count",
+            "_wr_sum",
+            "_pr_sum",
+            "_br_sum",
+            "_games_sum",
+            "_wr_weighted_sum",
+            "_pr_weighted_sum",
+            "_br_weighted_sum",
+            "_weighted_games_sum",
+            "_sources_without_games",
+        ):
             entry.pop(key, None)
         champion_list.append(entry)
 
@@ -199,6 +257,23 @@ def merge_platform_data(
     else:
         champion_list.sort(key=lambda c: (tier_order.get(c["stats"]["tier"], 9), -c["stats"]["win_rate"]))
 
+    for gap in source_gaps:
+        source_status.append(
+            {
+                "source": gap.get("source", gap.get("platform", "unknown")),
+                "status": "gap",
+                "stage": gap.get("stage", "adapter_fetch"),
+                "reason": gap.get("reason", gap.get("error", "Error no especificado")),
+                "attempted_at": gap.get("attempted_at"),
+            }
+        )
+
+    fallback = None
+    if champion_list and fallback_champions == len(champion_list):
+        fallback = "source_average_no_games"
+    elif fallback_champions:
+        fallback = "partial_source_average_no_games"
+
     return {
         "schema_version": SCHEMA_VERSION,
         "scraped_at": now,
@@ -206,6 +281,14 @@ def merge_platform_data(
         "role": role,
         "elo_filter": elo_filter,
         "sources": sources,
+        "source_status": source_status,
+        "source_gaps": source_gaps,
+        "aggregation": {
+            "method": "games_weighted_average_v1",
+            "fallback": fallback,
+            "weighted_champion_count": weighted_champions,
+            "fallback_champion_count": fallback_champions,
+        },
         "champion_count": len(champion_list),
         "champions": champion_list,
     }
@@ -279,11 +362,26 @@ def save_normalized(data: dict, tag: str = "merged", role: str | None = None) ->
     # Actualizar latest
     latest_role = _normalize_role(role or data.get("role", "support"))
     latest_path = _DATA_DIR / "normalized" / f"latest_{latest_role}_tier.json"
+    _backup_latest_if_needed(latest_path, latest_role)
     with open(latest_path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
     logger.info("Latest actualizado: %s", latest_path)
 
     return history_path
+
+
+def _backup_latest_if_needed(latest_path: Path, role: str) -> Path | None:
+    """Backupea el ultimo snapshot de jungla antes de pisarlo."""
+    if role != "jungle" or not latest_path.exists():
+        return None
+
+    backup_dir = _DATA_DIR / "normalized" / "backups" / "jungle"
+    backup_dir.mkdir(parents=True, exist_ok=True)
+    timestamp = datetime.now().strftime("%Y-%m-%dT%H-%M-%S")
+    backup_path = backup_dir / f"latest_jungle_tier_{timestamp}.json"
+    shutil.copy2(latest_path, backup_path)
+    logger.info("Backup latest jungla guardado: %s", backup_path)
+    return backup_path
 
 
 def save_raw(data: dict, platform: str, tag: str = "support_tier") -> Path:

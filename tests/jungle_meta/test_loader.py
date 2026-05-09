@@ -87,6 +87,19 @@ def test_xin_zhao_has_two_builds():
     assert len(champ["core_builds"]) == 2
 
 
+def test_xin_zhao_core_builds_match_skillcapped_screenshot():
+    """Regression: Xin Zhao source screenshot uses Statikk + Dusk and Dawn + Riftmaker."""
+    champ = get_champion_detail("XinZhao")
+    assert champ is not None
+
+    builds = {build["label"]: build["items"] for build in champ["core_builds"]}
+
+    assert builds == {
+        "Statikk Rush (DPS spike)": [3087, 2510, 4633],
+        "Dusk and Dawn First (Survivability)": [2510, 4633, 3087],
+    }
+
+
 def test_get_categories_returns_overpowered_low_elo_bans():
     categories = get_categories()
     assert "overpowered" in categories
@@ -99,6 +112,13 @@ def test_get_item_abusers_voltaic_sword():
     abusers = get_item_abusers("voltaic_sword_abusers")
     assert len(abusers) > 0
     assert all("id" in champ and "tier" in champ for champ in abusers)
+    assert "XinZhao" not in {champ["id"] for champ in abusers}
+
+
+def test_get_item_abusers_statikk_dusk_riftmaker():
+    abusers = get_item_abusers("statikk_dusk_riftmaker_abusers")
+
+    assert [champ["id"] for champ in abusers] == ["XinZhao"]
 
 
 def test_list_used_item_ids_includes_voltaic_sword():

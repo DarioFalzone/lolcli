@@ -260,6 +260,37 @@ body {
   gap: var(--space-1);
 }
 
+.source-filters {
+  display: flex;
+  gap: var(--space-1);
+  flex-wrap: wrap;
+}
+
+.source-pill {
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: var(--font-caption-sm);
+  font-weight: var(--weight-semibold);
+  cursor: pointer;
+  transition: var(--transition);
+  font-family: var(--font-body);
+  letter-spacing: var(--tracking-wide);
+}
+
+.source-pill:hover {
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
+}
+
+.source-pill--active {
+  background: rgba(10, 200, 185, 0.14);
+  border-color: var(--blue);
+  color: var(--blue-light);
+}
+
 .tier-pill {
   padding: var(--space-1) var(--space-3);
   border: 1px solid var(--border);
@@ -505,6 +536,66 @@ tr:hover .champion-avatar {
   background: rgba(123, 97, 255, 0.12);
   color: var(--purple);
   border: 1px solid rgba(123, 97, 255, 0.25);
+}
+
+.source-badge--ugg {
+  background: rgba(200, 155, 60, 0.12);
+  color: var(--gold);
+  border: 1px solid rgba(200, 155, 60, 0.25);
+}
+
+/* --- Source gaps --- */
+.gap-panel {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 154, 60, 0.25);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+.gap-panel-title {
+  font-family: var(--font-display);
+  font-size: var(--font-body-lg);
+  font-weight: var(--weight-bold);
+  color: var(--gold-light);
+  margin-bottom: var(--space-1);
+}
+
+.gap-panel-subtitle {
+  color: var(--text-secondary);
+  font-size: var(--font-body-sm);
+  margin-bottom: var(--space-3);
+}
+
+.gap-list {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.gap-item {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3);
+}
+
+.gap-source {
+  color: var(--gold);
+  font-size: var(--font-caption);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+
+.gap-reason {
+  color: var(--text-primary);
+  font-size: var(--font-body-sm);
+  margin-top: var(--space-1);
+}
+
+.gap-meta {
+  color: var(--text-muted);
+  font-size: var(--font-caption-sm);
+  margin-top: var(--space-1);
 }
 
 /* --- Empty State --- */

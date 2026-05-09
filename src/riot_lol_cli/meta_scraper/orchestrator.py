@@ -13,7 +13,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from .adapters.base import BaseAdapter
-from .normalizer import merge_platform_data, save_normalized, save_raw
+from .normalizer import SCHEMA_VERSION, merge_platform_data, save_normalized, save_raw
 
 logger = logging.getLogger(__name__)
 
@@ -57,15 +57,13 @@ class ScrapingOrchestrator:
         """
         if self._is_running:
             raise RuntimeError("Ya hay un scraping en curso.")
-        role = role.strip().lower()
-        if role in {"bottom", "bot", "marksman"}:
-            role = "adc"
-        if role not in {"support", "adc"}:
+        role = _normalize_scrape_role(role)
+        if role not in {"support", "adc", "jungle"}:
             raise ValueError(f"Rol no soportado para scraping: {role}")
 
         self._is_running = True
         platform_datasets: dict[str, dict] = {}
-        errors: list[dict] = []
+        source_gaps: list[dict] = []
 
         logger.info(
             "=== Iniciando scraping completo: %d plataformas ===",
@@ -81,6 +79,8 @@ class ScrapingOrchestrator:
                     # Extraer tier list del rol solicitado.
                     if role == "adc":
                         tier_data = adapter.fetch_adc_tier_list(patch=patch, elo=elo)
+                    elif role == "jungle":
+                        tier_data = adapter.fetch_jungle_tier_list(patch=patch, elo=elo)
                     else:
                         tier_data = adapter.fetch_support_tier_list(patch=patch, elo=elo)
 
@@ -95,49 +95,81 @@ class ScrapingOrchestrator:
                         )
                     else:
                         logger.warning("[%s] Sin datos de campeones.", platform)
-                        errors.append(
+                        source_gaps.append(
                             {
-                                "platform": platform,
-                                "error": "Sin datos de campeones en la respuesta",
+                                "source": platform,
+                                "stage": "adapter_empty",
+                                "reason": "Sin datos de campeones en la respuesta",
+                                "attempted_at": datetime.now(timezone.utc).isoformat(),
                             }
                         )
 
                 except PermissionError as e:
                     logger.error("[%s] ✗ Bloqueado: %s", platform, e)
-                    errors.append({"platform": platform, "error": str(e)})
+                    source_gaps.append(
+                        {
+                            "source": platform,
+                            "stage": "adapter_fetch",
+                            "reason": str(e),
+                            "attempted_at": datetime.now(timezone.utc).isoformat(),
+                        }
+                    )
 
                 except Exception as e:
                     logger.error("[%s] ✗ Error: %s", platform, e, exc_info=True)
-                    errors.append({"platform": platform, "error": str(e)})
+                    source_gaps.append(
+                        {
+                            "source": platform,
+                            "stage": "adapter_fetch",
+                            "reason": str(e),
+                            "attempted_at": datetime.now(timezone.utc).isoformat(),
+                        }
+                    )
 
                 finally:
                     adapter.close()
 
             # Normalizar y mergear
             if platform_datasets:
-                normalized = merge_platform_data(platform_datasets, role=role, elo_filter=elo)
+                normalized = merge_platform_data(
+                    platform_datasets,
+                    role=role,
+                    elo_filter=elo,
+                    source_gaps=source_gaps,
+                )
+                normalized["_scrape_meta"] = {
+                    "platforms_ok": list(platform_datasets.keys()),
+                    "platforms_error": source_gaps,
+                    "duration_info": "completado",
+                }
                 snapshot_path = save_normalized(normalized, role=role)
                 self._update_manifest(normalized, snapshot_path)
                 logger.info(
                     "=== Scraping completo: %d plataformas OK, %d errores ===",
                     len(platform_datasets),
-                    len(errors),
+                    len(source_gaps),
                 )
 
                 # Añadir metadata de scraping al resultado
-                normalized["_scrape_meta"] = {
-                    "platforms_ok": list(platform_datasets.keys()),
-                    "platforms_error": errors,
-                    "duration_info": "completado",
-                }
                 return normalized
             else:
                 logger.error("=== Scraping fallido: 0 plataformas OK ===")
                 return {
-                    "schema_version": "1.0",
+                    "schema_version": SCHEMA_VERSION,
                     "scraped_at": datetime.now(timezone.utc).isoformat(),
                     "error": "Ninguna plataforma respondió correctamente.",
-                    "details": errors,
+                    "details": source_gaps,
+                    "source_gaps": source_gaps,
+                    "source_status": [
+                        {
+                            "source": gap.get("source", "unknown"),
+                            "status": "gap",
+                            "stage": gap.get("stage", "adapter_fetch"),
+                            "reason": gap.get("reason", "Error no especificado"),
+                            "attempted_at": gap.get("attempted_at"),
+                        }
+                        for gap in source_gaps
+                    ],
                     "champions": [],
                     "role": role,
                 }
@@ -165,6 +197,7 @@ class ScrapingOrchestrator:
             "timestamp": now,
             "patch": data.get("patch", "unknown"),
             "champion_count": data.get("champion_count", 0),
+            "source_gaps": len(data.get("source_gaps", [])),
             "file": str(snapshot_path.relative_to(_DATA_DIR)),
         }
         manifest["snapshots"].append(
@@ -172,6 +205,7 @@ class ScrapingOrchestrator:
                 "timestamp": now,
                 "role": data.get("role", "support"),
                 "sources": data.get("sources", []),
+                "source_gaps": len(data.get("source_gaps", [])),
                 "champion_count": data.get("champion_count", 0),
                 "file": str(snapshot_path.relative_to(_DATA_DIR)),
             }
@@ -185,3 +219,13 @@ class ScrapingOrchestrator:
             json.dump(manifest, f, indent=2, ensure_ascii=False)
 
         logger.info("Manifest actualizado: %s", _MANIFEST_PATH)
+
+
+def _normalize_scrape_role(role: str) -> str:
+    """Normaliza aliases de rol para el orquestador."""
+    normalized = role.strip().lower()
+    if normalized in {"bottom", "bot", "marksman"}:
+        return "adc"
+    if normalized in {"jg", "jungler"}:
+        return "jungle"
+    return normalized

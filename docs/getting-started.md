@@ -171,7 +171,7 @@ Invoke-RestMethod http://127.0.0.1:8001/api/v1/draft/health
 
 ## 5. Meta Scraper
 
-Scrapea datos de meta de Support y ADC desde OP.GG, LoLalytics y U.GG (3 fuentes).
+Scrapea datos de meta de Support, ADC y jungla desde OP.GG, LoLalytics y U.GG (3 fuentes).
 Los snapshots normalizados alimentan opcionalamente el motor de scoring del Draft Advisor.
 
 ### Requisitos adicionales
@@ -204,10 +204,12 @@ $env:PYTHONPATH=(Resolve-Path .\src).Path
 
 ### Uso
 1. Abrir http://localhost:8002
-2. Seleccionar tab **Soporte** o **ADC**
+2. Seleccionar tab **Soporte**, **ADC** o **Jungla**
 3. Hacer clic en **Actualizar** para scrapear datos de las 3 plataformas
 4. La tier list se actualiza con WR, PR, BR y tier badges (ADC incluye Climb Score)
-5. Hacer clic en un campeón para ver el desglose por fuente
+5. Usar **Total** para el agregado ponderado o una fuente individual para auditar datos crudos
+6. Abrir **Gaps** para ver fuentes que fallaron o no entregaron datos limpios
+7. Hacer clic en un campeon para ver el desglose por fuente
 
 ### Endpoints principales
 ```bash
@@ -217,14 +219,20 @@ curl -X POST http://localhost:8002/api/v1/meta/scrape
 # Scrapear ADC (incluye climb_score)
 curl -X POST http://localhost:8002/api/v1/meta/scrape/adc
 
+# Scrapear Jungla
+curl -X POST http://localhost:8002/api/v1/meta/scrape/jungle
+
 # Leer tier list Support normalizada
 curl http://localhost:8002/api/v1/meta/support/tier
 
 # Leer tier list ADC normalizada con climb_score
 curl http://localhost:8002/api/v1/meta/adc/tier
+
+# Leer tier list Jungla normalizada
+curl http://localhost:8002/api/v1/meta/jungle/tier
 ```
 
-**Datos guardados en:** `data/meta_scraper/` (JSON timestamped por plataforma y normalizado en `normalized/`)
+**Datos guardados en:** `data/meta_scraper/` (raw por plataforma, `normalized/latest_<role>_tier.json`, history y backups de jungla en `normalized/backups/jungle/`)
 
 ---
 
@@ -276,7 +284,7 @@ curl http://localhost:8003/api/v1/jungle/champion/XinZhao
 
 ## 7. Items Browser
 
-Catalogo navegable de todos los items de LoL (EN + ES) con filtros por grupo (botas, componentes, legendarios, consumibles, trinkets, jungla, obsoletos) y busqueda por nombre.
+Catalogo navegable de items de LoL (EN + ES) con filtros por grupo (botas, componentes, legendarios, consumibles, trinkets, jungla, obsoletos) y busqueda por nombre. El browser oculta por defecto variantes duplicadas por mapa/modo de Data Dragon; la API permite auditarlas con `include_variants=true`.
 
 ### Setup inicial (database)
 
@@ -309,7 +317,7 @@ $env:PYTHONPATH=(Resolve-Path .\src).Path
 
 ### Endpoints principales
 ```bash
-curl http://localhost:8004/api/v1/items/all?include_deprecated=false
+curl "http://localhost:8004/api/v1/items/all?include_deprecated=false&include_variants=false"
 curl http://localhost:8004/api/v1/items/6699           # Voltaic Cyclosword
 curl http://localhost:8004/api/v1/items/groups         # buckets por uso
 curl "http://localhost:8004/api/v1/items/search?q=voltaic&lang=en"

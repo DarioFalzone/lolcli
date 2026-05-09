@@ -6,6 +6,112 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-05-09] Meta Scraper - Jungle Meta v1 multi-fuente
+
+### Que se hizo
+- Se extendio Meta Scraper para soportar rol `jungle` en el nucleo v1: OP.GG, LoLalytics y U.GG.
+- Se agregaron endpoints `GET /api/v1/meta/jungle/tier`, `GET /api/v1/meta/jungle/champion/{champion_id}` y `POST /api/v1/meta/scrape/jungle`.
+- El normalizador subio a schema `1.2` y ahora guarda `source_status`, `source_gaps` y metadata de agregacion.
+- El meta total usa promedio ponderado por `games_analyzed` cuando existe; si no hay partidas, cae a promedio simple por fuente y lo marca como fallback.
+- `latest_jungle_tier.json` queda como snapshot actual de jungla; antes de sobrescribirlo, el anterior se copia a `normalized/backups/jungle/`.
+- El frontend de `:8002` suma tab Jungla, selector `Total`/fuentes/`Gaps`, fecha y hora de update, y panel visible de gaps.
+- League of Graphs, Mobalytics, METAsrc, Asia, cuentas pro y pro-stage quedan registrados como backlog, no como fuentes activas en v1.
+
+### Archivos modificados clave
+- `src/riot_lol_cli/meta_scraper/` - rol jungla, endpoints, adapters, normalizer, backups y UI.
+- `data/meta_scraper/normalized/latest_jungle_tier.json` - placeholder inicial sin datos inventados.
+- `tests/meta_scraper/` y `tests/test_server_factories.py` - regresiones de rol jungla, agregacion y rutas.
+- `AGENTS.md`, `docs/getting-started.md`, `projects/active/meta-scraper/README.md` - contrato actualizado.
+
+### Verificacion
+- `pytest tests/meta_scraper -q`
+- `pytest tests/test_server_factories.py -q`
+- `pytest tests/ -q`
+- `ruff check src tests scripts`
+- `ruff format --check src/riot_lol_cli/meta_scraper tests/meta_scraper tests/test_server_factories.py`
+- `git diff --check`
+- Nota: `ruff format --check src tests scripts` queda bloqueado por `src/riot_lol_cli/home/server.py`, archivo ajeno/untracked de Home Hub.
+
+---
+
+## [2026-05-09] Home Hub — Centro de Operaciones (puerto 8080)
+
+### Que se hizo
+- Se creo el modulo `src/riot_lol_cli/home/` como nuevo subsistema FastAPI en puerto 8080 (configurable via `LOLCLI_HOME_PORT`).
+- El Home Hub es un portal unificado de acceso a los 5 servicios activos (Meta API, Draft Advisor, Meta Scraper, Jungle Meta, Items Browser) mas Junglas Pro como proyecto standalone.
+- Health-check agregado en tiempo real via `/api/v1/home/status`: el backend consulta async (httpx) el `/health` de cada servicio con timeout de 2s y retorna estado online/offline.
+- Frontend SPA con design system canonico (`tokens.css` + `components.css`): hero con titulo gradiente, grid de service cards con indicador de estado live, botones "Abrir" y "Docs", polling cada 30s con updates in-place.
+- Se agrego `get_home_host()` / `get_home_port()` a `settings.py` siguiendo el patron existente.
+- Se actualizo AGENTS.md con el nuevo subsistema (6 FastAPI), entrada en tabla de puertos, entry points y gotchas.
+
+### Archivos creados
+- `src/riot_lol_cli/home/__init__.py` — module marker.
+- `src/riot_lol_cli/home/server.py` — FastAPI + health-check agregado + factory.
+- `src/riot_lol_cli/home/static/index.html` — SPA shell con design system.
+- `src/riot_lol_cli/home/static/styles.css` — estilos propios del Home.
+- `src/riot_lol_cli/home/static/app.js` — fetch de status + rendering de cards.
+
+### Archivos modificados
+- `src/riot_lol_cli/settings.py` — `DEFAULT_HOME_HOST/PORT` + helpers.
+- `AGENTS.md` — Home Hub en 5 secciones (subsistemas, puertos, entry points, APIs, gotchas).
+- `bitacora_de_cambios.md` — este registro.
+
+### Verificacion
+- `python -m riot_lol_cli.home.server` levanta sin errores en :8080.
+- `GET /health` retorna `{"status":"ok","service":"home","version":"1.6.4"}`.
+- `GET /api/v1/home/status` retorna JSON con estado de cada servicio (3/5 online en prueba).
+- SPA carga correctamente con design system canonico, animaciones y health-check en vivo.
+
+---
+
+## [2026-05-09] Jungle Meta — Xin Zhao build corregido contra captura
+
+### Que se hizo
+- Se continuo la correccion iniciada por Claude para Xin Zhao en `data/jungle_meta/patch_26.09.json`.
+- Se reemplazaron los builds arquetipicos anteriores por la fuente visual confirmada: `Statikk Shiv` (`3087`), `Dusk and Dawn` (`2510`) y `Riftmaker` (`4633`).
+- Se saco `XinZhao` de `items_meta.voltaic_sword_abusers` porque el build verificado ya no usa Voltaic.
+- Se agrego `items_meta.statikk_dusk_riftmaker_abusers` con `XinZhao`.
+- Se agregaron tests de regresion para el build exacto de Xin Zhao y su nueva categoria de item meta.
+- Se actualizo el handoff de Jungle Meta para dejar asentado que Xin Zhao ya no esta pendiente.
+
+### Archivos modificados clave
+- `data/jungle_meta/patch_26.09.json` — build y metadata de items para Xin Zhao.
+- `tests/jungle_meta/test_loader.py` — regresiones de builds y item abusers.
+- `projects/active/jungle-meta/README.md` — schema vigente con `core_builds`.
+- `projects/active/jungle-meta/CODEX_HANDOFF.md` — estado actualizado para proximos agentes.
+
+### Verificacion
+- `pytest tests/jungle_meta/ -q`
+- `pytest tests/ -q`
+- `ruff check src tests scripts`
+- `ruff format --check src tests scripts`
+- `git diff --check`
+
+---
+
+## [2026-05-09] Items Browser — ocultar variantes duplicadas por mapa/modo
+
+### Que se hizo
+- Se corrigio el catalogo visual de Items Browser para no mostrar duplicados de Data Dragon como `Riftmaker` (`4633` vs Arena `224633`) ni variantes internas de smite (`1101`-`1103` vs `1105`-`1107`).
+- `loader.py` ahora calcula un item canonico por nombre y oculta variantes por defecto, priorizando items de Summoner's Rift (`map 11`), items multi-mapa y IDs base.
+- La API conserva acceso al dato bruto con `include_variants=true` en `/api/v1/items/all`, `/groups` y `/search`.
+- `health` expone `catalog_count` para distinguir catalogo visible de `current_count` bruto de Data Dragon.
+- Se agregaron tests para asegurar que la busqueda y el grupo Jungla no vuelvan a mostrar variantes duplicadas por defecto.
+
+### Archivos modificados clave
+- `src/riot_lol_cli/items_browser/loader.py` — deduplicacion de catalogo y anotacion `catalog_variant`.
+- `src/riot_lol_cli/items_browser/server.py` — query param `include_variants` y `catalog_count`.
+- `tests/items_browser/test_loader.py` y `tests/test_server_factories.py` — regresion de Riftmaker y smite variants.
+- `projects/active/items-browser/README.md`, `docs/getting-started.md`, `AGENTS.md` — documentacion del comportamiento.
+
+### Verificacion
+- `pytest tests/items_browser/test_loader.py tests/test_server_factories.py -q`
+- `ruff check src tests scripts`
+- `ruff format --check src tests scripts`
+- `git diff --check`
+
+---
+
 ## [2026-05-08] Prolijidad post-auditoria — estado FastAPI, puertos y guard Python 3.9
 
 ### Que se hizo

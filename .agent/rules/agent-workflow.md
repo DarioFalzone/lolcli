@@ -33,6 +33,7 @@ No mover `src/`, `data/`, `assets/`, `templates/` o `scripts/` sin plan explicit
 - `data/meta_analyzer.db`, caches, outputs y snapshots generados no son fuente de verdad.
 - `projects/active/junglas-pro/` es standalone; no copiar su investigacion completa a `KB/`.
 - `support_profiles.json` tiene drift historico de conteos; no corregir incidentalmente.
+- **Home Hub Integracion:** Cada vez que se agregue un sistema, servicio o proyecto nuevo, es **obligatorio** actualizar el Home Hub (`src/riot_lol_cli/home/`) para incluirlo.
 
 ## Agentes por subsistema
 

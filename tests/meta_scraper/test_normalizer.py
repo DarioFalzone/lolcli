@@ -1,10 +1,14 @@
 """Tests para el normalizador del Meta Scraper."""
 
+import json
+
+from riot_lol_cli.meta_scraper import normalizer
 from riot_lol_cli.meta_scraper.normalizer import (
     _compute_climb_score,
     _compute_tier,
     merge_platform_data,
     normalize_champion_id,
+    save_normalized,
 )
 
 
@@ -87,7 +91,7 @@ class TestMergePlatformData:
 
         result = merge_platform_data(data)
 
-        assert result["schema_version"] == "1.1"
+        assert result["schema_version"] == "1.2"
         assert result["patch"] == "16.8"
         assert result["role"] == "support"
         assert result["champion_count"] == 2
@@ -132,10 +136,11 @@ class TestMergePlatformData:
         result = merge_platform_data(data)
 
         thresh = result["champions"][0]
-        assert thresh["stats"]["win_rate"] == 51.5
-        assert thresh["stats"]["pick_rate"] == 11.0
-        assert thresh["stats"]["ban_rate"] == 7.0
+        assert thresh["stats"]["win_rate"] == 51.44
+        assert thresh["stats"]["pick_rate"] == 11.11
+        assert thresh["stats"]["ban_rate"] == 7.11
         assert thresh["stats"]["games_analyzed"] == 180000
+        assert result["aggregation"]["method"] == "games_weighted_average_v1"
 
         # Source breakdown debe tener ambas
         assert "lolalytics" in thresh["source_breakdown"]
@@ -178,3 +183,96 @@ class TestMergePlatformData:
         assert result["role"] == "adc"
         assert result["champions"][0]["id"] == "Jinx"
         assert result["champions"][0]["stats"]["climb_score"] > result["champions"][1]["stats"]["climb_score"]
+
+    def test_merge_jungle_role_with_source_gaps(self):
+        data = {
+            "ugg": {
+                "patch": "26.9",
+                "role": "jungle",
+                "champions": [
+                    {
+                        "id": "XinZhao",
+                        "display_name": "Xin Zhao",
+                        "win_rate": 52.0,
+                        "pick_rate": 9.0,
+                        "ban_rate": 6.0,
+                        "games_analyzed": 120000,
+                    },
+                ],
+            }
+        }
+        gaps = [
+            {
+                "source": "opgg",
+                "stage": "adapter_fetch",
+                "reason": "403 bloqueado",
+                "attempted_at": "2026-05-09T10:00:00+00:00",
+            }
+        ]
+
+        result = merge_platform_data(data, role="jungle", source_gaps=gaps)
+
+        assert result["role"] == "jungle"
+        assert result["source_gaps"] == gaps
+        assert result["source_status"][0]["source"] == "ugg"
+        assert result["source_status"][0]["status"] == "ok"
+        assert result["source_status"][1]["source"] == "opgg"
+        assert result["source_status"][1]["status"] == "gap"
+
+    def test_merge_uses_source_average_when_no_games(self):
+        data = {
+            "lolalytics": {
+                "patch": "26.9",
+                "champions": [{"id": "Nocturne", "win_rate": 52.0, "pick_rate": 8.0, "ban_rate": 5.0}],
+            },
+            "opgg": {
+                "patch": "26.9",
+                "champions": [{"id": "Nocturne", "win_rate": 54.0, "pick_rate": 6.0, "ban_rate": 7.0}],
+            },
+        }
+
+        result = merge_platform_data(data, role="jungle")
+        nocturne = result["champions"][0]
+
+        assert nocturne["stats"]["win_rate"] == 53.0
+        assert nocturne["stats"]["pick_rate"] == 7.0
+        assert nocturne["stats"]["games_analyzed"] == 0
+        assert result["aggregation"]["fallback"] == "source_average_no_games"
+
+    def test_source_without_games_stays_in_breakdown_but_not_weighted_average(self):
+        data = {
+            "ugg": {
+                "patch": "26.9",
+                "champions": [
+                    {"id": "LeeSin", "win_rate": 52.0, "pick_rate": 10.0, "ban_rate": 8.0, "games_analyzed": 100}
+                ],
+            },
+            "opgg": {
+                "patch": "26.9",
+                "champions": [
+                    {"id": "LeeSin", "win_rate": 60.0, "pick_rate": 20.0, "ban_rate": 1.0, "games_analyzed": 0}
+                ],
+            },
+        }
+
+        result = merge_platform_data(data, role="jungle")
+        lee_sin = result["champions"][0]
+
+        assert lee_sin["stats"]["win_rate"] == 52.0
+        assert lee_sin["stats"]["pick_rate"] == 10.0
+        assert lee_sin["stats"]["games_analyzed"] == 100
+        assert "opgg" in lee_sin["source_breakdown"]
+        assert "no en el promedio ponderado" in lee_sin["stats"]["aggregation_note"]
+
+    def test_save_normalized_backs_up_previous_jungle_latest(self, tmp_path, monkeypatch):
+        monkeypatch.setattr(normalizer, "_DATA_DIR", tmp_path)
+        latest_dir = tmp_path / "normalized"
+        latest_dir.mkdir(parents=True)
+        latest_path = latest_dir / "latest_jungle_tier.json"
+        latest_path.write_text('{"old": true}', encoding="utf-8")
+
+        save_normalized({"role": "jungle", "champions": []}, role="jungle")
+
+        backups = list((latest_dir / "backups" / "jungle").glob("latest_jungle_tier_*.json"))
+        assert len(backups) == 1
+        assert json.loads(backups[0].read_text(encoding="utf-8")) == {"old": True}

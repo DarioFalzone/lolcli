@@ -10,7 +10,7 @@ Este es el mapa maestro del repositorio para agentes IA. Leelo antes de tocar co
 - Visor offline de splash arts.
 - Meta Analyzer con API FastAPI, SQLite, deteccion de anomalias y tier lists.
 - Draft Advisor para recomendar picks ADC y Support.
-- Meta Scraper para recolectar datos externos de Support y ADC desde plataformas como OP.GG y LoLalytics.
+- Meta Scraper para recolectar datos externos de Support, ADC y jungla desde plataformas como OP.GG, LoLalytics y U.GG.
 - Base de conocimiento estrategica para el razonamiento de draft.
 
 Usa Riot Games API (`Summoner-V4`, `Match-V5`, `Account-V1`) y Data Dragon CDN para datos/assets oficiales.
@@ -46,6 +46,7 @@ El repo esta en evolucion activa y puede tener un working tree sucio. Antes de e
 | Meta Scraper | `src/riot_lol_cli/meta_scraper/` | FastAPI, Playwright, JSON | Activo | Scraping/normalizacion de meta support/ADC en puerto 8002 |
 | Jungle Meta | `src/riot_lol_cli/jungle_meta/` | FastAPI, JSON, SPA | Activo | Tier list de campeones jungla por patch en puerto 8003 |
 | Items Browser | `src/riot_lol_cli/items_browser/` | FastAPI, JSON, SPA | Activo | Catalogo de items LoL EN+ES con filtros por grupo en puerto 8004 |
+| Home Hub | `src/riot_lol_cli/home/` | FastAPI, JS vanilla, SPA | Activo | Centro de operaciones / portal unificado en puerto 8080 |
 | Schemas Riot | `src/riot_lol_cli/schemas/` | Pydantic V2 | Activo | Modelos tipados para payloads de Match-V5 |
 | Scripts | `scripts/`, `scripts/bat/` | Python, Batch, Shell | Activo | Automatizacion de setup, fetch, dashboards y assets |
 | Tests/CI | `tests/`, `.github/workflows/ci.yml` | pytest, ruff | Activo | Unit/eval tests y CI |
@@ -115,10 +116,11 @@ src/riot_lol_cli/meta_scraper/server.py
   -> data/draft_advisor/champion_base.json (normalizacion de nombres)
 ```
 
-Hay tres servidores FastAPI separados:
+Hay seis servidores FastAPI separados:
 
 | Servicio | Entry point | Puerto | UI principal | Docs |
 |----------|-------------|--------|--------------|------|
+| Home Hub | `python -m riot_lol_cli.home.server` | 8080 | `http://localhost:8080` | `http://localhost:8080/docs` |
 | Meta API / Meta Analyzer | `python scripts/run_api.py` | 8000 | `http://localhost:8000/dashboard-enhanced` | `http://localhost:8000/docs` |
 | Draft Advisor | `python -m riot_lol_cli.draft_advisor.server` | 8001 | `http://localhost:8001/draft` | `http://localhost:8001/docs` |
 | Meta Scraper | `python -m riot_lol_cli.meta_scraper.server` | 8002 | `http://localhost:8002` | `http://localhost:8002/docs` |
@@ -192,13 +194,13 @@ El Draft Advisor es el subsistema mas autocontenido. No depende de `database/` n
 ### Meta Scraper
 
 ```
-Browser / POST /api/v1/meta/scrape
+Browser / POST /api/v1/meta/scrape*
   -> meta_scraper/server.py
   -> ScrapingOrchestrator
-  -> adapters/opgg.py + adapters/lolalytics.py
+  -> adapters/opgg.py + adapters/lolalytics.py + adapters/ugg.py
   -> normalizer.py
   -> data/meta_scraper/raw/*
-  -> data/meta_scraper/normalized/latest_support_tier.json o latest_adc_tier.json
+  -> data/meta_scraper/normalized/latest_support_tier.json, latest_adc_tier.json o latest_jungle_tier.json
   -> data/meta_scraper/manifest.json
 ```
 
@@ -256,6 +258,7 @@ La fuente de verdad de paths runtime es `src/riot_lol_cli/paths.py`:
 | Meta Scraper | `python -m riot_lol_cli.meta_scraper.server` |
 | Jungle Meta | `python -m riot_lol_cli.jungle_meta.server` |
 | Items Browser | `python -m riot_lol_cli.items_browser.server` |
+| Home Hub | `python -m riot_lol_cli.home.server` |
 | Update Items Database | `python scripts/update_items_database.py` |
 | Fetch completo de partidas | `python scripts/fetch_matches_full.py` |
 | Tests | `pytest tests/` |
@@ -312,8 +315,11 @@ Definida en `src/riot_lol_cli/meta_scraper/server.py`.
 - `GET /api/v1/meta/support/history`
 - `GET /api/v1/meta/adc/tier`
 - `GET /api/v1/meta/adc/champion/{champion_id}`
+- `GET /api/v1/meta/jungle/tier`
+- `GET /api/v1/meta/jungle/champion/{champion_id}`
 - `POST /api/v1/meta/scrape`
 - `POST /api/v1/meta/scrape/adc`
+- `POST /api/v1/meta/scrape/jungle`
 
 ### Jungle Meta API (`:8003`)
 
@@ -330,15 +336,15 @@ Definida en `src/riot_lol_cli/jungle_meta/server.py`.
 
 ### Items Browser API (`:8004`)
 
-Definida en `src/riot_lol_cli/items_browser/server.py`. Sirve `data/items/database.json` (generado por `scripts/update_items_database.py`).
+Definida en `src/riot_lol_cli/items_browser/server.py`. Sirve `data/items/database.json` (generado por `scripts/update_items_database.py`). El catalogo visual oculta por defecto variantes duplicadas por mapa/modo; la API puede incluirlas con `include_variants=true`.
 
 - `GET /` (dashboard SPA)
 - `GET /health`
-- `GET /api/v1/items/all?include_deprecated=false`
+- `GET /api/v1/items/all?include_deprecated=false&include_variants=false`
 - `GET /api/v1/items/{item_id}`
-- `GET /api/v1/items/groups` (starter/boots/components/legendary/consumables/trinkets/jungle_specific/deprecated)
+- `GET /api/v1/items/groups?include_variants=false` (starter/boots/components/legendary/consumables/trinkets/jungle_specific/deprecated)
 - `GET /api/v1/items/categories` (tags Riot)
-- `GET /api/v1/items/search?q=&lang=en|es`
+- `GET /api/v1/items/search?q=&lang=en|es&include_variants=false`
 
 ## Datos y Knowledge Base
 
@@ -389,6 +395,8 @@ Los perfiles y relaciones del Draft Advisor deben usar IDs canonicos de `champio
 - Raw: `data/meta_scraper/raw/<platform>/...json`
 - Normalizado support actual: `data/meta_scraper/normalized/latest_support_tier.json`
 - Normalizado ADC actual: `data/meta_scraper/normalized/latest_adc_tier.json`
+- Normalizado jungla actual: `data/meta_scraper/normalized/latest_jungle_tier.json`
+- Backups jungla: `data/meta_scraper/normalized/backups/jungle/`
 - Historico normalizado: `data/meta_scraper/normalized/history/*.json`
 - Manifest: `data/meta_scraper/manifest.json`
 
@@ -481,7 +489,7 @@ Reglas clave:
 
 ## Gotchas Globales
 
-1. **Cinco FastAPI separados:** Meta API `:8000`, Draft Advisor `:8001`, Meta Scraper `:8002`, Jungle Meta `:8003`, Items Browser `:8004`.
+1. **Seis FastAPI separados:** Home Hub `:8080`, Meta API `:8000`, Draft Advisor `:8001`, Meta Scraper `:8002`, Jungle Meta `:8003`, Items Browser `:8004`.
 2. **Factories FastAPI:** cada servicio activo debe exponer `create_app()` y mantener `app = create_app()`. Estado mutable de runtime va en `app.state` o dependencias explicitas, no en singletons globales de import.
 3. **`api_server.py` es wrapper:** la app real del Meta Analyzer vive en `meta_api/app.py`.
 4. **Templates activos:** usar `templates/` raiz. No asumir `src/riot_lol_cli/templates/`.
@@ -489,15 +497,17 @@ Reglas clave:
 6. **Legacy copy:** `projects/legacy/riot-lol-cli/` no es el paquete activo.
 7. **API key Riot:** dev keys expiran cada 24h; usar `.env`.
 8. **Playwright:** Meta Scraper declara Playwright en `requirements.txt`, pero el browser Chromium se instala aparte con `playwright install chromium`.
-9. **Puertos 8000-8004:** Meta API (:8000), Draft Advisor (:8001), Meta Scraper (:8002), Jungle Meta (:8003) e Items Browser (:8004) usan `settings.py` para host/port configurables via `LOLCLI_*_HOST` y `LOLCLI_*_PORT`.
+9. **Puertos 8000-8004 + 8080:** Home Hub (:8080), Meta API (:8000), Draft Advisor (:8001), Meta Scraper (:8002), Jungle Meta (:8003) e Items Browser (:8004) usan `settings.py` para host/port configurables via `LOLCLI_*_HOST` y `LOLCLI_*_PORT`.
 10. **Data versioning:** `live_patch_label` es el parche jugable/meta; `static_data_version` es la version tecnica de Data Dragon/CDN y puede tener sufijos como `.1`.
-11. **Draft data IDs:** relaciones de `adc_profiles.json`, `support_profiles.json` y `personal_adc_mastery.json` deben validar contra IDs canonicos de `champion_base.json`.
-12. **ADC personal policy:** `excluded_from_recommendations` bloquea picks aunque sean meta; `never_top_pick` permite alternativa pero nunca primera opcion. Top ADC requiere maestria `S/A`, meta `S` o `climb_score >= 80`, y no estar vetado por reglas KB de linea como Nilah + Soraka vs Caitlyn + Nautilus ni por vetos tacticos de draft contra dive/burst sin frontline. Los bonus KB de matchup, como Xayah contra Malphite/TahmKench, solo suman fit de draft y no saltan el gate de meta/maestria.
-13. **Docs con drift:** algunos docs antiguos mencionan endpoints o rutas pre-reorganizacion.
-14. **SQLite concurrency:** `check_same_thread=False` permite FastAPI, pero writes concurrentes requieren cuidado.
-15. **Generated outputs:** `outputs/`, DBs, caches y artefactos generados no son fuente de verdad.
-16. **Dev scratch:** scripts manuales viven en `projects/dev-scratch/`; no dejarlos en `src/` si no son paquete.
-17. **Junglas Pro:** vive en `projects/active/junglas-pro/` como proyecto standalone; no copiarlo entero a `KB/`.
+11. **Meta Scraper jungla:** `latest_jungle_tier.json` usa agregacion ponderada por partidas cuando las fuentes traen `games_analyzed`; si una fuente falla queda en `source_gaps` y no se inventa dato.
+12. **Draft data IDs:** relaciones de `adc_profiles.json`, `support_profiles.json` y `personal_adc_mastery.json` deben validar contra IDs canonicos de `champion_base.json`.
+13. **ADC personal policy:** `excluded_from_recommendations` bloquea picks aunque sean meta; `never_top_pick` permite alternativa pero nunca primera opcion. Top ADC requiere maestria `S/A`, meta `S` o `climb_score >= 80`, y no estar vetado por reglas KB de linea como Nilah + Soraka vs Caitlyn + Nautilus ni por vetos tacticos de draft contra dive/burst sin frontline. Los bonus KB de matchup, como Xayah contra Malphite/TahmKench, solo suman fit de draft y no saltan el gate de meta/maestria.
+14. **Docs con drift:** algunos docs antiguos mencionan endpoints o rutas pre-reorganizacion.
+15. **SQLite concurrency:** `check_same_thread=False` permite FastAPI, pero writes concurrentes requieren cuidado.
+16. **Generated outputs:** `outputs/`, DBs, caches y artefactos generados no son fuente de verdad.
+17. **Dev scratch:** scripts manuales viven en `projects/dev-scratch/`; no dejarlos en `src/` si no son paquete.
+18. **Junglas Pro:** vive en `projects/active/junglas-pro/` como proyecto standalone; no copiarlo entero a `KB/`.
+19. **Home Hub Integracion:** Cada vez que se agregue un subsistema, proyecto o servicio FastAPI nuevo, es **obligatorio** actualizar el Home Hub (`src/riot_lol_cli/home/`) para incluirlo en el grid principal y en el health-check agregado.
 
 ## Alertas y Deuda Conocida
 

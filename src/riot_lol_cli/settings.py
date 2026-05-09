@@ -11,6 +11,8 @@ DEFAULT_JUNGLE_META_HOST = "0.0.0.0"
 DEFAULT_JUNGLE_META_PORT = 8003
 DEFAULT_ITEMS_BROWSER_HOST = "0.0.0.0"
 DEFAULT_ITEMS_BROWSER_PORT = 8004
+DEFAULT_HOME_HOST = "0.0.0.0"
+DEFAULT_HOME_PORT = 8080
 
 
 def _get_env_int(name: str, default: int) -> int:
@@ -66,3 +68,11 @@ def get_items_browser_host() -> str:
 
 def get_items_browser_port() -> int:
     return _get_env_int("LOLCLI_ITEMS_BROWSER_PORT", DEFAULT_ITEMS_BROWSER_PORT)
+
+
+def get_home_host() -> str:
+    return os.getenv("LOLCLI_HOME_HOST", DEFAULT_HOME_HOST)
+
+
+def get_home_port() -> int:
+    return _get_env_int("LOLCLI_HOME_PORT", DEFAULT_HOME_PORT)

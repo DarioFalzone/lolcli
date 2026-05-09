@@ -23,6 +23,7 @@ La documentacion se actualiza en la misma iteracion que el codigo, datos o estru
 | Cambio | Documento obligatorio |
 |--------|-----------------------|
 | Arquitectura, puerto, path critico | `AGENTS.md` |
+| Nuevo subsistema, servicio o proyecto | Actualizar el Home Hub en `src/riot_lol_cli/home/` |
 | Ownership o estructura por proyecto | `projects/README.md` |
 | Docs fusionadas, movidas o canonicas | `docs/README.md` |
 | Comandos de setup/ejecucion | `docs/getting-started.md` |

@@ -143,6 +143,10 @@ class UggAdapter(BaseAdapter):
         """Extrae la tier list de ADC desde U.GG."""
         return self._fetch_tier_list(role="adc", patch=patch, elo=elo)
 
+    def fetch_jungle_tier_list(self, patch: str = "latest", elo: str = "emerald_plus") -> dict:
+        """Extrae la tier list de jungla desde U.GG."""
+        return self._fetch_tier_list(role="jungle", patch=patch, elo=elo)
+
     def _fetch_tier_list(self, role: str, patch: str, elo: str) -> dict:
         self._ensure_playwright()
         context = self._browser.new_context(

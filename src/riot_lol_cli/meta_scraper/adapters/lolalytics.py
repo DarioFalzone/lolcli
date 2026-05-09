@@ -153,6 +153,10 @@ class LolalyticsAdapter(BaseAdapter):
         """Extrae la tier list completa de ADC/bot lane desde LoLalytics."""
         return self._fetch_tier_list(role="adc", lane="bottom", patch=patch, elo=elo)
 
+    def fetch_jungle_tier_list(self, patch: str = "latest", elo: str = "emerald_plus") -> dict:
+        """Extrae la tier list completa de jungla desde LoLalytics."""
+        return self._fetch_tier_list(role="jungle", lane="jungle", patch=patch, elo=elo)
+
     def _fetch_tier_list(self, role: str, lane: str, patch: str, elo: str) -> dict:
         """
         Extrae una tier list por rol desde LoLalytics.

@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LOLCLI — Centro de Operaciones</title>
+  <meta name="description" content="Hub central de acceso a todos los subsistemas de riot_lol_cli: Draft Advisor, Meta Analyzer, Items Browser y más." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/design-system/tokens.css" />
+  <link rel="stylesheet" href="/design-system/components.css" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body class="ds-page">
+
+  <!-- Ambient particles -->
+  <div class="ambient-particles" aria-hidden="true">
+    <div class="particle particle-1"></div>
+    <div class="particle particle-2"></div>
+    <div class="particle particle-3"></div>
+    <div class="particle particle-4"></div>
+    <div class="particle particle-5"></div>
+  </div>
+
+  <div class="home-container">
+
+    <!-- Header Bar -->
+    <header class="home-header" id="home-header">
+      <div class="header-brand">
+        <div class="brand-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/>
+            <line x1="12" y1="22" x2="12" y2="15.5"/>
+            <polyline points="22 8.5 12 15.5 2 8.5"/>
+            <polyline points="2 15.5 12 8.5 22 15.5"/>
+            <line x1="12" y1="2" x2="12" y2="8.5"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">LOLCLI</span>
+          <span class="brand-sub">riot_lol_cli</span>
+        </div>
+      </div>
+      <div class="header-meta">
+        <span class="pill pill-gold" id="version-pill">v...</span>
+        <div class="status-summary" id="status-summary">
+          <div class="status-dot status-dot--loading" id="global-status-dot"></div>
+          <span class="status-text" id="status-text">Verificando...</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero-section" id="hero">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-content">
+        <div class="hero-eyebrow">CENTRO DE OPERACIONES</div>
+        <h1 class="hero-title">
+          Tus sistemas<br/>
+          <span class="hero-highlight">en un solo lugar</span>
+        </h1>
+        <p class="hero-subtitle">
+          Accedé a todos los subsistemas de <strong>riot_lol_cli</strong> desde acá.
+          Health-check en tiempo real para cada servicio.
+        </p>
+      </div>
+      <div class="hero-ornament" aria-hidden="true">
+        <div class="hex hex-1"></div>
+        <div class="hex hex-2"></div>
+        <div class="hex hex-3"></div>
+      </div>
+    </section>
+
+    <!-- Services Grid -->
+    <section class="services-section" id="services">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="section-icon" aria-hidden="true">⚡</span>
+          Servicios Activos
+        </h2>
+        <div class="section-actions">
+          <button class="btn btn-ghost btn-sm" id="refresh-btn" title="Refrescar estado">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="23 4 23 10 17 10"/>
+              <polyline points="1 20 1 14 7 14"/>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+            </svg>
+            Refrescar
+          </button>
+        </div>
+      </div>
+      <div class="services-grid" id="services-grid">
+        <!-- Cards rendered by JS -->
+      </div>
+    </section>
+
+    <!-- Standalone Projects -->
+    <section class="standalone-section" id="standalone">
+      <div class="section-header">
+        <h2 class="section-title">
+          <span class="section-icon" aria-hidden="true">📁</span>
+          Proyectos Standalone
+        </h2>
+      </div>
+      <div class="standalone-grid" id="standalone-grid">
+        <div class="service-card service-card--standalone" data-accent="neutral">
+          <div class="card-accent-line"></div>
+          <div class="card-top">
+            <span class="service-icon">🔬</span>
+            <div class="service-status">
+              <span class="pill pill-neutral">LOCAL</span>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3 class="service-name">Junglas Pro</h3>
+            <p class="service-desc">Investigación y portal local sobre junglas profesionales.</p>
+          </div>
+          <div class="card-footer">
+            <span class="service-path">projects/active/junglas-pro/</span>
+            <span class="pill pill-neutral pill-sm">Standalone</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="home-footer" id="footer">
+      <div class="footer-divider"></div>
+      <div class="footer-content">
+        <span class="footer-brand">lolcli <span id="footer-version">v?</span></span>
+        <span class="footer-sep">·</span>
+        <span class="footer-link">Puerto Home: <strong id="footer-port">8080</strong></span>
+        <span class="footer-sep">·</span>
+        <a class="footer-link" href="/docs" target="_blank" rel="noopener">API Docs</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

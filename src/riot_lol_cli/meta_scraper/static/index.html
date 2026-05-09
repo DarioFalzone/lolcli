@@ -48,12 +48,13 @@
             </div>
             <div class="header-text">
                 <h1 class="header-title">Meta LoL</h1>
-                <p class="header-subtitle">Tier List · Soporte · ADC</p>
+                <p class="header-subtitle">Tier List - Soporte - ADC - Jungla</p>
             </div>
             <!-- Tabs de rol -->
             <nav class="role-tabs" id="role-tabs">
                 <button class="role-tab role-tab--active" data-role="support" onclick="switchRole('support')">Soporte</button>
                 <button class="role-tab" data-role="adc" onclick="switchRole('adc')">ADC</button>
+                <button class="role-tab" data-role="jungle" onclick="switchRole('jungle')">Jungla</button>
             </nav>
         </div>
         <div class="header-right">
@@ -90,6 +91,12 @@
 
     <!-- Filtros -->
     <div class="filter-bar">
+        <div class="filter-group">
+            <label class="filter-label">Vista</label>
+            <div class="source-filters" id="source-filters">
+                <button class="source-pill source-pill--active" data-source="total" onclick="switchSource('total')">Total</button>
+            </div>
+        </div>
         <div class="filter-group">
             <label class="filter-label">Filtrar por Tier</label>
             <div class="tier-filters" id="tier-filters">
@@ -129,8 +136,10 @@
                 </svg>
             </div>
             <p class="empty-title">Sin datos de meta</p>
-            <p class="empty-sub">Presioná <strong>Actualizar</strong> para scrapear datos de LoLalytics y OP.GG</p>
+            <p class="empty-sub">Presiona <strong>Actualizar</strong> para scrapear datos de LoLalytics, OP.GG y U.GG</p>
         </div>
+
+
 
         <!-- Tabla de tier list -->
         <table class="tier-table" id="tier-table" style="display: none;">

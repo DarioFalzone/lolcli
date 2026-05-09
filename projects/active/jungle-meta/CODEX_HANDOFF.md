@@ -44,7 +44,9 @@ Modulo `src/riot_lol_cli/jungle_meta/` ya tenia un MVP. En esta sesion se reescr
 - **SPA reescrita** (`static/index.html`, `styles.css`, `app.js`): hash router (`#overview` / `#champion/{id}`), cards expandidas con WR/PR, filter tabs ALL/S/A/B/C, splash bg en detail view, builds multiples renderizadas con flechas entre items.
 - **Source of truth visual**: `projects/active/jungle-meta/screenshots/` — 7 capturas de SkillCapped Patch 26.09. La carátula define la estética (Anton italic display + jungla icon).
 
-**Pendiente conocido** (CRITICO): los items en `core_builds` son arquetipos canónicos por champion (AD jungler → Voltaic + Black Cleaver + Maw, AP → Liandry + Rylai + Morello). NO matchean slot-a-slot el video real. La estructura permite que el fix sea cambiar un `int` por otro.
+**Estado 2026-05-09:** Xin Zhao ya fue corregido contra la captura/manual review. Sus builds usan `Statikk Shiv` (`3087`), `Dusk and Dawn` (`2510`) y `Riftmaker` (`4633`). Tambien se quito de `voltaic_sword_abusers` porque ya no usa Voltaic en el build verificado.
+
+**Pendiente conocido:** los champions sin screenshot dedicada siguen usando arquetipos canonicos. La estructura permite que cada correccion futura sea cambiar un `int` por otro dentro de `core_builds`.
 
 ### 3. Items Browser (puerto 8004)
 
@@ -73,7 +75,7 @@ Modulo nuevo para identificar exactamente qué items aparecen en cada screenshot
 
 ## Próximo paso (lo que tu sesión deberia ejecutar)
 
-**Tarea**: corregir slot-by-slot los items de `core_builds` en `data/jungle_meta/patch_26.09.json` para que matcheen las screenshots reales.
+**Tarea**: corregir slot-by-slot los items restantes de `core_builds` en `data/jungle_meta/patch_26.09.json` para que matcheen las screenshots reales.
 
 **Workflow sugerido**:
 
@@ -81,7 +83,7 @@ Modulo nuevo para identificar exactamente qué items aparecen en cada screenshot
    ```powershell
    scripts\bat\items_browser.bat   # http://localhost:8004
    ```
-2. Por cada champion con screenshot disponible (Xin Zhao, Kayn rojo, Udyr):
+2. Por cada champion con screenshot disponible pendiente:
    - Abrir `projects/active/jungle-meta/screenshots/core build <champ>.png`.
    - Identificar visualmente los 4 items del core build.
    - En el browser, buscar por nombre/grupo para encontrar el ID.
@@ -95,16 +97,16 @@ Modulo nuevo para identificar exactamente qué items aparecen en cada screenshot
 
 **Restricciones**:
 
-- No tocar `assets/items/`, `data/items/database.json`, ni el modulo items_browser (eso ya quedó cerrado).
+- No tocar `assets/items/` ni `data/items/database.json` salvo pedido explicito.
 - No alterar el schema de `patch_26.09.json` (solo cambiar valores `int` dentro de `items` arrays).
-- Mantener compatibilidad: tests `test_xin_zhao_has_two_builds` y `test_get_item_abusers_voltaic_sword` deben seguir pasando.
+- Mantener compatibilidad: tests `test_xin_zhao_core_builds_match_skillcapped_screenshot`, `test_xin_zhao_has_two_builds` y `test_get_item_abusers_voltaic_sword` deben seguir pasando.
 - Si un item de la screenshot resulta deprecated (no esta en DDragon vigente), hacerlo notar en commit body.
 
 **Verificación end-to-end**:
 
 1. `pytest -q` → 163+ passed.
-2. `curl http://localhost:8003/api/v1/jungle/champion/XinZhao` → builds visibles.
-3. Browser `http://localhost:8003/#champion/XinZhao` → 2 builds cada una con 4 iconos cargando desde `/items/{id}.png`.
+2. `curl http://localhost:8003/api/v1/jungle/champion/XinZhao` → builds `[3087,2510,4633]` y `[2510,4633,3087]`.
+3. Browser `http://localhost:8003/#champion/XinZhao` → 2 builds con iconos cargando desde `/items/{id}.png`.
 
 ---
 

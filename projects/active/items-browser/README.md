@@ -32,6 +32,12 @@ Schema por item:
 
 Items obsoletos (presentes en CSV legacy `assets/data_id_imagen/items_ddragon.csv` o `assets/items/*.png` pero ausentes en la version actual de DDragon) se marcan con `deprecated: true` y se exponen aparte en el grupo `deprecated`.
 
+Data Dragon tambien incluye variantes por mapa/modo con el mismo nombre e icono
+o casi el mismo item (por ejemplo Arena `224633` para Riftmaker o variantes
+internas de smite `1105`-`1107`). El catalogo visual las oculta por defecto
+para no mostrar duplicados; el JSON bruto se conserva y la API puede exponerlas
+con `include_variants=true`.
+
 ## Quick start
 
 ```powershell
@@ -52,12 +58,12 @@ Manual:
 | Metodo | Path | Descripcion |
 |--------|------|-------------|
 | `GET` | `/` | SPA |
-| `GET` | `/health` | version, total/current/deprecated count |
-| `GET` | `/api/v1/items/all?include_deprecated=` | lista completa |
+| `GET` | `/health` | version, total/current/catalog/deprecated count |
+| `GET` | `/api/v1/items/all?include_deprecated=&include_variants=` | lista completa filtrada para catalogo |
 | `GET` | `/api/v1/items/{id}` | detalle individual |
-| `GET` | `/api/v1/items/groups` | buckets por uso |
+| `GET` | `/api/v1/items/groups?include_variants=` | buckets por uso |
 | `GET` | `/api/v1/items/categories` | tags Riot |
-| `GET` | `/api/v1/items/search?q=&lang=en\|es` | busqueda por substring |
+| `GET` | `/api/v1/items/search?q=&lang=en\|es&include_variants=` | busqueda por substring |
 
 ## Refrescar items
 

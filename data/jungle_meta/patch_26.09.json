@@ -1,6 +1,6 @@
 {
   "patch": "26.09",
-  "date_updated": "2026-05-08T18:00:00Z",
+  "date_updated": "2026-05-09T00:00:00Z",
   "patch_theme": "Hail of Blades + AD items buffed, AP junglers adjusted",
   "source": "SkillCapped Patch 26.09 Jungle Tier List",
   "categories": {
@@ -9,7 +9,8 @@
     "bans": ["Shyvana", "Kayn", "Udyr"]
   },
   "items_meta": {
-    "voltaic_sword_abusers": ["XinZhao", "Hecarim", "Kayn", "RekSai"]
+    "voltaic_sword_abusers": ["Hecarim", "Kayn", "RekSai"],
+    "statikk_dusk_riftmaker_abusers": ["XinZhao"]
   },
   "jungle_champions": [
     {
@@ -23,12 +24,12 @@
       "reason_text": "Hail of Blades + AD item buffs. Lethal early game tempo.",
       "core_builds": [
         {
-          "label": "Standard (Voltaic + Cleaver + Sundered)",
-          "items": [3047, 6699, 3071, 6610]
+          "label": "Statikk Rush (DPS spike)",
+          "items": [3087, 2510, 4633]
         },
         {
-          "label": "Bruiser (Stridebreaker + Trinity)",
-          "items": [3006, 6631, 3078, 3071]
+          "label": "Dusk and Dawn First (Survivability)",
+          "items": [2510, 4633, 3087]
         }
       ],
       "core_rune": {

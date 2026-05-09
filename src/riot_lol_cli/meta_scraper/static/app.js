@@ -13,12 +13,25 @@ const state = {
   searchQuery: '',     // Búsqueda por texto
   selectedChamp: null, // Campeón seleccionado para detalle
   isScraping: false,
-  activeRole: 'support', // 'support' | 'adc'
+  activeRole: 'support', // 'support' | 'adc' | 'jungle'
+  activeSource: 'total', // 'total' | platform | 'gaps'
 };
 
 // Data Dragon CDN para avatares de campeones
-const DDRAGON_VERSION = '16.8.1';
+const DDRAGON_VERSION = '16.9.1';
 const DDRAGON_BASE = `https://ddragon.leagueoflegends.com/cdn/${DDRAGON_VERSION}/img/champion`;
+
+const ROLE_ENDPOINTS = {
+  support: '/api/v1/meta/support/tier',
+  adc: '/api/v1/meta/adc/tier',
+  jungle: '/api/v1/meta/jungle/tier',
+};
+
+const SCRAPE_ENDPOINTS = {
+  support: '/api/v1/meta/scrape',
+  adc: '/api/v1/meta/scrape/adc',
+  jungle: '/api/v1/meta/scrape/jungle',
+};
 
 // --- Init ---
 document.addEventListener('DOMContentLoaded', () => {
@@ -43,19 +56,26 @@ function switchRole(role) {
   // Reset filters and reload
   state.activeTier = 'all';
   state.searchQuery = '';
+  state.activeSource = 'total';
   document.getElementById('champion-search').value = '';
   document.querySelectorAll('.tier-pill').forEach(p => {
     p.classList.toggle('tier-pill--active', p.dataset.tier === 'all');
   });
+  updateSourceFilterButtons();
 
   loadData();
 }
 
+function switchSource(source) {
+  if (state.activeSource === source) return;
+  state.activeSource = source;
+  updateSourceFilterButtons();
+  refreshCurrentView();
+}
+
 // --- Data Loading ---
 async function loadData() {
-  const endpoint = state.activeRole === 'adc'
-    ? '/api/v1/meta/adc/tier'
-    : '/api/v1/meta/support/tier';
+  const endpoint = ROLE_ENDPOINTS[state.activeRole] || ROLE_ENDPOINTS.support;
 
   try {
     const response = await fetch(endpoint);
@@ -66,16 +86,91 @@ async function loadData() {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
     state.data = await response.json();
-    state.champions = state.data.champions || [];
 
     updateHeader(state.data);
-    updateQuickStats(state.data);
-    renderTierList(state.champions);
-    hideEmptyState();
+    renderSourceFilters(state.data);
+
+    // If snapshot has 0 champions, show the friendly empty state
+    if (!state.data.champions || state.data.champions.length === 0) {
+      showEmptyState();
+      updateQuickStats(state.data, []);
+      return;
+    }
+
+    refreshCurrentView();
   } catch (err) {
     console.error('Error cargando datos:', err);
     showEmptyState();
   }
+}
+
+function renderSourceFilters(data) {
+  const container = document.getElementById('source-filters');
+  if (!container) return;
+
+  const sources = data.sources || [];
+  const gaps = data.source_gaps || [];
+  const buttons = [
+    { id: 'total', label: 'Total' },
+    ...sources.map(source => ({ id: source, label: sourceLabel(source) })),
+  ];
+
+  container.innerHTML = buttons.map(button => `
+    <button class="source-pill" data-source="${button.id}" onclick="switchSource('${button.id}')">
+      ${button.label}
+    </button>
+  `).join('');
+  updateSourceFilterButtons();
+}
+
+function updateSourceFilterButtons() {
+  document.querySelectorAll('.source-pill').forEach(button => {
+    button.classList.toggle('source-pill--active', button.dataset.source === state.activeSource);
+  });
+}
+
+function refreshCurrentView() {
+  if (!state.data) return;
+
+  state.champions = getChampionsForSource(state.data, state.activeSource);
+  updateQuickStats(state.data, state.champions);
+  applyFilters();
+  hideEmptyState();
+}
+
+function getChampionsForSource(data, source) {
+  const champions = data.champions || [];
+  if (source === 'total') return champions;
+
+  return champions
+    .filter(champ => champ.source_breakdown && champ.source_breakdown[source])
+    .map(champ => {
+      const sourceStats = champ.source_breakdown[source];
+      return {
+        ...champ,
+        stats: {
+          ...champ.stats,
+          win_rate: sourceStats.win_rate || 0,
+          pick_rate: sourceStats.pick_rate || 0,
+          ban_rate: sourceStats.ban_rate || 0,
+          games_analyzed: sourceStats.games_analyzed || 0,
+          tier: sourceStats.tier || champ.stats?.tier || 'B',
+          aggregation_note: `Vista individual de ${sourceLabel(source)}`,
+        },
+        source_breakdown: {
+          [source]: sourceStats,
+        },
+      };
+    });
+}
+
+function sourceLabel(source) {
+  const labels = {
+    lolalytics: 'LoLalytics',
+    opgg: 'OP.GG',
+    ugg: 'U.GG',
+  };
+  return labels[source] || source;
 }
 
 // --- Header ---
@@ -83,20 +178,26 @@ function updateHeader(data) {
   const patchBadge = document.getElementById('patch-badge');
   const timestamp = document.getElementById('scrape-timestamp');
 
-  patchBadge.textContent = `Parche ${data.patch || '—'}`;
+  const patch = data.patch || '—';
+  patchBadge.textContent = patch === 'pending' ? 'Sin datos' : `Parche ${patch}`;
 
   if (data.scraped_at) {
     const date = new Date(data.scraped_at);
     timestamp.textContent = `Actualizado: ${date.toLocaleDateString('es-AR')} ${date.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' })}`;
+  } else {
+    timestamp.textContent = 'Sin datos aún';
   }
 }
 
 // --- Quick Stats ---
-function updateQuickStats(data) {
-  const champs = data.champions || [];
+function updateQuickStats(data, visibleChampions = null) {
+  const champs = visibleChampions || data.champions || [];
 
   document.getElementById('stat-total').textContent = champs.length;
-  document.getElementById('stat-sources').textContent = (data.sources || []).join(' + ') || '—';
+  const sourceText = state.activeSource === 'total'
+    ? (data.sources || []).map(sourceLabel).join(' + ')
+    : sourceLabel(state.activeSource);
+  document.getElementById('stat-sources').textContent = sourceText || '---';
 
   // Mejor WR
   if (champs.length > 0) {
@@ -114,6 +215,11 @@ function updateQuickStats(data) {
     const topPick = byPick[0];
     document.getElementById('stat-most-picked').textContent = `${topPick.stats.pick_rate}%`;
     document.getElementById('stat-picked-name').textContent = topPick.display_name || topPick.id;
+  } else {
+    document.getElementById('stat-best-wr').textContent = '---';
+    document.getElementById('stat-best-name').textContent = 'Mejor WR';
+    document.getElementById('stat-most-picked').textContent = '---';
+    document.getElementById('stat-picked-name').textContent = 'Mas pickeado';
   }
 }
 
@@ -210,6 +316,13 @@ function renderTierList(champions) {
   });
 }
 
+function formatDateTime(value) {
+  if (!value) return 'sin fecha';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return 'sin fecha';
+  return `${date.toLocaleDateString('es-AR')} ${date.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' })}`;
+}
+
 function wrColor(wr) {
   if (wr >= 53) return '#2dcc70';
   if (wr >= 51) return '#0ac8b9';
@@ -247,7 +360,7 @@ function filterBySearch(query) {
 function applyFilters() {
   if (!state.data) return;
 
-  let filtered = state.data.champions || [];
+  let filtered = getChampionsForSource(state.data, state.activeSource);
 
   // Tier filter
   if (state.activeTier !== 'all') {
@@ -381,9 +494,7 @@ async function triggerScrape() {
   btn.disabled = true;
   text.textContent = 'Scrapeando...';
 
-  const scrapeEndpoint = state.activeRole === 'adc'
-    ? '/api/v1/meta/scrape/adc'
-    : '/api/v1/meta/scrape';
+  const scrapeEndpoint = SCRAPE_ENDPOINTS[state.activeRole] || SCRAPE_ENDPOINTS.support;
 
   try {
     const response = await fetch(scrapeEndpoint, { method: 'POST' });
