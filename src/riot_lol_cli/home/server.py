@@ -32,6 +32,7 @@ _MODULE_DIR = Path(__file__).resolve().parent
 _STATIC_DIR = _MODULE_DIR / "static"
 _DESIGN_SYSTEM_DIR = _MODULE_DIR.parent / "draft_advisor" / "static" / "design-system"
 _VERSION_FILE = _MODULE_DIR.parent.parent.parent / "config" / "version.json"
+_JUNGLAS_PRO_DIR = _MODULE_DIR.parent.parent.parent / "projects" / "active" / "junglas-pro"
 
 router = APIRouter()
 
@@ -196,6 +197,14 @@ def create_app() -> FastAPI:
             "/design-system",
             StaticFiles(directory=str(_DESIGN_SYSTEM_DIR)),
             name="design-system",
+        )
+
+    # Expose Junglas Pro project
+    if _JUNGLAS_PRO_DIR.exists():
+        application.mount(
+            "/junglas-pro",
+            StaticFiles(directory=str(_JUNGLAS_PRO_DIR), html=True),
+            name="junglas-pro",
         )
 
     application.include_router(router)

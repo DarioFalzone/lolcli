@@ -3,102 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dashboard de Meta de Soporte — Visualiza la tier list, winrates, pickrates y builds óptimas de soportes en League of Legends">
-    <title>Meta Soporte — LoL CLI</title>
+    <meta name="description" content="Dashboard de Meta de Soporte / ADC / Jungla — Visualiza la tier list, winrates, pickrates y builds óptimas en League of Legends">
+    <title>Meta LoL — Dashboard</title>
 
-    <!-- Google Fonts (mismo stack del Draft Advisor) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Única dependencia externa: Inter (ya presente en el repo previo). Sin JetBrains Mono → usamos system mono stack en CSS. -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Design System (reutilizado del Draft Advisor) -->
-    <link rel="stylesheet" href="/design-system/tokens.css">
-    <link rel="stylesheet" href="/design-system/compat-spa.css">
-    <link rel="stylesheet" href="/design-system/components.css">
-
-    <!-- Estilos específicos del Meta Scraper -->
+    <!-- Estilos del Meta Scraper (self-contained: NO importa /design-system para evitar conflictos) -->
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
 
 <div class="app-shell" id="app-shell">
-    <!-- Header -->
+
+    <!-- =========================================================
+         HEADER
+         ========================================================= -->
     <header class="app-header">
         <div class="header-left">
             <div class="header-logo">
-                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32">
-                    <path d="M20 4L36 13V27L20 36L4 27V13L20 4Z" stroke="url(#hGrad)" stroke-width="1.5" stroke-linejoin="round"/>
-                    <path d="M20 10L30 16V28L20 34L10 28V16L20 10Z" fill="url(#hFill)" opacity="0.2"/>
-                    <circle cx="20" cy="22" r="5" fill="url(#hCore)" opacity="0.6"/>
+                <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" width="32" height="32" aria-hidden="true">
+                    <path d="M20 4L36 13V27L20 36L4 27V13L20 4Z" stroke="url(#hGrad)" stroke-width="1.6" stroke-linejoin="round"/>
+                    <path d="M20 10L30 16V28L20 34L10 28V16L20 10Z" fill="url(#hFill)" opacity="0.25"/>
+                    <circle cx="20" cy="22" r="5" fill="url(#hCore)" opacity="0.7"/>
                     <defs>
                         <linearGradient id="hGrad" x1="4" y1="4" x2="36" y2="36">
-                            <stop stop-color="#c89b3c"/>
-                            <stop offset="1" stop-color="#0ac8b9"/>
+                            <stop stop-color="#2dd4bf"/>
+                            <stop offset="1" stop-color="#22d3ee"/>
                         </linearGradient>
                         <linearGradient id="hFill" x1="10" y1="10" x2="30" y2="34">
-                            <stop stop-color="#c89b3c"/>
-                            <stop offset="1" stop-color="#0ac8b9"/>
+                            <stop stop-color="#2dd4bf"/>
+                            <stop offset="1" stop-color="#22d3ee"/>
                         </linearGradient>
                         <linearGradient id="hCore" x1="15" y1="17" x2="25" y2="27">
-                            <stop stop-color="#e4c870"/>
-                            <stop offset="1" stop-color="#0ac8b9"/>
+                            <stop stop-color="#67e8f9"/>
+                            <stop offset="1" stop-color="#2dd4bf"/>
                         </linearGradient>
                     </defs>
                 </svg>
             </div>
             <div class="header-text">
                 <h1 class="header-title">Meta LoL</h1>
-                <p class="header-subtitle">Tier List - Soporte - ADC - Jungla</p>
+                <p class="header-subtitle">Tier List · Soporte · ADC · Jungla</p>
             </div>
+
             <!-- Tabs de rol -->
-            <nav class="role-tabs" id="role-tabs">
+            <nav class="role-tabs" id="role-tabs" aria-label="Cambiar rol">
+                <span class="role-tabs__pill" id="role-tabs-pill" aria-hidden="true"></span>
                 <button class="role-tab role-tab--active" data-role="support" onclick="switchRole('support')">Soporte</button>
                 <button class="role-tab" data-role="adc" onclick="switchRole('adc')">ADC</button>
                 <button class="role-tab" data-role="jungle" onclick="switchRole('jungle')">Jungla</button>
             </nav>
         </div>
+
         <div class="header-right">
-            <span class="patch-badge" id="patch-badge">—</span>
+            <span class="patch-badge" id="patch-badge">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 L15 8 L22 9 L17 14 L18 21 L12 18 L6 21 L7 14 L2 9 L9 8 Z"/></svg>
+                <span class="patch-badge__text">—</span>
+            </span>
             <span class="scrape-timestamp" id="scrape-timestamp">Sin datos</span>
             <button class="btn-scrape" id="btn-scrape" onclick="triggerScrape()" aria-label="Actualizar datos">
-                <svg class="btn-scrape-icon" id="scrape-icon" viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
-                    <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"/>
+                <svg class="btn-scrape-icon" id="scrape-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true">
+                    <path d="M21 12 a9 9 0 1 1 -3-6.7"/>
+                    <path d="M21 4 V10 H15"/>
                 </svg>
                 <span class="btn-scrape-text" id="scrape-text">Actualizar</span>
             </button>
         </div>
     </header>
 
-    <!-- Stats rápidos -->
-    <div class="quick-stats" id="quick-stats">
-        <div class="stat-card">
-            <span class="stat-value" id="stat-total">—</span>
-            <span class="stat-label">Campeones</span>
-        </div>
-        <div class="stat-card">
-            <span class="stat-value" id="stat-sources">—</span>
-            <span class="stat-label">Fuentes</span>
-        </div>
-        <div class="stat-card stat-card--gold">
-            <span class="stat-value" id="stat-best-wr">—</span>
-            <span class="stat-label" id="stat-best-name">Mejor WR</span>
-        </div>
-        <div class="stat-card stat-card--cyan">
-            <span class="stat-value" id="stat-most-picked">—</span>
-            <span class="stat-label" id="stat-picked-name">Más pickeado</span>
-        </div>
-    </div>
+    <!-- =========================================================
+         QUICK STATS
+         ========================================================= -->
+    <section class="quick-stats" id="quick-stats" aria-label="Resumen del meta">
+        <article class="stat-card stat-card--teal">
+            <div class="stat-card__head">
+                <span class="stat-card__label">Total campeones</span>
+                <span class="stat-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 L20 6 V13 C20 18 16 21 12 22 C8 21 4 18 4 13 V6 Z"/></svg>
+                </span>
+            </div>
+            <div class="stat-card__value"><span class="stat-value" id="stat-total">—</span></div>
+            <div class="stat-card__meta"><span class="stat-label">analizados en el rol</span></div>
+        </article>
 
-    <!-- Filtros -->
+        <article class="stat-card stat-card--violet">
+            <div class="stat-card__head">
+                <span class="stat-card__label">Fuentes activas</span>
+                <span class="stat-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18"/></svg>
+                </span>
+            </div>
+            <div class="stat-card__value"><span class="stat-value" id="stat-sources">—</span></div>
+            <div class="stat-card__meta"><span class="stat-label">LoLalytics · OP.GG · U.GG</span></div>
+        </article>
+
+        <article class="stat-card stat-card--gold">
+            <div class="stat-card__head">
+                <span class="stat-card__label">Mejor Win Rate</span>
+                <span class="stat-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg>
+                </span>
+            </div>
+            <div class="stat-card__value"><span class="stat-value" id="stat-best-wr">—</span></div>
+            <div class="stat-card__meta"><span class="stat-label" id="stat-best-name">Mejor WR</span></div>
+        </article>
+
+        <article class="stat-card stat-card--cyan">
+            <div class="stat-card__head">
+                <span class="stat-card__label">Más pickeado</span>
+                <span class="stat-card__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                </span>
+            </div>
+            <div class="stat-card__value"><span class="stat-value" id="stat-most-picked">—</span></div>
+            <div class="stat-card__meta"><span class="stat-label" id="stat-picked-name">Más pickeado</span></div>
+        </article>
+    </section>
+
+    <!-- =========================================================
+         FILTER BAR
+         ========================================================= -->
     <div class="filter-bar">
         <div class="filter-group">
-            <label class="filter-label">Vista</label>
+            <label class="filter-label">Vista por fuente</label>
             <div class="source-filters" id="source-filters">
                 <button class="source-pill source-pill--active" data-source="total" onclick="switchSource('total')">Total</button>
             </div>
         </div>
+
         <div class="filter-group">
-            <label class="filter-label">Filtrar por Tier</label>
+            <label class="filter-label">Filtrar por tier</label>
             <div class="tier-filters" id="tier-filters">
                 <button class="tier-pill tier-pill--active" data-tier="all" onclick="filterByTier('all')">Todos</button>
                 <button class="tier-pill tier-pill--s" data-tier="S" onclick="filterByTier('S')">S</button>
@@ -107,41 +145,43 @@
                 <button class="tier-pill tier-pill--c" data-tier="C" onclick="filterByTier('C')">C</button>
             </div>
         </div>
-        <div class="filter-group">
-            <label class="filter-label">Buscar</label>
+
+        <div class="filter-group filter-group--search">
+            <label class="filter-label" for="champion-search">Buscar</label>
             <div class="search-wrapper">
-                <input type="search" id="champion-search" class="search-input" placeholder="Buscar campeón..." oninput="filterBySearch(this.value)" autocomplete="off" spellcheck="false">
+                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+                <input type="search" id="champion-search" class="search-input" placeholder="Escribí un nombre de campeón…" oninput="filterBySearch(this.value)" autocomplete="off" spellcheck="false">
             </div>
         </div>
     </div>
 
-    <!-- Tier List Table -->
+    <!-- =========================================================
+         TIER LIST TABLE
+         ========================================================= -->
     <main class="tier-list-container">
-        <!-- Estado vacío -->
+        <!-- Empty state -->
         <div class="empty-state" id="empty-state">
             <div class="empty-icon">
-                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <path d="M32 8L52 18V46L32 56L12 46V18L32 8Z" stroke="url(#eGrad)" stroke-width="1.5" stroke-linejoin="round"/>
-                    <circle cx="32" cy="32" r="8" fill="url(#eFill)" opacity="0.3"/>
+                    <circle cx="32" cy="32" r="8" fill="url(#eFill)" opacity="0.4"/>
                     <defs>
                         <linearGradient id="eGrad" x1="12" y1="8" x2="52" y2="56">
-                            <stop stop-color="#c89b3c" stop-opacity="0.5"/>
-                            <stop offset="1" stop-color="#0ac8b9" stop-opacity="0.5"/>
+                            <stop stop-color="#2dd4bf" stop-opacity="0.6"/>
+                            <stop offset="1" stop-color="#22d3ee" stop-opacity="0.6"/>
                         </linearGradient>
                         <linearGradient id="eFill" x1="24" y1="24" x2="40" y2="40">
-                            <stop stop-color="#c89b3c"/>
-                            <stop offset="1" stop-color="#0ac8b9"/>
+                            <stop stop-color="#2dd4bf"/>
+                            <stop offset="1" stop-color="#22d3ee"/>
                         </linearGradient>
                     </defs>
                 </svg>
             </div>
             <p class="empty-title">Sin datos de meta</p>
-            <p class="empty-sub">Presiona <strong>Actualizar</strong> para scrapear datos de LoLalytics, OP.GG y U.GG</p>
+            <p class="empty-sub">Presioná <strong>Actualizar</strong> para scrapear datos de LoLalytics, OP.GG y U.GG.</p>
         </div>
 
-
-
-        <!-- Tabla de tier list -->
+        <!-- Table -->
         <table class="tier-table" id="tier-table" style="display: none;">
             <thead>
                 <tr>
@@ -155,23 +195,69 @@
                     <th class="th-sources">Fuentes</th>
                 </tr>
             </thead>
-            <tbody id="tier-table-body">
-            </tbody>
+            <tbody id="tier-table-body"></tbody>
         </table>
-        <!-- Columna climb_score solo visible en modo ADC -->
+
+        <!-- Climb column visibility (depend on app.js applying body.role-adc) -->
         <style>
             .th-climb, .td-climb { display: none; }
             body.role-adc .th-climb, body.role-adc .td-climb { display: table-cell; }
         </style>
     </main>
 
-    <!-- Panel de detalle (lateral) -->
-    <aside class="detail-panel" id="detail-panel" style="display: none;">
-        <button class="detail-close" onclick="closeDetail()" aria-label="Cerrar detalle">&times;</button>
+    <!-- =========================================================
+         DETAIL PANEL
+         ========================================================= -->
+    <div class="detail-backdrop" id="detail-backdrop" onclick="closeDetail()" aria-hidden="true"></div>
+    <aside class="detail-panel" id="detail-panel" style="display: none;" aria-hidden="true">
+        <button class="detail-close" onclick="closeDetail()" aria-label="Cerrar detalle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M6 18L18 6"/></svg>
+        </button>
         <div class="detail-content" id="detail-content"></div>
     </aside>
+
 </div>
 
 <script src="/static/app.js"></script>
+
+<script>
+/* ---------- Animated role-tab pill ---------- */
+(function () {
+  const tabs = document.getElementById('role-tabs');
+  const pill = document.getElementById('role-tabs-pill');
+  if (!tabs || !pill) return;
+  function update() {
+    const active = tabs.querySelector('.role-tab--active');
+    if (!active) return;
+    const r = active.getBoundingClientRect();
+    const p = tabs.getBoundingClientRect();
+    pill.style.left = (r.left - p.left) + 'px';
+    pill.style.width = r.width + 'px';
+  }
+  // Re-position pill when role changes (app.js toggles .role-tab--active)
+  const obs = new MutationObserver(update);
+  tabs.querySelectorAll('.role-tab').forEach(t => obs.observe(t, { attributes: true, attributeFilter: ['class'] }));
+  window.addEventListener('load', update);
+  window.addEventListener('resize', update);
+  setTimeout(update, 50);
+})();
+
+/* ---------- Detail panel backdrop sync ---------- */
+(function () {
+  const panel = document.getElementById('detail-panel');
+  const backdrop = document.getElementById('detail-backdrop');
+  if (!panel || !backdrop) return;
+  const obs = new MutationObserver(() => {
+    const open = panel.style.display !== 'none';
+    backdrop.classList.toggle('is-open', open);
+    panel.classList.toggle('is-open', open);
+    panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+  });
+  obs.observe(panel, { attributes: true, attributeFilter: ['style'] });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && panel.style.display !== 'none' && typeof closeDetail === 'function') closeDetail();
+  });
+})();
+</script>
 </body>
 </html>

@@ -6,6 +6,51 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-05-09] Rediseño frontend Home Hub (`:8080`)
+
+### Que se hizo
+- Reemplazo de `static/index.html`, `static/styles.css` y `static/app.js` del Home Hub con rediseño visual completo.
+- Sin cambios en `server.py` — contrato 100% preservado con `/api/v1/home/status`.
+- Self-contained CSS: desacoplado de `/design-system/*` para evitar drift entre subsistemas.
+- Tipografía: Inter (UI) + IBM Plex Mono (stats/labels) reemplazando la display pesada anterior.
+- Top bar compacto con version pill + status dot + refresh button (reemplaza hero decorativo).
+- Stats strip operacional: servicios online con barra de progreso, offline, última actualización, uptime de sesión.
+- Tweaks panel: 4 paletas de acento (gold/cyan/green/violet), densidad balanceado/compacto, layout grid/lista, partículas on/off.
+- Atajos de teclado: R=refresh, G=grid, L=list, 1-5=abrir servicio, Esc=cerrar tweaks.
+- Responsive mobile/tablet, `prefers-reduced-motion`, WCAG focus rings.
+
+### Archivos modificados
+- `src/riot_lol_cli/home/static/index.html` — reescrito.
+- `src/riot_lol_cli/home/static/styles.css` — reescrito (self-contained).
+- `src/riot_lol_cli/home/static/app.js` — reescrito (contrato preservado, funcionalidad extendida).
+- `bitacora_de_cambios.md` — esta entrada.
+
+### Archivos NO tocados
+- `server.py`, `__init__.py` — sin cambios.
+- `/design-system/*` — sin cambios (otros subsistemas siguen usándolo).
+
+---
+
+## [2026-05-09] Rediseño frontend Meta Scraper (`:8002`)
+
+### Que se hizo
+- Reemplazo de `static/index.html` y `static/styles.css` del meta_scraper con rediseño visual completo.
+- Sin cambios en `app.js`, server, scoring ni endpoints — contrato 100% preservado (IDs, clases, onclick handlers).
+- Self-contained CSS: desacoplado de `/design-system/*` para evitar drift entre subsistemas.
+- Removida dependencia CDN de JetBrains Mono → system mono stack.
+- Mejoras visuales: glassmorphism, progress bars 6px con gradientes, tier badges con glow, panel detalle con backdrop blur, role tabs con pill animado, quick stats cards con accents por tipo, responsive mobile/tablet, `prefers-reduced-motion`.
+
+### Archivos modificados
+- `src/riot_lol_cli/meta_scraper/static/index.html` — reemplazado.
+- `src/riot_lol_cli/meta_scraper/static/styles.css` — reemplazado.
+- `bitacora_de_cambios.md` — esta entrada.
+
+### Archivos NO tocados
+- `static/app.js`, `server.py`, adapters, normalizer, orchestrator, endpoints.
+- `/design-system/*` (archivos siguen en el repo, solo no se cargan desde este HTML).
+
+---
+
 ## [2026-05-09] Meta Scraper - Jungle Meta v1 multi-fuente
 
 ### Que se hizo

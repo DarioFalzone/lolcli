@@ -5,14 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>LOLCLI — Centro de Operaciones</title>
   <meta name="description" content="Hub central de acceso a todos los subsistemas de riot_lol_cli: Draft Advisor, Meta Analyzer, Items Browser y más." />
+  <meta name="theme-color" content="#0a0e1a" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/design-system/tokens.css" />
-  <link rel="stylesheet" href="/design-system/components.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/static/styles.css" />
 </head>
-<body class="ds-page">
+<body data-accent-theme="gold" data-density="balanced" data-layout="grid" data-particles="on">
 
   <!-- Ambient particles -->
   <div class="ambient-particles" aria-hidden="true">
@@ -25,69 +24,86 @@
 
   <div class="home-container">
 
-    <!-- Header Bar -->
+    <!-- ===== Top Bar ===== -->
     <header class="home-header" id="home-header">
       <div class="header-brand">
         <div class="brand-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/>
-            <line x1="12" y1="22" x2="12" y2="15.5"/>
             <polyline points="22 8.5 12 15.5 2 8.5"/>
-            <polyline points="2 15.5 12 8.5 22 15.5"/>
-            <line x1="12" y1="2" x2="12" y2="8.5"/>
+            <line x1="12" y1="22" x2="12" y2="15.5"/>
           </svg>
         </div>
         <div class="brand-text">
           <span class="brand-name">LOLCLI</span>
-          <span class="brand-sub">riot_lol_cli</span>
+          <span class="brand-sub">centro de operaciones</span>
         </div>
       </div>
       <div class="header-meta">
-        <span class="pill pill-gold" id="version-pill">v...</span>
+        <span class="pill pill-gold" id="version-pill">v…</span>
         <div class="status-summary" id="status-summary">
           <div class="status-dot status-dot--loading" id="global-status-dot"></div>
-          <span class="status-text" id="status-text">Verificando...</span>
+          <span class="status-text" id="status-text">Verificando…</span>
         </div>
+        <button class="icon-btn" id="refresh-btn" type="button" aria-label="Refrescar estado" title="Refrescar (R)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"/>
+            <polyline points="1 20 1 14 7 14"/>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+          </svg>
+        </button>
       </div>
     </header>
 
-    <!-- Hero -->
-    <section class="hero-section" id="hero">
-      <div class="hero-glow" aria-hidden="true"></div>
-      <div class="hero-content">
-        <div class="hero-eyebrow">CENTRO DE OPERACIONES</div>
-        <h1 class="hero-title">
-          Tus sistemas<br/>
-          <span class="hero-highlight">en un solo lugar</span>
-        </h1>
-        <p class="hero-subtitle">
-          Accedé a todos los subsistemas de <strong>riot_lol_cli</strong> desde acá.
-          Health-check en tiempo real para cada servicio.
-        </p>
+    <!-- ===== Stats Strip ===== -->
+    <section class="stats-strip" aria-label="Resumen del sistema">
+      <div class="stat-cell" data-tone="ok">
+        <span class="stat-label">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          Servicios online
+        </span>
+        <span class="stat-value">
+          <span id="stat-online">–</span>
+          <span class="stat-value-suffix">/ <span id="stat-total">–</span></span>
+        </span>
+        <div class="stat-bar"><div class="stat-bar-fill" id="stat-bar-fill"></div></div>
       </div>
-      <div class="hero-ornament" aria-hidden="true">
-        <div class="hex hex-1"></div>
-        <div class="hex hex-2"></div>
-        <div class="hex hex-3"></div>
+      <div class="stat-cell" data-tone="err">
+        <span class="stat-label">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          Offline
+        </span>
+        <span class="stat-value" id="stat-offline">–</span>
+      </div>
+      <div class="stat-cell" data-tone="cyan">
+        <span class="stat-label">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Última actualización
+        </span>
+        <span class="stat-value" style="font-size:1.1rem;" id="stat-last-update">—</span>
+      </div>
+      <div class="stat-cell" data-tone="accent">
+        <span class="stat-label">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 2"/></svg>
+          Sesión
+        </span>
+        <span class="stat-value" style="font-size:1.1rem;" id="stat-uptime">00:00</span>
       </div>
     </section>
 
-    <!-- Services Grid -->
+    <!-- ===== Services Section ===== -->
     <section class="services-section" id="services">
       <div class="section-header">
-        <h2 class="section-title">
-          <span class="section-icon" aria-hidden="true">⚡</span>
-          Servicios Activos
-        </h2>
+        <h2 class="section-title">Servicios activos</h2>
         <div class="section-actions">
-          <button class="btn btn-ghost btn-sm" id="refresh-btn" title="Refrescar estado">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="23 4 23 10 17 10"/>
-              <polyline points="1 20 1 14 7 14"/>
-              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
-            </svg>
-            Refrescar
-          </button>
+          <div class="view-toggle" role="group" aria-label="Vista">
+            <button id="view-grid" type="button" aria-label="Vista grid" aria-pressed="true" title="Grid (G)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </button>
+            <button id="view-list" type="button" aria-label="Vista lista" aria-pressed="false" title="Lista (L)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            </button>
+          </div>
         </div>
       </div>
       <div class="services-grid" id="services-grid">
@@ -95,21 +111,18 @@
       </div>
     </section>
 
-    <!-- Standalone Projects -->
+    <!-- ===== Standalone Section ===== -->
     <section class="standalone-section" id="standalone">
       <div class="section-header">
-        <h2 class="section-title">
-          <span class="section-icon" aria-hidden="true">📁</span>
-          Proyectos Standalone
-        </h2>
+        <h2 class="section-title">Proyectos standalone</h2>
       </div>
       <div class="standalone-grid" id="standalone-grid">
-        <div class="service-card service-card--standalone" data-accent="neutral">
+        <div class="service-card" data-accent="violet">
           <div class="card-accent-line"></div>
           <div class="card-top">
-            <span class="service-icon">🔬</span>
+            <div class="service-icon-wrap">🔬</div>
             <div class="service-status">
-              <span class="pill pill-neutral">LOCAL</span>
+              <span class="pill pill-neutral pill-sm">LOCAL</span>
             </div>
           </div>
           <div class="card-content">
@@ -118,24 +131,106 @@
           </div>
           <div class="card-footer">
             <span class="service-path">projects/active/junglas-pro/</span>
-            <span class="pill pill-neutral pill-sm">Standalone</span>
+            <div class="card-actions">
+              <span class="pill pill-neutral pill-sm">Standalone</span>
+              <a href="/junglas-pro/" target="_blank" rel="noopener" class="btn-open">
+                Abrir
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/>
+                  <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ===== Footer ===== -->
     <footer class="home-footer" id="footer">
       <div class="footer-divider"></div>
       <div class="footer-content">
-        <span class="footer-brand">lolcli <span id="footer-version">v?</span></span>
-        <span class="footer-sep">·</span>
-        <span class="footer-link">Puerto Home: <strong id="footer-port">8080</strong></span>
-        <span class="footer-sep">·</span>
-        <a class="footer-link" href="/docs" target="_blank" rel="noopener">API Docs</a>
+        <div class="footer-left">
+          <span class="footer-brand">lolcli <span id="footer-version">v?</span></span>
+          <span class="footer-sep">·</span>
+          <span>Puerto: <strong id="footer-port">8080</strong></span>
+          <span class="footer-sep">·</span>
+          <a class="footer-link" href="/docs" target="_blank" rel="noopener">API Docs ↗</a>
+        </div>
+        <div class="footer-right">
+          <span class="kbd-hint"><span class="kbd">R</span><span>refrescar</span></span>
+          <span class="footer-sep">·</span>
+          <span class="kbd-hint"><span class="kbd">G</span><span>grid</span></span>
+          <span class="kbd-hint"><span class="kbd">L</span><span>lista</span></span>
+          <span class="footer-sep">·</span>
+          <span class="kbd-hint"><span class="kbd">1</span>–<span class="kbd">5</span><span>abrir servicio</span></span>
+        </div>
       </div>
     </footer>
   </div>
+
+  <!-- ===== Tweaks (visible solo cuando el host activa edit mode) ===== -->
+  <button class="tweaks-fab" id="tweaks-fab" type="button" aria-label="Abrir tweaks" title="Tweaks">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="3"/>
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+    </svg>
+  </button>
+
+  <aside class="tweaks-panel" id="tweaks-panel" aria-label="Panel de Tweaks">
+    <header class="tweaks-header">
+      <h3 class="tweaks-title">Tweaks</h3>
+      <button class="tweaks-close" id="tweaks-close" type="button" aria-label="Cerrar tweaks">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </header>
+    <div class="tweaks-body">
+      <div class="tweak-group">
+        <span class="tweak-label">Acento</span>
+        <div class="tweak-swatches" id="tweak-swatches">
+          <button type="button" class="tweak-swatch" data-tweak-accent="gold"   style="--swatch:#c89b3c" aria-label="Dorado"   aria-pressed="true"></button>
+          <button type="button" class="tweak-swatch" data-tweak-accent="cyan"   style="--swatch:#0bc6e3" aria-label="Cian"     aria-pressed="false"></button>
+          <button type="button" class="tweak-swatch" data-tweak-accent="green"  style="--swatch:#00d084" aria-label="Verde"    aria-pressed="false"></button>
+          <button type="button" class="tweak-swatch" data-tweak-accent="violet" style="--swatch:#a78bfa" aria-label="Violeta"  aria-pressed="false"></button>
+        </div>
+      </div>
+
+      <div class="tweak-group">
+        <span class="tweak-label">Densidad</span>
+        <div class="tweak-segment" id="tweak-density">
+          <button type="button" data-tweak-density="balanced" aria-pressed="true">Balanceado</button>
+          <button type="button" data-tweak-density="compact"  aria-pressed="false">Compacto</button>
+        </div>
+      </div>
+
+      <div class="tweak-group">
+        <span class="tweak-label">Layout</span>
+        <div class="tweak-segment" id="tweak-layout">
+          <button type="button" data-tweak-layout="grid" aria-pressed="true">Grid</button>
+          <button type="button" data-tweak-layout="list" aria-pressed="false">Lista</button>
+        </div>
+      </div>
+
+      <div class="tweak-group">
+        <span class="tweak-label">Ambiente</span>
+        <div class="tweak-toggle-row">
+          <span>Partículas de fondo</span>
+          <button type="button" class="toggle-switch" id="tweak-particles" role="switch" aria-checked="true" aria-label="Activar partículas"></button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Tweaks defaults (persistidos por el host) -->
+  <script>
+    window.__TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+      "accent": "gold",
+      "density": "balanced",
+      "layout": "grid",
+      "particles": true
+    }/*EDITMODE-END*/;
+  </script>
 
   <script src="/static/app.js"></script>
 </body>
