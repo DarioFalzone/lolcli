@@ -3,6 +3,8 @@ from fastapi.testclient import TestClient
 from riot_lol_cli.draft_advisor.server import create_app as create_draft_advisor_app
 from riot_lol_cli.items_browser.server import create_app as create_items_browser_app
 from riot_lol_cli.jungle_meta.server import create_app as create_jungle_meta_app
+from riot_lol_cli.meta_api.app import create_app as create_meta_api_app
+from riot_lol_cli.meta_scraper import server as meta_scraper_server
 from riot_lol_cli.meta_scraper.server import create_app as create_meta_scraper_app
 
 
@@ -31,6 +33,26 @@ def test_draft_advisor_create_app_serves_root_and_health():
     assert health.json()["status"] == "ok"
 
 
+def test_draft_advisor_create_app_uses_isolated_services():
+    first = create_draft_advisor_app()
+    second = create_draft_advisor_app()
+
+    assert first.state.draft_services is not second.state.draft_services
+    assert first.state.draft_services.data_service is not second.state.draft_services.data_service
+
+
+def test_meta_api_create_app_serves_health_and_openapi():
+    client = TestClient(create_meta_api_app())
+
+    health = client.get("/health")
+    assert health.status_code == 200
+    assert health.json()["status"] == "healthy"
+
+    openapi = client.get("/openapi.json")
+    assert openapi.status_code == 200
+    assert openapi.json()["info"]["title"].startswith("LOLCLI Meta Analyzer")
+
+
 def test_meta_scraper_create_app_registers_core_routes():
     app = create_meta_scraper_app()
     paths = _route_paths(app)
@@ -51,6 +73,30 @@ def test_meta_scraper_create_app_serves_health_and_openapi():
     openapi = client.get("/openapi.json")
     assert openapi.status_code == 200
     assert openapi.json()["info"]["title"].startswith("Meta Scraper")
+
+
+def test_meta_scraper_create_app_uses_isolated_runtime_state():
+    first = create_meta_scraper_app()
+    second = create_meta_scraper_app()
+
+    assert first.state.orchestrator is not second.state.orchestrator
+    assert first.state.last_scrape_result is None
+    assert second.state.last_scrape_result is None
+
+
+def test_meta_scraper_missing_adapters_returns_shared_playwright_message(monkeypatch):
+    class EmptyOrchestrator:
+        adapters = []
+        is_running = False
+
+    monkeypatch.setattr(meta_scraper_server, "_create_orchestrator", EmptyOrchestrator)
+    client = TestClient(create_meta_scraper_app())
+
+    response = client.post("/api/v1/meta/scrape")
+
+    assert response.status_code == 503
+    assert "playwright install chromium" in response.json()["detail"]
+    assert "pip install playwright" not in response.json()["detail"]
 
 
 def test_jungle_meta_create_app_registers_core_routes():

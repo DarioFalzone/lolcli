@@ -81,7 +81,7 @@ async def get_tier_list():
     try:
         return load_jungle_tier_list()
     except FileNotFoundError as e:
-        raise HTTPException(status_code=404, detail=f"Patch data not found: {e}")
+        raise HTTPException(status_code=404, detail=f"Patch data not found: {e}") from e
 
 
 @router.get("/api/v1/jungle/tier/{tier}")
@@ -99,8 +99,8 @@ async def get_tier(tier: str):
                 detail=f"No champions found in tier {tier}",
             )
         return {"tier": tier, "champions": champions, "count": len(champions)}
-    except FileNotFoundError:
-        raise HTTPException(status_code=404, detail="Patch data not found")
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=404, detail="Patch data not found") from e
 
 
 @router.get("/api/v1/jungle/champion/{champion_id}")
@@ -120,8 +120,8 @@ async def get_champion(champion_id: str):
             "patch": tier_list.get("patch"),
             "date_updated": tier_list.get("date_updated"),
         }
-    except FileNotFoundError:
-        raise HTTPException(status_code=404, detail="Patch data not found")
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=404, detail="Patch data not found") from e
 
 
 @router.get("/api/v1/jungle/categories")
@@ -129,8 +129,8 @@ async def get_curated_categories():
     """Devuelve campeones agrupados por categoría curada (OP, low elo, bans)."""
     try:
         return get_categories()
-    except FileNotFoundError:
-        raise HTTPException(status_code=404, detail="Patch data not found")
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=404, detail="Patch data not found") from e
 
 
 @router.get("/api/v1/jungle/items/abusers/{item_key}")
@@ -144,8 +144,8 @@ async def get_item_abusers_route(item_key: str):
                 detail=f"No abusers found for item key '{item_key}'",
             )
         return {"item_key": item_key, "champions": champions, "count": len(champions)}
-    except FileNotFoundError:
-        raise HTTPException(status_code=404, detail="Patch data not found")
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=404, detail="Patch data not found") from e
 
 
 @router.get("/api/v1/jungle/items/used")
@@ -153,8 +153,8 @@ async def get_used_items():
     """Devuelve la lista de IDs de items referenciados en core_builds."""
     try:
         return {"item_ids": sorted(list_used_item_ids())}
-    except FileNotFoundError:
-        raise HTTPException(status_code=404, detail="Patch data not found")
+    except FileNotFoundError as e:
+        raise HTTPException(status_code=404, detail="Patch data not found") from e
 
 
 def create_app() -> FastAPI:
@@ -192,9 +192,9 @@ def run() -> None:
         level=logging.INFO,
         format="%(asctime)s [%(name)s] %(levelname)s: %(message)s",
     )
-    logger.info("Levantando Jungle Meta Server en http://localhost:%d", port)
-    logger.info("Dashboard en http://localhost:%d", port)
-    logger.info("API docs en http://localhost:%d/docs", port)
+    logger.info("Levantando Jungle Meta Server en http://%s:%d", host, port)
+    logger.info("Dashboard en http://%s:%d", host, port)
+    logger.info("API docs en http://%s:%d/docs", host, port)
     uvicorn.run(app, host=host, port=port, log_level="info")
 
 

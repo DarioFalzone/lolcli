@@ -13,7 +13,7 @@ cls
 echo.
 echo ╔══════════════════════════════════════════════════════════╗
 echo ║   LOLCLI Meta Scraper                                    ║
-echo ║   Tier list Support / ADC — Puerto 8002                  ║
+echo ║   Tier list Support / ADC                                ║
 echo ╚══════════════════════════════════════════════════════════╝
 echo.
 

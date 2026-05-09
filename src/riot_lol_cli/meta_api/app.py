@@ -71,6 +71,6 @@ def run() -> None:
     host = get_meta_api_host()
     port = get_meta_api_port()
     _logger = logging.getLogger(__name__)
-    _logger.info("Levantando API en http://localhost:%d", port)
-    _logger.info("Documentación en http://localhost:%d/docs", port)
+    _logger.info("Levantando API en http://%s:%d", host, port)
+    _logger.info("Documentación en http://%s:%d/docs", host, port)
     uvicorn.run(app, host=host, port=port, reload=False)

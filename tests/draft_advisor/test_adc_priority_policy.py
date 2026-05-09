@@ -96,6 +96,18 @@ def test_vladimir_is_excluded_by_personal_policy(engine: ScoringEngine) -> None:
     assert "Vladimir" not in recommended_ids
 
 
+def test_user_excluded_adc_priority_is_blocked(engine: ScoringEngine, data_service: ChampionDataService) -> None:
+    profile = data_service.get_adc_profile("Vladimir")
+    assert profile is not None
+
+    draft = DraftState()
+    priority = engine._get_adc_priority(profile, draft, engine._analyzer.analyze(draft))
+
+    assert priority.eligibility == "blocked_user_excluded"
+    assert priority.is_core is False
+    assert priority.can_be_top_pick is False
+
+
 def test_personal_b_meta_s_is_fallback_only(engine: ScoringEngine) -> None:
     draft = DraftState(
         context=DraftContext(pick_position="blind", queue_type="ranked_solo"),

@@ -6,6 +6,34 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-05-08] Prolijidad post-auditoria — estado FastAPI, puertos y guard Python 3.9
+
+### Que se hizo
+- Draft Advisor: los servicios (`ChampionDataService` + `ScoringEngine`) dejaron de depender de singletons globales de import y ahora se crean por `create_app()` en `app.state`. La API usa dependencias FastAPI con `Annotated`.
+- Meta Scraper: `_orchestrator` y ultimo resultado de scraping pasaron a `app.state`; los endpoints de scraping usan un orquestador por app y mensajes compartidos para Playwright.
+- Playwright: se centralizo el copy operativo en `meta_scraper/messages.py`; los adapters ya no sugieren `pip install playwright` como paso principal, sino `playwright install chromium`.
+- FastAPI: logs de arranque de Meta API, Draft Advisor, Meta Scraper, Jungle Meta e Items Browser usan `host`/`port` configurables en lugar de `localhost` hardcodeado.
+- Scripts: `levantar_todo.bat` ahora levanta los cinco servicios activos (`8000`-`8004`) respetando `LOLCLI_*_PORT`; scripts individuales ajustaron copy visible de puertos.
+- Python 3.9: agregado guard `tests/test_python39_annotations.py` para detectar pipe-unions sin `from __future__ import annotations`.
+- Tests: se ampliaron smoke tests de factories, aislamiento de estado runtime, mensaje Playwright sin `pip install playwright`, y una rama `blocked_user_excluded` del Draft Advisor.
+- Ruff: se corrigieron excepciones `raise ... from e` en Jungle Meta e Items Browser y se aplico formato al codigo afectado.
+
+### Archivos modificados clave
+- `src/riot_lol_cli/draft_advisor/api.py` y `server.py` — servicios por app y dependencia tipada.
+- `src/riot_lol_cli/meta_scraper/server.py` y `messages.py` — estado runtime por app y mensajes operativos compartidos.
+- `src/riot_lol_cli/meta_api/app.py`, `jungle_meta/server.py`, `items_browser/server.py` — logs con host/port configurables.
+- `scripts/bat/levantar_todo.bat` — launcher de cinco servidores.
+- `tests/test_server_factories.py` y `tests/test_python39_annotations.py` — cobertura nueva de factories, estado y Python 3.9.
+
+### Verificacion
+- `pytest tests/test_server_factories.py tests/test_python39_annotations.py tests/meta_scraper/test_adapter_name_maps.py tests/draft_advisor/test_adc_priority_policy.py -q` -> 37 passed.
+- `pytest tests/ -q` -> 169 passed.
+- `ruff check src tests scripts` -> passed.
+- `ruff format --check src tests scripts` -> passed.
+- `git diff --check` -> passed.
+
+---
+
 ## [2026-05-08] Items Browser — Catalogo de items LoL (EN+ES) + regla wrap-up
 
 ### Que se hizo

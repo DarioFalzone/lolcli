@@ -5,6 +5,7 @@
 
 # Navegar al root del repo
 cd "$(dirname "$0")/../.."
+META_API_PORT="${LOLCLI_META_API_PORT:-8000}"
 
 clear
 
@@ -40,8 +41,8 @@ echo "[3/4] Información del sistema:"
 echo ""
 echo "   📊 Base de datos: data/meta_analyzer.db"
 echo "   🎨 Frontend: outputs/meta-analyzer-dashboard.html"
-echo "   🚀 API Backend: http://localhost:8000"
-echo "   📚 Docs: http://localhost:8000/docs"
+echo "   🚀 API Backend: http://localhost:${META_API_PORT}"
+echo "   📚 Docs: http://localhost:${META_API_PORT}/docs"
 echo ""
 
 # Paso 4: Levantar API (opcional)
@@ -50,14 +51,14 @@ read -r response
 
 if [[ "$response" =~ ^[Yy]$ ]]; then
     echo ""
-    echo "✅ Levantando API en puerto 8000..."
+    echo "✅ Levantando API en puerto ${META_API_PORT}..."
     echo ""
-    echo "📝 Cuando veas 'Uvicorn running on http://0.0.0.0:8000', abre en otra terminal:"
+    echo "📝 Cuando veas 'Uvicorn running on http://0.0.0.0:${META_API_PORT}', abre en otra terminal:"
     echo "   open outputs/meta-analyzer-dashboard.html  (Mac)"
     echo "   xdg-open outputs/meta-analyzer-dashboard.html  (Linux)"
     echo ""
     
-    python3 -m uvicorn riot_lol_cli.api_server:app --reload --port 8000
+    python3 -m uvicorn riot_lol_cli.api_server:app --reload --port "${META_API_PORT}"
 else
     echo ""
     echo "⚠️  API no levantado. Para levantarlo manualmente:"

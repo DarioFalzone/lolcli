@@ -10,7 +10,10 @@ Endpoints:
 
 from __future__ import annotations
 
-from fastapi import APIRouter, HTTPException
+from dataclasses import dataclass
+from typing import Annotated
+
+from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
 
 from .champion_data import ChampionDataService
@@ -18,20 +21,35 @@ from .schemas import AdvisorMode, DraftState, RecommendationOutput
 from .scoring import ScoringEngine
 
 # ============================================================================
-# Initialize services (loaded once at module import)
+# Services
 # ============================================================================
 
-_data_service: ChampionDataService | None = None
-_engine: ScoringEngine | None = None
+
+@dataclass(frozen=True)
+class DraftAdvisorServices:
+    data_service: ChampionDataService
+    scoring_engine: ScoringEngine
 
 
-def _get_services():
-    """Lazy initialization of services."""
-    global _data_service, _engine
-    if _data_service is None:
-        _data_service = ChampionDataService()
-        _engine = ScoringEngine(_data_service)
-    return _data_service, _engine
+def create_services() -> DraftAdvisorServices:
+    """Create isolated service instances for one FastAPI app."""
+    data_service = ChampionDataService()
+    return DraftAdvisorServices(
+        data_service=data_service,
+        scoring_engine=ScoringEngine(data_service),
+    )
+
+
+def get_services(request: Request) -> DraftAdvisorServices:
+    """Return services scoped to the current FastAPI app instance."""
+    services = getattr(request.app.state, "draft_services", None)
+    if services is None:
+        services = create_services()
+        request.app.state.draft_services = services
+    return services
+
+
+DraftServicesDep = Annotated[DraftAdvisorServices, Depends(get_services)]
 
 
 # ============================================================================
@@ -86,9 +104,9 @@ class VersionInfoResponse(BaseModel):
 
 
 @router.get("/health", response_model=HealthResponse)
-async def health():
+async def health(services: DraftServicesDep):
     """Chequeo de salud — confirma que los datos están cargados."""
-    svc, _ = _get_services()
+    svc = services.data_service
     return HealthResponse(
         status="ok",
         total_champions=svc.total_champions,
@@ -98,9 +116,9 @@ async def health():
 
 
 @router.get("/meta/version-info", response_model=VersionInfoResponse)
-async def version_info():
+async def version_info(services: DraftServicesDep):
     """Get decoupled telemetry version context."""
-    svc, _ = _get_services()
+    svc = services.data_service
     manifest = svc.manifest
     adc_meta = svc.get_adc_meta_snapshot_info()
     adc_mastery = svc.get_personal_adc_mastery_info()
@@ -121,9 +139,9 @@ async def version_info():
 
 
 @router.get("/champions", response_model=list[ChampionListItem])
-async def get_champions():
+async def get_champions(services: DraftServicesDep):
     """Listar todos los campeones para el selector de la UI."""
-    svc, _ = _get_services()
+    svc = services.data_service
     adc_ids = svc.get_adc_ids()
     support_ids = svc.get_support_ids()
     result = []
@@ -148,9 +166,9 @@ async def get_champions():
 
 
 @router.get("/champions/adcs", response_model=list[ChampionListItem])
-async def get_adcs():
+async def get_adcs(services: DraftServicesDep):
     """Get ADC champions only."""
-    svc, _ = _get_services()
+    svc = services.data_service
     adc_ids = svc.get_adc_ids()
     result = []
 
@@ -176,7 +194,7 @@ async def get_adcs():
 
 
 @router.post("/recommend", response_model=RecommendationOutput)
-async def recommend(draft_state: DraftState):
+async def recommend(draft_state: DraftState, services: DraftServicesDep):
     """
     Obtener recomendación de pick según el estado del draft.
 
@@ -184,7 +202,8 @@ async def recommend(draft_state: DraftState):
     Devuelve top pick + hasta 3 alternativas con desglose de puntaje
     y explicaciones estructuradas.
     """
-    svc, engine = _get_services()
+    svc = services.data_service
+    engine = services.scoring_engine
 
     # Validar IDs de campeones
     all_ids = svc.get_all_champion_ids()
@@ -225,13 +244,13 @@ class StrategicTriangleResponse(BaseModel):
 
 
 @router.get("/strategic-triangle/{champion_id}", response_model=StrategicTriangleResponse)
-async def get_strategic_triangle(champion_id: str):
+async def get_strategic_triangle(champion_id: str, services: DraftServicesDep):
     """Inspeccionar la posición de un campeón en el triángulo estratégico.
 
     Devuelve el arquetipo fine-grained, qué arquetipos counterea (beats)
     y cuáles lo counterean (loses_to).
     """
-    svc, _ = _get_services()
+    svc = services.data_service
 
     if not svc.champion_exists(champion_id):
         raise HTTPException(404, f"Campeón '{champion_id}' no encontrado")
@@ -279,9 +298,9 @@ class SupportRosterItem(BaseModel):
 
 
 @router.get("/champions/supports", response_model=list[SupportRosterItem])
-async def get_supports():
+async def get_supports(services: DraftServicesDep):
     """Listar todos los soportes con perfil detallado."""
-    svc, _ = _get_services()
+    svc = services.data_service
     result = []
 
     for supp_id, profile in svc.get_all_support_profiles().items():

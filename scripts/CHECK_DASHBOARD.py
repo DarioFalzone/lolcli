@@ -4,6 +4,7 @@
 from pathlib import Path
 
 from riot_lol_cli.paths import BASE_DIR
+from riot_lol_cli.settings import get_meta_api_port
 
 
 def exists(path: str) -> str:
@@ -18,6 +19,8 @@ def line(path: str, label: str) -> None:
 
 
 def main() -> None:
+    meta_api_port = get_meta_api_port()
+
     print("\nLOLCLI - Dashboard Enhanced")
     print("=" * 32)
 
@@ -40,9 +43,9 @@ def main() -> None:
     line("bitacora_de_cambios.md", "historial de cambios significativos")
 
     print("\nURLs locales")
-    print("Meta API: http://localhost:8000")
-    print("Dashboard: http://localhost:8000/dashboard-enhanced")
-    print("OpenAPI: http://localhost:8000/docs")
+    print(f"Meta API: http://localhost:{meta_api_port}")
+    print(f"Dashboard: http://localhost:{meta_api_port}/dashboard-enhanced")
+    print(f"OpenAPI: http://localhost:{meta_api_port}/docs")
 
 
 if __name__ == "__main__":

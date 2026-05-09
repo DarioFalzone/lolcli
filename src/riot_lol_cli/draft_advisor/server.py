@@ -21,6 +21,7 @@ from fastapi.staticfiles import StaticFiles
 from riot_lol_cli import paths
 from riot_lol_cli.settings import get_draft_advisor_host, get_draft_advisor_port
 
+from .api import create_services
 from .api import router as draft_router
 
 # ============================================================================
@@ -37,6 +38,8 @@ def create_app() -> FastAPI:
         description="Motor de recomendación de picks para League of Legends",
         version="1.1.0",
     )
+
+    application.state.draft_services = create_services()
 
     application.add_middleware(
         CORSMiddleware,
@@ -81,7 +84,7 @@ def run() -> None:
     port = get_draft_advisor_port()
     host = get_draft_advisor_host()
     _logger = logging.getLogger(__name__)
-    _logger.info("ADC Draft Advisor levantado en http://localhost:%d/draft", port)
+    _logger.info("ADC Draft Advisor levantado en http://%s:%d/draft", host, port)
     uvicorn.run(app, host=host, port=port)
 
 

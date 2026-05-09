@@ -78,7 +78,7 @@ async def get_all_items(
             "items": items,
         }
     except FileNotFoundError as e:
-        raise HTTPException(status_code=503, detail=str(e))
+        raise HTTPException(status_code=503, detail=str(e)) from e
 
 
 @router.get("/api/v1/items/groups")
@@ -86,7 +86,7 @@ async def get_groups():
     try:
         return {"groups": list_groups()}
     except FileNotFoundError as e:
-        raise HTTPException(status_code=503, detail=str(e))
+        raise HTTPException(status_code=503, detail=str(e)) from e
 
 
 @router.get("/api/v1/items/categories")
@@ -94,7 +94,7 @@ async def get_categories():
     try:
         return {"categories": list_categories()}
     except FileNotFoundError as e:
-        raise HTTPException(status_code=503, detail=str(e))
+        raise HTTPException(status_code=503, detail=str(e)) from e
 
 
 @router.get("/api/v1/items/search")
@@ -106,7 +106,7 @@ async def search(
         results = search_items(q, lang=lang)
         return {"query": q, "lang": lang, "count": len(results), "items": results}
     except FileNotFoundError as e:
-        raise HTTPException(status_code=503, detail=str(e))
+        raise HTTPException(status_code=503, detail=str(e)) from e
 
 
 @router.get("/api/v1/items/{item_id}")
@@ -117,7 +117,7 @@ async def get_one(item_id: int):
             raise HTTPException(status_code=404, detail=f"Item {item_id} no existe")
         return item
     except FileNotFoundError as e:
-        raise HTTPException(status_code=503, detail=str(e))
+        raise HTTPException(status_code=503, detail=str(e)) from e
 
 
 def create_app() -> FastAPI:
@@ -131,9 +131,7 @@ def create_app() -> FastAPI:
         application.mount("/static", StaticFiles(directory=str(_STATIC_DIR)), name="static")
 
     if _ITEMS_ASSETS_DIR.exists():
-        application.mount(
-            "/items", StaticFiles(directory=str(_ITEMS_ASSETS_DIR)), name="items"
-        )
+        application.mount("/items", StaticFiles(directory=str(_ITEMS_ASSETS_DIR)), name="items")
 
     application.include_router(router)
     return application
@@ -151,9 +149,9 @@ def run() -> None:
         level=logging.INFO,
         format="%(asctime)s [%(name)s] %(levelname)s: %(message)s",
     )
-    logger.info("Levantando Items Browser en http://localhost:%d", port)
-    logger.info("Dashboard en http://localhost:%d", port)
-    logger.info("API docs en http://localhost:%d/docs", port)
+    logger.info("Levantando Items Browser en http://%s:%d", host, port)
+    logger.info("Dashboard en http://%s:%d", host, port)
+    logger.info("API docs en http://%s:%d/docs", host, port)
     uvicorn.run(app, host=host, port=port, log_level="info")
 
 

@@ -57,9 +57,7 @@ def get_categories(patch: str = "26.09") -> dict[str, list[dict[str, Any]]]:
 
     result: dict[str, list[dict[str, Any]]] = {}
     for category_name, champion_ids in categories.items():
-        result[category_name] = [
-            champions_by_id[cid] for cid in champion_ids if cid in champions_by_id
-        ]
+        result[category_name] = [champions_by_id[cid] for cid in champion_ids if cid in champions_by_id]
     return result
 
 

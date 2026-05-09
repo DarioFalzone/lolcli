@@ -12,12 +12,13 @@ import logging
 from pathlib import Path
 
 import uvicorn
-from fastapi import APIRouter, BackgroundTasks, FastAPI, HTTPException
+from fastapi import APIRouter, BackgroundTasks, FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 
 from riot_lol_cli.settings import get_meta_scraper_host, get_meta_scraper_port
 
+from .messages import NO_ADAPTERS_AVAILABLE_MESSAGE
 from .normalizer import load_latest
 from .orchestrator import ScrapingOrchestrator
 
@@ -30,16 +31,18 @@ _STATIC_DIR = _MODULE_DIR / "static"
 _DESIGN_SYSTEM_DIR = _MODULE_DIR.parent / "draft_advisor" / "static" / "design-system"
 router = APIRouter()
 
-# Instancia global del orquestador
-_orchestrator = ScrapingOrchestrator()
 
-# Estado del último scrape
-_last_scrape_result: dict | None = None
+def _get_state_orchestrator(request: Request) -> ScrapingOrchestrator:
+    """Return the orchestrator scoped to this FastAPI app instance."""
+    orchestrator = getattr(request.app.state, "orchestrator", None)
+    if orchestrator is None:
+        orchestrator = ScrapingOrchestrator()
+        request.app.state.orchestrator = orchestrator
+    return orchestrator
 
 
-def _get_orchestrator() -> ScrapingOrchestrator:
+def _create_orchestrator() -> ScrapingOrchestrator:
     """Crea un orquestador fresco con adapters recién instanciados."""
-    global _orchestrator
     # Crear adapters frescos cada vez (evita cachear estados fallidos)
     orchestrator = ScrapingOrchestrator()
 
@@ -64,8 +67,7 @@ def _get_orchestrator() -> ScrapingOrchestrator:
     except ImportError:
         logger.warning("UggAdapter no disponible (falta playwright)")
 
-    _orchestrator = orchestrator
-    return _orchestrator
+    return orchestrator
 
 
 # --- Frontend ---
@@ -87,14 +89,14 @@ async def serve_frontend():
 
 
 @router.get("/health")
-async def health():
+async def health(request: Request):
     """Health check con estado del sistema."""
     latest_support = load_latest("support")
     latest_adc = load_latest("adc")
     return {
         "status": "ok",
         "service": "meta_scraper",
-        "port": 8002,
+        "port": get_meta_scraper_port(),
         "support": {
             "last_scrape": latest_support.get("scraped_at") if latest_support else None,
             "patch": latest_support.get("patch") if latest_support else None,
@@ -107,7 +109,7 @@ async def health():
             "champion_count": latest_adc.get("champion_count", 0) if latest_adc else 0,
             "sources": latest_adc.get("sources", []) if latest_adc else [],
         },
-        "is_scraping": _orchestrator.is_running,
+        "is_scraping": _get_state_orchestrator(request).is_running,
     }
 
 
@@ -198,31 +200,27 @@ async def get_scrape_history():
 
 
 @router.post("/api/v1/meta/scrape")
-async def trigger_scrape(background_tasks: BackgroundTasks):
+async def trigger_scrape(request: Request, background_tasks: BackgroundTasks):
     """
     Dispara un scraping manual.
 
     Se ejecuta en background para no bloquear la respuesta HTTP.
     El frontend puede pollear /health para ver el progreso.
     """
-    orchestrator = _get_orchestrator()
+    current_orchestrator = _get_state_orchestrator(request)
 
-    if orchestrator.is_running:
+    if current_orchestrator.is_running:
         raise HTTPException(
             status_code=409,
             detail="Ya hay un scraping en curso. Esperá a que termine.",
         )
 
+    orchestrator = _create_orchestrator()
     if not orchestrator.adapters:
-        raise HTTPException(
-            status_code=503,
-            detail=(
-                "No hay adapters disponibles. Verifica que las dependencias esten instaladas y luego ejecuta:\n"
-                "  playwright install chromium"
-            ),
-        )
+        raise HTTPException(status_code=503, detail=NO_ADAPTERS_AVAILABLE_MESSAGE)
 
-    background_tasks.add_task(_run_scrape_background, orchestrator, "support")
+    request.app.state.orchestrator = orchestrator
+    background_tasks.add_task(_run_scrape_background, request.app, orchestrator, "support")
 
     return {
         "status": "started",
@@ -232,26 +230,22 @@ async def trigger_scrape(background_tasks: BackgroundTasks):
 
 
 @router.post("/api/v1/meta/scrape/adc")
-async def trigger_adc_scrape(background_tasks: BackgroundTasks):
+async def trigger_adc_scrape(request: Request, background_tasks: BackgroundTasks):
     """Dispara un scraping manual de ADCs para climb."""
-    orchestrator = _get_orchestrator()
+    current_orchestrator = _get_state_orchestrator(request)
 
-    if orchestrator.is_running:
+    if current_orchestrator.is_running:
         raise HTTPException(
             status_code=409,
             detail="Ya hay un scraping en curso. Espera a que termine.",
         )
 
+    orchestrator = _create_orchestrator()
     if not orchestrator.adapters:
-        raise HTTPException(
-            status_code=503,
-            detail=(
-                "No hay adapters disponibles. Verifica que las dependencias esten instaladas y luego ejecuta:\n"
-                "  playwright install chromium"
-            ),
-        )
+        raise HTTPException(status_code=503, detail=NO_ADAPTERS_AVAILABLE_MESSAGE)
 
-    background_tasks.add_task(_run_scrape_background, orchestrator, "adc")
+    request.app.state.orchestrator = orchestrator
+    background_tasks.add_task(_run_scrape_background, request.app, orchestrator, "adc")
 
     return {
         "status": "started",
@@ -260,26 +254,27 @@ async def trigger_adc_scrape(background_tasks: BackgroundTasks):
     }
 
 
-def _run_scrape_background(orchestrator: ScrapingOrchestrator, role: str = "support") -> None:
+def _run_scrape_background(application: FastAPI, orchestrator: ScrapingOrchestrator, role: str = "support") -> None:
     """Ejecuta el scraping en background."""
-    global _last_scrape_result
     try:
         logger.info("=== Scraping background iniciado ===")
         result = orchestrator.run_full_scrape(role=role)
-        _last_scrape_result = result
+        application.state.last_scrape_result = result
         logger.info("=== Scraping background completado ===")
     except Exception as e:
         logger.error("=== Scraping background fallido: %s ===", e, exc_info=True)
-        _last_scrape_result = {"error": str(e)}
+        application.state.last_scrape_result = {"error": str(e)}
 
 
 def create_app() -> FastAPI:
     """Create the Meta Scraper FastAPI application."""
     application = FastAPI(
-        title="Meta Scraper — LoL Support Meta Dashboard",
-        description="Scrapea y visualiza el meta de soporte de League of Legends.",
+        title="Meta Scraper — LoL Meta Dashboard",
+        description="Scrapea y visualiza el meta de soporte y ADC de League of Legends.",
         version="1.0.0",
     )
+    application.state.orchestrator = ScrapingOrchestrator()
+    application.state.last_scrape_result = None
     application.mount("/static", StaticFiles(directory=str(_STATIC_DIR)), name="static")
     if _DESIGN_SYSTEM_DIR.exists():
         application.mount(
@@ -305,9 +300,9 @@ def run():
         level=logging.INFO,
         format="%(asctime)s [%(name)s] %(levelname)s: %(message)s",
     )
-    logger.info("Levantando Meta Scraper en http://localhost:%d", port)
-    logger.info("Dashboard en http://localhost:%d", port)
-    logger.info("Documentacion en http://localhost:%d/docs", port)
+    logger.info("Levantando Meta Scraper en http://%s:%d", host, port)
+    logger.info("Dashboard en http://%s:%d", host, port)
+    logger.info("Documentacion en http://%s:%d/docs", host, port)
     uvicorn.run(app, host=host, port=port, log_level="info")
 
 

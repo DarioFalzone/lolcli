@@ -482,21 +482,22 @@ Reglas clave:
 ## Gotchas Globales
 
 1. **Cinco FastAPI separados:** Meta API `:8000`, Draft Advisor `:8001`, Meta Scraper `:8002`, Jungle Meta `:8003`, Items Browser `:8004`.
-2. **`api_server.py` es wrapper:** la app real del Meta Analyzer vive en `meta_api/app.py`.
-3. **Templates activos:** usar `templates/` raiz. No asumir `src/riot_lol_cli/templates/`.
-4. **Rendering activo:** usar `rendering.py`. No reintroducir `html.py` legacy.
-5. **Legacy copy:** `projects/legacy/riot-lol-cli/` no es el paquete activo.
-6. **API key Riot:** dev keys expiran cada 24h; usar `.env`.
-7. **Playwright:** Meta Scraper declara Playwright en `requirements.txt`, pero el browser Chromium se instala aparte con `playwright install chromium`.
-8. **Puertos 8000-8004:** Meta API (:8000), Draft Advisor (:8001), Meta Scraper (:8002), Jungle Meta (:8003) e Items Browser (:8004) usan `settings.py` para host/port configurables via `LOLCLI_*_HOST` y `LOLCLI_*_PORT`.
-9. **Data versioning:** `live_patch_label` es el parche jugable/meta; `static_data_version` es la version tecnica de Data Dragon/CDN y puede tener sufijos como `.1`.
-10. **Draft data IDs:** relaciones de `adc_profiles.json`, `support_profiles.json` y `personal_adc_mastery.json` deben validar contra IDs canonicos de `champion_base.json`.
-11. **ADC personal policy:** `excluded_from_recommendations` bloquea picks aunque sean meta; `never_top_pick` permite alternativa pero nunca primera opcion. Top ADC requiere maestria `S/A`, meta `S` o `climb_score >= 80`, y no estar vetado por reglas KB de linea como Nilah + Soraka vs Caitlyn + Nautilus ni por vetos tacticos de draft contra dive/burst sin frontline. Los bonus KB de matchup, como Xayah contra Malphite/TahmKench, solo suman fit de draft y no saltan el gate de meta/maestria.
-12. **Docs con drift:** algunos docs antiguos mencionan endpoints o rutas pre-reorganizacion.
-13. **SQLite concurrency:** `check_same_thread=False` permite FastAPI, pero writes concurrentes requieren cuidado.
-14. **Generated outputs:** `outputs/`, DBs, caches y artefactos generados no son fuente de verdad.
-15. **Dev scratch:** scripts manuales viven en `projects/dev-scratch/`; no dejarlos en `src/` si no son paquete.
-16. **Junglas Pro:** vive en `projects/active/junglas-pro/` como proyecto standalone; no copiarlo entero a `KB/`.
+2. **Factories FastAPI:** cada servicio activo debe exponer `create_app()` y mantener `app = create_app()`. Estado mutable de runtime va en `app.state` o dependencias explicitas, no en singletons globales de import.
+3. **`api_server.py` es wrapper:** la app real del Meta Analyzer vive en `meta_api/app.py`.
+4. **Templates activos:** usar `templates/` raiz. No asumir `src/riot_lol_cli/templates/`.
+5. **Rendering activo:** usar `rendering.py`. No reintroducir `html.py` legacy.
+6. **Legacy copy:** `projects/legacy/riot-lol-cli/` no es el paquete activo.
+7. **API key Riot:** dev keys expiran cada 24h; usar `.env`.
+8. **Playwright:** Meta Scraper declara Playwright en `requirements.txt`, pero el browser Chromium se instala aparte con `playwright install chromium`.
+9. **Puertos 8000-8004:** Meta API (:8000), Draft Advisor (:8001), Meta Scraper (:8002), Jungle Meta (:8003) e Items Browser (:8004) usan `settings.py` para host/port configurables via `LOLCLI_*_HOST` y `LOLCLI_*_PORT`.
+10. **Data versioning:** `live_patch_label` es el parche jugable/meta; `static_data_version` es la version tecnica de Data Dragon/CDN y puede tener sufijos como `.1`.
+11. **Draft data IDs:** relaciones de `adc_profiles.json`, `support_profiles.json` y `personal_adc_mastery.json` deben validar contra IDs canonicos de `champion_base.json`.
+12. **ADC personal policy:** `excluded_from_recommendations` bloquea picks aunque sean meta; `never_top_pick` permite alternativa pero nunca primera opcion. Top ADC requiere maestria `S/A`, meta `S` o `climb_score >= 80`, y no estar vetado por reglas KB de linea como Nilah + Soraka vs Caitlyn + Nautilus ni por vetos tacticos de draft contra dive/burst sin frontline. Los bonus KB de matchup, como Xayah contra Malphite/TahmKench, solo suman fit de draft y no saltan el gate de meta/maestria.
+13. **Docs con drift:** algunos docs antiguos mencionan endpoints o rutas pre-reorganizacion.
+14. **SQLite concurrency:** `check_same_thread=False` permite FastAPI, pero writes concurrentes requieren cuidado.
+15. **Generated outputs:** `outputs/`, DBs, caches y artefactos generados no son fuente de verdad.
+16. **Dev scratch:** scripts manuales viven en `projects/dev-scratch/`; no dejarlos en `src/` si no son paquete.
+17. **Junglas Pro:** vive en `projects/active/junglas-pro/` como proyecto standalone; no copiarlo entero a `KB/`.
 
 ## Alertas y Deuda Conocida
 

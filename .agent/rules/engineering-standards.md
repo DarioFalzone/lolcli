@@ -19,7 +19,8 @@ El CI corre Python 3.9 (`.github/workflows/ci.yml`). El entorno local puede ser 
 - **Sintaxis PEP 604 (`X | None`, `int | str`)**: solo disponible en Python 3.10+ en runtime. Para usarla en 3.9, agregar `from __future__ import annotations` como **primera linea activa** del archivo (despues de docstring y antes de imports). Hace que todas las anotaciones sean lazy (no se evaluan en runtime).
 - **Sintaxis PEP 585 (`list[str]`, `dict[str, int]`)**: disponible nativamente desde 3.9; no requiere future import.
 - **Regla practica**: todo archivo nuevo en `src/riot_lol_cli/` que declare anotaciones con pipe-union debe incluir `from __future__ import annotations`. Si no hay pipe-unions, es opcional pero recomendado.
-- **Chequeo rapido recomendado**: antes de cerrar una iteracion con cambios de tipado, buscar `rg -n "\\| None| \\| " src tests scripts` y confirmar que cada archivo Python nuevo o modificado tenga el `future import` cuando corresponde.
+- **Guard automatizado**: `tests/test_python39_annotations.py` falla si un archivo en `src/`, `tests/` o `scripts/` usa pipe-unions en anotaciones sin `from __future__ import annotations`.
+- **Chequeo rapido recomendado**: antes de cerrar una iteracion con cambios de tipado, correr ese test o buscar `rg -n "\\| None| \\| " src tests scripts` y confirmar que cada archivo Python nuevo o modificado tenga el `future import` cuando corresponde.
 - No cambiar el CI a 3.10+ sin aprobacion explicita del usuario; 3.9 es el floor declarado del paquete.
 
 ## Patrones del repo
@@ -28,6 +29,7 @@ El CI corre Python 3.9 (`.github/workflows/ci.yml`). El entorno local puede ser 
 - Riot payloads complejos: usar modelos Pydantic en `src/riot_lol_cli/schemas/`; evitar dict access fragil.
 - CLI: `click.echo()` en comandos interactivos.
 - Librerias/servidores/jobs: usar `logging`, no `print()`.
+- FastAPI: exponer `create_app()` y mantener `app = create_app()` para compatibilidad. Estado mutable de runtime va en `app.state` o dependencias explicitas, no en singletons globales import-time.
 - HTML runtime de exports: templates Jinja2 en `templates/`.
 - Database: modelos SQLAlchemy en `src/riot_lol_cli/database/models.py` son la fuente de verdad; `schema.sql` es referencia.
 

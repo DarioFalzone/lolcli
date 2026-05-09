@@ -101,6 +101,9 @@ python scripts/run_api.py
 - Docs: http://localhost:8000/docs
 - Dashboard: http://localhost:8000/dashboard-enhanced
 
+El puerto default es `8000`; los scripts rapidos respetan `LOLCLI_META_API_PORT`
+si esta definido.
+
 ### Generar dashboard standalone
 ```bash
 python scripts/generate_dashboard.py
@@ -121,7 +124,8 @@ python -m riot_lol_cli.draft_advisor.server
 start http://localhost:8001/draft
 ```
 
-Puerto **8001** (separado del Meta Analyzer en 8000).
+Puerto **8001** (separado del Meta Analyzer en 8000). El servidor respeta
+`LOLCLI_DRAFT_ADVISOR_PORT` si esta definido.
 
 ### Windows / PowerShell
 
@@ -157,9 +161,9 @@ Invoke-RestMethod http://127.0.0.1:8001/api/v1/draft/health
 7. Las 3 cards inferiores muestran alternativas
 
 **Datos cargados al levantar:**
-- `data/draft_advisor/champion_base.json` — 171 campeones
-- `data/draft_advisor/adc_profiles.json` — 24 perfiles ADC detallados
-- `data/draft_advisor/support_profiles.json` — 10 perfiles Support (Leona, Nautilus, Thresh, Lulu, Janna, Soraka, Milio, Lux, Pyke, Karma)
+- `data/draft_advisor/champion_base.json` — 172 campeones
+- `data/draft_advisor/adc_profiles.json` — 32 perfiles ADC detallados
+- `data/draft_advisor/support_profiles.json` — 34 perfiles Support
 - `data/draft_advisor/priority_profiles.json` — 41 perfiles de prioridad
 - `data/draft_advisor/scoring_weights.json` — pesos del motor de scoring
 
@@ -291,6 +295,8 @@ scripts\bat\items_browser.bat
 
 (Regenera automaticamente la database si no existe.)
 
+El script levanta en puerto `8004` (respeta `LOLCLI_ITEMS_BROWSER_PORT` si esta definido).
+
 **Manual:**
 ```powershell
 $env:PYTHONPATH=(Resolve-Path .\src).Path
@@ -352,6 +358,7 @@ Los datos se guardan en `data/cache/matches.json`.
 | `scripts/bat/regenerar_html.bat` | Regenera HTML con plantilla claude-4-5 |
 | `scripts/bat/regenerar_splash_viewer.bat` | Regenera visor de splash arts |
 | `scripts/bat/download_splash_arts.bat` | Descarga splash arts (menú interactivo) |
+| `scripts/bat/levantar_todo.bat` | Levanta Meta API, Draft Advisor, Meta Scraper, Jungle Meta e Items Browser respetando `LOLCLI_*_PORT` |
 | `scripts/bat/meta_scraper.bat` | Levanta Meta Scraper dashboard (puerto 8002) |
 | `scripts/bat/jungle_meta.bat` | Levanta Jungle Meta dashboard (puerto 8003) |
 | `scripts/bat/items_browser.bat` | Levanta Items Browser dashboard (puerto 8004) |

@@ -8,6 +8,12 @@ setlocal enabledelayedexpansion
 REM Navegar al root del repo
 cd /d "%~dp0\..\.."
 
+if "%LOLCLI_META_API_PORT%"=="" (
+    set "META_API_PORT=8000"
+) else (
+    set "META_API_PORT=%LOLCLI_META_API_PORT%"
+)
+
 cls
 echo.
 echo ╔══════════════════════════════════════════════════════════╗
@@ -43,8 +49,8 @@ echo [3/4] Información del sistema:
 echo.
 echo   📊 Base de datos: data\meta_analyzer.db
 echo   🎨 Frontend: outputs\meta-analyzer-dashboard.html
-echo   🚀 API Backend: http://localhost:8000
-echo   📚 Docs: http://localhost:8000/docs
+echo   🚀 API Backend: http://localhost:%META_API_PORT%
+echo   📚 Docs: http://localhost:%META_API_PORT%/docs
 echo.
 
 REM Paso 4: Levantar API (opcional)
@@ -56,13 +62,13 @@ if errorlevel 1 goto start_api
 
 :start_api
 echo.
-echo ✅ Levantando API en puerto 8000...
+echo ✅ Levantando API en puerto %META_API_PORT%...
 echo.
-echo 📝 Cuando veas "Uvicorn running on http://0.0.0.0:8000", presiona:
+echo 📝 Cuando veas "Uvicorn running", presiona:
 echo    1. Win+R y escribe: start outputs\meta-analyzer-dashboard.html
-echo    2. O abre en navegador: http://localhost:8000/docs
+echo    2. O abre en navegador: http://localhost:%META_API_PORT%/docs
 echo.
-python -m uvicorn riot_lol_cli.api_server:app --reload --port 8000
+python -m uvicorn riot_lol_cli.api_server:app --reload --port %META_API_PORT%
 goto end
 
 :skip_api

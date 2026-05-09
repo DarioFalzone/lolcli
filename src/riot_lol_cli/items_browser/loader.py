@@ -19,8 +19,7 @@ def load_items_database() -> dict[str, Any]:
         return _cache
     if not _DATA_FILE.exists():
         raise FileNotFoundError(
-            f"Items database no encontrada en {_DATA_FILE}. "
-            "Ejecutar primero: python scripts/update_items_database.py"
+            f"Items database no encontrada en {_DATA_FILE}. Ejecutar primero: python scripts/update_items_database.py"
         )
     with open(_DATA_FILE, encoding="utf-8") as f:
         _cache = json.load(f)

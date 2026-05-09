@@ -15,6 +15,8 @@ import logging
 import re
 from datetime import datetime, timezone
 
+from riot_lol_cli.meta_scraper.messages import PLAYWRIGHT_UNAVAILABLE_MESSAGE
+
 from .base import BaseAdapter
 
 logger = logging.getLogger(__name__)
@@ -131,10 +133,7 @@ class LolalyticsAdapter(BaseAdapter):
         try:
             from playwright.sync_api import sync_playwright
         except ImportError as e:
-            raise ImportError(
-                "Playwright no esta disponible. Verifica las dependencias instaladas y ejecuta:\n"
-                "  playwright install chromium"
-            ) from e
+            raise ImportError(PLAYWRIGHT_UNAVAILABLE_MESSAGE) from e
 
         self._playwright = sync_playwright().start()
         self._browser = self._playwright.chromium.launch(

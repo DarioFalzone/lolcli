@@ -24,6 +24,7 @@ import requests
 
 try:
     from urllib3.exceptions import InsecureRequestWarning
+
     warnings.simplefilter("ignore", InsecureRequestWarning)
 except ImportError:
     pass
@@ -214,7 +215,9 @@ def main() -> int:
     database = build_database(version, en_data, es_data)
     out_path = write_database(database)
     print(f"  Wrote {out_path}")
-    print(f"  Total: {database['total_count']}  current: {database['current_count']}  deprecated: {database['deprecated_count']}\n")
+    print(
+        f"  Total: {database['total_count']}  current: {database['current_count']}  deprecated: {database['deprecated_count']}\n"
+    )
 
     print("Downloading missing PNG icons...")
     downloaded, skipped = download_missing_icons(en_data["data"], version)

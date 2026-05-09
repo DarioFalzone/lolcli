@@ -1,7 +1,7 @@
 # Design System — riot_lol_cli
 
-> Documentación del sistema de tokens CSS canónicos aplicado a las 4 surfaces del proyecto.
-> Última actualización: 2026-04-26.
+> Documentación del sistema de tokens CSS canónicos aplicado a las 5 surfaces principales del proyecto.
+> Última actualización: 2026-05-08.
 
 ---
 
