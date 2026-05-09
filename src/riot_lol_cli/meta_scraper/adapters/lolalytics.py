@@ -87,14 +87,16 @@ _JS_EXTRACT = """() => {
         const pickRate = parseFloat(cells[6]?.textContent.trim() || '0') || 0;
         const banRate = parseFloat(cells[7]?.textContent.trim() || '0') || 0;
 
-        // Games: buscar el primer numero grande en el texto completo de la fila
+        // Games: buscar en celdas finales (LoLalytics suele tenerlo en celda ~13-14)
+        // Evitar el fullText greedy que concatena numeros no relacionados.
         let games = 0;
-        const fullText = row.textContent || '';
-        const gameMatches = fullText.match(/(\\d[\\d,]{4,})/g);
-        if (gameMatches) {
-            for (const gm of gameMatches) {
-                const val = parseInt(gm.replace(/,/g, ''));
-                if (val > 10000) { games = val; break; }
+        for (let ci = 8; ci < cells.length; ci++) {
+            const cellText = (cells[ci]?.textContent || '').trim().replace(/,/g, '');
+            const parsed = parseInt(cellText);
+            // Debe ser un numero razonable: entre 100 y 50M partidas
+            if (!isNaN(parsed) && parsed >= 100 && parsed <= 50000000) {
+                games = parsed;
+                break;
             }
         }
 

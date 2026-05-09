@@ -101,12 +101,14 @@ def merge_platform_data(
     role: str = "support",
     elo_filter: str = "emerald_plus",
     source_gaps: list[dict] | None = None,
+    min_pick_rate: float = 0.5,
 ) -> dict:
     """
     Mergea datos de múltiples plataformas en un dataset normalizado.
 
     Args:
         platform_datasets: dict[platform_name] → raw tier list data
+        min_pick_rate: Limite inferior de pick rate para incluir en el dataset final.
 
     Returns:
         Schema normalizado unificado con promedios ponderados.
@@ -234,7 +236,6 @@ def merge_platform_data(
             entry["stats"]["pick_rate"],
             entry["stats"]["ban_rate"],
         )
-        # Limpiar campos internos
         for key in (
             "_sources_count",
             "_wr_sum",
@@ -248,7 +249,9 @@ def merge_platform_data(
             "_sources_without_games",
         ):
             entry.pop(key, None)
-        champion_list.append(entry)
+
+        if entry["stats"]["pick_rate"] >= min_pick_rate:
+            champion_list.append(entry)
 
     # Ordenar ADC por climb_score; support conserva orden por tier + winrate.
     tier_order = {"S": 0, "A": 1, "B": 2, "C": 3}

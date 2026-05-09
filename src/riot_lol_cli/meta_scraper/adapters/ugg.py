@@ -48,16 +48,18 @@ _UGG_NAME_MAP = {
     "nunu": "Nunu",
 }
 
-_JS_EXTRACT = """() => {
+_JS_EXTRACT = """(targetRole) => {
     const results = [];
     const seen = new Set();
 
     // U.GG: tabla React con filas .rt-tr
-    // Celdas: [0]=rank [1]=img [2]=name [3]=tier [4]=WR% [5]=PR% [6]=BR% [7]=link [8]=games
+    // Links contain the role: /lol/champions/{slug}/build/{role}
+    // We MUST filter by targetRole to avoid cross-role contamination.
     const rows = document.querySelectorAll('.rt-tr');
 
     for (const row of rows) {
-        const link = row.querySelector('a[href*="/lol/champions/"][href*="/build/"]');
+        // Only match links for the specific role we're scraping
+        const link = row.querySelector(`a[href*="/lol/champions/"][href*="/build/${targetRole}"]`);
         if (!link) continue;
 
         const href = link.getAttribute('href') || '';
@@ -164,9 +166,11 @@ class UggAdapter(BaseAdapter):
             logger.info("[ugg] Navegando a tier list de %s: %s", role, url)
             page.goto(url, wait_until="domcontentloaded", timeout=60000)
 
-            # Esperar a que los links de campeones estén en el DOM
-            page.wait_for_selector('a[href*="/lol/champions/"][href*="/build/"]', timeout=30000)
-            # Dar tiempo extra al React para renderizar stats
+            # Esperar a que los links de campeones del ROL ESPECÍFICO estén en el DOM.
+            # U.GG genera hrefs como /lol/champions/leesin/build/jungle.
+            role_selector = f'a[href*="/lol/champions/"][href*="/build/{role}"]'
+            page.wait_for_selector(role_selector, timeout=30000)
+            # Dar tiempo extra al React para renderizar stats completas
             page.wait_for_timeout(5000)
 
             # Detectar patch desde texto de la página
@@ -179,7 +183,8 @@ class UggAdapter(BaseAdapter):
             except Exception:
                 pass
 
-            champions_data = page.evaluate(_JS_EXTRACT)
+            # Pasar el rol al JS para filtrar solo los links del rol correcto
+            champions_data = page.evaluate(_JS_EXTRACT, role)
 
             normalized = []
             seen_ids: set[str] = set()

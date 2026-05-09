@@ -171,6 +171,16 @@ class OpggAdapter(BaseAdapter):
                         else if (tierText.includes('3') || tierText.includes('B')) tier = 'B';
                         else if (tierText.includes('4') || tierText.includes('C')) tier = 'C';
                         else if (tierText.includes('5') || tierText.includes('D')) tier = 'C';
+                    // Extraer games_analyzed de las celdas
+                    let games = 0;
+                    for (const cell of cells) {
+                        const text = cell.textContent.trim();
+                        if (text.includes('%')) continue;
+
+                        const parsed = parseInt(text.replace(/,/g, ''));
+                        if (!isNaN(parsed) && parsed >= 100 && parsed <= 50000000) {
+                            games = Math.max(games, parsed);
+                        }
                     }
 
                     results.push({
@@ -179,6 +189,7 @@ class OpggAdapter(BaseAdapter):
                         win_rate: percents[0] || 0,
                         pick_rate: percents[1] || 0,
                         ban_rate: percents.length > 2 ? percents[2] : 0,
+                        games_analyzed: games,
                     });
                 }
                 return results;
@@ -212,7 +223,7 @@ class OpggAdapter(BaseAdapter):
                         "win_rate": champ.get("win_rate", 0),
                         "pick_rate": champ.get("pick_rate", 0),
                         "ban_rate": champ.get("ban_rate", 0),
-                        "games_analyzed": 0,  # OP.GG no siempre muestra games
+                        "games_analyzed": champ.get("games_analyzed", 0),
                         "tier_raw": champ.get("tier", "B"),
                     }
                 )
