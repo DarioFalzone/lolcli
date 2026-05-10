@@ -256,7 +256,7 @@ function renderTeamSlots(team, slots, containerId, count) {
     if (champ) {
       const imgSrc  = `/assets/splash_arts/${champ.id}/${champ.id}_Classic.jpg`;
       const fallback = `data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22%3E%3Crect fill=%22%23060b14%22 width=%2280%22 height=%2280%22/%3E%3C/svg%3E`;
-      el.className  = `champion-slot slot--filled slot--${team}`;
+      el.className  = `slot champion-slot filled ${team}`;
       el.setAttribute('aria-label', `${champ.display_name}, slot ${team === 'ally' ? 'aliado' : 'enemigo'} ${i + 1}`);
       el.onclick    = () => openChampionPicker(team, i);
       el.innerHTML  = `
@@ -265,7 +265,7 @@ function renderTeamSlots(team, slots, containerId, count) {
         <button class="remove-btn" onclick="event.stopPropagation();removeChampion('${team}',${i})" aria-label="Quitar ${champ.display_name}">×</button>
       `;
     } else {
-      el.className  = 'champion-slot';
+      el.className  = 'slot champion-slot';
       el.setAttribute('aria-label', `Slot ${team === 'ally' ? 'aliado' : 'enemigo'} ${i + 1}, vacío`);
       el.onclick    = () => openChampionPicker(team, i);
       el.innerHTML  = '<span class="slot-plus">+</span>';

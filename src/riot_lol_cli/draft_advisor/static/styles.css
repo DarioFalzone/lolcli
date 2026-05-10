@@ -167,9 +167,10 @@
   gap: 7px;
 }
 .slot.champion-slot {
-  /* override mínimo: el slot del Draft es más chico que el slot canónico */
+  /* override: slots del Draft más chicos que el slot canónico */
   min-width: auto;
   min-height: 72px;
+  aspect-ratio: 1;
   font-size: 1.5rem;
   border-radius: var(--radius-sm);
 }
@@ -177,6 +178,7 @@
   color: var(--text-tertiary);
   font-size: 1.5rem;
   font-weight: 300;
+  line-height: 1;
   transition: color var(--motion-default);
 }
 .champion-slot:hover .slot-plus {
@@ -196,14 +198,16 @@
   letter-spacing: var(--tracking-widest);
   text-transform: uppercase;
 }
-.champion-slot.slot--filled {
+
+/* Slots filled — aligned con patterns.css .slot.filled.ally / .slot.filled.enemy */
+.slot.champion-slot.filled {
   border-style: solid;
   padding: 0;
 }
-.champion-slot.slot--filled.slot--ally {
+.slot.champion-slot.filled.ally {
   border-color: var(--arc-cyan-dark);
 }
-.champion-slot.slot--filled.slot--enemy {
+.slot.champion-slot.filled.enemy {
   border-color: var(--state-error);
 }
 .slot-img {
@@ -213,20 +217,15 @@
   object-position: center 15%;
   display: block;
 }
-.slot-name {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 4px 4px 5px;
-  background: linear-gradient(transparent, rgba(2, 8, 16, 0.95));
+
+/* .slot .slot-name de patterns.css ya maneja position+gradient+uppercase.
+   Override solo lo que difiere en el Draft (tamaño y padding más compactos). */
+.slot.champion-slot .slot-name {
   font-size: 0.57rem;
-  font-weight: var(--weight-bold);
-  text-align: center;
+  padding: 10px 4px 4px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: var(--text-primary);
 }
 .remove-btn {
   position: absolute;
@@ -247,7 +246,7 @@
   line-height: 1;
   transition: background var(--motion-fast);
 }
-.champion-slot.slot--filled:hover .remove-btn {
+.slot.champion-slot.filled:hover .remove-btn {
   display: flex;
 }
 .remove-btn:hover {
@@ -811,15 +810,19 @@
   line-height: 1.45;
 }
 
-/* MODAL — overrides chicos sobre .modal de patterns.css */
+/* MODAL — overrides sobre .modal de patterns.css */
 .modal-backdrop {
-  /* ya hereda .modal-overlay */
-  padding: var(--space-4);
+  /* ya hereda .modal-overlay — sin padding extra */
 }
 .modal-box {
-  /* ya hereda .modal */
   max-width: 700px;
   max-height: 87vh;
+  /* borde y sombra más pronunciados para destacar sobre fondo oscuro */
+  border: 1px solid var(--border-metal-strong);
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.85),
+    0 0 0 1px rgba(200, 155, 60, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 .modal-top {
   /* ya hereda .modal-header */
