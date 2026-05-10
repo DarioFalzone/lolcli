@@ -46,5 +46,6 @@ conocida y docs relacionadas.
 | `KB/README.md` | Base de conocimiento estrategica |
 | `bitacora_de_cambios.md` | Registro de cambios significativos |
 | `claude-design-handoff/README.md` | Handoff visual para Claude Design |
+| `claude-design-handoff/pattern-library-prompt.md` | Prompt maestro para pedir una libreria propia de patrones visuales en Claude Design |
 
 Los reportes antiguos de auditoria, el ADC Tracker separado y los documentos historicos duplicados fueron absorbidos en estos documentos, reglas de agentes y bitacora. No crear nuevos reportes Markdown fuera del mapa canonico salvo decision explicita.

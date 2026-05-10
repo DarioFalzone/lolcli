@@ -27,6 +27,14 @@ Ubicados en `src/riot_lol_cli/draft_advisor/static/design-system/`:
 | `compat-spa.css` | 74 | Aliases legacy para el SPA (tokens NO migrados: `--bg-*`, `--green`, etc.) |
 | `compat-dashboard.css` | 35 | Aliases legacy para el Dashboard (referencia, no linkeado activamente) |
 
+### Claude Design
+
+Para explorar una libreria propia de patrones transversales con Claude Design,
+usar `claude-design-handoff/pattern-library-prompt.md` junto con screenshots de
+Items Browser y Jungle Meta. La salida esperada debe seguir siendo compatible
+con HTML/CSS/JS vanilla y consolidar estos tokens, no reemplazarlos por un
+sistema visual ajeno.
+
 ---
 
 ## Familias de tokens canónicos

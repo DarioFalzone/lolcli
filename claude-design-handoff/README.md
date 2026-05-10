@@ -2,6 +2,12 @@
 
 Contexto unico para importar `riot_lol_cli` a Claude Design. Reemplaza los documentos fragmentados de marca, stack, tokens, componentes y flujos.
 
+## Prompt maestro
+
+- `pattern-library-prompt.md`: prompt robusto para pedirle a Claude Design una libreria propia de patrones visuales transversal a todos los proyectos.
+- Adjuntar junto con este README, `docs/design-system.md`, tokens/componentes CSS y screenshots actuales de Items Browser/Jungle Meta.
+- El objetivo del prompt no es rediseñar una pantalla aislada, sino generar un sistema de patrones reusable para HTML/CSS/JS vanilla.
+
 ## Resumen
 
 - Proyecto: CLI + servicios locales de analisis para League of Legends.

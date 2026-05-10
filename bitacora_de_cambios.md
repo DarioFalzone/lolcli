@@ -6,6 +6,24 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-05-10] Claude Design — prompt maestro para libreria de patrones
+
+### Que se hizo
+- Se publico `main` a `origin/main` con los 4 commits locales pendientes (`a63b2b8` -> `808d553`).
+- Se agrego un prompt maestro para Claude Design orientado a crear una libreria propia de patrones visuales para `riot_lol_cli`.
+- El prompt fija el alcance transversal: Home Hub, Draft Advisor, Meta Scraper, Jungle Meta, Items Browser, Meta Analyzer, Splash Gallery y exports HTML.
+- Se documentaron restricciones de implementacion: HTML/CSS/JS vanilla, tokens `arc-*`/`forge-*`, estados accesibles, dark premium gaming y anti-patterns.
+
+### Archivos creados
+- `claude-design-handoff/pattern-library-prompt.md` — prompt, fuentes oficiales, adjuntos recomendados, criterios de aceptacion y handoff posterior a ingenieria.
+
+### Archivos modificados
+- `claude-design-handoff/README.md` — referencia al prompt maestro.
+- `docs/design-system.md` — nota de uso de Claude Design sin reemplazar tokens canonicos.
+- `docs/README.md` — indice actualizado con el nuevo prompt.
+
+---
+
 ## [2026-05-09] Home Hub — launch on-demand + documentación de scripts
 
 ### Que se hizo
