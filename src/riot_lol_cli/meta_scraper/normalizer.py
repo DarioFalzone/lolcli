@@ -24,6 +24,20 @@ _CHAMPION_BASE_PATH = _BASE_DIR / "data" / "draft_advisor" / "champion_base.json
 # Schema version del formato normalizado
 SCHEMA_VERSION = "1.2"
 SUPPORTED_ROLES = {"support", "adc", "jungle"}
+MAX_GAMES_ANALYZED = 50_000_000
+
+# Algunos picks de jungla son reales aunque champion_base los tenga como off-meta
+# historico o no los liste aun en Jungle. La lista es deliberadamente chica:
+# sirve para no borrar picks plausibles sin volver a abrir la puerta a tablas
+# contaminadas de Support/ADC.
+JUNGLE_ROLE_OVERRIDES = {
+    "Brand",
+    "Morgana",
+    "Pantheon",
+    "Rumble",
+    "Zed",
+    "Zyra",
+}
 
 
 def _load_champion_base() -> dict[str, str]:
@@ -61,8 +75,26 @@ def _load_champion_base() -> dict[str, str]:
     return name_map
 
 
+def _load_champion_records() -> dict[str, dict]:
+    """Carga champion_base.json como mapa id canonico -> perfil."""
+    if not _CHAMPION_BASE_PATH.exists():
+        logger.warning("champion_base.json no encontrado en %s", _CHAMPION_BASE_PATH)
+        return {}
+
+    with open(_CHAMPION_BASE_PATH, encoding="utf-8") as f:
+        data = json.load(f)
+
+    champions = data.get("champions", data.get("data", {}))
+    if isinstance(champions, list):
+        return {champ.get("id", champ.get("championId", "")): champ for champ in champions}
+    if isinstance(champions, dict):
+        return {champ.get("id", key): champ for key, champ in champions.items()}
+    return {}
+
+
 # Cache del name map (se carga una sola vez)
 _CHAMPION_NAME_MAP: dict[str, str] | None = None
+_CHAMPION_RECORDS: dict[str, dict] | None = None
 
 
 def _get_name_map() -> dict[str, str]:
@@ -71,6 +103,14 @@ def _get_name_map() -> dict[str, str]:
     if _CHAMPION_NAME_MAP is None:
         _CHAMPION_NAME_MAP = _load_champion_base()
     return _CHAMPION_NAME_MAP
+
+
+def _get_champion_records() -> dict[str, dict]:
+    """Devuelve perfiles base de campeones, cargandolos si es necesario."""
+    global _CHAMPION_RECORDS
+    if _CHAMPION_RECORDS is None:
+        _CHAMPION_RECORDS = _load_champion_records()
+    return _CHAMPION_RECORDS
 
 
 def normalize_champion_id(raw_name: str) -> str:
@@ -96,6 +136,40 @@ def normalize_champion_id(raw_name: str) -> str:
     return raw_name.strip()
 
 
+def _is_champion_allowed_for_role(champion_id: str, role: str) -> bool:
+    """Valida pertenencia de rol cuando hay riesgo de contaminacion cross-role."""
+    if role != "jungle":
+        return True
+    if champion_id in JUNGLE_ROLE_OVERRIDES:
+        return True
+
+    champion = _get_champion_records().get(champion_id)
+    if not champion:
+        return True
+
+    roles = {champion.get("primary_role")}
+    roles.update(champion.get("off_roles", []))
+    return "Jungle" in roles
+
+
+def _coerce_games_analyzed(raw_value: object) -> tuple[int, bool]:
+    """Normaliza partidas analizadas y marca valores imposibles."""
+    if raw_value in (None, ""):
+        return 0, False
+
+    try:
+        if isinstance(raw_value, str):
+            games = int(float(raw_value.replace(",", "").strip()))
+        else:
+            games = int(raw_value)
+    except (TypeError, ValueError):
+        return 0, True
+
+    if games < 0 or games > MAX_GAMES_ANALYZED:
+        return 0, True
+    return games, False
+
+
 def merge_platform_data(
     platform_datasets: dict[str, dict],
     role: str = "support",
@@ -119,6 +193,8 @@ def merge_platform_data(
     source_gaps = source_gaps or []
     sources = list(platform_datasets.keys())
     source_status: list[dict] = []
+    role_filtered_by_source: dict[str, int] = {}
+    invalid_games_by_source: dict[str, int] = {}
     patch = "unknown"
 
     for platform, data in platform_datasets.items():
@@ -139,6 +215,15 @@ def merge_platform_data(
         for champ in champions:
             raw_id = champ.get("id", champ.get("champion_id", champ.get("name", "")))
             canonical_id = normalize_champion_id(raw_id)
+
+            if not _is_champion_allowed_for_role(canonical_id, role):
+                role_filtered_by_source[platform] = role_filtered_by_source.get(platform, 0) + 1
+                continue
+
+            raw_games = champ.get("games_analyzed", champ.get("stats", {}).get("games_analyzed", 0))
+            games, invalid_games = _coerce_games_analyzed(raw_games)
+            if invalid_games:
+                invalid_games_by_source[platform] = invalid_games_by_source.get(platform, 0) + 1
 
             if canonical_id not in merged_champions:
                 merged_champions[canonical_id] = {
@@ -171,7 +256,6 @@ def merge_platform_data(
             wr = champ.get("win_rate", champ.get("stats", {}).get("win_rate", 0))
             pr = champ.get("pick_rate", champ.get("stats", {}).get("pick_rate", 0))
             br = champ.get("ban_rate", champ.get("stats", {}).get("ban_rate", 0))
-            games = champ.get("games_analyzed", champ.get("stats", {}).get("games_analyzed", 0))
 
             entry["source_breakdown"][platform] = {
                 "win_rate": wr,
@@ -203,6 +287,26 @@ def merge_platform_data(
                     entry["matchups"] = champ["matchups"]
                 if champ.get("synergies"):
                     entry["synergies"] = champ["synergies"]
+
+    attempted_at = now
+    for platform, count in sorted(role_filtered_by_source.items()):
+        source_gaps.append(
+            {
+                "source": platform,
+                "stage": "normalization_role_filter",
+                "reason": f"{count} campeones filtrados por no pertenecer al rol {role}",
+                "attempted_at": attempted_at,
+            }
+        )
+    for platform, count in sorted(invalid_games_by_source.items()):
+        source_gaps.append(
+            {
+                "source": platform,
+                "stage": "normalization_games_filter",
+                "reason": f"{count} valores de games_analyzed fuera de rango; no ponderan el agregado",
+                "attempted_at": attempted_at,
+            }
+        )
 
     # Calcular promedios y tier
     champion_list = []

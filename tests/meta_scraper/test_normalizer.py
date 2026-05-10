@@ -4,6 +4,7 @@ import json
 
 from riot_lol_cli.meta_scraper import normalizer
 from riot_lol_cli.meta_scraper.normalizer import (
+    MAX_GAMES_ANALYZED,
     _compute_climb_score,
     _compute_tier,
     merge_platform_data,
@@ -263,6 +264,58 @@ class TestMergePlatformData:
         assert lee_sin["stats"]["games_analyzed"] == 100
         assert "opgg" in lee_sin["source_breakdown"]
         assert "no en el promedio ponderado" in lee_sin["stats"]["aggregation_note"]
+
+    def test_jungle_role_filters_cross_role_contamination(self):
+        data = {
+            "ugg": {
+                "patch": "26.9",
+                "role": "jungle",
+                "champions": [
+                    {"id": "Smolder", "win_rate": 53.5, "pick_rate": 17.0, "ban_rate": 10.0, "games_analyzed": 200000},
+                    {"id": "XinZhao", "win_rate": 52.0, "pick_rate": 9.0, "ban_rate": 6.0, "games_analyzed": 120000},
+                ],
+            }
+        }
+
+        result = merge_platform_data(data, role="jungle")
+        champion_ids = {champ["id"] for champ in result["champions"]}
+
+        assert "XinZhao" in champion_ids
+        assert "Smolder" not in champion_ids
+        assert result["source_gaps"][0]["stage"] == "normalization_role_filter"
+        assert "filtrados" in result["source_gaps"][0]["reason"]
+
+    def test_games_above_sane_limit_stay_in_breakdown_but_not_weighted(self):
+        data = {
+            "lolalytics": {
+                "patch": "26.9",
+                "role": "jungle",
+                "champions": [
+                    {
+                        "id": "Shyvana",
+                        "win_rate": 53.0,
+                        "pick_rate": 6.0,
+                        "ban_rate": 8.0,
+                        "games_analyzed": MAX_GAMES_ANALYZED + 1,
+                    }
+                ],
+            },
+            "ugg": {
+                "patch": "26.9",
+                "role": "jungle",
+                "champions": [
+                    {"id": "Shyvana", "win_rate": 52.0, "pick_rate": 5.0, "ban_rate": 7.0, "games_analyzed": 100000}
+                ],
+            },
+        }
+
+        result = merge_platform_data(data, role="jungle")
+        shyvana = result["champions"][0]
+
+        assert shyvana["stats"]["win_rate"] == 52.0
+        assert shyvana["stats"]["games_analyzed"] == 100000
+        assert shyvana["source_breakdown"]["lolalytics"]["games_analyzed"] == 0
+        assert any(gap["stage"] == "normalization_games_filter" for gap in result["source_gaps"])
 
     def test_save_normalized_backs_up_previous_jungle_latest(self, tmp_path, monkeypatch):
         monkeypatch.setattr(normalizer, "_DATA_DIR", tmp_path)
