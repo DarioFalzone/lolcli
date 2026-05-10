@@ -198,6 +198,18 @@
             <tbody id="tier-table-body"></tbody>
         </table>
 
+        <!-- Source gaps -->
+        <section class="gaps-panel" id="gaps-panel" style="display: none;" aria-live="polite">
+            <div class="gaps-panel__head">
+                <div>
+                    <p class="gaps-panel__eyebrow">AuditorÃ­a de fuentes</p>
+                    <h2 class="gaps-panel__title">Gaps detectados</h2>
+                </div>
+                <span class="gaps-panel__count" id="gaps-count">0</span>
+            </div>
+            <div class="gaps-list" id="gaps-list"></div>
+        </section>
+
         <!-- Climb column visibility (depend on app.js applying body.role-adc) -->
         <style>
             .th-climb, .td-climb { display: none; }

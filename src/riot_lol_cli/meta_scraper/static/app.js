@@ -113,6 +113,7 @@ function renderSourceFilters(data) {
   const buttons = [
     { id: 'total', label: 'Total' },
     ...sources.map(source => ({ id: source, label: sourceLabel(source) })),
+    { id: 'gaps', label: gaps.length ? `Gaps (${gaps.length})` : 'Gaps' },
   ];
 
   container.innerHTML = buttons.map(button => `
@@ -131,6 +132,13 @@ function updateSourceFilterButtons() {
 
 function refreshCurrentView() {
   if (!state.data) return;
+
+  if (state.activeSource === 'gaps') {
+    state.champions = [];
+    updateQuickStats(state.data, []);
+    renderGaps(state.data.source_gaps || []);
+    return;
+  }
 
   state.champions = getChampionsForSource(state.data, state.activeSource);
   updateQuickStats(state.data, state.champions);
@@ -169,6 +177,7 @@ function sourceLabel(source) {
     lolalytics: 'LoLalytics',
     opgg: 'OP.GG',
     ugg: 'U.GG',
+    gaps: 'Gaps',
   };
   return labels[source] || source;
 }
@@ -360,6 +369,11 @@ function filterBySearch(query) {
 function applyFilters() {
   if (!state.data) return;
 
+  if (state.activeSource === 'gaps') {
+    renderGaps(state.data.source_gaps || []);
+    return;
+  }
+
   let filtered = getChampionsForSource(state.data, state.activeSource);
 
   // Tier filter
@@ -377,6 +391,42 @@ function applyFilters() {
 
   state.champions = filtered;
   renderTierList(filtered);
+}
+
+function renderGaps(gaps) {
+  const panel = document.getElementById('gaps-panel');
+  const list = document.getElementById('gaps-list');
+  const count = document.getElementById('gaps-count');
+  const table = document.getElementById('tier-table');
+  const empty = document.getElementById('empty-state');
+
+  if (!panel || !list || !count) return;
+
+  empty.style.display = 'none';
+  table.style.display = 'none';
+  panel.style.display = 'block';
+  count.textContent = gaps.length;
+
+  if (!gaps.length) {
+    list.innerHTML = `
+      <article class="gap-card gap-card--empty">
+        <div class="gap-card__title">Sin gaps reportados</div>
+        <p class="gap-card__body">Todas las fuentes disponibles entregaron datos consumibles para este snapshot.</p>
+      </article>
+    `;
+    return;
+  }
+
+  list.innerHTML = gaps.map(gap => `
+    <article class="gap-card">
+      <div class="gap-card__meta">
+        <span class="source-badge source-badge--${gap.source || 'unknown'}">${sourceLabel(gap.source || 'unknown')}</span>
+        <span>${gap.stage || 'normalization'}</span>
+      </div>
+      <div class="gap-card__title">${gap.reason || gap.error || 'Gap sin detalle'}</div>
+      ${gap.attempted_at ? `<p class="gap-card__body">Detectado: ${formatDateTime(gap.attempted_at)}</p>` : ''}
+    </article>
+  `).join('');
 }
 
 // --- Detail Panel ---
@@ -558,10 +608,12 @@ async function pollHealth() {
 function showEmptyState() {
   document.getElementById('empty-state').style.display = 'flex';
   document.getElementById('tier-table').style.display = 'none';
+  document.getElementById('gaps-panel').style.display = 'none';
 }
 
 function hideEmptyState() {
   document.getElementById('empty-state').style.display = 'none';
+  document.getElementById('gaps-panel').style.display = 'none';
   document.getElementById('tier-table').style.display = 'table';
 }
 
