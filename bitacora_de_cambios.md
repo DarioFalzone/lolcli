@@ -73,6 +73,37 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-05-09] Home Hub — empty states (skeleton + error + empty fallback)
+
+### Que se hizo
+- **Frontend:** la grilla de servicios deja de aparecer vacía durante la carga inicial.
+  - 5 skeleton cards con `@keyframes shimmer` se renderizan inmediatamente al init (antes del primer poll).
+  - Si el fetch falla en first load → estado "Error al cargar servicios" con botón "Reintentar".
+  - Si la API devuelve `services: []` → estado "Sin servicios configurados".
+- `fetchAndRender` también refresca el botón de cada card en cada poll respetando el estado de launch en curso.
+
+### Archivos modificados
+- `src/riot_lol_cli/home/static/app.js` — `buildSkeletonCard`, `renderGridSkeletons(5)` al init, `renderGridError`, `renderGridEmpty`, manejo en `fetchAndRender`.
+- `src/riot_lol_cli/home/static/styles.css` — `@keyframes shimmer`, clases `.skel-*`, `.services-empty`, `.btn-retry`.
+
+---
+
+## [2026-05-09] Meta Scraper — accuracy fixes en adapters + min_pick_rate filter
+
+### Que se hizo
+- **lolalytics adapter:** `games_analyzed` ahora itera celdas individuales desde el índice 8 con regla numérica (100 ≤ N ≤ 50M). Antes usaba un regex greedy sobre `fullText` que concatenaba números no relacionados.
+- **opgg adapter:** ahora extrae `games_analyzed` de las celdas (ignorando `%`) en vez de hardcodear 0.
+- **ugg adapter:** `_JS_EXTRACT` recibe `targetRole` y filtra solo links cuyo href matchea `/build/{role}` (antes contaminaba cross-rol — picks de support aparecían en jungla).
+- **normalizer:** nuevo parámetro `min_pick_rate=0.5` en `merge_platform_data()`; campeones bajo ese umbral se excluyen del dataset final.
+
+### Archivos modificados
+- `src/riot_lol_cli/meta_scraper/adapters/lolalytics.py`
+- `src/riot_lol_cli/meta_scraper/adapters/opgg.py`
+- `src/riot_lol_cli/meta_scraper/adapters/ugg.py`
+- `src/riot_lol_cli/meta_scraper/normalizer.py`
+
+---
+
 ## [2026-05-09] Home Hub — launch on-demand + documentación de scripts
 
 ### Que se hizo
