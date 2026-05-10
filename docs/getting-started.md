@@ -35,6 +35,47 @@ cp .env.example .env
 
 ---
 
+## Home Hub — Panel Central
+
+**Centro de operaciones** con health checks, lanzamiento on-demand de servicios y acceso a todos los subsistemas.
+
+### Windows (script rápido)
+```bash
+scripts\bat\home.bat
+```
+
+### Manual
+```powershell
+$env:PYTHONPATH=(Resolve-Path .\src).Path
+.\.venv\Scripts\python.exe -m riot_lol_cli.home.server
+```
+
+- **URL**: http://localhost:8080
+- **Puertos monitoreados**: 8000 (Meta API), 8001 (Draft), 8002 (Meta Scraper), 8003 (Jungle Meta), 8004 (Items Browser)
+- **Features**: Health checks cada 30s, botón "Abrir" lanza servicios offline automáticamente, poll hasta 20s
+
+---
+
+## Levantar Todo (todos los servicios)
+
+**Script único** que levanta Home Hub + Meta API + Draft Advisor + Meta Scraper + Jungle Meta + Items Browser, todo en background sin ventanas CMD (logs en `logs/`).
+
+```bash
+scripts\bat\levantar_todo.bat
+```
+
+Abre automáticamente:
+- Home Hub: http://localhost:8080
+- Draft Advisor: http://localhost:8001/draft
+- Meta Scraper: http://localhost:8002
+- Jungle Meta: http://localhost:8003
+- Items Browser: http://localhost:8004
+- Splash Gallery: outputs\splash-viewer.html
+
+Respeta env vars `LOLCLI_*_PORT` si están definidas.
+
+---
+
 ## 1. CLI — Match History
 
 Consultar historial de partidas y generar HTML:

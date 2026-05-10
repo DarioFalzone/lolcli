@@ -6,6 +6,30 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-05-09] Home Hub — launch on-demand + documentación de scripts
+
+### Que se hizo
+- **Backend:** Nuevo endpoint `POST /api/v1/home/launch/{service_id}` — spawnea subproceso del servicio si no está corriendo.
+  - Valida que no esté online (quick health ping).
+  - Expone `health_path` en `/api/v1/home/status` para polling directo desde frontend.
+- **Frontend:** "Abrir" en cards offline → lanza servicio → muestra "⏳ Iniciando…" → poll health cada 1s hasta 20s → abre browser automáticamente.
+- **Documentación:** Secciones Home Hub + Levantar Todo en `docs/getting-started.md`.
+- **Scripts:** Nuevo `scripts/bat/home.bat` + actualizado `levantar_todo.bat` para incluir Home Hub (`:8080`).
+- **Tests:** 3 smoke tests (home routes, health_path en status, 404 on unknown service) + restaurado test items_browser completo.
+
+### Archivos creados
+- `scripts/bat/home.bat` — launcher independiente para Home Hub.
+
+### Archivos modificados
+- `src/riot_lol_cli/home/server.py` — imports os/subprocess/sys, `_LAUNCH_CMDS` dict, `_running_processes`, `POST /api/v1/home/launch/{id}`, expone `health_path`.
+- `src/riot_lol_cli/home/static/app.js` — `buildOpenButton()`, `launchAndOpen()`, `refreshCardButton()`, event delegation `.btn-launch`.
+- `src/riot_lol_cli/home/static/styles.css` — reset `button.btn-open`, estilo disabled y `--launching`.
+- `docs/getting-started.md` — secciones Home Hub + Levantar Todo al inicio.
+- `scripts/bat/levantar_todo.bat` — Home Hub `:8080` agregado, abre browser al inicio, actualizado display de frontends.
+- `tests/test_server_factories.py` — 3 nuevos tests home, restaurado test items_browser.
+
+---
+
 ## [2026-05-09] Rediseño frontend Home Hub (`:8080`)
 
 ### Que se hizo

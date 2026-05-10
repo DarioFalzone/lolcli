@@ -2,9 +2,9 @@
 chcp 65001 >nul
 REM ============================================================================
 REM LOLCLI — Levantar Todo
-REM Levanta los servidores activos en background (sin ventanas) + abre el navegador.
+REM Levanta Home + Meta API + Draft + Meta Scraper + Jungle + Items en background.
 REM Idempotente: omite servidores que ya esten corriendo.
-REM Logs: logs\draft_advisor.log / meta_scraper.log / meta_analyzer.log
+REM Logs: logs\*.log y logs\*.err
 REM ============================================================================
 
 setlocal enabledelayedexpansion
@@ -15,7 +15,7 @@ cls
 echo.
 echo ╔══════════════════════════════════════════════════════════╗
 echo ║   LOLCLI — Levantar Todo                                 ║
-echo ║   Draft + Meta + Jungle + Items Browser                  ║
+echo ║   Home Hub + Meta API + Draft + Scraper + Jungle + Items ║
 echo ╚══════════════════════════════════════════════════════════╝
 echo.
 
@@ -30,6 +30,8 @@ if not exist ".venv\Scripts\python.exe" (
 set ROOT=%CD%
 set PY=%ROOT%\.venv\Scripts\python.exe
 set PYPATH=%ROOT%\src
+set HOME_PORT=%LOLCLI_HOME_PORT%
+if "%HOME_PORT%"=="" set HOME_PORT=8080
 set META_API_PORT=%LOLCLI_META_API_PORT%
 if "%META_API_PORT%"=="" set META_API_PORT=8000
 set DRAFT_ADVISOR_PORT=%LOLCLI_DRAFT_ADVISOR_PORT%
@@ -42,6 +44,15 @@ set ITEMS_BROWSER_PORT=%LOLCLI_ITEMS_BROWSER_PORT%
 if "%ITEMS_BROWSER_PORT%"=="" set ITEMS_BROWSER_PORT=8004
 
 if not exist "%ROOT%\logs" mkdir "%ROOT%\logs"
+
+REM ─── Home Hub :8080 ───────────────────────────────────────────────────────
+netstat -ano | findstr ":%HOME_PORT%" >nul 2>&1
+if not errorlevel 1 (
+    echo [SKIP]  Home Hub       :%HOME_PORT%  ya esta corriendo
+) else (
+    echo [START] Home Hub       :%HOME_PORT%  ...
+    start /b "" powershell -WindowStyle Hidden -Command "$env:PYTHONPATH='%PYPATH%'; Start-Process -FilePath '%PY%' -ArgumentList '-m','riot_lol_cli.home.server' -WorkingDirectory '%ROOT%' -RedirectStandardOutput '%ROOT%\logs\home.log' -RedirectStandardError '%ROOT%\logs\home.err' -WindowStyle Hidden"
+)
 
 REM ─── Draft Advisor :8001 ──────────────────────────────────────────────────
 netstat -ano | findstr ":%DRAFT_ADVISOR_PORT%" >nul 2>&1
@@ -96,6 +107,8 @@ timeout /t 6 /nobreak >nul
 REM ─── Abrir frontends en el navegador ──────────────────────────────────────
 echo [BROWSER] Abriendo frontends...
 
+start "" "http://localhost:%HOME_PORT%"
+timeout /t 1 /nobreak >nul
 start "" "http://localhost:%DRAFT_ADVISOR_PORT%/draft"
 timeout /t 1 /nobreak >nul
 start "" "http://localhost:%META_SCRAPER_PORT%"
@@ -109,18 +122,19 @@ timeout /t 1 /nobreak >nul
 start "" "%ROOT%\projects\active\junglas-pro\index.html"
 
 echo.
-echo ╔══════════════════════════════════════════════════════════╗
-echo ║   Frontends disponibles                                  ║
-echo ╠══════════════════════════════════════════════════════════╣
-echo ║   Draft Advisor   →  http://localhost:%DRAFT_ADVISOR_PORT%/draft         ║
-echo ║   Meta Scraper    →  http://localhost:%META_SCRAPER_PORT%               ║
-echo ║   Meta Analyzer   →  http://localhost:%META_API_PORT%/docs          ║
-echo ║   Jungle Meta     →  http://localhost:%JUNGLE_META_PORT%               ║
-echo ║   Items Browser   →  http://localhost:%ITEMS_BROWSER_PORT%               ║
-echo ║   Splash Gallery  →  outputs\splash-viewer.html          ║
-echo ║   Junglas Pro     →  projects\active\junglas-pro\        ║
-echo ╠══════════════════════════════════════════════════════════╣
-echo ║   Sin ventanas CMD. Logs en logs\*.log y logs\*.err      ║
-echo ╚══════════════════════════════════════════════════════════╝
+echo ╔═══════════════════════════════════════════════════════════╗
+echo ║   Frontends disponibles                                   ║
+echo ╠═══════════════════════════════════════════════════════════╣
+echo ║   Home Hub        →  http://localhost:%HOME_PORT%                ║
+echo ║   Draft Advisor   →  http://localhost:%DRAFT_ADVISOR_PORT%/draft           ║
+echo ║   Meta Scraper    →  http://localhost:%META_SCRAPER_PORT%                 ║
+echo ║   Meta Analyzer   →  http://localhost:%META_API_PORT%/docs            ║
+echo ║   Jungle Meta     →  http://localhost:%JUNGLE_META_PORT%                 ║
+echo ║   Items Browser   →  http://localhost:%ITEMS_BROWSER_PORT%                 ║
+echo ║   Splash Gallery  →  outputs\splash-viewer.html            ║
+echo ║   Junglas Pro     →  projects\active\junglas-pro\          ║
+echo ╠═══════════════════════════════════════════════════════════╣
+echo ║   Sin ventanas CMD. Logs en logs\*.log y logs\*.err        ║
+echo ╚═══════════════════════════════════════════════════════════╝
 echo.
 pause
