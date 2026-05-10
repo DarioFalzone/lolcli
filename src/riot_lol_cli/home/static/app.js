@@ -137,6 +137,53 @@
 
   const _OPEN_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
 
+  // --- Empty / loading states ---
+
+  function buildSkeletonCard(_, index) {
+    const delay = 'animation-delay:' + (index * 0.08).toFixed(2) + 's';
+    return '<article class="service-card service-card--skeleton" style="' + delay + '" aria-hidden="true">'
+      + '<div class="card-accent-line"></div>'
+      + '<div class="card-top">'
+      +   '<div class="skel skel-icon"></div>'
+      +   '<div class="skel skel-pill"></div>'
+      + '</div>'
+      + '<div class="card-content">'
+      +   '<div class="skel skel-name"></div>'
+      +   '<div class="skel skel-desc"></div>'
+      +   '<div class="skel skel-desc" style="width:65%"></div>'
+      + '</div>'
+      + '<div class="card-footer">'
+      +   '<div class="skel skel-port"></div>'
+      +   '<div class="skel skel-btn"></div>'
+      + '</div>'
+      + '</article>';
+  }
+
+  function renderGridSkeletons(count) {
+    $grid.innerHTML = Array.from({ length: count }, buildSkeletonCard).join('');
+  }
+
+  function renderGridError() {
+    $grid.innerHTML = '<div class="services-empty">'
+      + '<svg class="services-empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">'
+      +   '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>'
+      + '</svg>'
+      + '<p class="services-empty-title">Error al cargar servicios</p>'
+      + '<p class="services-empty-desc">No se pudo conectar con el Hub. Verificá que el servidor esté corriendo.</p>'
+      + '<button class="btn-retry" onclick="location.reload()">Reintentar</button>'
+      + '</div>';
+  }
+
+  function renderGridEmpty() {
+    $grid.innerHTML = '<div class="services-empty">'
+      + '<svg class="services-empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">'
+      +   '<circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/>'
+      + '</svg>'
+      + '<p class="services-empty-title">Sin servicios configurados</p>'
+      + '<p class="services-empty-desc">No hay subsistemas registrados en el Hub.</p>'
+      + '</div>';
+  }
+
   /** Build the "Abrir" / "Iniciando…" button for a service card. */
   function buildOpenButton(svc) {
     const url = 'http://localhost:' + svc.port + svc.ui_path;
@@ -237,10 +284,14 @@
       lastServices = data.services;
 
       if (isFirstLoad) {
-        $grid.innerHTML = data.services.map(renderServiceCard).join('');
+        if (data.services.length === 0) {
+          renderGridEmpty();
+        } else {
+          $grid.innerHTML = data.services.map(renderServiceCard).join('');
+        }
         isFirstLoad = false;
       } else {
-        // Update existing cards in place (status only)
+        // Update existing cards in place (status only, preserve launch buttons)
         data.services.forEach((svc) => {
           const card = $grid.querySelector('[data-service-id="' + svc.id + '"]');
           if (!card) return;
@@ -251,12 +302,20 @@
             pill.className = 'pill ' + statusPillClass(svc.status) + ' pill-sm';
             pill.textContent = statusLabel(svc.status);
           }
+          // Refresh button only if not currently launching
+          if (!launchingServices.has(svc.id)) {
+            refreshCardButton(svc.id);
+          }
         });
       }
     } catch (err) {
       console.error('[Home Hub] Error fetching status:', err);
       $globalDot.className = 'status-dot status-dot--offline';
       $statusText.textContent = 'Error de conexión';
+      if (isFirstLoad) {
+        renderGridError();
+        isFirstLoad = false;
+      }
     }
   }
 
@@ -463,6 +522,7 @@
 
   // --- Init ---
   applyTweaks();
+  renderGridSkeletons(5);   // show placeholders immediately, replaced on first fetch
   fetchAndRender();
   setInterval(fetchAndRender, POLL_INTERVAL_MS);
 })();

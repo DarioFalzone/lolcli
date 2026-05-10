@@ -647,6 +647,80 @@ button.btn-open:disabled {
 }
 .btn-docs-link svg { width: 12px; height: 12px; }
 
+/* ===== Skeleton loader ===== */
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skel {
+  background: linear-gradient(90deg,
+    var(--bg-card-hover) 0%,
+    rgba(255,255,255,0.06) 50%,
+    var(--bg-card-hover) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+  border-radius: var(--r-sm);
+}
+
+.service-card--skeleton { pointer-events: none; }
+.service-card--skeleton .card-accent-line { opacity: 0.3; }
+
+.skel-icon { width: 52px; height: 52px; border-radius: var(--r-md); }
+.skel-pill { width: 58px; height: 20px; border-radius: 12px; }
+.skel-name { width: 55%; height: 17px; margin-bottom: var(--sp-2); }
+.skel-desc { width: 90%; height: 11px; margin-bottom: var(--sp-1); }
+.skel-port { width: 38px; height: 13px; }
+.skel-btn  { width: 72px; height: 30px; border-radius: var(--r-md); }
+
+/* ===== Empty / error state ===== */
+.services-empty {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-12) var(--sp-6);
+  text-align: center;
+  gap: var(--sp-3);
+}
+.services-empty-icon {
+  width: 40px;
+  height: 40px;
+  opacity: 0.35;
+  color: var(--text-tertiary);
+}
+.services-empty-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.services-empty-desc {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--text-tertiary);
+  max-width: 340px;
+  line-height: 1.6;
+}
+.btn-retry {
+  margin-top: var(--sp-2);
+  padding: 7px 18px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border-soft);
+  background: var(--bg-card-hover);
+  color: var(--text-secondary);
+  font: 500 0.82rem var(--font-sans);
+  cursor: pointer;
+  transition: var(--motion);
+}
+.btn-retry:hover {
+  background: var(--bg-elevated);
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+}
+
 /* ===== Service Card (list view) ===== */
 [data-layout="list"] .service-card {
   flex-direction: row;
