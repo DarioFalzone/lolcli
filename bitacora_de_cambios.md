@@ -6,6 +6,55 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-05-10] Pattern Library v2 — `patterns.css` drop-in + reference page
+
+### Que se hizo
+- ➕ `design-system/patterns.css`: 18 patrones drop-in HTML+CSS vanilla
+  (hero, control-panel, tabs, tier-row, cat-card, stat-strip, data-table,
+  modal, slots, toasts, banners, entity-card, score-factor, etc).
+- 🔄 `design-system/tokens.css` → v2 canónica. Cambios visuales sutiles
+  esperados:
+  - `--radius-sm/md/lg/xl`: 8/12/16/20px → 6/8/12/16px (bordes más chicos)
+  - `--motion-fast/default/slow`: 150/200/400ms → 120/180/320ms (animaciones más rápidas)
+  - `--state-success-dim/error-dim/warning-dim`: cambiaron de hex sólido a rgba
+    semitransparente. **Cambio drástico** en `components.css:494` donde
+    `--state-error-dim` se usa como border-color del slot enemy filled
+    (rojo sólido `#d13639` → rojo translúcido `rgba(255,70,85,0.18)`).
+- ➕ Tokens nuevos del v2: `--tier-s/a/b/c`, `--font-anton`, `--font-hero`,
+  `--tracking-hero`, `--space-20`, `--ease-out`, `--state-info-dim`.
+- ➖ Tokens deprecados (no se usaban en runtime activo, safe):
+  `--motion-spin`, `--motion-glow-pulse`, `--motion-border-flow`,
+  `--motion-grid-flow`, `--container-3xl`, `--tracking-tighter`.
+- ⚠️ Token `--gap` queda undefined → fallback a `initial`. Solo lo usaba
+  `compat-spa.css:57`. Se documenta en bitácora; si se rompe spacing en
+  Draft Advisor SPA, agregar mitigación en otra iteración.
+- 📖 Doc page nueva: `claude-design-handoff_revolution/patrones_diseños_claude_design/Pattern Library.html`
+  con TOC, demos, snippets y checklist (mirrors de tokens.css + patterns.css
+  para abrirla standalone).
+- 📝 Nuevo `design-system/README.md` con orden de carga canónico.
+- 📝 `docs/design-system.md` extendido con sección Pattern Library v2 + tabla
+  de recipes por surface.
+- Ref: PR `feat/pattern-library-v2`.
+
+### Archivos creados
+- `src/riot_lol_cli/draft_advisor/static/design-system/patterns.css`
+- `src/riot_lol_cli/draft_advisor/static/design-system/README.md`
+- `claude-design-handoff_revolution/patrones_diseños_claude_design/Pattern Library.html`
+- `claude-design-handoff_revolution/patrones_diseños_claude_design/tokens.css` (mirror)
+- `claude-design-handoff_revolution/patrones_diseños_claude_design/patterns.css` (mirror)
+
+### Archivos modificados
+- `src/riot_lol_cli/draft_advisor/static/design-system/tokens.css` (reemplazo total → v2)
+- `docs/design-system.md` (sección Pattern Library v2 al final)
+- `bitacora_de_cambios.md` (esta entrada)
+
+### Verificación
+- Smoke test visual de Draft Advisor (única surface que importa tokens.css).
+- Surfaces Home/Meta/Jungle/Items no afectadas (no importan tokens.css).
+- Doc page abre standalone sin errores de consola.
+
+---
+
 ## [2026-05-10] Claude Design — prompt maestro para libreria de patrones
 
 ### Que se hizo

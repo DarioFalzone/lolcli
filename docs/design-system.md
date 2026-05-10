@@ -211,3 +211,39 @@ Ver `templates/claude-4-5.html` y `templates/splash-viewer.html` como referencia
 ```
 
 Commits relevantes: `c47c87e` → `f1ff944` → `b98af17` → `e046130` → `a735989` → `141cc77` → `7110e74` → `4d5633a`
+
+---
+
+## Pattern Library v2 — `patterns.css`
+
+Desde el PR `feat/pattern-library-v2` el sistema incluye `patterns.css` —
+clases drop-in HTML+CSS para los 18 patrones transversales. Cualquier
+surface nueva arranca importando `tokens.css` + `patterns.css` en ese
+orden y ya queda alineada al sistema.
+
+### Orden de carga canónico
+
+```html
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Anton&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="/static/design-system/tokens.css?v=2">
+<link rel="stylesheet" href="/static/design-system/patterns.css?v=2">
+<!-- componentes legacy / compat solo si la surface los necesita -->
+<link rel="stylesheet" href="/static/design-system/components.css?v=2">
+```
+
+### Recipes por surface
+
+| Surface | Shell | Hero | Patrones | Modal |
+|---|---|---|---|---|
+| Home Hub | premium | compact | stat-strip, service cards, banners | — |
+| Items Browser | plano | compact (ITEMS) | control-panel, tabs, entity-card | item detail |
+| Jungle Meta | plano | dual (TIER LIST) | cat-card sidebar, tier-tabs, tier-row | champion detail |
+| Meta Scraper | plano | compact | data-table, pill source, toast | row detail |
+| Draft Advisor | premium | compact | slot grid, score-factor, top-pick | picker modal |
+| Splash Gallery | plano | compact | entity-card grid (full-bleed thumb) | splash full-screen |
+
+### Doc page de referencia
+
+`claude-design-handoff_revolution/patrones_diseños_claude_design/Pattern Library.html`
+— abrila localmente para ver tokens, demos, snippets y checklist de revisión
+pre-merge.
