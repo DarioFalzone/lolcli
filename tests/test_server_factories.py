@@ -1,6 +1,7 @@
 from fastapi.testclient import TestClient
 
 from riot_lol_cli.draft_advisor.server import create_app as create_draft_advisor_app
+from riot_lol_cli.home.server import create_app as create_home_app
 from riot_lol_cli.items_browser.server import create_app as create_items_browser_app
 from riot_lol_cli.jungle_meta.server import create_app as create_jungle_meta_app
 from riot_lol_cli.meta_api.app import create_app as create_meta_api_app
@@ -214,3 +215,27 @@ def test_items_browser_health_and_endpoints():
     ids = {item["id"] for item in all_items.json()["items"]}
     assert 4633 in ids
     assert 224633 not in ids
+
+
+def test_home_create_app_registers_launch_and_status_routes():
+    app = create_home_app()
+    paths = _route_paths(app)
+    assert "/health" in paths
+    assert "/api/v1/home/status" in paths
+    assert "/api/v1/home/launch/{service_id}" in paths
+
+
+def test_home_status_includes_health_path():
+    client = TestClient(create_home_app())
+    resp = client.get("/api/v1/home/status")
+    assert resp.status_code == 200
+    services = resp.json()["services"]
+    assert len(services) > 0
+    for svc in services:
+        assert "health_path" in svc, f"health_path missing for {svc['id']}"
+
+
+def test_home_launch_unknown_service_returns_404():
+    client = TestClient(create_home_app())
+    resp = client.post("/api/v1/home/launch/does_not_exist")
+    assert resp.status_code == 404

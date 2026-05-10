@@ -12,6 +12,8 @@
 
   const POLL_INTERVAL_MS = 30_000;
   const STATUS_URL = '/api/v1/home/status';
+  const LAUNCH_TIMEOUT_MS = 20_000;
+  const LAUNCH_POLL_MS    = 1_000;
 
   // --- DOM refs ---
   const $body          = document.body;
@@ -44,6 +46,7 @@
   // --- State ---
   let isFirstLoad = true;
   let lastServices = [];
+  const launchingServices = new Set(); // service IDs currently being launched
   const sessionStart = Date.now();
   let uptimeTimer = null;
 
@@ -132,13 +135,27 @@
     return String(m).padStart(2, '0') + ':' + String(s).padStart(2, '0');
   }
 
+  const _OPEN_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
+
+  /** Build the "Abrir" / "Iniciando…" button for a service card. */
+  function buildOpenButton(svc) {
+    const url = 'http://localhost:' + svc.port + svc.ui_path;
+    if (launchingServices.has(svc.id)) {
+      return '<button class="btn-open btn-open--launching" disabled>⏳ Iniciando…</button>';
+    }
+    if (svc.status === 'online') {
+      return '<a href="' + escapeHtml(url) + '" target="_blank" rel="noopener" class="btn-open">Abrir' + _OPEN_SVG + '</a>';
+    }
+    // offline / error → launch button
+    return '<button class="btn-open btn-launch" data-svc-id="' + escapeHtml(svc.id) + '" data-svc-url="' + escapeHtml(url) + '">Abrir' + _OPEN_SVG + '</button>';
+  }
+
   /**
    * Build a single service card HTML.
    * Mantiene contrato con el HTML existente:
    * .service-card[data-service-id], .card-status-dot, .service-status .pill
    */
   function renderServiceCard(svc, index) {
-    const url = 'http://localhost:' + svc.port + svc.ui_path;
     const docsUrl = 'http://localhost:' + svc.port + '/docs';
     const delay = isFirstLoad ? 'animation-delay: ' + (0.1 + index * 0.06).toFixed(2) + 's;' : '';
     const accent = escapeHtml(svc.accent || 'gold');
@@ -167,14 +184,7 @@
       +         '</svg>'
       +         'Docs'
       +       '</a>'
-      +       '<a href="' + url + '" target="_blank" rel="noopener" class="btn-open" data-service-link="' + escapeHtml(svc.id) + '">'
-      +         'Abrir'
-      +         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
-      +           '<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>'
-      +           '<polyline points="15 3 21 3 21 9"/>'
-      +           '<line x1="10" y1="14" x2="21" y2="3"/>'
-      +         '</svg>'
-      +       '</a>'
+      +       buildOpenButton(svc)
       +     '</div>'
       +   '</div>'
       + '</article>';
@@ -249,6 +259,82 @@
       $statusText.textContent = 'Error de conexión';
     }
   }
+
+  // --- Launch service ---
+
+  /** Replace the Abrir button in a card to reflect current launch state. */
+  function refreshCardButton(svcId) {
+    const card = $grid.querySelector('[data-service-id="' + svcId + '"]');
+    if (!card) return;
+    const actions = card.querySelector('.card-actions');
+    if (!actions) return;
+    const old = actions.querySelector('.btn-open, .btn-launch');
+    if (!old) return;
+    const svcDef = lastServices.find((s) => s.id === svcId);
+    if (!svcDef) return;
+    old.outerHTML = buildOpenButton(svcDef);
+  }
+
+  async function launchAndOpen(svcId, openUrl) {
+    launchingServices.add(svcId);
+    refreshCardButton(svcId);
+
+    try {
+      const resp = await fetch('/api/v1/home/launch/' + svcId, { method: 'POST' });
+      if (!resp.ok) throw new Error('HTTP ' + resp.status);
+      const data = await resp.json();
+      if (data.status === 'already_online') {
+        launchingServices.delete(svcId);
+        refreshCardButton(svcId);
+        window.open(openUrl, '_blank', 'noopener');
+        return;
+      }
+    } catch (err) {
+      console.error('[Home Hub] launch request failed:', err);
+      launchingServices.delete(svcId);
+      refreshCardButton(svcId);
+      return;
+    }
+
+    // Poll the service health directly until online or timeout.
+    const svcDef = lastServices.find((s) => s.id === svcId);
+    if (!svcDef) { launchingServices.delete(svcId); return; }
+
+    const healthUrl = 'http://localhost:' + svcDef.port + svcDef.health_path;
+    const deadline = Date.now() + LAUNCH_TIMEOUT_MS;
+
+    const timer = setInterval(async () => {
+      if (Date.now() > deadline) {
+        clearInterval(timer);
+        launchingServices.delete(svcId);
+        refreshCardButton(svcId);
+        console.warn('[Home Hub] launch timeout for', svcId);
+        return;
+      }
+      try {
+        const r = await fetch(healthUrl);
+        if (r.ok) {
+          clearInterval(timer);
+          launchingServices.delete(svcId);
+          // Optimistically mark online in lastServices so button renders correctly.
+          const idx = lastServices.findIndex((s) => s.id === svcId);
+          if (idx !== -1) lastServices[idx] = Object.assign({}, lastServices[idx], { status: 'online' });
+          refreshCardButton(svcId);
+          window.open(openUrl, '_blank', 'noopener');
+          fetchAndRender(); // sync stats strip
+        }
+      } catch (_) { /* still starting */ }
+    }, LAUNCH_POLL_MS);
+  }
+
+  // Delegated click handler for offline "Abrir" buttons.
+  $grid.addEventListener('click', (e) => {
+    const btn = e.target.closest('.btn-launch');
+    if (!btn) return;
+    const svcId = btn.dataset.svcId;
+    if (!svcId || launchingServices.has(svcId)) return;
+    launchAndOpen(svcId, btn.dataset.svcUrl);
+  });
 
   // --- View toggle (grid/list) ---
 

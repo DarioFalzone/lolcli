@@ -9,10 +9,13 @@ from __future__ import annotations
 
 import json
 import logging
+import os
+import subprocess
+import sys
 from pathlib import Path
 
 import httpx
-from fastapi import APIRouter, FastAPI
+from fastapi import APIRouter, FastAPI, HTTPException
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 
@@ -30,11 +33,25 @@ logger = logging.getLogger(__name__)
 
 _MODULE_DIR = Path(__file__).resolve().parent
 _STATIC_DIR = _MODULE_DIR / "static"
+_REPO_ROOT = _MODULE_DIR.parent.parent.parent   # e.g. e:\Desarrollos\LOLCLI
+_SRC_DIR = str(_MODULE_DIR.parent.parent)        # e.g. …\src  (PYTHONPATH for subprocesses)
 _DESIGN_SYSTEM_DIR = _MODULE_DIR.parent / "draft_advisor" / "static" / "design-system"
 _VERSION_FILE = _MODULE_DIR.parent.parent.parent / "config" / "version.json"
 _JUNGLAS_PRO_DIR = _MODULE_DIR.parent.parent.parent / "projects" / "active" / "junglas-pro"
 
 router = APIRouter()
+
+# Args appended to sys.executable to launch each service.
+_LAUNCH_CMDS: dict[str, list[str]] = {
+    "meta_api":      ["scripts/run_api.py"],
+    "draft_advisor": ["-m", "riot_lol_cli.draft_advisor.server"],
+    "meta_scraper":  ["-m", "riot_lol_cli.meta_scraper.server"],
+    "jungle_meta":   ["-m", "riot_lol_cli.jungle_meta.server"],
+    "items_browser": ["-m", "riot_lol_cli.items_browser.server"],
+}
+
+# Processes spawned by this hub (service_id → Popen).
+_running_processes: dict[str, subprocess.Popen[bytes]] = {}
 
 # Service registry — each entry defines a subsystem to monitor.
 SERVICES = [
@@ -153,6 +170,7 @@ async def aggregate_status():
                 "description": svc["description"],
                 "port": port,
                 "ui_path": svc["ui_path"],
+                "health_path": svc["health_path"],
                 "icon": svc["icon"],
                 "accent": svc["accent"],
                 "status": "unknown",
@@ -178,6 +196,49 @@ async def aggregate_status():
         "online": online_count,
         "offline": len(results) - online_count,
     }
+
+
+@router.post("/api/v1/home/launch/{service_id}")
+async def launch_service(service_id: str):
+    """Spawn a service subprocess if not already running.
+
+    Returns:
+        {"status": "already_online" | "starting", "service_id": ...}
+    """
+    svc = next((s for s in SERVICES if s["id"] == service_id), None)
+    if svc is None:
+        raise HTTPException(status_code=404, detail=f"Service '{service_id}' not found")
+
+    # Quick health ping — if already up, no need to launch.
+    port = svc["port_fn"]()
+    health_url = f"http://127.0.0.1:{port}{svc['health_path']}"
+    async with httpx.AsyncClient(timeout=1.0) as client:
+        try:
+            resp = await client.get(health_url)
+            if resp.status_code == 200:
+                return {"status": "already_online", "service_id": service_id}
+        except Exception:
+            pass
+
+    # If we already have a live subprocess for this service, report it.
+    existing = _running_processes.get(service_id)
+    if existing is not None and existing.poll() is None:
+        return {"status": "starting", "service_id": service_id}
+
+    launch_args = _LAUNCH_CMDS.get(service_id)
+    if launch_args is None:
+        raise HTTPException(status_code=422, detail=f"No launch config for '{service_id}'")
+
+    env = os.environ.copy()
+    env["PYTHONPATH"] = _SRC_DIR
+    process = subprocess.Popen(
+        [sys.executable, *launch_args],
+        cwd=str(_REPO_ROOT),
+        env=env,
+    )
+    _running_processes[service_id] = process
+    logger.info("[home/launch] Started %s (pid=%d)", service_id, process.pid)
+    return {"status": "starting", "service_id": service_id}
 
 
 def create_app() -> FastAPI:
