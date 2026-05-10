@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>lolcli — Pattern Library v2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Anton&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="patterns.css">
+<style>
+  /* ========== Pattern-library doc page chrome ========== */
+  body {
+    background:
+      radial-gradient(ellipse 1400px 900px at 20% -15%, rgba(11,198,227,0.08), transparent 60%),
+      radial-gradient(ellipse 1200px 800px at 80% 115%, rgba(200,155,60,0.06), transparent 60%),
+      linear-gradient(180deg, var(--forge-black) 0%, var(--forge-dark) 60%, var(--surface-base) 100%);
+    background-attachment: fixed;
+  }
+
+  .pl-shell { display: grid; grid-template-columns: 240px 1fr; min-height: 100vh; }
+  @media (max-width: 980px) { .pl-shell { grid-template-columns: 1fr; } }
+
+  /* Sidebar TOC */
+  .pl-toc {
+    position: sticky; top: 0; align-self: start;
+    height: 100vh; overflow-y: auto;
+    background: rgba(5, 16, 28, 0.85);
+    border-right: 1px solid var(--border-subtle);
+    padding: var(--space-6) var(--space-5);
+    backdrop-filter: blur(8px);
+  }
+  .pl-toc .brand {
+    font-family: var(--font-anton);
+    font-style: italic;
+    font-size: 1.5rem;
+    letter-spacing: var(--tracking-hero);
+    color: var(--text-primary);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .pl-toc .brand b { color: var(--arc-gold); }
+  .pl-toc .tag {
+    font-size: var(--font-pill);
+    letter-spacing: var(--tracking-widest);
+    color: var(--arc-cyan);
+    text-transform: uppercase;
+    font-weight: var(--weight-bold);
+    margin-bottom: var(--space-6);
+    display: block;
+  }
+  .pl-toc nav { display: flex; flex-direction: column; gap: 2px; }
+  .pl-toc nav a {
+    display: flex; align-items: center; gap: var(--space-2);
+    padding: 8px 10px;
+    border-radius: var(--radius-xs);
+    color: var(--text-secondary);
+    font-size: var(--font-body-sm);
+    border-left: 2px solid transparent;
+    transition: var(--motion-fast);
+  }
+  .pl-toc nav a .num {
+    font-family: var(--font-mono);
+    font-size: var(--font-pill);
+    color: var(--text-tertiary);
+    width: 22px;
+  }
+  .pl-toc nav a:hover { color: var(--arc-gold-text); border-left-color: var(--border-metal); background: rgba(200,155,60,0.04); }
+  .pl-toc nav a.active { color: var(--arc-gold); border-left-color: var(--arc-gold); background: rgba(200,155,60,0.08); }
+  .pl-toc .footer {
+    margin-top: var(--space-8);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border-subtle);
+    font-size: var(--font-pill);
+    color: var(--text-tertiary);
+    line-height: 1.6;
+    letter-spacing: var(--tracking-wide);
+  }
+
+  /* Main column */
+  .pl-main { padding: var(--space-12) var(--space-12) var(--space-16); max-width: 1200px; }
+  @media (max-width: 980px) { .pl-main { padding: var(--space-8) var(--space-5); } }
+
+  /* Section */
+  .pl-section { margin-bottom: var(--space-16); scroll-margin-top: var(--space-6); }
+  .pl-section-eyebrow {
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--font-pill);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--arc-cyan);
+    margin-bottom: var(--space-3);
+  }
+  .pl-section-eyebrow .num { color: var(--arc-gold); }
+  .pl-section-title {
+    font-family: var(--font-anton);
+    font-style: italic;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    line-height: 0.95;
+    letter-spacing: var(--tracking-hero);
+    text-transform: uppercase;
+    color: var(--text-primary);
+    margin: 0 0 var(--space-3);
+  }
+  .pl-section-lede {
+    font-size: var(--font-body-lg);
+    color: var(--text-secondary);
+    max-width: 720px;
+    line-height: var(--leading-relaxed);
+    margin: 0 0 var(--space-8);
+  }
+
+  .pl-h3 {
+    font-family: var(--font-display);
+    font-size: var(--font-display-sm);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--tracking-tight);
+    color: var(--arc-gold-bright);
+    margin: var(--space-8) 0 var(--space-4);
+  }
+  .pl-h3 .num { color: var(--text-tertiary); margin-right: var(--space-2); font-family: var(--font-mono); font-size: var(--font-body-sm); }
+
+  /* Code block */
+  pre.code {
+    background: var(--forge-darker);
+    border: 1px solid var(--border-divider);
+    border-radius: var(--radius-sm);
+    padding: var(--space-4);
+    font-family: var(--font-mono);
+    font-size: var(--font-body-xs);
+    color: var(--text-secondary);
+    overflow-x: auto;
+    line-height: 1.55;
+    margin: 0;
+  }
+  pre.code .k { color: var(--arc-cyan); }       /* selector / keyword */
+  pre.code .p { color: var(--arc-gold-text); }  /* property */
+  pre.code .v { color: var(--text-primary); }   /* value */
+  pre.code .c { color: var(--text-tertiary); font-style: italic; }
+  pre.code .t { color: var(--state-success); }  /* tag */
+
+  /* Demo wrapper */
+  .pl-demo {
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background:
+      linear-gradient(180deg, rgba(200,155,60,0.02), transparent 80%),
+      var(--surface-base);
+    padding: var(--space-6);
+    margin-bottom: var(--space-3);
+    position: relative;
+  }
+  .pl-demo::before {
+    content: attr(data-label);
+    position: absolute; top: -10px; left: 16px;
+    font-family: var(--font-mono);
+    font-size: var(--font-pill);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    background: var(--forge-black);
+    padding: 0 8px;
+  }
+
+  .pl-pair {
+    display: grid; grid-template-columns: 1fr; gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+
+  /* Token visualization grids */
+  .tok-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--space-3);
+  }
+  .tok-swatch {
+    background: var(--surface-card);
+    border: 1px solid var(--border-divider);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+  .tok-swatch .chip { height: 72px; }
+  .tok-swatch .info {
+    padding: var(--space-3);
+    display: flex; flex-direction: column; gap: 2px;
+    border-top: 1px solid var(--border-divider);
+  }
+  .tok-swatch .name {
+    font-family: var(--font-mono);
+    font-size: var(--font-body-xs);
+    color: var(--arc-gold-text);
+  }
+  .tok-swatch .hex {
+    font-family: var(--font-mono);
+    font-size: var(--font-pill);
+    color: var(--text-secondary);
+    letter-spacing: var(--tracking-wide);
+  }
+  .tok-swatch .role {
+    font-size: var(--font-pill);
+    color: var(--text-tertiary);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+  }
+
+  /* Surface stack */
+  .stack-row {
+    display: flex; gap: var(--space-2); flex-wrap: wrap;
+    align-items: stretch; padding: var(--space-3);
+    background: var(--surface-card);
+    border: 1px solid var(--border-divider);
+    border-radius: var(--radius-md);
+  }
+  .stack-row .layer {
+    flex: 1 1 140px;
+    min-height: 80px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-subtle);
+    padding: var(--space-3);
+    display: flex; flex-direction: column; justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: var(--font-pill);
+    color: var(--text-secondary);
+  }
+  .stack-row .layer .h { color: var(--arc-gold-text); }
+
+  /* Type specimens */
+  .type-specimen {
+    background: var(--surface-card);
+    border: 1px solid var(--border-divider);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: var(--space-4);
+    align-items: center;
+    margin-bottom: var(--space-2);
+  }
+  .type-specimen .meta {
+    font-family: var(--font-mono);
+    font-size: var(--font-pill);
+    color: var(--text-tertiary);
+    letter-spacing: var(--tracking-wide);
+    line-height: 1.6;
+  }
+  .type-specimen .meta b { color: var(--arc-gold-text); display: block; font-weight: var(--weight-bold); }
+
+  /* Spacing visual */
+  .space-row { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-1); }
+  .space-row .name { width: 80px; font-family: var(--font-mono); font-size: var(--font-body-xs); color: var(--arc-gold-text); }
+  .space-row .bar { height: 18px; background: var(--arc-gold); border-radius: 2px; }
+  .space-row .val { font-family: var(--font-mono); font-size: var(--font-pill); color: var(--text-tertiary); margin-left: var(--space-2); }
+
+  /* Radius visual */
+  .radius-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: var(--space-3); }
+  .radius-cell {
+    background: var(--surface-raised);
+    border: 1px solid var(--border-metal);
+    height: 96px;
+    display: flex; align-items: flex-end; justify-content: center;
+    font-family: var(--font-mono);
+    font-size: var(--font-pill);
+    color: var(--text-secondary);
+    padding: 8px;
+    letter-spacing: var(--tracking-wide);
+  }
+
+  /* Elevation visual */
+  .elev-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--space-5); padding: var(--space-6); background: var(--forge-darker); border-radius: var(--radius-md); border: 1px solid var(--border-divider); }
+  .elev-cell {
+    background: var(--surface-raised);
+    border-radius: var(--radius-md);
+    height: 80px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono);
+    font-size: var(--font-pill);
+    color: var(--text-secondary);
+    letter-spacing: var(--tracking-wide);
+  }
+
+  /* Principles + anti */
+  .princ-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-4);
+  }
+  .princ {
+    background: var(--surface-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+    border-left: 3px solid var(--arc-gold);
+  }
+  .princ.cyan { border-left-color: var(--arc-cyan); }
+  .princ h4 {
+    font-family: var(--font-display);
+    font-size: var(--font-body-lg);
+    color: var(--arc-gold-bright);
+    margin: 0 0 var(--space-2);
+    letter-spacing: var(--tracking-tight);
+    font-weight: var(--weight-bold);
+  }
+  .princ p { color: var(--text-secondary); font-size: var(--font-body-sm); line-height: var(--leading-relaxed); margin: 0; }
+
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+  }
+  @media (max-width: 760px) { .compare { grid-template-columns: 1fr; } }
+  .compare > div {
+    background: var(--surface-card);
+    border-radius: var(--radius-md);
+    padding: var(--space-5);
+    border-left: 3px solid;
+  }
+  .compare .do    { border-left-color: var(--state-success); }
+  .compare .dont  { border-left-color: var(--state-error); }
+  .compare h4 {
+    font-family: var(--font-display);
+    font-size: var(--font-body-md);
+    margin: 0 0 var(--space-2);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+  }
+  .compare .do h4    { color: var(--state-success); }
+  .compare .dont h4  { color: var(--state-error); }
+  .compare ul { padding-left: 18px; margin: 0; color: var(--text-secondary); font-size: var(--font-body-sm); line-height: 1.7; }
+
+  /* Checklist */
+  .checklist {
+    background: var(--surface-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    padding: var(--space-6);
+  }
+  .checklist h4 {
+    font-family: var(--font-display);
+    font-size: var(--font-body-md);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--arc-gold);
+    margin: 0 0 var(--space-3);
+  }
+  .checklist ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+  .checklist li {
+    display: flex; align-items: flex-start; gap: var(--space-3);
+    font-size: var(--font-body-sm);
+    color: var(--text-primary);
+    padding: var(--space-2) 0;
+    border-bottom: 1px solid var(--border-divider);
+  }
+  .checklist li:last-child { border-bottom: 0; }
+  .checklist li .box {
+    flex-shrink: 0;
+    width: 18px; height: 18px;
+    border: 1px solid var(--border-metal);
+    border-radius: 4px;
+    background: var(--forge-darker);
+    margin-top: 1px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: var(--arc-gold);
+    font-size: 12px;
+  }
+
+  /* Tokens table */
+  .map-table { width: 100%; border-collapse: collapse; font-size: var(--font-body-sm); }
+  .map-table th, .map-table td {
+    text-align: left;
+    padding: var(--space-3) var(--space-3);
+    border-bottom: 1px solid var(--border-divider);
+  }
+  .map-table th {
+    background: var(--forge-darker);
+    font-family: var(--font-display);
+    font-size: var(--font-caption-sm);
+    letter-spacing: var(--tracking-widest);
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+  .map-table td.mono { font-family: var(--font-mono); color: var(--arc-gold-text); font-size: var(--font-body-xs); }
+  .map-table td.dim  { color: var(--text-tertiary); }
+
+  /* Inline keyboard chip */
+  kbd {
+    font-family: var(--font-mono);
+    font-size: 0.7em;
+    padding: 2px 6px;
+    background: var(--forge-darker);
+    border: 1px solid var(--border-metal);
+    border-radius: 4px;
+    color: var(--arc-gold-text);
+  }
+</style>
+</head>
+<body data-screen-label="01 Pattern Library">
+
+<div class="pl-shell">
+
+  <!-- ============== TOC SIDEBAR ============== -->
+  <aside class="pl-toc" aria-label="Indice">
+    <div class="brand"><b>lol</b>cli</div>
+    <span class="tag">Pattern Library v2</span>
+
+    <nav id="pl-nav">
+      <a href="#identity"  data-screen-label="00"><span class="num">00</span> Identidad</a>
+      <a href="#tokens"    data-screen-label="01"><span class="num">01</span> Tokens</a>
+      <a href="#shell"     data-screen-label="02"><span class="num">02</span> App shell</a>
+      <a href="#hero"      data-screen-label="03"><span class="num">03</span> Hero</a>
+      <a href="#search"    data-screen-label="04"><span class="num">04</span> Search &amp; filters</a>
+      <a href="#segmented" data-screen-label="05"><span class="num">05</span> Segmented &amp; tabs</a>
+      <a href="#cards"     data-screen-label="06"><span class="num">06</span> Cards</a>
+      <a href="#sidebars"  data-screen-label="07"><span class="num">07</span> Sidebars</a>
+      <a href="#stats"     data-screen-label="08"><span class="num">08</span> Stat strips</a>
+      <a href="#tables"    data-screen-label="09"><span class="num">09</span> Tablas densas</a>
+      <a href="#modals"    data-screen-label="10"><span class="num">10</span> Modals</a>
+      <a href="#states"    data-screen-label="11"><span class="num">11</span> Estados</a>
+      <a href="#draft"     data-screen-label="12"><span class="num">12</span> Draft pieces</a>
+      <a href="#recipes"   data-screen-label="13"><span class="num">13</span> Surface recipes</a>
+      <a href="#anti"      data-screen-label="14"><span class="num">14</span> Anti-patterns</a>
+      <a href="#checklist" data-screen-label="15"><span class="num">15</span> Checklist</a>
+      <a href="#handoff"   data-screen-label="16"><span class="num">16</span> Handoff</a>
+    </nav>
+
+    <div class="footer">
+      Tokens: <code>tokens.css</code><br>
+      Patrones: <code>patterns.css</code><br>
+      HTML/CSS/JS vanilla. Sin React, sin bundlers.
+    </div>
+  </aside>
+
+  <!-- ============== MAIN ============== -->
+  <main class="pl-main">
+
+    <!-- ===== HERO doc ===== -->
+    <header class="pl-section" id="identity">
+      <div class="pl-section-eyebrow"><span class="num">00</span> · Identidad visual</div>
+      <h1 class="pl-section-title">Pattern Library</h1>
+      <p class="pl-section-lede">
+        Lenguaje visual transversal para <b style="color:var(--text-primary)">riot_lol_cli</b>:
+        Home Hub, Draft Advisor, Meta Scraper, Jungle Meta, Items Browser, Meta Analyzer,
+        Splash Gallery y exports HTML. Una sola paleta, una sola voz visual, mismos
+        componentes. HTML/CSS/JS vanilla — sin frameworks, sin bundlers.
+      </p>
+
+      <div class="princ-grid">
+        <div class="princ">
+          <h4>Dark navy + gold + cyan</h4>
+          <p>Fondo navy profundo casi negro. Gold para jerarquia, CTA, foco y headers. Cyan para info, aliado, links secundarios y metadata. Nunca inventes una tercer marca.</p>
+        </div>
+        <div class="princ cyan">
+          <h4>Glow como firma, no decoracion</h4>
+          <p>Glow gold + cyan se reservan para CTA primario, focus state y top-pick. Si todo brilla, nada brilla. Cards y tablas viven en sombras frias, no en gradients neon.</p>
+        </div>
+        <div class="princ">
+          <h4>Display condensado italico</h4>
+          <p>Headers tipo <i>ITEMS</i> / <i>TIER LIST</i> usan Anton italic. Body usa Inter. Outfit para subheaders. Numeros en tabular-nums siempre que haya tablas o stats.</p>
+        </div>
+        <div class="princ cyan">
+          <h4>Densidad util, no marketing</h4>
+          <p>Esto son herramientas de uso repetido. Score, contexto y razones tienen que escanearse en 2 segundos. Cero hero a pantalla completa, cero blobs decorativos.</p>
+        </div>
+        <div class="princ">
+          <h4>Microinteraccion sutil</h4>
+          <p>Hover lift de 2px, glow al focus, transitions de 120-180ms. Anima estados, no decoracion. Respeta <code>prefers-reduced-motion</code> siempre.</p>
+        </div>
+        <div class="princ cyan">
+          <h4>Voz: español rioplatense + jerga gamer</h4>
+          <p>"Recomendar Pick", "tu equipo", "blind pick", "peel", "dive", "scaling". No traduzcas terminos universales si quedan peor en español. EN cuando aporta, ES por default.</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===== TOKENS ===== -->
+    <section class="pl-section" id="tokens">
+      <div class="pl-section-eyebrow"><span class="num">01</span> · Tokens</div>
+      <h2 class="pl-section-title">Tokens</h2>
+      <p class="pl-section-lede">
+        Un solo set de variables CSS — <code>arc-*</code>, <code>forge-*</code>,
+        <code>surface-*</code>, <code>text-*</code>, <code>state-*</code> — vive
+        en <code>tokens.css</code>. Cualquier nuevo proyecto del repo
+        debe importarlo sin redefinir colores ni espaciado.
+      </p>
+
+      <h3 class="pl-h3"><span class="num">1.1</span>Brand · ARC gold</h3>
+      <div class="tok-grid">
+        <div class="tok-swatch"><div class="chip" style="background:#c89b3c"></div><div class="info"><span class="name">--arc-gold</span><span class="hex">#c89b3c</span><span class="role">CTA · jerarquia · foco</span></div></div>
+        <div class="tok-swatch"><div class="chip" style="background:#f0e6d2"></div><div class="info"><span class="name">--arc-gold-bright</span><span class="hex">#f0e6d2</span><span class="role">Texto display · score</span></div></div>
+        <div class="tok-swatch"><div class="chip" style="background:#785a28"></div><div class="info"><span class="name">--arc-gold-dark</span><span class="hex">#785a28</span><span class="role">Bordes pesados · gradient base</span></div></div>
+        <div class="tok-swatch"><div class="chip" style="background:#c8aa6e"></div><div class="info"><span class="name">--arc-gold-accent</span><span class="hex">#c8aa6e</span><span class="role">Hover gold</span></div></div>
+        <div class="tok-swatch"><div class="chip" style="background:#d4b15c"></div><div class="info"><span class="name">--arc-gold-text</span><span class="hex">#d4b15c</span><span class="role">Texto gold sobre dark</span></div></div>
+      </div>
+
+      <h3 class="pl-h3"><span class="num">1.2</span>Brand · ARC cyan</h3>
+      <div class="tok-grid">
+        <div class="tok-swatch"><div class="chip" style="background:#0bc6e3"></div><div class="info"><span class="name">--arc-cyan</span><span class="hex">#0bc6e3</span><span class="role">Info · aliado · metadata</span></div></div>
+        <div class="tok-swatch"><div class="chip" style="background:#0ac8b9"></div><div class="info"><span class="name">--arc-cyan-bright</span><span class="hex">#0ac8b9</span><span class="role">Highlight cyan</span></div></div>
+        <div class="tok-swatch"><div class="chip" style="background:#0397ab"></div><div class="info"><span class="name">--arc-cyan-dark</span><span class="hex">#0397ab</span><span class="role">Bordes cyan</span></div></div>
+      </div>
+
+      <h3 class="pl-h3"><span class="num">1.3</span>Forge · superficies (de mas oscuro a mas claro)</h3>
+      <div class="stack-row">
+        <div class="layer" style="background:#010a13"><span class="h">--forge-black</span><span>#010a13 · body bg</span></div>
+        <div class="layer" style="background:#05101c"><span class="h">--forge-darker</span><span>#05101c · inputs</span></div>
+        <div class="layer" style="background:#0a1428"><span class="h">--forge-dark</span><span>#0a1428 · hero base</span></div>
+        <div class="layer" style="background:#0d1b2a"><span class="h">--surface-base</span><span>#0d1b2a · default</span></div>
+        <div class="layer" style="background:#0f1923"><span class="h">--surface-card</span><span>#0f1923 · cards</span></div>
+        <div class="layer" style="background:#1b2838"><span class="h">--surface-raised</span><span>#1b2838 · hover</span></div>
+        <div class="layer" style="background:#1e2d3d"><span class="h">--surface-overlay</span><span>#1e2d3d · modals</span></div>
+      </div>
+
+      <h3 class="pl-h3"><span class="num">1.4</span>Texto y estado semantico</h3>
+      <div class="tok-grid">
+        <div class="tok-swatch"><div class="chip" style="background:#f0e6d2"></div><div class="info"><span class="name">--text-primary</span><span class="hex">#f0e6d2</span><span class="role">Crema, no blanco puro</span></div></div>
+        <div class="tok-swatch"><div class="chip" style="background:#a09b8c"></div><div class="info"><span class="name">--text-secondary</span><span class="hex">#a09b8c</span><span class="role">Helper · metadata</span></div></div>
+        <div class="tok-swatch"><div class="chip" style="background:#5b5a56"></div><div class="info"><span class="name">--text-tertiary</span><span class="hex">#5b5a56</span><span class="role">Placeholders</span></div></div>
+        <div class="tok-swatch"><div class="chip" style="background:#00d084"></div><div class="info"><span class="name">--state-success</span><span class="hex">#00d084</span><span class="role">Victoria · ally strength</span></div></div>
+        <div class="tok-swatch"><div class="chip" style="background:#ff4655"></div><div class="info"><span class="name">--state-error</span><span class="hex">#ff4655</span><span class="role">Derrota · enemy · riesgo</span></div></div>
+        <div class="tok-swatch"><div class="chip" style="background:#ff9a3c"></div><div class="info"><span class="name">--state-warning</span><span class="hex">#ff9a3c</span><span class="role">Precaucion · deprecated</span></div></div>
+        <div class="tok-swatch"><div class="chip" style="background:#8b9cb3"></div><div class="info"><span class="name">--state-neutral</span><span class="hex">#8b9cb3</span><span class="role">Sin data · remake</span></div></div>
+      </div>
+
+      <h3 class="pl-h3"><span class="num">1.5</span>Tier (S / A / B / C)</h3>
+      <div class="tok-grid" style="grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));">
+        <div class="tok-swatch"><div class="chip" style="background:#f0e6d2; display:flex; align-items:center; justify-content:center;"><span style="font-family:var(--font-anton); font-style:italic; font-size:2.4rem; color:#010a13">S</span></div><div class="info"><span class="name">--tier-s</span><span class="hex">#f0e6d2</span></div></div>
+        <div class="tok-swatch"><div class="chip" style="background:#0bc6e3; display:flex; align-items:center; justify-content:center;"><span style="font-family:var(--font-anton); font-style:italic; font-size:2.4rem; color:#010a13">A</span></div><div class="info"><span class="name">--tier-a</span><span class="hex">#0bc6e3</span></div></div>
+        <div class="tok-swatch"><div class="chip" style="background:#8b9cb3; display:flex; align-items:center; justify-content:center;"><span style="font-family:var(--font-anton); font-style:italic; font-size:2.4rem; color:#010a13">B</span></div><div class="info"><span class="name">--tier-b</span><span class="hex">#8b9cb3</span></div></div>
+        <div class="tok-swatch"><div class="chip" style="background:#ff4655; display:flex; align-items:center; justify-content:center;"><span style="font-family:var(--font-anton); font-style:italic; font-size:2.4rem; color:#f0e6d2">C</span></div><div class="info"><span class="name">--tier-c</span><span class="hex">#ff4655</span></div></div>
+      </div>
+
+      <h3 class="pl-h3"><span class="num">1.6</span>Tipografia</h3>
+      <div class="type-specimen">
+        <div class="meta"><b>Anton italic</b>--font-anton<br>Hero · tier label<br>clamp(3rem, 8vw, 6.5rem)</div>
+        <div style="font-family:'Anton',sans-serif; font-style:italic; font-size:4rem; line-height:1; letter-spacing:0.02em; text-transform:uppercase;">TIER LIST</div>
+      </div>
+      <div class="type-specimen">
+        <div class="meta"><b>Outfit 800</b>--font-display<br>H1 / H2 surface<br>1.5–2.4rem · tracking-tight</div>
+        <div style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.8rem; letter-spacing:-0.02em; color:var(--arc-gold-bright);">Recomendar Pick</div>
+      </div>
+      <div class="type-specimen">
+        <div class="meta"><b>Outfit 700 caps</b>--font-display<br>Eyebrow / card title<br>0.85rem · tracking-widest</div>
+        <div style="font-family:'Outfit',sans-serif; font-weight:700; font-size:0.85rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--arc-cyan);">Updated · Patch 26.09</div>
+      </div>
+      <div class="type-specimen">
+        <div class="meta"><b>Inter 400</b>--font-body<br>Body copy<br>1rem · leading 1.5</div>
+        <div style="font-family:'Inter',sans-serif; font-size:1rem; color:var(--text-primary); line-height:1.5; max-width:520px;">Equipo enemigo arranca con doble dive. Tu peel se concentra en el ADC. Probabilidad de teamfight pre-objective: alta.</div>
+      </div>
+      <div class="type-specimen">
+        <div class="meta"><b>JetBrains Mono</b>--font-mono<br>Numeros · keys · tokens<br>0.85rem · tabular-nums</div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:0.95rem; color:var(--arc-gold-text); font-variant-numeric:tabular-nums;">WR 54.2% · PR 12.5% · GR 11.4%</div>
+      </div>
+
+      <h3 class="pl-h3"><span class="num">1.7</span>Spacing (4px base)</h3>
+      <div style="background:var(--surface-card); border:1px solid var(--border-divider); border-radius:var(--radius-md); padding:var(--space-5);">
+        <div class="space-row"><span class="name">--space-1</span><span class="bar" style="width:4px"></span><span class="val">4px</span></div>
+        <div class="space-row"><span class="name">--space-2</span><span class="bar" style="width:8px"></span><span class="val">8px</span></div>
+        <div class="space-row"><span class="name">--space-3</span><span class="bar" style="width:12px"></span><span class="val">12px</span></div>
+        <div class="space-row"><span class="name">--space-4</span><span class="bar" style="width:16px"></span><span class="val">16px · default gap</span></div>
+        <div class="space-row"><span class="name">--space-5</span><span class="bar" style="width:20px"></span><span class="val">20px</span></div>
+        <div class="space-row"><span class="name">--space-6</span><span class="bar" style="width:24px"></span><span class="val">24px · padding card</span></div>
+        <div class="space-row"><span class="name">--space-8</span><span class="bar" style="width:32px"></span><span class="val">32px</span></div>
+        <div class="space-row"><span class="name">--space-12</span><span class="bar" style="width:48px"></span><span class="val">48px · hero pad</span></div>
+        <div class="space-row"><span class="name">--space-16</span><span class="bar" style="width:64px"></span><span class="val">64px · section gap</span></div>
+      </div>
+
+      <h3 class="pl-h3"><span class="num">1.8</span>Radius</h3>
+      <div class="radius-grid">
+        <div class="radius-cell" style="border-radius:4px">--radius-xs · 4px</div>
+        <div class="radius-cell" style="border-radius:6px">--radius-sm · 6px</div>
+        <div class="radius-cell" style="border-radius:8px">--radius-md · 8px</div>
+        <div class="radius-cell" style="border-radius:12px">--radius-lg · 12px</div>
+        <div class="radius-cell" style="border-radius:16px">--radius-xl · 16px</div>
+        <div class="radius-cell" style="border-radius:999px">--radius-pill</div>
+      </div>
+
+      <h3 class="pl-h3"><span class="num">1.9</span>Elevation &amp; glow</h3>
+      <div class="elev-grid">
+        <div class="elev-cell" style="box-shadow: var(--elevation-1)">elevation-1 · cards</div>
+        <div class="elev-cell" style="box-shadow: var(--elevation-2)">elevation-2 · raised</div>
+        <div class="elev-cell" style="box-shadow: var(--elevation-3)">elevation-3 · drawers</div>
+        <div class="elev-cell" style="box-shadow: var(--elevation-4)">elevation-4 · modals</div>
+        <div class="elev-cell" style="box-shadow: var(--glow-gold-sm); border:1px solid var(--border-metal-strong)">glow-gold-sm</div>
+        <div class="elev-cell" style="box-shadow: var(--glow-gold); border:1px solid var(--arc-gold-dark)">glow-gold · CTA</div>
+        <div class="elev-cell" style="box-shadow: var(--glow-cyan-sm); border:1px solid var(--border-cyan)">glow-cyan-sm</div>
+        <div class="elev-cell" style="box-shadow: var(--glow-error); border:1px solid var(--border-error)">glow-error</div>
+      </div>
+    </section>
+
+    <!-- ===== APP SHELL ===== -->
+    <section class="pl-section" id="shell">
+      <div class="pl-section-eyebrow"><span class="num">02</span> · Layout</div>
+      <h2 class="pl-section-title">App shell</h2>
+      <p class="pl-section-lede">
+        Todas las surfaces siguen el mismo esqueleto: contenedor centrado de
+        ancho maximo, padding uniforme, fondo navy con gradient radial sutil
+        en surfaces "premium" (Home / Draft Advisor) y plano en surfaces de
+        catalogo (Items / Meta Scraper).
+      </p>
+
+      <div class="pl-pair">
+        <div class="pl-demo" data-label="Shell premium · Home / Draft">
+          <div class="app-shell" style="border-radius: var(--radius-md); padding: var(--space-6); border:1px solid var(--border-subtle);">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: var(--space-4);">
+              <span class="hero-eyebrow">RIOT LOL CLI</span>
+              <span class="pill pill-cyan">v0.4 · LOCAL</span>
+            </div>
+            <div style="font-family:var(--font-anton); font-style:italic; font-size:3rem; line-height:1; letter-spacing:0.02em; text-transform:uppercase; color:var(--text-primary); text-align:center; margin: var(--space-4) 0;">HOME HUB</div>
+            <p style="text-align:center; color:var(--text-secondary); font-size:var(--font-body-sm); letter-spacing:var(--tracking-wide); margin:0;">Centro operacional · 7 servicios activos</p>
+          </div>
+        </div>
+        <pre class="code"><span class="c">/* Shell con gradient radial sutil */</span>
+<span class="k">.app-shell</span> {
+  <span class="p">background</span>:
+    radial-gradient(ellipse 1400px 900px at 20% -15%, rgba(11,198,227,0.10), transparent 60%),
+    radial-gradient(ellipse 1200px 800px at 80% 115%, rgba(200,155,60,0.08), transparent 60%),
+    linear-gradient(180deg, var(--forge-black) 0%, var(--forge-dark) 40%, var(--surface-base) 100%);
+  <span class="p">background-attachment</span>: fixed;
+  <span class="p">min-height</span>: 100vh;
+}</pre>
+      </div>
+
+      <div class="pl-pair">
+        <div class="pl-demo" data-label="Shell plano · Items / Meta Scraper">
+          <div style="background: var(--forge-black); border-radius: var(--radius-md); padding: var(--space-6); border:1px solid var(--border-subtle);">
+            <span class="pill pill-gold" style="margin-bottom:var(--space-3); display:inline-flex;">CATALOGO</span>
+            <div style="color:var(--text-primary); font-family:var(--font-display); font-weight:700; font-size:var(--font-display-md);">478 items · EN + ES · agrupado y filtrable</div>
+            <p style="color:var(--text-secondary); font-size:var(--font-body-sm); margin: var(--space-2) 0 0;">Surfaces de catalogo viven sobre <code>--forge-black</code> plano. Densidad maxima, cero ambient light.</p>
+          </div>
+        </div>
+        <pre class="code"><span class="c">/* Shell plano para catalogos densos */</span>
+<span class="k">body.catalog</span> {
+  <span class="p">background</span>: var(--forge-black);
+  <span class="p">max-width</span>: 1400px;
+  <span class="p">margin</span>: 0 auto;
+  <span class="p">padding</span>: var(--space-6);
+}</pre>
+      </div>
+    </section>
+
+    <!-- ===== HERO ===== -->
+    <section class="pl-section" id="hero">
+      <div class="pl-section-eyebrow"><span class="num">03</span> · Identity</div>
+      <h2 class="pl-section-title">Hero compacto</h2>
+      <p class="pl-section-lede">
+        Patron de identidad en cada surface principal. NO ocupa pantalla
+        completa. Eyebrow + meta a izq+der, titulo display al centro,
+        subtitle explicativo. Patron diagonal sutil al fondo.
+        <b style="color:var(--text-primary)">Una sola variante por surface.</b>
+      </p>
+
+      <h3 class="pl-h3"><span class="num">3.1</span>Hero catalogo · "ITEMS"</h3>
+      <div class="pl-pair">
+        <div class="pl-demo" data-label="Hero · Items Browser">
+          <div class="hero" style="margin:0">
+            <div class="hero-row">
+              <span class="hero-eyebrow">RIOT LOL CLI</span>
+              <span class="hero-meta">DDragon v16.9.1</span>
+            </div>
+            <h1 class="hero-title" style="font-size: clamp(2.5rem, 7vw, 5rem);">ITEMS</h1>
+            <p class="hero-subtitle">Catalogo completo · EN + ES · agrupado y filtrable</p>
+          </div>
+        </div>
+<pre class="code"><span class="t">&lt;section class="hero"&gt;</span>
+  <span class="t">&lt;div class="hero-row"&gt;</span>
+    <span class="t">&lt;span class="hero-eyebrow"&gt;</span>RIOT LOL CLI<span class="t">&lt;/span&gt;</span>
+    <span class="t">&lt;span class="hero-meta"&gt;</span>DDragon v16.9.1<span class="t">&lt;/span&gt;</span>
+  <span class="t">&lt;/div&gt;</span>
+  <span class="t">&lt;h1 class="hero-title"&gt;</span>ITEMS<span class="t">&lt;/h1&gt;</span>
+  <span class="t">&lt;p class="hero-subtitle"&gt;</span>Catalogo completo · EN + ES<span class="t">&lt;/p&gt;</span>
+<span class="t">&lt;/section&gt;</span></pre>
+      </div>
+
+      <h3 class="pl-h3"><span class="num">3.2</span>Hero tier list · "TIER LIST" + role icon</h3>
+      <div class="pl-pair">
+        <div class="pl-demo" data-label="Hero · Jungle Meta">
+          <div class="hero hero--dual" style="margin:0">
+            <div class="hero-row">
+              <span class="hero-eyebrow">SKILLCAPPED</span>
+              <span class="hero-meta" style="color:var(--text-primary); letter-spacing:var(--tracking-wide);">PATCH 26.09</span>
+            </div>
+            <h1 class="hero-title" style="font-size: clamp(2.5rem, 8vw, 5.5rem);">TIER LIST</h1>
+            <div class="hero-bottom">
+              <div class="hero-icon">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 2 L14 9 L21 10 L15.5 14.5 L17 21 L12 17.5 L7 21 L8.5 14.5 L3 10 L10 9 Z" fill="currentColor"/></svg>
+              </div>
+              <div class="hero-bottom-meta">
+                <span class="role">| JUNGLE</span>
+                <span class="updated">Updated 08 may 2026, 21:00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+<pre class="code"><span class="t">&lt;section class="hero hero--dual"&gt;</span>
+  <span class="t">&lt;div class="hero-row"&gt;</span>
+    <span class="t">&lt;span class="hero-eyebrow"&gt;</span>SKILLCAPPED<span class="t">&lt;/span&gt;</span>
+    <span class="t">&lt;span class="hero-meta"&gt;</span>PATCH 26.09<span class="t">&lt;/span&gt;</span>
+  <span class="t">&lt;/div&gt;</span>
+  <span class="t">&lt;h1 class="hero-title"&gt;</span>TIER LIST<span class="t">&lt;/h1&gt;</span>
+  <span class="t">&lt;div class="hero-bottom"&gt;</span>
+    <span class="t">&lt;div class="hero-icon"&gt;...&lt;/div&gt;</span>
+    <span class="t">&lt;div class="hero-bottom-meta"&gt;</span>
+      <span class="t">&lt;span class="role"&gt;</span>| JUNGLE<span class="t">&lt;/span&gt;</span>
+      <span class="t">&lt;span class="updated"&gt;</span>Updated...<span class="t">&lt;/span&gt;</span>
+    <span class="t">&lt;/div&gt;</span>
+  <span class="t">&lt;/div&gt;</span>
+<span class="t">&lt;/section&gt;</span></pre>
+      </div>
+    </section>
+
+    <!-- ===== SEARCH + FILTERS ===== -->
+    <section class="pl-section" id="search">
+      <div class="pl-section-eyebrow"><span class="num">04</span> · Inputs</div>
+      <h2 class="pl-section-title">Search &amp; filters</h2>
+      <p class="pl-section-lede">
+        Panel de control fijo encima de catalogos. Search a la izquierda,
+        toggles a la derecha, filtros y conteos abajo. Foco gold con glow
+        sm — la regla universal.
+      </p>
+
+      <div class="pl-pair">
+        <div class="pl-demo" data-label="Control panel completo · Items">
+          <div class="control-panel" style="margin:0">
+            <div class="control-row">
+              <input type="search" class="search-input" placeholder="Buscar por nombre (EN o ES)…" style="flex:1; min-width:240px;">
+              <div class="segmented">
+                <button class="active">EN</button>
+                <button>ES</button>
+              </div>
+            </div>
+            <div class="control-row control-row--space">
+              <label style="display:inline-flex; align-items:center; gap:var(--space-2); color:var(--text-secondary); font-size:var(--font-body-sm); cursor:pointer;">
+                <input type="checkbox" style="accent-color: var(--arc-gold);"> Mostrar items obsoletos
+              </label>
+              <span style="font-size:var(--font-caption-sm); color:var(--text-tertiary); letter-spacing:var(--tracking-wide);">478 items mostrados de 478 totales</span>
+            </div>
+            <div class="tabs">
+              <button class="tab active">Todos <span class="badge">478</span></button>
+              <button class="tab">Botas <span class="badge">21</span></button>
+              <button class="tab">Componentes <span class="badge">285</span></button>
+              <button class="tab">Legendarios <span class="badge">126</span></button>
+              <button class="tab">Consumibles <span class="badge">26</span></button>
+              <button class="tab">Trinkets <span class="badge">14</span></button>
+              <button class="tab">Jungla <span class="badge">6</span></button>
+            </div>
+          </div>
+        </div>
+<pre class="code"><span class="t">&lt;div class="control-panel"&gt;</span>
+  <span class="t">&lt;div class="control-row"&gt;</span>
+    <span class="t">&lt;input class="search-input" type="search" /&gt;</span>
+    <span class="t">&lt;div class="segmented"&gt;</span>
+      <span class="t">&lt;button class="active"&gt;</span>EN<span class="t">&lt;/button&gt;</span>
+      <span class="t">&lt;button&gt;</span>ES<span class="t">&lt;/button&gt;</span>
+    <span class="t">&lt;/div&gt;</span>
+  <span class="t">&lt;/div&gt;</span>
+  <span class="t">&lt;div class="tabs"&gt;</span>
+    <span class="t">&lt;button class="tab active"&gt;</span>Todos <span class="t">&lt;span class="badge"&gt;</span>478<span class="t">&lt;/span&gt;&lt;/button&gt;</span>
+    <span class="t">&lt;button class="tab"&gt;</span>Botas <span class="t">&lt;span class="badge"&gt;</span>21<span class="t">&lt;/span&gt;&lt;/button&gt;</span>
+  <span class="t">&lt;/div&gt;</span>
+<span class="t">&lt;/div&gt;</span></pre>
+      </div>
+    </section>
+
+    <!-- ===== SEGMENTED + TIER TABS ===== -->
+    <section class="pl-section" id="segmented">
+      <div class="pl-section-eyebrow"><span class="num">05</span> · Inputs</div>
+      <h2 class="pl-section-title">Segmented &amp; tier tabs</h2>
+      <p class="pl-section-lede">
+        Para 2-4 opciones mutuamente excluyentes (EN/ES, view modes, S/A/B/C).
+        Para mas opciones: pills con counter (ver patron 04).
+      </p>
+
+      <h3 class="pl-h3"><span class="num">5.1</span>Segmented · 2 opciones</h3>
+      <div class="pl-demo" data-label="Lang toggle">
+        <div style="display:flex; gap: var(--space-3); flex-wrap:wrap;">
+          <div class="segmented"><button class="active">EN</button><button>ES</button></div>
+          <div class="segmented"><button>Lista</button><button class="active">Grid</button></div>
+          <div class="segmented"><button class="active">Best in Theory</button><button>Best for Me</button><button>Counter</button></div>
+        </div>
+      </div>
+
+      <h3 class="pl-h3"><span class="num">5.2</span>Tier tabs · S / A / B / C semanticos</h3>
+      <div class="pl-demo" data-label="Tier filter">
+        <div class="tier-tabs">
+          <button class="tier-tab active">All</button>
+          <button class="tier-tab tier-s">S</button>
+          <button class="tier-tab tier-a">A</button>
+          <button class="tier-tab tier-b">B</button>
+          <button class="tier-tab tier-c">C</button>
+        </div>
+        <p style="color:var(--text-tertiary); font-size:var(--font-pill); letter-spacing:var(--tracking-widest); margin: var(--space-4) 0 0;">CADA TIER USA SU COLOR SOLO CUANDO ESTA <code>.active</code></p>
+      </div>
+
+      <h3 class="pl-h3"><span class="num">5.3</span>Buttons · primary / secondary / ghost</h3>
+      <div class="pl-demo" data-label="Acciones">
+        <div style="display:flex; gap: var(--space-3); flex-wrap:wrap; align-items:center;">
+          <button class="btn btn-primary">Recomendar Pick</button>
+          <button class="btn btn-secondary">+ Agregar campeon</button>
+          <button class="btn btn-ghost">Reset</button>
+          <button class="btn btn-ghost active">Filtros activos</button>
+          <button class="btn-icon" title="Cerrar">×</button>
+          <button class="btn btn-primary" disabled>Sin data</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CARDS ===== -->
+    <section class="pl-section" id="cards">
+      <div class="pl-section-eyebrow"><span class="num">06</span> · Containers</div>
+      <h2 class="pl-section-title">Cards</h2>
+      <p class="pl-section-lede">
+        El contenedor por defecto. <code>.card</code> base + variantes
+        (catalog item, champion, top-pick) y modificadores (interactive,
+        deprecated, ally, enemy).
+      </p>
+
+      <h3 class="pl-h3"><span class="num">6.1</span>Card base con header</h3>
+      <div class="pl-demo" data-label="Card base">
+        <div class="card" style="max-width:520px;">
+          <div class="card-header">
+            <h3>Reglas del draft</h3>
+            <span class="pill pill-cyan">3 RAZONES</span>
+          </div>
+          <div class="card-body" style="color:var(--text-secondary); font-size:var(--font-body-sm); line-height: var(--leading-relaxed);">
+            Equipo enemigo arranca con doble dive. Tu peel se concentra en el ADC. Probabilidad de teamfight pre-objective: alta.
+          </div>
+        </div>
+      </div>
+
+      <h3 class="pl-h3"><span class="num">6.2</span>Catalog cards · Items / consumibles</h3>
+      <div class="pl-demo" data-label="Items grid">
+        <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--space-2);">
+          <div class="entity-card">
+            <div class="thumb" style="background:linear-gradient(135deg,#5b3a18,#c89b3c);"></div>
+            <div class="name">Infinity Edge</div>
+            <div class="gold">⛁ 3400</div>
+            <div class="meta">3031</div>
+          </div>
+          <div class="entity-card">
+            <div class="thumb" style="background:linear-gradient(135deg,#0b3a4a,#0bc6e3);"></div>
+            <div class="name">Statikk Shiv</div>
+            <div class="gold">⛁ 2900</div>
+            <div class="meta">3087</div>
+          </div>
+          <div class="entity-card">
+            <div class="thumb" style="background:linear-gradient(135deg,#5a1a25,#ff4655);"></div>
+            <div class="name">Bloodthirster</div>
+            <div class="gold">⛁ 3400</div>
+            <div class="meta">3072</div>
+          </div>
+          <div class="entity-card deprecated">
+            <div class="thumb" style="background:#3c3c41;"></div>
+            <div class="name">Sword of the Divine</div>
+            <div class="gold">⛁ —</div>
+            <div class="meta">deprecated</div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="pl-h3"><span class="num">6.3</span>Champion cards · Tier list</h3>
+      <div class="pl-demo" data-label="Champ row">
+        <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--space-2);">
+          <div class="champ-card">
+            <div class="portrait" style="background:linear-gradient(135deg,#1a2a48,#0bc6e3);"></div>
+            <div class="name">Xin Zhao</div>
+            <div class="stats">WR <b>54.2%</b> · PR <b>12.5%</b></div>
+          </div>
+          <div class="champ-card">
+            <div class="portrait" style="background:linear-gradient(135deg,#3a1a1a,#ff4655);"></div>
+            <div class="name">Shyvana</div>
+            <div class="stats">WR <b>53.8%</b> · PR <b>11.2%</b></div>
+          </div>
+          <div class="champ-card">
+            <div class="portrait" style="background:linear-gradient(135deg,#2a1845,#785a28);"></div>
+            <div class="name">Kayn</div>
+            <div class="stats">WR <b>53.4%</b> · PR <b>13.1%</b></div>
+          </div>
+          <div class="champ-card">
+            <div class="portrait" style="background:linear-gradient(135deg,#5b3a18,#c89b3c);"></div>
+            <div class="name">Udyr</div>
+            <div class="stats">WR <b>53.5%</b> · PR <b>7.8%</b></div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="pl-h3"><span class="num">6.4</span>Tier row · S/A/B/C con borde semantico</h3>
+      <div class="pl-demo" data-label="Tier row · S">
+        <div class="tier-row tier-row--s">
+          <div class="tier-label" style="font-style:italic;">S</div>
+          <div class="tier-row-cards">
+            <div class="champ-card"><div class="portrait" style="background:#1a2a48;"></div><div class="name">Xin Zhao</div><div class="stats">WR <b>54.2%</b></div></div>
+            <div class="champ-card"><div class="portrait" style="background:#3a1a1a;"></div><div class="name">Shyvana</div><div class="stats">WR <b>53.8%</b></div></div>
+            <div class="champ-card"><div class="portrait" style="background:#2a1845;"></div><div class="name">Kayn</div><div class="stats">WR <b>53.4%</b></div></div>
+            <div class="champ-card"><div class="portrait" style="background:#5b3a18;"></div><div class="name">Udyr</div><div class="stats">WR <b>53.5%</b></div></div>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="pl-h3"><span class="num">6.5</span>Top pick · variante con glow</h3>
+      <div class="pl-demo" data-label="Draft Advisor · top recommendation">
+        <div class="card" style="max-width:520px; background: linear-gradient(180deg, rgba(200,155,60,0.06), var(--surface-card) 60%); border: 1px solid var(--arc-gold-dark); box-shadow: var(--elevation-2), var(--glow-gold);">
+          <div class="card-header">
+            <h3 style="display:flex; align-items:center; gap:var(--space-2);"><span style="color:var(--arc-gold);">★</span> Recomendado</h3>
+            <span class="pill pill-gold">SCORE 87</span>
+          </div>
+          <div class="card-body" style="display:grid; grid-template-columns: 90px 1fr; gap: var(--space-4); align-items:center;">
+            <div style="width:90px; height:90px; border-radius: var(--radius-md); border: 2px solid var(--arc-gold); background: linear-gradient(135deg,#5b3a18,#c89b3c); box-shadow: var(--glow-gold-sm);"></div>
+            <div>
+              <div style="font-family: var(--font-display); font-weight:700; font-size: var(--font-display-sm); color: var(--arc-gold-bright);">Lee Sin</div>
+              <div style="font-size: var(--font-body-sm); color: var(--text-secondary); margin-top: 4px;">Wins early, contests scuttle, sets up gank pre-6.</div>
+              <div style="display:flex; gap:6px; margin-top: var(--space-3); flex-wrap:wrap;">
+                <span class="pill pill-cyan">JUNGLE</span>
+                <span class="pill pill-success">Counter pick</span>
+                <span class="pill pill-gold">Blue side</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SIDEBARS ===== -->
+    <section class="pl-section" id="sidebars">
+      <div class="pl-section-eyebrow"><span class="num">07</span> · Containers</div>
+      <h2 class="pl-section-title">Sidebar category panels</h2>
+      <p class="pl-section-lede">
+        Bloques compactos a la izquierda con border-left semantico
+        (cyan = info / gold = signal / error = ban). Limit 3-4 por
+        sidebar. Cada panel: titulo en caps + grid de portraits 48px.
+      </p>
+
+      <div class="pl-demo" data-label="Sidebar · Jungle Meta">
+        <div style="display:grid; grid-template-columns: 280px 1fr; gap: var(--space-4); align-items:start;">
+          <div style="display:flex; flex-direction:column; gap: var(--space-4);">
+            <div class="cat-card cat-card--accent-cyan">
+              <h4 class="cat-title"><span style="color:var(--arc-cyan);">⚡</span> OVERPOWERED</h4>
+              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <div style="width:48px; height:48px; border-radius: var(--radius-sm); background:linear-gradient(135deg,#1a2a48,#0bc6e3); border: 2px solid var(--text-muted);"></div>
+                <div style="width:48px; height:48px; border-radius: var(--radius-sm); background:linear-gradient(135deg,#3a1a1a,#ff4655); border: 2px solid var(--text-muted);"></div>
+                <div style="width:48px; height:48px; border-radius: var(--radius-sm); background:linear-gradient(135deg,#2a1845,#785a28); border: 2px solid var(--text-muted);"></div>
+                <div style="width:48px; height:48px; border-radius: var(--radius-sm); background:linear-gradient(135deg,#5b3a18,#c89b3c); border: 2px solid var(--text-muted);"></div>
+              </div>
+            </div>
+            <div class="cat-card cat-card--accent-gold">
+              <h4 class="cat-title"><span style="color:var(--arc-gold);">◎</span> LOW ELO PICKS</h4>
+              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <div style="width:48px; height:48px; border-radius: var(--radius-sm); background:#1a3a2a; border: 2px solid var(--text-muted);"></div>
+                <div style="width:48px; height:48px; border-radius: var(--radius-sm); background:#2a4a1a; border: 2px solid var(--text-muted);"></div>
+                <div style="width:48px; height:48px; border-radius: var(--radius-sm); background:#1a2a4a; border: 2px solid var(--text-muted);"></div>
+              </div>
+            </div>
+            <div class="cat-card cat-card--accent-error">
+              <h4 class="cat-title"><span style="color:var(--state-error);">⊘</span> RECOMMENDED BANS</h4>
+              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <div style="width:48px; height:48px; border-radius: var(--radius-sm); background:linear-gradient(135deg,#5b3a18,#c89b3c); border: 2px solid var(--text-muted);"></div>
+                <div style="width:48px; height:48px; border-radius: var(--radius-sm); background:linear-gradient(135deg,#3a1a1a,#ff4655); border: 2px solid var(--text-muted);"></div>
+                <div style="width:48px; height:48px; border-radius: var(--radius-sm); background:linear-gradient(135deg,#2a1845,#0397ab); border: 2px solid var(--text-muted);"></div>
+              </div>
+            </div>
+          </div>
+          <div style="background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: var(--space-6); color: var(--text-secondary); font-size: var(--font-body-sm); display:flex; align-items:center; justify-content:center; min-height: 240px;">
+            <span style="text-align:center; line-height:1.6; max-width: 320px;">
+              Main content (tier list) ocupa la grid principal.<br>
+              Sidebar es <i>fixed-width</i> 280px, no fluida.
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STAT STRIPS ===== -->
+    <section class="pl-section" id="stats">
+      <div class="pl-section-eyebrow"><span class="num">08</span> · Data display</div>
+      <h2 class="pl-section-title">Stat strip</h2>
+      <p class="pl-section-lede">
+        Para mostrar 3-6 metricas escaneables. Numeros en
+        <code>tabular-nums</code> Outfit 700, label en caps secundario.
+        Color del valor cambia por estado (gold default, cyan info,
+        success / error semantico).
+      </p>
+
+      <div class="pl-demo" data-label="Champion detail · stats">
+        <div class="stat-strip">
+          <div class="stat"><span class="stat-label">Win Rate</span><span class="stat-value success">54.2%</span></div>
+          <div class="stat"><span class="stat-label">Pick Rate</span><span class="stat-value cyan">12.5%</span></div>
+          <div class="stat"><span class="stat-label">Ban Rate</span><span class="stat-value error">8.3%</span></div>
+          <div class="stat"><span class="stat-label">Games</span><span class="stat-value">14,287</span></div>
+          <div class="stat"><span class="stat-label">Tier</span><span class="stat-value">S</span></div>
+        </div>
+      </div>
+
+      <h3 class="pl-h3"><span class="num">8.1</span>Score bar (Draft Advisor)</h3>
+      <div class="pl-demo" data-label="Score factors">
+        <div style="max-width: 520px;">
+          <div class="score-factor">
+            <span class="score-factor-label">Matchup</span>
+            <div class="score-bar-track"><div class="score-bar-fill" style="width: 78%;"></div></div>
+            <span class="score-factor-value">78</span>
+          </div>
+          <div class="score-factor">
+            <span class="score-factor-label">Synergy</span>
+            <div class="score-bar-track"><div class="score-bar-fill" style="width: 64%;"></div></div>
+            <span class="score-factor-value">64</span>
+          </div>
+          <div class="score-factor">
+            <span class="score-factor-label">Patch winrate</span>
+            <div class="score-bar-track"><div class="score-bar-fill" style="width: 91%;"></div></div>
+            <span class="score-factor-value">91</span>
+          </div>
+          <div class="score-factor">
+            <span class="score-factor-label">Comfort</span>
+            <div class="score-bar-track"><div class="score-bar-fill" style="width: 42%;"></div></div>
+            <span class="score-factor-value">42</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TABLES ===== -->
+    <section class="pl-section" id="tables">
+      <div class="pl-section-eyebrow"><span class="num">09</span> · Data display</div>
+      <h2 class="pl-section-title">Tablas densas</h2>
+      <p class="pl-section-lede">
+        Patron principal de Meta Scraper / raw data. Header en caps
+        secundario, hover gold sutil, columnas numericas alineadas a
+        derecha con tabular-nums. Source badges en pill.
+      </p>
+
+      <div class="pl-demo" data-label="Meta Scraper · sources">
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Champion</th>
+                <th>Role</th>
+                <th class="num">WR</th>
+                <th class="num">PR</th>
+                <th class="num">Games</th>
+                <th>Source</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="font-weight:600;">Xin Zhao</td>
+                <td><span class="pill pill-cyan">JUNGLE</span></td>
+                <td class="num" style="color:var(--state-success); font-weight:600;">54.2%</td>
+                <td class="num">12.5%</td>
+                <td class="num">14,287</td>
+                <td><span class="pill pill-gold">U.GG</span></td>
+                <td><span class="toast success" style="padding:2px 8px; font-size:var(--font-pill);"><span class="dot"></span>OK</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600;">Shyvana</td>
+                <td><span class="pill pill-cyan">JUNGLE</span></td>
+                <td class="num" style="color:var(--state-success); font-weight:600;">53.8%</td>
+                <td class="num">11.2%</td>
+                <td class="num">9,841</td>
+                <td><span class="pill pill-gold">LOLALYTICS</span></td>
+                <td><span class="toast success" style="padding:2px 8px; font-size:var(--font-pill);"><span class="dot"></span>OK</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600;">Kayn</td>
+                <td><span class="pill pill-cyan">JUNGLE</span></td>
+                <td class="num" style="color:var(--state-success); font-weight:600;">53.4%</td>
+                <td class="num">13.1%</td>
+                <td class="num">21,053</td>
+                <td><span class="pill pill-neutral">OPGG</span></td>
+                <td><span class="toast" style="padding:2px 8px; font-size:var(--font-pill); border-color:var(--border-error); color:var(--state-error);"><span class="dot"></span>STALE</span></td>
+              </tr>
+              <tr>
+                <td style="font-weight:600;">Warwick</td>
+                <td><span class="pill pill-cyan">JUNGLE</span></td>
+                <td class="num" style="color:var(--state-error); font-weight:600;">48.1%</td>
+                <td class="num">8.6%</td>
+                <td class="num">6,210</td>
+                <td><span class="pill pill-gold">U.GG</span></td>
+                <td><span class="toast success" style="padding:2px 8px; font-size:var(--font-pill);"><span class="dot"></span>OK</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MODALS ===== -->
+    <section class="pl-section" id="modals">
+      <div class="pl-section-eyebrow"><span class="num">10</span> · Overlays</div>
+      <h2 class="pl-section-title">Modal &amp; detail drawer</h2>
+      <p class="pl-section-lede">
+        Para detalle de item / champion / pick. Backdrop blur 4px, overlay
+        en <code>--surface-overlay</code>, glow gold sm como signature.
+        Animacion slide-up 250ms <code>cubic-bezier(0.16, 1, 0.3, 1)</code>.
+      </p>
+
+      <div class="pl-demo" data-label="Item modal · estatico">
+        <div style="position:relative; min-height: 380px; background: rgba(0,0,0,0.5); border-radius: var(--radius-md); padding: var(--space-5); display:flex; align-items:center; justify-content:center;">
+          <div class="modal" style="position:relative; animation:none; max-width: 540px; width:100%;">
+            <div class="modal-header">
+              <div style="width:64px; height:64px; border-radius: var(--radius-sm); border: 2px solid var(--arc-gold); background: linear-gradient(135deg,#5b3a18,#c89b3c); flex-shrink:0;"></div>
+              <div>
+                <div style="font-family: var(--font-display); font-weight: 700; font-size: var(--font-display-sm); color: var(--arc-gold-bright); letter-spacing: var(--tracking-tight);">Infinity Edge</div>
+                <div style="color: var(--arc-cyan); font-size: var(--font-body-sm); font-style: italic;">Filo Infinito</div>
+              </div>
+              <button class="modal-close">×</button>
+            </div>
+            <div class="modal-body">
+              <div style="display:flex; gap: var(--space-2); flex-wrap:wrap; margin-bottom: var(--space-4);">
+                <span class="pill pill-gold">⛁ 3400</span>
+                <span class="pill pill-cyan">LEGENDARIO</span>
+                <span class="pill pill-neutral">3031</span>
+              </div>
+              <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--space-2); margin-bottom: var(--space-4);">
+                <div style="background: var(--forge-darker); border-radius: var(--radius-xs); padding: 6px 10px; font-size: var(--font-body-xs); color: var(--text-secondary);"><b style="color: var(--arc-gold-bright);">+80</b> Attack damage</div>
+                <div style="background: var(--forge-darker); border-radius: var(--radius-xs); padding: 6px 10px; font-size: var(--font-body-xs); color: var(--text-secondary);"><b style="color: var(--arc-gold-bright);">+25%</b> Crit chance</div>
+                <div style="background: var(--forge-darker); border-radius: var(--radius-xs); padding: 6px 10px; font-size: var(--font-body-xs); color: var(--text-secondary);"><b style="color: var(--arc-gold-bright);">+40%</b> Crit damage</div>
+              </div>
+              <p style="color: var(--text-secondary); font-size: var(--font-body-sm); line-height: var(--leading-relaxed); margin: 0;">Tu siguiente critico despues de adquirir 60% crit chance otorga vision en pista. Stack pasivo con Statikk y LDR.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STATES ===== -->
+    <section class="pl-section" id="states">
+      <div class="pl-section-eyebrow"><span class="num">11</span> · Estados</div>
+      <h2 class="pl-section-title">Empty · loading · error</h2>
+      <p class="pl-section-lede">
+        Toda lista, tabla y catalogo necesita los 3 estados visibles.
+        Skeleton durante fetch, mensaje gold-dashed cuando esta vacio,
+        bloque error rojo cuando algo falla. Cero spinners infinitos sin
+        fallback.
+      </p>
+
+      <div class="princ-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+        <div class="state-block">
+          <span class="icon">◎</span>
+          <div class="title">Sin resultados</div>
+          <div class="hint">No hay items que coincidan con "<b style="color:var(--text-primary)">filopt</b>". Probá EN o quitá filtros.</div>
+        </div>
+        <div class="state-block">
+          <div style="display:flex; flex-direction:column; gap: var(--space-2);">
+            <div class="skeleton" style="height:18px; width:60%;"></div>
+            <div class="skeleton" style="height:14px; width:80%;"></div>
+            <div class="skeleton" style="height:14px; width:45%;"></div>
+            <div class="skeleton" style="height:56px; margin-top: var(--space-2);"></div>
+          </div>
+          <div class="title" style="margin-top: var(--space-4);">Cargando data…</div>
+        </div>
+        <div class="state-block error">
+          <span class="icon" style="color: var(--state-error);">⚠</span>
+          <div class="title" style="color: var(--state-error);">Scraper caido</div>
+          <div class="hint" style="color: var(--text-secondary);">U.GG no respondio en 8s. Probá Lolalytics o reintentá.<br><button class="btn btn-secondary" style="margin-top: var(--space-3); min-height: 36px; padding: 6px 16px; font-size: var(--font-body-sm);">Reintentar</button></div>
+        </div>
+      </div>
+
+      <h3 class="pl-h3"><span class="num">11.1</span>Toasts &amp; banners inline</h3>
+      <div class="pl-demo" data-label="Inline status">
+        <div style="display:flex; flex-direction:column; gap: var(--space-3);">
+          <span class="toast success"><span class="dot"></span>Build guardada — Lee Sin / Jungle / 26.09</span>
+          <span class="toast info"><span class="dot"></span>3 nuevos parches detectados desde la ultima sincronizacion</span>
+          <span class="toast error"><span class="dot"></span>Lolalytics: 504 (timeout). Caido desde 14:32.</span>
+          <div class="banner info">⌗ Mostrando snapshot offline. Reconectá internet para refrescar.</div>
+          <div class="banner warning">⚑ Item deprecated en parche 26.07. No se recomienda en builds activas.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== DRAFT PIECES ===== -->
+    <section class="pl-section" id="draft">
+      <div class="pl-section-eyebrow"><span class="num">12</span> · Draft Advisor</div>
+      <h2 class="pl-section-title">Draft pieces</h2>
+      <p class="pl-section-lede">
+        Slots vacios y rellenos para el champion picker. Ally cyan,
+        enemy red. Empty slot con border dashed. Filled con gradient
+        bottom y nombre en caps.
+      </p>
+
+      <div class="pl-demo" data-label="Champion picker · 5v5">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: var(--space-6);">
+          <div>
+            <div style="font-family: var(--font-display); font-weight: 700; font-size: var(--font-body-sm); letter-spacing: var(--tracking-widest); color: var(--arc-cyan); margin-bottom: var(--space-3); text-transform: uppercase;">Tu equipo</div>
+            <div style="display:grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-2);">
+              <div class="slot filled ally" style="background: linear-gradient(135deg,#1a2a48,#0397ab);"><span class="slot-name">Ahri</span></div>
+              <div class="slot filled ally" style="background: linear-gradient(135deg,#5b3a18,#785a28);"><span class="slot-name">Lee Sin</span></div>
+              <div class="slot">+</div>
+              <div class="slot">+</div>
+              <div class="slot">+</div>
+            </div>
+          </div>
+          <div>
+            <div style="font-family: var(--font-display); font-weight: 700; font-size: var(--font-body-sm); letter-spacing: var(--tracking-widest); color: var(--state-error); margin-bottom: var(--space-3); text-transform: uppercase;">Equipo enemigo</div>
+            <div style="display:grid; grid-template-columns: repeat(5, 1fr); gap: var(--space-2);">
+              <div class="slot filled enemy" style="background: linear-gradient(135deg,#3a1a1a,#ff4655);"><span class="slot-name">Zed</span></div>
+              <div class="slot filled enemy" style="background: linear-gradient(135deg,#2a1845,#5b3a18);"><span class="slot-name">Hecarim</span></div>
+              <div class="slot filled enemy" style="background: linear-gradient(135deg,#1a3a3a,#0bc6e3);"><span class="slot-name">Lulu</span></div>
+              <div class="slot">+</div>
+              <div class="slot">+</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SURFACE RECIPES ===== -->
+    <section class="pl-section" id="recipes">
+      <div class="pl-section-eyebrow"><span class="num">13</span> · Composicion</div>
+      <h2 class="pl-section-title">Surface recipes</h2>
+      <p class="pl-section-lede">
+        Cada surface es una receta de los patrones de arriba. No
+        inventar. No mezclar. Usar exactamente esto.
+      </p>
+
+      <table class="map-table" style="background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); overflow: hidden;">
+        <thead>
+          <tr>
+            <th>Surface</th>
+            <th>Shell</th>
+            <th>Hero</th>
+            <th>Patrones principales</th>
+            <th>Modal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-weight:600;">Home Hub</td>
+            <td>premium</td>
+            <td>compact (eyebrow + title)</td>
+            <td class="dim">stat-strip · service cards · banners</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600;">Items Browser</td>
+            <td>plano</td>
+            <td>compact ("ITEMS" + version)</td>
+            <td class="dim">control-panel · tabs · entity-card grid</td>
+            <td>item detail (stats + tags)</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600;">Jungle Meta</td>
+            <td>plano</td>
+            <td>dual ("TIER LIST" + role icon)</td>
+            <td class="dim">cat-card sidebar · tier-tabs · tier-row</td>
+            <td>champion detail (build + runas)</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600;">Meta Scraper</td>
+            <td>plano</td>
+            <td>compact (sources + status)</td>
+            <td class="dim">data-table · pill source · toast status</td>
+            <td>row detail (raw json)</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600;">Draft Advisor</td>
+            <td>premium</td>
+            <td>compact (target role)</td>
+            <td class="dim">slot grid · score-factor · top-pick card</td>
+            <td>champion picker (search + grid)</td>
+          </tr>
+          <tr>
+            <td style="font-weight:600;">Splash Gallery</td>
+            <td>plano</td>
+            <td>compact</td>
+            <td class="dim">entity-card grid (full-bleed thumb)</td>
+            <td>splash detail full-screen</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ===== ANTI-PATTERNS ===== -->
+    <section class="pl-section" id="anti">
+      <div class="pl-section-eyebrow"><span class="num">14</span> · Reglas</div>
+      <h2 class="pl-section-title">Anti-patterns</h2>
+      <p class="pl-section-lede">Lo que NO se hace en lolcli, aunque se vea piola.</p>
+
+      <div class="compare">
+        <div class="do">
+          <h4>✓ Si</h4>
+          <ul>
+            <li>Importar <code>tokens.css</code> + <code>patterns.css</code> y combinar clases existentes.</li>
+            <li>Gold para CTA primaria, cyan para info, errores en rojo. Una sola convencion en todo el repo.</li>
+            <li>Hero compacto (max 200px alto) con titulo Anton italico.</li>
+            <li>Tabular-nums en cualquier numero (WR, PR, gold cost, scores).</li>
+            <li>Empty / loading / error con copy claro y accion de recuperacion.</li>
+            <li>Foco gold con <code>--focus-ring</code> en todo elemento navegable.</li>
+            <li>Titulos en español rioplatense; tags y terminos universales en EN.</li>
+          </ul>
+        </div>
+        <div class="dont">
+          <h4>✗ No</h4>
+          <ul>
+            <li>Nuevas paletas locales por surface. Cero <code>:root { --my-primary: ... }</code> en archivos de surface.</li>
+            <li>Hero a pantalla completa con slogan de marketing. Esto no es landing page.</li>
+            <li>Glow / gradient en cada card. Si todo brilla, nada brilla.</li>
+            <li>Spinner infinito sin timeout ni fallback.</li>
+            <li>Iconografia decorativa sin significado (sparkles, blobs, orbs).</li>
+            <li>Texto blanco puro <code>#ffffff</code> — usar siempre <code>--text-primary</code> (#f0e6d2).</li>
+            <li>Borders rounded extremos (>16px) en cards densas. Aspecto de juguete.</li>
+            <li>Inventar variantes de boton ("special", "magic"). Si no es primary/secondary/ghost/icon, repensar.</li>
+            <li>Mezclar Anton, Outfit y Inter sin razon. Anton solo en hero/tier label.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CHECKLIST ===== -->
+    <section class="pl-section" id="checklist">
+      <div class="pl-section-eyebrow"><span class="num">15</span> · Adopcion</div>
+      <h2 class="pl-section-title">Checklist de revision</h2>
+      <p class="pl-section-lede">
+        Antes de mergear una nueva pantalla / surface, validar:
+      </p>
+
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: var(--space-4);">
+        <div class="checklist">
+          <h4>Tokens</h4>
+          <ul>
+            <li><span class="box">✓</span>Importa <code>tokens.css</code> sin redefinir <code>:root</code> con colores propios.</li>
+            <li><span class="box">✓</span>Cero hex inline. Todos los colores via <code>var(--…)</code>.</li>
+            <li><span class="box">✓</span>Usa <code>--space-*</code>, <code>--radius-*</code>, <code>--font-*</code> definidos.</li>
+          </ul>
+        </div>
+        <div class="checklist">
+          <h4>Layout</h4>
+          <ul>
+            <li><span class="box">✓</span>Container con max-width definido (<code>--container-2xl</code> o menor).</li>
+            <li><span class="box">✓</span>Hero compacto. NO ocupa mas del 30% del viewport.</li>
+            <li><span class="box">✓</span>Sidebar fixed-width 280px en layouts de 2 columnas.</li>
+          </ul>
+        </div>
+        <div class="checklist">
+          <h4>Componentes</h4>
+          <ul>
+            <li><span class="box">✓</span>Reusa <code>.btn</code>, <code>.card</code>, <code>.pill</code>, <code>.tab</code>, <code>.input</code> existentes.</li>
+            <li><span class="box">✓</span>No crea nuevas variantes de boton sin justificacion.</li>
+            <li><span class="box">✓</span>Modal usa <code>.modal-overlay</code> + animacion slide-up estandar.</li>
+          </ul>
+        </div>
+        <div class="checklist">
+          <h4>Estados</h4>
+          <ul>
+            <li><span class="box">✓</span>Empty state con mensaje + accion de recuperacion.</li>
+            <li><span class="box">✓</span>Loading con skeleton, no spinner solo.</li>
+            <li><span class="box">✓</span>Error con copy claro y boton de reintento.</li>
+            <li><span class="box">✓</span>Disabled / hover / focus visibles.</li>
+          </ul>
+        </div>
+        <div class="checklist">
+          <h4>Accesibilidad</h4>
+          <ul>
+            <li><span class="box">✓</span>Focus ring gold en todo elemento <kbd>Tab</kbd>-eable.</li>
+            <li><span class="box">✓</span>Contraste minimo AA (text-primary sobre forge-black: ratio ≥ 12:1 ✓).</li>
+            <li><span class="box">✓</span>Modal con focus trap + cierre con <kbd>Esc</kbd>.</li>
+            <li><span class="box">✓</span><code>aria-label</code> / <code>aria-pressed</code> en toggles e iconos.</li>
+            <li><span class="box">✓</span>Respeta <code>prefers-reduced-motion</code>.</li>
+            <li><span class="box">✓</span>Hit target minimo 44px en mobile.</li>
+          </ul>
+        </div>
+        <div class="checklist">
+          <h4>Voz &amp; copy</h4>
+          <ul>
+            <li><span class="box">✓</span>Español rioplatense. Tags / terminos universales en EN.</li>
+            <li><span class="box">✓</span>Microcopy concreto, no instructivo basico.</li>
+            <li><span class="box">✓</span>Numeros con tabular-nums, % con simbolo, no decimales innecesarios.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== HANDOFF ===== -->
+    <section class="pl-section" id="handoff">
+      <div class="pl-section-eyebrow"><span class="num">16</span> · Engineering</div>
+      <h2 class="pl-section-title">Handoff a ingenieria</h2>
+      <p class="pl-section-lede">
+        Estructura recomendada para landear este sistema en el repo
+        <code>riot_lol_cli</code>.
+      </p>
+
+      <div class="card" style="margin-bottom: var(--space-4);">
+        <div class="card-header"><h3>Estructura de archivos</h3><span class="pill pill-cyan">CANONICO</span></div>
+        <div class="card-body">
+<pre class="code"><span class="c">src/riot_lol_cli/draft_advisor/static/design-system/</span>
+├── tokens.css           <span class="c"># Unica fuente de verdad de tokens</span>
+├── patterns.css         <span class="c"># Componentes drop-in (este archivo)</span>
+├── components.css       <span class="c"># Legacy — mantener compatibilidad</span>
+├── compat-spa.css       <span class="c"># Aliases para SPA legacy</span>
+├── compat-dashboard.css <span class="c"># Aliases para dashboard legacy</span>
+└── README.md            <span class="c"># Cargar order + ejemplos</span>
+
+<span class="c">docs/</span>
+└── design-system.md     <span class="c"># Sync con tokens y patrones de aca</span>
+
+<span class="c">claude-design-handoff/</span>
+├── README.md
+├── pattern-library-prompt.md
+└── patrones_diseños_claude_design/
+    ├── Pattern Library.html  <span class="c"># Esta page como reference</span>
+    ├── tokens.css
+    └── patterns.css</pre>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom: var(--space-4);">
+        <div class="card-header"><h3>Orden de carga</h3></div>
+        <div class="card-body">
+<pre class="code"><span class="c">&lt;!-- 1. Fonts --&gt;</span>
+<span class="t">&lt;link</span> rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Outfit:wght@400;500;600;700;800;900&amp;family=Anton&amp;display=swap"<span class="t">&gt;</span>
+
+<span class="c">&lt;!-- 2. Tokens --&gt;</span>
+<span class="t">&lt;link</span> rel="stylesheet" href="/static/design-system/tokens.css?v=2"<span class="t">&gt;</span>
+
+<span class="c">&lt;!-- 3. Patrones (este archivo) --&gt;</span>
+<span class="t">&lt;link</span> rel="stylesheet" href="/static/design-system/patterns.css?v=2"<span class="t">&gt;</span>
+
+<span class="c">&lt;!-- 4. Compat layer (solo si la surface tiene tokens legacy) --&gt;</span>
+<span class="t">&lt;link</span> rel="stylesheet" href="/static/design-system/compat-spa.css?v=2"<span class="t">&gt;</span>
+
+<span class="c">&lt;!-- 5. Tu surface override (si necesario) --&gt;</span>
+<span class="t">&lt;link</span> rel="stylesheet" href="/static/draft-advisor.css"<span class="t">&gt;</span></pre>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h3>Plan de migracion incremental</h3></div>
+        <div class="card-body" style="color: var(--text-secondary); font-size: var(--font-body-sm); line-height: var(--leading-relaxed);">
+          <ol style="margin:0; padding-left: 20px;">
+            <li><b style="color: var(--text-primary);">Fase 0</b> — Mergear <code>patterns.css</code> al lado de <code>components.css</code> existente. Cero breaking changes; ambos coexisten.</li>
+            <li><b style="color: var(--text-primary);">Fase 1</b> — Migrar Items Browser y Jungle Meta a importar <code>tokens.css</code> compartido en lugar de redefinir <code>:root</code>. Eliminar duplicacion.</li>
+            <li><b style="color: var(--text-primary);">Fase 2</b> — Migrar Home Hub y Meta Scraper a clases de <code>patterns.css</code> (<code>.hero</code>, <code>.control-panel</code>, <code>.tabs</code>, <code>.tier-row</code>).</li>
+            <li><b style="color: var(--text-primary);">Fase 3</b> — Draft Advisor SPA mantiene sus clases custom; alinear nombres con <code>patterns.css</code> donde aplique.</li>
+            <li><b style="color: var(--text-primary);">Fase 4</b> — Deprecar <code>compat-*.css</code>. Sync <code>docs/design-system.md</code> y <code>bitacora_de_cambios.md</code>.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div style="margin-top: var(--space-8); padding: var(--space-5); background: var(--surface-card); border: 1px solid var(--border-metal); border-radius: var(--radius-md); display: flex; gap: var(--space-4); align-items: center;">
+        <div style="font-family: var(--font-anton); font-style: italic; font-size: 3rem; line-height: 1; color: var(--arc-gold);">/</div>
+        <div>
+          <div style="font-family: var(--font-display); font-weight: 700; color: var(--arc-gold-bright); font-size: var(--font-body-lg); letter-spacing: var(--tracking-tight);">FIN.</div>
+          <div style="color: var(--text-secondary); font-size: var(--font-body-sm); margin-top: 2px;">Pattern Library v2 · lolcli · HTML/CSS/JS vanilla. Cualquier nueva surface arranca aca.</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // Scroll spy
+  const navLinks = document.querySelectorAll('.pl-toc nav a');
+  const sections = [...navLinks].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+
+  function spy() {
+    const y = window.scrollY + 100;
+    let active = sections[0];
+    for (const s of sections) {
+      if (s.offsetTop <= y) active = s;
+    }
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + active.id));
+  }
+  window.addEventListener('scroll', spy, { passive: true });
+  spy();
+</script>
+
+</body>
+</html>
