@@ -186,9 +186,13 @@ Ver `templates/claude-4-5.html` y `templates/splash-viewer.html` como referencia
 
 | Surface | Archivo | Estado |
 |---------|---------|--------|
-| Draft Advisor SPA | `static/styles.css` + `index.html` | ✅ Migrado (tokens canónicos + .btn/.pill) |
+| Draft Advisor SPA | `static/styles.css` + `index.html` | ✅ **Pattern Library v2** (tokens.css + patterns.css, sin compat-spa) |
+| Home Hub | `home/static/styles.css` | ⏳ Pendiente Pattern Library v2 |
+| Items Browser | `items_browser/static/styles.css` | ⏳ Pendiente Pattern Library v2 |
+| Jungle Meta | `jungle_meta/static/styles.css` | ⏳ Pendiente Pattern Library v2 |
+| Meta Scraper | `meta_scraper/static/styles.css` | ⏳ Pendiente Pattern Library v2 |
+| Splash Viewer | `templates/splash-viewer.html` | ⏳ Pendiente Pattern Library v2 (CSS inline) |
 | Match History | `templates/claude-4-5.html` | ✅ Migrado (tokens canónicos inline) |
-| Splash Viewer | `templates/splash-viewer.html` | ✅ Migrado (tokens canónicos inline) |
 | Dashboard | `dashboard_enhanced.py` | ✅ Tokens renombrados (sigue siendo autocontenido) |
 
 **Tokens NO migrados en SPA** (requieren decisión de valor antes de migrar):

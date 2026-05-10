@@ -6,6 +6,50 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-05-10] Pattern Library v2 — Draft Advisor (PR 1/6)
+
+### Que se hizo
+- **Draft Advisor SPA migrado a Pattern Library v2.** El `index.html` ahora
+  importa `tokens.css?v=2` + `patterns.css?v=2` y compone clases del sistema
+  con clases custom (`.slot.champion-slot`, `.btn.btn-primary.btn-analyze`,
+  `.modal-overlay.modal-backdrop`, `.card.panel`, `.state-block.results-empty`,
+  etc.). Las clases viejas se conservan para no romper `app.js`.
+- **`compat-spa.css` removido** del orden de carga: el nuevo styles.css usa solo
+  tokens canonicos (`--arc-gold`, `--state-error`, `--surface-card`,
+  `--text-primary`, etc.), no necesita el mapeo legacy.
+- **`styles.css` reescrito completo** (~233 -> ~600 lineas con comentarios) como
+  override layer sobre patterns.css: borra reglas duplicadas (modal base,
+  search-input base, btn base) y mantiene patrones unicos (header hexagonal,
+  sticky panel, top-pick gold glow, alternativas grid, role-pill filters del
+  modal, vs-divider).
+- **Tipografia ampliada:** se agregaron Outfit (display weights 800-900),
+  Anton y JetBrains Mono al `<link>` de Google Fonts (Beaufort se mantiene
+  para legacy si algun bloque lo usa).
+- **Body con `.app-shell`** del patterns.css: reemplaza el `body::before` con
+  radial gradients custom por el shell premium canonico (mismo lenguaje visual
+  que tendra el Home Hub en su PR posterior).
+
+### Cambios visuales esperados
+- Bordes mas chicos en cards/modal (radius v2: 8/12/16 vs antes 18px).
+- Hover transitions ~180ms (motion-default v2) vs antes 200ms.
+- Slot `enemy filled` con border `--state-error-dim` semi-transparente vs antes
+  rojo solido.
+- Top-pick mantiene gradient gold pero con tokens canonicos.
+
+### Archivos modificados
+- `src/riot_lol_cli/draft_advisor/static/index.html`
+- `src/riot_lol_cli/draft_advisor/static/styles.css`
+- `bitacora_de_cambios.md`
+
+### Verificacion
+- `pytest tests/test_server_factories.py -q` → 17 passed
+- `curl http://localhost:8001/draft` sirve HTML con clases composables ok
+- CSS de design-system carga 200 OK
+- Smoke browser: panel Draft sticky, modal de picker abre, slots ally/enemy
+  con bordes correctos.
+
+---
+
 ## [2026-05-10] Correccion post-auditoria — Meta Scraper jungla, Gaps UI y docs
 
 ### Que se hizo
