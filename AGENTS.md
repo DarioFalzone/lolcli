@@ -66,9 +66,12 @@ imports, rutas de assets, scripts y tests.
 |----------|----------|--------------------------|
 | CLI Match History | `projects/active/cli-match-history/README.md` | `main.py`, `src/riot_lol_cli/cli.py`, `rendering.py`, `templates/` |
 | Splash Gallery | `projects/active/splash-gallery/README.md` | `src/riot_lol_cli/splash.py`, `assets/splash_arts/`, `data/ddragon-splash-catalog.json`, `data/splash-manifest.json` |
+| Home Hub | `projects/active/home-hub/README.md` | `src/riot_lol_cli/home/`, `scripts/bat/home.bat`, `scripts/bat/levantar_todo.bat` |
 | Meta Analyzer + Dashboard | `projects/active/meta-analyzer-dashboard/README.md` | `meta_api/`, `meta_analyzer/`, `database/`, `dashboard*.py` |
 | Draft Advisor | `projects/active/draft-advisor/README.md` | `draft_advisor/`, `data/draft_advisor/`, `KB/` |
 | Meta Scraper | `projects/active/meta-scraper/README.md` | `meta_scraper/`, `data/meta_scraper/` |
+| Jungle Meta | `projects/active/jungle-meta/README.md` | `src/riot_lol_cli/jungle_meta/`, `data/jungle_meta/`, `tests/jungle_meta/` |
+| Items Browser | `projects/active/items-browser/README.md` | `src/riot_lol_cli/items_browser/`, `data/items/database.json`, `assets/items/`, `tests/items_browser/` |
 | Assets y Datos Riot | `projects/active/assets-and-data/README.md` | `assets/`, `data/`, scripts de descarga/fetch |
 | Junglas Pro | `projects/active/junglas-pro/README.md` | `projects/active/junglas-pro/index.html`, `docs/`, `img/` |
 
@@ -516,7 +519,7 @@ Reglas clave:
 - `docs/api-guide.md` y algunos docs de dashboard/meta pueden tener rutas antiguas comparadas con `meta_api/routes/*`.
 - `docs/draft_advisor/README.md` puede describir una fase anterior del roster de supports.
 - `Meta Scraper` requiere `playwright install chromium` para scraping real; el paquete Python ya esta declarado en `requirements.txt`.
-- `settings.py` ya tiene helpers para Meta Scraper y Jungle Meta host/port; revisar scripts y copy visible cuando se agreguen nuevos entrypoints.
+- `settings.py` ya tiene helpers host/port para los servicios FastAPI activos; revisar scripts y copy visible cuando se agreguen nuevos entrypoints.
 - `dashboard_enhanced.py` mantiene HTML embebido en Python; migrar a template solo con pedido explicito.
 - `database/` no tiene migraciones; no cambiar schema sin plan.
 - `projects/active/junglas-pro/` conserva contenido de investigacion standalone; validar vigencia de fuentes antes de usarlo como dato actual.

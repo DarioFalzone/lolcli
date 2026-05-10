@@ -33,8 +33,8 @@ logger = logging.getLogger(__name__)
 
 _MODULE_DIR = Path(__file__).resolve().parent
 _STATIC_DIR = _MODULE_DIR / "static"
-_REPO_ROOT = _MODULE_DIR.parent.parent.parent   # e.g. e:\Desarrollos\LOLCLI
-_SRC_DIR = str(_MODULE_DIR.parent.parent)        # e.g. …\src  (PYTHONPATH for subprocesses)
+_REPO_ROOT = _MODULE_DIR.parent.parent.parent  # e.g. e:\Desarrollos\LOLCLI
+_SRC_DIR = str(_MODULE_DIR.parent.parent)  # e.g. …\src  (PYTHONPATH for subprocesses)
 _DESIGN_SYSTEM_DIR = _MODULE_DIR.parent / "draft_advisor" / "static" / "design-system"
 _VERSION_FILE = _MODULE_DIR.parent.parent.parent / "config" / "version.json"
 _JUNGLAS_PRO_DIR = _MODULE_DIR.parent.parent.parent / "projects" / "active" / "junglas-pro"
@@ -43,10 +43,10 @@ router = APIRouter()
 
 # Args appended to sys.executable to launch each service.
 _LAUNCH_CMDS: dict[str, list[str]] = {
-    "meta_api":      ["scripts/run_api.py"],
+    "meta_api": ["scripts/run_api.py"],
     "draft_advisor": ["-m", "riot_lol_cli.draft_advisor.server"],
-    "meta_scraper":  ["-m", "riot_lol_cli.meta_scraper.server"],
-    "jungle_meta":   ["-m", "riot_lol_cli.jungle_meta.server"],
+    "meta_scraper": ["-m", "riot_lol_cli.meta_scraper.server"],
+    "jungle_meta": ["-m", "riot_lol_cli.jungle_meta.server"],
     "items_browser": ["-m", "riot_lol_cli.items_browser.server"],
 }
 
@@ -78,7 +78,7 @@ SERVICES = [
     {
         "id": "meta_scraper",
         "name": "Meta Scraper",
-        "description": "Scraping y normalización del meta desde OP.GG y LoLalytics.",
+        "description": "Scraping y normalización del meta desde OP.GG, LoLalytics y U.GG.",
         "port_fn": get_meta_scraper_port,
         "health_path": "/health",
         "ui_path": "/",

@@ -1,7 +1,7 @@
 @echo off
 REM ============================================================================
 REM LOLCLI Meta Scraper - Script de Levantamiento (Windows)
-REM Puerto 8002 — dashboard tier list Support / ADC
+REM Puerto 8002 — dashboard tier list Support / ADC / Jungla
 REM ============================================================================
 
 setlocal enabledelayedexpansion
@@ -13,7 +13,7 @@ cls
 echo.
 echo ╔══════════════════════════════════════════════════════════╗
 echo ║   LOLCLI Meta Scraper                                    ║
-echo ║   Tier list Support / ADC                                ║
+echo ║   Tier list Support / ADC / Jungla                       ║
 echo ╚══════════════════════════════════════════════════════════╝
 echo.
 

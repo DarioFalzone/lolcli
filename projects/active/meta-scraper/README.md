@@ -56,6 +56,7 @@ SPA con tabs Soporte / ADC / Jungla. Funcionalidades:
 - Los snapshots en `data/meta_scraper/` son datos generados, no contrato estable.
 - Jungla v1 usa solo OP.GG, LoLalytics y U.GG. League of Graphs, Mobalytics, METAsrc, Asia, cuentas pro y pro-stage quedan como backlog/gaps planificados.
 - Antes de pisar `latest_jungle_tier.json`, el normalizer guarda el anterior en `normalized/backups/jungle/`.
+- El normalizer de Jungla filtra contaminacion cross-role contra `champion_base.json` y deja el evento en `source_gaps`; tambien descarta `games_analyzed` imposibles (>50M) del promedio ponderado.
 - El Draft Advisor consume snapshots de Support/ADC de forma opcional; el snapshot Jungla queda separado del Draft Advisor por ahora.
 - U.GG reporta el patch con numeracion propia (ej: "26.9") vs la convencion "16.9" de OP.GG y LoLalytics.
 - LoLalytics ADC suele traer menos campeones que OP.GG porque algunos picks de nicho no aparecen en el top de la pagina dentro del timeout actual.

@@ -6,6 +6,42 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-05-10] Correccion post-auditoria — Meta Scraper jungla, Gaps UI y docs
+
+### Que se hizo
+- **Meta Scraper jungla:** el normalizer ahora filtra contaminacion cross-role
+  en rol `jungle` usando `champion_base.json` + overrides curados, y registra
+  el evento en `source_gaps`.
+- **Datos imposibles:** `games_analyzed` mayor a 50M se conserva en el desglose
+  con valor `0`, no pondera el agregado y queda auditado como gap.
+- **Snapshot:** `latest_jungle_tier.json` fue regenerado desde raw locales
+  existentes, sin scraping externo. El anterior quedo respaldado en
+  `data/meta_scraper/normalized/backups/jungle/`.
+- **Frontend Meta Scraper:** la vista `Gaps` ahora existe en la SPA y muestra
+  razon, fuente, etapa y hora de deteccion.
+- **Docs:** se alinearon README raiz, project map, docs index, API guide,
+  getting-started, rule de agentes, handoff de Jungle Meta y copy operativo.
+
+### Archivos creados
+- `projects/active/home-hub/README.md`
+- `tests/meta_scraper/test_jungle_snapshot_integrity.py`
+
+### Archivos modificados
+- `src/riot_lol_cli/meta_scraper/normalizer.py`
+- `src/riot_lol_cli/meta_scraper/static/index.html`
+- `src/riot_lol_cli/meta_scraper/static/app.js`
+- `src/riot_lol_cli/meta_scraper/static/styles.css`
+- `data/meta_scraper/normalized/latest_jungle_tier.json`
+- `data/meta_scraper/normalized/history/*_merged.json`
+- `data/meta_scraper/normalized/backups/jungle/*`
+- `tests/meta_scraper/test_normalizer.py`
+- `README.md`, `AGENTS.md`, `docs/README.md`, `docs/api-guide.md`,
+  `docs/getting-started.md`, `docs/design-system.md`, `projects/README.md`,
+  `.agent/rules/agent-workflow.md`, `projects/active/meta-scraper/README.md`,
+  `projects/active/jungle-meta/CODEX_HANDOFF.md`, `scripts/bat/meta_scraper.bat`
+
+---
+
 ## [2026-05-10] Pattern Library v2 — `patterns.css` drop-in + reference page
 
 ### Que se hizo

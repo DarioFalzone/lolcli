@@ -5,7 +5,7 @@ Un solo paquete Python (`riot_lol_cli`) con varios servicios FastAPI, una CLI,
 una galeria offline, un Draft Advisor y un Meta Scraper, mas una base de
 conocimiento estrategica y proyectos legacy preservados.
 
-**Version:** 1.6.4 · **Python:** 3.9+ · **Tests:** 132 (pytest) · **Licencia:** Privado
+**Version:** 1.6.4 · **Python:** 3.9+ · **Tests:** 190 (pytest) · **Licencia:** Privado
 
 ## Quick Start
 
@@ -21,7 +21,7 @@ copy .env.example .env
 # CLI: traer historial de partidas y exportar HTML
 python main.py --platform la2 --summoner "Nombre#TAG" --html-template claude-4-5
 
-# Levantar los 3 servicios FastAPI + abrir frontends
+# Levantar Home Hub + servicios FastAPI + abrir frontends
 scripts\bat\levantar_todo.bat
 ```
 
@@ -34,9 +34,12 @@ En Linux/macOS: `source .venv/bin/activate`. Ver [docs/getting-started.md](docs/
 | Proyecto | Tipo | Path / entry point | Puerto | Frontend |
 |----------|------|--------------------|--------|----------|
 | CLI Match History | CLI Click | `main.py` + [src/riot_lol_cli/cli.py](src/riot_lol_cli/cli.py) | — | HTML export |
+| Home Hub | FastAPI + SPA | [src/riot_lol_cli/home/](src/riot_lol_cli/home/) | 8080 | http://localhost:8080 |
 | Draft Advisor | FastAPI + SPA | [src/riot_lol_cli/draft_advisor/](src/riot_lol_cli/draft_advisor/) | 8001 | http://localhost:8001/draft |
 | Meta Analyzer + Dashboard | FastAPI | [src/riot_lol_cli/meta_api/](src/riot_lol_cli/meta_api/) + [meta_analyzer/](src/riot_lol_cli/meta_analyzer/) | 8000 | http://localhost:8000/docs |
 | Meta Scraper | FastAPI + Playwright | [src/riot_lol_cli/meta_scraper/](src/riot_lol_cli/meta_scraper/) | 8002 | http://localhost:8002 |
+| Jungle Meta | FastAPI + SPA | [src/riot_lol_cli/jungle_meta/](src/riot_lol_cli/jungle_meta/) | 8003 | http://localhost:8003 |
+| Items Browser | FastAPI + SPA | [src/riot_lol_cli/items_browser/](src/riot_lol_cli/items_browser/) | 8004 | http://localhost:8004 |
 | Splash Gallery | Generador HTML | [src/riot_lol_cli/splash.py](src/riot_lol_cli/splash.py) | — | `outputs/splash-viewer.html` |
 | Assets and Data | Recurso compartido | [assets/](assets/), [data/](data/), [scripts/](scripts/) | — | — |
 | Junglas Pro | Standalone HTML | [projects/active/junglas-pro/](projects/active/junglas-pro/) | — | `index.html` |
@@ -71,7 +74,7 @@ Detalle por proyecto en [projects/README.md](projects/README.md). El README maes
 - Bonus `climb_meta` calibrado: `(climb-50)*0.35 + (wr-50)*1.2 + min(pr,12)*0.25 - min(br,30)*0.15` (clamp ±10/+12).
 - 32 perfiles ADC + soporte; integracion NotebookLM (sinergias medidas, triangulo estrategico).
 - SPA en español rioplatense, dark navy, microcopy gamer.
-- API: `/api/v1/draft/health`, `/api/v1/draft/champions`, `/api/v1/draft/recommendations`.
+- API: `/api/v1/draft/health`, `/api/v1/draft/champions`, `/api/v1/draft/recommend`.
 
 ### Meta Analyzer + Dashboard (puerto 8000)
 
@@ -79,14 +82,14 @@ Detalle por proyecto en [projects/README.md](projects/README.md). El README maes
 - Deteccion de anomalias estadisticas (z-score por campeon/rol).
 - Generacion de tier lists multifuente.
 - Dashboard HTML con filtros y tabs.
-- Endpoints: `/v1/champion/stats`, `/v1/anomalies`, `/v1/tierlist`, `/maintenance/status`.
+- Endpoints: `/api/v1/stats/latest`, `/api/v1/anomalies/high-confidence`, `/api/v1/tier-list/current`, `/api/v1/maintenance/status`.
 
 ### Meta Scraper (puerto 8002)
 
 - Adapters para OP.GG, LoLalytics y U.GG via Playwright (sync_api).
 - Normalizador que mergea datos de las 3 plataformas.
 - Cache layer + manifest en `data/meta_scraper/`.
-- Output canonico: `data/meta_scraper/normalized/latest_{adc,support}_tier.json`.
+- Output canonico: `data/meta_scraper/normalized/latest_{adc,support,jungle}_tier.json`.
 - Stale si supera 72h; el Draft Advisor warning si lo usa.
 
 ### Splash Gallery
@@ -115,7 +118,7 @@ LOLCLI/
 ├── requirements-dev.txt            # pytest, ruff
 ├── .agent/rules/                   # 4 rules canonicas (workflow, eng, docs, sec/test)
 ├── projects/                       # Indice por proyecto activo/legacy
-│   ├── active/                     # 7 proyectos activos
+│   ├── active/                     # 9 proyectos activos
 │   ├── dev-scratch/                # Scripts manuales no runtime
 │   └── legacy/                     # 5 proyectos archivados
 ├── src/riot_lol_cli/               # Paquete Python activo
@@ -136,7 +139,7 @@ LOLCLI/
 │   └── bat/                        # draft_advisor.bat, meta_scraper.bat, levantar_todo.bat
 ├── docs/                           # Documentacion canonica
 ├── KB/                             # Base estrategica del Draft Advisor (NotebookLM, sintesis)
-├── tests/                          # 132 tests (pytest)
+├── tests/                          # 190 tests (pytest)
 └── claude-design-handoff/          # Handoff visual para Claude Design
 ```
 

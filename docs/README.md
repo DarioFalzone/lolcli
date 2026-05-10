@@ -30,9 +30,12 @@ conocida y docs relacionadas.
 |----------|----------|
 | CLI Match History | `../projects/active/cli-match-history/README.md` |
 | Splash Gallery | `../projects/active/splash-gallery/README.md` |
+| Home Hub | `../projects/active/home-hub/README.md` |
 | Draft Advisor | `../projects/active/draft-advisor/README.md` |
 | Meta Analyzer + Dashboard | `../projects/active/meta-analyzer-dashboard/README.md` |
 | Meta Scraper | `../projects/active/meta-scraper/README.md` |
+| Jungle Meta | `../projects/active/jungle-meta/README.md` |
+| Items Browser | `../projects/active/items-browser/README.md` |
 | Assets y datos Riot | `../projects/active/assets-and-data/README.md` |
 | Junglas Pro | `../projects/active/junglas-pro/README.md` |
 

@@ -128,10 +128,11 @@ sistema visual ajeno.
 ### Surface con servidor FastAPI (puede cargar CSS externo)
 
 ```html
-<link rel="stylesheet" href="/static/design-system/tokens.css?v=1">
-<link rel="stylesheet" href="/static/design-system/components.css?v=1">
-<!-- Si hay tokens legacy que aún no migraste: -->
-<link rel="stylesheet" href="/static/design-system/compat-spa.css?v=1">
+<link rel="stylesheet" href="/static/design-system/tokens.css?v=2">
+<link rel="stylesheet" href="/static/design-system/patterns.css?v=2">
+<!-- Compat legacy solo si la surface lo necesita: -->
+<link rel="stylesheet" href="/static/design-system/components.css?v=2">
+<link rel="stylesheet" href="/static/design-system/compat-spa.css?v=2">
 <link rel="stylesheet" href="/static/tu-surface.css">
 ```
 

@@ -407,7 +407,7 @@ Los datos se guardan en `data/cache/matches.json`.
 | `scripts/bat/regenerar_html.bat` | Regenera HTML con plantilla claude-4-5 |
 | `scripts/bat/regenerar_splash_viewer.bat` | Regenera visor de splash arts |
 | `scripts/bat/download_splash_arts.bat` | Descarga splash arts (menú interactivo) |
-| `scripts/bat/levantar_todo.bat` | Levanta Meta API, Draft Advisor, Meta Scraper, Jungle Meta e Items Browser respetando `LOLCLI_*_PORT` |
+| `scripts/bat/levantar_todo.bat` | Levanta Home Hub, Meta API, Draft Advisor, Meta Scraper, Jungle Meta e Items Browser respetando `LOLCLI_*_PORT` |
 | `scripts/bat/meta_scraper.bat` | Levanta Meta Scraper dashboard (puerto 8002) |
 | `scripts/bat/jungle_meta.bat` | Levanta Jungle Meta dashboard (puerto 8003) |
 | `scripts/bat/items_browser.bat` | Levanta Items Browser dashboard (puerto 8004) |

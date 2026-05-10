@@ -17,9 +17,12 @@ pueden vivir fisicamente dentro de `projects/active/` o `projects/legacy/`.
 |----------|----------|------------------------------------|
 | CLI Match History | `active/cli-match-history/README.md` | `main.py`, `src/riot_lol_cli/cli.py`, `src/riot_lol_cli/api.py`, `src/riot_lol_cli/rendering.py`, `templates/`, `data/cache/` |
 | Splash Gallery | `active/splash-gallery/README.md` | `src/riot_lol_cli/splash.py`, `templates/splash-viewer.html`, `assets/splash_arts/`, `data/ddragon-splash-catalog.json`, `data/splash-manifest.json`, `outputs/splash-viewer.html` |
+| Home Hub | `active/home-hub/README.md` | `src/riot_lol_cli/home/`, `scripts/bat/home.bat`, `scripts/bat/levantar_todo.bat` |
 | Draft Advisor | `active/draft-advisor/README.md` | `src/riot_lol_cli/draft_advisor/`, `data/draft_advisor/`, `KB/`, `tests/draft_advisor/` |
 | Meta Analyzer + Dashboard | `active/meta-analyzer-dashboard/README.md` | `src/riot_lol_cli/meta_api/`, `src/riot_lol_cli/meta_analyzer/`, `src/riot_lol_cli/database/`, `src/riot_lol_cli/dashboard*.py`, `data/meta_analyzer.db` |
 | Meta Scraper | `active/meta-scraper/README.md` | `src/riot_lol_cli/meta_scraper/`, `data/meta_scraper/`, `tests/meta_scraper/` |
+| Jungle Meta | `active/jungle-meta/README.md` | `src/riot_lol_cli/jungle_meta/`, `data/jungle_meta/`, `tests/jungle_meta/` |
+| Items Browser | `active/items-browser/README.md` | `src/riot_lol_cli/items_browser/`, `data/items/database.json`, `assets/items/`, `tests/items_browser/` |
 | Assets y datos Riot | `active/assets-and-data/README.md` | `assets/`, `data/`, scripts de descarga/fetch |
 | Junglas Pro | `active/junglas-pro/README.md` | `active/junglas-pro/index.html`, `active/junglas-pro/research-notes.md`, `active/junglas-pro/docs/deeps_searchs/`, `active/junglas-pro/img/` |
 

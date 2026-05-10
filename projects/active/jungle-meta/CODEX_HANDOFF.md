@@ -10,10 +10,14 @@
 
 Mapa maestro vivo: `AGENTS.md`. Reglas operativas: `.agent/rules/`. Bitácora: `bitacora_de_cambios.md`. Lectura inicial obligatoria de `CLAUDE.md`.
 
-Servidores FastAPI activos (todos con `create_app()` factory + `run()` entry):
+Snapshot historico de la sesion 2026-05-08. Para el estado actual, usar
+`AGENTS.md` y `projects/README.md`.
+
+Servidores FastAPI activos actuales (todos con `create_app()` factory + `run()` entry):
 
 | Subsistema | Puerto | Path |
 |------------|--------|------|
+| Home Hub | 8080 | `src/riot_lol_cli/home/` |
 | Meta API / Meta Analyzer | 8000 | `src/riot_lol_cli/meta_api/` |
 | Draft Advisor | 8001 | `src/riot_lol_cli/draft_advisor/` |
 | Meta Scraper | 8002 | `src/riot_lol_cli/meta_scraper/` |
@@ -62,11 +66,12 @@ Modulo nuevo para identificar exactamente qué items aparecen en cada screenshot
 
 ### 4. Tests
 
-`pytest -q` → 163 passed (was 153 antes de items_browser). 8 tests nuevos en `tests/items_browser/test_loader.py` + 2 smoke tests en `tests/test_server_factories.py`.
+`pytest -q` al cierre original → 163 passed (was 153 antes de items_browser).
+El conteo actual vive en `README.md` y en la salida real de `pytest tests/ -q`.
 
 ### 5. Documentación sincronizada
 
-- `AGENTS.md`: subsistemas (5 ahora), tabla server, entry points, APIs locales, gotchas (4→5 FastAPI, puertos 8000-8004 configurables).
+- `AGENTS.md`: subsistemas, tabla server, entry points, APIs locales, gotchas y puertos configurables.
 - `docs/getting-started.md`: nueva sección 7 "Items Browser" + sección 8 renumerada.
 - `.agent/rules/agent-workflow.md`: gotcha y tabla de docs canónicas.
 - `bitacora_de_cambios.md`: entrada completa con "Archivos creados/modificados".
@@ -104,7 +109,7 @@ Modulo nuevo para identificar exactamente qué items aparecen en cada screenshot
 
 **Verificación end-to-end**:
 
-1. `pytest -q` → 163+ passed.
+1. `pytest tests/ -q` → revisar conteo actual.
 2. `curl http://localhost:8003/api/v1/jungle/champion/XinZhao` → builds `[3087,2510,4633]` y `[2510,4633,3087]`.
 3. Browser `http://localhost:8003/#champion/XinZhao` → 2 builds con iconos cargando desde `/items/{id}.png`.
 
