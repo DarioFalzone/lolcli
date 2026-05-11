@@ -16,7 +16,7 @@ from pathlib import Path
 
 import httpx
 from fastapi import APIRouter, FastAPI, HTTPException
-from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 from riot_lol_cli.settings import (
@@ -38,6 +38,7 @@ _SRC_DIR = str(_MODULE_DIR.parent.parent)  # e.g. …\src  (PYTHONPATH for subpr
 _DESIGN_SYSTEM_DIR = _MODULE_DIR.parent / "draft_advisor" / "static" / "design-system"
 _VERSION_FILE = _MODULE_DIR.parent.parent.parent / "config" / "version.json"
 _JUNGLAS_PRO_DIR = _MODULE_DIR.parent.parent.parent / "projects" / "active" / "junglas-pro"
+_FAVICON_PATH = _STATIC_DIR / "favicon.svg"
 
 router = APIRouter()
 
@@ -144,6 +145,14 @@ async def health():
         "port": get_home_port(),
         "version": _load_version(),
     }
+
+
+@router.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    """Sirve favicon explicito para evitar 404 ruidosos en consola."""
+    if _FAVICON_PATH.exists():
+        return FileResponse(str(_FAVICON_PATH), media_type="image/svg+xml")
+    return Response(status_code=204)
 
 
 @router.get("/api/v1/home/version")
