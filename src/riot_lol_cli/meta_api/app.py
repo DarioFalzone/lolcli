@@ -44,6 +44,10 @@ def create_app() -> FastAPI:
     if paths.OUTPUT_DIR.exists():
         app.mount("/static", StaticFiles(directory=str(paths.OUTPUT_DIR)), name="static")
 
+    design_system_dir = paths.SRC_DIR / "riot_lol_cli" / "draft_advisor" / "static" / "design-system"
+    if design_system_dir.exists():
+        app.mount("/design-system", StaticFiles(directory=str(design_system_dir)), name="design-system")
+
     @app.exception_handler(HTTPException)
     async def http_exception_handler(request, exc):
         return JSONResponse(

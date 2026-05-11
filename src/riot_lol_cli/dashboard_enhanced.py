@@ -462,58 +462,66 @@ ENHANCED_DASHBOARD_HTML = r"""
             }
         }
     </style>
+    <link rel="stylesheet" href="/design-system/tokens.css?v=2">
+    <link rel="stylesheet" href="/design-system/patterns.css?v=2">
 </head>
-<body>
-    <!-- Header -->
-    <header>
-        <h1>⚔️ LOLCLI Meta Analyzer - Enhanced</h1>
-        <div class="header-info">
-            <div class="header-status">
-                <div class="status-item">
-                    <span class="status-dot"></span>
-                    <span>Sistema: <strong id="system-status">Conectando...</strong></span>
-                </div>
-                <div class="status-item">
-                    Última actualización: <strong id="last-update">--:--</strong>
-                </div>
+<body class="app-shell">
+    <!-- Hero -->
+    <header class="hero hero-compact">
+        <div class="hero-row" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;">
+            <div>
+                <div class="hero-eyebrow">LOLCLI</div>
+                <h1 class="hero-title">META ANALYZER</h1>
+                <div class="hero-meta">Enhanced Dashboard</div>
             </div>
-            <a class="home-hub-link" href="http://localhost:8080/">⌂ Home Hub</a>
+            <div class="header-info">
+                <div class="header-status">
+                    <div class="status-item">
+                        <span class="status-dot"></span>
+                        <span>Sistema: <strong id="system-status">Conectando...</strong></span>
+                    </div>
+                    <div class="status-item">
+                        Última actualización: <strong id="last-update">--:--</strong>
+                    </div>
+                </div>
+                <a class="home-hub-link" href="http://localhost:8080/">⌂ Home Hub</a>
+            </div>
         </div>
     </header>
 
     <!-- Main Content -->
     <div class="container">
         <!-- Summary Stats -->
-        <div class="card grid mb-20">
-            <div class="summary-stat">
-                <div class="stat-value" id="stat-champions">0</div>
+        <div class="stat-strip mb-20">
+            <div class="stat">
+                <div class="stat-value gold" id="stat-champions">0</div>
                 <div class="stat-label">Campeones ADC</div>
             </div>
-            <div class="summary-stat">
-                <div class="stat-value" id="stat-matches">0</div>
+            <div class="stat">
+                <div class="stat-value cyan" id="stat-matches">0</div>
                 <div class="stat-label">Partidas Analizadas</div>
             </div>
-            <div class="summary-stat">
-                <div class="stat-value" id="stat-anomalies">0</div>
+            <div class="stat">
+                <div class="stat-value warning" id="stat-anomalies">0</div>
                 <div class="stat-label">Anomalías</div>
             </div>
         </div>
 
         <!-- Tabs -->
         <div class="tabs">
-            <button class="tab active" onclick="switchTab(event, 'dashboard')">📊 Dashboard</button>
-            <button class="tab" onclick="switchTab(event, 'matchups')">⚡ Matchups</button>
-            <button class="tab" onclick="switchTab(event, 'items')">🛡️ Items</button>
-            <button class="tab" onclick="switchTab(event, 'raw-data')">📋 Raw Data</button>
+            <button class="tab active" onclick="switchTab(event, 'dashboard')">ðŸ“Š Dashboard</button>
+            <button class="tab" onclick="switchTab(event, 'matchups')">âš¡ Matchups</button>
+            <button class="tab" onclick="switchTab(event, 'items')">ðŸ›¡ï¸ Items</button>
+            <button class="tab" onclick="switchTab(event, 'raw-data')">ðŸ“‹ Raw Data</button>
         </div>
 
         <!-- Tab: Dashboard (Tier List) -->
         <div id="dashboard" class="tab-content active">
             <div class="card">
                 <div class="card-title">Tier List - ADCs Actuales</div>
-                <p style="color: #aaa; margin-bottom: 15px;">Haz click en un campeón para ver más detalles</p>
+                <p style="color: #aaa; margin-bottom: 15px;">Haz click en un campeÃ³n para ver mÃ¡s detalles</p>
                 <div id="tier-list-content">
-                    <p class="loading">⏳ Cargando tier list...</p>
+                    <p class="loading">â³ Cargando tier list...</p>
                 </div>
             </div>
         </div>
@@ -521,22 +529,22 @@ ENHANCED_DASHBOARD_HTML = r"""
         <!-- Tab: Matchups -->
         <div id="matchups" class="tab-content">
             <div class="card">
-                <div class="card-title">Historial de Matchups - Por Campeón</div>
+                <div class="card-title">Historial de Matchups - Por CampeÃ³n</div>
 
                 <!-- Filters -->
                 <div class="filters">
                     <div class="filter-group">
-                        <label>Campeón:</label>
+                        <label>CampeÃ³n:</label>
                         <select id="matchup-champion-filter" onchange="loadMatchupData()">
                             <option value="">Seleccionar...</option>
                         </select>
                     </div>
                     <div class="filter-group">
-                        <label>Últimas (horas):</label>
+                        <label>Ãšltimas (horas):</label>
                         <input type="number" id="matchup-hours-filter" value="24" min="1" max="240" onchange="loadMatchupData()">
                     </div>
                     <div class="filter-group">
-                        <label>Límite:</label>
+                        <label>LÃ­mite:</label>
                         <input type="number" id="matchup-limit-filter" value="50" min="10" max="500" onchange="loadMatchupData()">
                     </div>
                 </div>
@@ -547,7 +555,7 @@ ENHANCED_DASHBOARD_HTML = r"""
                         <thead>
                             <tr>
                                 <th onclick="sortTable('matchup-table', 0)">Hora</th>
-                                <th onclick="sortTable('matchup-table', 1)">Campeón Rival</th>
+                                <th onclick="sortTable('matchup-table', 1)">CampeÃ³n Rival</th>
                                 <th onclick="sortTable('matchup-table', 2)">Partidas</th>
                                 <th onclick="sortTable('matchup-table', 3)">Victorias</th>
                                 <th onclick="sortTable('matchup-table', 4)">Derrotas</th>
@@ -557,7 +565,7 @@ ENHANCED_DASHBOARD_HTML = r"""
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td colspan="8" class="no-data">Selecciona un campeón para ver matchups</td></tr>
+                            <tr><td colspan="8" class="no-data">Selecciona un campeÃ³n para ver matchups</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -567,12 +575,12 @@ ENHANCED_DASHBOARD_HTML = r"""
         <!-- Tab: Items -->
         <div id="items" class="tab-content">
             <div class="card">
-                <div class="card-title">Construcción de Items - Por Campeón</div>
+                <div class="card-title">ConstrucciÃ³n de Items - Por CampeÃ³n</div>
 
                 <!-- Filters -->
                 <div class="filters">
                     <div class="filter-group">
-                        <label>Campeón:</label>
+                        <label>CampeÃ³n:</label>
                         <select id="items-champion-filter" onchange="loadItemsData()">
                             <option value="">Seleccionar...</option>
                         </select>
@@ -595,7 +603,7 @@ ENHANCED_DASHBOARD_HTML = r"""
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td colspan="4" class="no-data">Selecciona un campeón para ver items</td></tr>
+                            <tr><td colspan="4" class="no-data">Selecciona un campeÃ³n para ver items</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -610,13 +618,13 @@ ENHANCED_DASHBOARD_HTML = r"""
                 <!-- Filters -->
                 <div class="filters">
                     <div class="filter-group">
-                        <label>Campeón (opcional):</label>
+                        <label>CampeÃ³n (opcional):</label>
                         <select id="raw-champion-filter" onchange="loadRawData()">
                             <option value="">Todos</option>
                         </select>
                     </div>
                     <div class="filter-group">
-                        <label>Límite:</label>
+                        <label>LÃ­mite:</label>
                         <input type="number" id="raw-limit-filter" value="100" min="10" max="1000" onchange="loadRawData()">
                     </div>
                 </div>
@@ -626,7 +634,7 @@ ENHANCED_DASHBOARD_HTML = r"""
                     <table id="raw-table">
                         <thead>
                             <tr>
-                                <th onclick="sortTable('raw-table', 0)">Campeón</th>
+                                <th onclick="sortTable('raw-table', 0)">CampeÃ³n</th>
                                 <th onclick="sortTable('raw-table', 1)">Hora</th>
                                 <th onclick="sortTable('raw-table', 2)">Partidas</th>
                                 <th onclick="sortTable('raw-table', 3)">WR %</th>
@@ -635,7 +643,7 @@ ENHANCED_DASHBOARD_HTML = r"""
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td colspan="6" class="loading">⏳ Cargando datos...</td></tr>
+                            <tr><td colspan="6" class="loading">â³ Cargando datos...</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -646,7 +654,7 @@ ENHANCED_DASHBOARD_HTML = r"""
     <!-- Modal - Champion Details -->
     <div id="champion-modal" class="modal">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">✕</button>
+            <button class="modal-close" onclick="closeModal()">âœ•</button>
             <div class="modal-title">
                 <span id="modal-champion-name"></span>
                 <span class="source-badge" id="modal-source">data_dragon</span>
@@ -676,7 +684,7 @@ ENHANCED_DASHBOARD_HTML = r"""
                 const seen = new Set();
                 allChampions = rawRows.map(r => r.champion).filter(c => c && !seen.has(c) && seen.add(c));
 
-                // Cargar summary para el counter de anomalías
+                // Cargar summary para el counter de anomalÃ­as
                 try {
                     const summaryResp = await axios.get(`${API_BASE}/dashboard/summary`);
                     const summary = summaryResp.data.summary || {};
@@ -740,7 +748,7 @@ ENHANCED_DASHBOARD_HTML = r"""
                     A: { bg: 'linear-gradient(135deg, #ffa500, #ff8c00)', name: 'Muy Bueno' },
                     B: { bg: 'linear-gradient(135deg, #4ecdc4, #44b7aa)', name: 'Viable' },
                     C: { bg: 'linear-gradient(135deg, #95e1d3, #38a169)', name: 'Aceptable' },
-                    D: { bg: 'linear-gradient(135deg, #cccccc, #999999)', name: 'Débil' }
+                    D: { bg: 'linear-gradient(135deg, #cccccc, #999999)', name: 'DÃ©bil' }
                 };
 
                 // API devuelve tier_s / tier_a / tier_b / tier_c / tier_d con objetos {champion, winrate, pickrate, ...}
@@ -751,25 +759,25 @@ ENHANCED_DASHBOARD_HTML = r"""
                     totalChamps += champions.length;
                     const tierInfo = tierColors[tier] || { bg: '#666', name: tier };
 
-                    html += \`
+                    html += `
                         <div class="mb-20">
                             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 2px solid var(--arc-gold-dark);">
-                                <div style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: \${tierInfo.bg}; color: white; font-weight: bold; font-size: 20px;">\${tier}</div>
-                                <div><strong>Tier \${tier} - \${tierInfo.name}</strong> <span style="color: var(--arc-gold);">(\${champions.length})</span></div>
+                                <div style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: ${tierInfo.bg}; color: white; font-weight: bold; font-size: 20px;">${tier}</div>
+                                <div><strong>Tier ${tier} - ${tierInfo.name}</strong> <span style="color: var(--arc-gold);">(${champions.length})</span></div>
                             </div>
                             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px;">
-                    \`;
+                    `;
 
                     champions.forEach(champ => {
-                        html += \`
-                            <div style="background: rgba(0, 0, 0, 0.3); border: 1px solid var(--arc-gold-dark); border-radius: 4px; padding: 10px; text-align: center; cursor: pointer; transition: all 0.3s ease;" onclick="showChampionDetails('\${champ.champion}')">
-                                <div style="font-weight: bold; color: var(--arc-gold); margin-bottom: 5px; font-size: 12px;">\${champ.champion}</div>
+                        html += `
+                            <div style="background: rgba(0, 0, 0, 0.3); border: 1px solid var(--arc-gold-dark); border-radius: 4px; padding: 10px; text-align: center; cursor: pointer; transition: all 0.3s ease;" onclick="showChampionDetails('${champ.champion}')">
+                                <div style="font-weight: bold; color: var(--arc-gold); margin-bottom: 5px; font-size: 12px;">${champ.champion}</div>
                                 <div style="font-size: 11px; color: #aaa;">
-                                    <div>WR: <span class="text-success">\${champ.winrate?.toFixed(1)}%</span></div>
-                                    <div>PR: <span class="text-info">\${champ.pickrate?.toFixed(1)}%</span></div>
+                                    <div>WR: <span class="text-success">${champ.winrate?.toFixed(1)}%</span></div>
+                                    <div>PR: <span class="text-info">${champ.pickrate?.toFixed(1)}%</span></div>
                                 </div>
                             </div>
-                        \`;
+                        `;
                     });
 
                     html += '</div></div>';
@@ -787,7 +795,7 @@ ENHANCED_DASHBOARD_HTML = r"""
             const champion = document.getElementById('matchup-champion-filter').value;
             if (!champion) {
                 document.getElementById('matchup-table').querySelector('tbody').innerHTML =
-                    '<tr><td colspan="8" class="no-data">Selecciona un campeón</td></tr>';
+                    '<tr><td colspan="8" class="no-data">Selecciona un campeÃ³n</td></tr>';
                 return;
             }
 
@@ -796,7 +804,7 @@ ENHANCED_DASHBOARD_HTML = r"""
                 const limit = document.getElementById('matchup-limit-filter').value;
 
                 const response = await axios.get(
-                    `\${API_BASE}/champions/\${champion}/matchups?limit=\${limit}&hours=\${hours}`
+                    `${API_BASE}/champions/${champion}/matchups?limit=${limit}&hours=${hours}`
                 );
 
                 const data = response.data.data || [];
@@ -807,18 +815,18 @@ ENHANCED_DASHBOARD_HTML = r"""
                     return;
                 }
 
-                tbody.innerHTML = data.map(row => \`
+                tbody.innerHTML = data.map(row => `
                     <tr>
-                        <td>\${new Date(row.hour).toLocaleString('es-ES')}</td>
-                        <td>\${row.champion}</td>
-                        <td>\${row.matches}</td>
-                        <td class="text-success">\${row.wins}</td>
-                        <td class="text-danger">\${row.losses}</td>
-                        <td class="text-info">\${row.winrate?.toFixed(1)}%</td>
-                        <td class="trend-\${row.trend?.toLowerCase() || 'stable'}">\${row.trend || 'STABLE'}</td>
-                        <td><span class="source-badge">\${row.source}</span></td>
+                        <td>${new Date(row.hour).toLocaleString('es-ES')}</td>
+                        <td>${row.champion}</td>
+                        <td>${row.matches}</td>
+                        <td class="text-success">${row.wins}</td>
+                        <td class="text-danger">${row.losses}</td>
+                        <td class="text-info">${row.winrate?.toFixed(1)}%</td>
+                        <td class="trend-${row.trend?.toLowerCase() || 'stable'}">${row.trend || 'STABLE'}</td>
+                        <td><span class="source-badge">${row.source}</span></td>
                     </tr>
-                \`).join('');
+                `).join('');
 
             } catch (error) {
                 console.error("Error loading matchups:", error);
@@ -831,14 +839,14 @@ ENHANCED_DASHBOARD_HTML = r"""
             const champion = document.getElementById('items-champion-filter').value;
             if (!champion) {
                 document.getElementById('items-table').querySelector('tbody').innerHTML =
-                    '<tr><td colspan="4" class="no-data">Selecciona un campeón</td></tr>';
+                    '<tr><td colspan="4" class="no-data">Selecciona un campeÃ³n</td></tr>';
                 return;
             }
 
             try {
                 const limit = document.getElementById('items-limit-filter').value;
                 const response = await axios.get(
-                    `\${API_BASE}/champions/\${champion}/items?limit=\${limit}`
+                    `${API_BASE}/champions/${champion}/items?limit=${limit}`
                 );
 
                 const data = response.data.data || [];
@@ -849,14 +857,14 @@ ENHANCED_DASHBOARD_HTML = r"""
                     return;
                 }
 
-                tbody.innerHTML = data.map(row => \`
+                tbody.innerHTML = data.map(row => `
                     <tr>
-                        <td>\${row.item_id}</td>
-                        <td class="text-success">\${row.frequency}</td>
-                        <td>\${row.build_path || 'N/A'}</td>
-                        <td><span class="source-badge">\${row.source}</span></td>
+                        <td>${row.item_id}</td>
+                        <td class="text-success">${row.frequency}</td>
+                        <td>${row.build_path || 'N/A'}</td>
+                        <td><span class="source-badge">${row.source}</span></td>
                     </tr>
-                \`).join('');
+                `).join('');
 
             } catch (error) {
                 console.error("Error loading items:", error);
@@ -870,8 +878,8 @@ ENHANCED_DASHBOARD_HTML = r"""
                 const champion = document.getElementById('raw-champion-filter').value;
                 const limit = document.getElementById('raw-limit-filter').value;
 
-                let url = `\${API_BASE}/champions/all/raw-data?limit=\${limit}`;
-                if (champion) url += `&champion=\${champion}`;
+                let url = `${API_BASE}/champions/all/raw-data?limit=${limit}`;
+                if (champion) url += `&champion=${champion}`;
 
                 const response = await axios.get(url);
                 const data = response.data.data || [];
@@ -882,16 +890,16 @@ ENHANCED_DASHBOARD_HTML = r"""
                     return;
                 }
 
-                tbody.innerHTML = data.map((row, idx) => \`
-                    <tr onclick="showChampionDetails('\${row.champion}')">
-                        <td style="cursor: pointer; color: var(--arc-gold); font-weight: bold;">\${row.champion}</td>
-                        <td>\${new Date(row.hour).toLocaleString('es-ES')}</td>
-                        <td>\${row.matches}</td>
-                        <td class="text-success">\${row.winrate?.toFixed(1)}%</td>
-                        <td class="text-info">\${row.pickrate?.toFixed(1)}%</td>
-                        <td><span class="source-badge">\${row.source}</span></td>
+                tbody.innerHTML = data.map((row, idx) => `
+                    <tr onclick="showChampionDetails('${row.champion}')">
+                        <td style="cursor: pointer; color: var(--arc-gold); font-weight: bold;">${row.champion}</td>
+                        <td>${new Date(row.hour).toLocaleString('es-ES')}</td>
+                        <td>${row.matches}</td>
+                        <td class="text-success">${row.winrate?.toFixed(1)}%</td>
+                        <td class="text-info">${row.pickrate?.toFixed(1)}%</td>
+                        <td><span class="source-badge">${row.source}</span></td>
                     </tr>
-                \`).join('');
+                `).join('');
 
                 document.getElementById("stat-matches").textContent = data.length;
 
@@ -907,7 +915,7 @@ ENHANCED_DASHBOARD_HTML = r"""
 
             try {
                 const response = await axios.get(
-                    `\${API_BASE}/champions/\${championName}/details`
+                    `${API_BASE}/champions/${championName}/details`
                 );
 
                 const data = response.data;
@@ -915,58 +923,58 @@ ENHANCED_DASHBOARD_HTML = r"""
 
                 if (data.champion_data) {
                     const stats = data.champion_data;
-                    html += \`
+                    html += `
                         <div class="modal-section">
-                            <div class="modal-section-title">📊 Estadísticas Actuales</div>
+                            <div class="modal-section-title">ðŸ“Š EstadÃ­sticas Actuales</div>
                             <table style="width: 100%; margin-top: 10px;">
                                 <tr>
                                     <td style="padding: 5px;"><strong>Winrate:</strong></td>
-                                    <td class="text-success">\${stats.winrate?.toFixed(1)}%</td>
+                                    <td class="text-success">${stats.winrate?.toFixed(1)}%</td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 5px;"><strong>Pickrate:</strong></td>
-                                    <td class="text-info">\${stats.pickrate?.toFixed(1)}%</td>
+                                    <td class="text-info">${stats.pickrate?.toFixed(1)}%</td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 5px;"><strong>Partidas:</strong></td>
-                                    <td>\${stats.matches}</td>
+                                    <td>${stats.matches}</td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 5px;"><strong>Tierrada:</strong></td>
-                                    <td style="color: var(--arc-gold);">\${stats.tier || 'N/A'}</td>
+                                    <td style="color: var(--arc-gold);">${stats.tier || 'N/A'}</td>
                                 </tr>
                             </table>
                         </div>
-                    \`;
+                    `;
                 }
 
                 if (data.anomalies && data.anomalies.length > 0) {
-                    html += \`
+                    html += `
                         <div class="modal-section">
-                            <div class="modal-section-title">⚠️ Anomalías Detectadas</div>
-                    \`;
+                            <div class="modal-section-title">âš ï¸ AnomalÃ­as Detectadas</div>
+                    `;
 
                     data.anomalies.forEach(anom => {
-                        html += \`
+                        html += `
                             <div style="background: rgba(255, 153, 0, 0.1); border-left: 3px solid var(--state-warning); padding: 10px; margin-bottom: 10px; border-radius: 4px;">
-                                <div><strong>\${anom.type}</strong> - Confianza: <span class="text-warning">\${(anom.confidence * 100).toFixed(0)}%</span></div>
-                                <div style="margin-top: 5px; color: #ccc;">\${anom.description}</div>
+                                <div><strong>${anom.type}</strong> - Confianza: <span class="text-warning">${(anom.confidence * 100).toFixed(0)}%</span></div>
+                                <div style="margin-top: 5px; color: #ccc;">${anom.description}</div>
                             </div>
-                        \`;
+                        `;
                     });
 
                     html += '</div>';
                 }
 
-                html += \`
+                html += `
                     <div class="modal-section">
-                        <div class="modal-section-title">ℹ️ Información</div>
+                        <div class="modal-section-title">â„¹ï¸ InformaciÃ³n</div>
                         <div style="color: #aaa; font-size: 12px;">
-                            <div><strong>Fuente de Datos:</strong> <span class="source-badge">\${data.source}</span></div>
-                            <div style="margin-top: 5px;"><strong>Última Actualización:</strong> \${new Date(data.timestamp).toLocaleString('es-ES')}</div>
+                            <div><strong>Fuente de Datos:</strong> <span class="source-badge">${data.source}</span></div>
+                            <div style="margin-top: 5px;"><strong>Ãšltima ActualizaciÃ³n:</strong> ${new Date(data.timestamp).toLocaleString('es-ES')}</div>
                         </div>
                     </div>
-                \`;
+                `;
 
                 document.getElementById('modal-champion-name').textContent = championName;
                 document.getElementById('modal-source').textContent = data.source;
@@ -976,7 +984,7 @@ ENHANCED_DASHBOARD_HTML = r"""
             } catch (error) {
                 console.error("Error loading champion details:", error);
                 document.getElementById('modal-body').innerHTML =
-                    '<div class="text-danger">Error al cargar detalles del campeón</div>';
+                    '<div class="text-danger">Error al cargar detalles del campeÃ³n</div>';
             }
         }
 
