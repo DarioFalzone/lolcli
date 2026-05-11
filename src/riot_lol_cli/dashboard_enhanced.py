@@ -308,25 +308,7 @@ ENHANCED_DASHBOARD_HTML = r"""
             font-weight: bold;
         }
 
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
+        /* Modal — overlay usa patterns.css .modal-overlay, content local */
         .modal-content {
             background: rgba(10, 30, 61, 0.95);
             border: 2px solid var(--arc-gold-dark);
@@ -339,7 +321,8 @@ ENHANCED_DASHBOARD_HTML = r"""
             position: relative;
         }
 
-        .modal-close {
+        /* Mayor especificidad para ganarle a patterns.css */
+        .modal-content .modal-close {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -353,9 +336,10 @@ ENHANCED_DASHBOARD_HTML = r"""
             font-size: 16px;
             font-weight: bold;
             transition: all 0.2s ease;
+            margin-left: 0;
         }
 
-        .modal-close:hover {
+        .modal-content .modal-close:hover {
             transform: rotate(90deg);
             background: #ff0000;
         }
@@ -651,10 +635,10 @@ ENHANCED_DASHBOARD_HTML = r"""
         </div>
     </div>
 
-    <!-- Modal - Champion Details -->
-    <div id="champion-modal" class="modal">
+    <!-- Modal - Champion Details (modal-overlay = patterns.css toggle) -->
+    <div id="champion-modal" class="modal-overlay">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal()">âœ•</button>
+            <button class="modal-close" onclick="closeModal()">✕</button>
             <div class="modal-title">
                 <span id="modal-champion-name"></span>
                 <span class="source-badge" id="modal-source">data_dragon</span>
