@@ -104,7 +104,7 @@ button { font-family: inherit; cursor: pointer; }
 input  { font-family: inherit; }
 ::selection { background: rgba(45, 212, 191, 0.30); color: var(--text-primary); }
 
-.app-shell {
+.scraper-shell {
   max-width: 1440px;
   margin: 0 auto;
   padding: var(--s-6) var(--s-8) var(--s-12);
@@ -153,6 +153,32 @@ input  { font-family: inherit; }
 .header-right {
   display: flex; align-items: center; gap: var(--s-3);
   flex-wrap: wrap;
+}
+.home-hub-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: 9px 14px;
+  background: rgba(34, 211, 238, 0.08);
+  color: var(--text-primary);
+  border: 1px solid rgba(34, 211, 238, 0.22);
+  border-radius: var(--r-pill);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: transform var(--t-default), box-shadow var(--t-default), border-color var(--t-default), background var(--t-default);
+}
+.home-hub-link:hover {
+  transform: translateY(-1px);
+  background: rgba(34, 211, 238, 0.14);
+  border-color: rgba(34, 211, 238, 0.4);
+  box-shadow: 0 8px 20px rgba(34, 211, 238, 0.12);
+}
+.home-hub-link__icon {
+  font-size: 13px;
+  line-height: 1;
 }
 
 /* Patch badge */
@@ -777,11 +803,15 @@ input  { font-family: inherit; }
 }
 
 @media (max-width: 720px) {
-  .app-shell { padding: var(--s-4); }
+  .scraper-shell { padding: var(--s-4); }
+}
+
+@media (max-width: 480px) {
   .app-header { gap: var(--s-3); }
   .header-left { gap: var(--s-3); width: 100%; }
   .role-tabs { margin-left: 0; }
   .header-right { width: 100%; justify-content: space-between; }
+  .home-hub-link { order: -1; }
   .quick-stats { grid-template-columns: 1fr; }
   .tier-table thead th.th-sources,
   .tier-table tbody td:nth-last-child(1) { display: none; }

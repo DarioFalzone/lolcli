@@ -13,7 +13,7 @@ from pathlib import Path
 
 import uvicorn
 from fastapi import APIRouter, BackgroundTasks, FastAPI, HTTPException, Request
-from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 from riot_lol_cli.settings import get_meta_scraper_host, get_meta_scraper_port
@@ -27,6 +27,7 @@ logger = logging.getLogger(__name__)
 # Paths
 _MODULE_DIR = Path(__file__).resolve().parent
 _STATIC_DIR = _MODULE_DIR / "static"
+_FAVICON_PATH = _STATIC_DIR / "favicon.svg"
 
 _DESIGN_SYSTEM_DIR = _MODULE_DIR.parent / "draft_advisor" / "static" / "design-system"
 router = APIRouter()
@@ -83,6 +84,14 @@ async def serve_frontend():
             status_code=404,
         )
     return FileResponse(str(index_path))
+
+
+@router.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    """Sirve favicon explicito para evitar 404 ruidosos en consola."""
+    if _FAVICON_PATH.exists():
+        return FileResponse(str(_FAVICON_PATH), media_type="image/svg+xml")
+    return Response(status_code=204)
 
 
 # --- API Endpoints ---

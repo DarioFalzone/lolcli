@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
     <meta name="description" content="Dashboard de Meta de Soporte / ADC / Jungla — Visualiza la tier list, winrates, pickrates y builds óptimas en League of Legends">
     <title>Meta LoL — Dashboard</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Única dependencia externa: Inter (ya presente en el repo previo). Sin JetBrains Mono → usamos system mono stack en CSS. -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Anton&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 
-    <!-- Estilos del Meta Scraper (self-contained: NO importa /design-system para evitar conflictos) -->
-    <link rel="stylesheet" href="/static/styles.css">
+    <!-- Pattern Library v2: tokens canónicos + patterns drop-in. -->
+    <link rel="stylesheet" href="/design-system/tokens.css?v=2">
+    <link rel="stylesheet" href="/design-system/patterns.css?v=2">
+    <!-- Estilos locales del Meta Scraper (sobre-escribe tokens canónicos con paleta teal/cyan propia) -->
+    <link rel="stylesheet" href="/static/styles.css?v=2">
 </head>
 <body>
 
-<div class="app-shell" id="app-shell">
+<div class="scraper-shell" id="app-shell">
 
     <!-- =========================================================
          HEADER
@@ -60,6 +63,10 @@
         </div>
 
         <div class="header-right">
+            <a class="home-hub-link" href="http://localhost:8080/" title="Volver al Home Hub">
+                <span class="home-hub-link__icon" aria-hidden="true">⌂</span>
+                <span>Home Hub</span>
+            </a>
             <span class="patch-badge" id="patch-badge">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 L15 8 L22 9 L17 14 L18 21 L12 18 L6 21 L7 14 L2 9 L9 8 Z"/></svg>
                 <span class="patch-badge__text">—</span>
