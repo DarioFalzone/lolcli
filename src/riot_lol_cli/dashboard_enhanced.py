@@ -11,6 +11,7 @@ ENHANCED_DASHBOARD_HTML = r"""
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/favicon.ico" type="image/svg+xml">
     <title>LOLCLI Meta Analyzer - Enhanced</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Anton&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <style>
@@ -35,7 +36,7 @@ ENHANCED_DASHBOARD_HTML = r"""
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, var(--forge-black) 0%, var(--primary) 100%);
             color: var(--light);
             min-height: 100vh;
@@ -54,8 +55,11 @@ ENHANCED_DASHBOARD_HTML = r"""
 
         header h1 {
             font-size: 28px;
+            font-family: 'Anton', sans-serif;
+            font-style: italic;
             color: var(--arc-gold);
             margin-bottom: 10px;
+            letter-spacing: 0.02em;
         }
 
         .header-info {
@@ -666,9 +670,18 @@ ENHANCED_DASHBOARD_HTML = r"""
 
         async function initializeDashboard() {
             try {
-                // Cargar lista de campeones
-                const response = await axios.get(`${API_BASE}/champions/list`);
-                allChampions = response.data.champions || [];
+                // Cargar lista de campeones desde raw-data
+                const rawResp = await axios.get(`${API_BASE}/champions/all/raw-data?limit=200`);
+                const rawRows = rawResp.data.data || [];
+                const seen = new Set();
+                allChampions = rawRows.map(r => r.champion).filter(c => c && !seen.has(c) && seen.add(c));
+
+                // Cargar summary para el counter de anomalías
+                try {
+                    const summaryResp = await axios.get(`${API_BASE}/dashboard/summary`);
+                    const summary = summaryResp.data.summary || {};
+                    document.getElementById("stat-anomalies").textContent = summary.active_anomalies ?? 0;
+                } catch (_) { /* no bloquea el resto */ }
 
                 // Llenar selects
                 populateSelects();
@@ -717,29 +730,25 @@ ENHANCED_DASHBOARD_HTML = r"""
         async function updateDashboard() {
             try {
                 const response = await axios.get(`${API_BASE}/tier-list/current`);
-                const tiers = response.data;
+                const raw = response.data;
 
                 let html = '';
-
-                // Contar estadísticas
                 let totalChamps = 0;
-                let totalMatches = 0;
-                let tierSCount = tiers.S?.length || 0;
 
-                Object.keys(tiers).forEach(tier => {
-                    const champions = tiers[tier] || [];
+                const tierColors = {
+                    S: { bg: 'linear-gradient(135deg, #ff6b6b, #ff4444)', name: 'OP' },
+                    A: { bg: 'linear-gradient(135deg, #ffa500, #ff8c00)', name: 'Muy Bueno' },
+                    B: { bg: 'linear-gradient(135deg, #4ecdc4, #44b7aa)', name: 'Viable' },
+                    C: { bg: 'linear-gradient(135deg, #95e1d3, #38a169)', name: 'Aceptable' },
+                    D: { bg: 'linear-gradient(135deg, #cccccc, #999999)', name: 'Débil' }
+                };
+
+                // API devuelve tier_s / tier_a / tier_b / tier_c / tier_d con objetos {champion, winrate, pickrate, ...}
+                [['tier_s','S'], ['tier_a','A'], ['tier_b','B'], ['tier_c','C'], ['tier_d','D']].forEach(([key, tier]) => {
+                    const champions = raw[key] || [];
                     if (champions.length === 0) return;
 
                     totalChamps += champions.length;
-
-                    const tierColors = {
-                        S: { bg: 'linear-gradient(135deg, #ff6b6b, #ff4444)', name: 'OP' },
-                        A: { bg: 'linear-gradient(135deg, #ffa500, #ff8c00)', name: 'Muy Bueno' },
-                        B: { bg: 'linear-gradient(135deg, #4ecdc4, #44b7aa)', name: 'Viable' },
-                        C: { bg: 'linear-gradient(135deg, #95e1d3, #38a169)', name: 'Aceptable' },
-                        D: { bg: 'linear-gradient(135deg, #cccccc, #999999)', name: 'Débil' }
-                    };
-
                     const tierInfo = tierColors[tier] || { bg: '#666', name: tier };
 
                     html += \`
@@ -753,11 +762,11 @@ ENHANCED_DASHBOARD_HTML = r"""
 
                     champions.forEach(champ => {
                         html += \`
-                            <div style="background: rgba(0, 0, 0, 0.3); border: 1px solid var(--arc-gold-dark); border-radius: 4px; padding: 10px; text-align: center; cursor: pointer; transition: all 0.3s ease;" onclick="showChampionDetails('\${champ.name}')">
-                                <div style="font-weight: bold; color: var(--arc-gold); margin-bottom: 5px; font-size: 12px;">\${champ.name}</div>
+                            <div style="background: rgba(0, 0, 0, 0.3); border: 1px solid var(--arc-gold-dark); border-radius: 4px; padding: 10px; text-align: center; cursor: pointer; transition: all 0.3s ease;" onclick="showChampionDetails('\${champ.champion}')">
+                                <div style="font-weight: bold; color: var(--arc-gold); margin-bottom: 5px; font-size: 12px;">\${champ.champion}</div>
                                 <div style="font-size: 11px; color: #aaa;">
-                                    <div>WR: <span class="text-success">\${champ.winrate.toFixed(1)}%</span></div>
-                                    <div>PR: <span class="text-info">\${champ.pickrate.toFixed(1)}%</span></div>
+                                    <div>WR: <span class="text-success">\${champ.winrate?.toFixed(1)}%</span></div>
+                                    <div>PR: <span class="text-info">\${champ.pickrate?.toFixed(1)}%</span></div>
                                 </div>
                             </div>
                         \`;
@@ -766,7 +775,7 @@ ENHANCED_DASHBOARD_HTML = r"""
                     html += '</div></div>';
                 });
 
-                document.getElementById("tier-list-content").innerHTML = html;
+                document.getElementById("tier-list-content").innerHTML = html || '<p style="color:#aaa;">Sin datos de tier list</p>';
                 document.getElementById("stat-champions").textContent = totalChamps;
 
             } catch (error) {
