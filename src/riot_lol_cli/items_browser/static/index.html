@@ -3,40 +3,51 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
     <title>Items Browser — League of Legends</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Outfit:wght@400;700;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Anton&family=JetBrains+Mono:wght@400;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/design-system/tokens.css?v=2" />
+    <link rel="stylesheet" href="/design-system/patterns.css?v=2" />
+    <link rel="stylesheet" href="/static/styles.css?v=2" />
   </head>
   <body>
+    <div class="page-container">
     <header class="hero">
       <div class="hero-row">
         <span class="hero-eyebrow">RIOT LOL CLI</span>
-        <span class="hero-version" data-bind="version">—</span>
+        <div class="hero-actions">
+          <a class="home-hub-link" href="http://localhost:8080/" title="Volver al Home Hub">
+            <span class="home-hub-link__icon" aria-hidden="true">⌂</span>
+            <span>Home Hub</span>
+          </a>
+          <span class="hero-version" data-bind="version">—</span>
+        </div>
       </div>
       <h1 class="hero-title">ITEMS</h1>
       <p class="hero-subtitle">Catalogo completo · EN + ES · agrupado y filtrable</p>
     </header>
 
-    <section class="controls">
-      <div class="search-wrap">
+    <section class="control-panel controls">
+      <div class="control-row search-wrap">
         <input
           type="search"
           id="search-input"
+          class="search-input"
           placeholder="Buscar por nombre (EN o ES)..."
           autocomplete="off"
         />
-        <div class="lang-toggle" role="radiogroup">
+        <div class="segmented lang-toggle" role="radiogroup">
           <button data-lang="en" class="active">EN</button>
           <button data-lang="es">ES</button>
         </div>
       </div>
 
-      <div class="filter-row">
+      <div class="control-row filter-row">
         <label class="checkbox">
           <input type="checkbox" id="show-deprecated" />
           <span>Mostrar items obsoletos</span>
@@ -44,20 +55,20 @@
         <span class="counts" data-bind="counts"></span>
       </div>
 
-      <div class="group-tabs" id="group-tabs"></div>
+      <div class="tabs group-tabs" id="group-tabs"></div>
     </section>
 
     <main class="catalog">
       <div class="items-grid" id="items-grid">
-        <div class="loader">Cargando catalogo de items...</div>
+        <div class="state-block loader">Cargando catalogo de items...</div>
       </div>
     </main>
-
-    <div class="modal" id="item-modal" hidden>
-      <div class="modal-backdrop" data-close></div>
-      <div class="modal-content" id="modal-content"></div>
     </div>
 
-    <script src="/static/app.js"></script>
+    <div class="modal-overlay" id="item-modal" data-close>
+      <div class="modal" id="modal-content"></div>
+    </div>
+
+    <script src="/static/app.js?v=2"></script>
   </body>
 </html>
