@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="jungleBg" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0a1428"/>
+      <stop offset="1" stop-color="#0d1b2a"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="6" width="52" height="52" rx="14" fill="url(#jungleBg)"/>
+  <path d="M21 42C27 38 28 31 31 24C33 18 37 15 43 14C41 20 41 25 39 30C36 37 31 43 21 42Z" fill="#0bc6e3"/>
+  <path d="M22 42C28 35 31 28 33 19" stroke="#f0e6d2" stroke-width="3" stroke-linecap="round"/>
+  <path d="M29 28C26 27 24 25 23 22" stroke="#c89b3c" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M33 23C36 22 39 20 41 17" stroke="#c89b3c" stroke-width="2.4" stroke-linecap="round"/>
+</svg>

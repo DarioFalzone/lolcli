@@ -12,7 +12,7 @@ import logging
 from pathlib import Path
 
 from fastapi import APIRouter, FastAPI, HTTPException
-from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 from riot_lol_cli.settings import get_jungle_meta_host, get_jungle_meta_port
@@ -31,6 +31,8 @@ logger = logging.getLogger(__name__)
 _MODULE_DIR = Path(__file__).resolve().parent
 _STATIC_DIR = _MODULE_DIR / "static"
 _ITEMS_DIR = _MODULE_DIR.parent.parent.parent / "assets" / "items"
+_FAVICON_PATH = _STATIC_DIR / "favicon.svg"
+_DESIGN_SYSTEM_DIR = _MODULE_DIR.parent / "draft_advisor" / "static" / "design-system"
 
 router = APIRouter()
 
@@ -48,6 +50,14 @@ async def serve_frontend():
             status_code=404,
         )
     return FileResponse(str(index_path))
+
+
+@router.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    """Sirve favicon explicito para evitar 404 ruidosos en consola."""
+    if _FAVICON_PATH.exists():
+        return FileResponse(str(_FAVICON_PATH), media_type="image/svg+xml")
+    return Response(status_code=204)
 
 
 # --- API Endpoints ---
@@ -167,6 +177,13 @@ def create_app() -> FastAPI:
 
     if _STATIC_DIR.exists():
         application.mount("/static", StaticFiles(directory=str(_STATIC_DIR)), name="static")
+
+    if _DESIGN_SYSTEM_DIR.exists():
+        application.mount(
+            "/design-system",
+            StaticFiles(directory=str(_DESIGN_SYSTEM_DIR)),
+            name="design-system",
+        )
 
     if _ITEMS_DIR.exists():
         application.mount("/items", StaticFiles(directory=str(_ITEMS_DIR)), name="items")

@@ -161,13 +161,13 @@ function buildExpandedCard(champ) {
   a.appendChild(img);
 
   const name = document.createElement("div");
-  name.className = "champ-name";
+  name.className = "name champ-name";
   name.textContent = champ.display_name;
   a.appendChild(name);
 
   const stats = document.createElement("div");
-  stats.className = "champ-stats";
-  stats.innerHTML = `WR <span>${champ.winrate}%</span> · PR <span>${champ.pickrate}%</span>`;
+  stats.className = "stats champ-stats";
+  stats.innerHTML = `WR <b>${champ.winrate}%</b> · PR <b>${champ.pickrate}%</b>`;
   a.appendChild(stats);
 
   return a;
