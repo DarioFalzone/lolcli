@@ -1,5 +1,5 @@
 {
-  "last_scrape": "2026-05-09T08:51:16.731624+00:00",
+  "last_scrape": "2026-05-11T18:35:57.136328+00:00",
   "patch": "26.9",
   "snapshots": [
     {
@@ -97,6 +97,17 @@
       "source_gaps": 0,
       "champion_count": 77,
       "file": "normalized\\history\\2026-05-09T05-51-16_merged.json"
+    },
+    {
+      "timestamp": "2026-05-11T18:35:57.136328+00:00",
+      "role": "jungle",
+      "sources": [
+        "lolalytics",
+        "ugg"
+      ],
+      "source_gaps": 2,
+      "champion_count": 20,
+      "file": "normalized\\history\\2026-05-11T15-35-57_merged.json"
     }
   ],
   "latest_by_role": {
@@ -113,11 +124,11 @@
       "file": "normalized\\history\\2026-05-03T17-59-02_merged.json"
     },
     "jungle": {
-      "timestamp": "2026-05-09T08:51:16.731624+00:00",
+      "timestamp": "2026-05-11T18:35:57.136328+00:00",
       "patch": "26.9",
-      "champion_count": 77,
-      "source_gaps": 0,
-      "file": "normalized\\history\\2026-05-09T05-51-16_merged.json"
+      "champion_count": 20,
+      "source_gaps": 2,
+      "file": "normalized\\history\\2026-05-11T15-35-57_merged.json"
     }
   }
 }

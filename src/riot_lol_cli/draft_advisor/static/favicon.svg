@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="draftBg" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0a1428"/>
+      <stop offset="1" stop-color="#0f1923"/>
+    </linearGradient>
+    <linearGradient id="draftRing" x1="16" y1="12" x2="48" y2="52" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#c89b3c"/>
+      <stop offset="1" stop-color="#0ac8b9"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="6" width="52" height="52" rx="14" fill="url(#draftBg)"/>
+  <circle cx="32" cy="32" r="17" fill="none" stroke="url(#draftRing)" stroke-width="3"/>
+  <circle cx="32" cy="32" r="4" fill="#f0e6d2"/>
+  <path d="M32 15V23M49 32H41M32 49V41M15 32H23" stroke="#f0e6d2" stroke-width="3" stroke-linecap="round"/>
+</svg>

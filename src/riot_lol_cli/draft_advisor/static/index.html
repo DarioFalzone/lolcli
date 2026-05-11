@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
     <title>Draft Advisor — League of Legends</title>
     <meta name="description" content="Motor de recomendación de picks asistido por IA para drafts de League of Legends. Obtené sugerencias de campeones a nivel experto basadas en tu composición de equipo.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -49,6 +50,10 @@
                 </div>
             </div>
             <div class="header-meta">
+                <a class="home-hub-link" href="http://localhost:8080/" title="Volver al Home Hub">
+                    <span class="home-hub-link__icon" aria-hidden="true">⌂</span>
+                    <span>Home Hub</span>
+                </a>
                 <span class="pill pill-success patch-badge" id="patch-badge" aria-live="polite">
                     <span class="patch-dot" aria-hidden="true"></span>
                     Cargando…
@@ -140,6 +145,7 @@
                         <label class="ctx-label" for="target-role">Rol objetivo</label>
                         <select class="ctx-select" id="target-role" onchange="changeTargetRole(this.value)">
                             <option value="adc" selected>ADC</option>
+                            <option value="jungle">Jungla</option>
                             <option value="support">Soporte</option>
                         </select>
                     </div>
@@ -273,6 +279,6 @@
     </div>
 </div>
 
-<script src="/static/app.js?v=18"></script>
+<script src="/static/app.js?v=19"></script>
 </body>
 </html>

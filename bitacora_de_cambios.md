@@ -6,6 +6,183 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-05-11] Rediseño visual — Pattern Library v2 aplicada a las 6 surfaces
+
+### Que se hizo
+
+Se aplicó el bundle "Pattern Library v2" (`tokens.css` + `patterns.css`) a las 6 surfaces del proyecto. Cada surface recibió su propio PR/branch atómico, mergeable independientemente.
+
+**Draft Advisor `:8001`** (`feat/draft-advisor-pattern-library-v2`):
+- Se importó `patterns.css` después de `tokens.css` y se eliminó `compat-spa.css` (overrideaba `--text-primary` y tokens canónicos).
+- Body usa `.app-shell` (premium gradient). Slots: clase base `slot` preservada en JS para que `patterns.css` matchee `.slot.filled.ally/enemy`.
+- Modal: `border: 1px solid var(--border-metal-strong)` + deep `box-shadow`. Pills → `.pill.pill-gold/cyan`. Botón → `.btn.btn-primary`.
+- `styles.css` reescrito como overrides únicos (~50% menos de CSS).
+
+**Items Browser `:8004`** (`feat/items-browser-pattern-library-v2`):
+- Imports canónicos + `/design-system` StaticFiles en `server.py`.
+- Hero con Anton italic, `.control-panel` + `.segmented` (EN/ES), `.tabs` con counters, grid → `.entity-card`.
+- Modal usa `classList.add/remove("active")` (migrado desde `removeAttribute("hidden")`).
+- `styles.css` reescrito — ~70% del CSS redundante eliminado.
+
+**Jungle Meta `:8003`** (`feat/jungle-meta-pattern-library-v2`):
+- `.hero--dual` (dual gradient). Sidebar: `.cat-card.cat-card--accent-{cyan|gold|error}`.
+- Tier rows: `.tier-row.tier-row--{s|a|b|c}`. Tier tabs: `.tier-tab.tier-s/a/b/c` (compound, no BEM).
+- JS actualizado: `name.className = "name champ-name"`, stats con `<b>` para valores gold.
+- Página de detalle de campeón preservada intacta (splash hero, builds, runas).
+
+**Home Hub `:8080`** (`feat/home-hub-pattern-library-v2`):
+- Enfoque conservador (1071 LOC con tweaks system + ambient particles): solo imports canónicos + composición selectiva de clases.
+- `tokens.css` + `patterns.css` importados ANTES de `styles.css` local. `.stat-strip.stats-strip`, `.card.service-card` compuestos en JS.
+- Tweaks panel, particles, view-toggle y footer kbd hints preservados.
+
+**Meta Scraper `:8002`** (`feat/meta-scraper-pattern-library-v2`):
+- Decisión clave: `.app-shell` local renombrado a `.scraper-shell` para evitar colisión con el gradiente premium de `patterns.css .app-shell`.
+- Imports canónicos (tokens primero, styles local después) preservan la paleta teal/cyan propia del Meta Scraper.
+- Role-tabs animado, stat-cards 4 variantes y gaps-panel preservados.
+
+**Splash Viewer offline** (`feat/splash-viewer-pattern-library-v2`):
+- Surface ya alineada por diseño — tokens inline coinciden con `tokens.css` canónico.
+- No-op visual: solo se agregó comentario explicativo en el template. Sin cambios visuales.
+
+### Lecciones aprendidas
+- La clase base `slot` debe preservarse en JS al llenar slots (patterns.css la necesita para sus selectores compuestos).
+- `.app-shell` en `patterns.css` aplica gradientes premium — surfaces con shell propio deben renombrar su clase local.
+- Orden de carga canónico: fonts → tokens.css → patterns.css → styles.css local.
+- Para surfaces complejas (>800 LOC, paleta propia): integración conservadora por composición + imports canónicos, no rewrite completo.
+
+### Archivos modificados (por surface — ver `docs/pattern-library-v2-roadmap.md` para detalle)
+- `src/riot_lol_cli/draft_advisor/static/{index.html,styles.css}` + `app.js` (clases de slots)
+- `src/riot_lol_cli/items_browser/static/{index.html,styles.css}` + `app.js` + `server.py`
+- `src/riot_lol_cli/jungle_meta/static/{index.html,styles.css}` + `app.js` + `server.py`
+- `src/riot_lol_cli/home/static/index.html` + `app.js`
+- `src/riot_lol_cli/meta_scraper/static/{index.html,styles.css}`
+- `templates/splash-viewer.html`
+- `docs/pattern-library-v2-roadmap.md` (creado — hoja de ruta + log de cada PR)
+
+---
+
+## [2026-05-11] Draft Advisor - rol Jungla con Jungle Meta como fuente primaria
+
+### Que se hizo
+- Se extendio `target_role` con `jungle` y el front de `/draft` ahora permite elegir `Jungla` sin cambiar el default `ADC`.
+- Se agrego `jungle_meta_provider.py`: primero consulta `http://localhost:8003/api/v1/jungle/tier-list` y, si Jungle Meta esta offline, cae a `data/jungle_meta/patch_26.09.json` usando el loader local.
+- El scoring de Jungla v1 usa Jungle Meta como fuente principal: `S/A` pueden ser top, `B` queda como fallback y `C` solo puede ser top en `pool_only` sin mejores opciones.
+- La UI muestra chips `Tier`, `WR`, `PR`, `Patch`, estado de fuente, razon de Jungle Meta, build core y runa con iconos locales de items.
+- `Meta Scraper :8002` queda explicitamente como contexto secundario futuro; no altera el ranking de Jungla en esta iteracion.
+
+### Archivos creados
+- `src/riot_lol_cli/draft_advisor/jungle_meta_provider.py`
+- `tests/draft_advisor/test_jungle_meta_provider.py`
+- `tests/draft_advisor/test_jungle_recommendations.py`
+
+### Archivos modificados
+- `src/riot_lol_cli/draft_advisor/schemas.py`
+- `src/riot_lol_cli/draft_advisor/champion_data.py`
+- `src/riot_lol_cli/draft_advisor/api.py`
+- `src/riot_lol_cli/draft_advisor/scoring.py`
+- `src/riot_lol_cli/draft_advisor/server.py`
+- `src/riot_lol_cli/draft_advisor/static/index.html`
+- `src/riot_lol_cli/draft_advisor/static/app.js`
+- `src/riot_lol_cli/draft_advisor/static/styles.css`
+- `tests/draft_advisor/test_data_integrity.py`
+- `tests/test_server_factories.py`
+- `docs/draft_advisor/README.md`
+- `projects/active/draft-advisor/README.md`
+- `AGENTS.md`
+- `bitacora_de_cambios.md`
+
+## [2026-05-11] Home Hub - acceso directo transversal completado
+
+### Que se hizo
+- Se completo el acceso directo visible al `Home Hub` en las superficies de producto que todavia no lo tenian consistente: el dashboard original del `Meta Analyzer` (`/dashboard`) y la `Splash Gallery` offline.
+- El `Meta Analyzer` ahora ofrece retorno al Hub tanto en la version enhanced como en la version original servida desde `outputs/meta-analyzer-dashboard.html`.
+- La `Splash Gallery` quedo alineada con el resto de los desarrollos navegables mediante un acceso directo en el header, tanto en el template fuente como en el HTML generado actual.
+- Con esto, el criterio de UX del repo queda realmente transversal: toda surface navegable de producto debe ofrecer vuelta visible al `Home Hub`.
+
+### Archivos modificados
+- `src/riot_lol_cli/dashboard.py`
+- `outputs/meta-analyzer-dashboard.html`
+- `templates/splash-viewer.html`
+- `outputs/splash-viewer.html`
+- `tests/test_server_factories.py`
+- `bitacora_de_cambios.md`
+
+## [2026-05-11] Home Hub - estandarizacion de favicon y contrato UI transversal
+
+### Que se hizo
+- Se extendio la solucion del Home Hub a todos los proyectos activos integrados: `Draft Advisor`, `Meta Scraper`, `Jungle Meta`, `Items Browser`, `Meta Analyzer` y `Junglas Pro`.
+- Todas las UIs integradas ahora declaran un favicon explicito para evitar `404` ruidosos de `/favicon.ico` en consola.
+- Los servidores FastAPI con frontend propio exponen fallback de `favicon.ico` hacia un favicon real o `204` controlado.
+- `Meta Analyzer` incorporo favicon tanto en la fuente generadora de dashboards como en los HTML actualmente servidos desde `outputs/`.
+- Se documento el contrato para futuros proyectos del Home Hub: card registrada, health check valido, link visible de vuelta al Hub, favicon explicito y launch popup-safe.
+
+### Archivos modificados
+- `src/riot_lol_cli/draft_advisor/static/index.html`
+- `src/riot_lol_cli/draft_advisor/static/favicon.svg`
+- `src/riot_lol_cli/draft_advisor/server.py`
+- `src/riot_lol_cli/meta_scraper/static/index.html`
+- `src/riot_lol_cli/meta_scraper/static/favicon.svg`
+- `src/riot_lol_cli/meta_scraper/server.py`
+- `src/riot_lol_cli/items_browser/static/index.html`
+- `src/riot_lol_cli/items_browser/static/favicon.svg`
+- `src/riot_lol_cli/items_browser/server.py`
+- `src/riot_lol_cli/meta_api/routes/core.py`
+- `src/riot_lol_cli/dashboard.py`
+- `src/riot_lol_cli/dashboard_enhanced.py`
+- `outputs/meta-analyzer-dashboard.html`
+- `outputs/meta-analyzer-dashboard-enhanced.html`
+- `projects/active/junglas-pro/index.html`
+- `projects/active/junglas-pro/favicon.svg`
+- `AGENTS.md`
+- `.agent/rules/agent-workflow.md`
+- `.agent/rules/documentation-and-commits.md`
+- `projects/active/home-hub/README.md`
+- `docs/getting-started.md`
+- `tests/test_server_factories.py`
+
+## [2026-05-10] Navegacion transversal - acceso de vuelta al Home Hub
+
+### Que se hizo
+- Se agrego un acceso visible a `http://localhost:8080/` en las UIs activas para volver al Home Hub sin cerrar la navegacion actual.
+- El patron se adapto a cada surface: `Draft Advisor`, `Meta Scraper`, `Jungle Meta`, `Items Browser`, `Meta Analyzer` y `Junglas Pro`.
+- En `Jungle Meta` el acceso tambien aparece en la vista de detalle del campeon para no perder el retorno al hub al navegar por hash routes.
+- En `Meta Analyzer` se actualizo tanto la fuente generadora (`dashboard_enhanced.py`) como el HTML servido actualmente en `outputs/meta-analyzer-dashboard-enhanced.html`.
+
+### Archivos modificados
+- `src/riot_lol_cli/draft_advisor/static/index.html`
+- `src/riot_lol_cli/draft_advisor/static/styles.css`
+- `src/riot_lol_cli/meta_scraper/static/index.html`
+- `src/riot_lol_cli/meta_scraper/static/styles.css`
+- `src/riot_lol_cli/jungle_meta/static/index.html`
+- `src/riot_lol_cli/jungle_meta/static/styles.css`
+- `src/riot_lol_cli/items_browser/static/index.html`
+- `src/riot_lol_cli/items_browser/static/styles.css`
+- `src/riot_lol_cli/dashboard_enhanced.py`
+- `outputs/meta-analyzer-dashboard-enhanced.html`
+- `projects/active/junglas-pro/index.html`
+
+## [2026-05-10] Home Hub - fix de launch polling sin CORS
+
+### Que se hizo
+- **Corregido el flujo de `Abrir` en cards offline del Home Hub.** El frontend ya no hace `fetch` directo al `/health` cross-origin de cada servicio (`:8000`-`:8004`) mientras espera el arranque.
+- **Nuevo polling interno sobre `/api/v1/home/status`.** El browser ahora consulta solo al propio Hub (`:8080`) y usa el estado agregado para detectar cuando un servicio paso a `online`.
+- **Eliminado el falso error de consola** `net::ERR_FAILED 200 (OK)` que aparecia al iniciar Jungle Meta, Meta Analyzer u otros servicios sin CORS habilitado para `localhost:8080`.
+- **Endurecido el open del Home Hub.** Ahora reserva la nueva pestaña al momento del click y luego navega esa ventana cuando el servicio queda `online`, lo que reduce bloqueos por popup async.
+- **Declarado favicon explicito** en Home Hub y Jungle Meta para evitar el `404` ruidoso de `/favicon.ico` en consola.
+
+### Impacto
+- Los accesos directos del Home Hub vuelven a iniciar servicios sin quedar trabados en `Iniciando...`.
+- El comportamiento queda alineado con la arquitectura del Hub: el backend centraliza health checks y el frontend evita cross-origin innecesario.
+
+### Archivos modificados
+- `src/riot_lol_cli/home/server.py`
+- `src/riot_lol_cli/home/static/app.js`
+- `src/riot_lol_cli/home/static/index.html`
+- `src/riot_lol_cli/home/static/favicon.svg`
+- `src/riot_lol_cli/jungle_meta/server.py`
+- `src/riot_lol_cli/jungle_meta/static/index.html`
+- `src/riot_lol_cli/jungle_meta/static/favicon.svg`
+
 ## [2026-05-10] Pattern Library v2 — Draft Advisor (PR 1/6)
 
 ### Que se hizo

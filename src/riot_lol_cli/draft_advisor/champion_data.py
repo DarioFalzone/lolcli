@@ -14,6 +14,7 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
+from .jungle_meta_provider import JungleMetaProvider, JungleMetaSnapshot
 from .schemas import (
     AdcProfile,
     AdcProfilesFile,
@@ -80,6 +81,8 @@ class ChampionDataService:
         self._adc_meta_snapshot: dict = {}
         self._support_meta: dict[str, dict] = {}
         self._support_meta_snapshot: dict = {}
+        self._jungle_meta_provider = JungleMetaProvider()
+        self._jungle_meta_snapshot: JungleMetaSnapshot | None = None
         self._personal_adc_mastery: dict = {}
         self._personal_adc_tiers: dict[str, str] = {}
         self._excluded_adc_ids: set[str] = set()
@@ -455,6 +458,51 @@ class ChampionDataService:
     @property
     def total_supports(self) -> int:
         return len(self._support_profiles)
+
+    # ========================================================================
+    # Queries â€” Jungle Meta
+    # ========================================================================
+
+    def get_jungle_meta_snapshot(self, *, force_refresh: bool = False) -> JungleMetaSnapshot:
+        """Return Jungle Meta snapshot using HTTP first, then local fallback."""
+        if self._jungle_meta_snapshot is None or force_refresh:
+            self._jungle_meta_snapshot = self._jungle_meta_provider.load()
+        return self._jungle_meta_snapshot
+
+    def get_jungle_meta_champions(self) -> dict[str, dict]:
+        """Return Jungle Meta champions keyed by canonical champion ID."""
+        snapshot = self.get_jungle_meta_snapshot()
+        champion_ids = self.get_all_champion_ids()
+        return {str(champ["id"]): champ for champ in snapshot.champions if champ.get("id") in champion_ids}
+
+    def get_jungle_meta_champion(self, champion_id: str) -> dict | None:
+        """Return one Jungle Meta row if present and canonical."""
+        return self.get_jungle_meta_champions().get(champion_id)
+
+    def get_jungler_ids(self) -> set[str]:
+        """Return currently recommendable jungle champion IDs from Jungle Meta."""
+        return set(self.get_jungle_meta_champions().keys())
+
+    def get_jungle_meta_snapshot_info(self) -> dict:
+        """Return lightweight metadata for the Jungle Meta source."""
+        snapshot = self.get_jungle_meta_snapshot()
+        return {
+            "status": snapshot.status,
+            "patch": snapshot.patch,
+            "date_updated": snapshot.date_updated,
+            "source": snapshot.source,
+            "source_url": snapshot.source_url,
+            "champion_count": snapshot.champion_count,
+            "error": snapshot.error,
+        }
+
+    def get_jungle_meta_without_champion_base(self) -> list[str]:
+        """List Jungle Meta IDs that are not canonical in champion_base."""
+        snapshot = self.get_jungle_meta_snapshot()
+        champion_ids = self.get_all_champion_ids()
+        return sorted(
+            str(champ["id"]) for champ in snapshot.champions if champ.get("id") and champ.get("id") not in champion_ids
+        )
 
     # ========================================================================
     # Queries — Priority Profiles (Tier 3)

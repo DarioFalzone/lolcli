@@ -30,6 +30,22 @@ El puerto default `8080` se puede cambiar con `LOLCLI_HOME_PORT`.
   Meta Scraper, Jungle Meta e Items Browser.
 - `POST /api/v1/home/launch/{service_id}` lanza servicios offline usando
   comandos registrados, no comandos arbitrarios del usuario.
+- El launcher del Hub reserva la nueva pestaña desde el click y la navega
+  cuando el servicio llega a `online`; no espera al final para recien intentar
+  `window.open()`.
+
+## Checklist de integracion
+
+Cada proyecto o servicio nuevo que aparezca en el Home Hub debe cumplir este
+contrato minimo:
+
+- Card registrada en `SERVICES` con `health_path` y `ui_path` correctos.
+- Health check valido desde el Hub.
+- Link visible de vuelta al `Home Hub` dentro de la UI del proyecto.
+- Favicon explicito para evitar `404` ruidosos en consola (`/static/favicon.svg`,
+  `favicon.svg` local o equivalente).
+- Si el frontend se abre despues de un launch on-demand, evitar popups tardios:
+  reservar la ventana en el click y navegarla cuando el servicio quede `online`.
 
 ## Deuda conocida
 

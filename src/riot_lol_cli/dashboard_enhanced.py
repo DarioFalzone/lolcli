@@ -9,6 +9,7 @@ ENHANCED_DASHBOARD_HTML = r"""
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico" type="image/svg+xml">
     <title>LOLCLI Meta Analyzer - Enhanced</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -69,6 +70,30 @@ ENHANCED_DASHBOARD_HTML = r"""
             display: flex;
             gap: 20px;
             font-size: 14px;
+        }
+
+        .home-hub-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(200, 155, 60, 0.28);
+            background: rgba(200, 155, 60, 0.1);
+            color: var(--light);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+        }
+
+        .home-hub-link:hover {
+            transform: translateY(-1px);
+            border-color: rgba(200, 155, 60, 0.45);
+            background: rgba(200, 155, 60, 0.16);
+            box-shadow: 0 8px 20px rgba(200, 155, 60, 0.14);
         }
 
         .status-item {
@@ -448,6 +473,7 @@ ENHANCED_DASHBOARD_HTML = r"""
                     Última actualización: <strong id="last-update">--:--</strong>
                 </div>
             </div>
+            <a class="home-hub-link" href="http://localhost:8080/">⌂ Home Hub</a>
         </div>
     </header>
 

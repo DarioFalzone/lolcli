@@ -36,6 +36,7 @@ from .schemas import (
     DraftChampion,
     DraftState,
     EnemyCompProfile,
+    JunglePickContext,
     PickPosition,
     PoolMode,
     RawScores,
@@ -61,6 +62,14 @@ _PERSONAL_TIER_SCORES = {
 _STRONG_PERSONAL_TIERS = {"S", "A"}
 _STRONG_META_TIERS = {"S"}
 _STRONG_META_CLIMB_SCORE = 80.0
+
+_JUNGLE_TIER_SCORES = {
+    "S": 92.0,
+    "A": 80.0,
+    "B": 62.0,
+    "C": 40.0,
+}
+_JUNGLE_TOP_TIERS = {"S", "A"}
 
 
 @dataclass(frozen=True)
@@ -98,6 +107,14 @@ class _AdcMatchupBonusResult:
     rule_id: str
     score_delta: float
     reason: str
+
+
+@dataclass(frozen=True)
+class _JunglePriority:
+    eligibility: str
+    eligibility_reason: str
+    is_core: bool
+    can_be_top_pick: bool
 
 
 def _float_or_none(value: object) -> float | None:
@@ -154,6 +171,8 @@ class ScoringEngine:
         """
         if draft_state.target_role == AdvisorMode.SUPPORT:
             return self._recommend_support(draft_state)
+        if draft_state.target_role == AdvisorMode.JUNGLE:
+            return self._recommend_jungle(draft_state)
         return self._recommend_adc(draft_state)
 
     def _recommend_adc(self, draft_state: DraftState) -> RecommendationOutput:
@@ -1248,6 +1267,395 @@ class ScoringEngine:
             disadvantages.append("Puntaje general levemente inferior en este draft")
 
         return disadvantages[:3]
+
+    # ========================================================================
+    # JUNGLE MODE — Jungle Meta as source of truth
+    # ========================================================================
+
+    def _recommend_jungle(self, draft_state: DraftState) -> RecommendationOutput:
+        """Recommend junglers using Jungle Meta as the primary source."""
+        analysis = self._analyzer.analyze(draft_state)
+        snapshot = self._data.get_jungle_meta_snapshot()
+        jungle_rows = self._data.get_jungle_meta_champions()
+        if not snapshot.is_available or not jungle_rows:
+            raise ValueError("Jungle Meta no esta disponible para recomendar junglas.")
+
+        candidates = self._get_jungle_candidates(draft_state, jungle_rows)
+        if not candidates:
+            raise ValueError("No hay candidatos de Jungla disponibles para puntuar.")
+
+        tier_rank = {"S": 0, "A": 1, "B": 2, "C": 3}
+        best_rank = min(tier_rank.get(str(jungle_rows[cid].get("tier", "")).upper(), 9) for cid in candidates)
+
+        scored: list[tuple[str, float, ScoreBreakdown, _JunglePriority]] = []
+        fallback_scored: list[tuple[str, float, ScoreBreakdown, _JunglePriority]] = []
+        for jungler_id in candidates:
+            row = jungle_rows[jungler_id]
+            champion = self._data.get_champion(jungler_id)
+            if champion is None:
+                continue
+            priority = self._get_jungle_priority(row, draft_state, best_rank)
+            if priority.eligibility == "blocked_low_tier":
+                continue
+            raw = self._compute_raw_scores_jungle(row, draft_state, analysis)
+            breakdown = self._build_breakdown_jungle(raw, draft_state, jungler_id)
+            score = max(0.0, min(100.0, breakdown.pre_clamp_total))
+            item = (jungler_id, score, breakdown, priority)
+            if priority.is_core:
+                scored.append(item)
+            else:
+                fallback_scored.append(item)
+
+        scored.sort(key=lambda x: x[1], reverse=True)
+        fallback_scored.sort(key=lambda x: x[1], reverse=True)
+        visible_scored = scored + fallback_scored
+        top_candidates = [row for row in visible_scored if row[3].can_be_top_pick]
+        if not top_candidates:
+            raise ValueError("Ningun jungla paso los gates de tier del Jungle Meta.")
+
+        top = top_candidates[0]
+        alternatives = [row for row in visible_scored if row[0] != top[0]][:3]
+        top_pick = self._build_top_pick_jungle(top[0], top[2], jungle_rows[top[0]], analysis, draft_state, top[3])
+
+        alt_picks = []
+        for alt_id, _, alt_breakdown, alt_priority in alternatives:
+            alt_pick = self._build_alternative_jungle(
+                alt_id,
+                alt_breakdown,
+                jungle_rows[alt_id],
+                jungle_rows[top[0]],
+                alt_priority,
+            )
+            alt_picks.append(alt_pick)
+
+        state_hash = hashlib.md5(
+            json.dumps(draft_state.model_dump(), sort_keys=True, default=str).encode()
+        ).hexdigest()[:12]
+
+        return RecommendationOutput(
+            timestamp=datetime.now(timezone.utc).isoformat(),
+            draft_state_hash=state_hash,
+            mode=draft_state.user_pool.mode,
+            top_pick=top_pick,
+            alternatives=alt_picks,
+            draft_analysis=analysis,
+        )
+
+    def _get_jungle_candidates(self, draft_state: DraftState, jungle_rows: dict[str, dict]) -> list[str]:
+        picked = {champ.id for champ in draft_state.allies}
+        picked.update(champ.id for champ in draft_state.enemies)
+        picked.update(draft_state.bans)
+
+        available = {cid for cid in jungle_rows if cid not in picked}
+        pool = draft_state.user_pool
+
+        if pool.mode == PoolMode.POOL_ONLY:
+            return [cid for cid in pool.champions if cid in available]
+
+        def tier_of(cid: str) -> str:
+            return str(jungle_rows[cid].get("tier", "")).upper()
+
+        meta_candidates = {cid for cid in available if tier_of(cid) in {"S", "A", "B"}}
+        if pool.mode == PoolMode.POOL_PREFERRED:
+            pool_candidates = {cid for cid in pool.champions if cid in available}
+            meta_candidates.update(pool_candidates)
+        return list(meta_candidates)
+
+    def _get_jungle_priority(self, row: dict, draft_state: DraftState, best_rank: int) -> _JunglePriority:
+        tier = str(row.get("tier", "")).upper()
+        pool_only = draft_state.user_pool.mode == PoolMode.POOL_ONLY
+        in_pool = row.get("id") in draft_state.user_pool.champions
+
+        if tier in _JUNGLE_TOP_TIERS:
+            return _JunglePriority(
+                eligibility="core",
+                eligibility_reason=f"Tier {tier} vigente en Jungle Meta.",
+                is_core=True,
+                can_be_top_pick=True,
+            )
+        if tier == "B":
+            return _JunglePriority(
+                eligibility="fallback_tier_b",
+                eligibility_reason="Tier B: alternativa usable si no hay S/A disponible.",
+                is_core=False,
+                can_be_top_pick=best_rank >= 2,
+            )
+        if tier == "C" and pool_only:
+            return _JunglePriority(
+                eligibility="fallback_tier_c_pool_only",
+                eligibility_reason="Tier C: solo top si tu pool no tiene una opcion mejor.",
+                is_core=False,
+                can_be_top_pick=best_rank >= 3,
+            )
+        if tier == "C" and in_pool:
+            return _JunglePriority(
+                eligibility="fallback_tier_c_pool_preferred",
+                eligibility_reason="Tier C de tu pool: visible como alternativa, no como prioridad.",
+                is_core=False,
+                can_be_top_pick=False,
+            )
+        return _JunglePriority(
+            eligibility="blocked_low_tier",
+            eligibility_reason="Fuera del rango recomendado por Jungle Meta.",
+            is_core=False,
+            can_be_top_pick=False,
+        )
+
+    def _compute_raw_scores_jungle(
+        self,
+        row: dict,
+        draft_state: DraftState,
+        analysis: DraftAnalysis,
+    ) -> RawScores:
+        jungler_id = str(row.get("id", ""))
+        comfort = draft_state.user_pool.comfort.get(jungler_id)
+        comfort_raw = float(comfort * 10) if comfort is not None else 50.0
+        return RawScores(
+            ally_synergy=self._score_jungle_meta_strength(row),
+            enemy_matchup=self._score_jungle_draft_fit(row, analysis),
+            blind_pick_safety=self._score_jungle_blind_safety(row),
+            comp_gap_fill=self._score_jungle_comp_gap(row, analysis),
+            solo_queue_reliability=self._score_jungle_tempo(row),
+            scaling_fit=max(0.0, min(100.0, comfort_raw)),
+        )
+
+    def _score_jungle_meta_strength(self, row: dict) -> float:
+        tier = str(row.get("tier", "")).upper()
+        score = _JUNGLE_TIER_SCORES.get(tier, 30.0)
+        winrate = _float_or_none(row.get("winrate")) or 50.0
+        pickrate = _float_or_none(row.get("pickrate")) or 0.0
+        banrate = _float_or_none(row.get("banrate")) or 0.0
+        snapshot = self._data.get_jungle_meta_snapshot()
+        categories = snapshot.categories
+
+        score += max(-12.0, min(14.0, (winrate - 50.0) * 3.0))
+        score += min(pickrate, 18.0) * 0.35
+        score += min(banrate, 25.0) * 0.12
+        if row.get("id") in categories.get("overpowered", []):
+            score += 5.0
+        if row.get("id") in categories.get("bans", []):
+            score += 2.0
+        return max(0.0, min(100.0, score))
+
+    def _score_jungle_draft_fit(self, row: dict, analysis: DraftAnalysis) -> float:
+        champ = self._data.get_champion(str(row.get("id", "")))
+        if champ is None:
+            return 50.0
+        tags = champ.tags
+        allied = analysis.allied_comp_profile
+        enemy = analysis.enemy_comp_profile
+        score = 50.0
+
+        if not allied.has_engage:
+            score += (tags.engage - 5) * 4
+            score += (tags.cc - 5) * 2
+        if not allied.has_frontline:
+            score += (tags.tankiness - 5) * 3
+        if enemy.has_dive:
+            score += (tags.cc - 5) * 2
+            score += (tags.tankiness - 5) * 2
+        if enemy.has_tanks:
+            score += (tags.sustained_dps - 5) * 3
+        if enemy.has_poke:
+            score += (tags.engage - 5) * 2
+            score += (tags.mobility - 5) * 2
+        if allied.primary_damage_existing and champ.damage_type != allied.primary_damage_existing:
+            score += 6
+        elif allied.primary_damage_existing and champ.damage_type == allied.primary_damage_existing:
+            score -= 4
+
+        return max(0.0, min(100.0, score))
+
+    def _score_jungle_blind_safety(self, row: dict) -> float:
+        champ = self._data.get_champion(str(row.get("id", "")))
+        tier = str(row.get("tier", "")).upper()
+        score = {"S": 76.0, "A": 68.0, "B": 56.0, "C": 42.0}.get(tier, 35.0)
+        if champ is not None:
+            score += (champ.tags.mobility - 5) * 2
+            score += (champ.tags.tankiness - 5) * 1.5
+            score += (champ.tags.cc - 5) * 1.5
+        pickrate = _float_or_none(row.get("pickrate")) or 0.0
+        score += min(pickrate, 15.0) * 0.45
+        return max(0.0, min(100.0, score))
+
+    def _score_jungle_comp_gap(self, row: dict, analysis: DraftAnalysis) -> float:
+        champ = self._data.get_champion(str(row.get("id", "")))
+        if champ is None:
+            return 50.0
+        tags = champ.tags
+        allied = analysis.allied_comp_profile
+        score = 50.0
+
+        if "frontline" in allied.missing:
+            score += (tags.tankiness - 5) * 4
+        if "engage" in allied.missing:
+            score += (tags.engage - 5) * 4
+        if "peel" in allied.missing:
+            score += (tags.peel - 5) * 2
+            score += (tags.cc - 5) * 2
+        if "magic_dps" in allied.missing and champ.damage_type in (DamageType.MAGIC, DamageType.MIXED):
+            score += 10
+        if "physical_dps" in allied.missing and champ.damage_type in (DamageType.PHYSICAL, DamageType.MIXED):
+            score += 10
+
+        return max(0.0, min(100.0, score))
+
+    def _score_jungle_tempo(self, row: dict) -> float:
+        champ = self._data.get_champion(str(row.get("id", "")))
+        if champ is None:
+            return 50.0
+        score = 45.0
+        tags = champ.tags
+        score += (tags.early_power - 5) * 4
+        score += (tags.mobility - 5) * 2
+        score += (tags.pick_potential - 5) * 2
+        if row.get("primary_reason") in {"item_synergy", "champ_buff", "meta_stable"}:
+            score += 6
+        return max(0.0, min(100.0, score))
+
+    def _build_breakdown_jungle(self, raw: RawScores, draft_state: DraftState, jungler_id: str) -> ScoreBreakdown:
+        has_comfort = jungler_id in draft_state.user_pool.comfort
+        weights = {
+            "ally_synergy": 0.70 if has_comfort else 0.80,
+            "enemy_matchup": 0.05,
+            "blind_pick_safety": 0.05,
+            "comp_gap_fill": 0.05,
+            "solo_queue_reliability": 0.05,
+            "scaling_fit": 0.10 if has_comfort else 0.0,
+        }
+        weighted_dict = {}
+        weighted_sum = 0.0
+        for factor, raw_value in raw.model_dump().items():
+            contribution = raw_value * weights.get(factor, 0.0)
+            weighted_dict[factor] = round(contribution, 2)
+            weighted_sum += contribution
+        weighted_sum = round(weighted_sum, 2)
+        return ScoreBreakdown(
+            raw=raw,
+            weighted=WeightedScores(**weighted_dict),
+            comfort_bonus=0.0,
+            weighted_sum=weighted_sum,
+            pre_clamp_total=weighted_sum,
+            weights_used=weights,
+            draft_fit_score=round(
+                (raw.enemy_matchup + raw.blind_pick_safety + raw.comp_gap_fill + raw.solo_queue_reliability) / 4,
+                2,
+            ),
+            meta_strength_score=raw.ally_synergy,
+        )
+
+    def _build_top_pick_jungle(
+        self,
+        jungler_id: str,
+        breakdown: ScoreBreakdown,
+        row: dict,
+        analysis: DraftAnalysis,
+        draft_state: DraftState,
+        priority: _JunglePriority,
+    ) -> RecommendedPick:
+        display_name = self._data.get_champion_display_name(jungler_id)
+        total = max(0.0, min(100.0, breakdown.pre_clamp_total))
+        strengths = self._generate_strengths_jungle(row, analysis)
+        risks = self._generate_risks_jungle(row, priority)
+        not_rec = self._generate_not_recommended_jungle(row, draft_state)
+        pattern = row.get("playstyle") or "Juga alrededor del tempo de jungla y objetivos neutrales."
+
+        return RecommendedPick(
+            id=jungler_id,
+            display_name=display_name,
+            total_score=round(total, 1),
+            score_breakdown=breakdown,
+            jungle_context=self._build_jungle_pick_context(row, priority),
+            strengths_in_this_draft=strengths,
+            risks_in_this_draft=risks,
+            not_recommended_when=not_rec,
+            enabled_play_pattern=pattern,
+        )
+
+    def _build_alternative_jungle(
+        self,
+        alt_id: str,
+        alt_breakdown: ScoreBreakdown,
+        alt_row: dict,
+        top_row: dict,
+        priority: _JunglePriority,
+    ) -> AlternativePick:
+        display_name = self._data.get_champion_display_name(alt_id)
+        total = max(0.0, min(100.0, alt_breakdown.pre_clamp_total))
+        reason = f"Tier {alt_row.get('tier')} en Jungle Meta"
+        if priority.eligibility.startswith("fallback"):
+            reason += f" - {priority.eligibility_reason}"
+
+        advantages = []
+        disadvantages = []
+        if (_float_or_none(alt_row.get("winrate")) or 0.0) > (_float_or_none(top_row.get("winrate")) or 0.0):
+            advantages.append("Mejor winrate bruto en la fuente actual.")
+        if str(alt_row.get("tier")) != str(top_row.get("tier")):
+            disadvantages.append(f"Menor prioridad de tier que {top_row.get('display_name', 'el top pick')}.")
+        if priority.can_be_top_pick is False:
+            disadvantages.append("No deberia ser primera opcion con mejores tiers disponibles.")
+
+        return AlternativePick(
+            id=alt_id,
+            display_name=display_name,
+            total_score=round(total, 1),
+            score_breakdown=alt_breakdown,
+            jungle_context=self._build_jungle_pick_context(alt_row, priority),
+            one_line_reason=reason,
+            advantages_over_top_pick=advantages[:3],
+            disadvantages_vs_top_pick=disadvantages[:3],
+        )
+
+    def _build_jungle_pick_context(self, row: dict, priority: _JunglePriority) -> JunglePickContext:
+        snapshot = self._data.get_jungle_meta_snapshot()
+        return JunglePickContext(
+            tier=row.get("tier"),
+            winrate=_float_or_none(row.get("winrate")),
+            pickrate=_float_or_none(row.get("pickrate")),
+            banrate=_float_or_none(row.get("banrate")),
+            patch=snapshot.patch,
+            updated_at=snapshot.date_updated,
+            source_status=snapshot.status,
+            source=snapshot.source,
+            reason_text=row.get("reason_text"),
+            core_builds=row.get("core_builds", []),
+            core_rune=row.get("core_rune"),
+            eligibility=priority.eligibility,
+            eligibility_reason=priority.eligibility_reason,
+        )
+
+    def _generate_strengths_jungle(self, row: dict, analysis: DraftAnalysis) -> list[str]:
+        tier = row.get("tier", "?")
+        strengths = [f"Tier {tier} en la fuente viva de Jungle Meta."]
+        if row.get("reason_text"):
+            strengths.append(str(row["reason_text"]))
+        if analysis.allied_comp_profile.missing:
+            strengths.append("Aporta al armado de composicion segun los huecos detectados.")
+        if row.get("core_builds"):
+            strengths.append("Tiene build core registrada en Jungle Meta para este parche.")
+        return strengths[:4]
+
+    def _generate_risks_jungle(self, row: dict, priority: _JunglePriority) -> list[str]:
+        risks = []
+        tier = str(row.get("tier", "")).upper()
+        if tier in {"B", "C"}:
+            risks.append(priority.eligibility_reason)
+        banrate = _float_or_none(row.get("banrate")) or 0.0
+        if banrate >= 12:
+            risks.append("Ban rate alto: puede no llegar libre al draft.")
+        if priority.eligibility.startswith("fallback"):
+            risks.append("Es alternativa contextual, no prioridad si hay S/A disponible.")
+        return risks[:3] or ["Sin riesgos criticos detectados desde Jungle Meta."]
+
+    def _generate_not_recommended_jungle(self, row: dict, draft_state: DraftState) -> list[str]:
+        notes = []
+        tier = str(row.get("tier", "")).upper()
+        if tier == "C":
+            notes.append("Si tenes disponible un jungla S/A del meta actual.")
+        if draft_state.context.pick_position == PickPosition.BLIND and tier not in _JUNGLE_TOP_TIERS:
+            notes.append("Como blind pick si hay opciones de tier superior.")
+        notes.append("Si no dominas su pathing o ventana de primer clear.")
+        return notes[:3]
 
     # ========================================================================
     # SUPPORT MODE — Mainear soporte

@@ -34,6 +34,7 @@ No mover `src/`, `data/`, `assets/`, `templates/` o `scripts/` sin plan explicit
 - `projects/active/junglas-pro/` es standalone; no copiar su investigacion completa a `KB/`.
 - `support_profiles.json` tiene drift historico de conteos; no corregir incidentalmente.
 - **Home Hub Integracion:** Cada vez que se agregue un sistema, servicio o proyecto nuevo, es **obligatorio** actualizar el Home Hub (`src/riot_lol_cli/home/`) para incluirlo.
+- **Contrato visual/operativo del Home Hub:** toda UI integrada al Hub debe tener un acceso visible de vuelta al `Home Hub`, favicon explicito y no depender de `window.open()` disparado solo despues de esperas async; si hay launch on-demand, reservar la pestaña desde el click y navegarla al confirmar `online`.
 
 ## Agentes por subsistema
 

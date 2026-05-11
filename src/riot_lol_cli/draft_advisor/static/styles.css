@@ -63,6 +63,35 @@
 .header-meta {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  gap: var(--space-3);
+}
+.home-hub-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(10, 200, 185, 0.28);
+  background: rgba(10, 200, 185, 0.08);
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  transition: var(--motion-default);
+}
+.home-hub-link:hover {
+  transform: translateY(-1px);
+  border-color: rgba(10, 200, 185, 0.46);
+  background: rgba(10, 200, 185, 0.14);
+  box-shadow: 0 8px 18px rgba(10, 200, 185, 0.12);
+}
+.home-hub-link__icon {
+  font-size: 0.95rem;
+  line-height: 1;
 }
 .patch-badge {
   /* extiende .pill .pill-success — solo agrega el dot interno */
@@ -639,6 +668,72 @@
   text-align: right;
 }
 
+.jungle-build-block {
+  margin: 0 26px 20px;
+  padding: 16px;
+  border: 1.5px solid rgba(10, 200, 185, 0.22);
+  border-radius: var(--radius-md);
+  background: rgba(10, 200, 185, 0.045);
+}
+.jungle-build-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: 10px;
+  color: var(--arc-cyan-bright);
+  font-family: var(--font-display);
+  font-size: var(--font-body-sm);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}
+.jungle-rune {
+  color: var(--arc-gold-bright);
+  font-size: var(--font-pill);
+}
+.jungle-reason {
+  margin: 0 0 12px;
+  color: var(--text-secondary);
+  font-size: var(--font-body-sm);
+  line-height: var(--leading-normal);
+}
+.jungle-build {
+  display: grid;
+  grid-template-columns: minmax(130px, 210px) 1fr;
+  align-items: center;
+  gap: var(--space-3);
+  padding-top: 10px;
+  border-top: 1px solid var(--border-divider);
+}
+.jungle-build + .jungle-build {
+  margin-top: 10px;
+}
+.jungle-build-label {
+  color: var(--text-primary);
+  font-size: var(--font-body-sm);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+}
+.jungle-build-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.jungle-item {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-metal);
+  background: var(--surface-panel);
+  object-fit: cover;
+}
+@media (max-width: 720px) {
+  .jungle-build {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* EXPLANATION */
 .explain-grid {
   display: grid;
@@ -991,6 +1086,11 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
+  }
+  .header-meta {
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
   }
   .score-row {
     grid-template-columns: 120px 1fr 38px;

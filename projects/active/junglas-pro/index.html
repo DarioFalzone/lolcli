@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <title>Tier List — Junglas Élite de League of Legends</title>
     <meta name="description" content="Tier list analítico de los mejores junglas de League of Legends con paso por LCS y escena internacional. Ranking S/A/B/C con estadísticas, títulos y análisis detallado.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,6 +41,8 @@ body{font-family:var(--font-main);background:var(--bg-primary);color:var(--text-
 .nav-links{display:flex;gap:28px}
 .nav-links a{color:var(--text-muted);text-decoration:none;font-size:.85rem;font-weight:500;transition:color var(--transition);letter-spacing:.5px}
 .nav-links a:hover{color:var(--text-primary)}
+.home-hub-link{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:100px;border:1px solid rgba(94,234,212,0.22);background:rgba(94,234,212,0.08);color:var(--text-primary);text-decoration:none;font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;transition:var(--transition)}
+.home-hub-link:hover{transform:translateY(-2px);border-color:rgba(94,234,212,0.4);background:rgba(94,234,212,0.14);box-shadow:0 10px 24px rgba(94,234,212,0.12)}
 .section{position:relative;z-index:1;padding:100px 0}
 .section-header{display:flex;align-items:center;gap:20px;margin-bottom:56px}
 .section-tag{display:flex;align-items:center;justify-content:center;width:42px;height:42px;font-family:var(--font-heading);font-weight:700;font-size:.85rem;color:var(--accent-1);border:1px solid rgba(123,94,247,0.3);border-radius:12px;background:rgba(123,94,247,0.08);flex-shrink:0}
@@ -258,6 +261,7 @@ body{font-family:var(--font-main);background:var(--bg-primary);color:var(--text-
     <div class="nav-inner">
         <a href="#hero" class="nav-logo">JGL<span class="accent">TIER</span></a>
         <div class="nav-links">
+            <a class="home-hub-link" href="http://localhost:8080/">⌂ Home Hub</a>
             <a href="#tier-list">Tier List</a>
             <a href="#tabla">Tabla</a>
             <a href="#chart">Score Ranking</a>

@@ -88,6 +88,7 @@ class AdvisorMode(str, Enum):
 
     ADC = "adc"
     SUPPORT = "support"
+    JUNGLE = "jungle"
 
 
 class SupportArchetype(str, Enum):
@@ -404,7 +405,7 @@ class DraftState(BaseModel):
     bans: list[str] = Field(default_factory=list)
     context: DraftContext = Field(default_factory=DraftContext)
     user_pool: UserPool = Field(default_factory=UserPool)
-    target_role: AdvisorMode = AdvisorMode.ADC  # NUEVO: rutea a _recommend_adc() o _recommend_support()
+    target_role: AdvisorMode = AdvisorMode.ADC  # rutea a ADC, Support o Jungla
 
 
 # ============================================================================
@@ -453,12 +454,29 @@ class AdcPickContext(BaseModel):
     eligibility_reason: str | None = None
 
 
+class JunglePickContext(BaseModel):
+    tier: str | None = None
+    winrate: float | None = None
+    pickrate: float | None = None
+    banrate: float | None = None
+    patch: str | None = None
+    updated_at: str | None = None
+    source_status: str | None = None
+    source: str | None = None
+    reason_text: str | None = None
+    core_builds: list[dict] = Field(default_factory=list)
+    core_rune: dict | None = None
+    eligibility: str | None = None
+    eligibility_reason: str | None = None
+
+
 class RecommendedPick(BaseModel):
     id: str
     display_name: str
     total_score: float = Field(ge=0, le=100)
     score_breakdown: ScoreBreakdown
     adc_context: AdcPickContext | None = None
+    jungle_context: JunglePickContext | None = None
     strengths_in_this_draft: list[str]
     risks_in_this_draft: list[str]
     not_recommended_when: list[str]
@@ -471,6 +489,7 @@ class AlternativePick(BaseModel):
     total_score: float = Field(ge=0, le=100)
     score_breakdown: ScoreBreakdown
     adc_context: AdcPickContext | None = None
+    jungle_context: JunglePickContext | None = None
     one_line_reason: str
     advantages_over_top_pick: list[str]
     disadvantages_vs_top_pick: list[str]

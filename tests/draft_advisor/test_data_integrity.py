@@ -81,3 +81,15 @@ def test_champion_picker_api_smoke_loads_rosters() -> None:
     assert any(champion["id"] == "JarvanIV" for champion in payload)
     assert any(champion["id"] == "Bard" and champion["display_name"] == "Bardo" for champion in payload)
     assert any(champion["id"] == "MasterYi" and champion["display_name"] == "Maestro Yi" for champion in payload)
+    assert any(champion["id"] == "XinZhao" and champion["is_jungler"] is True for champion in payload)
+
+    junglers = client.get("/api/v1/draft/champions/junglers")
+    assert junglers.status_code == 200
+    jungle_payload = junglers.json()
+    assert any(champion["id"] == "XinZhao" and champion["jungle_tier"] == "S" for champion in jungle_payload)
+
+    version = client.get("/api/v1/draft/meta/version-info")
+    assert version.status_code == 200
+    version_payload = version.json()
+    assert version_payload["jungle_meta_patch"] == "26.09"
+    assert version_payload["jungle_meta_champion_count"] >= 1

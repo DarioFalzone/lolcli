@@ -9,7 +9,7 @@ Este es el mapa maestro del repositorio para agentes IA. Leelo antes de tocar co
 - CLI de match history y exportacion HTML.
 - Visor offline de splash arts.
 - Meta Analyzer con API FastAPI, SQLite, deteccion de anomalias y tier lists.
-- Draft Advisor para recomendar picks ADC y Support.
+- Draft Advisor para recomendar picks ADC, Support y Jungla.
 - Meta Scraper para recolectar datos externos de Support, ADC y jungla desde plataformas como OP.GG, LoLalytics y U.GG.
 - Base de conocimiento estrategica para el razonamiento de draft.
 
@@ -41,7 +41,7 @@ El repo esta en evolucion activa y puede tener un working tree sucio. Antes de e
 | Meta Analyzer | `src/riot_lol_cli/meta_analyzer/` | SQLAlchemy, estadistica | Activo | Colectores, anomalias, tier lists |
 | Database | `src/riot_lol_cli/database/` | SQLAlchemy ORM, SQLite | Activo | Modelos y manager de `data/meta_analyzer.db` |
 | Dashboard | `src/riot_lol_cli/dashboard.py`, `dashboard_enhanced.py` | HTML/JS embebido | Activo | Dashboards standalone y servidos por Meta API |
-| Draft Advisor | `src/riot_lol_cli/draft_advisor/` | FastAPI, Pydantic V2, JS vanilla | Activo | Recomendador ADC/Support y SPA en puerto 8001 |
+| Draft Advisor | `src/riot_lol_cli/draft_advisor/` | FastAPI, Pydantic V2, JS vanilla | Activo | Recomendador ADC/Support/Jungla y SPA en puerto 8001 |
 | Draft KB | `KB/`, `data/draft_advisor/kb/` | Markdown, JSON estructurado | Activo | Fuente conceptual y reglas estructuradas del Draft Advisor |
 | Meta Scraper | `src/riot_lol_cli/meta_scraper/` | FastAPI, Playwright, JSON | Activo | Scraping/normalizacion de meta support/ADC en puerto 8002 |
 | Jungle Meta | `src/riot_lol_cli/jungle_meta/` | FastAPI, JSON, SPA | Activo | Tier list de campeones jungla por patch en puerto 8003 |
@@ -105,10 +105,13 @@ src/riot_lol_cli/draft_advisor/server.py
   -> static/index.html + static/app.js + static/styles.css
   -> api.py (/api/v1/draft/*)
   -> champion_data.py
+  -> jungle_meta_provider.py (HTTP :8003 + fallback local)
   -> analyzer.py + scoring.py + scoring_rules.py
   -> data/draft_advisor/*.json
+  -> data/jungle_meta/patch_26.09.json (fallback jungla)
   -> data/draft_advisor/kb/*
   -> assets/splash_arts/ (frontend)
+  -> assets/items/ (builds de Jungla)
 
 src/riot_lol_cli/meta_scraper/server.py
   -> static/index.html + static/app.js + static/styles.css
@@ -303,6 +306,7 @@ Definida en `src/riot_lol_cli/draft_advisor/api.py`.
 - `GET /api/v1/draft/meta/version-info`
 - `GET /api/v1/draft/champions`
 - `GET /api/v1/draft/champions/adcs`
+- `GET /api/v1/draft/champions/junglers`
 - `GET /api/v1/draft/champions/supports`
 - `POST /api/v1/draft/recommend`
 - `GET /api/v1/draft/strategic-triangle/{champion_id}`
@@ -378,6 +382,7 @@ Los perfiles y relaciones del Draft Advisor deben usar IDs canonicos de `champio
 | `support_profiles.json` | Perfiles profundos de supports y picks anti-meta |
 | `priority_profiles.json` | Campeones de alto impacto para draft |
 | `scoring_weights.json` | Pesos del motor |
+| `data/jungle_meta/patch_26.09.json` | Fuente fallback de Jungla para Draft Advisor si `:8003` esta offline |
 | `data_manifest.json` | Metadata de versiones y validacion |
 | `kb/manifest.json` | Fuentes de la KB estructurada |
 | `kb/structured/*.json` | Reglas consumidas por el motor |
@@ -505,12 +510,14 @@ Reglas clave:
 11. **Meta Scraper jungla:** `latest_jungle_tier.json` usa agregacion ponderada por partidas cuando las fuentes traen `games_analyzed`; si una fuente falla queda en `source_gaps` y no se inventa dato.
 12. **Draft data IDs:** relaciones de `adc_profiles.json`, `support_profiles.json` y `personal_adc_mastery.json` deben validar contra IDs canonicos de `champion_base.json`.
 13. **ADC personal policy:** `excluded_from_recommendations` bloquea picks aunque sean meta; `never_top_pick` permite alternativa pero nunca primera opcion. Top ADC requiere maestria `S/A`, meta `S` o `climb_score >= 80`, y no estar vetado por reglas KB de linea como Nilah + Soraka vs Caitlyn + Nautilus ni por vetos tacticos de draft contra dive/burst sin frontline. Los bonus KB de matchup, como Xayah contra Malphite/TahmKench, solo suman fit de draft y no saltan el gate de meta/maestria.
-14. **Docs con drift:** algunos docs antiguos mencionan endpoints o rutas pre-reorganizacion.
-15. **SQLite concurrency:** `check_same_thread=False` permite FastAPI, pero writes concurrentes requieren cuidado.
-16. **Generated outputs:** `outputs/`, DBs, caches y artefactos generados no son fuente de verdad.
-17. **Dev scratch:** scripts manuales viven en `projects/dev-scratch/`; no dejarlos en `src/` si no son paquete.
-18. **Junglas Pro:** vive en `projects/active/junglas-pro/` como proyecto standalone; no copiarlo entero a `KB/`.
-19. **Home Hub Integracion:** Cada vez que se agregue un subsistema, proyecto o servicio FastAPI nuevo, es **obligatorio** actualizar el Home Hub (`src/riot_lol_cli/home/`) para incluirlo en el grid principal y en el health-check agregado.
+14. **Draft Advisor Jungla:** `target_role="jungle"` usa Jungle Meta `:8003` como fuente primaria y `data/jungle_meta/patch_26.09.json` como fallback local. Meta Scraper `:8002` no decide ranking de jungla en v1. Top Jungla permite `S/A`; `B` solo top si no quedan `S/A`; `C` solo top en `pool_only` sin mejores opciones.
+15. **Docs con drift:** algunos docs antiguos mencionan endpoints o rutas pre-reorganizacion.
+16. **SQLite concurrency:** `check_same_thread=False` permite FastAPI, pero writes concurrentes requieren cuidado.
+17. **Generated outputs:** `outputs/`, DBs, caches y artefactos generados no son fuente de verdad.
+18. **Dev scratch:** scripts manuales viven en `projects/dev-scratch/`; no dejarlos en `src/` si no son paquete.
+19. **Junglas Pro:** vive en `projects/active/junglas-pro/` como proyecto standalone; no copiarlo entero a `KB/`.
+20. **Home Hub Integracion:** Cada vez que se agregue un subsistema, proyecto o servicio FastAPI nuevo, es **obligatorio** actualizar el Home Hub (`src/riot_lol_cli/home/`) para incluirlo en el grid principal y en el health-check agregado.
+20. **Contrato UI para proyectos integrados al Home Hub:** todo frontend expuesto desde el Home Hub debe incluir un acceso visible de vuelta a `http://localhost:8080/`, declarar favicon explicito para evitar `404` ruidosos en consola y, si el launch depende de un wait/poll async, el Home Hub debe reservar la nueva pestaña en el click y navegarla cuando el servicio quede `online`.
 
 ## Alertas y Deuda Conocida
 

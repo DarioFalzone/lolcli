@@ -1,7 +1,7 @@
 # Draft Advisor — Documentación Técnica
 
 > Motor de recomendación de picks para ranked/clash de League of Legends.
-> Soporta roles **ADC** y **Soporte**. Ultima actualizacion: 2026-05-05.
+> Soporta roles **ADC**, **Soporte** y **Jungla**. Ultima actualizacion: 2026-05-11.
 
 ---
 
@@ -28,6 +28,7 @@ src/riot_lol_cli/draft_advisor/
 ├── scoring.py         Motor de scoring multifactor
 ├── analyzer.py        Análisis de composición (amenazas, gaps)
 ├── champion_data.py   Loader de JSONs + validación cruzada
+├── jungle_meta_provider.py Proveedor Jungle Meta HTTP + fallback local
 ├── schemas.py         Modelos Pydantic V2
 └── static/
     ├── index.html     SPA única
@@ -48,8 +49,9 @@ src/riot_lol_cli/draft_advisor/
 | `GET` | `/draft` | Sirve la SPA |
 | `GET` | `/api/v1/draft/champions` | Lista todos los campeones base |
 | `GET` | `/api/v1/draft/champions/adcs` | Lista ADCs con perfil detallado |
+| `GET` | `/api/v1/draft/champions/junglers` | Lista junglas recomendables desde Jungle Meta |
 | `GET` | `/api/v1/draft/champions/supports` | Lista Supports con perfil detallado |
-| `GET` | `/api/v1/draft/meta/version-info` | Version de patch, datos y snapshot ADC |
+| `GET` | `/api/v1/draft/meta/version-info` | Version de patch, datos, snapshot ADC y contexto Jungle Meta |
 | `POST` | `/api/v1/draft/recommend` | Recomienda pick dado un DraftState |
 | `GET` | `/api/v1/draft/health` | Estado del servicio |
 
@@ -67,7 +69,7 @@ src/riot_lol_cli/draft_advisor/
 }
 ```
 
-`target_role` acepta `"adc"` o `"support"`. Default del schema y del front: `"adc"`.
+`target_role` acepta `"adc"`, `"support"` o `"jungle"`. Default del schema y del front: `"adc"`.
 
 ### Respuesta ADC
 
@@ -81,6 +83,23 @@ En modo ADC, cada `top_pick` y alternativa incluye `adc_context`:
 `RecommendationOutput.adc_priority_context` agrega estado global del snapshot,
 warning de stale/missing, cantidad de candidatos elegibles y campeones detectados
 por scraping que todavia no tienen perfil local.
+
+### Respuesta Jungla
+
+En modo Jungla, cada `top_pick` y alternativa incluye `jungle_context`:
+
+- `tier`, `winrate`, `pickrate`, `banrate`: stats curadas de Jungle Meta.
+- `patch`, `updated_at`: version y fecha/hora de la fuente.
+- `source_status`: `http`, `local_fallback` o `unavailable`.
+- `source`: fuente humana del snapshot (`SkillCapped Patch 26.09 Jungle Tier List` en v1).
+- `core_builds`, `core_rune`: build/runa para mostrar items locales en la card.
+- `eligibility`: `core`, `fallback_tier_b`, `fallback_tier_c_pool_only` o `fallback_tier_c_pool_preferred`.
+
+La fuente primaria es `Jungle Meta` (`:8003`, endpoint `/api/v1/jungle/tier-list`).
+Si el servicio no esta levantado, `jungle_meta_provider.py` usa fallback local
+con `riot_lol_cli.jungle_meta.loader.load_jungle_tier_list()`, leyendo
+`data/jungle_meta/patch_26.09.json`. `Meta Scraper :8002` queda documentado
+como contexto secundario futuro: no decide el ranking de jungla en v1.
 
 ---
 
@@ -112,6 +131,27 @@ Reglas vigentes:
 El fit de draft calcula sinergias, counters, macro/micro, seguridad blind, gap
 fill, SoloQ y escalado. Ese puntaje queda como `draft_fit_score` dentro del
 `score_breakdown` y pesa 40% dentro de los candidatos que pasaron los gates.
+
+### Modo Jungla
+
+Jungla usa `Jungle Meta` como fuente de verdad v1. No existe todavia
+`personal_jungle_mastery.json`; el pool del usuario solo afecta visibilidad y
+comfort opcional, no reemplaza la tier list.
+
+| Capa | Peso final | Fuente |
+|------|------------|--------|
+| Fuerza Jungle Meta | 70%-80% | `http://localhost:8003/api/v1/jungle/tier-list` o fallback local |
+| Fit de draft | 20% | analyzer de composicion + tags de campeon |
+| Comfort opcional | 10% | `user_pool.comfort` cuando se envia |
+
+Reglas vigentes:
+
+- `S/A` puede ser top pick.
+- `B` solo puede ser top si no hay `S/A` disponible en el pool o todos los `S/A` estan pickeados/baneados.
+- `C` solo puede ser top en `pool_only` sin mejores opciones, con warning visible.
+- Campeones fuera de Jungle Meta no se recomiendan; si aparecen en el pool, la API los rechaza como "no esta en Jungle Meta".
+- `pool_preferred` prioriza meta `S/A/B` y agrega picks del pool como alternativas si estan en Jungle Meta.
+- El badge superior del front agrega estado de Jungle Meta cuando el rol seleccionado es `Jungla`.
 
 ### Modo Support
 
@@ -185,6 +225,14 @@ Snapshot opcional generado por Meta Scraper (mismas fuentes):
 - campos consumidos: `stats.win_rate`, `stats.pick_rate`, `stats.ban_rate`
 - el factor `solo_queue_reliability` de Support incorpora este bonus acotado a `[-10, +12]`
 - sin `climb_score` (el normalizer no lo calcula para support)
+
+### Jungle Meta para Draft Advisor
+Fuente primaria para recomendaciones de Jungla:
+- HTTP preferido: `http://localhost:8003/api/v1/jungle/tier-list`
+- fallback local: `data/jungle_meta/patch_26.09.json`
+- loader compartido: `riot_lol_cli.jungle_meta.loader.load_jungle_tier_list()`
+- campos consumidos: `jungle_champions[].tier`, `winrate`, `pickrate`, `banrate`, `reason_text`, `core_builds`, `core_rune`, `categories.overpowered`, `categories.bans`
+- `Meta Scraper :8002` y `latest_jungle_tier.json` quedan como contexto secundario futuro, sin impacto en scoring Jungla v1
 
 ### Proveniencia y sanitizacion de datos
 

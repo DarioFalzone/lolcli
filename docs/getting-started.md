@@ -52,7 +52,7 @@ $env:PYTHONPATH=(Resolve-Path .\src).Path
 
 - **URL**: http://localhost:8080
 - **Puertos monitoreados**: 8000 (Meta API), 8001 (Draft), 8002 (Meta Scraper), 8003 (Jungle Meta), 8004 (Items Browser)
-- **Features**: Health checks cada 30s, botón "Abrir" lanza servicios offline automáticamente, poll hasta 20s
+- **Features**: Health checks cada 30s, botón "Abrir" lanza servicios offline automáticamente, poll hasta 20s, apertura popup-safe y retorno visible al Home Hub desde las UIs integradas
 
 ---
 

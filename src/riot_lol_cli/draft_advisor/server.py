@@ -15,7 +15,7 @@ from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, RedirectResponse
+from fastapi.responses import FileResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 from riot_lol_cli import paths
@@ -29,6 +29,7 @@ from .api import router as draft_router
 # ============================================================================
 
 _STATIC_DIR = Path(__file__).parent / "static"
+_FAVICON_PATH = _STATIC_DIR / "favicon.svg"
 
 
 def create_app() -> FastAPI:
@@ -55,6 +56,10 @@ def create_app() -> FastAPI:
     if assets_dir.exists():
         application.mount("/assets/splash_arts", StaticFiles(directory=str(assets_dir)), name="splash_arts")
 
+    items_dir = paths.ASSETS_DIR / "items"
+    if items_dir.exists():
+        application.mount("/items", StaticFiles(directory=str(items_dir)), name="items")
+
     if _STATIC_DIR.exists():
         application.mount("/static", StaticFiles(directory=str(_STATIC_DIR)), name="static")
 
@@ -70,6 +75,13 @@ def create_app() -> FastAPI:
     async def root():
         """Redirect root to draft UI."""
         return RedirectResponse(url="/draft")
+
+    @application.get("/favicon.ico", include_in_schema=False)
+    async def favicon():
+        """Sirve favicon explicito para evitar 404 ruidosos en consola."""
+        if _FAVICON_PATH.exists():
+            return FileResponse(str(_FAVICON_PATH), media_type="image/svg+xml")
+        return Response(status_code=204)
 
     return application
 
