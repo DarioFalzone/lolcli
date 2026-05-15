@@ -1,0 +1,8 @@
+{
+  "source": "riot_calendar",
+  "source_url": null,
+  "fetched_at": "2026-05-15T09:10:37.952869Z",
+  "content_hash": "66f18f742f66be331b2026ebc41e53ce367240a2eb34040902382c4c13db913d",
+  "payload": {},
+  "error": "Client error '403 Forbidden' for url 'https://support-leagueoflegends.riotgames.com/hc/es-419/articles/360018987893-Calendario-de-lanzamiento-de-versiones-de-League-of-Legends'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403"
+}

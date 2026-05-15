@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="patchBg" x1="8" y1="8" x2="56" y2="56" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0a1428"/>
+      <stop offset="1" stop-color="#0d1b2a"/>
+    </linearGradient>
+  </defs>
+  <rect x="6" y="6" width="52" height="52" rx="14" fill="url(#patchBg)"/>
+  <rect x="16" y="14" width="32" height="38" rx="3" fill="none" stroke="#c89b3c" stroke-width="2.4"/>
+  <line x1="20" y1="22" x2="44" y2="22" stroke="#0bc6e3" stroke-width="2.2" stroke-linecap="round"/>
+  <line x1="20" y1="30" x2="40" y2="30" stroke="#f0e6d2" stroke-width="2" stroke-linecap="round"/>
+  <line x1="20" y1="38" x2="42" y2="38" stroke="#f0e6d2" stroke-width="2" stroke-linecap="round"/>
+  <line x1="20" y1="46" x2="36" y2="46" stroke="#c89b3c" stroke-width="2" stroke-linecap="round"/>
+</svg>

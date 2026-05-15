@@ -1,0 +1,241 @@
+{
+  "publisher": "riot",
+  "game": "lol",
+  "channel": "site",
+  "source_locale": "es-es",
+  "patch_version": "25.13",
+  "title": "Notas de la versión 25.13",
+  "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/patch-25-13-notes",
+  "published_at": "2025-06-24T00:00:00Z",
+  "fetched_at": "2026-05-15T07:30:56.326583Z",
+  "content_hash": "1450a73215c988d3c7ef71fa7883a2b1f67b174721267607376690417b443009",
+  "summary": "¡Os damos la bienvenida a la versión del MSI y el comienzo del Acto 2 de Florecer espiritual - Más allá! Por fin llega la gran actualización de ARAM, y ahora podréis lanzaros de cabeza al Puente del Carnicero o al Paso de Koeshin para darlo todo en su única calle. Por otro lado,…",
+  "sections": [
+    {
+      "title": "Introducción",
+      "heading_level": 2,
+      "blocks": [
+        "¡Os damos la bienvenida a la versión del MSI y el comienzo del Acto 2 de Florecer espiritual - Más allá! Por fin llega la gran actualización de ARAM, y ahora podréis lanzaros de cabeza al Puente del Carnicero o al Paso de Koeshin para darlo todo en su única calle. Por otro lado, ¡Arena vuelve para quedarse durante todo un año! Si os había roto el corazoncito su despedida, ¡ya podéis volver a disputar encarnizados combates en ella! Los cambios de EXP del pase que os adelantamos en las notas de la versión anterior ya están disponibles, así que ahora podéis completar misiones una y otra vez para conseguir de EXP del pase de la buena. Los cambios a la Grieta del Invocador no son más que pequeños ajustes o modificaciones de seguimiento a la última versión, como mejorar a Rammus, que se ha quedado más enclenque de lo que esperábamos, y otorgarle poder de combate por equipos a Kindred. Aprovechamos también para dar un repaso a otros campeones que hemos cambiado hace poco, como Vi, Twisted Fate y Nidalee. ¡También podéis leer las notas de la versión de TFT aquí ! Caden \"Riot Sakaar\" House Los platos fuertes de la versión"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Los platos fuertes de la versión",
+      "heading_level": 2,
+      "blocks": [
+        "Akali florecer espiritual, Hwei florecer espiritual, Karma florecer espiritual, Kayle florecer espiritual, Nidalee florecer espiritual, Zed florecer espiritual de prestigio y Morgana florecer espiritual estarán disponibles el 25 de junio a las 20:00 (hora peninsular). Vacaciones de verano de Riot"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Vacaciones de verano de Riot",
+      "heading_level": 2,
+      "blocks": [
+        "Este ciclo de la versión se solapa con las vacaciones de verano anuales de Riot, así que League of Legends (y Riot) van a tomarse un descanso de una semana para recargar pilas, relajarse y puede que terminar los pases de HoL, o sacarle todo el jugo a los mapas para subir de rango. Este descanso de siete días durante la semana del 4 de julio hará que la versión 25.13 dure tres semanas, hasta que llegue la versión 25.14 el 16 de julio. ARAM"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "ARAM",
+      "heading_level": 2,
+      "blocks": [
+        "A partir de esta versión, vamos a añadir dos mapas a ARAM para que cada partida tenga un toque fresco e innovador. Desde ahora a la versión 25.16, apareceréis en uno de los tres mapas, cada uno con un aspecto único y ligeras diferencias en la experiencia de juego y obstáculos del terreno, ¡así cada partida será una aventura nueva! Los mapas alternarán entre el Abismo de los Lamentos clásico, el nuevo Paso de Koeshin y el popular Puente del Carnicero. El mapa en el que vais a jugar se elegirá al azar, y todos los jugadores lo descubrirán al pasar a la pantalla de carga. El mapa no cambiará en función de la versión ni nada similar. Teniendo en cuenta que solo hay pequeñas diferencias en la experiencia de juego de cada mapa, no tendréis que agobiaros por elegir al mejor campeón para cada mapa, ya que no lo hay. Solo tendréis que elegir el campeón que queráis y disfrutar del mapa en el que os toque jugar. También vamos a actualizar los cambios de campeón para convertirlos en las cartas de campeón . Las cartas de campeón os ayudarán (a vosotros y a vuestros compañeros) a obtener más campeones con más frecuencia . Al comienzo de cada sala, se os ofrecerán dos opciones, y el campeón que no elijáis irá directamente al banquillo. Si tenéis suerte, ¡a veces es posible que haya hasta tres campeones entre los que elegir! Si os gustaría tener más información de los desarrolladores, así como un repaso más exhaustivo de estos cambios, ¡tenemos un artículo completísimo sobre los cambios de ARAM aquí ! Arena"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Arena",
+      "heading_level": 2,
+      "blocks": [
+        "Y, en caso de que os hayáis perdido el gran anuncio de la semana pasada..., ¡vuelve Arena! Pero no solo eso, ¡sino que podréis disfrutar de este modo durante 12 meses! Sí, lo habéis oído bien, ¡Arena volverá a estar disponible todo un año! La última vez que implementamos Arena, la respuesta fue positiva tanto mientras estuvo activa como después. Cuando la deshabilitamos, los jugadores la buscaron activamente y nos contaron lo mucho que habían disfrutado de esa forma alternativa de jugar a LoL. Hemos visto conversaciones al respecto en la comunidad en todas partes del mundo, nos lo habéis mencionado en nuestras redes sociales e incluso habéis inundado la beta de una región en la que Arena seguía estando disponible. Así que, vamos a cumplir con nuestra palabra. Prometimos que, si funcionaba bien, Arena estaría disponible más tiempo, ¡y así ha sido! Por el momento, esperamos que disfrutéis del retorno de Arena. A finales de año, os contaremos qué tal ha ido la cosa. Mejoras de próximos pases de batalla"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Mejoras de próximos pases de batalla",
+      "heading_level": 2,
+      "blocks": [
+        "Hemos estado pendientes a cómo avanzáis a lo largo de los pases de batalla durante cada acto, y queremos asegurarnos de que os resulte satisfactorio y respete el tiempo que invertís en LoL. Independientemente de si jugáis 4 horas al día o a la semana, queremos que se os recompense por el tiempo invertido. Por ello, vamos a introducir algunos cambios que mejoran cómo se puede conseguir EXP del pase de batalla en el Acto 2 en cuanto la versión 25.13 esté disponible . Experiencia del pase por maestría de campeón Empezando por la maestría de campeón, la experiencia por maestría de campeón pasará a estar vinculada a una misión. Con este nuevo sistema, podréis conseguir hasta 2500 de EXP con los campeones que queráis, en lugar de los que ofrece el conjunto de maestrías . Cuando lanzamos el conjunto de maestrías, queríamos que sirviese para encontrar a un par de campeones principales nuevos en función de las recomendaciones personalizadas que ofrecía, y de paso, os llevabais experiencia del pase. Ahora que lo hemos probado, hemos echado un ojo a la finalización de las misiones. Los porcentajes de finalización de las misiones no cumplen con nuestras expectativas, y el conjunto de maestrías tampoco ha servido para aumentar el número de campeones jugados, así que hemos decidido eliminarlo en la versión 25.13. Dicho esto, tendremos esta experiencia en cuenta para seguir mejorando el sistema de maestrías en el futuro. Misiones de regreso También vamos a modificar el funcionamiento de las misiones semanales para que se completen con mayor regularidad y los pases de batalla tengan un mejor progreso. A partir de la versión 25.13, en lugar de durar 7 días, las misiones semanales estarán disponibles durante 21 días. Esto significa que, cada semana, recibiréis otra tanda de misiones semanales nuevas, las cuales podréis completar a lo largo de varias semanas. Ahora mismo, no hay ningún método que permita a los jugadores ponerse al día con la EXP del pase de batalla al incorporarse a mitad de acto o si no han podido completar algunas misiones semanales porque estaban ocupados. Con esta actualización, podréis acumular misiones durante un tiempo para que, si no podéis jugar durante un par de semanas, os podáis poner al día con vuestro pase de batalla. Para esto, no hará falta que iniciéis sesión ni nada, ya que estarán disponibles en la lista de misiones cuando podáis entrar al juego. En la práctica, se verá algo así: Semana 1: Recibiréis las misiones de la semana 1. Semana 2: Recibiréis las misiones de la semana 2, y tendréis a vuestra disposición las misiones de la semana 1 que no hayáis completado. Semana 3: Recibiréis las misiones de la semana 3, y tendréis a vuestra disposición las misiones de las semanas 1 y 2 que no hayáis completado. Semana 4: Recibiréis las misiones de la semana 4, y tendréis a vuestra disposición las misiones de las semanas 2 y 3 que no hayáis completado. Las misiones pendientes de la semana 1 expirarán. Y así. Seguiremos estos cambios de cerca, así como vuestros comentarios al respecto, y aprovecharemos las oportunidades que surjan para que los pases resulten más satisfactorios para quienes apostéis por ellos. Modo de compatibilidad con Windows"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Modo de compatibilidad con Windows",
+      "heading_level": 2,
+      "blocks": [
+        "Con la versión 25.13, vamos a eliminar la posibilidad de que los jugadores puedan ejecutar League of Legends o Teamfight Tactics en el modo de compatibilidad de Windows. Tras pulsar el botón para jugar en el cliente de Riot con el modo de compatibilidad activado, aparecerá una ventana emergente que os ofrecerá desactivar esta opción y ejecutar el juego con normalidad. Si se rechaza, el cliente no se ejecutará. Sin embargo, si aceptáis, este modo se desactivará y el cliente se intentará ejecutar de forma normal y corriente. Esto no debería afectar a los jugadores y, de esta forma, nos aseguramos de que LoL se ejecuta con una configuración compatible. Para saber más sobre los requisitos del sistema de LoL, consultad el artículo de asistencia al jugador: Requisitos del sistema mínimos y recomendados . Actualización al sistema de informes"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Actualización al sistema de informes",
+      "heading_level": 2,
+      "blocks": [
+        "Hemos añadido una nueva categoría al enviar informes, \"Manipulación de clasificación\". Anteriormente, cuando alguien quería enviar un informe sobre un jugador que se dedicaba al \"boosting\" o al descenso deliberado, seleccionaba una categoría al azar para informar de dicho comportamiento, así que hemos añadido una nueva opción en los informes conforme seguimos trabajando para poner freno a este comportamiento inadecuado. Si veis que las cuentas de las personas con las que jugáis no tienen la clasificación que debería, avisadnos a través de esta opción. El \"boosting\" y el descenso deliberado, entre otros, no son actitudes correctas y profundizaremos en este tema pronto. También hemos cambiado el nombre de la categoría de informes de \"Sacrificio intencionado\" a \"Experiencia de juego disruptiva\", ya que describe mejor su uso y queda más claro qué abarca esta categoría. Los jugadores ya no recibirán penalizaciones por inactividad si se reconectan a la partida en curso y ganan. También hemos ajustado el periodo de notificación de avisos a quienes envían informes, de 14 a 3 días, para que las notificaciones sean más relevantes. Campeones"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Campeones",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Los ataques de la W ya no se pueden cancelar. Se reduce el tiempo de lanzamiento de la E. Hemos corregido algunos errores un tanto extraños de Briar, por lo que la experiencia de juego con la campeona debería ser mejor. W - Frenesí sanguinario NOVEDAD : Los ataques en frenesí ya no se pueden cancelar. Esto impide que a veces los ataques se cancelen al perseguir a enemigos que se mueven a toda velocidad. E - Alarido escalofriante Tiempo tras la canalización : 0,25 (se reduce con la velocidad de ataque) ⇒ 0,15 ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el daño de la W. Fiddlesticks no está pasando por un buen momento en la jungla, así que vamos a otorgarle más ganancia de oro, aunque esto no debería afectar a su versión de apoyo, la cual creemos que está estupendamente. W - Cosecha abundante Daño por segundo : 60/90/120/150/180 (+40 % del PH) ⇒ 60/90/120/150/180 (+45 % del PH) ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el coste de maná de la Q. Se reduce el enfriamiento de la R. Los jugadores más experimentados de Gangplank optan por opciones que pongan remedio a su falta de maná, como comprar un Cristal de maná al principio de la partida para luego venderlo, y esto es indicativo de que su patrón de juego no tiene mucho apoyo al principio de la partida. Vamos a facilitarle el inicio de partida y también a reducir ligeramente el enfriamiento de su definitiva, ya que también se ha quedado un poco atrás, incluso en los niveles más altos de juego. Q - Parrrlamento Coste de maná : 55/50/45/40/35 ⇒ 50/45/40/35/30 . R - Andanada de cañón Enfriamiento : 170/150/130 ⇒ 160/140/120 ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta la velocidad de ataque de la pasiva en los niveles inferiores. Tenemos cierto margen para convertir a Irelia en una luchadora más poderosa y, en concreto, queremos destacar el daño de repetición como escaramuzadora, pero sin depender de objetos. Por tanto, vamos a dar un poco de amor a la pasiva al inicio de la partida para que pueda intercambiar autoataques contra otros campeones cuerpo a cuerpo desde el principio. Pasiva - Fervor jonio Velocidad de ataque por acumulación : 7,5-25 % (según el nivel) ⇒ 10-25 % (según el nivel) . Velocidad de ataque máxima : 30-100 % (según el nivel) ⇒ 40-100 % (según el nivel) . [Corrección de error] La velocidad de ataque ahora se actualiza de forma dinámica si sube de nivel con mejoras."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el enfriamiento de la R en los niveles inferiores. Creemos que Kindred puede ser una elección para la jungla de nicho en el MSI de este año y tenemos más que margen para otorgarle una mejora sin que esto vaya en detrimento de las elecciones más frecuentes, así que nos vamos a centrar en su papel en los combates por equipo y la disponibilidad de su definitiva. R - Respiro de cordera Enfriamiento : 180/150/120 ⇒ 160/140/120 ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el daño de la Q en función del alcance. Las mejoras de Nidalee de la versión anterior no sirvieron para ponerla a la altura de los demás campeones. Eso sí, queremos centrarnos en mejorar su versión de la jungla mucho más que la de la calle superior. Creemos que su habilidad por excelencia debería suponer una mayor amenaza, así que vamos a dar rienda suelta a esa fantasía en la que asestáis sus lanzas aprovechando su alcance máximo. Q - Jabalina Aumento de daño en función de la distancia recorrida : 0-200 % ⇒ 0-225 % . Distancia necesaria para la amplificación de daño : 525 ⇒ sin cambios."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el crecimiento de vida. Aumentan la armadura y la resistencia mágica de la W. La actualización de Rammus ha servido para que sea más útil, pero aún no tiene el nivel de poder adecuado. Nos gustaría volver a mejorarlo y, más concretamente, devolver la amplia variedad de opciones que tenía antes a la hora de decidir qué habilidad mejorar al máximo primero. Vamos a otorgarle más durabilidad general y potenciar los niveles de Posición defensiva. De esta forma, también podrá optar a ser el armadillo más resistente de toda la Grieta. Estadísticas básicas Crecimiento de vida : 94 ⇒ 100 . W - Posición defensiva Armadura y resistencia mágica adicionales : 27 ⇒ 27/32/37/42/47 ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el daño de la W y se ajusta su coste de maná. Ahora mismo, Ryze es más fuerte de lo que debería, y vemos que pretende invadir la calle central en el MSI de este año, así que vamos a debilitar un poquitín su fase de calles al principio de la partida, ya que deja a sus rivales sin opciones. W - Prisión rúnica Daño : 70/100/130/160/190 (+70 % del PH) (+4 % del maná adicional) ⇒ 60/90/120/150/180 (+70 % del PH) (+4 % del maná adicional.) Maná : 40/55/70/85/100 ⇒ 50/60/70/80/90 ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el enfriamiento de la R. Las mejoras a Twisted Fate de la última versión excedieron nuestros objetivos y, ahora mismo, es el campeón de la calle central más fuerte del juego. Estamos encantados con que TF vuelva a recibir el amor y el cariño de los jugadores, pero tiene demasiado dominio en la Grieta, así que vamos a retirarle un tercio del poder que le otorgamos hace dos semanas. R - Destino Enfriamiento : 160/130/100 ⇒ 170/140/110 ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el escudo de la pasiva. Los ajustes de los niveles de las habilidades de la semana pasada aumentaron ligeramente su porcentaje de victorias en general, debido a que incentivaban lo que la mayoría de los jugadores ya hacían en partida. Ahora que hemos resuelto estos problemillas, vamos a debilitar a la jungla más potente del juego de cara al MSI de este año. La durabilidad del escudo de Vi es una de sus herramientas a las que más partido se le saca a nivel profesional, ya que no siempre tiene tanta importancia en los duelos, pero sí en los combates por equipo, algo de vital importancia en el más alto nivel. Esperamos que la combinación de los ajustes de estas últimas versiones no afecte a Vi en los niveles estándares de juego, pero reduzca su presencia a nivel profesional. Pasiva - Escudo de rayo Escudo : 14 % de la vida máxima ⇒ 12 % de la vida máxima ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce la armadura básica. Los cambios a Yorick de la última versión han servido para que haya una mayor variedad a la hora de elegir su primer objeto, pero no ha reducido su poder tanto como nos hubiese gustado. En esta versión, vamos a seguir debilitando su poder al principio de la partida con el objetivo de que los demás campeones puedan plantarle cara antes de que los objetos completos entren en juego. Estadísticas básicas Armadura : 39 ⇒ 36 . Cambios de equilibrio de ARAM"
+          ],
+          "subsections": []
+        }
+      ]
+    },
+    {
+      "title": "Cambios de equilibrio de ARAM",
+      "heading_level": 2,
+      "blocks": [
+        "¡Hola, fans de ARAM! En esta versión, vamos a echarle un cable a Shaco de DA y a Rengar potenciando sus configuraciones de objetos de asesino con un par de mejoras concretas. También vamos a eliminar las debilitaciones a ciertos campeones para que se acerquen más al nivel de poder deseado. En cuanto a las debilitaciones, vamos a centrarnos en los campeones que más frustrantes resultan. En cuanto a Mel, vamos a mantener su daño, pero a ralentizar la frecuencia con la que puede hacer uso de él para que el resto de jugadores puedan plantarle cara. Contadnos qué os parece, ¡y nos vemos en el Puente! Campeones"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Campeones",
+      "heading_level": 2,
+      "blocks": [
+        "Mel Velocidad de habilidades : 0 ⇒ -10 . Rengar Relación de DA de la Q : 100-115 % ⇒ 110-125% . Relación de DA de la Q potenciada : 130 % ⇒ 140 % . DA adicional de la E : 80 % ⇒ 100 % . Shaco DA adicional de la pasiva : 30 % ⇒ 40 % . Enfriamiento de la Q : 12/11,5/11/10,5/10 ⇒ 12/11/10/9/8 . DA adicional de la Q : 65 % ⇒ 85 % . DA adicional de la E : 80 % ⇒ 100 % . Singed Daño infligido : 95 % ⇒ 100 % . Udyr Curación : 90 % ⇒ 100 % . Escudos : 90 % ⇒ 100 % . Vayne Daño infligido : 105 % ⇒ 100 % . Volibear Bonificación de curación de la W según la vida que le falte : 8/10/12/14/16 % ⇒ 8/11/14/17/20 % (igual que en la Grieta del Invocador) . Yasuo Enfriamiento de la W : 25/23/21/19/17 ⇒ 27/25/23/21/19 . Actualización del doblaje en inglés de ciertos aspectos"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Actualización del doblaje en inglés de ciertos aspectos",
+      "heading_level": 2,
+      "blocks": [
+        "Ahora mismo, estamos grabando y poniéndonos al día con las frases de doblaje al inglés que faltan de los aspectos que hemos tenido que lanzar con el doblaje del aspecto básico del campeón. ¡Y vamos a empezar con Morgana florecer espiritual y Karma florecer espiritual! Su doblaje final en inglés estará disponible en la versión 25.13. A partir de ahora, pretendemos publicar los aspectos nuevos con su doblaje en inglés completo y final. Actualizaciones del sanctasanctórum y la tienda mítica"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Actualizaciones del sanctasanctórum y la tienda mítica",
+      "heading_level": 2,
+      "blocks": [
+        "Morgana florecer espiritual estará disponible en el sanctasanctórum en la versión 25.13. El siguiente contenido también estará disponible en la tienda mítica: Golpe final del nexo En flor (250 esencias míticas) Emoticono animado de Morgana florecer espiritual: En la palma de mi mano (25 esencias míticas) Esto significa que Mordekaiser Sahn-Uzal, su emoticono animado y el golpe final del nexo La Ordalía abandonarán el sanctasanctórum y la tienda mítica, respectivamente. Esencias míticas del sanctasanctórum En esta versión, vamos a mejorar las esencias míticas del sanctasanctórum. El sanctasanctórum otorgará más esencias míticas por chispas ancestrales de media, y también de forma general. Para esto, otorgaremos 2 esencias míticas cada vez que consigáis un icono o un emoticono, por lo que los resultados del nivel B, los más comunes, serán aún mejor. Además, también vamos a reducir ligeramente la probabilidad de obtención de los mayores botines de esencias míticas. También vamos a aumentar el botín por duplicados del nivel S de variantes míticas, de 100 a 130 esencias míticas. Esto hará que obtener duplicados de variantes míticas tenga un valor similar a las recompensas por duplicados de aspectos exaltados. Este cambio está disponible en la versión 25.13 y se reflejará en la siguiente variante mítica. Todos estos cambios se reflejarán en la tabla de probabilidades del cliente, en la pestaña del sanctasanctórum. Icono aleatorio ⇒ icono aleatorio + 2 esencias míticas Emoticono aleatorio ⇒ emoticono aleatorio + 2 esencias míticas Duplicado de variante mítica de nivel S: 100 esencias míticas ⇒ 130 esencias míticas Prueba de avance de aspectos en la tienda del cliente"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Prueba de avance de aspectos en la tienda del cliente",
+      "heading_level": 2,
+      "blocks": [
+        "Es posible que, al consultar los nuevos aspectos de Florecer espiritual y Sombra de tinta, hayáis visto un nuevo avance de aspectos en el cliente. No todo el mundo tiene acceso a esta función, ya que la estamos probando en estos momentos. Esta prueba tendrá lugar durante una o dos versiones y, luego, la desactivaremos. De vez en cuando, llevamos a cabo estas pruebas para evaluar las mejoras del cliente que nos planteamos. Si cumple con nuestros objetivos (resulta útil, fácil de encontrar, se usa con frecuencia, etc.), Podríamos añadirla en el futuro, mientras que si no, volverá al cajón desastre. Corrección de errores y mejoras de calidad"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Corrección de errores y mejoras de calidad",
+      "heading_level": 2,
+      "blocks": [
+        "Hemos corregido un error que provocaba que Viego no pudiese ver las opciones de mejora de un objeto de apoyo. Hemos corregido un error que provocaba que la W de Renata no otorgase el mérito del asesinato al campeón correspondiente si el último golpe lo asestaba una mascota. Hemos corregido un error que provocaba que la hazaña de contienda bélica no aumentase si las mascotas eran objetivo de la W de Renata y acababan con un campeón. Hemos corregido un error que provocaba que Viego no pudiese moverse con normalidad tras poseer a Jhin y usar su E, o la E de Caitlyn si había poseído a Pantheon anteriormente y había usado su E (Sí, es un error muy concreto, pero Viego es especialito). Hemos corregido un error que provocaba que la pasiva de Hwei se activase en una ubicación incorrecta en situaciones concretas. Hemos corregido un error que provocaba que la pasiva de Milio activase la runa de Electrocutar sobre un aliado. Hemos corregido un error que provocaba que la R de Azir no moviese a los súbditos. Hemos corregido un error que provocaba que las pasivas de Zac y Anivia se activasen a través de la torreta de la fuente. Hemos corregido este problema, y ahora funciona de forma similar a Ángel de la guarda. Hemos corregido un error que provocaba que, cuando Neeko se disfrazaba de Karma, el disco no girase. Hemos corregido un error que provocaba que el disco de Karma no girase tras reconectarse a una partida. Hemos corregido un error que provocaba que el indicador de la pasiva de Akali a veces apareciese sobre el campeón incorrecto. Hemos corregido un error que provocaba que los espectros de la Niebla de Senna consumiesen las activaciones adicionales de impacto de Senna. Hemos corregido un error que provocaba que Sylas conservase la habilidad definitiva que robaba si saltaba sobre el Heraldo de la Grieta y la usaba. Hemos corregido un error que provocaba que Sylas pudiese usar una habilidad definitiva robada por segunda vez si usaba Teleportar tras lanzar la definitiva. Hemos corregido un error que provocaba que, si Twitch pilotaba el Heraldo de la Grieta mientras usaba la Q, la carga no apareciese correctamente para el equipo enemigo. Hemos corregido un error que provocaba que Mel se llevase el crédito de un asesinato de un compañero con el ataque potenciado de la pasiva cuando Renata usaba su R. Hemos corregido un error que provocaba que Sylas usase el modelo de un campeón al lanzar una habilidad definitiva robada y teleportarse luego. Hemos corregido un error que provocaba que la segunda Q de Zilean sobre el mismo objetivo no tuviese efecto de sonido. Hemos corregido un error que provocaba que Ahri no recibiese la curación de su pasiva al estar en estasis. Hemos corregido un error que provocaba que la R de Katarina se cancelase al usar la E sobre la nada más allá de su alcance. Hemos corregido un error que provocaba que, cuando poseía a un enemigo con Rompecascos, Viego otorgase armadura y resistencia mágica a los súbditos de forma continua. Hemos corregido un error de la herramienta de práctica que provocaba que las acumulaciones de los objetos se sumasen de forma infinita en situaciones concretas. Hemos corregido un error de la herramienta de práctica que provocaba que Vara de las edades pudiese superar las 10 acumulaciones. Próximos aspectos y chromas"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Próximos aspectos y chromas",
+      "heading_level": 2,
+      "blocks": [
+        "Lanzaremos los siguientes aspectos a lo largo de esta versión: Zed florecer espiritual de prestigio Morgana florecer espiritual Akali florecer espiritual Hwei florecer espiritual Nidalee florecer espiritual Karma florecer espiritual Kayle florecer espiritual Lanzaremos los siguientes chromas a lo largo de esta versión: Kayle florecer espiritual Karma florecer espiritual Nidalee florecer espiritual Akali florecer espiritual Hwei florecer espiritual Artículos relacionados"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Artículos relacionados",
+      "heading_level": 2,
+      "blocks": [
+        "Actualizaciones del juego 2025-08-12T18:00:00.000Z Notas de la versión 25.16 ¡Versión 25.16 lista para el despegue! Actualizaciones del juego 2025-05-13T18:00:00.000Z Notas de la versión 25.10 La versión 25.10 está escrita en las estrellas ✨ Actualizaciones del juego 2025-02-19T19:00:00.000Z Notas de la versión 25.04 ¡No os perdáis la última versión del acto 1! Actualizaciones del juego 2024-08-13T18:00:00.000Z Notas de la versión 14.16 ¡Celebrad la grandeza durante la versión 14.16! Actualizaciones del juego 2023-02-07T19:00:00.000Z Notas de la versión 13.3 Preparaos para una versión cósmica, ¡ya está aquí la 13.3! Actualizaciones del juego 2022-12-06T19:00:00.000Z Notas de la versión 12.23 ¡Ya está aquí la versión 12.23, la última del año! Actualizaciones del juego 2022-11-01T18:00:00.000Z Notas de la versión 12.21 ¡Ya está aquí la final del Campeonato Mundial de LoL! ¡Y K'Sante! ¡Y la pretemporada está a la vuelta de la esquina! Con tantas cosas a las que prestar atención, aquí tenemos la versión 12.21, porque lo bueno y breve... Actualizaciones del juego 2022-10-04T18:00:00.000Z Notas de la versión 12.19 ¿Mejoras a Blitzcrank luchador? ¿Mejoras a Rakan de PH? ¿Estamos soñando o ya es la versión 12.19? ¡Os damos la bienvenida a una versión llena de mejoras fuera del metajuego! Actualizaciones del juego 2022-09-07T18:00:00.000Z Notas de la versión 12.17 ¡La penúltima versión antes del mundial! Actualizaciones del juego 2022-06-07T18:00:00.000Z Notas de la versión 12.11 ¡Uníos a Bel'Veth y al mar lavanda en la versión 12.11!"
+      ],
+      "subsections": []
+    }
+  ],
+  "assets": [],
+  "scraper_version": "legacy-v33b",
+  "raw_html_ref": null
+}

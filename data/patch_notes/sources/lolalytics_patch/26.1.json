@@ -1,0 +1,14 @@
+{
+  "source": "lolalytics_patch",
+  "source_url": "https://lolalytics.com/lol/tierlist/",
+  "fetched_at": "2026-05-15T09:11:36.359989Z",
+  "content_hash": "5dc1c7ef3563af40108625db7f329fceec93e89f0514bad924aa6cbf0e96005b",
+  "payload": {
+    "source_url": "https://lolalytics.com/lol/tierlist/?patch=26.1",
+    "patch_label": "26.1",
+    "rows_count": 0,
+    "rows": [],
+    "fetched_at": "2026-05-15T09:11:36.359580+00:00"
+  },
+  "error": null
+}

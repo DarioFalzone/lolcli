@@ -1,0 +1,156 @@
+{
+  "source": "ugg_patch",
+  "source_url": "https://u.gg/lol/tier-list",
+  "fetched_at": "2026-05-15T09:21:44.602369Z",
+  "content_hash": "d038233a67c07ee9295aa58d71a5f68d84bd377140fa65af7599f452e3ecba4f",
+  "payload": {
+    "source_url": "https://u.gg/lol/tier-list",
+    "patch_label_active": "26.9",
+    "patch_label_reported": "26.10",
+    "rows_count": 35,
+    "rows": [
+      {
+        "name": "Hwei",
+        "href": "https://u.gg/lol/champions/hwei/build/adc"
+      },
+      {
+        "name": "Riven",
+        "href": "https://u.gg/lol/champions/riven/build/mid"
+      },
+      {
+        "name": "Smolder",
+        "href": "https://u.gg/lol/champions/smolder/build/adc"
+      },
+      {
+        "name": "Xerath",
+        "href": "https://u.gg/lol/champions/xerath/build/adc"
+      },
+      {
+        "name": "Karthus",
+        "href": "https://u.gg/lol/champions/karthus/build/adc"
+      },
+      {
+        "name": "Vel'Koz",
+        "href": "https://u.gg/lol/champions/velkoz/build/adc"
+      },
+      {
+        "name": "Rek'Sai",
+        "href": "https://u.gg/lol/champions/reksai/build/jungle"
+      },
+      {
+        "name": "Lux",
+        "href": "https://u.gg/lol/champions/lux/build/adc"
+      },
+      {
+        "name": "Katarina",
+        "href": "https://u.gg/lol/champions/katarina/build/adc"
+      },
+      {
+        "name": "Rammus",
+        "href": "https://u.gg/lol/champions/rammus/build/jungle"
+      },
+      {
+        "name": "Cassiopeia",
+        "href": "https://u.gg/lol/champions/cassiopeia/build/top"
+      },
+      {
+        "name": "Seraphine",
+        "href": "https://u.gg/lol/champions/seraphine/build/adc"
+      },
+      {
+        "name": "Bel'Veth",
+        "href": "https://u.gg/lol/champions/belveth/build/jungle"
+      },
+      {
+        "name": "Malphite",
+        "href": "https://u.gg/lol/champions/malphite/build/mid"
+      },
+      {
+        "name": "Fizz",
+        "href": "https://u.gg/lol/champions/fizz/build/mid"
+      },
+      {
+        "name": "Pantheon",
+        "href": "https://u.gg/lol/champions/pantheon/build/mid"
+      },
+      {
+        "name": "Kayle",
+        "href": "https://u.gg/lol/champions/kayle/build/mid"
+      },
+      {
+        "name": "Vladimir",
+        "href": "https://u.gg/lol/champions/vladimir/build/mid"
+      },
+      {
+        "name": "Sona",
+        "href": "https://u.gg/lol/champions/sona/build/support"
+      },
+      {
+        "name": "Evelynn",
+        "href": "https://u.gg/lol/champions/evelynn/build/jungle"
+      },
+      {
+        "name": "Taric",
+        "href": "https://u.gg/lol/champions/taric/build/support"
+      },
+      {
+        "name": "Aurelion Sol",
+        "href": "https://u.gg/lol/champions/aurelionsol/build/adc"
+      },
+      {
+        "name": "Udyr",
+        "href": "https://u.gg/lol/champions/udyr/build/jungle"
+      },
+      {
+        "name": "Nidalee",
+        "href": "https://u.gg/lol/champions/nidalee/build/jungle"
+      },
+      {
+        "name": "Xerath",
+        "href": "https://u.gg/lol/champions/xerath/build/mid"
+      },
+      {
+        "name": "Kayle",
+        "href": "https://u.gg/lol/champions/kayle/build/top"
+      },
+      {
+        "name": "Naafiri",
+        "href": "https://u.gg/lol/champions/naafiri/build/top"
+      },
+      {
+        "name": "Diana",
+        "href": "https://u.gg/lol/champions/diana/build/mid"
+      },
+      {
+        "name": "Nocturne",
+        "href": "https://u.gg/lol/champions/nocturne/build/jungle"
+      },
+      {
+        "name": "Seraphine",
+        "href": "https://u.gg/lol/champions/seraphine/build/support"
+      },
+      {
+        "name": "Swain",
+        "href": "https://u.gg/lol/champions/swain/build/adc"
+      },
+      {
+        "name": "Soraka",
+        "href": "https://u.gg/lol/champions/soraka/build/support"
+      },
+      {
+        "name": "Twisted Fate",
+        "href": "https://u.gg/lol/champions/twistedfate/build/mid"
+      },
+      {
+        "name": "Kled",
+        "href": "https://u.gg/lol/champions/kled/build/top"
+      },
+      {
+        "name": "Olaf",
+        "href": "https://u.gg/lol/champions/olaf/build/top"
+      }
+    ],
+    "fetched_at": "2026-05-15T09:21:44.601926+00:00"
+  },
+  "error": null
+}

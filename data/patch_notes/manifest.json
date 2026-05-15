@@ -1,0 +1,290 @@
+{
+  "schema_version": "1.0",
+  "last_scrape": "2026-05-15T09:10:08.707997Z",
+  "scraper_version": "patch_notes_v1.0.0",
+  "locales": [
+    "es-es"
+  ],
+  "available_patches": [
+    "26.10",
+    "26.9",
+    "26.8",
+    "26.7",
+    "26.6",
+    "26.5",
+    "26.4",
+    "26.3",
+    "26.2",
+    "26.1",
+    "25.17",
+    "25.16",
+    "25.15",
+    "25.14",
+    "25.13",
+    "25.12"
+  ],
+  "entries": [
+    {
+      "patch_version": "25.17",
+      "source_locale": "es-es",
+      "file": "normalized/by_patch/25.17_es-es.json",
+      "content_hash": "26fd86a44ca759545192cc026a055c1a4de0182740cf0a0016fe82502d783f6e",
+      "fetched_at": "2026-05-15T07:30:56.326583Z",
+      "published_at": "2025-08-26T00:00:00Z",
+      "title": "Notas de la versión 25.17",
+      "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/patch-25-17-notes"
+    },
+    {
+      "patch_version": "25.16",
+      "source_locale": "es-es",
+      "file": "normalized/by_patch/25.16_es-es.json",
+      "content_hash": "33cdecd79b1ee3486fd404b3092bbeb9c58fbc7c6d550a4a3299de179dd85e80",
+      "fetched_at": "2026-05-15T07:30:56.326583Z",
+      "published_at": "2025-08-12T00:00:00Z",
+      "title": "Notas de la versión 25.16",
+      "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/patch-25-16-notes"
+    },
+    {
+      "patch_version": "25.15",
+      "source_locale": "es-es",
+      "file": "normalized/by_patch/25.15_es-es.json",
+      "content_hash": "82786f3bf30e94f62a19b2fd37605691441d7b6dd3c360b2caf6c65be083b095",
+      "fetched_at": "2026-05-15T07:30:56.326583Z",
+      "published_at": "2025-07-29T00:00:00Z",
+      "title": "Notas de la versión 25.15",
+      "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/patch-25-15-notes"
+    },
+    {
+      "patch_version": "25.14",
+      "source_locale": "es-es",
+      "file": "normalized/by_patch/25.14_es-es.json",
+      "content_hash": "c684cc55ab393870add0e58798cc325975fb3dec8ced330a96ff313d88785bac",
+      "fetched_at": "2026-05-15T07:30:56.326583Z",
+      "published_at": "2025-07-15T00:00:00Z",
+      "title": "Notas de la versión 25.14",
+      "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/patch-25-14-notes"
+    },
+    {
+      "patch_version": "25.13",
+      "source_locale": "es-es",
+      "file": "normalized/by_patch/25.13_es-es.json",
+      "content_hash": "1450a73215c988d3c7ef71fa7883a2b1f67b174721267607376690417b443009",
+      "fetched_at": "2026-05-15T07:30:56.326583Z",
+      "published_at": "2025-06-24T00:00:00Z",
+      "title": "Notas de la versión 25.13",
+      "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/patch-25-13-notes"
+    },
+    {
+      "patch_version": "25.12",
+      "source_locale": "es-es",
+      "file": "normalized/by_patch/25.12_es-es.json",
+      "content_hash": "d8646249b65749c627a06b1bb6a26385f6e2e1849b708154e69cc9c92d7a56f4",
+      "fetched_at": "2026-05-15T07:30:56.326583Z",
+      "published_at": "2025-06-10T00:00:00Z",
+      "title": "Notas de la versión 25.12",
+      "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/patch-25-12-notes"
+    },
+    {
+      "patch_version": "26.3",
+      "source_locale": "es-es",
+      "file": "normalized/by_patch/26.3_es-es.json",
+      "content_hash": "f74c4471654e958ba4f642901f704f0f78dec5bb192319a6150529e4446e22a1",
+      "fetched_at": "2026-05-15T08:54:08.146718Z",
+      "published_at": "2026-02-03T19:00:00Z",
+      "title": "Notas de la versión 26.3",
+      "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/patch-26-3-notes"
+    },
+    {
+      "patch_version": "26.2",
+      "source_locale": "es-es",
+      "file": "normalized/by_patch/26.2_es-es.json",
+      "content_hash": "50e599852dcd4cf208071a4a6751d19a357e03e6b36376d2f543fa8c19512d9d",
+      "fetched_at": "2026-05-15T08:54:17.879109Z",
+      "published_at": "2026-01-21T19:00:00Z",
+      "title": "Notas de la versión 26.2",
+      "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/patch-26-2-notes"
+    },
+    {
+      "patch_version": "26.1",
+      "source_locale": "es-es",
+      "file": "normalized/by_patch/26.1_es-es.json",
+      "content_hash": "f2d1a5ebcc718a7782101c7b60f378f5e70c8203f86ea1a15715b2782fbb5884",
+      "fetched_at": "2026-05-15T08:54:27.455297Z",
+      "published_at": "2026-01-07T19:00:00Z",
+      "title": "Notas de la versión 26.1",
+      "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/patch-26-1-notes"
+    },
+    {
+      "patch_version": "26.10",
+      "source_locale": "es-es",
+      "file": "normalized/by_patch/26.10_es-es.json",
+      "content_hash": "e17cc9162924b4c8f003ebb6da2256d76b4560463553ab6ea0d4e736dc6dfbc4",
+      "fetched_at": "2026-05-15T09:09:15.037452Z",
+      "published_at": "2026-05-12T18:00:00Z",
+      "title": "Notas de la versión 26.10",
+      "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-10-notes"
+    },
+    {
+      "patch_version": "26.9",
+      "source_locale": "es-es",
+      "file": "normalized/by_patch/26.9_es-es.json",
+      "content_hash": "c045b71c14009c94271e0138b5c9ea2408ef5b878dd271e97250a616520ba704",
+      "fetched_at": "2026-05-15T09:09:21.720172Z",
+      "published_at": "2026-04-28T18:00:00Z",
+      "title": "Notas de la versión 26.9 de League of Legends",
+      "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-9-notes"
+    },
+    {
+      "patch_version": "26.8",
+      "source_locale": "es-es",
+      "file": "normalized/by_patch/26.8_es-es.json",
+      "content_hash": "311463504bc35837642ebb0fa758b4eb0d8b688a462dcc1c290efa90c5417598",
+      "fetched_at": "2026-05-15T09:09:31.832499Z",
+      "published_at": "2026-04-14T18:00:00Z",
+      "title": "Notas de la versión 26.8 LoL",
+      "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-8-notes"
+    },
+    {
+      "patch_version": "26.7",
+      "source_locale": "es-es",
+      "file": "normalized/by_patch/26.7_es-es.json",
+      "content_hash": "092d5dc1aee11a9abec3f99680c4662d8ceb1cba93adf63bab90c865806d885a",
+      "fetched_at": "2026-05-15T09:09:41.623971Z",
+      "published_at": "2026-03-31T18:00:00Z",
+      "title": "Notas de la versión 26.7 de League of Legends",
+      "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-7-notes"
+    },
+    {
+      "patch_version": "26.6",
+      "source_locale": "es-es",
+      "file": "normalized/by_patch/26.6_es-es.json",
+      "content_hash": "46385a1d976fc5d4639e51efee6739699fb36c9f24b93715b50623530cd9389a",
+      "fetched_at": "2026-05-15T09:09:50.133245Z",
+      "published_at": "2026-03-17T18:00:00Z",
+      "title": "Notas de la versión 26.6 de League of Legends",
+      "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-6-notes"
+    },
+    {
+      "patch_version": "26.5",
+      "source_locale": "es-es",
+      "file": "normalized/by_patch/26.5_es-es.json",
+      "content_hash": "45cffba6456e2bf068c218f5f4b1410999732bf19c407f210c5e721d5eb83d7c",
+      "fetched_at": "2026-05-15T09:09:58.512665Z",
+      "published_at": "2026-03-03T19:00:00Z",
+      "title": "Notas de la versión 26.5",
+      "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-5-notes"
+    },
+    {
+      "patch_version": "26.4",
+      "source_locale": "es-es",
+      "file": "normalized/by_patch/26.4_es-es.json",
+      "content_hash": "b3ac750b4b1eb648db70d4cb4835fc815f3669775ee236d60da2657fb7cda822",
+      "fetched_at": "2026-05-15T09:10:08.688091Z",
+      "published_at": "2026-02-18T19:00:00Z",
+      "title": "League of Legends Patch 26.4 Notes",
+      "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-4-notes"
+    }
+  ],
+  "sources_status": {
+    "lol_official": {
+      "last_scrape": "2026-05-15T09:10:35.651372+00:00",
+      "last_success": "2026-05-15T09:10:35.651372+00:00",
+      "last_error": null,
+      "available_patches": []
+    },
+    "ddragon": {
+      "last_scrape": "2026-05-15T09:10:37.153255+00:00",
+      "last_success": "2026-05-15T09:10:37.153255+00:00",
+      "last_error": null,
+      "available_patches": []
+    },
+    "riot_calendar": {
+      "last_scrape": "2026-05-15T09:10:37.953792+00:00",
+      "last_success": null,
+      "last_error": "Client error '403 Forbidden' for url 'https://support-leagueoflegends.riotgames.com/hc/es-419/articles/360018987893-Calendario-de-lanzamiento-de-versiones-de-League-of-Legends'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/403",
+      "available_patches": []
+    },
+    "lol_dev": {
+      "last_scrape": "2026-05-15T09:21:32.473958+00:00",
+      "last_success": "2026-05-15T09:21:32.473958+00:00",
+      "last_error": null,
+      "available_patches": [
+        "26.10",
+        "26.9",
+        "26.8",
+        "26.7",
+        "26.6",
+        "26.5",
+        "26.4",
+        "26.3",
+        "26.2",
+        "26.1"
+      ]
+    },
+    "ugg_patch": {
+      "last_scrape": "2026-05-15T09:21:44.603378+00:00",
+      "last_success": "2026-05-15T09:21:44.603378+00:00",
+      "last_error": null,
+      "available_patches": [
+        "26.10",
+        "26.9",
+        "26.8",
+        "26.7",
+        "26.6",
+        "26.5",
+        "26.4",
+        "26.3",
+        "26.2",
+        "26.1"
+      ]
+    },
+    "opgg_patch": {
+      "last_scrape": "2026-05-15T09:20:52.619999+00:00",
+      "last_success": "2026-05-15T09:20:52.619999+00:00",
+      "last_error": null,
+      "available_patches": [
+        "26.10",
+        "26.8",
+        "26.7",
+        "26.6",
+        "26.5",
+        "26.4",
+        "26.3",
+        "26.2",
+        "26.1"
+      ]
+    },
+    "lolalytics_patch": {
+      "last_scrape": "2026-05-15T09:21:04.947734+00:00",
+      "last_success": "2026-05-15T09:21:04.947734+00:00",
+      "last_error": null,
+      "available_patches": [
+        "26.10",
+        "26.8",
+        "26.7",
+        "26.6",
+        "26.5",
+        "26.4",
+        "26.3",
+        "26.2",
+        "26.1"
+      ]
+    },
+    "mobalytics_patch": {
+      "last_scrape": "2026-05-15T09:21:18.117176+00:00",
+      "last_success": "2026-05-15T09:21:18.117176+00:00",
+      "last_error": null,
+      "available_patches": [
+        "26.10",
+        "26.8",
+        "26.7",
+        "26.6",
+        "26.5",
+        "26.4",
+        "26.3",
+        "26.2",
+        "26.1"
+      ]
+    }
+  }
+}

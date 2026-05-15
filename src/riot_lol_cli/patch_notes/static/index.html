@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
+    <title>Patch Notes V2 — League of Legends</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Anton&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/design-system/tokens.css?v=2" />
+    <link rel="stylesheet" href="/design-system/components.css?v=2" />
+    <link rel="stylesheet" href="/design-system/patterns.css?v=2" />
+    <link rel="stylesheet" href="/static/styles.css?v=4" />
+  </head>
+  <body>
+    <div id="app">
+      <div class="loader">Cargando patch notes...</div>
+    </div>
+
+    <!-- =========== OVERVIEW =========== -->
+    <template id="tpl-overview">
+      <header class="hero hero--dual">
+        <div class="hero-row">
+          <span class="hero-eyebrow">LEAGUE OF LEGENDS</span>
+          <div class="hero-actions">
+            <a class="home-hub-link" href="http://localhost:8080/" title="Volver al Home Hub">
+              <span class="home-hub-link__icon" aria-hidden="true">⌂</span>
+              <span>Home Hub</span>
+            </a>
+            <span class="hero-patch">
+              <span data-bind="patch_count"></span> PARCHES
+            </span>
+          </div>
+        </div>
+        <h1 class="hero-title">PATCH NOTES</h1>
+        <p class="hero-subtitle">Multi-source · Cambios oficiales + análisis de comunidad</p>
+        <div class="hero-bottom">
+          <div class="hero-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 64" width="64" height="64" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round">
+              <rect x="14" y="10" width="36" height="44" rx="3" />
+              <line x1="20" y1="22" x2="44" y2="22" />
+              <line x1="20" y1="32" x2="40" y2="32" />
+              <line x1="20" y1="42" x2="42" y2="42" />
+            </svg>
+          </div>
+          <div class="hero-meta">
+            <div class="hero-meta-row">
+              <span class="hero-role">| FUENTE OFICIAL</span>
+              <span class="version-pill" data-bind="app_version" title="Versión del subsistema Patch Notes">v—</span>
+            </div>
+            <span class="hero-updated">Último parche: <span data-bind="last_patch"></span></span>
+            <span class="meta-chip meta-chip--freshness" data-bind="freshness_pill"></span>
+          </div>
+        </div>
+      </header>
+
+      <section class="control-panel control-panel--overview">
+        <form class="search-form" data-bind="search_form" role="search">
+          <input
+            class="search-input"
+            type="search"
+            name="q"
+            placeholder="Buscar en los parches (ej: Aatrox, jungla, runa)..."
+            autocomplete="off"
+          />
+          <button class="btn-pill btn-pill--cyan" type="submit">Buscar</button>
+        </form>
+      </section>
+
+      <main class="overview-main">
+        <div class="empty-state" data-bind="empty_state" hidden>
+          <h2>Sin parches aún</h2>
+          <p>
+            No hay patch notes scrapeados todavía. Disparar un scrape real desde
+            <code>POST /api/v1/patch-notes/scrape</code>.
+          </p>
+        </div>
+        <div class="patches-grid" data-bind="patch_cards"></div>
+      </main>
+    </template>
+
+    <!-- =========== PATCH DETAIL =========== -->
+    <template id="tpl-patch-detail">
+      <header class="patch-detail-hero">
+        <a class="back-link" href="#overview">← Volver a la lista</a>
+        <a class="detail-home-link" href="http://localhost:8080/" title="Volver al Home Hub">⌂ Home Hub</a>
+        <div class="patch-detail-meta">
+          <span class="pill pill-gold" data-bind="patch_version_pill"></span>
+          <span class="pill pill-neutral" data-bind="patch_date_pill"></span>
+          <a class="pill pill-cyan" target="_blank" rel="noopener" data-bind="canonical_link">Fuente oficial ↗</a>
+          <span class="pill pill-success" data-bind="enrichments_pill"></span>
+        </div>
+        <h1 class="patch-detail-title" data-bind="patch_title"></h1>
+        <p class="patch-detail-summary" data-bind="patch_summary"></p>
+      </header>
+
+      <nav class="detail-tabs" role="tablist" aria-label="Vistas del parche">
+        <button class="detail-tab active" data-tab="official" type="button" role="tab">📜 Notas oficiales</button>
+        <button class="detail-tab" data-tab="sources" type="button" role="tab">📡 Por fuente</button>
+      </nav>
+
+      <div class="tab-panel active" data-panel="official">
+        <main class="patch-layout">
+          <aside class="toc-sidebar">
+            <h2 class="toc-title">Tabla de contenidos</h2>
+            <nav class="toc-nav" data-bind="toc"></nav>
+          </aside>
+          <article class="patch-article" data-bind="patch_sections"></article>
+        </main>
+      </div>
+
+      <div class="tab-panel" data-panel="sources" hidden>
+        <main class="sources-main">
+          <div class="sources-accordion" data-bind="sources_accordion"></div>
+        </main>
+      </div>
+    </template>
+
+    <!-- =========== SEARCH RESULTS =========== -->
+    <template id="tpl-search-results">
+      <header class="patch-detail-hero patch-detail-hero--compact">
+        <a class="back-link" href="#overview">← Volver a la lista</a>
+        <a class="detail-home-link" href="http://localhost:8080/" title="Volver al Home Hub">⌂ Home Hub</a>
+        <div class="patch-detail-meta">
+          <span class="pill pill-cyan">Resultados</span>
+          <span class="pill pill-neutral" data-bind="result_count"></span>
+        </div>
+        <h1 class="patch-detail-title">"<span data-bind="query"></span>"</h1>
+      </header>
+
+      <section class="control-panel">
+        <form class="search-form" data-bind="search_form" role="search">
+          <input
+            class="search-input"
+            type="search"
+            name="q"
+            placeholder="Refinar búsqueda..."
+            autocomplete="off"
+            data-bind="search_input"
+          />
+          <button class="btn-pill btn-pill--cyan" type="submit">Buscar</button>
+        </form>
+      </section>
+
+      <main class="search-main">
+        <div class="empty-state" data-bind="search_empty" hidden>
+          <h2>Sin resultados</h2>
+          <p>No encontramos coincidencias. Probá con menos palabras o cambia el locale.</p>
+        </div>
+        <ul class="search-list" data-bind="hits"></ul>
+      </main>
+    </template>
+
+    <!-- =========== DIFF VIEW =========== -->
+    <template id="tpl-diff">
+      <header class="patch-detail-hero patch-detail-hero--compact">
+        <a class="back-link" href="#overview">← Volver a la lista</a>
+        <a class="detail-home-link" href="http://localhost:8080/" title="Volver al Home Hub">⌂ Home Hub</a>
+        <div class="patch-detail-meta">
+          <span class="pill pill-gold" data-bind="a_pill"></span>
+          <span class="pill pill-neutral">vs</span>
+          <span class="pill pill-cyan" data-bind="b_pill"></span>
+          <span class="pill pill-success" data-bind="diff_summary"></span>
+        </div>
+        <h1 class="patch-detail-title">Comparación de parches</h1>
+      </header>
+
+      <main class="diff-main">
+        <div class="diff-legend">
+          <span class="legend-chip legend-chip--added">+ Agregado</span>
+          <span class="legend-chip legend-chip--removed">− Eliminado</span>
+          <span class="legend-chip legend-chip--modified">~ Modificado</span>
+          <span class="legend-chip legend-chip--unchanged">= Sin cambios</span>
+        </div>
+        <div class="diff-grid" data-bind="diff_sections"></div>
+      </main>
+    </template>
+
+    <script src="/design-system/scroll-to-top.js?v=1"></script>
+    <script src="/static/app.js?v=4"></script>
+  </body>
+</html>

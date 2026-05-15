@@ -1,0 +1,256 @@
+{
+  "source": "opgg_patch",
+  "source_url": "https://www.op.gg/champions",
+  "fetched_at": "2026-05-15T09:16:11.798165Z",
+  "content_hash": "fa95201a1d80070a6911a812d7182d3c1ddf601c30040f190d6a5b9c8ec973db",
+  "payload": {
+    "source_url": "https://www.op.gg/champions",
+    "patch_label_active": "26.4",
+    "patch_label_reported": "16.10",
+    "rows_count": 80,
+    "rows": [
+      {
+        "slug": "smolder",
+        "href": "https://op.gg/lol/champions/smolder/build/adc"
+      },
+      {
+        "slug": "fizz",
+        "href": "https://op.gg/lol/champions/fizz/build/mid"
+      },
+      {
+        "slug": "teemo",
+        "href": "https://op.gg/lol/champions/teemo/build/top"
+      },
+      {
+        "slug": "vladimir",
+        "href": "https://op.gg/lol/champions/vladimir/build/mid"
+      },
+      {
+        "slug": "nocturne",
+        "href": "https://op.gg/lol/champions/nocturne/build/jungle"
+      },
+      {
+        "slug": "xerath",
+        "href": "https://op.gg/lol/champions/xerath/build/mid"
+      },
+      {
+        "slug": "malphite",
+        "href": "https://op.gg/lol/champions/malphite/build/top"
+      },
+      {
+        "slug": "seraphine",
+        "href": "https://op.gg/lol/champions/seraphine/build/support"
+      },
+      {
+        "slug": "katarina",
+        "href": "https://op.gg/lol/champions/katarina/build/mid"
+      },
+      {
+        "slug": "senna",
+        "href": "https://op.gg/lol/champions/senna/build/support"
+      },
+      {
+        "slug": "jinx",
+        "href": "https://op.gg/lol/champions/jinx/build/adc"
+      },
+      {
+        "slug": "sion",
+        "href": "https://op.gg/lol/champions/sion/build/top"
+      },
+      {
+        "slug": "ahri",
+        "href": "https://op.gg/lol/champions/ahri/build/mid"
+      },
+      {
+        "slug": "thresh",
+        "href": "https://op.gg/lol/champions/thresh/build/support"
+      },
+      {
+        "slug": "garen",
+        "href": "https://op.gg/lol/champions/garen/build/top"
+      },
+      {
+        "slug": "leesin",
+        "href": "https://op.gg/lol/champions/leesin/build/jungle"
+      },
+      {
+        "slug": "milio",
+        "href": "https://op.gg/lol/champions/milio/build/support"
+      },
+      {
+        "slug": "bard",
+        "href": "https://op.gg/lol/champions/bard/build/support"
+      },
+      {
+        "slug": "nami",
+        "href": "https://op.gg/lol/champions/nami/build/support"
+      },
+      {
+        "slug": "ashe",
+        "href": "https://op.gg/lol/champions/ashe/build/adc"
+      },
+      {
+        "slug": "viktor",
+        "href": "https://op.gg/lol/champions/viktor/build/mid"
+      },
+      {
+        "slug": "karthus",
+        "href": "https://op.gg/lol/champions/karthus/build/adc"
+      },
+      {
+        "slug": "rammus",
+        "href": "https://op.gg/lol/champions/rammus/build/jungle"
+      },
+      {
+        "slug": "reksai",
+        "href": "https://op.gg/lol/champions/reksai/build/jungle"
+      },
+      {
+        "slug": "udyr",
+        "href": "https://op.gg/lol/champions/udyr/build/jungle"
+      },
+      {
+        "slug": "diana",
+        "href": "https://op.gg/lol/champions/diana/build/mid"
+      },
+      {
+        "slug": "sona",
+        "href": "https://op.gg/lol/champions/sona/build/support"
+      },
+      {
+        "slug": "kindred",
+        "href": "https://op.gg/lol/champions/kindred/build/jungle"
+      },
+      {
+        "slug": "vex",
+        "href": "https://op.gg/lol/champions/vex/build/mid"
+      },
+      {
+        "slug": "warwick",
+        "href": "https://op.gg/lol/champions/warwick/build/jungle"
+      },
+      {
+        "slug": "evelynn",
+        "href": "https://op.gg/lol/champions/evelynn/build/jungle"
+      },
+      {
+        "slug": "belveth",
+        "href": "https://op.gg/lol/champions/belveth/build/jungle"
+      },
+      {
+        "slug": "soraka",
+        "href": "https://op.gg/lol/champions/soraka/build/support"
+      },
+      {
+        "slug": "tryndamere",
+        "href": "https://op.gg/lol/champions/tryndamere/build/top"
+      },
+      {
+        "slug": "kayle",
+        "href": "https://op.gg/lol/champions/kayle/build/top"
+      },
+      {
+        "slug": "brand",
+        "href": "https://op.gg/lol/champions/brand/build/adc"
+      },
+      {
+        "slug": "nidalee",
+        "href": "https://op.gg/lol/champions/nidalee/build/jungle"
+      },
+      {
+        "slug": "monkeyking",
+        "href": "https://op.gg/lol/champions/monkeyking/build/jungle"
+      },
+      {
+        "slug": "janna",
+        "href": "https://op.gg/lol/champions/janna/build/support"
+      },
+      {
+        "slug": "singed",
+        "href": "https://op.gg/lol/champions/singed/build/top"
+      },
+      {
+        "slug": "shen",
+        "href": "https://op.gg/lol/champions/shen/build/top"
+      },
+      {
+        "slug": "briar",
+        "href": "https://op.gg/lol/champions/briar/build/jungle"
+      },
+      {
+        "slug": "twistedfate",
+        "href": "https://op.gg/lol/champions/twistedfate/build/mid"
+      },
+      {
+        "slug": "lissandra",
+        "href": "https://op.gg/lol/champions/lissandra/build/mid"
+      },
+      {
+        "slug": "varus",
+        "href": "https://op.gg/lol/champions/varus/build/top"
+      },
+      {
+        "slug": "ekko",
+        "href": "https://op.gg/lol/champions/ekko/build/mid"
+      },
+      {
+        "slug": "fiddlesticks",
+        "href": "https://op.gg/lol/champions/fiddlesticks/build/jungle"
+      },
+      {
+        "slug": "olaf",
+        "href": "https://op.gg/lol/champions/olaf/build/top"
+      },
+      {
+        "slug": "lux",
+        "href": "https://op.gg/lol/champions/lux/build/mid"
+      },
+      {
+        "slug": "braum",
+        "href": "https://op.gg/lol/champions/braum/build/support"
+      },
+      {
+        "slug": "blitzcrank",
+        "href": "https://op.gg/lol/champions/blitzcrank/build/support"
+      },
+      {
+        "slug": "camille",
+        "href": "https://op.gg/lol/champions/camille/build/top"
+      },
+      {
+        "slug": "rell",
+        "href": "https://op.gg/lol/champions/rell/build/support"
+      },
+      {
+        "slug": "leona",
+        "href": "https://op.gg/lol/champions/leona/build/support"
+      },
+      {
+        "slug": "aatrox",
+        "href": "https://op.gg/lol/champions/aatrox/build"
+      },
+      {
+        "slug": "akali",
+        "href": "https://op.gg/lol/champions/akali/build"
+      },
+      {
+        "slug": "akshan",
+        "href": "https://op.gg/lol/champions/akshan/build"
+      },
+      {
+        "slug": "alistar",
+        "href": "https://op.gg/lol/champions/alistar/build"
+      },
+      {
+        "slug": "ambessa",
+        "href": "https://op.gg/lol/champions/ambessa/build"
+      },
+      {
+        "slug": "amumu",
+        "href": "https://op.gg/lol/champions/amumu/build"
+      }
+    ],
+    "fetched_at": "2026-05-15T09:16:11.797693+00:00"
+  },
+  "error": null
+}

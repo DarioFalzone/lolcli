@@ -1,0 +1,1412 @@
+{
+  "publisher": "riot",
+  "game": "lol",
+  "channel": "site",
+  "source_locale": "es-es",
+  "patch_version": "26.6",
+  "title": "Notas de la versión 26.6 de League of Legends",
+  "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-6-notes",
+  "published_at": "2026-03-17T18:00:00Z",
+  "fetched_at": "2026-05-15T09:09:50.133245Z",
+  "content_hash": "46385a1d976fc5d4639e51efee6739699fb36c9f24b93715b50623530cd9389a",
+  "summary": "Naafiri sabuesos de guerra, Senna sabuesos de guerra y Warwick sabuesos de guerra estarán disponibles el 18 de marzo de 2026.",
+  "sections": [
+    {
+      "title": "Actualización de mitad de versión",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "ACTUALIZACIONES DEL 20 DE MARZO DE 2026",
+              "heading_level": 4,
+              "blocks": [],
+              "subsections": []
+            },
+            {
+              "title": "Shyvana",
+              "heading_level": 4,
+              "blocks": [
+                "Armadura pasiva por acumulación: 0,4 ⇒ 0,3.",
+                "Resistencia mágica pasiva por acumulación: 0,4 ⇒ 0,3.",
+                "Reducción de enfriamiento al golpear de la Q: 1,25 ⇒ 1 s.",
+                "Daño pasivo de la Q según la vida máxima: 1 % (+1,7 % por cada 100 de DA adicional) (+1,3 % por cada 100 de PH) ⇒ 1 % (+1,1 % por cada 100 de DA adicional) (+1,1 % por cada 100 de PH).",
+                "Curación de la W (forma de dragón): 100-250 (+10 % del DA adicional) (+5 % del PH, que se duplica según la vida que le falte) ⇒ 75-200 (+10 % del DA adicional) (+5 % del PH, que se duplica según la vida que le falte).",
+                "Daño de la E: 80/120/160/200/240 (+50 % del DA adicional) (+70 % del PH) ⇒ 80/110/140/170/200 (+35 % del DA adicional) (+70 % del PH).",
+                "Eficacia de la ralentización de la E: 30/35/40/45/50 % ⇒ 20/25/30/35/40 %.",
+                "Duración del miedo de la R: 1 s ⇒ 0,75 s."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Cassiopeia",
+              "heading_level": 4,
+              "blocks": [
+                "Los cambios de Cassiopeia indicados en esta versión no se han implementado en los servidores debido a un error, por lo que han quedado pospuestos a una futura versión."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Olaf",
+              "heading_level": 4,
+              "blocks": [
+                "Daño básico de la Q: 60/110/160/210/260 ⇒ 70/120/170/220/270.",
+                "Daño adicional a monstruos de la Q: 10/25/40/55/70 ⇒ 20/35/50/65/80."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Heraldo de la Grieta",
+              "heading_level": 4,
+              "blocks": [
+                "Ahora, las siguientes acciones del Heraldo de la Grieta activan el Sobrecrecimiento: Carga, ataque giratorio y autoataque."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Corrección de errores de Arena",
+              "heading_level": 4,
+              "blocks": [
+                "Hemos corregido un error que permitía conseguir varios aumentos en una misma ronda.",
+                "Hemos corregido un error que provocaba que Acaparadores siempre mostrase un 20 %."
+              ],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Los platos fuertes de la versión",
+      "heading_level": 2,
+      "blocks": [
+        "Naafiri sabuesos de guerra, Senna sabuesos de guerra y Warwick sabuesos de guerra estarán disponibles el 18 de marzo de 2026."
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Actualización de Shyvana",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Pasiva - Cota de escamas",
+              "heading_level": 4,
+              "blocks": [
+                "Las eliminaciones de campeones, súbditos grandes y monstruos otorgan a Shyvana acumulaciones de Cota de escamas. Cada acumulación otorga a Shyvana 0,4 de armadura y 0,4 de resistencia mágica permanentes.",
+                "Los monstruos gigantes y los súbditos de asedio otorgan 1 acumulación.",
+                "Los campeones y los monstruos épicos otorgan 3 acumulaciones."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Q - Golpe de ascuas",
+              "heading_level": 4,
+              "blocks": [
+                "Enfriamiento: 6 s.",
+                "Pasiva: Los ataques de Shyvana infligen 1 % (+1,7 % por cada 100 de DA + 1,3 % por cada 100 de PH) de la vida máxima como daño mágico al impactar y reducen el enfriamiento de esta habilidad en 1,25 s.",
+                "Activa: El siguiente ataque de Shyvana golpea al objetivo y el área circundante, lo que inflige 10-30 (+110 % del DA) (+25 % del PH) de daño físico. Esta habilidad se puede reactivar durante los siguientes 4 s tras un ataque o tras un breve retardo.",
+                "Forma de dragón: Shyvana puede reactivarla una vez más, lo que provoca que muerda al objetivo de su siguiente ataque y le inflija 15-45 (+165 % del DA) (+37,5 % del PH) de daño verdadero."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "W - Égida infernal",
+              "heading_level": 4,
+              "blocks": [
+                "Enfriamiento: 12 s.",
+                "Shyvana se envuelve en llamas durante 2,5 s, lo que le otorga 60-140 (+5 % de la vida) de escudo, que aumenta en 24-42 (+1,5 %) de vida por cada campeón enemigo cercano, y un 25 % de velocidad de movimiento, que aumenta a un 44 % al moverse hacia campeones enemigos. Cuando el efecto termina, el escudo se rompe, o al reactivar la habilidad, el área a su alrededor explota e inflige 80-160 (+40 % del DA adicional) (+20 % del PH) de daño mágico.",
+                "Forma de dragón: Si la detonación alcanza a un campeón enemigo, Shyvana recupera entre 100-250 (+10 % del DA adicional) (+5 % del PH) y 200-500 (+20 % del DA adicional) (+10 % del PH) de vida según la vida que le falte."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "E - Explosión magmática",
+              "heading_level": 4,
+              "blocks": [
+                "Enfriamiento: 10 s.",
+                "Shyvana lanza una bola de fuego a la ubicación objetivo, lo que inflige 80-240 (+50 % del DA adicional) (+70 % del PH) de daño mágico y ralentiza un 50 % durante 2 s. Explota al golpear a un enemigo o al llegar al final de su trayectoria.",
+                "Forma de dragón: La bola de fuego de Shyvana es más grande y atraviesa a los enemigos. Al golpear a un campeón o monstruo gigante, o al llegar al final de su trayectoria, provoca una explosión de fuego que inflige 100-300 (+62,5 % del DA adicional) (+87,5 % del PH) de daño mágico y ralentiza un 50 % durante 2 s. La bola de fuego deja un rastro tras de sí durante 2 s, lo que inflige 5-25 (+5 % del PH) de daño mágico por segundo."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "R - Ascendencia de dragón",
+              "heading_level": 4,
+              "blocks": [
+                "Requiere 100 de Furia para activarla.",
+                "Pasiva: Shyvana genera 1,25 de Furia dracónica al golpear a sus enemigos con ataques y habilidades. Aumenta en un 200 % cuando está en forma de dragón y se reduce en un 75 % al golpear en área a unidades que no sean campeones.",
+                "Activa: Shyvana adopta su forma de dragón, se vuelve imparable y vuela hacia la ubicación objetivo. Mientras vuela, escupe fuego a los enemigos que se encuentren debajo, lo que inflige 150-350 (+100 % del PH) daño mágico y provoca que huyan durante 1 s.",
+                "Mientras está transformada, las habilidades básicas de Shyvana se ven mejoradas y obtiene 150-350 de vida, tamaño y alcance de ataque adicionales. Shyvana pierde Furia dracónica con el tiempo, y la transformación termina cuando no le queda Furia dracónica."
+              ],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "First Stand",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": []
+    },
+    {
+      "title": "Campeones",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "Ahri",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Q - Orbe del engaño",
+              "heading_level": 4,
+              "blocks": [
+                "Daño por pasada: 40/65/90/115/140 ⇒ 35/60/85/110/135."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Azir",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Q - Arenas conquistadoras",
+              "heading_level": 4,
+              "blocks": [
+                "Relación del daño de PH:: (+35 % del PH) ⇒ (+35/40/45/50/55 % del PH)."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "W - ¡Alzaos!",
+              "heading_level": 4,
+              "blocks": [
+                "Daño: 0-45 (5 de daño por nivel a partir del nivel 10) ⇒ 0-72 (7 de daño por nivel a partir del nivel 10).",
+                "Relación del daño de PH: (+32,5/40/47,5/55/62,5 % del PH) ⇒ (+35/42,5/50/57,5/65 % del PH)."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Cassiopeia",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Estadísticas básicas",
+              "heading_level": 4,
+              "blocks": [
+                "Maná básico: 450 ⇒ 480."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "E - Colmillo doble",
+              "heading_level": 4,
+              "blocks": [
+                "Daño mágico adicional a objetivos envenenados: 20/43/66/89/112 ⇒ 20/45/70/90/120."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Lissandra",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Estadísticas básicas",
+              "heading_level": 4,
+              "blocks": [
+                "Crecimiento de armadura: 4,9 ⇒ 4,2."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Q - Fragmento de hielo",
+              "heading_level": 4,
+              "blocks": [
+                "Enfriamiento: 8/7/6/5/4 ⇒ 7/6/5/4/3."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Olaf",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Estadísticas básicas",
+              "heading_level": 4,
+              "blocks": [
+                "Velocidad de ataque básica: 0,694 ⇒ 0,72."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Q - Lanzamiento",
+              "heading_level": 4,
+              "blocks": [
+                "Porcentaje de ralentización: 25/30/40/45 % durante 1,5- 2,5 s (según la distancia) ⇒ 30/40/45/50 % durante 1-3 s (según la distancia).",
+                "Corrección de error: Ahora, los enemigos golpeados por la piruleta al final de la Q quedarán ralentizados el tiempo correcto (antes era una ralentización fija del 30 %)."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "W - Aguante",
+              "heading_level": 4,
+              "blocks": [
+                "Corrección de error: Al lanzar la W mientras el lanzamiento anterior siga activo, ahora se aplicarán de nuevo sus efectos correctamente, en lugar de reiniciar el lanzamiento previo (se reiniciará el ataque y obtendréis la velocidad de ataque actualizada)."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "E - Embestida temeraria",
+              "heading_level": 4,
+              "blocks": [
+                "Daño propio: 30 % del daño infligido ⇒ 40 % del daño infligido."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Pyke",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Estadísticas básicas",
+              "heading_level": 4,
+              "blocks": [
+                "Armadura básica: 43 ⇒ 37."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Shen",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Q - Asalto del crepúsculo",
+              "heading_level": 4,
+              "blocks": [
+                "Límite de daño a monstruos: 120/140/160/180/200 ⇒ 100/125/150/175/200."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Skarner",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Q - Tierra fragmentada",
+              "heading_level": 4,
+              "blocks": [
+                "Coste de maná: 45 ⇒ 30.",
+                "Daño del tercer ataque según la vida máxima del objetivo: 9 % ⇒ 11 %."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Tryndamere",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Estadísticas básicas",
+              "heading_level": 4,
+              "blocks": [
+                "Relación de velocidad de ataque: 0,694 ⇒ 0,725."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Zaahen",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "W - Hendidura del retorno",
+              "heading_level": 4,
+              "blocks": [
+                "Daño secundario: 40/60/80/100/120 (+50 % del DA adicional) ⇒ 30/50/70/90/110 (+30 % del DA adicional)."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "E - Impulso áureo",
+              "heading_level": 4,
+              "blocks": [
+                "Daño adicional a monstruos: 75 ⇒ 50."
+              ],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Objetos",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "Mecanoespada punki",
+          "heading_level": 3,
+          "blocks": [
+            "Coste de combinación: 350 de oro ⇒ 250 de oro.",
+            "Coste total: 3100 ⇒ 3000 de oro."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "Égida de fuego solar",
+          "heading_level": 3,
+          "blocks": [
+            "Receta: Rescoldo de Bami + Chaleco de cadenas + 1000 de oro ⇒ Rescoldo de Bami + Chaleco de cadenas + Cristal de rubí + 600 de oro."
+          ],
+          "subsections": []
+        }
+      ]
+    },
+    {
+      "title": "Sistemas",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "MATAR SÚBDITOS COMO APOYO",
+              "heading_level": 4,
+              "blocks": [
+                "Asesinatos de súbditos antes de que se active la penalización de oro (antes de 5:00 min): 7 ⇒ 24.",
+                "Asesinatos de súbditos cada 5 min antes de que se active la penalización de oro (después de 5:00 min): 20 ⇒ 30."
+              ],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Clash de la Grieta del Invocador - Copa de Noxus",
+      "heading_level": 2,
+      "blocks": [
+        "Inicio del registro: 16 de marzo a las 11:00 (hora local).",
+        "Fechas del torneo: 21 y 22 de marzo de 16:00 a 19:00 aproximadamente (hora local); varía según la región."
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Arena",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "AUMENTOS Y YUNQUES DE ESTADÍSTICAS",
+              "heading_level": 4,
+              "blocks": [
+                "Energía de dragón masiva",
+                "Shyvana obtiene Furia máxima y esta no disminuye. La reactivación final de (Q) Golpe de ascuas en forma de dragón inflige un 200 % de daño.",
+                "Fragmento de omnisucción",
+                "Omnisucción: 25 (cuerpo a cuerpo)/12,5 % (a distancia) ⇒ 25 (cuerpo a cuerpo)/15 % (a distancia)."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "OBJETOS",
+              "heading_level": 4,
+              "blocks": [
+                "Dardos rastreademonios",
+                "Enfriamiento: 60 s ⇒ 20 s.",
+                "Convergencia de Zeke",
+                "Enfriamiento: 30 s ⇒ 20 s.",
+                "Corona de la reina quebrada",
+                "Reducción de daño: 50 % ⇒ 90 %.",
+                "Duración: 3 s ⇒ 1,25 s.",
+                "Desgarrador divino",
+                "Daño cuerpo a cuerpo según la vida máxima: 4 % ⇒ 6 %.",
+                "Daño a distancia según la vida máxima: 3 ⇒ 4 %.",
+                "Curación premitigación: 55 % ⇒ 70 %.",
+                "Lanza de punta de diamante",
+                "Alcance del daño máximo: 1000 ⇒ 800.",
+                "Multiplicador máximo del daño de las habilidades: 40 % ⇒ 50 %.",
+                "Chupasangre",
+                "Relación de curación según el DA básico: 20 % ⇒ 35 %.",
+                "Curación según la vida que falte: 15 % ⇒ 18 %.",
+                "Cosechador nocturno",
+                "Daño: 125 (+15 % del PH) ⇒ 160 (+40 % del PH)."
+              ],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "ARAM: Caos",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "CAMPEONES",
+              "heading_level": 4,
+              "blocks": [
+                "Illaoi",
+                "Daño recibido: 105 % ⇒ 100 %.",
+                "Curación: 80 % ⇒ 90 %.",
+                "Sett",
+                "Daño recibido: 110 % ⇒ 100 %.",
+                "Shyvana",
+                "Daño recibido: 105 % ⇒ 100 %.",
+                "Sion",
+                "Daño recibido: 110 % ⇒ 100 %.",
+                "Swain",
+                "Daño recibido: 115 % ⇒ 105 %.",
+                "Curación: 80 % ⇒ 90 %.",
+                "Daño infligido: 95 % ⇒ 100 %.",
+                "Urgot",
+                "Daño recibido: 105 % ⇒ 100 %.",
+                "Vladimir",
+                "Daño recibido: 105 % ⇒ 100 %.",
+                "Curación: 90 % ⇒ 100 %.",
+                "Daño infligido: 95 % ⇒ 100 %."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "AUMENTOS",
+              "heading_level": 4,
+              "blocks": [
+                "Capoeibara",
+                "Tamaño del daño en área: 550 ⇒ 650.",
+                "Daño verdadero según la vida máxima: 25 % ⇒ 30 %.",
+                "Porcentaje de ralentización: 35 % ⇒ 45 %.",
+                "A dos manos",
+                "Velocidad de ataque adicional: 20 % ⇒ 10 %.",
+                "Fuego zorruno",
+                "Velocidad de movimiento adicional: 40 % ⇒ 25 %.",
+                "Algidez",
+                "Reducción de la velocidad de movimiento fija: 100 ⇒ 75.",
+                "Bien exprimido",
+                "Daño de impacto según el porcentaje de maná máximo: 3,5 % ⇒ 4,5 %.",
+                "Ahora solo afecta a los campeones.",
+                "Reina del baile",
+                "Duración de Hechizar: 2 ⇒ 1,5 s.",
+                "Sonata",
+                "Aumento de la velocidad de movimiento propia: 50 % ⇒ 30 %.",
+                "Aumento de la velocidad de movimiento de aliados: 30 % ⇒ 20 %.",
+                "Demonio raudo",
+                "Duración de la disminución: 1 ⇒ 0,75 s.",
+                "¡Que nadie se mueva!",
+                "Ahora, con Katarina, se lanza en cuanto empieza a canalizar su definitiva.",
+                "Gatillo infernal a muerte",
+                "Velocidad de movimiento por acumulación: (2,75 - 3,5) ⇒ (4,25 - 5).",
+                "Daño por disparo: 10 - 40 (+0,35 del DA) (+0,2 del PH) ⇒ 20-40 (+0,4 del DA) (+0,25 del PH)",
+                "¡Ojito, pastelito!",
+                "Oro para quienes no lo posean: 15 ⇒ 50."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "CONJUNTOS DE AUMENTOS",
+              "heading_level": 4,
+              "blocks": [
+                "Que llueva",
+                "Ahora, los enemigos sueltan monedas al ser asesinados.",
+                "Nivel 2: Deja caer 6 monedas.",
+                "Nivel 3: Deja caer 12 monedas.",
+                "Cada moneda otorga 5 de oro y solo las pueden recoger quienes tengan el aumento y los campeones aliados."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "MEJORAS DE CALIDAD",
+              "heading_level": 4,
+              "blocks": [
+                "Los sobres rojos ya no aparecen en el minimapa para ninguno de los dos equipos.",
+                "Ahora, Transporte de Último Bastión solo muestra un mensaje en el chat al propietario del aumento por cada campeón golpeado.",
+                "Ahora, Vampirismo y Perseverancia son mutuamente excluyentes, por lo que ya no se os ofrecerá uno si tenéis el otro.",
+                "Ahora, hay un icono para la debilitación de A cachetazo limpio.",
+                "Las invocaciones de los campeones, como los miembros de la manada de Naafiri, ya no muestran un mensaje en el chat cuando tienen una gran cantidad de sombreros."
+              ],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Corrección de errores",
+      "heading_level": 2,
+      "blocks": [
+        "Hemos corregido un error que provocaba que, al comprar un yunque de estadísticas, no se ofrecieran aumentos en ARAM: Caos.",
+        "Hemos corregido un error que provocaba que Forja viviente (P) de Ornn activase una selección de aumentos no intencionada tras comprar un Yunque de estadísticas.",
+        "Hemos corregido un error que provocaba que el aumento dorado Trampas permitiese acceder a la tienda durante la selección de aumentos.",
+        "Hemos corregido un error que provocaba que la selección de aumentos se sustituyera por la selección de un yunque de estadísticas al comprar yunques de estadísticas.",
+        "Hemos corregido un error que provocaba que el último aumento cambiado se actualizase al morir si no se había realizado ninguna selección mientras había varias ofertas en cola.",
+        "Hemos corregido un error que provocaba que las ofertas de aumentos de los niveles 11 y 15 no se llevasen a cabo si el jugador moría mientras había varias ofertas en cola.",
+        "Hemos corregido un error que provocaba que los yunques en cola de Gran apuesta no se ofrecieran tras volver a la base con el aumento Trampas.",
+        "Hemos corregido un error que provocaba que Sion perdiera parte de su resistencia mágica tras su primera muerte en ARAM: Caos.",
+        "Hemos corregido un error que provocaba que Ornn viera Inmolación del Vacío en la ventana de la tienda de su pasiva.",
+        "Hemos corregido un error que provocaba que la R de Zilean eliminase la resistencia mágica de los aliados cuerpo a cuerpo al revivirlos.",
+        "Hemos corregido un error que provocaba que Xerath y Ziggs pudieran activar dos veces Enardecimiento y Pacto ominoso con una sola habilidad.",
+        "Hemos corregido un error que permitía a Viego usar la tienda tras abandonar la posesión de un enemigo.",
+        "Hemos corregido un error que provocaba que las cartas de aumentos se abrieran durante el combate si había enemigos dentro de vuestra base.",
+        "Hemos corregido un error que provocaba que Viego perdiera la mejora de Soy el rey si completaba la misión mientras poseía a un enemigo.",
+        "Hemos corregido un error que provocaba que la mejora de Soy el rey de Viego se revirtiera tras abandonar la posesión de un enemigo.",
+        "Hemos corregido un error que provocaba que, al recibir Sombrero de Wooglet, se perdiera una Vara innecesariamente grande adicional.",
+        "Hemos corregido un error que impedía que los jugadores compraran objetos tras recibir daño letal si había una selección de Yunque de estadísticas en curso.",
+        "Hemos corregido un error que impedía que los jugadores pudieran comprar objetos durante la selección de un yunque de estadísticas tras retirarse con el aumento Trampas.",
+        "Hemos corregido un error que provocaba que el aumento Mejora de Bendición de Mikael no otorgase el objeto al seleccionarlo.",
+        "Hemos corregido un error que provocaba que el enfriamiento de Plan de huida se reiniciase al morir.",
+        "Hemos corregido un error que provocaba que el consumo de maná de Karthus con Sobrecarga volviera a la normalidad tras revivir en lugar de mantener el coste aumentado.",
+        "Hemos corregido un error que provocaba que Neeko con Taconeo pudiese acumular cargas de forma infinita al transformarse en un súbdito y asestar ataques básicos.",
+        "Hemos corregido un error que provocaba que algunas reactivaciones tuvieran un coste de maná incorrecto al usar Sobrecarga.",
+        "Hemos corregido el espaciado incorrecto en las descripciones de las pasivas de varios objetos mejorados.",
+        "Hemos corregido un error en la descripción de Rebote del Rey Poro que indicaba incorrectamente que afectaba a unidades que no eran campeones.",
+        "Hemos corregido un error que impedía que Sion usara sus habilidades en la forma de su pasiva si tenía el aumento Sobrecarga.",
+        "Hemos corregido un error que provocaba que, si Quinn tenía Vuelta a lo básico, reapareciera con su forma definitiva.",
+        "Hemos corregido un error que provocaba que el nombre de la Malla de espinas mejorada no apareciera en los avisos del chat.",
+        "Hemos corregido un error que provocaba que Patada voladora otorgase visión permanente de un campeón enemigo asesinado tras participar en una eliminación.",
+        "Hemos corregido un error que provocaba que la descripción de Mejora de Inmolar no registrara el oro obtenido con su efecto.",
+        "Hemos corregido un error que provocaba que los sobres rojos no otorgasen daño de ataque al recogerlos.",
+        "Hemos corregido un error que provocaba que el enfriamiento de Reina del baile se iniciara al activarse.",
+        "Hemos corregido un error que provocaba que la retirada de Trampas se viese interrumpida por el lanzamiento automático de Fuego zorruno.",
+        "Hemos corregido un error que provocaba que El auge de la oscuridad (P) de Mordekaiser generase acumulaciones de El poder de la fe con cada activación de daño.",
+        "Hemos corregido una interacción incorrecta del enfriamiento entre Mejora de Reloj de arena de Zhonya y Sombrero de Wooglet.",
+        "Hemos corregido un error que provocaba que, al tener equipado Pinball, Gatillo infernal a muerte pudiese reemplazar un hueco de hechizo de invocador por Deslizamiento tras lanzar Marca al menos una vez.",
+        "Hemos corregido un error que provocaba que el enfriamiento de Purificar con Mejora de Bendición de Mikael se mostrase de forma incorrecta.",
+        "Hemos corregido un error que provocaba que el efecto visual de la bonificación de conjunto NIII NOO NIII NOOO fuera difícil de ver al combinarlo con Soy un gatito bebé, ¿dónde está mi mamá?",
+        "Hemos corregido un error que provocaba que la P de Soraka y la bonificación de conjunto NIII NOO NIII NOOO redujeran drásticamente la velocidad de movimiento al elegir El poder de la fe.",
+        "Hemos corregido un error de la interfaz que provocaba que, al combinar la interfaz de Aphelios con los ajustes del minimapa para zurdos, los aumentos aparecieran en el lado incorrecto y no se pudieran ocultar.",
+        "Hemos corregido un error que impedía a Aphelios abrir el panel hextech al pulsar la tecla C en ARAM: Caos.",
+        "Hemos corregido un error en el modo personalizado de ARAM: Caos que provocaba que, al seleccionar el Puente del Carnicero, se cargaba el Abismo de los Lamentos.",
+        "Hemos corregido un error que provocaba que Empalador de Atma no mostrase en la pantalla la velocidad de habilidades que otorga.",
+        "Hemos corregido un error que provocaba que Fuego zorruno hextech activase por error el coste del 5 % de la vida de Pacto ominoso hextech al lanzarse.",
+        "Hemos corregido un error que provocaba que el efecto de Fuego zorruno activara incorrectamente la bonificación de conjunto del atributo Archimago.",
+        "Hemos corregido un error que provocaba que el elixir gratuito de Ornn en el nivel 12 pusiera en enfriamiento su habilidad pasiva.",
+        "Hemos corregido un error que provocaba que el aumento Campeón de Urf a veces no otorgase Espátula dorada.",
+        "Hemos corregido un error que provocaba que Tryndamere pudiese morir durante su R tras activar Mejora de Brillo.",
+        "Hemos corregido un error que provocaba que Conducto infernal activase Aceite picante de la yaya con más frecuencia de la debida.",
+        "Hemos corregido un error que provocaba que De principio a fin otorgase más acumulaciones de Cosecha oscura de lo previsto al combinarse con los aumentos de Transmutar.",
+        "Hemos corregido un error que provocaba que el aumento Intervención divina mostrase un icono de debilitación en blanco.",
+        "Hemos corregido un error que provocaba que la bonificación de conjunto Incursión bombardera mostrase un icono de debilitación en blanco.",
+        "Hemos corregido un error que provocaba que Esto va a quemar mostrase un icono de debilitación en blanco.",
+        "Hemos corregido un error que provocaba que la Q de Nasus no mostrase correctamente cuántas acumulaciones otorgaba en ARAM y ARAM: Caos."
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Corrección de errores y mejoras de calidad",
+      "heading_level": 2,
+      "blocks": [
+        "Hemos pulido el código de las restricciones de los dúos en los niveles superiores y descartado algunos casos atípicos que no funcionaban como esperábamos. Esos casos aislados solo afectan a un número muy reducido de jugadores, ya que suelen deberse a dúos con una clasificación más baja y un MMR más alto que no deberían haberse permitido, pero lo hemos solucionado en la versión 26.6.",
+        "Hemos corregido un error que provocaba que la Q de Mel entrase en enfriamiento tras bloquear la Q de Zac con su W.",
+        "Hemos corregido un error que provocaba que Samira lanzase su Q sin efecto si la usaba inmediatamente después de su W y su R.",
+        "Hemos corregido un error que provocaba que el daño del escudo de la E de Ivern contase para la pasiva de Samira.",
+        "Hemos corregido un error que provocaba que los jugadores enemigos cercanos pudieran oír a Zac en la niebla de guerra.",
+        "Hemos corregido un error que provocaba que los efectos de sonido de A salvo de Senna se iniciaran y detuvieran de forma repentina."
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Próximos aspectos y chromas",
+      "heading_level": 2,
+      "blocks": [
+        "Lanzaremos los siguientes aspectos a lo largo de esta versión:"
+      ],
+      "subsections": [
+        {
+          "title": "",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Naafiri sabuesos de guerra",
+              "heading_level": 4,
+              "blocks": [],
+              "subsections": []
+            },
+            {
+              "title": "Senna sabuesos de guerra",
+              "heading_level": 4,
+              "blocks": [],
+              "subsections": []
+            },
+            {
+              "title": "Warwick sabuesos de guerra",
+              "heading_level": 4,
+              "blocks": [
+                "Lanzaremos los siguientes chromas a lo largo de esta versión:"
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Naafiri sabuesos de guerra",
+              "heading_level": 4,
+              "blocks": [],
+              "subsections": []
+            },
+            {
+              "title": "Senna sabuesos de guerra",
+              "heading_level": 4,
+              "blocks": [],
+              "subsections": []
+            },
+            {
+              "title": "Warwick sabuesos de guerra",
+              "heading_level": 4,
+              "blocks": [],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Artículos relacionados",
+      "heading_level": 2,
+      "blocks": [
+        "Actualizaciones del juego12/5/2026Notas de la versión 26.10¡La temporada de los demonios continúa con la versión 26.10!",
+        "Actualizaciones del juego28/4/2026Notas de la versión 26.9 de League of Legends¡Toca cazar demonios con la versión 26.9!",
+        "Actualizaciones del juego14/4/2026Notas de la versión 26.8 LoL¡Toca cambiar de onda con la versión 26.8!",
+        "Actualizaciones del juego31/3/2026Notas de la versión 26.7 de League of Legends¡Os esperan toneladas de diversión y pollo frito!",
+        "Actualizaciones del juego3/3/2026Notas de la versión 26.5¡Os damos la bienvenida a la versión oficial del First Stand, el \nprimer gran torneo internacional del año!",
+        "Actualizaciones del juego18/2/2026League of Legends Patch 26.4 NotesHappy Lunar Revel, welcome to patch 26.4!",
+        "Actualizaciones del juego3/2/2026Notas de la versión 26.3Celebrad el año nuevo y deleitaos con la versión 26.3 🎊",
+        "Actualizaciones del juego21/1/2026Notas de la versión 26.2¡La versión 26.2 está lista para el despliegue!",
+        "Actualizaciones del juego7/1/2026Notas de la versión 26.1Demacia ascenderá con la versión 26.1 🛡️"
+      ],
+      "subsections": []
+    }
+  ],
+  "assets": [
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/e77a2205583ecc1e4c17856c64c3c1f2fcec070d-1920x1080.jpg?accountingTag=LoL&auto=format&fit=fill&q=80&w=1920",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/e77a2205583ecc1e4c17856c64c3c1f2fcec070d-1920x1080.jpg?accountingTag=LoL&auto=format&fit=fill&q=80&w=1184",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/1eaf25db2cb788bbb07762d4b879c1598a9ac6ce-200x200.jpg",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/b36c216eac2e27319ed6c7a5df2dd25e449adee2-220x220.jpg",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/ca1ff9c14a7c22252e92199aec42db4e03d24806-300x300.jpg",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=http://ddragon.leagueoflegends.com/cdn/16.6.1/img/champion/Shyvana.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=http://ddragon.leagueoflegends.com/cdn/16.6.1/img/champion/Cassiopeia.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=http://ddragon.leagueoflegends.com/cdn/16.6.1/img/champion/Olaf.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/9d08a25df24e1d51052b3aa32794899daeb99a72-1920x1080.jpg",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/7ccb92a2b7973ca296939f4dac1da7f4372c1f75-512x512.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/88d6c890a3e7988a4a43d2aa19cb3079cd93b0bd-512x512.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/b94a91bae94fde29fc7a362090e2fdbfd56545c0-512x512.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/ec68886f543c76f42906befc207ef0fa560099f2-512x512.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/d4295e0fa1492c83bc46ef2d07ae7a3315968278-512x512.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.5.1/img/champion/Ahri.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.5.1/img/spell/AhriQ.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.5.1/img/champion/Azir.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.5.1/img/spell/AzirQWrapper.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.5.1/img/spell/AzirW.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.5.1/img/champion/Cassiopeia.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.5.1/img/spell/CassiopeiaE.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.5.1/img/champion/Lissandra.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.5.1/img/spell/LissandraQ.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.5.1/img/champion/Olaf.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.5.1/img/spell/OlafAxeThrowCast.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.5.1/img/spell/OlafFrenziedStrikes.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.5.1/img/spell/OlafRecklessStrike.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.5.1/img/champion/Pyke.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.5.1/img/champion/Shen.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.5.1/img/spell/ShenQ.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.5.1/img/champion/Skarner.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.5.1/img/spell/SkarnerQ.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.5.1/img/champion/Tryndamere.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.5.1/img/champion/Zaahen.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.5.1/img/spell/ZaahenW.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.5.1/img/spell/ZaahenE.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/36730d62745041805b260d301534bef5774906fa-512x512.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/023c4649d5bfd33fe9be1bae0251180833efc6c6-512x512.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/c2004b97744ad7485aac04af044ec5dfeb4bb910-1920x1080.jpg",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/77413053f63fb4f7c66283cc7ea80a55c57b73a3-1920x1080.jpg",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/e9eeeab7ffd4ce71cbdcf53aaf59504cdbf14e9c-1920x1080.jpg",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/d0d94aa65ea803fc8fdeda721b869323b8f1a192-1610x590.jpg",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/0f5bb2a9019143b46471b802a76ef1fe04834a31-1610x590.jpg",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/6bc0621ddddf457947ca2b1320d75017a43ed481-1610x590.jpg",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/6ee41cd6a039966520450f721c40c0012a8c870f-2048x1208.jpg?accountingTag=LoL&auto=format&fit=crop&q=80&h=270&w=480&crop=center",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/b2e196d8bf9c21cdc7bdde5c7680249bda2b82de-1920x1080.jpg?accountingTag=LoL&auto=format&fit=crop&q=80&h=270&w=480&crop=center",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/0925832fd385df3f5e442886d2450e209ffb8846-1920x1080.jpg?accountingTag=LoL&auto=format&fit=crop&q=80&h=270&w=480&crop=center",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/13375a6633f09dee4e4397083ca37fc294592203-1920x1133.jpg?accountingTag=LoL&auto=format&fit=crop&q=80&h=270&w=480&crop=center",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/1c6e3c541e7dbfc4759097a24f350b7b2dfb13a3-1920x1080.jpg?accountingTag=LoL&auto=format&fit=crop&q=80&h=270&w=480&crop=center",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/99c3a609a45061dca9c9a2056a3e033702a64bb5-1920x1080.jpg?accountingTag=LoL&auto=format&fit=crop&q=80&h=270&w=480&crop=center",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/26009ed5cbbbf58f100561ac6d54d06e88b39afe-1920x1080.jpg?accountingTag=LoL&auto=format&fit=crop&q=80&h=270&w=480&crop=center",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/8450bda0b6eb809ffb11c0161157d2e0b4d692d8-1920x1080.jpg?accountingTag=LoL&auto=format&fit=crop&q=80&h=270&w=480&crop=center",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/dae5b2dc2bf5472edc69262a289e065394ee790b-1920x1080.jpg?accountingTag=LoL&auto=format&fit=crop&q=80&h=270&w=480&crop=center",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "link",
+      "src": "https://euw.leagueoflegends.com/es-es/",
+      "alt": null,
+      "text": "mainLogoRiotFist21mainMenuDownNonHover"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/how-to-play/",
+      "alt": null,
+      "text": "Resumen del juego"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/",
+      "alt": null,
+      "text": "Campeones"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/",
+      "alt": null,
+      "text": "TODAS"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates",
+      "alt": null,
+      "text": "ACTUALIZACIONES DEL JUEGO"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/esports",
+      "alt": null,
+      "text": "ESPORTS"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/dev",
+      "alt": null,
+      "text": "DESARROLLO"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/lore",
+      "alt": null,
+      "text": "HISTORIAS"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/media",
+      "alt": null,
+      "text": "MULTIMEDIA"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/merch",
+      "alt": null,
+      "text": "MERCHANDISING"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/community",
+      "alt": null,
+      "text": "COMUNIDAD"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/riot-games",
+      "alt": null,
+      "text": "RIOT GAMES"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/tags/patch-notes",
+      "alt": null,
+      "text": "Notas de la versión"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://euw.leagueoflegends.com/es/featured/league-displays",
+      "alt": null,
+      "text": "LEAGUE DISPLAYS"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://halloflegends.leagueoflegends.com/",
+      "alt": null,
+      "text": "HALL OF LEGENDS"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/riot-games/hello-riot-mobile-farewell-league/",
+      "alt": null,
+      "text": "RIOT MOBILE"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://lolesports.com/",
+      "alt": null,
+      "text": "EsportsmainNavLinkOut"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://universe.leagueoflegends.com/es_ES/",
+      "alt": null,
+      "text": "UniversemainNavLinkOut"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://merch.riotgames.com/es-es",
+      "alt": null,
+      "text": "MerchandisingmainNavLinkOut"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://support.riotgames.com/hc/es-es/",
+      "alt": null,
+      "text": "AsistenciamainNavLinkOut"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/how-to-play/",
+      "alt": null,
+      "text": "Resumen del juego"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/",
+      "alt": null,
+      "text": "Campeones"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-6-notes/#",
+      "alt": null,
+      "text": "NoticiassubMenuRight"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/tags/patch-notes",
+      "alt": null,
+      "text": "Notas de la versión"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-6-notes/#",
+      "alt": null,
+      "text": "DescubrirsubMenuRight"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://lolesports.com/",
+      "alt": null,
+      "text": "EsportsmainNavLinkOut"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://universe.leagueoflegends.com/es_ES/",
+      "alt": null,
+      "text": "UniversemainNavLinkOut"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://merch.riotgames.com/es-es",
+      "alt": null,
+      "text": "MerchandisingmainNavLinkOut"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://support.riotgames.com/hc/es-es/",
+      "alt": null,
+      "text": "AsistenciamainNavLinkOut"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/",
+      "alt": null,
+      "text": "Actualizaciones del juego"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://wiki.leagueoflegends.com/en-us/",
+      "alt": null,
+      "text": "aquí"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://preview.teamfighttactics.leagueoflegends.com/es-es/news/game-updates/teamfight-tactics-patch-16-7",
+      "alt": null,
+      "text": "Aquí"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/en-us/champions/ahri/",
+      "alt": null,
+      "text": "Ahri"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/en-us/champions/azir/",
+      "alt": null,
+      "text": "Azir"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/en-us/champions/cassiopeia/",
+      "alt": null,
+      "text": "Cassiopeia"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/en-us/champions/lissandra/",
+      "alt": null,
+      "text": "Lissandra"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/en-us/champions/olaf/",
+      "alt": null,
+      "text": "Olaf"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/en-us/champions/pyke/",
+      "alt": null,
+      "text": "Pyke"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/en-us/champions/shen/",
+      "alt": null,
+      "text": "Shen"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/en-us/champions/skarner/",
+      "alt": null,
+      "text": "Skarner"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/en-us/champions/tryndamere/",
+      "alt": null,
+      "text": "Tryndamere"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/en-us/champions/zaahen/",
+      "alt": null,
+      "text": "Zaahen"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/en-us/how-to-play/",
+      "alt": null,
+      "text": "Mecanoespada punki"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/en-us/how-to-play/",
+      "alt": null,
+      "text": "Égida de fuego solar"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://support-leagueoflegends.riotgames.com/hc/es/articles/360000951548-Clash-FAQ",
+      "alt": null,
+      "text": "preguntas frecuentes sobre Clash"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/c2004b97744ad7485aac04af044ec5dfeb4bb910-1920x1080.jpg",
+      "alt": null,
+      "text": "Naafiri sabuesos de guerra"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/77413053f63fb4f7c66283cc7ea80a55c57b73a3-1920x1080.jpg",
+      "alt": null,
+      "text": "Senna sabuesos de guerra"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/e9eeeab7ffd4ce71cbdcf53aaf59504cdbf14e9c-1920x1080.jpg",
+      "alt": null,
+      "text": "Warwick sabuesos de guerra"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/d0d94aa65ea803fc8fdeda721b869323b8f1a192-1610x590.jpg",
+      "alt": null,
+      "text": "Naafiri sabuesos de guerra"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/0f5bb2a9019143b46471b802a76ef1fe04834a31-1610x590.jpg",
+      "alt": null,
+      "text": "Senna sabuesos de guerra"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/6bc0621ddddf457947ca2b1320d75017a43ed481-1610x590.jpg",
+      "alt": null,
+      "text": "Warwick sabuesos de guerra"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-10-notes",
+      "alt": null,
+      "text": "Actualizaciones del juego12/5/2026Notas de la versión 26.10¡La temporada de los demonios continúa con la versión 26.10!"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-9-notes",
+      "alt": null,
+      "text": "Actualizaciones del juego28/4/2026Notas de la versión 26.9 de League of Legends¡Toca cazar demonios con la versión 26.9!"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-8-notes",
+      "alt": null,
+      "text": "Actualizaciones del juego14/4/2026Notas de la versión 26.8 LoL¡Toca cambiar de onda con la versión 26.8!"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-7-notes",
+      "alt": null,
+      "text": "Actualizaciones del juego31/3/2026Notas de la versión 26.7 de League of Legends¡Os esperan toneladas de diversión y pollo frito!"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-5-notes",
+      "alt": null,
+      "text": "Actualizaciones del juego3/3/2026Notas de la versión 26.5¡Os damos la bienvenida a la versión oficial del First Stand, el \nprimer gran torneo internacional del año!"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-4-notes",
+      "alt": null,
+      "text": "Actualizaciones del juego18/2/2026League of Legends Patch 26.4 NotesHappy Lunar Revel, welcome to patch 26.4!"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/patch-26-3-notes",
+      "alt": null,
+      "text": "Actualizaciones del juego3/2/2026Notas de la versión 26.3Celebrad el año nuevo y deleitaos con la versión 26.3 🎊"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/patch-26-2-notes",
+      "alt": null,
+      "text": "Actualizaciones del juego21/1/2026Notas de la versión 26.2¡La versión 26.2 está lista para el despliegue!"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/patch-26-1-notes",
+      "alt": null,
+      "text": "Actualizaciones del juego7/1/2026Notas de la versión 26.1Demacia ascenderá con la versión 26.1 🛡️"
+    }
+  ],
+  "scraper_version": "patch_notes_v2.0.0",
+  "raw_html_ref": null,
+  "enrichments": []
+}

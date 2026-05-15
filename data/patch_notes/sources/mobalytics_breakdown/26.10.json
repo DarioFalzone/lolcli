@@ -1,0 +1,38 @@
+{
+  "source": "mobalytics_breakdown",
+  "source_url": "https://mobalytics.gg/lol/guides/patch-notes-breakdown",
+  "fetched_at": "2026-05-12T19:10:21Z",
+  "content_hash": "7a5afae07767e72758949023f5b8634e5ff9c4e58aeea822b3bbaf476160216c",
+  "payload": {
+    "title": "League of Legends 26.10 Patch Notes Breakdown",
+    "content_markdown": "# League of Legends 26.10 Patch Notes Breakdown\n\nWelcome to our patch notes breakdown for **League of Legends Season 26.10 (Split 2 for LoL)**!\n\nLet's break down all the new changes in LoL coming this week.\n\nWe recommend following along with the official patch notes since we won't be listing all the specific stat changes, but rather focusing on the impact of the changes and the champions' place in the current meta.\n\nIf you're wondering how these changes will affect the meta, check out our LoL champion tier list!\n\n## Champion Changes\n\n### Ambessa (change)\n- Her Q max health damage is increased, and the damage it deals to monsters is reduced.\n- Her Ultimate healing is increased, which will give Ambessa a bit of extra sustain in team fights. The healing it provides versus monsters is reduced, though.\n- These changes are going to help Ambessa in the Top role, but reduce her effectiveness moving forward in the Jungle role due to the monster damage nerfs.\n- Ambessa had a 46.7% win rate on patch 26.09.\n\n### Anivia (nerf)\n- Her base armor is reduced, and the armor growth per level is reduced. These changes are going to make Anivia weaker against AD assassins in the Mid lane, like Zed or Yasuo.\n- Anivia had a 51% win rate on patch 26.09.\n\n### Ashe (buff)\n- Her Q AD ratio is increased. This is going to make Ashe deal more damage in trades, especially in the latter parts of the game.\n- Ashe had a 52.2% win rate on patch 26.09.\n\n### Galio (change)\n- Galio's Q mana cost is reduced, which is going to help him clear waves and poke the enemy down.\n- His E damage has changed as well. The AP ratio is increased.\n- Galio's Ultimate now scales with bonus magic resistance.\n- These changes are interesting, and it will be good to see how they play out for Galio in the future.\n- Galio had a 48.7% win rate on patch 26.09.\n\n### Lee Sin (change)\n- Lee's W base shield is reduced, and the cooldown is reduced from 12 seconds to 7, which is nice.\n- It no longer reduces cooldown if it's a champion he uses it on. Instead, he now also gains a shield if he uses it on a minion or ward.\n- Lee's E damage is nerfed as well, which is going to reduce his clear speed and trading power.\n- It will be interesting to see how these changes play out for Lee Sin. We could see him being played in a solo lane again soon.\n- Lee Sin had a 49.9% win rate on patch 26.09.\n\n### Naafiri (nerf)\n- Naafiri's Q damage from packmates is reduced vs monsters. This is going to reduce Naafiri's strength in the Mid and Jungle roles.\n- Her Ultimate damage is also reduced, which is going to negatively impact her all-ins post 6 and reduce her kill pressure in lane.\n- These changes will make Naafiri weaker in both the Mid and Jungle roles.\n- Naafiri had a 50.3% win rate on patch 26.09.\n\n### Quinn (buff)\n- Her Passive now deals extra damage against monsters.\n- Quinn's Q damage vs monsters is increased.\n- Her Ultimate mana cost is reduced.\n- All these changes to Quinn tell us Riot wants people to play Quinn in the Jungle role moving forward.\n- Quinn had a 50.5% win rate on patch 26.09.\n\n### Shyvana (nerf)\n- Her health growth per level is lower; this will make her weaker as the game progresses.\n- The cooldown on her W is increased and the shield is nerfed, which is going to make her weaker in those 1v1s.\n- These changes will make Shyvana weaker in the Jungle role moving forward.\n- Shyvana had a 52.4% win rate on patch 26.09.\n\n### Wukong (buff)\n- His W damage and duration are increased.\n- Wukong's E bonus attack speed is increased.\n- These changes to Wukong are good. They will make him stronger in the Jungle and Top lane, and we will see him more often. He will be a bigger threat in the upcoming patches.\n- Wukong had a 49.4% win rate on patch 26.09.\n\n### Zed (nerf)\n- Zed's Passive health ratio reduction is reduced.\n- His E damage and AD ratio are also decreased. These changes will make Zed weaker in the Jungle and Mid Lane roles going forward.\n- Zed had a 51.9% win rate on patch 26.09.\n\n### Zeri (buff)\n- Zeri's Q bonus AD is increased, meaning her all-in and trading damage will increase too.\n- These are some good changes to Zeri as she is relatively weak compared to many other ADCs in the current meta.\n- Zeri had a 47.4% win rate on patch 26.09.\n\n## Items\n\n### Doran's Bow\n- The AD is increased from 6 to 8.\n\n### Doran's Helm\n- It now gives a little more HP.\n\n### Gluttonous Graves\n- The cost has increased to 1000 gold.\n- Slay Omnivamp per stack is reduced, but the max stacks are increased to 10 from 6.\n\n### Immortal Path\n- Slay Omnivamp per stack is reduced, but the max stacks are increased to 10 from 6.\n\n### Lich Bane\n- It gives more movement speed now.\n- The Spellblade AP ratio is increased.\n\n### Voltaic Cyclosword\n- The cost is increased by 100g.\n\n## Runes\n\n### Deathfire Touch\n- The base damage is changed.\n\n### Stormraider's Surge\n- Bonus movement speed duration is increased.\n",
+    "section_count": 4,
+    "published_at": "2026-05-12T00:00:00Z",
+    "champions_mentioned": [
+      "Ambessa",
+      "Anivia",
+      "Ashe",
+      "Galio",
+      "Lee Sin",
+      "Naafiri",
+      "Quinn",
+      "Shyvana",
+      "Wukong",
+      "Zed",
+      "Zeri"
+    ],
+    "items_mentioned": [
+      "Doran's Bow",
+      "Doran's Helm",
+      "Gluttonous Graves",
+      "Immortal Path",
+      "Lich Bane",
+      "Voltaic Cyclosword"
+    ],
+    "runes_mentioned": [
+      "Deathfire Touch",
+      "Stormraider's Surge"
+    ]
+  },
+  "error": null
+}

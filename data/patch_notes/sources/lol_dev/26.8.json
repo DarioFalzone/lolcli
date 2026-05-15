@@ -1,0 +1,48 @@
+{
+  "source": "lol_dev",
+  "source_url": "https://www.leagueoflegends.com/es-es/news/dev/dev-apex-tier-ranked-reset",
+  "fetched_at": "2026-05-15T09:20:22.718063Z",
+  "content_hash": "98e2a5306cd791f8597609f3fc0661c9e7b7b7ec2794f72d1c1feb23f234f7db",
+  "payload": {
+    "url": "https://www.leagueoflegends.com/es-es/news/dev/dev-apex-tier-ranked-reset",
+    "title": "Desarrollo: Reinicio clasificatorio niveles altos",
+    "published_at": "2026-04-21T15:00:00.000Z",
+    "paragraphs": [
+      "NoticiasmainNavArrowDownmainNavArrowDownHover",
+      "DescubrirmainNavArrowDownmainNavArrowDownHover",
+      "¡Buenas! Hemos estado monitorizando la situación en la cima de la clasificación desde el reinicio de enero. Además, hemos estado prestando atención a las conversaciones entre los jugadores de los niveles superiores. Debido a la volatilidad que hemos observado desde enero, hemos decidido reiniciar la clasificación de los niveles superiores (a partir de Maestro) en NA, EUW, EUNE, BR, LAN y TR.",
+      "El rango visible y el MMR de los jugadores actuales de Maestro, Gran Maestro y Aspirante de dichas regiones volverá a ser de Maestro con 0 PL cuando implementemos la versión 26.9 al principio de la Temporada 2.",
+      "Sabemos que un reinicio total a mitad de año interrumpe el ascenso, pero debido a los problemas que gran parte de la comunidad (y nosotros) habéis identificado desde principios de año y a la disparidad entre la parte superior e inferior de los niveles superiores, este reinicio debería resultar en una clasificación más sana.",
+      "Dicho esto, hablemos de lo que ha pasado y de por qué hemos decidido tomar este camino.",
+      "Este año, hemos aplicado grandes cambios al emparejamiento para intentar ofreceros una experiencia clasificatoria más satisfactoria: hemos mejorado la experiencia del polivalente automático, hemos aumentado la satisfacción en ciertos rangos y hemos permitido los dúos en los niveles superiores, entre otras cosas. Al hacerlo, hemos cometido varios errores en la configuración del sistema clasificatorio para el inicio de la temporada 2026. Nos habéis comentado dichos problemas y hemos preguntado a los jugadores de los niveles superiores pertenecientes a las regiones afectadas para conocer mejor sus experiencias. Y ha resultado obvio que el ascenso clasificatorio de esta temporada no ha sido una experiencia agradable para muchos de vosotros.",
+      "Al intentar solucionar estos problemas, los jugadores de los niveles superiores de las regiones mencionadas pasaron por varios estados en los que sus PL variaban entre +10/-30 en una versión y +/-20 en la siguiente, lo que resultó en una experiencia de ascenso mediocre e irregular. Al final, esto significaba que la versión en la que jugabais era un factor determinante en vuestro ascenso clasificatorio, lo que socavaba la integridad.",
+      "Ahora toca centrarse en el presente. Con la implementación de un emparejamiento mejorado en la versión 26.6, un mejor equilibrio de los dúos, la eliminación del límite de PL en la parte superior de la clasificación y otra tanda de cambios menores, creemos haber resuelto los problemas que provocaba que obtuvieseis cantidades de PL desiguales. Sin embargo, eso nos deja con una clasificación que no parece representar fielmente la destreza de los jugadores.",
+      "Todo eso nos ha llevado a tomar la decisión de llevar a cabo un reinicio total en Maestro y los niveles superiores con la versión 26.9.",
+      "Cuando preguntamos a los grupos de jugadores de los niveles superiores pertenecientes a las regiones afectadas, lo que más nos señalaron fue su deseo de que priorizásemos la integridad de la clasificación por encima de todo, aunque eso supusiera una bajada de calidad a medio plazo en el emparejamiento.",
+      "Un reinicio completo significa que todo el mundo empezará desde el mismo punto: Maestro con 0 PL. No se conservará nada de la clasificación actual, lo que sitúa a todo el mundo en igualdad de condiciones a costa de partidas más justas.",
+      "Como el sistema de emparejamiento no recordará los rangos anteriores, es posible que participéis en algunas partidas algo desequilibradas. Por ejemplo, podría haber cinco antiguos Aspirantes contra cinco antiguos Maestros y el sistema lo consideraría una partida justa. Será una desventaja a corto plazo, ya que el estado de la clasificación tardará varios meses en estabilizarse tras el reinicio.",
+      "Otra cosa que nos habéis comentado es lo tediosa que puede resultar la clasificación, sobre todo en los niveles superiores y al fijaros en los PL necesarios para llegar a Gran Maestro y Aspirante. Una opinión frecuente en las encuestas era la necesidad de más puntos de corte en la clasificación de los niveles superiores, y es algo que añadiremos en 2027.",
+      "No modificaremos los puntos de corte para Gran Maestro y Aspirante con dichos cambios, y los valores de PL seguirán siendo superiores a los de los años anteriores. Sin embargo, vamos a aumentar las ganancias de PL por las victorias o derrotas para que tengan una base de +-30 PL, lo que hará que el ascenso a los niveles superiores sea menos pesado.",
+      "Esperamos que las ganancias y pérdidas de PL se sitúen entre +35/-25 PL y +25/-35 PL, con un valor básico de +-30 PL. Creemos que esto ofrece un mejor equilibrio entre la inversión necesaria para llegar a lo más alto de la clasificación y la posibilidad de que quienes tengan otras responsabilidades puedan ascender.",
+      "También aumentaremos los PL mínimos necesarios en las regiones del reinicio a 800 PL para Aspirante y a 400 PL para Gran Maestro. Una de las críticas a los reinicios clasificatorios de las temporadas (desde hace ya muchos años) ha sido que las rachas de victorias al principio de la temporada y jugar muchas partidas en poco tiempo pueden catapultar a alguien por encima de los 500 PL (el punto de corte actual para Aspirante). Al aumentar los requisitos, podremos encontrar un mejor equilibrio en la constancia necesaria para llegar a Aspirante, sin que parezca una tarea imposible (lo que mitigaremos aumentando las ganancias de PL a +30 PL de base).",
+      "También queremos dedicar un momento a hablar de las recompensas clasificatorias de los niveles superiores. Este reinicio, sumado a que la duración de esta temporada es menor, hará que parezca más costoso volver a alcanzar vuestra clasificación más alta a tiempo. Por ello, repartiremos las recompensas de la Temporada 1 como de costumbre y, después, usaremos la Temporada 3 como una última fase de ajuste para las recompensas de la Temporada 2 en el caso de los jugadores de los niveles superiores pertenecientes a las regiones afectadas. Y, si alcanzáis una clasificación superior en la Temporada 3, también contará de cara a las recompensas de la Temporada 2. Por ejemplo, si llegáis a Maestro en la Temporada 2 y a Gran Maestro en la Temporada 3, recibiréis las recompensas de Gran Maestro de las Temporadas 2 y 3 al final del año.",
+      "No creemos que ninguna otra región haya experimentado un nivel de inestabilidad que socave la integridad clasificatoria lo suficiente como para justificar un reinicio como este.",
+      "Como siempre, agradecemos que hayan hablado los jugadores afectados. Gracias a vuestros comentarios e historias, que nos han permitido ver la gravedad de todos estos cambios en el sistema, hemos recurrido a un reinicio más drástico e inusual.",
+      "Aunque sabemos que un reinicio total a mitad de la temporada clasificatoria no es lo ideal (además de algo extremadamente inusual que siempre trataremos de evitar), queríamos tomar las medidas necesarias para solucionar la inestabilidad que habéis notado esta temporada, a pesar de los inconvenientes.",
+      "Muchas gracias por vuestra paciencia esta temporada mientras trabajábamos en una solución que abordara la raíz de vuestras inquietudes. Os deseamos un feliz ascenso.",
+      "Desarrollo21/4/2026Nuevos eventos y aumentos ponen rumbo a Arena¡Preparaos para una nueva temporada de gloriosos combates en Arena a partir de la versión 26.9!",
+      "Desarrollo14/4/2026Resumen: Pandemonium, Arena y másUn breve resumen de los cambios incluidos en la entrega de Actualización de desarrollo de hoy.",
+      "Desarrollo14/4/2026Desarrollo: Controles WASD en las clasificatoriasTras meses de pruebas y comentarios, los controles WASD por fin están listos para su lanzamiento.",
+      "Desarrollo14/4/2026Desarrollo: Actualizaciones de Arena y másPabro y Meddler hablan de la Temporada 2: Pandemonium, los cambios a la experiencia, Arena y más.",
+      "Desarrollo14/4/2026Desarrollo: Arena a otro nivelUn resumen de todos los cambios que llegan a Arena en la Temporada 2.",
+      "Desarrollo28/3/2026Desarrollo de TFT: Deidades siderales¡Ya están aquí las deidades siderales! Ganaos su bendición y convertíos en estrellas gracias a su poder celestial.",
+      "Desarrollo26/3/2026Desarrollo de TFT: Avance¿Quién quiere un carrusel cuando se les puede suplicar a las estrellas?",
+      "Desarrollo2/3/2026Resumen: Clasificatorias, Shyvana y másUn breve resumen de los cambios incluidos en la entrega de Actualización de desarrollo de hoy."
+    ],
+    "related_patch_versions": [
+      "26.9"
+    ],
+    "fetched_at": "2026-05-15T09:20:22.717582+00:00"
+  },
+  "error": null
+}
