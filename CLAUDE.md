@@ -19,7 +19,7 @@ Claude Code debe usar este archivo solo como puntero de arranque.
 - Python 3.9+, virtualenv en `.venv/`.
 - `pip install -r requirements.txt` y `pip install -r requirements-dev.txt`.
 - Para scraping real (Meta Scraper): `playwright install chromium`.
-- 3 servidores FastAPI: Meta API `:8000`, Draft Advisor `:8001`, Meta Scraper `:8002`. Launcher unico: `scripts/bat/levantar_todo.bat`.
+- 6 servidores FastAPI: Home `:8080`, Meta API `:8000`, Draft `:8001`, Meta Scraper `:8002`, Jungle `:8003`, Items `:8004`. Launcher unico: `scripts/bat/levantar_todo.bat`.
 
 ## Verificacion minima
 
@@ -27,5 +27,7 @@ Claude Code debe usar este archivo solo como puntero de arranque.
 .venv\Scripts\python.exe -m pytest -q
 ruff check src tests scripts
 ```
+
+Si el cambio toca una surface visual: ademas correr `python scripts/visual_smoke.py <URL>` y abrir el PNG resultante. Auditar el codigo no atrapa cascadas rotas ni mojibake renderizado.
 
 No crear ni mantener reglas largas especificas de Claude en este archivo. Las reglas operativas viven en `.agent/rules/` y `AGENTS.md` sigue siendo el entrypoint comun para agentes.

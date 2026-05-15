@@ -460,7 +460,7 @@ class ChampionDataService:
         return len(self._support_profiles)
 
     # ========================================================================
-    # Queries â€” Jungle Meta
+    # Queries - Jungle Meta
     # ========================================================================
 
     def get_jungle_meta_snapshot(self, *, force_refresh: bool = False) -> JungleMetaSnapshot:

@@ -1,85 +1,60 @@
 # Documentation And Commits
 
-Protocolo documental y convenciones de commits.
-
 ## Regla central
 
-La documentacion se actualiza en la misma iteracion que el codigo, datos o estructura que la origina. No existe "documentar despues".
+Documentar en la **misma iteración** que el código/datos/estructura. No existe "lo documento después".
 
-## Que cuenta como iteracion significativa
+## Qué cuenta como significativo
 
-| Tipo | Ejemplos |
-|------|----------|
-| Feature nuevo | Endpoint, pagina, comando o flujo |
-| Extension de feature | Nuevo parametro, modo, variante o dato consumido |
-| Refactor visible | Renombrar schemas, payloads, rutas o archivos criticos |
-| Cambio operativo | Puerto, comando, script o prerequisito |
-| Reorganizacion | Mover carpetas, fusionar docs, crear/bajar proyectos |
-| Migracion de datos/tokens | JSON, pesos, tokens CSS |
-| Bug fix visible | Cambia comportamiento que el usuario o agente debe conocer |
+Feature nuevo, extensión de feature, refactor visible (renombres, paths críticos), cambio operativo (puerto, comando, prerequisito), reorganización, migración de datos/tokens, **bug fix con cambio de comportamiento observable**.
 
-## Documentos a revisar
+## Documentos a actualizar
 
-| Cambio | Documento obligatorio |
-|--------|-----------------------|
-| Arquitectura, puerto, path critico | `AGENTS.md` |
-| Nuevo subsistema, servicio o proyecto | Actualizar el Home Hub en `src/riot_lol_cli/home/` y aplicar el contrato UI (link visible al Home Hub + favicon explicito + launch seguro) |
-| Ownership o estructura por proyecto | `projects/README.md` |
-| Docs fusionadas, movidas o canonicas | `docs/README.md` |
-| Comandos de setup/ejecucion | `docs/getting-started.md` |
-| API o schema Draft Advisor | `docs/draft_advisor/README.md` |
-| API/dashboard Meta Analyzer | `docs/meta_analyzer/README.md` o `docs/dashboard/README.md` |
+| Cambio | Documento |
+|--------|-----------|
+| Arquitectura, puerto, path crítico | `AGENTS.md` |
+| Subsistema/servicio/proyecto nuevo | Home Hub (`src/riot_lol_cli/home/`) + contrato UI (`agent-workflow.md`) |
+| Ownership/estructura por proyecto | `projects/README.md` |
+| Setup/ejecución | `docs/getting-started.md` |
+| API/schema Draft Advisor | `docs/draft_advisor/README.md` |
+| API/dashboard Meta Analyzer | `docs/meta_analyzer/README.md` |
 | Tokens/componentes visuales | `docs/design-system.md` |
-| Estrategia de draft | `KB/` y JSON estructurado si aplica |
-| Cambio significativo cualquiera | `bitacora_de_cambios.md` |
+| Estrategia de draft | `KB/` + JSON estructurado |
+| **Cualquier cambio significativo** | `bitacora_de_cambios.md` |
 
-## Bitacora
-
-Usar este formato:
+## Bitácora — formato
 
 ```markdown
-## [YYYY-MM-DD] Titulo breve
+## [YYYY-MM-DD] Título breve
 
-### Que se hizo
-- Descripcion concisa de cada cambio principal.
+### Qué se hizo
+- Descripción concisa de cada cambio.
 
-### Archivos modificados clave
-- `ruta/archivo` - decision relevante.
+### Causa raíz (si fue bug fix)
+- Por qué ocurrió + qué impide que vuelva a ocurrir (test guardrail, regla, etc.).
+
+### Archivos modificados
+- `ruta/archivo` — decisión relevante.
 ```
 
-## Checklist post-accion (canonico)
+## Cierre obligatorio: lista de archivos
 
-Ejecutarlo despues de cada cambio de codigo, datos o estructura, con verificacion proporcional al alcance real del cambio.
+La respuesta final al usuario **debe** terminar con:
 
-1. **Bitacora**: si el cambio es significativo (ver tabla de arriba), agregar entrada en `bitacora_de_cambios.md` con fecha, que se hizo, archivos clave y resultado de verificacion.
-2. **Docs tecnicas**: si cambia un endpoint, puerto, comando, schema, path critico o prerequisito, actualizar el documento correspondiente de la tabla "Documentos a revisar".
-3. **Bug fix visible**: si el fix cambia comportamiento observable por el usuario o agente, documentarlo en la bitacora con causa raiz + verificacion.
-4. **CI / dependencias**: si el cambio agrega, quita o modifica una dependencia o prerequisito de sistema (e.g. playwright, Python version floor, nueva env var), verificar que `requirements.txt`, `requirements-dev.txt`, `docs/getting-started.md` y el workflow de CI reflejen el cambio.
-5. **Verificacion**: si el fix cierra un bug reproducible, confirmar que existe o se agrego un test que lo habria atrapado. Para cambios de codigo usar tests focalizados como piso; correr la suite completa solo cuando el alcance o el riesgo lo justifiquen. Mencionar en la bitacora.
-6. **Reglas de agente**: si el cambio introduce una convencion nueva o un gotcha (e.g. nueva limitacion de version, patron obligatorio, exclusion de ruff), registrarla en la rule canonica de `.agent/rules/` correspondiente.
-7. **Cierre con lista de archivos (obligatorio)**: el agente debe cerrar la respuesta final al usuario con dos secciones explicitas, **incluso si parecen redundantes con el commit**:
-   - **Archivos creados** — lista bullet con paths relativos (ej. `src/riot_lol_cli/items_browser/server.py`).
-   - **Archivos modificados** — lista bullet con paths relativos.
-   - Si la lista es vacia, decir explicitamente "Sin archivos nuevos/modificados". No omitir la seccion.
-   - Esto da al usuario un mapa rapido de la blast radius sin tener que leer el diff entero.
+- **Archivos creados** — bullets con paths relativos.
+- **Archivos modificados** — bullets con paths relativos.
 
-> **Por que**: la documentacion que no se actualiza en la misma iteracion que el codigo rota y acumula drift. Cada "lo hago despues" es deuda que ningun agente futuro puede resolver sin leer el codigo completo. La lista de archivos al cierre es lo primero que el usuario revisa para decidir si auditar el cambio o aceptar el resumen.
+Si la lista es vacía: decir "Sin archivos nuevos/modificados". No omitir la sección. Esto da blast radius sin leer el diff.
 
 ## Conventional Commits
 
-Formato:
-
-```text
+```
 <type>(<scope>): <description>
 ```
 
 Types: `feat`, `fix`, `docs`, `refactor`, `chore`, `test`, `style`, `perf`.
-
 Scopes frecuentes: `cli`, `api`, `meta`, `draft`, `dashboard`, `splash`, `db`, `scripts`, `docs`.
 
-Reglas:
-
-- Descripcion en imperativo e ingles.
-- Primera linea maximo 72 caracteres.
-- Un commit por cambio logico.
-- Cuerpo en espanol si hace falta contexto.
+- Descripción imperativa, primera línea ≤72 chars.
+- Un commit por cambio lógico.
+- Cuerpo en español si hace falta contexto.

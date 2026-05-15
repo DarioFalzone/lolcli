@@ -1,0 +1,45 @@
+{
+  "platform": "ugg",
+  "patch": "26.9",
+  "elo": "emerald_plus",
+  "role": "jungle",
+  "scraped_at": "2026-05-11T18:35:56.922245+00:00",
+  "champions": [
+    {
+      "id": "Reksai",
+      "display_name": "Reksai",
+      "win_rate": 52.31,
+      "pick_rate": 2.3,
+      "ban_rate": 1.8,
+      "games_analyzed": 44160,
+      "tier_raw": "S"
+    },
+    {
+      "id": "Belveth",
+      "display_name": "Belveth",
+      "win_rate": 51.93,
+      "pick_rate": 1.9,
+      "ban_rate": 3.5,
+      "games_analyzed": 36034,
+      "tier_raw": "S"
+    },
+    {
+      "id": "Shyvana",
+      "display_name": "Shyvana",
+      "win_rate": 51.9,
+      "pick_rate": 6.4,
+      "ban_rate": 8.4,
+      "games_analyzed": 120179,
+      "tier_raw": "S+"
+    },
+    {
+      "id": "Rammus",
+      "display_name": "Rammus",
+      "win_rate": 51.79,
+      "pick_rate": 1.5,
+      "ban_rate": 3.2,
+      "games_analyzed": 28857,
+      "tier_raw": "S"
+    }
+  ]
+}

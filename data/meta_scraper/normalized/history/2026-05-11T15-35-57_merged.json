@@ -1,0 +1,636 @@
+{
+  "schema_version": "1.2",
+  "scraped_at": "2026-05-11T18:35:57.088846+00:00",
+  "patch": "26.9",
+  "role": "jungle",
+  "elo_filter": "emerald_plus",
+  "sources": [
+    "lolalytics",
+    "ugg"
+  ],
+  "source_status": [
+    {
+      "source": "lolalytics",
+      "status": "ok",
+      "patch": "16.9",
+      "role": "jungle",
+      "elo": "emerald_plus",
+      "champion_count": 20,
+      "scraped_at": "2026-05-11T18:35:27.949719+00:00"
+    },
+    {
+      "source": "ugg",
+      "status": "ok",
+      "patch": "26.9",
+      "role": "jungle",
+      "elo": "emerald_plus",
+      "champion_count": 4,
+      "scraped_at": "2026-05-11T18:35:56.922245+00:00"
+    },
+    {
+      "source": "opgg",
+      "status": "gap",
+      "stage": "adapter_fetch",
+      "reason": "Page.evaluate: SyntaxError: Unexpected end of input\n    at eval (<anonymous>)\n    at UtilityScript.evaluate (<anonymous>:290:30)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+      "attempted_at": "2026-05-11T18:35:40.820301+00:00"
+    },
+    {
+      "source": "lolalytics",
+      "status": "gap",
+      "stage": "normalization_role_filter",
+      "reason": "1 campeones filtrados por no pertenecer al rol jungle",
+      "attempted_at": "2026-05-11T18:35:57.088846+00:00"
+    }
+  ],
+  "source_gaps": [
+    {
+      "source": "opgg",
+      "stage": "adapter_fetch",
+      "reason": "Page.evaluate: SyntaxError: Unexpected end of input\n    at eval (<anonymous>)\n    at UtilityScript.evaluate (<anonymous>:290:30)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+      "attempted_at": "2026-05-11T18:35:40.820301+00:00"
+    },
+    {
+      "source": "lolalytics",
+      "stage": "normalization_role_filter",
+      "reason": "1 campeones filtrados por no pertenecer al rol jungle",
+      "attempted_at": "2026-05-11T18:35:57.088846+00:00"
+    }
+  ],
+  "aggregation": {
+    "method": "games_weighted_average_v1",
+    "fallback": null,
+    "weighted_champion_count": 20,
+    "fallback_champion_count": 0
+  },
+  "champion_count": 20,
+  "champions": [
+    {
+      "id": "Shyvana",
+      "display_name": "Shyvana",
+      "stats": {
+        "win_rate": 52.68,
+        "pick_rate": 6.34,
+        "ban_rate": 8.58,
+        "games_analyzed": 267215,
+        "tier": "S",
+        "climb_score": 74.63
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 53.32,
+          "pick_rate": 6.3,
+          "ban_rate": 8.72,
+          "games_analyzed": 147036,
+          "tier": "A+",
+          "patch": "16.9",
+          "scraped_at": "2026-05-11T18:35:27.949719+00:00"
+        },
+        "ugg": {
+          "win_rate": 51.9,
+          "pick_rate": 6.4,
+          "ban_rate": 8.4,
+          "games_analyzed": 120179,
+          "tier": "S+",
+          "patch": "26.9",
+          "scraped_at": "2026-05-11T18:35:56.922245+00:00"
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Nocturne",
+      "display_name": "Nocturne",
+      "stats": {
+        "win_rate": 52.41,
+        "pick_rate": 7.73,
+        "ban_rate": 14.0,
+        "games_analyzed": 180432,
+        "tier": "S",
+        "climb_score": 72.79
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 52.41,
+          "pick_rate": 7.73,
+          "ban_rate": 14,
+          "games_analyzed": 180432,
+          "tier": "A",
+          "patch": "16.9",
+          "scraped_at": "2026-05-11T18:35:27.949719+00:00"
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "RekSai",
+      "display_name": "RekSai",
+      "stats": {
+        "win_rate": 52.64,
+        "pick_rate": 2.29,
+        "ban_rate": 1.72,
+        "games_analyzed": 97272,
+        "tier": "A",
+        "climb_score": 71.08
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 52.91,
+          "pick_rate": 2.28,
+          "ban_rate": 1.66,
+          "games_analyzed": 53112,
+          "tier": "S",
+          "patch": "16.9",
+          "scraped_at": "2026-05-11T18:35:27.949719+00:00"
+        },
+        "ugg": {
+          "win_rate": 52.31,
+          "pick_rate": 2.3,
+          "ban_rate": 1.8,
+          "games_analyzed": 44160,
+          "tier": "S",
+          "patch": "26.9",
+          "scraped_at": "2026-05-11T18:35:56.922245+00:00"
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Briar",
+      "display_name": "Briar",
+      "stats": {
+        "win_rate": 52.15,
+        "pick_rate": 4.82,
+        "ban_rate": 9.36,
+        "games_analyzed": 112446,
+        "tier": "A",
+        "climb_score": 68.52
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 52.15,
+          "pick_rate": 4.82,
+          "ban_rate": 9.36,
+          "games_analyzed": 112446,
+          "tier": "A",
+          "patch": "16.9",
+          "scraped_at": "2026-05-11T18:35:27.949719+00:00"
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Kayn",
+      "display_name": "Kayn",
+      "stats": {
+        "win_rate": 51.85,
+        "pick_rate": 7.07,
+        "ban_rate": 4.05,
+        "games_analyzed": 164938,
+        "tier": "A",
+        "climb_score": 71.43
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 51.85,
+          "pick_rate": 7.07,
+          "ban_rate": 4.05,
+          "games_analyzed": 164938,
+          "tier": "S-",
+          "patch": "16.9",
+          "scraped_at": "2026-05-11T18:35:27.949719+00:00"
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "MasterYi",
+      "display_name": "MasterYi",
+      "stats": {
+        "win_rate": 51.53,
+        "pick_rate": 6.35,
+        "ban_rate": 14.61,
+        "games_analyzed": 148128,
+        "tier": "A",
+        "climb_score": 64.49
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 51.53,
+          "pick_rate": 6.35,
+          "ban_rate": 14.61,
+          "games_analyzed": 148128,
+          "tier": "S-",
+          "patch": "16.9",
+          "scraped_at": "2026-05-11T18:35:27.949719+00:00"
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Shaco",
+      "display_name": "Shaco",
+      "stats": {
+        "win_rate": 51.24,
+        "pick_rate": 4.89,
+        "ban_rate": 17.59,
+        "games_analyzed": 114123,
+        "tier": "A",
+        "climb_score": 59.37
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 51.24,
+          "pick_rate": 4.89,
+          "ban_rate": 17.59,
+          "games_analyzed": 114123,
+          "tier": "A+",
+          "patch": "16.9",
+          "scraped_at": "2026-05-11T18:35:27.949719+00:00"
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Naafiri",
+      "display_name": "Naafiri",
+      "stats": {
+        "win_rate": 51.21,
+        "pick_rate": 7.64,
+        "ban_rate": 33.14,
+        "games_analyzed": 178187,
+        "tier": "A",
+        "climb_score": 57.57
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 51.21,
+          "pick_rate": 7.64,
+          "ban_rate": 33.14,
+          "games_analyzed": 178187,
+          "tier": "S+",
+          "patch": "16.9",
+          "scraped_at": "2026-05-11T18:35:27.949719+00:00"
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Sylas",
+      "display_name": "Sylas",
+      "stats": {
+        "win_rate": 51.03,
+        "pick_rate": 5.19,
+        "ban_rate": 11.75,
+        "games_analyzed": 121210,
+        "tier": "A",
+        "climb_score": 60.36
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 51.03,
+          "pick_rate": 5.19,
+          "ban_rate": 11.75,
+          "games_analyzed": 121210,
+          "tier": "A+",
+          "patch": "16.9",
+          "scraped_at": "2026-05-11T18:35:27.949719+00:00"
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Belveth",
+      "display_name": "Belveth",
+      "stats": {
+        "win_rate": 52.21,
+        "pick_rate": 1.89,
+        "ban_rate": 3.42,
+        "games_analyzed": 80116,
+        "tier": "B",
+        "climb_score": 66.92
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 52.44,
+          "pick_rate": 1.89,
+          "ban_rate": 3.36,
+          "games_analyzed": 44082,
+          "tier": "S",
+          "patch": "16.9",
+          "scraped_at": "2026-05-11T18:35:27.949719+00:00"
+        },
+        "ugg": {
+          "win_rate": 51.93,
+          "pick_rate": 1.9,
+          "ban_rate": 3.5,
+          "games_analyzed": 36034,
+          "tier": "S",
+          "patch": "26.9",
+          "scraped_at": "2026-05-11T18:35:56.922245+00:00"
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Rammus",
+      "display_name": "Rammus",
+      "stats": {
+        "win_rate": 51.79,
+        "pick_rate": 1.5,
+        "ban_rate": 3.2,
+        "games_analyzed": 28857,
+        "tier": "B",
+        "climb_score": 63.51
+      },
+      "source_breakdown": {
+        "ugg": {
+          "win_rate": 51.79,
+          "pick_rate": 1.5,
+          "ban_rate": 3.2,
+          "games_analyzed": 28857,
+          "tier": "S",
+          "patch": "26.9",
+          "scraped_at": "2026-05-11T18:35:56.922245+00:00"
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Zaahen",
+      "display_name": "Zaahen",
+      "stats": {
+        "win_rate": 51.49,
+        "pick_rate": 0.7,
+        "ban_rate": 3.0,
+        "games_analyzed": 16427,
+        "tier": "B",
+        "climb_score": 60.36
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 51.49,
+          "pick_rate": 0.7,
+          "ban_rate": 3,
+          "games_analyzed": 16427,
+          "tier": "A",
+          "patch": "16.9",
+          "scraped_at": "2026-05-11T18:35:27.949719+00:00"
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Darius",
+      "display_name": "Darius",
+      "stats": {
+        "win_rate": 51.2,
+        "pick_rate": 0.61,
+        "ban_rate": 13.79,
+        "games_analyzed": 14231,
+        "tier": "B",
+        "climb_score": 54.43
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 51.2,
+          "pick_rate": 0.61,
+          "ban_rate": 13.79,
+          "games_analyzed": 14231,
+          "tier": "A",
+          "patch": "16.9",
+          "scraped_at": "2026-05-11T18:35:27.949719+00:00"
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Talon",
+      "display_name": "Talon",
+      "stats": {
+        "win_rate": 50.9,
+        "pick_rate": 5.27,
+        "ban_rate": 8.26,
+        "games_analyzed": 123053,
+        "tier": "B",
+        "climb_score": 60.79
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 50.9,
+          "pick_rate": 5.27,
+          "ban_rate": 8.26,
+          "games_analyzed": 123053,
+          "tier": "S",
+          "patch": "16.9",
+          "scraped_at": "2026-05-11T18:35:27.949719+00:00"
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "XinZhao",
+      "display_name": "XinZhao",
+      "stats": {
+        "win_rate": 50.78,
+        "pick_rate": 8.12,
+        "ban_rate": 6.68,
+        "games_analyzed": 189466,
+        "tier": "B",
+        "climb_score": 64.49
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 50.78,
+          "pick_rate": 8.12,
+          "ban_rate": 6.68,
+          "games_analyzed": 189466,
+          "tier": "A",
+          "patch": "16.9",
+          "scraped_at": "2026-05-11T18:35:27.949719+00:00"
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "LeeSin",
+      "display_name": "LeeSin",
+      "stats": {
+        "win_rate": 50.72,
+        "pick_rate": 12.93,
+        "ban_rate": 14.19,
+        "games_analyzed": 301607,
+        "tier": "B",
+        "climb_score": 68.18
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 50.72,
+          "pick_rate": 12.93,
+          "ban_rate": 14.19,
+          "games_analyzed": 301607,
+          "tier": "S+",
+          "patch": "16.9",
+          "scraped_at": "2026-05-11T18:35:27.949719+00:00"
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Graves",
+      "display_name": "Graves",
+      "stats": {
+        "win_rate": 50.61,
+        "pick_rate": 11.75,
+        "ban_rate": 17.19,
+        "games_analyzed": 274145,
+        "tier": "B",
+        "climb_score": 64.7
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 50.61,
+          "pick_rate": 11.75,
+          "ban_rate": 17.19,
+          "games_analyzed": 274145,
+          "tier": "S-",
+          "patch": "16.9",
+          "scraped_at": "2026-05-11T18:35:27.949719+00:00"
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Zed",
+      "display_name": "Zed",
+      "stats": {
+        "win_rate": 50.59,
+        "pick_rate": 2.92,
+        "ban_rate": 31.02,
+        "games_analyzed": 68166,
+        "tier": "B",
+        "climb_score": 47.36
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 50.59,
+          "pick_rate": 2.92,
+          "ban_rate": 31.02,
+          "games_analyzed": 68166,
+          "tier": "A+",
+          "patch": "16.9",
+          "scraped_at": "2026-05-11T18:35:27.949719+00:00"
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Viego",
+      "display_name": "Viego",
+      "stats": {
+        "win_rate": 50.28,
+        "pick_rate": 9.41,
+        "ban_rate": 8.7,
+        "games_analyzed": 219636,
+        "tier": "B",
+        "climb_score": 62.09
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 50.28,
+          "pick_rate": 9.41,
+          "ban_rate": 8.7,
+          "games_analyzed": 219636,
+          "tier": "A",
+          "patch": "16.9",
+          "scraped_at": "2026-05-11T18:35:27.949719+00:00"
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    },
+    {
+      "id": "Khazix",
+      "display_name": "Khazix",
+      "stats": {
+        "win_rate": 50.28,
+        "pick_rate": 5.65,
+        "ban_rate": 3.92,
+        "games_analyzed": 131898,
+        "tier": "B",
+        "climb_score": 58.5
+      },
+      "source_breakdown": {
+        "lolalytics": {
+          "win_rate": 50.28,
+          "pick_rate": 5.65,
+          "ban_rate": 3.92,
+          "games_analyzed": 131898,
+          "tier": "A-",
+          "patch": "16.9",
+          "scraped_at": "2026-05-11T18:35:27.949719+00:00"
+        }
+      },
+      "builds": {},
+      "matchups": {},
+      "synergies": {}
+    }
+  ],
+  "_scrape_meta": {
+    "platforms_ok": [
+      "lolalytics",
+      "ugg"
+    ],
+    "platforms_error": [
+      {
+        "source": "opgg",
+        "stage": "adapter_fetch",
+        "reason": "Page.evaluate: SyntaxError: Unexpected end of input\n    at eval (<anonymous>)\n    at UtilityScript.evaluate (<anonymous>:290:30)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+        "attempted_at": "2026-05-11T18:35:40.820301+00:00"
+      },
+      {
+        "source": "lolalytics",
+        "stage": "normalization_role_filter",
+        "reason": "1 campeones filtrados por no pertenecer al rol jungle",
+        "attempted_at": "2026-05-11T18:35:57.088846+00:00"
+      }
+    ],
+    "duration_info": "completado"
+  }
+}

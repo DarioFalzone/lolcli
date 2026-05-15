@@ -45,6 +45,8 @@ El repo esta en evolucion activa y puede tener un working tree sucio. Antes de e
 | Draft KB | `KB/`, `data/draft_advisor/kb/` | Markdown, JSON estructurado | Activo | Fuente conceptual y reglas estructuradas del Draft Advisor |
 | Meta Scraper | `src/riot_lol_cli/meta_scraper/` | FastAPI, Playwright, JSON | Activo | Scraping/normalizacion de meta support/ADC en puerto 8002 |
 | Jungle Meta | `src/riot_lol_cli/jungle_meta/` | FastAPI, JSON, SPA | Activo | Tier list de campeones jungla por patch en puerto 8003 |
+| Patch Notes | `src/riot_lol_cli/patch_notes/` | FastAPI, Playwright, Pydantic V2, APScheduler, SPA | Activo | **V2**: scraping multi-source con 7 adapters (oficial + dev + calendar + ddragon + ugg/opgg/lolalytics/mobalytics). Búsqueda full-text, diff entre versiones, multi-locale UI, cron opcional. Puerto 8005. |
+| Jungle Research | `src/riot_lol_cli/jungle_research/` | Python, Pydantic V2, JSON | Activo | Knowledge base consolidada de jungla (registry + scoring + pipelines + reports). Vive dentro de Meta API :8000 bajo `/api/v1/jungle-research/*` y se visualiza como tab "Jungla 360" en `/dashboard-enhanced` |
 | Items Browser | `src/riot_lol_cli/items_browser/` | FastAPI, JSON, SPA | Activo | Catalogo de items LoL EN+ES con filtros por grupo en puerto 8004 |
 | Home Hub | `src/riot_lol_cli/home/` | FastAPI, JS vanilla, SPA | Activo | Centro de operaciones / portal unificado en puerto 8080 |
 | Schemas Riot | `src/riot_lol_cli/schemas/` | Pydantic V2 | Activo | Modelos tipados para payloads de Match-V5 |
@@ -65,20 +67,23 @@ imports, rutas de assets, scripts y tests.
 | Proyecto | Manifest | Rutas reales principales |
 |----------|----------|--------------------------|
 | CLI Match History | `projects/active/cli-match-history/README.md` | `main.py`, `src/riot_lol_cli/cli.py`, `rendering.py`, `templates/` |
+| Patch Notes Viewer | `projects/active/patch-notes/README.md` | `projects/active/patch-notes/` (standalone, no forma parte del paquete Python) |
 | Splash Gallery | `projects/active/splash-gallery/README.md` | `src/riot_lol_cli/splash.py`, `assets/splash_arts/`, `data/ddragon-splash-catalog.json`, `data/splash-manifest.json` |
 | Home Hub | `projects/active/home-hub/README.md` | `src/riot_lol_cli/home/`, `scripts/bat/home.bat`, `scripts/bat/levantar_todo.bat` |
 | Meta Analyzer + Dashboard | `projects/active/meta-analyzer-dashboard/README.md` | `meta_api/`, `meta_analyzer/`, `database/`, `dashboard*.py` |
 | Draft Advisor | `projects/active/draft-advisor/README.md` | `draft_advisor/`, `data/draft_advisor/`, `KB/` |
 | Meta Scraper | `projects/active/meta-scraper/README.md` | `meta_scraper/`, `data/meta_scraper/` |
 | Jungle Meta | `projects/active/jungle-meta/README.md` | `src/riot_lol_cli/jungle_meta/`, `data/jungle_meta/`, `tests/jungle_meta/` |
+| Patch Notes | `projects/active/patch-notes/README.md` | `src/riot_lol_cli/patch_notes/`, `data/patch_notes/`, `tests/patch_notes/` |
 | Items Browser | `projects/active/items-browser/README.md` | `src/riot_lol_cli/items_browser/`, `data/items/database.json`, `assets/items/`, `tests/items_browser/` |
 | Assets y Datos Riot | `projects/active/assets-and-data/README.md` | `assets/`, `data/`, scripts de descarga/fetch |
 | Junglas Pro | `projects/active/junglas-pro/README.md` | `projects/active/junglas-pro/index.html`, `docs/`, `img/` |
 
 Los proyectos no activos viven en `projects/legacy/`: copia antigua
 `riot-lol-cli`, scraper legacy de items/Data Dragon, screenshots ADC y
-proyectos de notas de parche. Junglas Pro es activo pero standalone: no forma
-parte del paquete `riot_lol_cli`.
+las versiones originales de las notas de parche (v33a/v33b, supersedidas por
+`active/patch-notes/`). Junglas Pro es activo pero standalone: no forma
+parte del paquete `riot_lol_cli`. Patch Notes Viewer también es standalone.
 
 ## Arquitectura General
 
@@ -122,7 +127,7 @@ src/riot_lol_cli/meta_scraper/server.py
   -> data/draft_advisor/champion_base.json (normalizacion de nombres)
 ```
 
-Hay seis servidores FastAPI separados:
+Hay siete servidores FastAPI separados:
 
 | Servicio | Entry point | Puerto | UI principal | Docs |
 |----------|-------------|--------|--------------|------|
@@ -132,6 +137,7 @@ Hay seis servidores FastAPI separados:
 | Meta Scraper | `python -m riot_lol_cli.meta_scraper.server` | 8002 | `http://localhost:8002` | `http://localhost:8002/docs` |
 | Jungle Meta | `python -m riot_lol_cli.jungle_meta.server` | 8003 | `http://localhost:8003` | `http://localhost:8003/docs` |
 | Items Browser | `python -m riot_lol_cli.items_browser.server` | 8004 | `http://localhost:8004` | `http://localhost:8004/docs` |
+| Patch Notes | `python -m riot_lol_cli.patch_notes.server` | 8005 | `http://localhost:8005` | `http://localhost:8005/docs` |
 
 ## Flujos Operativos
 
@@ -264,6 +270,8 @@ La fuente de verdad de paths runtime es `src/riot_lol_cli/paths.py`:
 | Meta Scraper | `python -m riot_lol_cli.meta_scraper.server` |
 | Jungle Meta | `python -m riot_lol_cli.jungle_meta.server` |
 | Items Browser | `python -m riot_lol_cli.items_browser.server` |
+| Patch Notes | `python -m riot_lol_cli.patch_notes.server` |
+| Seed patch notes legacy | `python scripts/seed_patch_notes_from_legacy.py` |
 | Home Hub | `python -m riot_lol_cli.home.server` |
 | Update Items Database | `python scripts/update_items_database.py` |
 | Fetch completo de partidas | `python scripts/fetch_matches_full.py` |
@@ -296,6 +304,20 @@ Definida en `src/riot_lol_cli/meta_api/routes/`.
 - `GET /api/v1/champions/all/raw-data`
 - `POST /api/v1/maintenance/cleanup`
 - `GET /api/v1/maintenance/status`
+
+Endpoints de Jungle Research (definidos en `src/riot_lol_cli/meta_api/routes/jungle_research.py`):
+
+- `GET /api/v1/jungle-research/overview`
+- `GET /api/v1/jungle-research/current`
+- `GET /api/v1/jungle-research/sources`
+- `GET /api/v1/jungle-research/champions/{champion_id}/history`
+- `GET /api/v1/jungle-research/champions/{champion_id}/otp` (V1: planned)
+- `GET /api/v1/jungle-research/pros/recent-picks`
+- `GET /api/v1/jungle-research/pros/{player_name}/matches`
+- `GET /api/v1/jungle-research/emerging`
+- `GET /api/v1/jungle-research/consensus`
+- `GET /api/v1/jungle-research/daily-report`
+- `POST /api/v1/jungle-research/refresh?mode=soloq|riot_pros|all`
 
 ### Draft Advisor API (`:8001`)
 
@@ -355,6 +377,16 @@ Definida en `src/riot_lol_cli/items_browser/server.py`. Sirve `data/items/databa
 
 ## Datos y Knowledge Base
 
+### Reglas de Codificación (JSON, UTF-8)
+
+**Regla de Oro:** Todo archivo JSON del repo DEBE ser UTF-8 sin BOM.
+
+- **PowerShell NO:** `Set-Content -Encoding UTF8` y `Out-File -Encoding UTF8` agregan BOM automáticamente. Causan mojibake en el frontend cuando hay caracteres con tilde o virgulilla.
+- **Python SÍ:** `json.dump(data, f, ensure_ascii=False)` con `encoding='utf-8'` no agrega BOM.
+- **Guard:** `tests/test_no_mojibake.py` rompe CI si detecta BOM o doble-encoding.
+
+Incident 2026-05-15: Ingesta de Mobalytics breakdown generó mojibake porque PowerShell escribió JSON con BOM. Solución: siempre usar Python para escribir JSON, nunca PowerShell nativo.
+
 ### Snapshot Observado (2026-04-30)
 
 Estos conteos describen el working tree observado. No son contrato estable.
@@ -408,6 +440,83 @@ Los perfiles y relaciones del Draft Advisor deben usar IDs canonicos de `champio
 - Historico normalizado: `data/meta_scraper/normalized/history/*.json`
 - Manifest: `data/meta_scraper/manifest.json`
 
+## Fuentes Externas de Datos
+
+Inventario consolidado de todas las URLs y fuentes web que el proyecto consume o planea consumir.
+
+### APIs Oficiales de Riot Games
+
+| Fuente | URL base | Uso |
+|--------|----------|-----|
+| Riot Developer Portal | `https://developer.riotgames.com/` | Obtener API key de desarrollo (expira cada 24h) |
+| Riot API — Platform endpoints | `https://{platform}.api.riotgames.com` | Endpoints por region: `la2`, `na1`, `euw1`, `kr`, etc. |
+| Riot API — Regional endpoints | `https://{regional}.api.riotgames.com` | Endpoints regionales: `americas`, `europe`, `asia` |
+| Data Dragon CDN | `https://ddragon.leagueoflegends.com` | Assets estaticos: splash arts, items, campeones, runas, hechizos |
+| Riot Static Content | `https://static.developer.riotgames.com/docs/lol/queues.json` | Metadatos de colas de juego |
+
+Endpoints Data Dragon usados directamente por `src/riot_lol_cli/api.py`:
+
+- `GET /api/versions.json` — version actual del parche
+- `GET /cdn/{version}/data/en_US/summoner.json` — hechizos de invocador
+- `GET /cdn/{version}/data/en_US/runesReforged.json` — arboles de runas
+- `GET /cdn/{version}/data/{lang}/champion.json` — roster de campeones
+- `GET /cdn/{version}/img/champion/{name}.png` — iconos de campeones
+
+Endpoints Riot API usados: `Summoner-V4`, `Account-V1` (by-riot-id), `Match-V5` (ids + detalle).
+
+### Meta Scraper — Fuentes Activas (V1)
+
+Estas tres fuentes son las que el Meta Scraper consulta hoy. Los adapters viven en `src/riot_lol_cli/meta_scraper/adapters/`.
+
+| Plataforma | URL tier list | Roles scrapeados | Tecnica | Adapter |
+|------------|---------------|------------------|---------|---------|
+| **OP.GG** | `https://www.op.gg/champions?position={position}` | Support, ADC, Jungla | Playwright (bloquea HTTP directo) | `adapters/opgg.py` |
+| **LoLalytics** | `https://lolalytics.com/lol/tierlist/?lane={lane}` | Support, ADC, Jungla | Playwright + JS evaluation | `adapters/lolalytics.py` |
+| **U.GG** | `https://u.gg/lol/tier-list?role={role}` | Support, ADC, Jungla | Playwright + selectores React (`.rt-tr`, `.rt-td`) | `adapters/ugg.py` |
+
+Notas operativas:
+- Delay entre requests: 4-10 segundos por plataforma para no gatillar rate limits.
+- LoLalytics suele traer menos campeones nicho que OP.GG en ADC.
+- U.GG reporta el parche con numeracion propia (ej: "26.9" vs "16.9" en otros).
+- Cada adapter incluye un `_*_NAME_MAP` para normalizar nombres a IDs canonicos de Data Dragon.
+
+### Meta Scraper — Fuentes Planeadas (Stubs)
+
+Adapters en estado stub; requieren validacion de selectores antes de activar. Archivos en `src/riot_lol_cli/meta_scraper/adapters/`.
+
+| Plataforma | URL principal | Tecnica planeada | Prioridad | Notas |
+|------------|---------------|------------------|-----------|-------|
+| **METAsrc** | `https://www.metasrc.com/lol/{region}/tier-list/jungle` | BeautifulSoup (SSR, no SPA) | Media | Soporta filtro por region y elo |
+| **Mobalytics** | `https://mobalytics.gg/lol/tier-list/jungle` | Playwright (SPA pesada, delay 5-10s) | Media | Tiene curación propia de tier y stats separados |
+| **League of Graphs** | `https://www.leagueofgraphs.com/champions/stats/jungle` | BeautifulSoup (HTML estatico) | Media | Rate limit historicamente estricto — `min_delay >= 8s` obligatorio |
+| **Tracker.gg** | `https://tracker.gg/lol/insights` | XHR/JSON internos o Playwright fallback | Baja | Mayor friccion; agregar al final del roadmap |
+
+### Patch Notes V2 — Fuentes Multi-Source (Activas)
+
+7 adapters propios en `src/riot_lol_cli/patch_notes/adapters/`. La fuente canónica
+es la columna vertebral; las demás se adjuntan como `PatchEnrichment[]` con
+`content_hash` y `error` opcional. Tolerancia a fallos: si una fuente rompe, el
+patch sigue funcionando con las demás.
+
+| Fuente | URL | Tipo | Tecnica | Adapter |
+|--------|-----|------|---------|---------|
+| **LoL oficial** | `leagueoflegends.com/{locale}/news/tags/patch-notes/` (acepta slug viejo `patch-X-Y-notes` y nuevo `league-of-legends-patch-X-Y-notes` >= 26.4) | Canónica | Playwright + JS recursivo | `lol_official.py` |
+| **LoL /dev** | `leagueoflegends.com/{locale}/news/dev/` | Enrichment per-patch | Playwright | `lol_dev.py` |
+| **Riot Calendar** | `support-leagueoflegends.riotgames.com/.../Calendario` | Enrichment global | httpx + BS4 (UA real) | `riot_calendar.py` |
+| **Data Dragon** | `ddragon.leagueoflegends.com/api/versions.json` | Enrichment global | httpx puro (JSON) | `ddragon.py` |
+| **U.GG** | `u.gg/lol/tier-list` | Enrichment per-patch (snapshot tageado) | Playwright | `ugg_patch.py` |
+| **OP.GG** | `op.gg/champions` | Enrichment per-patch (snapshot tageado) | Playwright | `opgg_patch.py` |
+| **LoLalytics** | `lolalytics.com/lol/tierlist/?patch=X.Y` | Enrichment per-patch (URL ancorada) | Playwright | `lolalytics_patch.py` |
+| **Mobalytics** | `mobalytics.gg/lol/tier-list` | Enrichment per-patch (snapshot tageado) | Playwright | `mobalytics_patch.py` |
+
+Notas operativas V2:
+- El orchestrator corre las fases en orden: canonical → globals (httpx) → per-patch (Playwright).
+- Cada adapter Playwright se cierra después de su extracción para liberar el slot
+  (sync Playwright permite solo una instancia activa por thread).
+- El scrape se ejecuta en `threading.Thread`, no en `BackgroundTask`, para evitar
+  el asyncio loop de FastAPI que rompe sync Playwright.
+- Endpoints: `GET /sources/registry`, `POST /scrape/{source}`, `GET /{patch}/sources`.
+
 ## Documentacion Viva
 
 | Documento | Rol |
@@ -446,11 +555,23 @@ Surfaces principales:
 Tokens canonicos del design system:
 
 - `src/riot_lol_cli/draft_advisor/static/design-system/tokens.css`
-- `components.css`
+- `components.css` — incluye `.scroll-to-top` (V2.2, pattern transversal).
+- `patterns.css` — `.hero`, `.control-panel`, `.home-hub-link`.
 - `compat-spa.css`
 - `compat-dashboard.css`
+- `scroll-to-top.js` — script transversal auto-init para FAB "volver arriba".
+  **Integrar via `<script src="/design-system/scroll-to-top.js"></script>`
+  en toda surface nueva.** SPAs con hash router pueden llamar a
+  `window.LOLCLI_ScrollToTop.refresh()` tras re-render.
 
 Identidad visual: Hextech dark, gold/cyan, dark mode obligatorio, microcopy en espanol rioplatense con jerga gamer. En Draft Advisor, nombres visibles y razones deben estar en español; los IDs internos siguen en canon Data Dragon. Se permiten terminos gamer claros como `ADC`, `draft`, `teamfight`, `stun`, `dive`, `peel`, `poke`, `engage`, `roam`, `gank`, `matchup`, `all-in`, `frontline`, `wave`, `burst` y `scaling`.
+
+**DESIGN.md (Stitch contract)**: `projects/active/patch-notes/DESIGN.md` es el
+contrato visual canónico del subsistema Patch Notes y la plantilla de referencia
+para que Google Stitch (u otra IA de UI) genere propuestas alineadas con el
+design system. Replicar la estructura (YAML frontmatter con tokens + body
+markdown con Overview/Colors/Typography/Layout/Components/Do's-Don'ts) cuando
+se necesite un design contract por subsistema.
 
 ## Testing y CI
 
@@ -497,7 +618,7 @@ Reglas clave:
 
 ## Gotchas Globales
 
-1. **Seis FastAPI separados:** Home Hub `:8080`, Meta API `:8000`, Draft Advisor `:8001`, Meta Scraper `:8002`, Jungle Meta `:8003`, Items Browser `:8004`.
+1. **Siete FastAPI separados:** Home Hub `:8080`, Meta API `:8000`, Draft Advisor `:8001`, Meta Scraper `:8002`, Jungle Meta `:8003`, Items Browser `:8004`, Patch Notes `:8005`.
 2. **Factories FastAPI:** cada servicio activo debe exponer `create_app()` y mantener `app = create_app()`. Estado mutable de runtime va en `app.state` o dependencias explicitas, no en singletons globales de import.
 3. **`api_server.py` es wrapper:** la app real del Meta Analyzer vive en `meta_api/app.py`.
 4. **Templates activos:** usar `templates/` raiz. No asumir `src/riot_lol_cli/templates/`.
@@ -505,7 +626,7 @@ Reglas clave:
 6. **Legacy copy:** `projects/legacy/riot-lol-cli/` no es el paquete activo.
 7. **API key Riot:** dev keys expiran cada 24h; usar `.env`.
 8. **Playwright:** Meta Scraper declara Playwright en `requirements.txt`, pero el browser Chromium se instala aparte con `playwright install chromium`.
-9. **Puertos 8000-8004 + 8080:** Home Hub (:8080), Meta API (:8000), Draft Advisor (:8001), Meta Scraper (:8002), Jungle Meta (:8003) e Items Browser (:8004) usan `settings.py` para host/port configurables via `LOLCLI_*_HOST` y `LOLCLI_*_PORT`.
+9. **Puertos 8000-8005 + 8080:** Home Hub (:8080), Meta API (:8000), Draft Advisor (:8001), Meta Scraper (:8002), Jungle Meta (:8003), Items Browser (:8004) y Patch Notes (:8005) usan `settings.py` para host/port configurables via `LOLCLI_*_HOST` y `LOLCLI_*_PORT`.
 10. **Data versioning:** `live_patch_label` es el parche jugable/meta; `static_data_version` es la version tecnica de Data Dragon/CDN y puede tener sufijos como `.1`.
 11. **Meta Scraper jungla:** `latest_jungle_tier.json` usa agregacion ponderada por partidas cuando las fuentes traen `games_analyzed`; si una fuente falla queda en `source_gaps` y no se inventa dato.
 12. **Draft data IDs:** relaciones de `adc_profiles.json`, `support_profiles.json` y `personal_adc_mastery.json` deben validar contra IDs canonicos de `champion_base.json`.

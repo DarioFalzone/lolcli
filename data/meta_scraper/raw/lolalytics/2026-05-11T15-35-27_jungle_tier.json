@@ -1,0 +1,189 @@
+{
+  "platform": "lolalytics",
+  "patch": "16.9",
+  "elo": "emerald_plus",
+  "role": "jungle",
+  "scraped_at": "2026-05-11T18:35:27.949719+00:00",
+  "champions": [
+    {
+      "id": "Naafiri",
+      "display_name": "Naafiri",
+      "win_rate": 51.21,
+      "pick_rate": 7.64,
+      "ban_rate": 33.14,
+      "games_analyzed": 178187,
+      "tier_raw": "S+"
+    },
+    {
+      "id": "LeeSin",
+      "display_name": "LeeSin",
+      "win_rate": 50.72,
+      "pick_rate": 12.93,
+      "ban_rate": 14.19,
+      "games_analyzed": 301607,
+      "tier_raw": "S+"
+    },
+    {
+      "id": "Talon",
+      "display_name": "Talon",
+      "win_rate": 50.9,
+      "pick_rate": 5.27,
+      "ban_rate": 8.26,
+      "games_analyzed": 123053,
+      "tier_raw": "S"
+    },
+    {
+      "id": "RekSai",
+      "display_name": "RekSai",
+      "win_rate": 52.91,
+      "pick_rate": 2.28,
+      "ban_rate": 1.66,
+      "games_analyzed": 53112,
+      "tier_raw": "S"
+    },
+    {
+      "id": "Belveth",
+      "display_name": "Belveth",
+      "win_rate": 52.44,
+      "pick_rate": 1.89,
+      "ban_rate": 3.36,
+      "games_analyzed": 44082,
+      "tier_raw": "S"
+    },
+    {
+      "id": "Graves",
+      "display_name": "Graves",
+      "win_rate": 50.61,
+      "pick_rate": 11.75,
+      "ban_rate": 17.19,
+      "games_analyzed": 274145,
+      "tier_raw": "S-"
+    },
+    {
+      "id": "MasterYi",
+      "display_name": "MasterYi",
+      "win_rate": 51.53,
+      "pick_rate": 6.35,
+      "ban_rate": 14.61,
+      "games_analyzed": 148128,
+      "tier_raw": "S-"
+    },
+    {
+      "id": "Kayn",
+      "display_name": "Kayn",
+      "win_rate": 51.85,
+      "pick_rate": 7.07,
+      "ban_rate": 4.05,
+      "games_analyzed": 164938,
+      "tier_raw": "S-"
+    },
+    {
+      "id": "Sylas",
+      "display_name": "Sylas",
+      "win_rate": 51.03,
+      "pick_rate": 5.19,
+      "ban_rate": 11.75,
+      "games_analyzed": 121210,
+      "tier_raw": "A+"
+    },
+    {
+      "id": "Zed",
+      "display_name": "Zed",
+      "win_rate": 50.59,
+      "pick_rate": 2.92,
+      "ban_rate": 31.02,
+      "games_analyzed": 68166,
+      "tier_raw": "A+"
+    },
+    {
+      "id": "Shaco",
+      "display_name": "Shaco",
+      "win_rate": 51.24,
+      "pick_rate": 4.89,
+      "ban_rate": 17.59,
+      "games_analyzed": 114123,
+      "tier_raw": "A+"
+    },
+    {
+      "id": "Shyvana",
+      "display_name": "Shyvana",
+      "win_rate": 53.32,
+      "pick_rate": 6.3,
+      "ban_rate": 8.72,
+      "games_analyzed": 147036,
+      "tier_raw": "A+"
+    },
+    {
+      "id": "Nocturne",
+      "display_name": "Nocturne",
+      "win_rate": 52.41,
+      "pick_rate": 7.73,
+      "ban_rate": 14,
+      "games_analyzed": 180432,
+      "tier_raw": "A"
+    },
+    {
+      "id": "Viego",
+      "display_name": "Viego",
+      "win_rate": 50.28,
+      "pick_rate": 9.41,
+      "ban_rate": 8.7,
+      "games_analyzed": 219636,
+      "tier_raw": "A"
+    },
+    {
+      "id": "Aatrox",
+      "display_name": "Aatrox",
+      "win_rate": 50.92,
+      "pick_rate": 1.36,
+      "ban_rate": 8.76,
+      "games_analyzed": 31733,
+      "tier_raw": "A"
+    },
+    {
+      "id": "XinZhao",
+      "display_name": "XinZhao",
+      "win_rate": 50.78,
+      "pick_rate": 8.12,
+      "ban_rate": 6.68,
+      "games_analyzed": 189466,
+      "tier_raw": "A"
+    },
+    {
+      "id": "Zaahen",
+      "display_name": "Zaahen",
+      "win_rate": 51.49,
+      "pick_rate": 0.7,
+      "ban_rate": 3,
+      "games_analyzed": 16427,
+      "tier_raw": "A"
+    },
+    {
+      "id": "Briar",
+      "display_name": "Briar",
+      "win_rate": 52.15,
+      "pick_rate": 4.82,
+      "ban_rate": 9.36,
+      "games_analyzed": 112446,
+      "tier_raw": "A"
+    },
+    {
+      "id": "Darius",
+      "display_name": "Darius",
+      "win_rate": 51.2,
+      "pick_rate": 0.61,
+      "ban_rate": 13.79,
+      "games_analyzed": 14231,
+      "tier_raw": "A"
+    },
+    {
+      "id": "Khazix",
+      "display_name": "Khazix",
+      "win_rate": 50.28,
+      "pick_rate": 5.65,
+      "ban_rate": 3.92,
+      "games_analyzed": 131898,
+      "tier_raw": "A-"
+    }
+  ]
+}

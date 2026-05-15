@@ -173,9 +173,139 @@ GET /api/v1/maintenance/status
 - **Dashboard vacio:** correr setup para regenerar demo data.
 - **Endpoints no coinciden con docs antiguas:** verificar `meta_api/routes`.
 
+## Jungla 360 - fuentes y consenso
+
+Capa de investigacion de jungla integrada al Meta Analyzer. Vive en
+`src/riot_lol_cli/jungle_research/` y se visualiza como tab dentro de
+`/dashboard-enhanced` (`#jungle-research`). Corre dentro del mismo proceso
+FastAPI `:8000` y comparte el lifecycle.
+
+### Arquitectura
+
+```text
+src/riot_lol_cli/jungle_research/
+  schemas.py          Pydantic V2: Source, ChampionMetaSnapshot, ProPlayer,
+                      ProAccount, MatchHistoryEntry, OtpRankingEntry,
+                      FinalJungleTierEntry, FinalJungleTierList, DailyReport
+  source_registry.py  Read-only sobre data/.../sources.json (35 fuentes)
+  json_storage.py     Snapshots inmutables, rotacion a backups/, escritura
+                      atomica via .tmp
+  scoring_engine.py   Percentiles por cohorte (patch, region, elo, queue) +
+                      consenso multi-fuente + warning_flags
+  riot_bridge.py      Wrapper sobre RiotClient (api.py) con SERVER_ROUTING
+                      KR/JP/CN/EUW/NA/BR/etc. + gap si falta RIOT_API_KEY
+  pipelines/
+    meta_soloq.py     V1 active. Lee Meta Scraper local + Jungle Meta curated
+    pro_accounts.py   V1 active. Resuelve PUUID solo si seed tiene riot_id
+    match_history.py  V1 active. Descarga ultimas N partidas via match-v5
+    meta_asia.py      Planned (KR/CN/JP)
+    pro_stage.py      Planned (Riot Esports Data + GOL)
+    otp_rankings.py   Planned (Onetricks, LeagueOfGraphs, PORO Masters)
+  reports/
+    daily_report.py   Top junglers + risers/fallers + contradictions
+```
+
+### Storage canonico
+
+```text
+data/meta_analyzer/jungle_research/
+  sources.json                                  # registry de fuentes
+  pro_players_seed.json                         # seed manual de pros
+  pro_accounts.json                             # cuentas resueltas
+  champion_meta_snapshots/
+    latest.json
+    backups/<YYYY-MM-DDTHH-MM-SS>.json
+    history/<YYYY-MM-DDTHH-MM-SS>_merged.json
+    raw/<source>/<YYYY-MM-DDTHH-MM-SS>.json
+  match_history/<puuid>/<YYYY-MM-DDTHH-MM-SS>.json
+  otp_rankings/<champion_id>/<YYYY-MM-DDTHH-MM-SS>.json
+  final_jungle_tierlist/
+    latest.json
+    history/<YYYY-MM-DDTHH-MM-SS>.json
+  daily_reports/<YYYY-MM-DD>.json
+```
+
+Storage v1 = JSON. Migracion futura a SQLite/PostgreSQL queda preparada por
+nombres de campos compatibles. **Snapshots inmutables**: nunca se pisa
+`latest.json` sin antes rotar a `backups/`.
+
+### Endpoints
+
+Bajo `/api/v1/jungle-research/*`:
+
+| Endpoint | Funcion |
+|----------|---------|
+| `GET overview` | Resumen agregado: top tiers, conteo de fuentes, freshness, riot_api_key_present |
+| `GET current?limit=` | Tier list final consolidada |
+| `GET sources` | Registry con estado de cada fuente |
+| `GET champions/{id}/history` | Evolucion del campeon en backups historicos |
+| `GET champions/{id}/otp` | OTPs (V1: gap visible) |
+| `GET pros/recent-picks?hours=` | Picks pros ultimas N horas |
+| `GET pros/{name}/matches` | Match history persistido |
+| `GET emerging` | Mayor subida de score vs ultimo backup |
+| `GET consensus` | Mayor acuerdo entre fuentes |
+| `GET daily-report?date=` | Reporte diario; genera al vuelo si no existe |
+| `POST refresh?mode=soloq\|riot_pros\|all` | Dispara pipelines disponibles |
+
+Regla central: si una capa de datos no esta disponible, los endpoints
+devuelven 200 con `gaps` visible. Nunca 500. Nunca inventan datos.
+
+### Refresh: que hace cada modo
+
+- `mode=soloq`: lee `data/meta_scraper/normalized/latest_jungle_tier.json` +
+  `data/jungle_meta/patch_*.json`, consolida, persiste tier list.
+- `mode=riot_pros`: solo si `RIOT_API_KEY` esta presente, resuelve cuentas
+  pro con Riot ID conocido en el seed. Cero scraping.
+- `mode=all`: ejecuta lo activo + registra gaps de lo planned.
+
+### Fuentes activas vs planned (V1)
+
+Active (5): Riot API + Data Dragon + Meta Scraper local + Jungle Meta local
++ adapters U.GG/LoLalytics/OP.GG via Meta Scraper.
+
+Planned (28): Mobalytics, METAsrc, League of Graphs, Tracker.gg, PORO.GG,
+FOW, LOL.PS, DEEPLOL, Tencent 101, OP.GG KR/JP/CN, TrackingThePros,
+DPM.LOL, ProbuildStats, Games of Legends, Riot Esports Data, Onetricks,
+CounterStats. Cada una tiene URL en el registry; se activan agregando
+adapter cuando se decida implementar.
+
+### Resolucion de cuentas pro
+
+V1 = manual. El seed shipped (`pro_players_seed.json`) trae 11 pros con
+URLs publicas pero sin Riot ID. Para resolver cuentas:
+
+1. Editar el seed y agregar `riot_id` (formato `"GameName#TAG"`) y `server`
+   (KR, EUW, NA, etc.) por jugador.
+2. Exportar `RIOT_API_KEY` (dev keys expiran cada 24h).
+3. `POST /api/v1/jungle-research/refresh?mode=riot_pros`.
+
+Si `riot_id` falta -> `gap_flag: needs_account_resolution`. Si falta key ->
+`gap_flag: no_riot_key`. Cero scraping de TrackingThePros/DPM.
+
+### Cockpit visual
+
+Tab `Jungla 360` (icono pino) en `/dashboard-enhanced`. 5 sub-vistas:
+
+- **Consenso**: tier list final con score, confidence, WR/PR/BR/games,
+  source_count, warnings, explicacion.
+- **Fuentes**: registry con estado coloreado (active/planned/gap) y URLs.
+- **Pros**: cards por jugador del seed con su flag de resolucion.
+- **OTPs**: state-block warning indicando "planned" en V1.
+- **Reporte diario**: top junglers + risers + fallers + contradictions
+  entre fuentes (spread WR > 5pp).
+
+Header del tab: freshness, patch reportado por fuentes, estado Riot API
+(verde si presente, warning si ausente), conteo total de gaps, botones
+Refrescar SoloQ / Riot Pros.
+
+URL hash hook: `/dashboard-enhanced#jungle-research` activa el tab al
+cargar (util para smoke visual reproducible).
+
 ## Deuda Conocida
 
 - `data_collector.py` JSON es legacy; preferir `data_collector_db.py`.
 - Algunos documentos historicos describian estructura propuesta o rutas antiguas.
 - No hay migraciones Alembic.
 - La calidad del detector depende del volumen de muestra.
+- Jungle Research V1: 28 de 33 fuentes externas estan en estado `planned` (registry-only). Pipelines `meta_asia`, `pro_stage`, `otp_rankings` no implementados.
+- Resolucion automatica de cuentas pro queda fuera de V1 (requiere editar seed manualmente).

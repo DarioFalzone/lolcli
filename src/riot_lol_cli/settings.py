@@ -11,6 +11,8 @@ DEFAULT_JUNGLE_META_HOST = "0.0.0.0"
 DEFAULT_JUNGLE_META_PORT = 8003
 DEFAULT_ITEMS_BROWSER_HOST = "0.0.0.0"
 DEFAULT_ITEMS_BROWSER_PORT = 8004
+DEFAULT_PATCH_NOTES_HOST = "0.0.0.0"
+DEFAULT_PATCH_NOTES_PORT = 8005
 DEFAULT_HOME_HOST = "0.0.0.0"
 DEFAULT_HOME_PORT = 8080
 
@@ -68,6 +70,27 @@ def get_items_browser_host() -> str:
 
 def get_items_browser_port() -> int:
     return _get_env_int("LOLCLI_ITEMS_BROWSER_PORT", DEFAULT_ITEMS_BROWSER_PORT)
+
+
+def get_patch_notes_host() -> str:
+    return os.getenv("LOLCLI_PATCH_NOTES_HOST", DEFAULT_PATCH_NOTES_HOST)
+
+
+def get_patch_notes_port() -> int:
+    return _get_env_int("LOLCLI_PATCH_NOTES_PORT", DEFAULT_PATCH_NOTES_PORT)
+
+
+def get_patch_notes_cron_enabled() -> bool:
+    """True si LOLCLI_PATCH_NOTES_CRON_ENABLED=1 (default: off)."""
+    return os.getenv("LOLCLI_PATCH_NOTES_CRON_ENABLED", "0").strip() in {"1", "true", "True", "yes"}
+
+
+def get_patch_notes_default_locale() -> str:
+    return os.getenv("LOLCLI_PATCH_NOTES_DEFAULT_LOCALE", "es-es")
+
+
+def get_patch_notes_max_patches() -> int:
+    return _get_env_int("LOLCLI_PATCH_NOTES_MAX_PATCHES", 10)
 
 
 def get_home_host() -> str:

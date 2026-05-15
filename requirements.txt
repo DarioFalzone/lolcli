@@ -24,3 +24,9 @@ python-dotenv>=1.0.0
 # Después de `pip install playwright` correr: `playwright install chromium`.
 # El servidor levanta sin Playwright (los adapters fallan con mensaje claro).
 playwright>=1.40.0
+
+# Patch Notes V2 (puerto 8005)
+# beautifulsoup4: parsing HTML estático del calendario Riot y adapters comunidad.
+# apscheduler: cron in-process opcional (LOLCLI_PATCH_NOTES_CRON_ENABLED=1).
+beautifulsoup4>=4.12.0
+apscheduler>=3.10.0

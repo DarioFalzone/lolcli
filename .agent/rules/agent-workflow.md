@@ -1,75 +1,59 @@
 # Agent Workflow
 
-Reglas operativas para agentes IA que trabajen en este repositorio.
+Reglas operativas para agentes IA en este repo.
 
-## Lectura inicial
+## Antes de editar
 
-1. Leer `AGENTS.md` en la raiz.
-2. Revisar `projects/README.md` para ubicar el proyecto logico afectado.
-3. Leer el README del proyecto activo en `projects/active/*/README.md`.
-4. Leer la doc tecnica del subsistema en `docs/` si el cambio toca API, datos, UI o comandos.
-5. Revisar `git status --short` antes de editar y no revertir cambios ajenos.
+1. `git status --short` — no revertir cambios ajenos.
+2. `AGENTS.md` para mapa de subsistemas, puertos y entrypoints.
+3. `projects/active/<proyecto>/README.md` y `docs/<subsistema>/README.md` si el cambio toca API, datos o UI.
 
-## Mapa operativo
+## Mapa rápido
 
 - Runtime activo: `src/riot_lol_cli/`, `data/`, `assets/`, `templates/`, `scripts/`.
-- Mapa por proyecto: `projects/`.
-- Documentacion tecnica activa: `docs/`.
-- Base estrategica humana del Draft Advisor: `KB/`.
+- Mapa por proyecto: `projects/`. Histórico no runtime: `projects/legacy/`.
 - Reglas de agentes: `.agent/rules/`.
-- Historico no runtime: `projects/legacy/`.
+- 6 FastAPI: Home Hub `:8080`, Meta API `:8000`, Draft Advisor `:8001`, Meta Scraper `:8002`, Jungle Meta `:8003`, Items Browser `:8004`.
 
-No mover `src/`, `data/`, `assets/`, `templates/` o `scripts/` sin plan explicito de imports, rutas, docs y tests.
+No mover `src/`, `data/`, `assets/`, `templates/` o `scripts/` sin plan explícito de imports, paths, docs y tests.
 
-## Subsistemas y gotchas
+## Gotchas que no están en el código
 
-- Hay seis FastAPI separados: Home Hub `:8080`, Meta API `:8000`, Draft Advisor `:8001`, Meta Scraper `:8002`, Jungle Meta `:8003`, Items Browser `:8004`.
 - `api_server.py` es wrapper; la app real del Meta Analyzer vive en `src/riot_lol_cli/meta_api/app.py`.
-- Templates runtime activos: `templates/` en la raiz. No reintroducir `src/riot_lol_cli/templates/`.
-- Rendering activo: `src/riot_lol_cli/rendering.py`; `html.py` es legado.
-- `projects/legacy/riot-lol-cli/` no es el paquete activo.
-- Meta Scraper requiere Playwright para scraping real (declarado en `requirements.txt` + `playwright install chromium`), pero no correr scraping salvo pedido explicito.
-- Los 3 adapters de Meta Scraper tienen maps de nombres por plataforma; cualquier campeon nuevo en uno debe ir a los 3. `tests/meta_scraper/test_adapter_name_maps.py` detecta drift.
-- `data/meta_analyzer.db`, caches, outputs y snapshots generados no son fuente de verdad.
-- `projects/active/junglas-pro/` es standalone; no copiar su investigacion completa a `KB/`.
-- `support_profiles.json` tiene drift historico de conteos; no corregir incidentalmente.
-- **Home Hub Integracion:** Cada vez que se agregue un sistema, servicio o proyecto nuevo, es **obligatorio** actualizar el Home Hub (`src/riot_lol_cli/home/`) para incluirlo.
-- **Contrato visual/operativo del Home Hub:** toda UI integrada al Hub debe tener un acceso visible de vuelta al `Home Hub`, favicon explicito y no depender de `window.open()` disparado solo despues de esperas async; si hay launch on-demand, reservar la pestaña desde el click y navegarla al confirmar `online`.
+- Templates runtime activos: `templates/` raíz. No reintroducir `src/riot_lol_cli/templates/`.
+- Rendering activo: `src/riot_lol_cli/rendering.py`. `html.py` es legacy.
+- Meta Scraper requiere Playwright para scraping real, pero **no correr scraping salvo pedido explícito**.
+- Adapters Meta Scraper tienen maps de nombres por plataforma; champion nuevo va en los 3. Drift detector: `tests/meta_scraper/test_adapter_name_maps.py`.
+- `data/meta_analyzer.db`, caches, outputs y snapshots no son fuente de verdad.
+- `projects/active/junglas-pro/` es standalone; no copiar su investigación a `KB/`.
+- `support_profiles.json` tiene drift histórico de conteos; no corregir incidentalmente.
 
-## Agentes por subsistema
+## Home Hub: contrato obligatorio
 
-Los antiguos `src/riot_lol_cli/*/AGENTS.md` fueron absorbidos. Usar estas referencias:
+Al agregar un sistema/servicio/proyecto: actualizar `src/riot_lol_cli/home/`. Cada UI integrada debe tener:
 
-| Area | Documento canonico |
-|------|--------------------|
-| Home Hub | `projects/active/home-hub/README.md` + `docs/getting-started.md` |
-| Draft Advisor | `projects/active/draft-advisor/README.md` + `docs/draft_advisor/README.md` |
-| Meta Analyzer | `projects/active/meta-analyzer-dashboard/README.md` + `docs/meta_analyzer/README.md` |
-| Database | `docs/meta_analyzer/README.md` seccion Base de Datos |
-| Meta Scraper | `projects/active/meta-scraper/README.md` |
-| Jungle Meta | `projects/active/jungle-meta/README.md` |
-| Items Browser | `projects/active/items-browser/README.md` |
-| Splash Gallery | `projects/active/splash-gallery/README.md` + `docs/splash-viewer.md` |
+- Acceso visible de vuelta al Home Hub.
+- Favicon explícito (evita 404 ruidoso en consola).
+- Si depende de launch async, reservar pestaña en el click y navegar al confirmar `online`.
 
-## Como cerrar una tarea
+## Cierre de tarea
 
-Antes de dar una tarea por terminada, revisar el checklist canonico de
-`.agent/rules/documentation-and-commits.md` y aplicar una verificacion
-proporcional al alcance:
+Antes de cerrar una iteración, aplicar verificación proporcional al alcance:
 
-1. **Cambios de codigo/datos runtime**: correr al menos tests focalizados y `ruff check src tests scripts`.
-2. **Cambios de doc o estructura**: hacer busquedas o checks de consistencia acordes; no forzar `pytest -q` completo si no aporta cobertura real.
-3. **Bitacora y docs**: actualizar los documentos que apliquen en la misma iteracion.
-4. **Rules**: registrar cualquier gotcha nuevo en la rule canonica correspondiente.
-5. **Informar**: cerrar con resumen, verificacion ejecutada y riesgo residual.
+1. **Código/datos runtime**: tests focalizados + `ruff check src tests scripts`.
+2. **Frontend visible**: `python scripts/visual_smoke.py <URL>` + abrir el PNG y validar (ver `engineering-standards.md` § Verificación visual obligatoria).
+3. **Doc/estructura**: búsquedas o checks de consistencia, sin forzar pytest completo.
+4. **Bitácora y docs**: actualizar en la misma iteración (ver `documentation-and-commits.md`).
+5. **Rules**: registrar gotcha nuevo en la rule canónica correspondiente.
+6. **Informar**: cerrar con resumen, verificación ejecutada y archivos creados/modificados.
 
-> La clave no es "correr todo siempre", sino no cerrar una tarea sin la verificacion que realmente cubre el cambio hecho.
+> No es "correr todo siempre"; es no cerrar sin la verificación que cubre el cambio hecho. Para frontend, eso incluye **siempre** ver una captura, no solo leer el HTML.
 
-## Glosario minimo
+## Glosario mínimo
 
-- ADC: tirador de bot lane.
-- Draft: fase de seleccion de campeones.
-- KB: Knowledge Base humana y estrategica del Draft Advisor.
-- Golden drafts: casos de evaluacion/regresion del Draft Advisor.
-- DDragon: Data Dragon CDN de Riot con datos y assets oficiales.
-- PUUID: identificador universal de jugador usado por Riot APIs.
+- ADC: tirador bot lane.
+- Draft: fase de selección de campeones.
+- KB: Knowledge Base humana del Draft Advisor.
+- Golden drafts: casos de regresión del Draft Advisor.
+- DDragon: Data Dragon CDN de Riot.
+- PUUID: identificador universal de jugador en Riot APIs.
