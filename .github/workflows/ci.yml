@@ -7,8 +7,36 @@ on:
     branches: [ "main" ]
 
 jobs:
+  # Job dedicado de encoding: corre primero, falla rápido si hay BOM o mojibake.
+  # Implementa la defensa en profundidad contra el incidente 2026-05-15.
+  encoding-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+
+      - name: Encoding guards (BOM, mojibake, doble-encoding, charset HTTP)
+        env:
+          PYTHONPATH: src
+        run: |
+          pytest tests/test_no_mojibake.py \
+                 tests/test_encoding_global.py \
+                 tests/patch_notes/test_encoding.py -v
+
   lint-and-test:
     runs-on: ubuntu-latest
+    needs: encoding-guard
 
     steps:
     - uses: actions/checkout@v4

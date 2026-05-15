@@ -19,6 +19,7 @@ from fastapi import APIRouter, FastAPI, HTTPException
 from fastapi.responses import FileResponse, HTMLResponse, Response
 from fastapi.staticfiles import StaticFiles
 
+from riot_lol_cli.http_utils import UTF8JSONResponse
 from riot_lol_cli.settings import (
     get_draft_advisor_port,
     get_home_host,
@@ -27,6 +28,7 @@ from riot_lol_cli.settings import (
     get_jungle_meta_port,
     get_meta_api_port,
     get_meta_scraper_port,
+    get_patch_notes_port,
 )
 
 logger = logging.getLogger(__name__)
@@ -49,6 +51,7 @@ _LAUNCH_CMDS: dict[str, list[str]] = {
     "meta_scraper": ["-m", "riot_lol_cli.meta_scraper.server"],
     "jungle_meta": ["-m", "riot_lol_cli.jungle_meta.server"],
     "items_browser": ["-m", "riot_lol_cli.items_browser.server"],
+    "patch_notes": ["-m", "riot_lol_cli.patch_notes.server"],
 }
 
 # Processes spawned by this hub (service_id → Popen).
@@ -105,6 +108,16 @@ SERVICES = [
         "ui_path": "/",
         "icon": "⚔️",
         "accent": "warning",
+    },
+    {
+        "id": "patch_notes",
+        "name": "Patch Notes",
+        "description": "Notas de parche oficiales de LoL — campeones, ítems y mecánicas.",
+        "port_fn": get_patch_notes_port,
+        "health_path": "/health",
+        "ui_path": "/",
+        "icon": "📝",
+        "accent": "gold",
     },
 ]
 
@@ -256,6 +269,7 @@ def create_app() -> FastAPI:
         title="LOLCLI Home — Centro de Operaciones",
         description="Hub central de acceso a todos los subsistemas de riot_lol_cli.",
         version="1.0.0",
+        default_response_class=UTF8JSONResponse,
     )
 
     if _STATIC_DIR.exists():

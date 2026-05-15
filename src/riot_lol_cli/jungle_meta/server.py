@@ -15,6 +15,7 @@ from fastapi import APIRouter, FastAPI, HTTPException
 from fastapi.responses import FileResponse, HTMLResponse, Response
 from fastapi.staticfiles import StaticFiles
 
+from riot_lol_cli.http_utils import UTF8JSONResponse
 from riot_lol_cli.settings import get_jungle_meta_host, get_jungle_meta_port
 
 from .loader import (
@@ -173,6 +174,7 @@ def create_app() -> FastAPI:
         title="Jungle Metagame — LoL Jungle Champion Tiers",
         description="Visualiza el meta actual de junglas por parche con items y estadísticas.",
         version="1.1.0",
+        default_response_class=UTF8JSONResponse,
     )
 
     if _STATIC_DIR.exists():

@@ -19,6 +19,7 @@ from fastapi.responses import FileResponse, RedirectResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 from riot_lol_cli import paths
+from riot_lol_cli.http_utils import UTF8JSONResponse
 from riot_lol_cli.settings import get_draft_advisor_host, get_draft_advisor_port
 
 from .api import create_services
@@ -38,6 +39,7 @@ def create_app() -> FastAPI:
         title="Draft Advisor",
         description="Motor de recomendación de picks para League of Legends",
         version="1.1.0",
+        default_response_class=UTF8JSONResponse,
     )
 
     application.state.draft_services = create_services()

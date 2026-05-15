@@ -15,6 +15,7 @@ from fastapi import APIRouter, FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse, HTMLResponse, Response
 from fastapi.staticfiles import StaticFiles
 
+from riot_lol_cli.http_utils import UTF8JSONResponse
 from riot_lol_cli.settings import get_items_browser_host, get_items_browser_port
 
 from .loader import (
@@ -140,6 +141,7 @@ def create_app() -> FastAPI:
         title="Items Browser — LoL Item Catalog",
         description="Navega items de League of Legends con nombres EN+ES y filtros por grupo.",
         version="1.0.0",
+        default_response_class=UTF8JSONResponse,
     )
 
     if _STATIC_DIR.exists():

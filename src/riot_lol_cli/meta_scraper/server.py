@@ -16,6 +16,7 @@ from fastapi import APIRouter, BackgroundTasks, FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, HTMLResponse, Response
 from fastapi.staticfiles import StaticFiles
 
+from riot_lol_cli.http_utils import UTF8JSONResponse
 from riot_lol_cli.settings import get_meta_scraper_host, get_meta_scraper_port
 
 from .messages import NO_ADAPTERS_AVAILABLE_MESSAGE
@@ -351,6 +352,7 @@ def create_app() -> FastAPI:
         title="Meta Scraper — LoL Meta Dashboard",
         description="Scrapea y visualiza el meta de soporte, ADC y jungla de League of Legends.",
         version="1.0.0",
+        default_response_class=UTF8JSONResponse,
     )
     application.state.orchestrator = ScrapingOrchestrator()
     application.state.last_scrape_result = None
