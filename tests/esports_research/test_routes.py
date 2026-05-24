@@ -125,6 +125,38 @@ def test_sources(esports_client):
     assert body["summary"]["total"] == 12
 
 
+def test_source_last_run_never_run(esports_client):
+    body = esports_client.get("/api/v1/esports/sources/leaguepedia/last-run").json()
+    assert body["data"]["status"] == "never_run"
+    assert body["data"]["rows_ingested"] == 0
+    assert body["gaps"] == ["no run recorded for source: leaguepedia"]
+
+
+def test_source_last_run_unknown_source(esports_client):
+    body = esports_client.get("/api/v1/esports/sources/missing/last-run").json()
+    assert body["data"] is None
+    assert body["gaps"] == ["unknown source: missing"]
+
+
+def test_source_last_run_returns_telemetry(esports_client):
+    json_storage.save_adapter_run(
+        "leaguepedia",
+        {
+            "status": "success",
+            "last_attempted_at": "2026-05-24T01:00:00Z",
+            "rows_ingested": 12,
+            "gaps": [],
+        },
+    )
+
+    body = esports_client.get("/api/v1/esports/sources/leaguepedia/last-run").json()
+
+    assert body["data"]["status"] == "success"
+    assert body["data"]["last_attempted_at"] == "2026-05-24T01:00:00Z"
+    assert body["data"]["rows_ingested"] == 12
+    assert body["gaps"] == []
+
+
 def test_coverage_empty_returns_200(esports_client):
     body = esports_client.get("/api/v1/esports/coverage").json()
     assert body["success"] is True

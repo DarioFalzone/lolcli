@@ -183,6 +183,16 @@ async def sources() -> dict[str, Any]:
     return _ok(**_registry_payload())
 
 
+@router.get("/sources/{source_id}/last-run")
+async def source_last_run(source_id: str) -> dict[str, Any]:
+    registry = SourceRegistry.load()
+    source_entry = registry.get(source_id)
+    if source_entry is None:
+        return _ok(source_id=source_id, data=None, gaps=[f"unknown source: {source_id}"])
+    data = _source_last_run_payload(source_id, source_entry.status.value)
+    return _ok(source_id=source_id, data=data, gaps=data.get("gaps", []))
+
+
 @router.get("/coverage")
 async def coverage() -> dict[str, Any]:
     report = coverage_report.generate()
@@ -240,6 +250,41 @@ def _run_ingest(source: str, tournament: str | None) -> dict[str, Any]:
         return {"status": "gap", "gaps": [f"api ingest not implemented for source: {source}"]}
     except Exception as exc:  # noqa: BLE001
         return {"status": "gap", "gaps": [f"ingest failed for {source}: {exc}"]}
+
+
+def _source_last_run_payload(source_id: str, source_status: str) -> dict[str, Any]:
+    runs_payload = json_storage.read_adapter_runs()
+    runs = runs_payload.get("runs", {}) if isinstance(runs_payload.get("runs"), dict) else {}
+    run = runs.get(source_id)
+    if not isinstance(run, dict):
+        return {
+            "source_id": source_id,
+            "source_status": source_status,
+            "status": "never_run",
+            "last_attempted_at": None,
+            "timestamp": None,
+            "rows_ingested": 0,
+            "gaps": [f"no run recorded for source: {source_id}"],
+        }
+    gaps = run.get("gaps", [])
+    if isinstance(gaps, str):
+        gaps = [gaps]
+    if not isinstance(gaps, list):
+        gaps = []
+    reason = run.get("reason")
+    if reason and not gaps:
+        gaps = [str(reason)]
+    timestamp = run.get("last_attempted_at") or run.get("timestamp") or run.get("updated_at")
+    rows_ingested = run.get("rows_ingested", run.get("rows", run.get("row_count", 0)))
+    return {
+        "source_id": source_id,
+        "source_status": source_status,
+        "status": run.get("status", "unknown"),
+        "last_attempted_at": timestamp,
+        "timestamp": timestamp,
+        "rows_ingested": rows_ingested,
+        "gaps": gaps,
+    }
 
 
 def _read_counterpicks(patch: str | None) -> list[dict[str, Any]]:

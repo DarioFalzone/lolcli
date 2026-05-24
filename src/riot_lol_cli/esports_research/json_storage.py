@@ -15,6 +15,7 @@ from riot_lol_cli import paths
 
 ROOT = paths.DATA_DIR / "esports_research"
 SOURCES_FILE = ROOT / "sources.json"
+ADAPTER_RUNS_FILE = ROOT / "adapter_runs.json"
 
 BRONZE_DIR = ROOT / "bronze"
 SILVER_DIR = ROOT / "silver"
@@ -88,6 +89,23 @@ def read_sources() -> list[dict[str, Any]]:
     return data
 
 
+def read_adapter_runs() -> dict[str, Any]:
+    payload = read_json(ADAPTER_RUNS_FILE)
+    return payload if isinstance(payload, dict) else {}
+
+
+def save_adapter_runs(payload: dict[str, Any]) -> Path:
+    ensure_directories()
+    return write_json_atomic(ADAPTER_RUNS_FILE, payload)
+
+
+def save_adapter_run(source_id: str, payload: dict[str, Any]) -> Path:
+    runs_payload = read_adapter_runs()
+    runs = runs_payload.get("runs", {}) if isinstance(runs_payload.get("runs"), dict) else {}
+    runs[source_id] = {"source_id": source_id, **payload}
+    return save_adapter_runs({"updated_at": utcnow_iso(), "runs": runs})
+
+
 def save_bronze_json(source_id: str, partition: str, name: str, payload: Any) -> Path:
     ensure_directories()
     target = BRONZE_DIR / source_id / partition / f"{name}_{_timestamp_slug()}.json"
@@ -159,3 +177,7 @@ def list_json_rows(path: Path) -> list[dict[str, Any]]:
         elif isinstance(payload, list):
             rows.extend(row for row in payload if isinstance(row, dict))
     return rows
+
+
+def utcnow_iso() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
