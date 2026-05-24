@@ -47,6 +47,7 @@ router = APIRouter()
 # Args appended to sys.executable to launch each service.
 _LAUNCH_CMDS: dict[str, list[str]] = {
     "meta_api": ["scripts/run_api.py"],
+    "esports_research": ["scripts/run_api.py"],
     "draft_advisor": ["-m", "riot_lol_cli.draft_advisor.server"],
     "meta_scraper": ["-m", "riot_lol_cli.meta_scraper.server"],
     "jungle_meta": ["-m", "riot_lol_cli.jungle_meta.server"],
@@ -78,6 +79,16 @@ SERVICES = [
         "ui_path": "/draft",
         "icon": "🎯",
         "accent": "gold",
+    },
+    {
+        "id": "esports_research",
+        "name": "Esports Research",
+        "description": "Cockpit de drafts, torneos, comfort picks y counterpicks pro-stage.",
+        "port_fn": get_meta_api_port,
+        "health_path": "/api/v1/esports/health",
+        "ui_path": "/esports/",
+        "icon": "ER",
+        "accent": "cyan",
     },
     {
         "id": "meta_scraper",

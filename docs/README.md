@@ -18,6 +18,7 @@ en `../projects/README.md`.
 |-----------|-------------|
 | [dashboard/README.md](dashboard/README.md) | Dashboard del Meta Analyzer: tabs, filtros, endpoints y troubleshooting |
 | [meta_analyzer/README.md](meta_analyzer/README.md) | Meta Analyzer: arquitectura, DB, ADC Tracker, anomalias, tier lists y API |
+| [esports_research/README.md](esports_research/README.md) | Esports Research: fuentes pro-stage, pipelines bronze/silver/gold, API y compliance |
 | [draft_advisor/README.md](draft_advisor/README.md) | Draft Advisor: API, datos, scoring y SPA |
 
 ## Documentacion por Proyecto
@@ -33,6 +34,7 @@ conocida y docs relacionadas.
 | Home Hub | `../projects/active/home-hub/README.md` |
 | Draft Advisor | `../projects/active/draft-advisor/README.md` |
 | Meta Analyzer + Dashboard | `../projects/active/meta-analyzer-dashboard/README.md` |
+| Esports Research | integrado en Meta Analyzer; docs en `esports_research/README.md` |
 | Meta Scraper | `../projects/active/meta-scraper/README.md` |
 | Jungle Meta | `../projects/active/jungle-meta/README.md` |
 | Items Browser | `../projects/active/items-browser/README.md` |

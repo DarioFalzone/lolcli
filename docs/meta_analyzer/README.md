@@ -301,6 +301,24 @@ Refrescar SoloQ / Riot Pros.
 URL hash hook: `/dashboard-enhanced#jungle-research` activa el tab al
 cargar (util para smoke visual reproducible).
 
+## Esports Research
+
+Capa nueva de investigacion historica pro-stage integrada al Meta API `:8000`.
+Vive en `src/riot_lol_cli/esports_research/`, usa adapters bajo
+`src/riot_lol_cli/meta_scraper/adapters/esports/` y expone cockpit en
+`/esports/`.
+
+Rutas principales:
+
+- API: `/api/v1/esports/*`
+- UI: `http://localhost:8000/esports/`
+- Docs: `docs/esports_research/README.md`
+
+V0 cubre 4 fuentes activas (Leaguepedia, Oracle's Elixir, Gol.gg y Data
+Dragon), 6 stubs activables y analytics descriptivo para counterpicks,
+comfort jugador-campeon y sinergias basicas. No expone asistencia en vivo ni
+descarga VODs; los endpoints faltantes devuelven `200` con `gaps` visibles.
+
 ## Deuda Conocida
 
 - `data_collector.py` JSON es legacy; preferir `data_collector_db.py`.

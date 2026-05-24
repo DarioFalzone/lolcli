@@ -6,6 +6,42 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-05-24] Esports Research V0 - subsistema pro-stage
+
+### Que se hizo
+
+- Nuevo paquete `src/riot_lol_cli/esports_research/` con schemas Pydantic V2,
+  storage JSON atomico, source registry, analytics de counterpicks, comfort y
+  sinergias, reports y pipelines bronze/silver/gold.
+- Nuevos adapters en `src/riot_lol_cli/meta_scraper/adapters/esports/`:
+  Leaguepedia, Oracle's Elixir, Gol.gg y Data Dragon activos; Riot Tournament
+  V5, GRID, PandaScore, Abios, LoL Esports VODs y Game Client Local como stubs.
+- Nuevo router `src/riot_lol_cli/meta_api/routes/esports.py` bajo
+  `/api/v1/esports/*`, integrado al Meta API `:8000`, con regla de `200 + gaps`
+  si falta storage o fuente.
+- Nueva surface `/esports/` con 6 paginas vanilla usando Pattern Library v2:
+  overview, drafts, teams, players, counterpicks y tournaments.
+- Home Hub actualizado para abrir Esports Research como surface del Meta API.
+- Documentacion nueva en `docs/esports_research/` y mapas actualizados en
+  `AGENTS.md`, `docs/README.md`, `projects/README.md` y
+  `docs/meta_analyzer/README.md`.
+
+### Compliance
+
+- Sin endpoints de asistencia en vivo.
+- VODs solo metadata; no descarga ni rehosting.
+- Gol.gg respeta robots.txt y `min_delay >= 4s`; Leaguepedia usa
+  User-Agent identificable con email de contacto y `min_delay >= 2s`.
+- Stubs comerciales/oficiales quedan desactivados hasta contrato, token o
+  production key.
+
+### Verificacion
+
+- `pytest tests/esports_research -q` -> 126 passed.
+- Ruff parcial de archivos nuevos ejecutado durante implementacion y corregido.
+
+---
+
 ## [2026-05-15] Patch Notes — Mobalytics Breakdown + hardening UTF-8
 
 ### Que se hizo

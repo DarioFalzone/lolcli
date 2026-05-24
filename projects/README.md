@@ -21,6 +21,7 @@ pueden vivir fisicamente dentro de `projects/active/` o `projects/legacy/`.
 | Home Hub | `active/home-hub/README.md` | `src/riot_lol_cli/home/`, `scripts/bat/home.bat`, `scripts/bat/levantar_todo.bat` |
 | Draft Advisor | `active/draft-advisor/README.md` | `src/riot_lol_cli/draft_advisor/`, `data/draft_advisor/`, `KB/`, `tests/draft_advisor/` |
 | Meta Analyzer + Dashboard | `active/meta-analyzer-dashboard/README.md` | `src/riot_lol_cli/meta_api/`, `src/riot_lol_cli/meta_analyzer/`, `src/riot_lol_cli/database/`, `src/riot_lol_cli/dashboard*.py`, `data/meta_analyzer.db` |
+| Esports Research | `active/meta-analyzer-dashboard/README.md` | `src/riot_lol_cli/esports_research/`, `src/riot_lol_cli/meta_api/routes/esports.py`, `src/riot_lol_cli/meta_api/static/esports/`, `data/esports_research/`, `tests/esports_research/` |
 | Meta Scraper | `active/meta-scraper/README.md` | `src/riot_lol_cli/meta_scraper/`, `data/meta_scraper/`, `tests/meta_scraper/` |
 | Jungle Meta | `active/jungle-meta/README.md` | `src/riot_lol_cli/jungle_meta/`, `data/jungle_meta/`, `tests/jungle_meta/` |
 | Items Browser | `active/items-browser/README.md` | `src/riot_lol_cli/items_browser/`, `data/items/database.json`, `assets/items/`, `tests/items_browser/` |

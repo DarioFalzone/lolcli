@@ -11,6 +11,8 @@ Este es el mapa maestro del repositorio para agentes IA. Leelo antes de tocar co
 - Meta Analyzer con API FastAPI, SQLite, deteccion de anomalias y tier lists.
 - Draft Advisor para recomendar picks ADC, Support y Jungla.
 - Meta Scraper para recolectar datos externos de Support, ADC y jungla desde plataformas como OP.GG, LoLalytics y U.GG.
+- Esports Research para investigacion historica pro-stage: drafts, torneos,
+  comfort picks, counterpicks y fuentes publicas/comerciales stub.
 - Base de conocimiento estrategica para el razonamiento de draft.
 
 Usa Riot Games API (`Summoner-V4`, `Match-V5`, `Account-V1`) y Data Dragon CDN para datos/assets oficiales.
@@ -47,6 +49,7 @@ El repo esta en evolucion activa y puede tener un working tree sucio. Antes de e
 | Jungle Meta | `src/riot_lol_cli/jungle_meta/` | FastAPI, JSON, SPA | Activo | Tier list de campeones jungla por patch en puerto 8003 |
 | Patch Notes | `src/riot_lol_cli/patch_notes/` | FastAPI, Playwright, Pydantic V2, APScheduler, SPA | Activo | **V2**: scraping multi-source con 7 adapters (oficial + dev + calendar + ddragon + ugg/opgg/lolalytics/mobalytics). Búsqueda full-text, diff entre versiones, multi-locale UI, cron opcional. Puerto 8005. |
 | Jungle Research | `src/riot_lol_cli/jungle_research/` | Python, Pydantic V2, JSON | Activo | Knowledge base consolidada de jungla (registry + scoring + pipelines + reports). Vive dentro de Meta API :8000 bajo `/api/v1/jungle-research/*` y se visualiza como tab "Jungla 360" en `/dashboard-enhanced` |
+| Esports Research | `src/riot_lol_cli/esports_research/` | Python, Pydantic V2, FastAPI, JSON, SPA vanilla | Activo | Investigacion historica pro-stage con 4 adapters activos, 6 stubs, bronze/silver/gold, API `/api/v1/esports/*` y cockpit `/esports/` dentro de Meta API :8000 |
 | Items Browser | `src/riot_lol_cli/items_browser/` | FastAPI, JSON, SPA | Activo | Catalogo de items LoL EN+ES con filtros por grupo en puerto 8004 |
 | Home Hub | `src/riot_lol_cli/home/` | FastAPI, JS vanilla, SPA | Activo | Centro de operaciones / portal unificado en puerto 8080 |
 | Schemas Riot | `src/riot_lol_cli/schemas/` | Pydantic V2 | Activo | Modelos tipados para payloads de Match-V5 |
@@ -71,6 +74,7 @@ imports, rutas de assets, scripts y tests.
 | Splash Gallery | `projects/active/splash-gallery/README.md` | `src/riot_lol_cli/splash.py`, `assets/splash_arts/`, `data/ddragon-splash-catalog.json`, `data/splash-manifest.json` |
 | Home Hub | `projects/active/home-hub/README.md` | `src/riot_lol_cli/home/`, `scripts/bat/home.bat`, `scripts/bat/levantar_todo.bat` |
 | Meta Analyzer + Dashboard | `projects/active/meta-analyzer-dashboard/README.md` | `meta_api/`, `meta_analyzer/`, `database/`, `dashboard*.py` |
+| Esports Research | `projects/active/meta-analyzer-dashboard/README.md` | `esports_research/`, `meta_api/routes/esports.py`, `meta_api/static/esports/`, `data/esports_research/` |
 | Draft Advisor | `projects/active/draft-advisor/README.md` | `draft_advisor/`, `data/draft_advisor/`, `KB/` |
 | Meta Scraper | `projects/active/meta-scraper/README.md` | `meta_scraper/`, `data/meta_scraper/` |
 | Jungle Meta | `projects/active/jungle-meta/README.md` | `src/riot_lol_cli/jungle_meta/`, `data/jungle_meta/`, `tests/jungle_meta/` |
@@ -228,6 +232,7 @@ Playwright es requerido para scraping real. Si no esta instalado, el servidor pu
 | `data/cache/` | Cache de partidas y payloads runtime |
 | `data/draft_advisor/` | Perfiles JSON y KB estructurada del Draft Advisor |
 | `data/meta_scraper/` | Snapshots raw/normalizados del Meta Scraper |
+| `data/esports_research/` | Registry, bronze/silver/gold y reports del Esports Research |
 | `data/ddragon-splash-catalog.json` | Catalogo Data Dragon localizado para nombres de skins, parche y fecha de importacion |
 | `data/splash-manifest.json` | Indice generado de splash arts |
 | `assets/splash_arts/` | Splash arts JPG por campeon |
@@ -318,6 +323,30 @@ Endpoints de Jungle Research (definidos en `src/riot_lol_cli/meta_api/routes/jun
 - `GET /api/v1/jungle-research/consensus`
 - `GET /api/v1/jungle-research/daily-report`
 - `POST /api/v1/jungle-research/refresh?mode=soloq|riot_pros|all`
+
+Endpoints de Esports Research (definidos en `src/riot_lol_cli/meta_api/routes/esports.py`):
+
+- `GET /api/v1/esports/health`
+- `GET /api/v1/esports/tournaments?league=&season=`
+- `GET /api/v1/esports/tournaments/{tournament_id}`
+- `GET /api/v1/esports/matches/{match_id}`
+- `GET /api/v1/esports/games/{game_id}`
+- `GET /api/v1/esports/games/{game_id}/draft`
+- `GET /api/v1/esports/games/{game_id}/participants`
+- `GET /api/v1/esports/teams`
+- `GET /api/v1/esports/teams/{team_id}`
+- `GET /api/v1/esports/teams/{team_id}/recent?limit=20`
+- `GET /api/v1/esports/teams/{team_id}/champions`
+- `GET /api/v1/esports/players/{player_id}`
+- `GET /api/v1/esports/players/{player_id}/comfort`
+- `GET /api/v1/esports/players/{player_id}/games?limit=20`
+- `GET /api/v1/esports/champions/{champion_id}/pro-stage`
+- `GET /api/v1/esports/champions/{champion_id}/matchups`
+- `GET /api/v1/esports/counterpicks?role=&patch=&region=&limit=`
+- `GET /api/v1/esports/sources`
+- `GET /api/v1/esports/coverage`
+- `POST /api/v1/esports/refresh?mode=bronze|silver|gold|all&tournament=`
+- `POST /api/v1/esports/ingest?source=&tournament=`
 
 ### Draft Advisor API (`:8001`)
 
@@ -531,6 +560,7 @@ Notas operativas V2:
 | `docs/design-system.md` | Tokens y componentes visuales |
 | `docs/draft_advisor/README.md` | API, datos y scoring del Draft Advisor |
 | `docs/meta_analyzer/README.md` | Guia canonica del Meta Analyzer |
+| `docs/esports_research/README.md` | Arquitectura, fuentes, API y compliance del Esports Research |
 | `docs/dashboard/README.md` | Guia canonica del dashboard |
 | `docs/splash-viewer.md` | Splash viewer |
 | `KB/README.md` | Indice de la base estrategica |

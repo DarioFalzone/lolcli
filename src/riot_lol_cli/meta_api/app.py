@@ -11,6 +11,7 @@ from riot_lol_cli.http_utils import UTF8JSONResponse
 from riot_lol_cli.meta_api import dependencies
 from riot_lol_cli.meta_api.routes.champions import router as champions_router
 from riot_lol_cli.meta_api.routes.core import router as core_router
+from riot_lol_cli.meta_api.routes.esports import router as esports_router
 from riot_lol_cli.meta_api.routes.jungle_research import router as jungle_research_router
 from riot_lol_cli.meta_api.routes.maintenance import router as maintenance_router
 from riot_lol_cli.meta_api.routes.stats import router as stats_router
@@ -51,6 +52,10 @@ def create_app() -> FastAPI:
     if design_system_dir.exists():
         app.mount("/design-system", StaticFiles(directory=str(design_system_dir)), name="design-system")
 
+    esports_static_dir = paths.SRC_DIR / "riot_lol_cli" / "meta_api" / "static" / "esports"
+    if esports_static_dir.exists():
+        app.mount("/esports", StaticFiles(directory=str(esports_static_dir), html=True), name="esports")
+
     @app.exception_handler(HTTPException)
     async def http_exception_handler(request, exc):
         return JSONResponse(
@@ -67,6 +72,7 @@ def create_app() -> FastAPI:
     app.include_router(champions_router)
     app.include_router(maintenance_router)
     app.include_router(jungle_research_router)
+    app.include_router(esports_router)
     return app
 
 

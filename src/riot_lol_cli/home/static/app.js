@@ -537,7 +537,7 @@
 
   // --- Init ---
   applyTweaks();
-  renderGridSkeletons(5);   // show placeholders immediately, replaced on first fetch
+  renderGridSkeletons(7);   // show placeholders immediately, replaced on first fetch
   fetchAndRender();
   setInterval(fetchAndRender, POLL_INTERVAL_MS);
 })();
