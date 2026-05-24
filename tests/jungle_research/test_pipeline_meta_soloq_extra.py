@@ -60,8 +60,40 @@ class _StubRaisingAdapter:
         raise RuntimeError("conexion timeout")
 
 
-def test_default_adapters_all_not_implemented(tmp_storage):
-    """Los 4 default adapters retornan not_implemented sin tocar red."""
+def test_default_adapters_have_4_ids(tmp_storage, monkeypatch):
+    """Los 4 default adapters están registrados.
+
+    Tras V3.7 [2026-05-24]: metasrc ya no es stub, intenta network real.
+    En tests aislamos network mockeando metasrc; los otros 3 siguen stubs.
+    El test valida los IDs registrados, no el status (que depende de network).
+    """
+    # Mockear metasrc para no tocar network en este test.
+    class _MetaSrcStub:
+        def fetch_jungle_tier_list(self, elo="emerald_plus"):
+            return {
+                "platform": "metasrc",
+                "source_url": "https://x",
+                "status": "not_implemented",
+                "reason": "stub: test sin network",
+                "champions": [],
+                "champion_count": 0,
+                "scraped_at": "2026-05-24T00:00:00Z",
+            }
+
+    from riot_lol_cli.meta_scraper.adapters.leagueofgraphs import LeagueOfGraphsAdapter
+    from riot_lol_cli.meta_scraper.adapters.mobalytics import MobalyticsAdapter
+    from riot_lol_cli.meta_scraper.adapters.tracker_gg import TrackerGgAdapter
+
+    monkeypatch.setattr(
+        meta_soloq_extra,
+        "_default_adapters",
+        lambda: {
+            "metasrc_jungle": _MetaSrcStub(),
+            "mobalytics_jungle_tierlist": MobalyticsAdapter(),
+            "leagueofgraphs_jungle": LeagueOfGraphsAdapter(),
+            "tracker_gg_lol": TrackerGgAdapter(),
+        },
+    )
     result = meta_soloq_extra.run(persist=False)
     assert len(result.snapshots) == 0
     assert len(result.runs) == 4
@@ -72,6 +104,7 @@ def test_default_adapters_all_not_implemented(tmp_storage):
         "leagueofgraphs_jungle",
         "tracker_gg_lol",
     }
+    # Todos retornan not_implemented (3 stubs + 1 metasrc mockeado).
     assert all(r.status == "not_implemented" for r in result.runs)
 
 
