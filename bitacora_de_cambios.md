@@ -2347,3 +2347,19 @@ Todos los módulos que corren como servidores o jobs de fondo (`api_server.py`, 
 - Se escribieron pruebas para los nuevos modelos de Pydantic y el cliente asíncrono.
 - La ejecución de `pytest` indica que **todos los tests pasan** y la **cobertura del código en `src/` subió a >50%**.
 - Hemos integrado este reporte a la nueva base de GitHub Actions (`ci.yml`) que ahora fallará si la cobertura baja de 30%.
+
+---
+
+## [2026-05-24] Esports Research C.1 - tests de BaseEsportsAdapter
+
+Se agrego cobertura dedicada para `BaseEsportsAdapter`, enfocada en los paths de mayor riesgo del audit V0:
+
+- headers HTTP identificables (`User-Agent` + `From`);
+- parsing de `Retry-After`;
+- retry de 429 con y sin header;
+- 403/401 como `PermissionError` sin retry;
+- retries de `httpx.RequestError`;
+- retries de `httpx.HTTPStatusError`;
+- agotamiento de 429 tras 3 intentos.
+
+La implementacion usa un cliente HTTP fake local y monkeypatch de `time.sleep`, sin sumar dependencias nuevas ni hacer requests reales.
