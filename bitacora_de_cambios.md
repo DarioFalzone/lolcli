@@ -19,6 +19,21 @@ Tests nuevos cubren exito mockeado de `leaguepedia` y gap para fuente activa no 
 
 ---
 
+## [2026-05-24] Esports Research B.1 - selectores reales Gol.gg draft
+
+Se reemplazo el parser generico de `gol_gg.parse_draft_html` por selectores validados contra HTML vivo de Gol.gg (`/game/stats/78125/page-game/`, 200 OK).
+
+- Detecta columnas de equipo por `.blue-line-header` y `.red-line-header`.
+- Extrae filas rotuladas `Bans` y `Picks`.
+- Lee campeones desde `img.champion_icon_medium` y prioriza el ID canonico del filename (`JarvanIV.png`).
+- Completa `action_type` real (`BAN`/`PICK`) y `team_side` real (`BLUE`/`RED`).
+- Deriva fases V0 (`BAN_PHASE_1/2`, `PICK_PHASE_1/2`) segun posicion dentro de cada fila.
+- Conserva fallback legacy para fixtures simples y HTML antiguo.
+
+La validacion live se hizo con una unica lectura manual del HTML, sin captcha/login ni bypass de contenido. El entorno Windows requirio `curl -k` por problema local de certificado, no por bloqueo de Gol.gg.
+
+---
+
 ## [2026-05-24] Esports Research V0 - subsistema pro-stage
 
 ### Que se hizo
