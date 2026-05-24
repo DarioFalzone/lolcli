@@ -6,6 +6,18 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-05-24] Esports Research C.5 - test endpoint ingest dry-run
+
+Se reforzo el test del endpoint `POST /api/v1/esports/ingest` para validar explicitamente el contrato V0:
+
+- status code HTTP 200;
+- `data.status == "dry_run"`;
+- gap visible `external ingest disabled by default in V0 API surface`.
+
+El PR es test-only y no cambia comportamiento runtime.
+
+---
+
 ## [2026-05-24] Esports Research V0 - subsistema pro-stage
 
 ### Que se hizo
