@@ -6,6 +6,21 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-05-24] Esports Research E.2 - telemetria por source
+
+Se agrego telemetria mutable por source para monitorear salud de ingestas sin leer logs manuales.
+
+- Nuevo `data/esports_research/adapter_runs.json` gestionado por `json_storage`.
+- Helpers `read_adapter_runs`, `save_adapter_runs` y `save_adapter_run`.
+- Endpoint `GET /api/v1/esports/sources/{source_id}/last-run`.
+- Respuesta normalizada con `status`, `last_attempted_at`, `timestamp`, `rows_ingested`, `gaps` y `source_status`.
+- Si la fuente existe pero aun no corrio, devuelve `status="never_run"` y gap visible.
+- Si la fuente no existe, devuelve `data=null` y gap `unknown source`.
+
+Tests cubren round-trip de storage, fuente sin corridas, fuente desconocida y corrida exitosa con rows ingestados.
+
+---
+
 ## [2026-05-24] Esports Research V0 - subsistema pro-stage
 
 ### Que se hizo

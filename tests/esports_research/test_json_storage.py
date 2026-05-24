@@ -62,6 +62,21 @@ def test_read_sources_handles_dict(esports_tmp_root: Path):
     assert len(json_storage.read_sources()) == 12
 
 
+def test_adapter_runs_round_trip(esports_tmp_root: Path):
+    json_storage.save_adapter_run(
+        "leaguepedia",
+        {
+            "status": "success",
+            "last_attempted_at": "2026-05-24T00:00:00Z",
+            "rows_ingested": 42,
+            "gaps": [],
+        },
+    )
+    payload = json_storage.read_adapter_runs()
+    assert payload["runs"]["leaguepedia"]["rows_ingested"] == 42
+    assert payload["runs"]["leaguepedia"]["source_id"] == "leaguepedia"
+
+
 def test_list_json_rows_reads_directory(esports_tmp_root: Path):
     json_storage.save_silver_entity("matches", "m1", {"match_id": "m1"})
     assert json_storage.list_json_rows(esports_tmp_root / "silver" / "matches") == [{"match_id": "m1"}]

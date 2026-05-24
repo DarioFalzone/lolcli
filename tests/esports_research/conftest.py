@@ -23,6 +23,7 @@ def load_text_fixture(name: str) -> str:
 def esports_tmp_root(tmp_path: Path, monkeypatch) -> Path:
     monkeypatch.setattr(json_storage, "ROOT", tmp_path)
     monkeypatch.setattr(json_storage, "SOURCES_FILE", tmp_path / "sources.json")
+    monkeypatch.setattr(json_storage, "ADAPTER_RUNS_FILE", tmp_path / "adapter_runs.json")
     monkeypatch.setattr(json_storage, "BRONZE_DIR", tmp_path / "bronze")
     monkeypatch.setattr(json_storage, "SILVER_DIR", tmp_path / "silver")
     monkeypatch.setattr(json_storage, "GOLD_DIR", tmp_path / "gold")
