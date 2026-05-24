@@ -25,6 +25,28 @@ def test_parse_draft_html_extracts_champions():
     assert [action["champion_id"] for action in actions] == ["Varus", "Ezreal"]
 
 
+def test_parse_draft_html_extracts_real_game_bans_and_picks():
+    actions = parse_draft_html(load_text_fixture("gol_gg_game_draft_sample.html"))
+
+    assert len(actions) == 20
+    assert actions[0] == {
+        "action_order": 1,
+        "champion_id": "Orianna",
+        "action_type": "BAN",
+        "team_side": "BLUE",
+        "phase": "BAN_PHASE_1",
+    }
+    assert actions[4]["phase"] == "BAN_PHASE_2"
+    assert actions[5]["team_side"] == "BLUE"
+    assert actions[5]["action_type"] == "PICK"
+    assert actions[6]["champion_id"] == "JarvanIV"
+    assert actions[10]["team_side"] == "RED"
+    assert actions[10]["action_type"] == "BAN"
+    assert actions[15]["champion_id"] == "Bard"
+    assert actions[15]["action_type"] == "PICK"
+    assert actions[15]["team_side"] == "RED"
+
+
 def test_fetch_tournament_respects_robots_gap(monkeypatch):
     adapter = GolGGAdapter()
     monkeypatch.setattr(adapter, "robots_allowed", lambda url: False)
