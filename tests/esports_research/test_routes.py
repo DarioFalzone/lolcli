@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from riot_lol_cli.esports_research import json_storage
+from riot_lol_cli.meta_api.routes import esports as esports_routes
 
 
 def seed_storage() -> None:
@@ -244,3 +245,24 @@ def test_ingest_unknown_source(esports_client):
 def test_ingest_known_source_is_dry_run(esports_client):
     body = esports_client.post("/api/v1/esports/ingest?source=leaguepedia&tournament=Worlds_2025").json()
     assert body["data"]["status"] == "dry_run"
+
+
+def test_ingest_real_leaguepedia_success(esports_client, monkeypatch):
+    def fake_ingest(tournament):
+        return {"success": True, "source": "leaguepedia", "raw_uri": f"bronze/{tournament}.json"}
+
+    monkeypatch.setattr(esports_routes.ingest_leaguepedia, "ingest_tournament", fake_ingest)
+
+    body = esports_client.post(
+        "/api/v1/esports/ingest?source=leaguepedia&tournament=Worlds_2025&dry_run=false"
+    ).json()
+
+    assert body["data"]["status"] == "success"
+    assert body["data"]["raw_uri"] == "bronze/Worlds_2025.json"
+    assert body["gaps"] == []
+
+
+def test_ingest_real_returns_gap_for_unwired_source(esports_client):
+    body = esports_client.post("/api/v1/esports/ingest?source=oracles_elixir&dry_run=false").json()
+    assert body["data"]["status"] == "gap"
+    assert body["gaps"] == ["api ingest not implemented for source: oracles_elixir"]

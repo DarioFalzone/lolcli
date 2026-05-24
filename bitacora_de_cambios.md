@@ -6,6 +6,19 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-05-24] Esports Research E.1 - ingest real con dry_run=false
+
+Se habilito `POST /api/v1/esports/ingest?dry_run=false` para ejecutar ingesta real opt-in desde la API sin cambiar el default seguro.
+
+- `dry_run=true` sigue siendo el default y conserva la respuesta `status="dry_run"`.
+- `dry_run=false` despacha a los ingests V0 disponibles para `leaguepedia`, `gol_gg` y `data_dragon`.
+- Fuentes sin contrato suficiente en este endpoint devuelven `status="gap"` con razon visible.
+- Errores de ingesta se degradan a `status="gap"` para smoke/UX, sin automatizar bypasses ni cambiar compliance.
+
+Tests nuevos cubren exito mockeado de `leaguepedia` y gap para fuente activa no cableada por el endpoint.
+
+---
+
 ## [2026-05-24] Esports Research V0 - subsistema pro-stage
 
 ### Que se hizo
