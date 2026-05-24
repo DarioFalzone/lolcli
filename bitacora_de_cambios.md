@@ -6,6 +6,7 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+<<<<<<< HEAD
 ## [2026-05-24] Esports Research E.1 - ingest real con dry_run=false
 
 Se habilito `POST /api/v1/esports/ingest?dry_run=false` para ejecutar ingesta real opt-in desde la API sin cambiar el default seguro.
@@ -46,6 +47,18 @@ Se agrego telemetria mutable por source para monitorear salud de ingestas sin le
 - Si la fuente no existe, devuelve `data=null` y gap `unknown source`.
 
 Tests cubren round-trip de storage, fuente sin corridas, fuente desconocida y corrida exitosa con rows ingestados.
+
+---
+
+## [2026-05-24] Esports Research C.5 - test endpoint ingest dry-run
+
+Se reforzo el test del endpoint `POST /api/v1/esports/ingest` para validar explicitamente el contrato V0:
+
+- status code HTTP 200;
+- `data.status == "dry_run"`;
+- gap visible `external ingest disabled by default in V0 API surface`.
+
+El PR es test-only y no cambia comportamiento runtime.
 
 ---
 

@@ -275,8 +275,11 @@ def test_ingest_unknown_source(esports_client):
 
 
 def test_ingest_known_source_is_dry_run(esports_client):
-    body = esports_client.post("/api/v1/esports/ingest?source=leaguepedia&tournament=Worlds_2025").json()
+    response = esports_client.post("/api/v1/esports/ingest?source=leaguepedia&tournament=Worlds_2025")
+    assert response.status_code == 200
+    body = response.json()
     assert body["data"]["status"] == "dry_run"
+    assert body["gaps"] == ["external ingest disabled by default in V0 API surface"]
 
 
 def test_ingest_real_leaguepedia_success(esports_client, monkeypatch):
