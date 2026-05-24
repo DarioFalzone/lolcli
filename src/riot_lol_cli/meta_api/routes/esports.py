@@ -11,6 +11,7 @@ from typing import Any
 from fastapi import APIRouter
 
 from riot_lol_cli.esports_research import json_storage
+from riot_lol_cli.esports_research.pipelines import ingest_gol_gg, ingest_leaguepedia, sync_data_dragon
 from riot_lol_cli.esports_research.pipelines.orchestrator import run_full_pipeline
 from riot_lol_cli.esports_research.reports import coverage as coverage_report
 from riot_lol_cli.esports_research.schemas import utcnow_iso
@@ -204,20 +205,41 @@ async def refresh(mode: str = "all", tournament: str | None = None) -> dict[str,
 
 
 @router.post("/ingest")
-async def ingest(source: str, tournament: str | None = None) -> dict[str, Any]:
+async def ingest(source: str, tournament: str | None = None, dry_run: bool = True) -> dict[str, Any]:
     registry = SourceRegistry.load()
     source_entry = registry.get(source)
     if source_entry is None:
         return _ok(source=source, data=None, gaps=[f"unknown source: {source}"])
-    # NOTE V0: API-triggered external network ingest is reported as a dry run by
-    # default to avoid accidental scraping from health/smoke flows. Operators can
-    # run source-specific pipeline functions when they intentionally fetch data.
+    if not dry_run:
+        result = _run_ingest(source, tournament)
+        return _ok(source=source, tournament=tournament, data=result, gaps=result.get("gaps", []))
     return _ok(
         source=source,
         tournament=tournament,
-        data={"status": "dry_run", "source_status": source_entry.status.value},
+        data={"status": "dry_run", "source_status": source_entry.status.value, "dry_run": True},
         gaps=["external ingest disabled by default in V0 API surface"],
     )
+
+
+def _run_ingest(source: str, tournament: str | None) -> dict[str, Any]:
+    try:
+        if source == "leaguepedia":
+            if not tournament:
+                return {"status": "gap", "gaps": ["tournament is required for leaguepedia ingest"]}
+            result = ingest_leaguepedia.ingest_tournament(tournament)
+            return {"status": "success", **result}
+        if source == "gol_gg":
+            if not tournament:
+                return {"status": "gap", "gaps": ["tournament is required for gol_gg ingest"]}
+            result = ingest_gol_gg.ingest_tournament(tournament)
+            status = "gap" if result.get("gaps") else "success"
+            return {"status": status, **result}
+        if source == "data_dragon":
+            result = sync_data_dragon.sync_patch(patch=tournament or "latest")
+            return {"status": "success", **result}
+        return {"status": "gap", "gaps": [f"api ingest not implemented for source: {source}"]}
+    except Exception as exc:  # noqa: BLE001
+        return {"status": "gap", "gaps": [f"ingest failed for {source}: {exc}"]}
 
 
 def _read_counterpicks(patch: str | None) -> list[dict[str, Any]]:
