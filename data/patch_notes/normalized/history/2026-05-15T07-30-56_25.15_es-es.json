@@ -1,0 +1,241 @@
+{
+  "publisher": "riot",
+  "game": "lol",
+  "channel": "site",
+  "source_locale": "es-es",
+  "patch_version": "25.15",
+  "title": "Notas de la versión 25.15",
+  "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/patch-25-15-notes",
+  "published_at": "2025-07-29T00:00:00Z",
+  "fetched_at": "2026-05-15T07:30:56.326583Z",
+  "content_hash": "82786f3bf30e94f62a19b2fd37605691441d7b6dd3c360b2caf6c65be083b095",
+  "summary": "Ahri manantial del florecer espiritual nocturno, Aphelios manantial del florecer espiritual de prestigio, Sett manantial del florecer espiritual, Teemo manantial del florecer espiritual, Ahri manantial del florecer espiritual, Volibear manantial del florecer espiritual y Sona man…",
+  "sections": [
+    {
+      "title": "Los platos fuertes de la versión",
+      "heading_level": 2,
+      "blocks": [
+        "Ahri manantial del florecer espiritual nocturno, Aphelios manantial del florecer espiritual de prestigio, Sett manantial del florecer espiritual, Teemo manantial del florecer espiritual, Ahri manantial del florecer espiritual, Volibear manantial del florecer espiritual y Sona manantial del florecer espiritual estarán disponibles el 30 de julio de 2025. Vista previa de habilidades en la selección de campeón"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Vista previa de habilidades en la selección de campeón",
+      "heading_level": 2,
+      "blocks": [
+        "La vista previa de habilidades estará disponible en la selección de campeón en todos los modos de reclutamiento y ARAM a partir de esta versión. La idea es ofrecer a los jugadores un método cómodo que les permita refrescar su conocimiento, en constante aumento, del plantel de los campeones sin tener que abandonar el cliente. Independientemente de si estáis aprendiendo a usar un campeón nuevo, pillándole el truco a un kit que no os resulta familiar o estudiando la composición enemiga, ahora bastará con pasar el ratón sobre el retrato de un campeón durante unos segundos para obtener una vista previa de su estilo de juego. Una vez fijéis, podéis usar el tiempo restante para revisar las habilidades de vuestro campeón y prepararos para la partida. Los jugadores más veteranos que prefieran tener menos distracciones en la pantalla de selección de campeón, pueden desactivar esta opción desde los ajustes. Batalla de Koeshin/Patio de Koeshin"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Batalla de Koeshin/Patio de Koeshin",
+      "heading_level": 2,
+      "blocks": [
+        "Ahora podéis acceder al Patio independientemente del tiempo que hayáis invertido en el metajuego de la Batalla de Koeshin. La opción debería estar disponible en el menú del metajuego de la Batalla de Koeshin. Nos habéis comentado que preferís disfrutar de la experiencia del Patio sin tener que completar todos los niveles de Batalla de Koeshin, así que hemos modificado los requisitos. Algunos preferís repartir amor en vez de tortas, y eso está bien. Errores conocidos Los modelos de los personajes a veces desaparecen (Hemos corregido varios casos afectados por este problema, pero aún puede ocurrir en situaciones concretas). Sistemas"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Sistemas",
+      "heading_level": 2,
+      "blocks": [
+        "Barón Nashor El Barón Nashor tiene regeneración de vida pasiva, lo que significa que su vida puede superar el valor del daño de Aplastar, Voracidad o Festín, entre otros, arrebatándoos ese asesinato tan bien calculado. Así que mejor nos lo ahorramos. Como compensación, recibe 100 de vida básica, por lo que deberíais tardar lo mismo en acabar con él. Estadísticas básicas Regeneración de vida por cada 5 : 75 ⇒ 0 . Vida básica : 11400 ⇒ 11500 . Regeneración fuera de combate : Sin cambios. Campeones"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Campeones",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce la armadura básica. Alistar lleva siendo uno de los tanques de apoyo más fuertes durante un tiempo, tanto a nivel profesional como en los niveles más comunes. Para crear un ecosistema de apoyos más equitativo, vamos a debilitarlo. Aunque 7 de armadura parezca un cambio drástico, las debilitaciones a Braum y Leona más recientes han demostrado que estos campeones no se resienten apenas con este tipo de cambios. Por supuesto, seguiremos de cerca esta modificación para asegurarnos de que cumple el cometido que esperamos. Estadísticas básicas Armadura básica : 47 ⇒ 40 ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta la velocidad de ataque de la pasiva en los niveles 2-18. Se reduce el daño de la Q a campeones. Bel'Veth fue una de las grandes ganadoras de la versión anterior gracias a los cambios a Verdugo de krakens y Hoja del rey arruinado. Aunque creemos que las debilitaciones al principio de partida están más que justificadas, también nos gustaría ayudarla para que su daño pueda incrementarse de cara al final de la partida. Para ello, vamos a aumentar el valor de las acumulaciones de su pasiva. Pasiva - Muerte en lavanda Velocidad de ataque por acumulación : 0,28-1 % (niveles 1-17) ⇒ 0,28 - 1,1 % (niveles 1-18) . Q - Oleada del Vacío Daño a campeones : 10/15/20/25/30 (+100 % del DA total) ⇒ 0/5/10/15/20 (+100 % del DA total). Daño total a monstruos : 55/70/85/100/115 (+100 % del DA total) (sin cambios) ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reducen la armadura básica y el crecimiento de armadura. La debilitación a la armadura de Braum de la última versión tuvo bastante menos impacto del que esperábamos, porque sigue como si nada, siendo el mejor tanque de la cola en solitario. Vamos a ajustarlo de nuevo con el objetivo de que su poder sea más adecuado a alguien de su calibre (que no es poco). Estadísticas básicas Armadura básica : 42 ⇒ 35 . Crecimiento de armadura : 5,2 ⇒ 5 ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Fórmula del daño de la E ajustada. Aumenta el daño de la R. Vamos a llevar a cabo una serie de ajustes a Corki para empujarlo a configuraciones que le otorguen mucho DA (pero le hagan más enclenque). Además, vamos a reducir su potente explosión de poder del final de la fase de calles, pero sin que ello afecte a su sólida presencia en la misma. Q - Bomba de fósforo: Daño : 70/120/170/220/270 (+120 % del DA adicional) (+100 % del PH) ⇒ 70/115/160/205/250 (+130 % del DA adicional) (+100 % del PH). R - Andanada de proyectiles Daño : 90/170/250 (+80 % del DA adicional) ⇒ 90/170/250 (+85% del DA adicional) ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el daño de la pasiva. E ajustada. Queremos realizar una serie de ajustes a Illaoi con el objetivo de reducir las situaciones que más frustración producen a sus rivales. Ahora ya no tendréis que esquivar unos tentáculos que han aparecido de la nada durante 10 s. En su lugar, vamos a otorgarle más poder, que también se lo merece. Para ello, su E tendrá una mayor capacidad de respuesta, así como mayor daño a nivel general. Además, ahora asestará dos golpetazos con la primera fase de Prueba de espíritu, antes de subir al nivel 7. En esta versión, nos gustaría aumentar ligeramente su poder general y, como siempre, seguiremos de cerca cómo encajan estos cambios para asegurarnos de alcanzar nuestro objetivo. Pasiva - Profeta de un dios antiguo Daño : 9-162 (según el nivel) (+100 % del DA) (+40 % del PH) ⇒ 9-162 (según el nivel) (+105 % del DA) (+40 % del PH). El daño indicado en la descripción ahora se actualizará en función del nivel de la Q. Q - Aplastamiento con tentáculo La descripción ahora indica todo el daño de la habilidad, que se actualiza en función del nivel de la Q. E - Prueba de espíritu Temporizador de ataque de los tentáculos : 5/4/3 s (nivel 1/7/13) ⇒ 4/3,5/3 s (nivel 1/7/13). Duración del receptáculo : 10 ⇒ 3 . Los tentáculos que genera el receptáculo ahora lo atacan en torno a 1 s antes."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce la regeneración de vida. Para sorpresa de nadie, el nivel de poder de Irelia ha aumentado muchísimo debido a las últimas mejoras y los cambios a Hoja del rey arruinado de la última versión. Volvemos a poner el foco en su regeneración de vida, dado que esta estadística normalmente brilla más en la calle central, donde puede permitirse perder algo más de poder. Estadísticas básicas Regeneración de vida : 6 ⇒ 3,5 ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumentan las resistencias de la pasiva cuando está desmontado. Las configuraciones de Kled, así como el campeón en general, están funcionando estupendamente tras los cambios de la versión 25.14, pero creemos que aún está un poco debilucho. Vamos a otorgarle mayor durabilidad tras desmontar, sobre todo al principio de la partida y al final de la misma durante los combates de equipo. De esta forma, nos aseguraremos de que pueda volver a subirse a su montura en una cantidad de tiempo más que decente. Pasiva - Skaarl, el Lagarto Cobarde Resistencias desmontado : 1-2 % de vida adicional (según la cantidad de campeones enemigos cercanos) ⇒ 4 (+1 % de vida adicional) - 10 (+2,5 % de vida adicional) (según la cantidad de campeones enemigos cercanos)."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el daño de la Q para configuraciones de poco DA. Al igual que Bel'Veth, Maestro Yi ha sido uno de los grandes beneficiados por las mejoras a Hoja del rey arruinado y Verdugo de krakens, así que vamos a bajarle un poco esos aires de grandeza. Toca reducir el daño explosivo de Golpe fulgurante en las configuraciones de poco DA para que sus configuraciones de impacto crítico y mayor DA estén al mismo nivel que las de velocidad de ataque. Q - Golpe fulgurante Daño : 30/60/90/120/150 (+50 % del DA total) ⇒ 20/40/60/80/100 (+70 % del DA total) . Daño a monstruos : 95/150/205/260/315 (+50 % del DA total) ⇒ 80/125/170/215/260 (+70 % del DA total) ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el DA básico y se reduce el crecimiento de la velocidad de ataque. Nilah es la campeona con mayor porcentaje de victorias de la calle inferior de League of Legends, y aunque siempre tiene que haber alguien que reine por encima de los demás, creemos que lo hace con demasiada diferencia. Por ello, optamos por implementar una debilitación menor general y concederle más libertad al principio de la partida. Estadísticas básicas DA básico : 58 ⇒ 60 . Crecimiento de velocidad de ataque : 3 % ⇒ 2,25 % ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el daño de la Q a monstruos. Desde hace varias versiones, el rol más apropiado para Pantheon es el de jungla. Queremos reducir ligeramente su viabilidad, ya que se ha vuelto demasiado dominante y le ha quitado lustre a su versión de la calle superior. Q - Lanza cometa Daño contra monstruos 105 % ⇒ 90 % ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el daño de la Q. Las configuraciones más efectivas de Quinn (con Puñal de Statikk y Suelas simbióticas) funcionan a las mil maravillas, y su habilidad definitiva resulta demasiado imponente. Vamos a reducir ligeramente su fuerza al final de la fase de calles, así como su capacidad de despeje de oleadas, obligándola a esperar un pelín más para acceder a todo ese poder. Eso sí, el daño de los autoataques no lo vamos a tocar. Q - Asalto cegador Daño : 20/40/60/80/100 (+80/90/100/110/120 % del DA total) ⇒ 65/100/135/170/205 (+80/90/100/110/120 % del DA adicional )."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reducen la armadura básica y el crecimiento de armadura. Se reduce el tiempo de bloqueo del lanzamiento por los aires de la W en los niveles superiores. La E inflige daño verdadero ajustado. R ajustada. Debido a su falta de daño verdadero, Rek'Sai se siente un poco depre, así que vamos a devolvérselo para que los jugadores puedan deleitarse con el texto de varios colores en pantalla. Como queremos que sea una luchadora más completa, su habilidad definitiva no siempre realizará una ejecución, podrá usar Mordisco furioso más veces y tendrá acceso a un mejor control de adversario a final de partida. También aprovechamos para implementar algunos cambios de calidad y así mejorar la usabilidad de su definitiva y reducir los casos en los que Mordisco furioso falla. Las debilitaciones de esta versión pretenden compensar las mejoras que va a recibir. Nuestro objetivo general es que Rek'Sai sea más poderosa que antes. Estadísticas básicas Armadura básica : 36 ⇒ 35 . Crecimiento de armadura : 4,95 ⇒ 4,5 . W - Salir a la superficie Tiempo de bloqueo del lanzamiento por los aires : 10 ⇒ 10/9/8/7/6 . E - Mordisco furioso Daño potenciado : 100 % del DA total (+8/9,5/11/12,5/14 % de la vida máxima del objetivo) ⇒ 100/135/170/205/240 (+80 % del DA adicional) . Daño no potenciado : 100 % del DA total ⇒ 80 /108/136/164/192 (+64 % del DA adicional) (80 % del daño potenciado) . Enfriamiento : 10 ⇒ 6 . R - Carrera del vacío Daño : 150/300/450 (+100 % del DA adicional) (+25/30/35 % de la vida que le falte) ⇒ 150/250/350 (+100 % del DA adicional) (+15/20/25 % de la vida máxima del objetivo) . Enfriamiento : 100/90/80 ⇒ 120/100/80 s . Enfriamiento por lanzamiento interrumpido al morir el objetivo : 10 ⇒ 5 . Ahora reinicia el enfriamiento de la W tras el lanzamiento."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el escudo de la W. Rell está a la altura de Alistar y Braum como una de las mejores tanques de apoyo del juego y, al igual que con ellos, vamos a realizar unas debilitaciones que permitan brillar a otros campeones de apoyo. Con este cambio, queremos que su durabilidad esté algo menos garantizada. W - Caída Escudo : 25/50/75/100/125 (+13 % de la vida máxima) ⇒ 20/40/60/80/100 (+13 % de la vida máxima). Cambios de equilibrio de ARAM"
+          ],
+          "subsections": []
+        }
+      ]
+    },
+    {
+      "title": "Cambios de equilibrio de ARAM",
+      "heading_level": 2,
+      "blocks": [
+        "Efecto de pantalla al morir"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Efecto de pantalla al morir",
+      "heading_level": 2,
+      "blocks": [
+        "Hemos recibido muchos comentarios sobre la pantalla al morir en ARAM, así que vamos a hacer algunos cambios en esta versión. Hemos reducido la intensidad del color y el efecto de distorsión, por lo que no resultará un cambio visual tan drástico cuando vayáis de cabeza al más allá. Sistemas"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Sistemas",
+      "heading_level": 2,
+      "blocks": [
+        "Hemos eliminado la mejora de velocidad de movimiento que se obtenía al acercarse a los portales de Florecer espiritual. La duración y la potencia del escudo de las plantas de la jungla aumenta un 50 %. Campeones"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Campeones",
+      "heading_level": 2,
+      "blocks": [
+        "Akali Daño infligido : -5 % ⇒ 0 % . Daño recibido : 10 % ⇒ 5 % . Relación de PH de la pasiva : 55 % ⇒ 65 % . Relación de PH de la Q : 60 % ⇒ 70 % . Relación de PH de la R1 : 30 % ⇒ 40 % . Relación de PH de la R2 : 30 % ⇒ 40 % . Briar Curación adicional : 5 % ⇒ 15 % . Reducción de daño de la E : 35 % ⇒ 55 % . Caitlyn Relación de DA total de la Q : 125/145/165/185/205 % ⇒ 125/140/155/170/185 % . Hecarim Enfriamiento de la E : 20/19/18/17/16 ⇒ 16/15/14/13/12 . Kassadin Daño de la E : 70/100/130/160/190 (+65 % del PH) ⇒ 80/115/150/185/220 (+75 % del PH) . Nunu Relación de PH de la curación con monstruos de la Q : 90 % ⇒ 110 % . Relación de PH de la curación con campeón de la Q : 54 % ⇒ 66 % . Relación de PH de la W: : 30-150 % ⇒ 67-200 % . Quinn Ahora la R funciona correctamente en el mapa de Florecer espiritual. Empezará directamente con la R una vez desbloqueada. Senna Daño infligido : -3 % ⇒ -8 % . Sett Conversión de coraje básico de la W : 25 % ⇒ 20 % . Talon Relación de DA adicional de la Q : 100 % ⇒ 115 % . Relación de DA adicional de la W : 40 %/90 % (inicial/vuelta) ⇒ 50 %/100 % (inicial/vuelta) . Enfriamiento de obstáculos del terreno de la E : 160/135/110/85/60 ⇒ 10/9/8/7/6 . Enfriamiento de la R : 100/80/60 ⇒ 80/70/60 . Teemo Velocidad de habilidades : -10 ⇒ -15 . Duración de la R : 5 min ⇒ 3 min . Ziggs Daño en área contra súbditos : 100 % ⇒ 80 % . Objetos"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Objetos",
+      "heading_level": 2,
+      "blocks": [
+        "Sable espectral Coste de oro : 3000 ⇒ 2800 . Ya no se puede usar para teletransportar enemigos a vuestra localización inicial. ARURF"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "ARURF",
+      "heading_level": 2,
+      "blocks": [
+        "¡Vuelve ARURF! ¡Se disputará en el mapa de Florecer espiritual con todos los cambios y el nuevo sistema de cartas de campeones en ARAM! Hemos ajustado el equilibrio de los campeones con respecto a los anteriores lanzamientos de URF y estaremos muy atentos a su impacto en el juego. Katarina Daño infligido : 105 % ⇒ 110 % . Nidalee Daño infligido : 105 % ⇒ 110 % . Senna Daño infligido : 100 % ⇒ 110 % . Skarner Daño infligido : 100 % ⇒ 110 % . Escudos :100 % ⇒ 110 % . Annie Daño recibido :105 % ⇒ 110 % . Escudos :100 % ⇒ 90 % . Sanctasanctórum y tienda mítica"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Sanctasanctórum y tienda mítica",
+      "heading_level": 2,
+      "blocks": [
+        "Nueva variante mítica en el sanctasanctórum La nueva variante mítica, Ahri manantial del florecer espiritual nocturno, estará disponible en el sanctasanctórum durante un periodo de tiempo. Para más información sobre el sanctasanctórum, consultad nuestro artículo de asistencia . Nuevo aspecto de prestigio en la tienda mítica Con la versión 25.15, llega Aphelios manantial del florecer espiritual a la tienda mítica por 150 esencias míticas. Permanecerá en la tienda hasta la versión 25.17, ¡así que haceos con él mientras podáis! Esto también supone que toca despedirse de Qiyana academia de combate de prestigio. ¡Corred, que aún tenéis un par de horas para haceros con ella! Para más información sobre la tienda mítica y las esencias míticas, echad un vistazo a nuestro artículo al respecto . Corrección de errores y mejoras de calidad"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Corrección de errores y mejoras de calidad",
+      "heading_level": 2,
+      "blocks": [
+        "Mejoras de calidad de vida Los tiempos de espera para la votación para rendirse o rehacer la partida se han reducido de 60 segundos a 25. Hemos actualizado el diseño del intercambio de rol para diferenciarlo mejor del cambio de orden y ver si así dejáis de confundirlos. Corrección de errores generales Hemos corregido un error que provocaba que el daño de la granada de Heimerdinger no cambiase el objetivo al que atacaban sus torretas en el extremo del alcance de las mismas. Hemos corregido un error que provocaba que Arco axiomático recuperara el doble de carga de la R de Yunara. Hemos corregido un error que provocaba que Kled acabase con los hechizos equivocados al usar el botón de deshacer estando sobre la montura. Hemos corregido un error que provocaba que Ambessa pudiese fracasar a la hora de conseguir acumulaciones de Conquistador con su R. Hemos corregido un error que provocaba que apareciese un texto de debug en la selección de campeón si existía una restricción de chat. Hemos corregido un error que provocaba que Yunara fallase al actualizar su acumulación de Lluvia de cuchillas cuando su Q o su R cancelaban un autoataque. Hemos corregido un error que provocaba que Llamasombría no activase la pasiva de daño crítico de Yunara. Hemos corregido un error que provocaba que el efecto visual de Ángel de la guarda persistiera tras vender el objeto. Hemos corregido un error que provocaba que, si Vayne usaba Destello mientras lanzaba la E, terminase orientada en otra dirección. Hemos corregido un error que provocaba que Fiddlesticks no redujese la duración con Leyenda: Velocidad antes de poder volver a asustar a un objetivo. Hemos corregido un error que provocaba que la E de Zoe colocara una trampa permanente en el minimapa. Hemos corregido un error que provocaba que Smolder sufriese un retardo en su autoataque tras usar la Q. Hemos corregido un error que provocaba que la W de Yunara tuviera una descripción numérica incorrecta en su descripción expandida en chino. Hemos corregido un error que provocaba que acertar a una planta de jungla con el efecto de Hoja encantada activo eliminase el efecto visual y el icono de mejora. Hemos corregido un error que provocaba varios problemas cuando Mel usaba su W para reflejar la R de Urgot y lanzaba su R al mismo tiempo. Hemos corregido un error que provocaba que, si Taric sobrevivía a la R de Mordekaiser mientras estaba vinculado a cualquier campeón al alcance de su W, ese aliado siguiera vinculado aunque saliera del alcance. Hemos corregido un error que provocaba que la Q1 y la Q2 de Yone asestara un impacto crítico a todos los objetivos si el primer golpe asestado era crítico. Ahora debería calcularse de forma correcta para cada impacto. Hemos corregido un error que impedía que el daño de la R de Viktor y la E de Smolder fuese bloqueado por escudos de hechizos, pero los consumía igualmente. Hemos corregido un error que provocaba que la R de Sion se pudiera detener con la R de Sett sin ninguna colisión. Hemos corregido un error que provocaba que un Olaf con su R no pudiera retroceder por la acción de una piña explosiva que él mismo había atacado. Hemos corregido un error que provocaba que la W de Mel fallase a la hora de reflejar la E de Zoe tras recibir un impacto de su autoataque o su pasiva. Hemos corregido un error que provocaba que la curación de la W de Seraphine por cada aliado cercano tuviera beneficios decrecientes. Hemos corregido un error que provocaba que los ataques de los soldados de Azir a un objetivo con Malla de espinas/Chaleco de zarzas no aplicaran el reflejo ni las heridas graves. Corrección de errores de aspectos Hemos corregido un error que provocaba que el efecto visual de Lillia apareciese sobre los muros. Hemos corregido un error que provocaba que la capa de LeBlanc no desapareciese al morir con ciertos aspectos. Hemos corregido un error que provocaba que el sonido de Seraphine se duplicara para su personaje y que los aliados no pudieran oírla. Hemos corregido un error que provocaba que la música de DJ Sona se viera anulada por la música de la Grieta del Invocador. Hemos corregido un error que provocaba que a la música de DJ Sona le faltaran ciertos ritmos y capas. Hemos corregido un error que provocaba que algunas de las animaciones de carrera más rápidas de Zed galante no se reprodujeran al tener una velocidad de movimiento superior o con A salvo. Próximos aspectos y chromas"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Próximos aspectos y chromas",
+      "heading_level": 2,
+      "blocks": [
+        "Lanzaremos los siguientes aspectos a lo largo de esta versión: Ahri manantial del florecer espiritual nocturno Aphelios manantial del florecer espiritual de prestigio Sona manantial del florecer espiritual Sett manantial del florecer espiritual Volibear manantial del florecer espiritual Ahri manantial del florecer espiritual Teemo manantial del florecer espiritual Lanzaremos los siguientes chromas a lo largo de esta versión: Sona manantial del florecer espiritual Sett manantial del florecer espiritual Volibear manantial del florecer espiritual Ahri manantial del florecer espiritual Teemo manantial del florecer espiritual Artículos relacionados"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Artículos relacionados",
+      "heading_level": 2,
+      "blocks": [
+        "Actualizaciones del juego 2025-08-12T18:00:00.000Z Notas de la versión 25.16 ¡Versión 25.16 lista para el despegue! Actualizaciones del juego 2025-05-13T18:00:00.000Z Notas de la versión 25.10 La versión 25.10 está escrita en las estrellas ✨ Actualizaciones del juego 2025-02-19T19:00:00.000Z Notas de la versión 25.04 ¡No os perdáis la última versión del acto 1! Actualizaciones del juego 2024-08-13T18:00:00.000Z Notas de la versión 14.16 ¡Celebrad la grandeza durante la versión 14.16! Actualizaciones del juego 2023-02-07T19:00:00.000Z Notas de la versión 13.3 Preparaos para una versión cósmica, ¡ya está aquí la 13.3! Actualizaciones del juego 2022-12-06T19:00:00.000Z Notas de la versión 12.23 ¡Ya está aquí la versión 12.23, la última del año! Actualizaciones del juego 2022-11-01T18:00:00.000Z Notas de la versión 12.21 ¡Ya está aquí la final del Campeonato Mundial de LoL! ¡Y K'Sante! ¡Y la pretemporada está a la vuelta de la esquina! Con tantas cosas a las que prestar atención, aquí tenemos la versión 12.21, porque lo bueno y breve... Actualizaciones del juego 2022-10-04T18:00:00.000Z Notas de la versión 12.19 ¿Mejoras a Blitzcrank luchador? ¿Mejoras a Rakan de PH? ¿Estamos soñando o ya es la versión 12.19? ¡Os damos la bienvenida a una versión llena de mejoras fuera del metajuego! Actualizaciones del juego 2022-09-07T18:00:00.000Z Notas de la versión 12.17 ¡La penúltima versión antes del mundial! Actualizaciones del juego 2022-06-07T18:00:00.000Z Notas de la versión 12.11 ¡Uníos a Bel'Veth y al mar lavanda en la versión 12.11!"
+      ],
+      "subsections": []
+    }
+  ],
+  "assets": [],
+  "scraper_version": "legacy-v33b",
+  "raw_html_ref": null
+}

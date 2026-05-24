@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "last_updated_at": "2026-05-12T03:09:42Z",
+  "runs": {
+    "metasrc_jungle": {
+      "adapter_id": "metasrc_jungle",
+      "status": "not_implemented",
+      "reason": "Adapter stub. Para activar: implementar parse_html() con BeautifulSoup sobre el HTML inicial (METAsrc trae datos en el SSR), validar selectores contra la pagina actual, y eliminar este short-circuit.",
+      "champion_count": 0,
+      "last_attempted_at": "2026-05-12T03:09:42Z",
+      "source_url": "https://www.metasrc.com/lol/na/tier-list/jungle"
+    },
+    "mobalytics_jungle_tierlist": {
+      "adapter_id": "mobalytics_jungle_tierlist",
+      "status": "not_implemented",
+      "reason": "Adapter stub. Para activar: usar Playwright (chromium) para renderizar la SPA, esperar selector de tabla de tiers, extraer rows con champion + tier + WR/PR/BR. Mobalytics tiene curacion propia de tier ademas de stats.",
+      "champion_count": 0,
+      "last_attempted_at": "2026-05-12T03:09:42Z",
+      "source_url": "https://mobalytics.gg/lol/tier-list/jungle"
+    },
+    "leagueofgraphs_jungle": {
+      "adapter_id": "leagueofgraphs_jungle",
+      "status": "not_implemented",
+      "reason": "Adapter stub. Para activar: parse del HTML inicial con BeautifulSoup, extraer rows de la tabla principal con champion + WR/PR. CUIDADO: LoG tiene rate limit estricto, mantener min_delay >= 8s y respetar 429.",
+      "champion_count": 0,
+      "last_attempted_at": "2026-05-12T03:09:42Z",
+      "source_url": "https://www.leagueofgraphs.com/champions/stats/jungle"
+    },
+    "tracker_gg_lol": {
+      "adapter_id": "tracker_gg_lol",
+      "status": "not_implemented",
+      "reason": "Adapter stub. Para activar: inspeccionar Network del SPA, identificar endpoints XHR/JSON internos y consumirlos directo (preferir sobre Playwright). Si no hay endpoints estables, fallback a Playwright.",
+      "champion_count": 0,
+      "last_attempted_at": "2026-05-12T03:09:42Z",
+      "source_url": "https://tracker.gg/lol/insights"
+    }
+  }
+}

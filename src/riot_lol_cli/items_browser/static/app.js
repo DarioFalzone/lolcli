@@ -92,7 +92,7 @@ function renderTabs() {
 
 function makeTab(group, label, count) {
   const btn = document.createElement("button");
-  btn.className = "group-tab";
+  btn.className = "tab group-tab";
   if (group === state.currentGroup) btn.classList.add("active");
   btn.innerHTML = `${label} <span class="badge">${count}</span>`;
   btn.addEventListener("click", () => {
@@ -133,7 +133,7 @@ function render() {
   $("[data-bind='counts']").textContent = `${items.length} items mostrados de ${state.items.length} totales`;
 
   if (items.length === 0) {
-    grid.innerHTML = `<div class="loader">Sin resultados para "${state.searchQuery || state.currentGroup}".</div>`;
+    grid.innerHTML = `<div class="state-block loader">Sin resultados para "${state.searchQuery || state.currentGroup}".</div>`;
     return;
   }
 
@@ -255,11 +255,11 @@ function openModal(item) {
     content.appendChild(sec);
   }
 
-  modal.removeAttribute("hidden");
+  modal.classList.add("active");
 }
 
 function closeModal() {
-  $("#item-modal").setAttribute("hidden", "");
+  $("#item-modal").classList.remove("active");
 }
 
 document.addEventListener("click", (e) => {

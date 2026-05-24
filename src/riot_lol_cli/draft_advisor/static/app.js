@@ -14,6 +14,7 @@ const state = {
   roleFilter: 'all',
   recommendation: null,
   targetRole: 'adc',
+  versionInfo: null,
 };
 
 function formatLastUpdate(value) {
@@ -52,6 +53,32 @@ function formatDateTime(value) {
 }
 
 // ── Inicialización ─────────────────────────────────────────
+function renderPatchBadge() {
+  const badge = document.getElementById('patch-badge');
+  const info = state.versionInfo;
+  if (!badge || !info) return;
+
+  const parts = [
+    `Parche ${info.live_patch_label}`,
+    `Data Dragon ${info.static_data_version}`,
+    `Actualizado ${formatLastUpdate(info.last_verified_at)}`,
+  ];
+
+  if (state.targetRole === 'jungle') {
+    const status = info.jungle_meta_status || 'unavailable';
+    const statusLabel = {
+      http: 'Jungle Meta online',
+      local_fallback: 'Jungle Meta fallback local',
+      unavailable: 'Jungle Meta sin datos',
+    }[status] || `Jungle Meta ${status}`;
+    parts.push(statusLabel);
+    parts.push(`Jungla ${info.jungle_meta_patch || 'sin patch'}`);
+    parts.push(`Update ${formatLastUpdate(info.jungle_meta_updated_at)}`);
+  }
+
+  badge.innerHTML = `<span class="patch-dot"></span> ${parts.join(' &nbsp;·&nbsp; ')}`;
+}
+
 async function init() {
   try {
     const [champsRes, telRes] = await Promise.all([
@@ -59,10 +86,8 @@ async function init() {
       fetch('/api/v1/draft/meta/version-info'),
     ]);
     state.champions = await champsRes.json();
-    const info = await telRes.json();
-    const badge = document.getElementById('patch-badge');
-    const lastUpdate = formatLastUpdate(info.last_verified_at);
-    badge.innerHTML = `<span class="patch-dot"></span> Parche ${info.live_patch_label} &nbsp;·&nbsp; Data Dragon ${info.static_data_version} &nbsp;·&nbsp; Actualizado ${lastUpdate}`;
+    state.versionInfo = await telRes.json();
+    renderPatchBadge();
     renderChampionGrid();
   } catch (e) {
     console.error('Error al iniciar:', e);
@@ -75,9 +100,11 @@ async function init() {
 function changeTargetRole(role) {
   state.targetRole = role;
   const lbl = document.getElementById('target-role-label');
-  if (lbl) lbl.textContent = role === 'support' ? 'SUPP' : 'ADC';
+  const labels = { adc: 'ADC', support: 'SUPP', jungle: 'JG' };
+  if (lbl) lbl.textContent = labels[role] || 'ADC';
   state.poolChampions = [];
   state.comfort = {};
+  renderPatchBadge();
 }
 
 // ── Limpiar tablero completo ───────────────────────────────
@@ -198,7 +225,7 @@ function renderChampionGrid() {
   let list = state.champions;
 
   if (state.roleFilter !== 'all') {
-    list = list.filter(c => c.primary_role === state.roleFilter);
+    list = list.filter(c => c.primary_role === state.roleFilter || (state.roleFilter === 'Jungle' && c.is_jungler));
   }
   if (search) {
     list = list.filter(c =>
@@ -256,7 +283,7 @@ function renderTeamSlots(team, slots, containerId, count) {
     if (champ) {
       const imgSrc  = `/assets/splash_arts/${champ.id}/${champ.id}_Classic.jpg`;
       const fallback = `data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22%3E%3Crect fill=%22%23060b14%22 width=%2280%22 height=%2280%22/%3E%3C/svg%3E`;
-      el.className  = `champion-slot slot--filled slot--${team}`;
+      el.className  = `slot champion-slot filled ${team}`;
       el.setAttribute('aria-label', `${champ.display_name}, slot ${team === 'ally' ? 'aliado' : 'enemigo'} ${i + 1}`);
       el.onclick    = () => openChampionPicker(team, i);
       el.innerHTML  = `
@@ -265,7 +292,7 @@ function renderTeamSlots(team, slots, containerId, count) {
         <button class="remove-btn" onclick="event.stopPropagation();removeChampion('${team}',${i})" aria-label="Quitar ${champ.display_name}">×</button>
       `;
     } else {
-      el.className  = 'champion-slot';
+      el.className  = 'slot champion-slot';
       el.setAttribute('aria-label', `Slot ${team === 'ally' ? 'aliado' : 'enemigo'} ${i + 1}, vacío`);
       el.onclick    = () => openChampionPicker(team, i);
       el.innerHTML  = '<span class="slot-plus">+</span>';
@@ -374,7 +401,7 @@ function renderDraftSummary(analysis) {
       <div class="summary-value">${formatShape(allied.teamfight_shape)}</div>
     </div>
     <div class="summary-card">
-      <div class="summary-label">Amenaza Enemiga al ADC</div>
+      <div class="summary-label">${state.targetRole === 'jungle' ? 'Amenaza Enemiga al Jungla' : 'Amenaza Enemiga al ADC'}</div>
       <div class="summary-value threat--${enemy.threat_level_to_adc}">${threatEs(enemy.threat_level_to_adc)}</div>
     </div>
     <div class="summary-card">
@@ -391,14 +418,7 @@ function renderTopPick(pick) {
   const imgSrc = `/assets/splash_arts/${pick.id}/${pick.id}_Classic.jpg`;
   const raw    = pick.score_breakdown.raw;
 
-  const factors = [
-    { label: 'Sinergia Aliada',       key: 'ally_synergy' },
-    { label: 'Matchup Enemigo',       key: 'enemy_matchup' },
-    { label: 'Seguridad a Ciegas',    key: 'blind_pick_safety' },
-    { label: 'Cubre Huecos de Comp.', key: 'comp_gap_fill' },
-    { label: 'Fiabilidad en SoloQ',   key: 'solo_queue_reliability' },
-    { label: 'Ajuste de Escalado',    key: 'scaling_fit' },
-  ];
+  const factors = getScoreFactors(pick);
 
   card.innerHTML = `
     <div class="top-pick-header">
@@ -408,7 +428,7 @@ function renderTopPick(pick) {
       <div>
         <div class="pick-badge">★ Recomendación Principal</div>
         <div class="pick-name">${pick.display_name}</div>
-        ${renderAdcContextChips(pick.adc_context)}
+        ${renderPickContextChips(pick)}
       </div>
       <div class="top-pick-score">
         <div class="score-number">${pick.total_score.toFixed(1)}</div>
@@ -426,6 +446,8 @@ function renderTopPick(pick) {
         </div>`;
       }).join('')}
     </div>
+
+    ${renderJungleBuildBlock(pick.jungle_context)}
 
     <div class="explain-grid">
       <div class="explain-block">
@@ -475,7 +497,7 @@ function renderAlternatives(alts) {
           </div>
           <div style="flex:1;min-width:0;">
             <div class="alt-name">${alt.display_name}</div>
-            ${renderAdcContextChips(alt.adc_context, true)}
+            ${renderPickContextChips(alt, true)}
             <div class="alt-reason">${alt.one_line_reason}</div>
           </div>
           <div class="alt-score-num">${alt.total_score.toFixed(1)}</div>
@@ -491,6 +513,80 @@ function renderAlternatives(alts) {
 }
 
 // ── Helpers ────────────────────────────────────────────────
+function getScoreFactors(pick) {
+  if (pick.jungle_context) {
+    return [
+      { label: 'Meta Jungla',     key: 'ally_synergy' },
+      { label: 'Fit de Draft',    key: 'enemy_matchup' },
+      { label: 'Seguridad Blind', key: 'blind_pick_safety' },
+      { label: 'Cubre Huecos',    key: 'comp_gap_fill' },
+      { label: 'Tempo',           key: 'solo_queue_reliability' },
+      { label: 'Comfort',         key: 'scaling_fit' },
+    ];
+  }
+  return [
+    { label: 'Sinergia Aliada',       key: 'ally_synergy' },
+    { label: 'Matchup Enemigo',       key: 'enemy_matchup' },
+    { label: 'Seguridad a Ciegas',    key: 'blind_pick_safety' },
+    { label: 'Cubre Huecos de Comp.', key: 'comp_gap_fill' },
+    { label: 'Fiabilidad en SoloQ',   key: 'solo_queue_reliability' },
+    { label: 'Ajuste de Escalado',    key: 'scaling_fit' },
+  ];
+}
+
+function renderPickContextChips(pick, compact = false) {
+  if (pick?.jungle_context) return renderJungleContextChips(pick.jungle_context, compact);
+  return renderAdcContextChips(pick?.adc_context, compact);
+}
+
+function formatPercent(value) {
+  if (typeof value !== 'number') return null;
+  return `${value.toFixed(1)}%`;
+}
+
+function renderJungleContextChips(ctx, compact = false) {
+  if (!ctx) return '';
+  const chips = [];
+  if (ctx.tier) chips.push({ label: `Tier ${ctx.tier}`, mod: 'meta' });
+  const wr = formatPercent(ctx.winrate);
+  const pr = formatPercent(ctx.pickrate);
+  if (wr) chips.push({ label: `WR ${wr}`, mod: 'score' });
+  if (pr) chips.push({ label: `PR ${pr}`, mod: 'score' });
+  if (ctx.patch) chips.push({ label: `Patch ${ctx.patch}`, mod: 'date' });
+  if (ctx.source_status === 'local_fallback') chips.push({ label: 'Fallback local', mod: 'fallback' });
+  else if (ctx.source_status) chips.push({ label: 'Jungle Meta', mod: 'meta' });
+  if (ctx.eligibility && ctx.eligibility.startsWith('fallback')) {
+    chips.push({ label: 'Alternativa', mod: 'fallback' });
+  }
+  return `<div class="adc-context-chips ${compact ? 'adc-context-chips--compact' : ''}">
+    ${chips.map(chip => `<span class="adc-chip adc-chip--${chip.mod}" title="${ctx.eligibility_reason || ctx.reason_text || ''}">${chip.label}</span>`).join('')}
+  </div>`;
+}
+
+function renderJungleBuildBlock(ctx) {
+  if (!ctx) return '';
+  const builds = Array.isArray(ctx.core_builds) ? ctx.core_builds : [];
+  const rune = ctx.core_rune?.name;
+  if (!builds.length && !rune && !ctx.reason_text) return '';
+  return `<div class="jungle-build-block">
+    <div class="jungle-build-head">
+      <span>Plan de Jungla</span>
+      ${rune ? `<span class="jungle-rune">Runa: ${rune}</span>` : ''}
+    </div>
+    ${ctx.reason_text ? `<p class="jungle-reason">${ctx.reason_text}</p>` : ''}
+    ${builds.map(build => `
+      <div class="jungle-build">
+        <div class="jungle-build-label">${build.label || 'Build core'}</div>
+        <div class="jungle-build-items">
+          ${(build.items || []).map(itemId => `
+            <img class="jungle-item" src="/items/${itemId}.png" alt="Item ${itemId}" title="Item ${itemId}" loading="lazy">
+          `).join('')}
+        </div>
+      </div>
+    `).join('')}
+  </div>`;
+}
+
 function renderAdcContextChips(ctx, compact = false) {
   if (!ctx) return '';
   const chips = [];

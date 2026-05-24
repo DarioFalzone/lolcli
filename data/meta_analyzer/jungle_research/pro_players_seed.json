@@ -1,0 +1,202 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-05-11T20:00:00Z",
+  "notes": "Seed manual de pros jungla del prompt. URLs publicas conocidas; cuentas Riot ID se resuelven en pipeline_pro_accounts cuando el usuario las provea. V1: cero scraping de TrackingThePros/DPM.",
+  "_format_help": {
+    "riot_id": "Formato 'GameName#TAG' (ej: 'Hide on bush#KR1') o {game_name, tagline}. Si es null, queda como needs_account_resolution.",
+    "server": "KR | EUW | EUNE | NA | BR | LAN | LAS | JP | TR | RU | OCE | VN | TW | CN. Mapeo platform/regional vive en src/riot_lol_cli/jungle_research/riot_bridge.py SERVER_ROUTING.",
+    "como_resolver": "Opcion A: editar este archivo a mano. Opcion B: POST /api/v1/jungle-research/pros/{name}/account con {riot_id, server}. Opcion C: form en la sub-vista Pros del cockpit /dashboard-enhanced#jungle-research/jr-pros.",
+    "fuentes_de_riot_ids": "Liquipedia (oficial), team rosters anunciados, transmisiones del propio jugador. NO inventar. Si hay duda, dejar null."
+  },
+  "players": [
+    {
+      "player_name": "Canyon",
+      "real_name": "Kim Geon-bu",
+      "country": "KR",
+      "role": "jungle",
+      "current_team": null,
+      "historical_teams": ["DAMWON KIA", "Gen.G"],
+      "priority_tier": "S",
+      "urls": {
+        "trackingthepros": "https://www.trackingthepros.com/player/Canyon",
+        "dpm": "https://dpm.lol/pro/Canyon",
+        "gol": "https://gol.gg/players/player-stats/1909/season-ALL/split-ALL/tournament-ALL/champion-ALL/"
+      },
+      "notes": "Tier S del prompt original.",
+      "created_at": "2026-05-11T20:00:00Z",
+      "updated_at": "2026-05-11T20:00:00Z"
+    },
+    {
+      "player_name": "Oner",
+      "real_name": "Mun Hyeon-jun",
+      "country": "KR",
+      "role": "jungle",
+      "current_team": "T1",
+      "historical_teams": ["T1"],
+      "priority_tier": "S",
+      "urls": {
+        "trackingthepros": "https://www.trackingthepros.com/player/Oner",
+        "new_trackingthepros": "https://new.trackingthepros.com/player/Oner",
+        "dpm": "https://dpm.lol/pro/Oner",
+        "gol": "https://gol.gg/players/player-stats/3741/season-ALL/split-ALL/tournament-ALL/champion-ALL/"
+      },
+      "notes": "Tier S del prompt original.",
+      "created_at": "2026-05-11T20:00:00Z",
+      "updated_at": "2026-05-11T20:00:00Z"
+    },
+    {
+      "player_name": "Peanut",
+      "real_name": "Han Wang-ho",
+      "country": "KR",
+      "role": "jungle",
+      "current_team": null,
+      "historical_teams": ["Gen.G", "Hanwha Life Esports", "Nongshim RedForce"],
+      "priority_tier": "A",
+      "urls": {
+        "trackingthepros": "https://www.trackingthepros.com/player/Peanut",
+        "dpm": "https://dpm.lol/pro/Peanut",
+        "gol": null
+      },
+      "notes": "Tier A del prompt original.",
+      "created_at": "2026-05-11T20:00:00Z",
+      "updated_at": "2026-05-11T20:00:00Z"
+    },
+    {
+      "player_name": "Kanavi",
+      "real_name": "Seo Jin-hyeok",
+      "country": "KR",
+      "role": "jungle",
+      "current_team": "JD Gaming",
+      "historical_teams": ["JDG", "Griffin"],
+      "priority_tier": "A",
+      "urls": {
+        "trackingthepros": "https://www.trackingthepros.com/player/Kanavi",
+        "dpm": "https://dpm.lol/pro/Kanavi",
+        "gol": "https://gol.gg/players/player-stats/2360/season-ALL/split-ALL/tournament-ALL/champion-ALL/",
+        "gol_matchlist": "https://gol.gg/players/player-matchlist/2360/season-ALL/split-ALL/tournament-ALL/"
+      },
+      "notes": "Tier A del prompt original. Activo en LPL.",
+      "created_at": "2026-05-11T20:00:00Z",
+      "updated_at": "2026-05-11T20:00:00Z"
+    },
+    {
+      "player_name": "Jankos",
+      "real_name": "Marcin Jankowski",
+      "country": "PL",
+      "role": "jungle",
+      "current_team": null,
+      "historical_teams": ["G2 Esports", "Team Heretics"],
+      "priority_tier": "B",
+      "urls": {
+        "trackingthepros": "https://www.trackingthepros.com/player/Jankos",
+        "dpm": null,
+        "gol": null
+      },
+      "notes": "Tier B del prompt original.",
+      "created_at": "2026-05-11T20:00:00Z",
+      "updated_at": "2026-05-11T20:00:00Z"
+    },
+    {
+      "player_name": "XUN",
+      "real_name": "Peng Li-Xun",
+      "country": "CN",
+      "role": "jungle",
+      "current_team": "Bilibili Gaming",
+      "historical_teams": ["BLG"],
+      "priority_tier": "B",
+      "urls": {
+        "trackingthepros": "https://www.trackingthepros.com/player/XUN",
+        "dpm": null,
+        "gol": "https://gol.gg/players/player-stats/3330/season-ALL/split-ALL/tournament-ALL/champion-ALL/"
+      },
+      "notes": "Tier B del prompt original. Jungla LPL.",
+      "created_at": "2026-05-11T20:00:00Z",
+      "updated_at": "2026-05-11T20:00:00Z"
+    },
+    {
+      "player_name": "Tian",
+      "real_name": "Gao Tian-Liang",
+      "country": "CN",
+      "role": "jungle",
+      "current_team": null,
+      "historical_teams": ["FunPlus Phoenix"],
+      "priority_tier": "B",
+      "urls": {
+        "trackingthepros": "https://www.trackingthepros.com/player/Tian",
+        "dpm": null,
+        "gol": "https://gol.gg/players/player-stats/1269/season-ALL/split-ALL/tournament-ALL/champion-ALL/"
+      },
+      "notes": "Tier B del prompt original. Worlds 2019 winner.",
+      "created_at": "2026-05-11T20:00:00Z",
+      "updated_at": "2026-05-11T20:00:00Z"
+    },
+    {
+      "player_name": "Blaber",
+      "real_name": "Robert Huang",
+      "country": "US",
+      "role": "jungle",
+      "current_team": "Cloud9",
+      "historical_teams": ["Cloud9"],
+      "priority_tier": "B",
+      "urls": {
+        "trackingthepros": "https://www.trackingthepros.com/player/Blaber",
+        "dpm": "https://dpm.lol/pro/Blaber",
+        "gol": null
+      },
+      "notes": "Tier B del prompt original. Jungla LCS.",
+      "created_at": "2026-05-11T20:00:00Z",
+      "updated_at": "2026-05-11T20:00:00Z"
+    },
+    {
+      "player_name": "Wei",
+      "real_name": "Yan Yang-Wei",
+      "country": "CN",
+      "role": "jungle",
+      "current_team": null,
+      "historical_teams": ["Invictus Gaming", "Ninjas in Pyjamas"],
+      "priority_tier": "B",
+      "urls": {
+        "trackingthepros": "https://www.trackingthepros.com/player/Wei",
+        "dpm": null,
+        "gol": null
+      },
+      "notes": "Tier B del prompt original.",
+      "created_at": "2026-05-11T20:00:00Z",
+      "updated_at": "2026-05-11T20:00:00Z"
+    },
+    {
+      "player_name": "Pyosik",
+      "real_name": "Hong Chang-hyeon",
+      "country": "KR",
+      "role": "jungle",
+      "current_team": null,
+      "historical_teams": ["DRX", "Dplus KIA"],
+      "priority_tier": "B",
+      "urls": {
+        "trackingthepros": "https://www.trackingthepros.com/player/Pyosik",
+        "dpm": null,
+        "gol": "https://gol.gg/players/player-stats/2664/season-ALL/split-ALL/tournament-ALL/champion-ALL/"
+      },
+      "notes": "Tier B del prompt original. Worlds 2022 winner.",
+      "created_at": "2026-05-11T20:00:00Z",
+      "updated_at": "2026-05-11T20:00:00Z"
+    },
+    {
+      "player_name": "Tarzan",
+      "real_name": "Lee Seung-yong",
+      "country": "KR",
+      "role": "jungle",
+      "current_team": null,
+      "historical_teams": ["Griffin", "LNG Esports"],
+      "priority_tier": "B",
+      "urls": {
+        "trackingthepros": "https://www.trackingthepros.com/player/Tarzan",
+        "dpm": "https://dpm.lol/pro/Tarzan",
+        "gol": "https://gol.gg/players/player-stats/1226/season-ALL/split-ALL/tournament-ALL/champion-ALL/"
+      },
+      "notes": "Tier B del prompt original.",
+      "created_at": "2026-05-11T20:00:00Z",
+      "updated_at": "2026-05-11T20:00:00Z"
+    }
+  ]
+}

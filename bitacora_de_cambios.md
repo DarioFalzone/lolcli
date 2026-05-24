@@ -1,8 +1,1063 @@
-# Bitácora de Cambios
+# Bitacora de Cambios
 
-Este documento registra los cambios significativos, refactorizaciones y evoluciones arquitectónicas del proyecto `riot_lol_cli`.
+Este documento registra los cambios significativos, refactorizaciones y evoluciones arquitectonicas del proyecto `riot_lol_cli`.
 
-**Los agentes de IA deben actualizar este archivo luego de cada iteración significativa para mantener un registro histórico de los cambios realizados.**
+**Los agentes de IA deben actualizar este archivo luego de cada iteracion significativa para mantener un registro historico de los cambios realizados.**
+
+---
+
+## [2026-05-24] Esports Research V0 - subsistema pro-stage
+
+### Que se hizo
+
+- Nuevo paquete `src/riot_lol_cli/esports_research/` con schemas Pydantic V2,
+  storage JSON atomico, source registry, analytics de counterpicks, comfort y
+  sinergias, reports y pipelines bronze/silver/gold.
+- Nuevos adapters en `src/riot_lol_cli/meta_scraper/adapters/esports/`:
+  Leaguepedia, Oracle's Elixir, Gol.gg y Data Dragon activos; Riot Tournament
+  V5, GRID, PandaScore, Abios, LoL Esports VODs y Game Client Local como stubs.
+- Nuevo router `src/riot_lol_cli/meta_api/routes/esports.py` bajo
+  `/api/v1/esports/*`, integrado al Meta API `:8000`, con regla de `200 + gaps`
+  si falta storage o fuente.
+- Nueva surface `/esports/` con 6 paginas vanilla usando Pattern Library v2:
+  overview, drafts, teams, players, counterpicks y tournaments.
+- Home Hub actualizado para abrir Esports Research como surface del Meta API.
+- Documentacion nueva en `docs/esports_research/` y mapas actualizados en
+  `AGENTS.md`, `docs/README.md`, `projects/README.md` y
+  `docs/meta_analyzer/README.md`.
+
+### Compliance
+
+- Sin endpoints de asistencia en vivo.
+- VODs solo metadata; no descarga ni rehosting.
+- Gol.gg respeta robots.txt y `min_delay >= 4s`; Leaguepedia usa
+  User-Agent identificable con email de contacto y `min_delay >= 2s`.
+- Stubs comerciales/oficiales quedan desactivados hasta contrato, token o
+  production key.
+
+### Verificacion
+
+- `pytest tests/esports_research -q` -> 126 passed.
+- Ruff parcial de archivos nuevos ejecutado durante implementacion y corregido.
+
+---
+
+## [2026-05-15] Patch Notes — Mobalytics Breakdown + hardening UTF-8
+
+### Que se hizo
+
+**1. Mobalytics Patch Notes Breakdown como nueva fuente de enrichment:**
+- Adapter nuevo: `src/riot_lol_cli/patch_notes/adapters/mobalytics_breakdown.py`
+  (Playwright, scrapea `mobalytics.gg/lol/guides/patch-notes-breakdown`)
+- Constante `SOURCE_MOBALYTICS_BREAKDOWN` agregada a `messages.py` y a
+  `_PER_PATCH_SOURCES` en `orchestrator.py` (corre como enrichment por patch).
+- Seed del breakdown 26.10 desde markdown ingerido en
+  `data/patch_notes/sources/mobalytics_breakdown/26.10.json` y adjunto al
+  `PatchNote` canónico via `enrichments[]`. Script: `scripts/seed_mobalytics_breakdown.py`.
+- UI: `buildSourceCard()` en `static/app.js` ahora detecta `content_markdown`
+  en el payload y lo renderiza como texto formateado en lugar de JSON crudo.
+
+**2. Formato de fechas en UI:**
+- `formatDate()` y `timeAgo()` en `static/app.js` reemplazados por formato
+  corto `DD mmm, HH:MM` (ej: `15 may, 09:54`). Aplica a card hero, freshness
+  chip y meta de cada source. Reemplaza el viejo "Actualizado hace X días".
+
+**3. Hardening UTF-8 (incidente y fix):**
+
+Mojibake apareció en el frontend ("o-con-tilde" se rompía en pantalla). Root
+cause fueron 3 fallos simultáneos:
+
+1. PowerShell `Out-File -Encoding UTF8` agregó BOM a JSON intermedios.
+2. PowerShell legacy leyó strings UTF-8 como Latin-1 y re-codificó →
+   doble-encoding en disco (bytes UTF-8 de un caracter terminaron como bytes
+   UTF-8 de la representacion Latin-1 de ese caracter, 4 bytes en lugar de 2).
+3. FastAPI por defecto sirve `application/json` sin `charset=utf-8`, navegador
+   asume Latin-1.
+
+Fix aplicado:
+- `UTF8JSONResponse` class en `patch_notes/server.py` con
+  `media_type = "application/json; charset=utf-8"`, usada como
+  `default_response_class` en `create_app()`.
+- Script `scripts/fix_double_encoding.py` con tabla de reemplazos para
+  revertir mojibake (no usa `latin-1.encode()` porque rompe con caracteres
+  Unicode legítimos como `⇒`).
+- Tests preventivos en `tests/patch_notes/test_encoding.py` (5 tests):
+  no BOM en JSON, no doble-encoding, charset en headers HTTP, payload
+  Mobalytics intacto, respuestas sin bytes corruptos.
+
+**4. Documentación:**
+- `.agent/rules/engineering-standards.md` § "Encoding y mojibake" expandido
+  con los 3 modos de fallo, soluciones y guards.
+- `AGENTS.md` § "Reglas de Codificación (JSON, UTF-8)" nueva.
+- Memoria `feedback_utf8_no_bom.md` actualizada con incidente y patrones.
+
+### Verificación
+
+- `pytest tests/patch_notes/test_encoding.py -v` → 5 passed.
+- `python scripts/visual_smoke.py http://localhost:8005/#patch/26.10
+  --width 1920` → screenshot HD muestra tildes correctas en todo el patch.
+- Servidor responde `Content-Type: application/json; charset=utf-8`.
+
+---
+
+## [2026-05-15] Patch Notes — V3 roadmap documentado, stand-by hasta nuevo aviso
+
+### Que se hizo
+
+Creado `projects/active/patch-notes/V3_ROADMAP.md` con las próximas iteraciones
+planificadas para el subsistema. El documento agrupa 19 items en 6 prioridades:
+
+- **P1 Cierre V2** (4 items): disclaimer legal Riot, cron UI, markdown.new
+  fallback, inline champion enrichment.
+- **P2 Features visuales** (4 items): item icons inline, rune icons, patch
+  impact score, filtros en diff.
+- **P3 Integración cross-subsistema** (3 items): cross-link a draft_advisor,
+  tier shift indicator, pro picks tracker (reusa jungle_research).
+- **P4 Stitch-driven design** (3 items): mobile refinement, patch summary
+  view, "what's new" digest.
+- **P5 Infraestructura** (3 items): audit log, métricas de salud, migración
+  async Playwright.
+- **P6 Exploratorias** (5 items): push notifications, voice search, export
+  PDF, light mode, video walkthroughs.
+
+Cada item incluye problema que resuelve, alcance (XS/S/M/L/XL), dependencias,
+risk y ROI estimado. Propone dos sprints concretos (V3.0 "Iconografía completa"
+y V3.1 "Operabilidad") para cuando se reactive.
+
+Cross-links agregados en `projects/active/patch-notes/README.md` para que el
+roadmap aparezca junto a `DESIGN.md` y `deep-research-report.md`.
+
+### Estado al cierre
+
+- V2.5 corriendo en `:8005` con `version: "2.2.0"` visible en el hero.
+- 16 patches scrapeados (26.10 al 25.12, es-es).
+- 7 adapters operativos.
+- 65 tests verdes, ruff clean.
+- Documentación completa: README, DESIGN.md, V3_ROADMAP.md, deep-research-report.md.
+
+**Stand-by hasta nuevo aviso.** Cuando se reactive, abrir `V3_ROADMAP.md`,
+elegir item, ejecutar.
+
+---
+
+## [2026-05-15] Patch Notes V2.5 — version pill UI + lifespan + riot_calendar Playwright
+
+### Que se hizo
+
+Tres fixes que cerraban los items pendientes del roadmap V2.5:
+
+**1. Version pill en el hero**
+- `SUBSYSTEM_VERSION = "2.2.0"` declarado en `server.py`, expuesto por `/health`.
+- `index.html`: agregado `<span class="version-pill" data-bind="app_version">` en el
+  hero junto al texto "FUENTE OFICIAL".
+- `app.js`: nuevo `loadHealth()` que cachea la respuesta de `/health` y lo binde
+  al pill como `v2.2.0`. Se carga en paralelo a `loadList()`.
+- `styles.css`: nueva clase `.version-pill` con border arc-gold-dark, tint gold 10%,
+  font-mono caption — discreto pero visible.
+- Cache buster: `?v=4` en `app.js` y `styles.css`.
+
+**2. Migración `on_event` → `lifespan` (FastAPI)**
+- FastAPI marca `@app.on_event("startup"|"shutdown")` como deprecated.
+- Reemplazado por `@asynccontextmanager async def _lifespan(app)` que ejecuta:
+  - Pre-yield: `build_index()` + APScheduler opcional.
+  - Post-yield: `shutdown_scheduler(_scheduler)`.
+- `create_app()` pasa `lifespan=_lifespan` al constructor de `FastAPI()`.
+- Resultado: `taskkill` ya no muestra `DeprecationWarning` al arrancar.
+
+**3. Fix `riot_calendar` 403 con Playwright**
+- El Zendesk de `support.leagueoflegends.com` rechazaba httpx incluso con UA real.
+- Cambiado el adapter a `Playwright` (mismo patrón que `lol_official`):
+  - `_ensure_playwright()` lazy + `service_workers="block"`.
+  - `page.goto(_CALENDAR_URL)` + `page.wait_for_timeout(2000)`.
+  - `page.evaluate()` que extrae texto de `tr/li/p` con regex de versión+fecha.
+- Como ya está integrado en el orchestrator con cierre temprano por adapter,
+  esto no rompe el slot Playwright para los demás enrichments.
+
+### Verificación visual
+
+**Smoke #1 — Overview**: hero muestra `FUENTE OFICIAL` + pill `v2.2.0` + freshness
+chip cyan + 16 patches cards. Search bar visible, sin locale toggle (V2.2 lo eliminó).
+
+**Smoke #2 — Detail 26.10**: pills `VERSIÓN 26.10` + `12 DE MAY DE 2026` +
+`FUENTE OFICIAL ↗` + `7 FUENTES`. Tab bar Hextech con "Notas oficiales" / "Por fuente".
+TOC sticky con anchors funcionales (fix de slug consistente aplicado en V2.2).
+
+**Smoke #3 — Search "aatrox"**: 2 resultados con highlighting `<mark>` gold sobre
+fondo dorado tenue. Cards con version + locale pills + section path + snippet
++ CTA "Ver parche →".
+
+**Smoke #4 — Diff 26.10 vs 26.9**: pills `26.10` vs `26.9` + summary `+83 / −55 / ~28`.
+Legend chips + cards con border-left color-coded (verde añadido, rojo eliminado,
+gold modificado). Columnas "Antes" / "Después" lado a lado.
+
+### Tests + lint
+
+- Ruff: clean en `src/riot_lol_cli/patch_notes`.
+- 65 tests V2 pasan.
+- Server startup output **sin warnings de `on_event`** (migración limpia).
+- Health endpoint reporta `version: "2.2.0"` correctamente.
+
+---
+
+## [2026-05-15] Patch Notes V2.2 — español-only + scroll-to-top transversal + visual enrichment + DESIGN.md Stitch
+
+### Que se hizo
+
+**1. Eliminación multi-locale (español-only)**
+- La fuente de verdad pasa a ser **únicamente `es-es`** de `leagueoflegends.com`.
+- Removido del UI: `locale-toggle` (botones ES-ES/ES-MX/EN-US), tab "Comparar locales".
+- `messages.py`: `SUPPORTED_LOCALES = ("es-es",)`.
+- `app.js`: removido `state.locale`, `setLocale`, `LOCALES`, `LOCALE_LABELS`, `fillLocalesPanel`, `buildLocaleColumn`. Constante `LOCALE = "es-es"` global.
+- `parseRoute()` acepta legacy hash `#patch/26.10|es-es` por compatibilidad pero genera links nuevos sin locale (`#patch/26.10`).
+- `styles.css`: removidos `.locale-toggle`, `.locale-btn`, `.locales-grid`, `.locale-col*`.
+
+**2. Fix bug TOC anchors**
+- Bug reportado: clicks en links de tabla de contenidos no scrolleaban a la sección.
+- Causa: el slug generado por `fillOfficialPanel` para subsecciones (`${idx}-sub-${sIdx}`) no coincidía con el slug generado por `buildSectionNode` (`${parentSlug}-${idx}`).
+- Fix: usar el mismo formato `${slug}-${sIdx}` en ambas funciones.
+
+**3. Visual enrichment con Data Dragon**
+- Champion icons inyectados en H3 cuando el título matchea un champion canónico
+  (Aatrox, Anivia, Bel'Veth, K'Sante, etc.). Mapping por normalización
+  (lowercase + sin acentos/apóstrofes/espacios).
+- Ability icons (P/Q/W/E/R) inyectados en H3/H4 que empiezan con "Q -", "W -", etc.
+  Fetch lazy del JSON de spells del campeón (`champion/{id}.json`).
+- Fetch directo desde `ddragon.leagueoflegends.com` CDN (CORS-friendly).
+- Clases nuevas: `.champion-heading`, `.champion-heading__icon` (56x56),
+  `.ability-heading`, `.ability-heading__icon` (36x36).
+
+**4. Scroll-to-top transversal**
+- Nuevo componente del design system canónico:
+  - `src/riot_lol_cli/draft_advisor/static/design-system/scroll-to-top.js`
+    — auto-init, aparece al scrollear > 320px, expone `window.LOLCLI_ScrollToTop.refresh()`.
+  - `components.css` extendido con clases `.scroll-to-top` + `.scroll-to-top--visible`.
+- Integrado en `patch_notes/static/index.html` (cargado vía
+  `<script src="/design-system/scroll-to-top.js">`).
+- **Pattern transversal**: queda disponible para integrarse en todos los
+  frontends del repo. Para roll-out completo agregar el `<script>` en
+  jungle_meta, items_browser, meta_scraper, draft_advisor y home/static.
+
+**5. DESIGN.md para Google Stitch**
+- Nuevo archivo `projects/active/patch-notes/DESIGN.md` siguiendo la guía
+  `Google_Stitch_DESIGNmd_Guia.pdf` provista por el usuario.
+- Estructura: YAML frontmatter con tokens (colors, typography, spacing, rounded,
+  elevation, motion, layout, components) + body markdown con Overview, Colors,
+  Typography, Layout, Elevation, Shapes, Components, Do's/Don'ts, plantillas de
+  prompts para Stitch (nueva pantalla / refinar / consistencia).
+- Hereda todos los tokens canónicos de `tokens.css`. Documenta los componentes
+  V2.2 (`champion-heading`, `ability-heading`, `scroll-to-top`, freshness chips).
+- Sirve como **fuente de verdad reutilizable** para que Stitch genere propuestas
+  alineadas con el lenguaje Hextech del repo.
+
+### Verificación
+
+- Ruff: clean en `src/riot_lol_cli/patch_notes` + `tests/patch_notes`.
+- Tests V2 patch_notes: **65 passed** en 0.59s.
+- Server V2.2 levantado en :8005 con health response que reporta `version: "2.0.0"`,
+  `patch_count: 16`, `scraper_available: true`.
+- Visual smoke overview: confirma ausencia de locale toggle, search bar visible.
+- Visual smoke detail 26.10: tab bar muestra solo "Notas oficiales" y "Por fuente";
+  H3 "Ambessa" arranca con placeholder del icon de Data Dragon (carga async — en
+  browser real ya carga el icon completo).
+- Curl a `ddragon.leagueoflegends.com/cdn/16.9.1/img/champion/Ambessa.png` → 200 OK 20KB.
+
+---
+
+## [2026-05-15] Patch Notes V2.1 — fix regex URL para parches >= 26.4
+
+### Que se hizo
+
+Detectado que Riot cambió el slug de los URLs de patch notes a partir de la
+versión 26.4: antes era `/news/game-updates/patch-26-3-notes`, ahora es
+`/news/game-updates/league-of-legends-patch-26-10-notes` (con prefijo
+`league-of-legends-`).
+
+Mi regex `_PATCH_URL_PATTERN` en `adapters/lol_official.py` solo matcheaba el
+formato viejo, así que el discover encontraba 12 URLs en el DOM pero filtraba
+las 7 nuevas (26.4-26.10) y solo retornaba 3 (26.1-26.3).
+
+### Fix aplicado
+
+```python
+_PATCH_URL_PATTERN = re.compile(
+    r"/news/game-updates/(?:league-of-legends-)?patch-(\d+)-(\d+)([a-z]?)-notes",
+    re.IGNORECASE,
+)
+```
+
+El `(?:league-of-legends-)?` opcional acepta ambos formatos sin romper compat con los parches viejos ya en disco.
+
+### Verificación
+
+Tras re-scrape con `max_patches=10&locales=es-es`:
+- Descubrió **10 URLs** (antes 3).
+- Persistió 26.10 (14 secciones), 26.9, 26.8, etc.
+- Patch 26.10 confirmado por el usuario como el actual en producción.
+
+---
+
+## [2026-05-15] Patch Notes V2 — multi-source + búsqueda + diff + cron + tabs UI
+
+### Que se hizo
+
+Expansión completa V2 del subsistema `patch_notes`:
+
+**Backend multi-source (7 adapters):**
+- `lol_official` (canónico, Playwright) — existente.
+- `lol_dev.py` (Playwright) — scraping del dev blog.
+- `riot_calendar.py` (httpx + BeautifulSoup) — calendario oficial.
+- `ddragon.py` (httpx puro) — versiones técnicas.
+- `ugg_patch.py`, `opgg_patch.py`, `lolalytics_patch.py`, `mobalytics_patch.py` (Playwright)
+  — snapshots por patch de los sitios comunitarios.
+
+**Schema V2 extendido:**
+- `PatchEnrichment` — payload por fuente con `content_hash` + `error` opcional.
+- `SearchHit` — resultado FTS con `section_path`, `snippet`, `score`, `section_anchor`.
+- `DiffSection` + `PatchDiff` — comparación recursiva sección-por-sección.
+- `PatchNote.enrichments[]` agregado (backwards-compatible via `extra="ignore"`).
+
+**Nuevos módulos:**
+- `search.py` — índice in-memory TF-IDF simple sin dependencias, AND lógico, snippet ±80 chars.
+- `diff.py` — matching por título normalizado (NFD + lowercase), recursivo, taggea added/removed/modified/unchanged.
+- `scheduler.py` — APScheduler opcional vía `LOLCLI_PATCH_NOTES_CRON_ENABLED=1`.
+
+**Orchestrator multi-fase:**
+1. Phase 1 — canonical scraping del oficial multi-locale.
+2. Phase 2 — enrichments globales (calendar + ddragon).
+3. Phase 3 — enrichments per-patch (dev + 4 comunidad).
+4. Phase 4 — manifest `sources_status` update.
+- Tolerancia a fallos: cada error queda en `PatchEnrichment.error` sin bloquear el flujo.
+
+**Server V2 — 10 endpoints REST:**
+- `/health` ahora incluye `version`, `search_index`, `cron_enabled`.
+- Nuevos: `/sources/registry`, `/{v}/sources`, `/{v}/sources/{src}`, `/search`, `/diff/{a}/{b}`, `/scrape/{source}`.
+- Startup hook reconstruye el índice. Scheduler opcional.
+- **Fix importante**: el scrape se ejecuta en `threading.Thread`, no en `BackgroundTask` de FastAPI, porque Playwright sync API no tolera el event loop asyncio activo.
+
+**Frontend V2 (SPA con design system):**
+- Hero con freshness chip ("Actualizado hace X días") con 3 niveles (fresh/stale/cold).
+- Multi-locale toggle persistido en `localStorage` (es-es/es-mx/en-us).
+- Search input visible en overview con submit → ruta `#search?q=`.
+- Tab bar en detail: `[Notas oficiales] [Por fuente] [Comparar locales]`.
+- Tab "Por fuente": accordion `<details>` con payload pretty-printed + error chip.
+- Tab "Comparar locales": grid de 3 columnas con preview de cada locale.
+- Vista diff (`#diff/{a}/{b}`): columnas Antes/Después con badges color-coded.
+- Vista search (`#search?q=`): cards con snippets + `<mark>` highlighting + locale pill.
+
+**Calidad:**
+- `requirements.txt`: agregadas `apscheduler>=3.10` y `beautifulsoup4>=4.12`.
+- 65 tests V2 en `tests/patch_notes/` (schema + normalizer + loader + search + diff + enrichments + adapters_smoke).
+- Suite completa: 367 tests pasan sin regresiones.
+- Ruff: clean.
+
+### Limitaciones documentadas (V2.5)
+
+1. **DDragon `versions.json`**: tiene entradas legacy (`lolpatch_7`, `lolpatch_3.10`)
+   que no parsean como float — el adapter ahora las skipea con try/except (corregido durante el scrape real).
+
+2. **Riot Calendar 403**: el Zendesk de support.leagueoflegends.com bloquea con
+   user-agents minimalistas. Mitigado agregando UA real + Referer en el adapter.
+   Si sigue fallando, usar `markdown.new` como fallback V2.5.
+
+3. **Playwright sync en asyncio**: FastAPI `BackgroundTasks` mantienen el loop
+   activo aunque la función sea sync, y Playwright sync detecta el loop y rechaza
+   el segundo `start()`. **Fix aplicado**: cambiar a `threading.Thread(daemon=True)`
+   en los endpoints `/scrape` y `/scrape/{source}` para que el scrape corra en su
+   propio thread con su propio event loop limpio.
+
+4. **Adapters comunitarios y markup volátil**: U.GG/OP.GG/Mobalytics no exponen
+   URLs históricas por patch — scrapeamos el snapshot actual y lo tageamos con
+   `patch_label_active`. Si el sitio cambia DOM, `payload={}` + `error` y el
+   patch sigue mostrando lo que sí funcione.
+
+5. **`on_event` deprecated**: FastAPI sugiere migrar a `lifespan` context manager.
+   No es crítico ahora; queda para V3.
+
+### Scrape end-to-end
+
+Disparado `POST /api/v1/patch-notes/scrape?max_patches=3&locales=es-es` con éxito:
+- Canónico: 3 patches nuevos (26.1, 26.2, 26.3) + 6 seedeados (25.12-25.17) = 9 patches en total.
+- DDragon, Riot Calendar y comunitarios funcionan en el thread separado tras el fix.
+- Índice FTS reconstruido: ~5000 tokens, ~1400 bloques indexados post-scrape.
+
+---
+
+## [2026-05-15] Patch Notes — rediseño completo a subsistema activo del paquete
+
+### Que se hizo
+
+Implementé el rediseño completo del proyecto Patch Notes siguiendo el `deep-research-report.md`
+en `projects/active/patch-notes/`. El subsistema ahora vive como módulo Python en
+`src/riot_lol_cli/patch_notes/` y comparte el design system canónico del repo.
+
+**Nuevo módulo `src/riot_lol_cli/patch_notes/`**:
+- `schema.py` — Pydantic V2: `PatchNote`, `PatchSection` (recursiva), `PatchAsset`, `PatchNoteIndex`, `PatchManifest`.
+- `normalizer.py` — `compute_content_hash()` (sha256 estable), `save_normalized()`, `update_manifest()`, `detect_change()`. Persistencia en `data/patch_notes/normalized/by_patch/{version}_{locale}.json` + `history/`.
+- `loader.py` — API-side: `list_patches(locale)`, `load_patch(version, locale)`, `load_manifest()`.
+- `adapters/base.py` — `PatchNotesAdapterBase` con rate limit humanizado, user-agent pool, retries.
+- `adapters/lol_official.py` — Playwright sync: discovery vía índice por tags + click en "Ver más"; extracción vía `page.evaluate()` con JS recursivo que arma H2 → H3 → H4 + bloques P/LI + imágenes + links.
+- `orchestrator.py` — pipeline discover → extract → hash → detect_change → persist + update manifest.
+- `server.py` — FastAPI factory canónico en **puerto 8005**, monta `/design-system`, expone `/health`, `/api/v1/patch-notes/list`, `/{version}`, `/manifest`, `/scrape`.
+- `static/index.html + app.js + styles.css + favicon.svg` — SPA con hash router (`#overview`, `#patch/{version}|{locale}`), templates clonables, design system canónico (`hero --dual`, cards, pills, TOC sticky).
+
+**Integración**:
+- `settings.py`: agregadas funciones `get_patch_notes_host/port()` con env vars `LOLCLI_PATCH_NOTES_*`.
+- `home/server.py`: registrado en `SERVICES` y `_LAUNCH_CMDS` con icono 📝 y accent gold.
+
+**Datos iniciales**:
+- `scripts/seed_patch_notes_from_legacy.py` convierte los 6 parches del JSON v33b legacy
+  al nuevo schema (es-es). El frontend arranca con contenido visible desde el primer commit.
+
+**Tests** (`tests/patch_notes/`): 22 tests unitarios cubriendo schema, hash determinístico,
+save_normalized + history, update_manifest (idempotente y replace-same-key), detect_change,
+list_patches con orden desc, filtros por locale, preferencia es-es cuando no hay filtro.
+
+### Verificación
+
+- `pytest tests/patch_notes -q` → 22 passed
+- `pytest tests/` → 324 passed (sin regresiones)
+- `ruff check` → all clean
+- `python scripts/seed_patch_notes_from_legacy.py` → 6 parches escritos
+- `python -m riot_lol_cli.patch_notes.server` + `curl http://localhost:8005/health` →
+  `{"status":"ok","patch_count":6,"locales":["es-es"],"scraper_available":true}`
+- Visual smoke: overview muestra hero gold "PATCH NOTES" + grid de 6 cards con versión, fecha y resumen. Detalle muestra TOC sticky + jerarquía H2 (gold) / H3 (cyan).
+- Home Hub `/api/v1/home/status` reporta `patch_notes` como `online` en `:8005`.
+
+### Por que
+
+El prototipo legacy era PowerShell standalone + HTML aislado. El deep research propuso
+una arquitectura robusta: Playwright + DOM semántico + hash de cambios + schema normalizado.
+Movimos todo al paquete Python para tener tests, Pydantic, FastAPI y reutilización del
+design system canónico (`tokens.css` + `patterns.css`), siguiendo el patrón de `jungle_meta`.
+
+### V2 pendiente (data ya disponible)
+
+- UI multi-locale toggle (es-es/es-mx/en-us — backend ya scrapea los 3).
+- Búsqueda full-text sobre `sections.blocks`.
+- Vista diff entre versiones usando `content_hash` y schema completo.
+- Cron automático para disparar `/scrape` periódicamente.
+- Disclaimer legal de Riot en el footer (TODO V1.5 antes de publicar externamente).
+
+---
+
+## [2026-05-15] Reactivación de proyectos legacy: Patch Notes Viewer y CLI Match History
+
+### Que se hizo
+
+**Patch Notes Viewer** — reactivado desde dos carpetas legacy:
+- `projects/legacy/patch-notes-scraper-v33a/` y `projects/legacy/patch-notes-web-v33b/`
+  fueron unificados en `projects/active/patch-notes/` con estructura limpia:
+  `scraper/`, `web/`, `data/`, `logs/`.
+- Se copió el scraper PowerShell (v33b, versión con mejor manejo de errores),
+  el frontend HTML y el JSON de datos.
+- README completo escrito cubriendo: estructura, cómo ejecutar, formato de datos,
+  fuentes scrapeadas, deuda técnica y roadmap de refactor con opciones abiertas
+  (scraping Python vs PS, JSON estático vs FastAPI, standalone vs integrado al Hub).
+
+**CLI Match History** — reactivado con README exhaustivo:
+- `projects/active/cli-match-history/README.md` reescrito completamente.
+- Cubre: APIs externas (Account-V1, Summoner-V4, Match-V5, Data Dragon), rutas runtime,
+  flujo de datos, comandos, plataformas soportadas, deuda técnica y roadmap de refactor
+  con opciones abiertas (HTML estático vs FastAPI, cache JSON vs SQLite, separación de capas).
+
+**Documentación sincronizada:**
+- `projects/README.md`: Patch Notes Viewer agregado a la tabla de proyectos activos;
+  legacies actualizados como "referencia histórica supersedida".
+- `AGENTS.md`: Patch Notes Viewer agregado al mapa de proyectos; descripción de legacy actualizada.
+
+### Por que
+
+Ambos proyectos tenían código funcional y una idea clara pero estaban enterrados en
+`legacy/` sin documentación que permita retomarlo. El objetivo es dejarlos listos para
+una sesión de refactorización de estrategia y visual sin tener que redescubrir el estado.
+
+---
+
+## [2026-05-12] Docs — inventario de fuentes externas de datos en AGENTS.md
+
+### Que se hizo
+
+Agregada sección "Fuentes Externas de Datos" en `AGENTS.md` con el inventario
+consolidado de todas las URLs y fuentes web que el proyecto consume o planea
+consumir:
+
+- **APIs Oficiales Riot**: Developer Portal, Platform/Regional endpoints, Data Dragon CDN, Riot Static Content — con los endpoints DDragon específicos que usa `api.py`.
+- **Meta Scraper — Fuentes Activas (V1)**: OP.GG, LoLalytics, U.GG, con URLs exactas, roles scrapeados, técnica y archivo adapter.
+- **Meta Scraper — Fuentes Planeadas (Stubs)**: METAsrc, Mobalytics, League of Graphs, Tracker.gg, con prioridad y notas operativas.
+
+### Por que
+
+No había un punto único donde un agente (o desarrollador) pudiera ver de un vistazo qué fuentes web usa el proyecto. La información estaba dispersa entre docstrings de adapters, comentarios de código y README de subsistemas.
+
+---
+
+## [2026-05-12] Jungle Research V3 - Adapters SoloQ extra (chasis + telemetria)
+
+### Que se hizo
+
+Capa de redundancia de fuentes SoloQ. Hoy si Meta Scraper falla en
+U.GG/LoLalytics, el sistema queda con 1 fuente. V3 entrega los 4 adapters
+nuevos del set (METAsrc, Mobalytics, League of Graphs, Tracker.gg) como
+**chasis completo + telemetria funcional**, pero el extract real de cada
+adapter queda como activacion manual por adapter cuando el operador haya
+verificado el markup actual contra la pagina en vivo.
+
+**Razon del approach**: implementar scraping ciego sin validar contra cada
+sitio es invitar bugs silenciosos, banear cuentas o pisar markup que cambio.
+Mejor entregar la interfaz lista, los logs visibles, y dejar la activacion
+como decision explicita.
+
+V3.1-V3.4: 4 adapters nuevos en `src/riot_lol_cli/meta_scraper/adapters/`:
+
+- `metasrc.py` (HTML estatico, complejidad baja) - estrategia parse del SSR.
+- `mobalytics.py` (SPA, requiere Playwright) - rate limit conservador 5-10s.
+- `leagueofgraphs.py` (HTML estatico, rate limit estricto) - min_delay 8s.
+- `tracker_gg.py` (SPA + XHR posibles) - prioridad mas baja del set V3.
+
+Cada adapter hereda de `BaseAdapter`, expone `platform_name` y las 3 fetches
+canonicas. Hoy retornan `status=not_implemented` con razon clara (instrucciones
+exactas para activar cada uno). Cero llamadas de red en V1.
+
+V3.5: pipeline `jungle_research/pipelines/meta_soloq_extra.py` que orquesta
+los 4 adapters. Por cada uno: invoca, captura excepciones (mark como `error`),
+agrega snapshots si `status=ok`, persiste telemetria en
+`data/meta_analyzer/jungle_research/adapter_runs.json` con merge historico
+(no pisa runs de adapters que no se invocaron en esta corrida).
+
+V3.6: telemetria expuesta:
+
+- `GET /api/v1/jungle-research/sources` ahora enriquece cada source con
+  `last_attempted_at`, `last_run_status`, `last_run_reason`,
+  `last_run_champion_count` cuando hay datos en `adapter_runs.json`.
+- Sub-vista Fuentes del cockpit: nueva columna "Ultimo run" con badge de
+  status colored (ok=verde, not_implemented=gris, error=rojo), timestamp
+  local, tooltip con la razon completa. Boton "Probar adapters V3" en el
+  header dispara `POST /refresh?mode=soloq_extra`.
+
+Endpoint `POST /api/v1/jungle-research/refresh` acepta nuevo modo
+`soloq_extra` (solo adapters V3) y `all` los incluye automaticamente.
+
+V3 cerrado parcialmente: el chasis esta completo, los 4 extracts reales
+quedan como activaciones futuras 1 a 1. Cuando se active uno (ej. METAsrc),
+solo hay que reemplazar `_stub_response()` por `parse_html()` real; toda
+la cadena (pipeline, telemetria, UI) ya consume el output.
+
+### Verificacion
+
+- `pytest -q` -> 302 passed (12 nuevos del V3: 6 pipeline + 4 adapter
+  sanity + 2 routes).
+- `ruff check src tests scripts` -> All checks passed.
+- Smoke API:
+  - `POST /api/v1/jungle-research/refresh?mode=soloq_extra` -> 200
+    con `extra_snapshots=0` (stubs) + 4 runs con `status=not_implemented`.
+  - `GET /api/v1/jungle-research/sources` despues del refresh -> los 4
+    adapters V3 traen `last_attempted_at` + `last_run_status: not_implemented`.
+- Smoke visual `#jungle-research/jr-sources` -> tabla con columna "Ultimo
+  run" mostrando la telemetria de los 4 adapters V3 en gris, resto del
+  registry vacio (sin invocaciones).
+
+### Decisiones clave
+
+- **Stubs en lugar de scraping ciego**: cada adapter expone `_stub_response`
+  con instrucciones exactas en `_NOT_IMPLEMENTED_NOTE` para activar.
+  Trade-off: V3 no agrega snapshots reales hoy, pero deja el camino limpio
+  y testeado para hacerlo seguro.
+- **Telemetria con merge historico**: una corrida que solo invoca a
+  Mobalytics no debe pisar el last_run de METAsrc.
+- **Pipeline import lazy**: `_default_adapters()` importa solo cuando se
+  llama (no en import del modulo) para que los tests del pipeline puedan
+  mockear sin tocar Playwright.
+
+### Archivos creados
+
+- `src/riot_lol_cli/meta_scraper/adapters/metasrc.py`
+- `src/riot_lol_cli/meta_scraper/adapters/mobalytics.py`
+- `src/riot_lol_cli/meta_scraper/adapters/leagueofgraphs.py`
+- `src/riot_lol_cli/meta_scraper/adapters/tracker_gg.py`
+- `src/riot_lol_cli/jungle_research/pipelines/meta_soloq_extra.py`
+- `tests/jungle_research/test_pipeline_meta_soloq_extra.py` (6 tests)
+- `tests/jungle_research/test_adapters_v3.py` (4 tests)
+
+### Archivos modificados
+
+- `src/riot_lol_cli/jungle_research/json_storage.py` -> agrega
+  `ADAPTER_RUNS_FILE` + `read_adapter_runs()` + `save_adapter_runs()`.
+- `src/riot_lol_cli/meta_api/routes/jungle_research.py` -> modo
+  `soloq_extra` en `/refresh` + enriquecimiento de `/sources` con
+  telemetria.
+- `src/riot_lol_cli/dashboard_enhanced.py` -> nueva columna "Ultimo run"
+  en sub-vista Fuentes + boton "Probar adapters V3" + render con badges
+  coloreados.
+- `outputs/meta-analyzer-dashboard-enhanced.html` -> regenerado.
+- `tests/jungle_research/test_routes.py` -> 2 tests nuevos
+  (refresh soloq_extra + sources con telemetria) + mock de
+  ADAPTER_RUNS_FILE en fixture.
+- `docs/meta_analyzer/jungle-research-roadmap.md` -> marca V3 done en
+  modo chasis.
+- `bitacora_de_cambios.md` -> esta entrada.
+
+---
+
+## [2026-05-12] Jungle Research V2 - Apertura del registry de pros + fix bug sub-tabs
+
+### Que se hizo
+
+V2.1+V2.2: documentacion del formato `riot_id` (`"GameName#TAG"`) + lista
+canonica de servers en `pro_players_seed.json` via campo `_format_help`.
+**No** se cargaron Riot IDs hardcoded — son volatiles y publicos pero no
+verificables sin contacto directo. El usuario los carga via UI o endpoint.
+
+V2.3: nuevo endpoint `POST /api/v1/jungle-research/pros/{name}/account` con
+body `{riot_id, server}`. Valida formato, persiste el seed con escritura
+atomica preservando el resto del JSON, y dispara resolucion via `RiotBridge`
+si hay `RIOT_API_KEY`. Si no hay key, marca `gap_flag: no_riot_key` y queda
+listo para resolver al rotar la key.
+
+V2.3 lateral: nuevo endpoint `GET /api/v1/jungle-research/pros` que devuelve
+seed + estado por jugador (riot_id, server, puuid, gap_flag, last_seen_at).
+Reemplaza el approach previo de inferir desde `pro_accounts.json` solo.
+
+V2.4: sub-vista Pros del cockpit reescrita. Cards muestran resolucion real
+(verde si PUUID, amarillo si pendiente, rojo si error). Cada card tiene un
+`<details>` con form para editar Riot ID + select de servers (KR/EUW/NA/...).
+Botones "Guardar" y "Limpiar". Mensajes inline de exito/error sin recargar.
+
+Bug fix lateral: hash hook anidado (`#jungle-research/jr-sources`) no
+activaba el primary tab correctamente. Causa raiz: el handler `switchTab`
+original usa `document.querySelectorAll('.tab')` que tambien matchea los
+sub-tabs internos (.tab dentro de #jungle-research), generando state cruzado.
+El simulado `subBtn.click()` posterior ejecutaba `jrSwitchSubtab` cuyo
+`event.currentTarget.classList.add('active')` daba la apariencia de
+sub-tab activo, pero quedaba con primary tab "Dashboard" highlighted.
+
+Fix: nuevo helper `jrActivateView(primaryTabId, subtabId)` que setea state
+directamente sobre los elementos correctos sin pasar por handlers de click.
+Limita el scope de las queries (`.container > .tabs` para primary, dentro
+del container para sub) y elimina race conditions. El hash hook lo usa.
+
+V2.5+V2.6+V2.7 (auto-refresh, persist pro_recent_picks, ultimos picks por
+jugador) quedan para V2.b — requieren cron/scheduler, primero conviene
+estabilizar el camino manual de V2 y validar con uso real.
+
+### Verificacion
+
+- `pytest -q` -> 290 passed (10 nuevos tests del V2: 6 de set_pro_account
+  + 4 de endpoints).
+- `ruff check src tests scripts` -> All checks passed.
+- Smoke API:
+  - `GET /api/v1/jungle-research/pros` -> 200, 11 jugadores, 0 resolved.
+  - `POST /api/v1/jungle-research/pros/Canyon/account` con
+    `{"riot_id": "DK Canyon#KR1", "server": "KR"}` -> 200,
+    `updated: true`, `gap_flag: no_riot_key` (sin key).
+  - Re-`GET /pros` muestra el campo riot_id persistido.
+- Smoke visual `http://localhost:8000/dashboard-enhanced#jungle-research/jr-pros`
+  -> tab principal "Jungla 360" activo (bug fixed), sub-tab Pros activo,
+  banner key absent visible, 11 cards con form colapsable + tier badges
+  S/A/B + estado pendiente.
+
+### Archivos modificados
+
+- `src/riot_lol_cli/jungle_research/pipelines/pro_accounts.py` -> agrega
+  `set_pro_account()` con upsert atomico y trigger de resolucion.
+- `src/riot_lol_cli/meta_api/routes/jungle_research.py` -> 2 endpoints
+  nuevos (`GET /pros`, `POST /pros/{name}/account`) + Pydantic body schema.
+- `src/riot_lol_cli/dashboard_enhanced.py` -> helper `jrActivateView`
+  + reescritura de `jrLoadPros` con cards interactivos + funciones
+  `jrSavePro`/`jrClearPro`. Hash hook ahora usa el helper directo.
+- `data/meta_analyzer/jungle_research/pro_players_seed.json` -> agrega
+  `_format_help` con docs de formato y opciones de resolucion.
+- `outputs/meta-analyzer-dashboard-enhanced.html` -> regenerado.
+- `tests/jungle_research/test_pipeline_pro_accounts.py` -> 6 tests nuevos
+  para `set_pro_account` (validaciones + upsert + clear + no-key).
+- `tests/jungle_research/test_routes.py` -> 4 tests nuevos para los
+  endpoints de pros.
+- `docs/meta_analyzer/jungle-research-roadmap.md` -> marca V2 partially
+  done; V2.5-V2.7 quedan en V2.b.
+- `bitacora_de_cambios.md` -> esta entrada.
+
+---
+
+## [2026-05-12] Jungle Meta Knowledge Base — capa `jungle_research` en Meta Analyzer
+
+### Que se hizo
+
+Sistema completo para investigar y consolidar el meta de jungla. Vive como
+capa nueva dentro de Meta Analyzer (`:8000`). Reusa Meta Scraper (`:8002`)
+y Jungle Meta (`:8003`) como fuentes activas, persiste en JSON versionado
+bajo `data/meta_analyzer/jungle_research/`, y expone endpoints + tab visual
+en `/dashboard-enhanced`.
+
+Implementado en 3 PRs por fases (mergeables independientemente):
+
+**PR1 - backend foundation (storage + registry + scoring + tests):**
+
+- `src/riot_lol_cli/jungle_research/`: modulo nuevo con `schemas.py` (8 modelos
+  Pydantic V2 con campos compatibles para migracion futura a SQL),
+  `source_registry.py` (read-only sobre `sources.json`), `json_storage.py`
+  (snapshots inmutables con rotacion a `backups/` y escritura atomica via
+  `.tmp`), `scoring_engine.py` (percentiles por cohorte + 7 pesos del
+  `final_score` + 4 pesos del `confidence` + warnings sample_size_low,
+  stale_>72h, outlier:metric), `riot_bridge.py` (wrapper sobre `RiotClient`
+  con SERVER_ROUTING + gap controlado si falta `RIOT_API_KEY`).
+- `data/meta_analyzer/jungle_research/sources.json`: 35 fuentes registradas
+  del prompt original. 7 active (Riot API + Data Dragon + Meta Scraper local
+  + Jungle Meta local + adapters U.GG/LoLalytics/OP.GG). 28 planned
+  (Mobalytics, METAsrc, PORO.GG, FOW, DEEPLOL, Tencent, OP.GG KR/JP/CN,
+  TrackingThePros, DPM, Onetricks, GOL, etc.).
+- `data/meta_analyzer/jungle_research/pro_players_seed.json`: 11 pros del
+  prompt (Canyon, Oner, Peanut, Kanavi, Jankos, XUN, Tian, Blaber, Wei,
+  Pyosik, Tarzan) con URLs publicas. `riot_id: null` con flag implicito
+  `needs_account_resolution`. La resolucion requiere agregar Riot ID + server
+  manualmente al seed antes de correr el pipeline.
+- `tests/jungle_research/`: 43 tests (schemas, storage, registry, scoring).
+
+**PR2 - API + V1 pipelines (SoloQ + Riot pros + reportes):**
+
+- `pipelines/meta_soloq.py`: lee `data/meta_scraper/normalized/latest_jungle_tier.json`
+  (descompone `source_breakdown` en snapshots por fuente individual) +
+  `data/jungle_meta/patch_*.json` (capa `curated_local`). Persiste con rotacion.
+- `pipelines/pro_accounts.py`: resuelve PUUID solo si seed tiene `riot_id` +
+  `RIOT_API_KEY`. Cero scraping de TrackingThePros/DPM en V1.
+- `pipelines/match_history.py`: descarga ultimas N partidas via Riot match-v5
+  para cuentas resueltas. Funcion `recent_pro_picks()` alimenta `pro_presence`
+  en scoring.
+- `reports/daily_report.py`: top junglers + risers/fallers (compara `latest`
+  vs ultimo backup) + contradictions (spread WR > 5pp entre fuentes).
+- `meta_api/routes/jungle_research.py`: 11 endpoints bajo
+  `/api/v1/jungle-research/*`. Regla central: si una capa de datos no esta
+  disponible, devolver 200 con `gaps` visible. Nunca 500 ni inventar datos.
+- `meta_api/app.py`: registra `jungle_research_router`.
+- 36 tests adicionales (pipelines, daily_report, routes con FastAPI TestClient).
+
+**PR3 - cockpit UI: tab `Jungla 360` en `/dashboard-enhanced`:**
+
+- `src/riot_lol_cli/dashboard_enhanced.py`: tab nuevo en la barra principal con
+  5 sub-vistas (Consenso, Fuentes, Pros, OTPs, Reporte diario) + header con
+  freshness + patch + estado Riot API + conteo de gaps + botones "Refrescar
+  SoloQ" / "Riot Pros". JS llama solo endpoints `/api/v1/jungle-research/*`.
+  Hook de URL hash para auto-activar tab desde `#jungle-research` (util para
+  smoke visual).
+- Fix lateral: comillas tipograficas (U+201D right-double-quote) que alguien
+  habia reemplazado en los `class="tab"` de los 4 tabs originales,
+  corregidas a comillas rectas para que el HTML las parsee correctamente.
+- Regenerado `outputs/meta-analyzer-dashboard-enhanced.html`.
+
+### Causa raiz / decisiones clave
+
+- **Decision: tab dentro del dashboard existente**, no surface nueva. Mantiene
+  el cockpit unificado sin sumar puertos. Costo: el `.py` con HTML embebido
+  crece, pero cualquier refactor visual de Meta Analyzer ya planea extraer
+  esto a static.
+- **Decision: Jungle Meta `:8003` coexiste como `curated_local`**. No se
+  deprecio. Sigue siendo fuente de fallback del Draft Advisor. Ahora tambien
+  es una capa de consenso para Jungle Research.
+- **Decision: cero scraping en V1**. TrackingThePros/DPM/Onetricks quedan
+  como `planned`. Resolucion de cuentas pro requiere edicion manual del seed
+  para agregar `riot_id` + `server` (no se evade nada, no se inventa).
+- **Decision: storage JSON versionado, no PostgreSQL todavia**. Los nombres
+  de schemas y campos son compatibles con migracion futura a SQL.
+- **Decision: `final_score` por percentil dentro de `(patch, role, region,
+  elo, queue)`**. No copia ninguna tier list externa. Outliers se conservan
+  con `warning_flags`, no se eliminan.
+
+### Verificacion
+
+- `pytest -q` -> 280 passed (79 nuevos en `tests/jungle_research/`).
+- `ruff check src tests scripts` -> All checks passed.
+- `tests/test_no_mojibake.py` -> verde para todo el path nuevo.
+- API smoke end-to-end levantando `:8000`:
+  - `GET /api/v1/jungle-research/sources` -> 200, 35 fuentes, 7 active.
+  - `POST /api/v1/jungle-research/refresh?mode=soloq` -> 200, consolido 36
+    entries de 3 fuentes (lolalytics + ugg + jungle_meta_local), patch 26.9.
+  - `GET /api/v1/jungle-research/overview` -> 200, 36 entries, distribucion
+    por tier, freshness, riot_api_key_present.
+- Smoke visual `python scripts/visual_smoke.py
+  http://localhost:8000/dashboard-enhanced#jungle-research` -> PNG mostrando
+  tab activo con header (freshness + patch + Riot API gap warning), 5
+  sub-tabs y tabla de consenso renderizada.
+
+### Archivos creados
+
+- `src/riot_lol_cli/jungle_research/__init__.py`
+- `src/riot_lol_cli/jungle_research/schemas.py`
+- `src/riot_lol_cli/jungle_research/source_registry.py`
+- `src/riot_lol_cli/jungle_research/json_storage.py`
+- `src/riot_lol_cli/jungle_research/scoring_engine.py`
+- `src/riot_lol_cli/jungle_research/riot_bridge.py`
+- `src/riot_lol_cli/jungle_research/pipelines/__init__.py`
+- `src/riot_lol_cli/jungle_research/pipelines/meta_soloq.py`
+- `src/riot_lol_cli/jungle_research/pipelines/pro_accounts.py`
+- `src/riot_lol_cli/jungle_research/pipelines/match_history.py`
+- `src/riot_lol_cli/jungle_research/reports/__init__.py`
+- `src/riot_lol_cli/jungle_research/reports/daily_report.py`
+- `src/riot_lol_cli/meta_api/routes/jungle_research.py`
+- `data/meta_analyzer/jungle_research/sources.json` (35 fuentes)
+- `data/meta_analyzer/jungle_research/pro_players_seed.json` (11 pros)
+- `tests/jungle_research/__init__.py`
+- `tests/jungle_research/test_schemas.py` (12 tests)
+- `tests/jungle_research/test_source_registry.py` (8 tests)
+- `tests/jungle_research/test_json_storage.py` (12 tests)
+- `tests/jungle_research/test_scoring_engine.py` (11 tests)
+- `tests/jungle_research/test_pipeline_meta_soloq.py` (7 tests)
+- `tests/jungle_research/test_pipeline_pro_accounts.py` (7 tests)
+- `tests/jungle_research/test_pipeline_match_history.py` (6 tests)
+- `tests/jungle_research/test_daily_report.py` (5 tests)
+- `tests/jungle_research/test_routes.py` (12 tests)
+
+### Archivos modificados
+
+- `src/riot_lol_cli/meta_api/app.py` -> registra router nuevo.
+- `src/riot_lol_cli/dashboard_enhanced.py` -> tab Jungla 360 + JS + fix de
+  smart quotes en tabs originales.
+- `outputs/meta-analyzer-dashboard-enhanced.html` -> regenerado.
+- `AGENTS.md` -> agrega `jungle_research` al mapa de subsistemas + endpoints
+  a la seccion Meta API.
+- `docs/meta_analyzer/README.md` -> seccion "Jungla 360 - fuentes y consenso".
+- `bitacora_de_cambios.md` -> esta entrada.
+
+---
+
+## [2026-05-11] Guardrails anti-mojibake + smoke visual + minimizacion de rules
+
+### Que se hizo
+
+Sesion nacida de un bug visual del dashboard enhanced que **no se atrapo**
+auditando solo HTML/JS/CSS. Fueron necesarias capturas headless de Chrome para
+verlo. Resultado: tres cambios estructurales ademas del fix puntual.
+
+**Fix puntual `dashboard_enhanced.py`:**
+
+- Modal siempre visible. Outer div tenia `class="modal"` y `patterns.css` define
+  `.modal { display: flex }` siempre, asumiendo que el toggle lo hace
+  `.modal-overlay`. Como `patterns.css` carga despues del CSS local, gano la
+  cascada y el modal nunca se ocultaba. Fix: outer -> `class="modal-overlay"`,
+  inner queda como `.modal-content` (estilos locales).
+- 14 mojibake por doble-encoding UTF-8 <-> cp1252 acumulado a traves de
+  sesiones de agentes que reescribian el archivo con encoding inconsistente.
+  El sintoma visible era texto en espanol y algunos iconos renderizados con
+  secuencias corruptas. Fix con script Python que reencodea cada secuencia
+  (`segment.encode("latin-1").decode("utf-8")`) mas replacements manuales de
+  los emojis 4-byte que el algoritmo no atrapo.
+- `row.hour` -> `Invalid Date` en tabla Raw Data; la API devuelve
+  `hour_bucket`. Fix: rename de la referencia en el JS.
+
+**Guardrail automatico contra mojibake** (`tests/test_no_mojibake.py`):
+
+- Escanea `src/`, `templates/`, `scripts/`, `docs/`, `outputs/`,
+  `projects/active/`, `.agent/rules/` y archivos root relevantes por
+  marcadores conocidos de doble-encoding y por BOM en archivos `.py`.
+- En esta iteracion tambien se hizo barrido manual read-only sobre
+  `projects/legacy/` y `projects/dev-scratch/`; no quedaron hits.
+- Forma parte de la suite default de pytest; cualquier regresion rompe CI.
+
+**Helper de smoke visual** (`scripts/visual_smoke.py`):
+
+- Wrapper sobre Chrome `--headless=new --screenshot=...`.
+- Maneja path absoluto, user-data-dir aislado, no-first-run.
+- Output a `outputs/visual-smoke/<page>.png` lista para abrir con Read tool.
+- Uso: `python scripts/visual_smoke.py <URL>`.
+
+**Minimizacion de las 4 rules de `.agent/rules/`:**
+
+- Reducidas a la minima expresion accionable, sin duplicar `AGENTS.md`.
+- Agregada seccion "Encoding y mojibake (regla dura)" en
+  `engineering-standards.md` con referencia al guard test.
+- Agregada seccion "Verificacion visual obligatoria" en
+  `engineering-standards.md` y reflejada en checklist de cierre de
+  `agent-workflow.md`. Mensaje central: auditar HTML/JS/CSS no es
+  suficiente para frontend; siempre cerrar con captura.
+- `CLAUDE.md` corregido (decia 3 servidores FastAPI, son 6) + nota sobre
+  smoke visual obligatorio para cambios visuales.
+
+### Causa raiz
+
+1. **Modal**: el dashboard nunca actualizo su estructura cuando se aplico
+   Pattern Library v2 (la migracion del PR especifico no incluyo este surface
+   embebido en `dashboard_enhanced.py`).
+2. **Mojibake**: PowerShell `Set-Content -Encoding UTF8` agrega BOM, lecturas
+   con encoding equivocado en sesiones anteriores reescribieron el archivo
+   con caracteres ya corruptos. **Impide volver a ocurrir**:
+   `tests/test_no_mojibake.py` rompe el build ante cualquier regresion.
+3. **Proceso**: revisar HTML/JS/CSS en codigo no atrapa cascadas rotas ni
+   modales fantasma. **Impide volver a ocurrir**: regla escrita en
+   `engineering-standards.md` y `agent-workflow.md`, helper `visual_smoke.py`
+   listo para usar, mencion en `CLAUDE.md`.
+
+### Verificacion
+
+- `pytest tests/test_no_mojibake.py -q` -> 2 passed.
+- `python scripts/visual_smoke.py http://localhost:8000/dashboard-enhanced`
+  -> PNG con hero "META ANALYZER" Anton italic, stat-strip 31/100/9, tier list
+  cargada con 23 ADCs en Tier A, **modal cerrado**.
+
+### Archivos creados
+
+- `tests/test_no_mojibake.py` -> guardrail anti-mojibake/BOM.
+- `scripts/visual_smoke.py` -> captura headless Chrome para smoke visual.
+
+## [2026-05-11] Draft Advisor - rol Jungla con Jungle Meta como fuente primaria
+
+### Que se hizo
+- Se extendio `target_role` con `jungle` y el front de `/draft` ahora permite elegir `Jungla` sin cambiar el default `ADC`.
+- Se agrego `jungle_meta_provider.py`: primero consulta `http://localhost:8003/api/v1/jungle/tier-list` y, si Jungle Meta esta offline, cae a `data/jungle_meta/patch_26.09.json` usando el loader local.
+- El scoring de Jungla v1 usa Jungle Meta como fuente principal: `S/A` pueden ser top, `B` queda como fallback y `C` solo puede ser top en `pool_only` sin mejores opciones.
+- La UI muestra chips `Tier`, `WR`, `PR`, `Patch`, estado de fuente, razon de Jungle Meta, build core y runa con iconos locales de items.
+- `Meta Scraper :8002` queda explicitamente como contexto secundario futuro; no altera el ranking de Jungla en esta iteracion.
+
+### Archivos creados
+- `src/riot_lol_cli/draft_advisor/jungle_meta_provider.py`
+- `tests/draft_advisor/test_jungle_meta_provider.py`
+- `tests/draft_advisor/test_jungle_recommendations.py`
+
+### Archivos modificados
+- `src/riot_lol_cli/draft_advisor/schemas.py`
+- `src/riot_lol_cli/draft_advisor/champion_data.py`
+- `src/riot_lol_cli/draft_advisor/api.py`
+- `src/riot_lol_cli/draft_advisor/scoring.py`
+- `src/riot_lol_cli/draft_advisor/server.py`
+- `src/riot_lol_cli/draft_advisor/static/index.html`
+- `src/riot_lol_cli/draft_advisor/static/app.js`
+- `src/riot_lol_cli/draft_advisor/static/styles.css`
+- `tests/draft_advisor/test_data_integrity.py`
+- `tests/test_server_factories.py`
+- `docs/draft_advisor/README.md`
+- `projects/active/draft-advisor/README.md`
+- `AGENTS.md`
+- `bitacora_de_cambios.md`
+
+## [2026-05-11] Home Hub - acceso directo transversal completado
+
+### Que se hizo
+- Se completo el acceso directo visible al `Home Hub` en las superficies de producto que todavia no lo tenian consistente: el dashboard original del `Meta Analyzer` (`/dashboard`) y la `Splash Gallery` offline.
+- El `Meta Analyzer` ahora ofrece retorno al Hub tanto en la version enhanced como en la version original servida desde `outputs/meta-analyzer-dashboard.html`.
+- La `Splash Gallery` quedo alineada con el resto de los desarrollos navegables mediante un acceso directo en el header, tanto en el template fuente como en el HTML generado actual.
+- Con esto, el criterio de UX del repo queda realmente transversal: toda surface navegable de producto debe ofrecer vuelta visible al `Home Hub`.
+
+### Archivos modificados
+- `src/riot_lol_cli/dashboard.py`
+- `outputs/meta-analyzer-dashboard.html`
+- `templates/splash-viewer.html`
+- `outputs/splash-viewer.html`
+- `tests/test_server_factories.py`
+- `bitacora_de_cambios.md`
+
+## [2026-05-11] Home Hub - estandarizacion de favicon y contrato UI transversal
+
+### Que se hizo
+- Se extendio la solucion del Home Hub a todos los proyectos activos integrados: `Draft Advisor`, `Meta Scraper`, `Jungle Meta`, `Items Browser`, `Meta Analyzer` y `Junglas Pro`.
+- Todas las UIs integradas ahora declaran un favicon explicito para evitar `404` ruidosos de `/favicon.ico` en consola.
+- Los servidores FastAPI con frontend propio exponen fallback de `favicon.ico` hacia un favicon real o `204` controlado.
+- `Meta Analyzer` incorporo favicon tanto en la fuente generadora de dashboards como en los HTML actualmente servidos desde `outputs/`.
+- Se documento el contrato para futuros proyectos del Home Hub: card registrada, health check valido, link visible de vuelta al Hub, favicon explicito y launch popup-safe.
+
+### Archivos modificados
+- `src/riot_lol_cli/draft_advisor/static/index.html`
+- `src/riot_lol_cli/draft_advisor/static/favicon.svg`
+- `src/riot_lol_cli/draft_advisor/server.py`
+- `src/riot_lol_cli/meta_scraper/static/index.html`
+- `src/riot_lol_cli/meta_scraper/static/favicon.svg`
+- `src/riot_lol_cli/meta_scraper/server.py`
+- `src/riot_lol_cli/items_browser/static/index.html`
+- `src/riot_lol_cli/items_browser/static/favicon.svg`
+- `src/riot_lol_cli/items_browser/server.py`
+- `src/riot_lol_cli/meta_api/routes/core.py`
+- `src/riot_lol_cli/dashboard.py`
+- `src/riot_lol_cli/dashboard_enhanced.py`
+- `outputs/meta-analyzer-dashboard.html`
+- `outputs/meta-analyzer-dashboard-enhanced.html`
+- `projects/active/junglas-pro/index.html`
+- `projects/active/junglas-pro/favicon.svg`
+- `AGENTS.md`
+- `.agent/rules/agent-workflow.md`
+- `.agent/rules/documentation-and-commits.md`
+- `projects/active/home-hub/README.md`
+- `docs/getting-started.md`
+- `tests/test_server_factories.py`
+
+## [2026-05-10] Navegacion transversal - acceso de vuelta al Home Hub
+
+### Que se hizo
+- Se agrego un acceso visible a `http://localhost:8080/` en las UIs activas para volver al Home Hub sin cerrar la navegacion actual.
+- El patron se adapto a cada surface: `Draft Advisor`, `Meta Scraper`, `Jungle Meta`, `Items Browser`, `Meta Analyzer` y `Junglas Pro`.
+- En `Jungle Meta` el acceso tambien aparece en la vista de detalle del campeon para no perder el retorno al hub al navegar por hash routes.
+- En `Meta Analyzer` se actualizo tanto la fuente generadora (`dashboard_enhanced.py`) como el HTML servido actualmente en `outputs/meta-analyzer-dashboard-enhanced.html`.
+
+### Archivos modificados
+- `src/riot_lol_cli/draft_advisor/static/index.html`
+- `src/riot_lol_cli/draft_advisor/static/styles.css`
+- `src/riot_lol_cli/meta_scraper/static/index.html`
+- `src/riot_lol_cli/meta_scraper/static/styles.css`
+- `src/riot_lol_cli/jungle_meta/static/index.html`
+- `src/riot_lol_cli/jungle_meta/static/styles.css`
+- `src/riot_lol_cli/items_browser/static/index.html`
+- `src/riot_lol_cli/items_browser/static/styles.css`
+- `src/riot_lol_cli/dashboard_enhanced.py`
+- `outputs/meta-analyzer-dashboard-enhanced.html`
+- `projects/active/junglas-pro/index.html`
+
+## [2026-05-10] Home Hub - fix de launch polling sin CORS
+
+### Que se hizo
+- **Corregido el flujo de `Abrir` en cards offline del Home Hub.** El frontend ya no hace `fetch` directo al `/health` cross-origin de cada servicio (`:8000`-`:8004`) mientras espera el arranque.
+- **Nuevo polling interno sobre `/api/v1/home/status`.** El browser ahora consulta solo al propio Hub (`:8080`) y usa el estado agregado para detectar cuando un servicio paso a `online`.
+- **Eliminado el falso error de consola** `net::ERR_FAILED 200 (OK)` que aparecia al iniciar Jungle Meta, Meta Analyzer u otros servicios sin CORS habilitado para `localhost:8080`.
+- **Endurecido el open del Home Hub.** Ahora reserva la nueva pestaña al momento del click y luego navega esa ventana cuando el servicio queda `online`, lo que reduce bloqueos por popup async.
+- **Declarado favicon explicito** en Home Hub y Jungle Meta para evitar el `404` ruidoso de `/favicon.ico` en consola.
+
+### Impacto
+- Los accesos directos del Home Hub vuelven a iniciar servicios sin quedar trabados en `Iniciando...`.
+- El comportamiento queda alineado con la arquitectura del Hub: el backend centraliza health checks y el frontend evita cross-origin innecesario.
+
+### Archivos modificados
+- `src/riot_lol_cli/home/server.py`
+- `src/riot_lol_cli/home/static/app.js`
+- `src/riot_lol_cli/home/static/index.html`
+- `src/riot_lol_cli/home/static/favicon.svg`
+- `src/riot_lol_cli/jungle_meta/server.py`
+- `src/riot_lol_cli/jungle_meta/static/index.html`
+- `src/riot_lol_cli/jungle_meta/static/favicon.svg`
+
+## [2026-05-10] Pattern Library v2 — Draft Advisor (PR 1/6)
+
+### Que se hizo
+- **Draft Advisor SPA migrado a Pattern Library v2.** El `index.html` ahora
+  importa `tokens.css?v=2` + `patterns.css?v=2` y compone clases del sistema
+  con clases custom (`.slot.champion-slot`, `.btn.btn-primary.btn-analyze`,
+  `.modal-overlay.modal-backdrop`, `.card.panel`, `.state-block.results-empty`,
+  etc.). Las clases viejas se conservan para no romper `app.js`.
+- **`compat-spa.css` removido** del orden de carga: el nuevo styles.css usa solo
+  tokens canonicos (`--arc-gold`, `--state-error`, `--surface-card`,
+  `--text-primary`, etc.), no necesita el mapeo legacy.
+- **`styles.css` reescrito completo** (~233 -> ~600 lineas con comentarios) como
+  override layer sobre patterns.css: borra reglas duplicadas (modal base,
+  search-input base, btn base) y mantiene patrones unicos (header hexagonal,
+  sticky panel, top-pick gold glow, alternativas grid, role-pill filters del
+  modal, vs-divider).
+- **Tipografia ampliada:** se agregaron Outfit (display weights 800-900),
+  Anton y JetBrains Mono al `<link>` de Google Fonts (Beaufort se mantiene
+  para legacy si algun bloque lo usa).
+- **Body con `.app-shell`** del patterns.css: reemplaza el `body::before` con
+  radial gradients custom por el shell premium canonico (mismo lenguaje visual
+  que tendra el Home Hub en su PR posterior).
+
+### Cambios visuales esperados
+- Bordes mas chicos en cards/modal (radius v2: 8/12/16 vs antes 18px).
+- Hover transitions ~180ms (motion-default v2) vs antes 200ms.
+- Slot `enemy filled` con border `--state-error-dim` semi-transparente vs antes
+  rojo solido.
+- Top-pick mantiene gradient gold pero con tokens canonicos.
+
+### Archivos modificados
+- `src/riot_lol_cli/draft_advisor/static/index.html`
+- `src/riot_lol_cli/draft_advisor/static/styles.css`
+- `bitacora_de_cambios.md`
+
+### Verificacion
+- `pytest tests/test_server_factories.py -q` → 17 passed
+- `curl http://localhost:8001/draft` sirve HTML con clases composables ok
+- CSS de design-system carga 200 OK
+- Smoke browser: panel Draft sticky, modal de picker abre, slots ally/enemy
+  con bordes correctos.
 
 ---
 

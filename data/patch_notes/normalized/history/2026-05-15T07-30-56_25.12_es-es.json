@@ -1,0 +1,368 @@
+{
+  "publisher": "riot",
+  "game": "lol",
+  "channel": "site",
+  "source_locale": "es-es",
+  "patch_version": "25.12",
+  "title": "Notas de la versión 25.12",
+  "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/patch-25-12-notes",
+  "published_at": "2025-06-10T00:00:00Z",
+  "fetched_at": "2026-05-15T07:30:56.326583Z",
+  "content_hash": "d8646249b65749c627a06b1bb6a26385f6e2e1849b708154e69cc9c92d7a56f4",
+  "summary": "Vayne leyenda alzada, Kai'Sa leyenda alzada, Kai'Sa leyenda inmortal, Renekton sombra de tinta, Pyke sombra de tinta, Lee Sin sombra de tinta y Nilah sombra de tinta estarán disponible el 11 de junio de 2025 a las 21:00 (hora peninsular). Hall of Legends",
+  "sections": [
+    {
+      "title": "Los platos fuertes de la versión",
+      "heading_level": 2,
+      "blocks": [
+        "Vayne leyenda alzada, Kai'Sa leyenda alzada, Kai'Sa leyenda inmortal, Renekton sombra de tinta, Pyke sombra de tinta, Lee Sin sombra de tinta y Nilah sombra de tinta estarán disponible el 11 de junio de 2025 a las 21:00 (hora peninsular). Hall of Legends"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Hall of Legends",
+      "heading_level": 2,
+      "blocks": [
+        "Cada año, LoL Esports incluye a un jugador profesional en Hall of Legends para rendir homenaje a sus logros en el deporte y en el juego. Un jurado independiente formado por veteranos y expertos de la industria de los esports de cada región elige a los jugadores según sus puestos internacionales, títulos internacionales y regionales, estadísticas en su rol y contribuciones generales al deporte. Este año, nos enorgullece darle la bienvenida a Jian \"Uzi\" Zihao como el segundo elegido de Hall of Legends, un honor reservado para los jugadores más legendarios de la historia de los esports de League of Legends. Icónico por su destreza sin parangón como jugador de la calle inferior, su dedicación al juego y la influencia que ha tenido en la escena de los esports global, la elección de Uzi rinde homenaje a su increíble carrera y sus contribuciones al deporte. Considerado como uno de los mejores jugadores de la calle inferior de la historia de League of Legends, Uzi conquistó el corazón de los fans con su mecánica precisión y atrevidas jugadas. Tras alzarse en la LPL con Royal Club y dominar con Royal Never Give Up (RNG), ayudó a redefinir los límites de la escena profesional. La feroz competitividad y la gran conexión con los fans de Uzi jugaron un rol importantísimo a la hora de popularizar los esports de LoL y la LPL en China. Su increíble rendimiento en la final del Campeonato Mundial en 2013 y 2014, así como los magníficos logros en 2018, cementaron su legado como jugador icónico a nivel global. Celebramos su incorporación al Hall of Legends con un pase de evento que os llevará por un recorrido de la carrera de Uzi, ¡en el que se destacarán sus momentos clave, logros y mucho más! Podréis conseguir y comprar artículos cosméticos, colecciones y aspectos conmemorativos con la temática del mismísimo Mad Dog para celebrar el acontecimiento. También podréis echar el guante a Kai'Sa leyenda inmortal y Kai'Sa leyenda alzada, con los aspectos de Kai'Sa, cuyo desarrollo se ha hecho con ayuda de Uzi. Disfrutad de los grandes momentos de la carrera de Uzi con 100 niveles de recompensas desbloqueables del pase del Hall of Legends, que incluyen aspectos conmemorativos, iconos y una retirada exclusiva en homenaje al icónico campeón de Uzi. Las principales recompensas son: Aspecto de Vayne leyenda alzada + borde Chroma del evento de Vayne leyenda alzada (ascenso mítico) Aspectos de Ashe dragona feérica, PROYECTO: Lucian y Ezreal helado 125 Esencias míticas 11 cofres de botín 13 iconos y emoticonos inspirados en Uzi Guardián Te vas a ahogar Estandarte Cazador incesante Título Crazy Little Dog ¡Y más! Para saber más sobre Hall of Legends, consultad nuestro artículo completo o la página web de Hall of Legends . Mejoras de próximos pases de batalla"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Mejoras de próximos pases de batalla",
+      "heading_level": 2,
+      "blocks": [
+        "Hemos estado pendientes a cómo avanzáis a lo largo de los pases de batalla durante las temporadas, y queremos asegurarnos de que os resulte satisfactorio y respeta el tiempo que invertís en LoL. Independientemente de si jugáis 4 horas al día o a la semana, queremos que se os recompense por el tiempo que jugáis. Por ello, vamos a introducir algunos cambios que mejoran cómo se puede conseguir EXP del pase de batalla en el Acto 2 en cuanto la versión 25.13 esté disponible . Experiencia del pase por maestría de campeón Empezando por la maestría de campeón, la experiencia por maestría de campeón pasará a estar vinculada a una misión. Con este nuevo sistema, podréis conseguir hasta 2500 de EXP con los campeones que queráis, en lugar de los que ofrece el conjunto de maestrías . Cuando lanzamos el conjunto de maestrías, queríamos que sirviese como puerta a un par de campeones nuevos en función de las recomendaciones personalizadas que ofrecía, y de paso, os llevabais experiencia del pase. Ahora que lo hemos probado, hemos echado un ojo a la finalización de las misiones. Los porcentajes de finalización de las misiones no cumplen con nuestras expectativas, y el conjunto de maestrías tampoco ha servido para aumentar el número de campeones jugados, así que hemos decidido eliminarlo en la versión 25.13. Dicho esto, tendremos esta experiencia en cuenta para seguir mejorando el sistema de maestrías en el futuro. Misiones de regreso También vamos a modificar el funcionamiento de las misiones semanales para que se completen con mayor regularidad y los pases de batalla tengan un mejor progreso. A partir de la versión 25.13, en lugar de durar 7 días, las misiones semanales estarán disponibles durante 21 días. Esto significa que, cada semana, recibiréis otra tanda de misiones semanales nuevas, las cuales podréis completar a lo largo de varias semanas. Ahora mismo, no hay ningún método que permita a los jugadores ponerse al día con la EXP del pase de batalla al incorporarse a mitad de acto o si no han podido completar algunas misiones semanales porque estaban ocupados. Con esta actualización, podréis acumular misiones durante un tiempo para que, si no podéis jugar durante un par de semanas, os podáis poner al día con vuestro pase de batalla. Para esto, no hará falta que iniciéis sesión ni nada, ya que estarán disponibles en la lista de misiones cuando podáis entrar al juego. En la práctica, se verá algo así: Semana 1: Recibiréis las misiones de la semana 1. Semana 2: Recibiréis las misiones de la semana 2, y tendréis a vuestra disposición las misiones de la semana 1 que no hayáis completado. Semana 3: Recibiréis las misiones de la semana 3, y tendréis a vuestra disposición las misiones de las semanas 1 y 2 que no hayáis completado. Semana 4: Recibiréis las misiones de la semana 4, y tendréis a vuestra disposición las misiones de las semanas 2 y 3 que no hayáis completado. Las misiones pendientes de la semana 1 expirarán. Y así. Seguiremos estos cambios de cerca, así como vuestros comentarios al respecto, y aprovecharemos las oportunidades que surjan para que los pases resulten más satisfactorios para quienes apostéis por ellos. Tu tienda"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Tu tienda",
+      "heading_level": 2,
+      "blocks": [
+        "Tu tienda volvió la última versión, pero si no habéis podido echarle un ojo, no os preocupéis. Estará disponible hasta el 24 de junio de 2025, así que probad suerte, ¡a ver si podéis conseguir una ganga y haceros con ese aspecto que tanto os gusta! Campeones"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Campeones",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta la curación de la E y la pasiva. Con los cambios a Aatrox de la última versión, queríamos que tuviese un poder equilibrado, pero ha acabado peor de lo que pensábamos. Así que volvemos a la carga en esta versión con pequeñas mejoras para que pueda chuparse todo el daño de la vanguardia sin problema. Pasiva - Aspecto de la muerte Relación de curación contra campeones : 80 % ⇒ 100 % . Relación de curación contra súbditos : 20 % ⇒ 25 % . E - Deslizamiento sombrío Relación de curación en función del daño del campeón : 16 % (+0,9 % por cada 100 de vida adicional) ⇒ 16 % (+1,1 % por cada 100 de vida adicional) ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce la duración del hechizo de la E según el nivel. Aumenta el enfriamiento de la R. Ahri ha sido una elección popular a nivel profesional durante bastante tiempo debido a su gran movilidad y adaptabilidad ante selecciones a ciegas. Queremos que esté al mismo nivel que otros campeones de la calle central de cara al MSI, así que vamos a reducir la capacidad de hacer grandes jugadas con su R para que tenga que lanzarse de forma más deliberada a la hora de hacerse con asesinatos, así como a reducir la eficacia de la E al máximo, ya que se ha vuelto una pesadilla a nivel profesional. E - Hechizar Duración de Hechizar : 1,2/1,4/1,6/1,8/2 ⇒ 1,2/1,35/1,5/1,65/1,8 . R - Impulso espiritual Enfriamiento : 130/115/100 ⇒ 140/120/100 ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta la velocidad de ataque al nivel 1. Aumenta la velocidad de movimiento de Severum. Aumenta el daño de Calibrum. El poder de Aphelios está bastante equilibrado ahora mismo, pero no ha conseguido pasar a la escena profesional. Vamos a otorgarle un par de mejoras centradas en la escena profesional para que los jugadores tengan más fe en las armas de este fiel. Estadísticas básicas Velocidad de ataque al nivel 1 : 0,640 ⇒ 0,665 . Severum Velocidad de movimiento de Arremetida : 20 % ⇒ 25 % . Calibrum Daño : 60-160 (+42-60 % del DA adicional) ⇒ 70-160 (+42-60 % del DA adicional) ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta la resistencia mágica básica. Aumenta el daño de la R. Aurora es una campeona que nos cuesta que funcione en la escena profesional, ya que suele acabar en la calle superior en cuanto se vuelve viable. Aun así, queremos que siga siendo una opción viable para el MSI, por lo que vamos a otorgarle mejoras más centradas en la calle central, así no decantará la balanza hacia la calle superior. Estadísticas básicas Resistencia mágica básica : 30 ⇒ 32 . R - Entre mundos Daño : 175/275/375 (+60 % del PH) ⇒ 175/275/375 (+70 % del PH) ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reducen la velocidad de movimiento y la velocidad de ataque por nivel. Azir está más que acostumbrado a la escena profesional, pero ahora mismo el emperador está un pelín por encima de sus competidores. Nos gustaría que fuese un poco más débil al final de las partidas y que sufriese un pelín contra rivales con mayor movilidad, así que vamos a disminuir un poco sus puntos fuertes en estos aspectos. Estadísticas básicas Velocidad de movimiento : 335 ⇒ 330 . Velocidad de ataque por nivel: 6 % ⇒ 5,5 % ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta la velocidad de movimiento. Bardo está a puntito de ser viable en los niveles más altos de juego, así que vamos a aumentar su velocidad de movimiento para que destaque una mijilla más como el campeón de apoyo omnipresente y ambulante que es. Estadísticas básicas Velocidad de movimiento básica : 330 ⇒ 335 ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el alcance de lanzamiento de la R. En esta versión, le vamos a implementar una pequeña mejora de calidad a Bel'Veth para que pueda devorar los corales del Vacío de los oponentes a los que derrote con su E. R - Banquete infinito Alcance del lanzamiento : 275 ⇒ 175/275/375/ 450 (coincide con el rango de ataque de la E) . Corrección de error Corrección de error : Lanzar la R ya no impide que Bel'Veth pueda usar sus hechizos de invocador (a excepción de Destello)."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta la progresión del daño de la E. Los ajustes de la última versión a Garen han funcionado a las mil maravillas en lo que a los objetos de luchador se refiere, pero ahora le falta un pelín de fuelle, así que vamos a devolvérselo. El daño de Juicio aumenta a partir de los 100 de DA en total (que se alcanza rápidamente con las configuraciones típicas), y vamos a corregir un error que impide que Garen pueda desgarrar armadura, que ya iba siendo hora de hacerlo. Su sed de DA adicional debería seguir llevándolo a sacar partido a objetos como Lanza de Shojin y runas como Conquistador. E - Juicio Daño : 4/8/12/16/20 (+36/38/40/42/44 % del DA) ⇒ 4/7/10/13/16 (+36/39/42/45/48 % del DA) (nota: esto supone una mejora tras 100 de DA total) . Corrección de error : El desgarre de armadura ahora se aplica correctamente a los giros adicionales. Antes, si la duración era reducida, no se otorgaban acumulaciones."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce la vida básica. Aumenta el enfriamiento de la W. En la cola en solitario y en la escena profesional, Gwen tiene poder de más, así que vamos a bajarle los humos un pelín. Con el objetivo de que siga teniendo cabida en la escena profesional, esta debilitación se va a centrar en su fase inicial de la partida, ya que esto tiene una mayor influencia en los niveles de juego superiores, en contraposición con la cola en solitario, donde progresa con mayor regularidad. Estadísticas básicas Vida básica : 620 ⇒ 600 . W - Niebla consagrada Enfriamiento : 22/21/20/19/18 s ⇒ 24/22,5/21/19,5/18 s ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta la velocidad de ataque de la pasiva. Jax tiene su nicho como campeón escaramuzador progresivo e implacable de la calle superior, así que para seguir dando rienda suelta a esa fantasía, vamos a otorgarle velocidad de ataque adicional con su pasiva. Esto debería ayudarlo a ganar duelos más prolongados en la calle superior. Pasiva - Asalto implacable Velocidad de ataque adicional por acumulación: : 3,5/5/6,5/8/9,5/11 % (según el nivel) ⇒ 5/6,5/8/9,5/11/12,5 % (según el nivel) ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce la vida básica. Aumenta el enfriamiento de la Q. La gran movilidad y capacidad de hostigar de Kalista la convierte en una rival temible en la fase de calles. Y aunque nos encanta, vamos a reducir su poder para que los jugadores profesionales no tengan que elegirla o bloquearla en cada partida. Estadísticas básicas Vida básica : 580 ⇒ 560 . Q - Atravesar Enfriamiento : 8 ⇒ 9 s ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el daño de la E. Se reduce el enfriamiento de la R. LeBlanc, como muchos otros asesinos, está en un punto de equilibrio delicado porque, cuando es poderosa, resulta frustrante. Vamos a otorgarle unas mejoras con ciertas reservas en esta versión para que resulte gratificante pillar a los oponentes, pero sin que jugar contra esta campeona resulte en una partida miserable por quedarse detrás al principio. E - Cadenas etéreas Daño : 80/120/160/200/240 (+80 % del PH) ⇒ 80/120/160/200/240 (+85 % del PH) . R - Mímica: Enfriamiento : 50/40/30 ⇒ 45/35/25 ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reducen el enfriamiento de la E y la ralentización. Esta temporada, no se ha visto a Lee Sin en la jungla, así que queremos darle algo más de poder para que entre en el grupo de campeones viables para la escena profesional de cara al MSI. En esta ocasión, vamos a apostar por Tempestad, ya que debería ayudar a los jugadores a tener acceso a la ralentización con mayor regularidad, algo que resulta de gran ayuda en los niveles superiores de juego. E - Tempestad/Incapacitar Enfriamiento : 9 ⇒ 8 s . Ralentización : 20/35/50/65/80 % ⇒ 35/45/55/65/75 % ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el daño de la Q. Mordekaiser ha perdido algo de poder tras la debilitación de su máscara mágica favorita en la versión 15.10, así que queremos devolverle parte de este poder, sobre todo en lo que se refiere a su capacidad de despeje en los compases finales de la fase de calles, que está de capa caída. Q - Aniquilación Daño : 0-45 (según el nivel) (+80/110/140/170/200) (+70 % del PH) ⇒ 0-45 (según el nivel) (+80/115/150/185/220) (+70 % del PH)."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el daño de la Q y la W. Neeko se ha convertido en la campeona hostigadora y abusona por excelencia de la temporada, así que vamos a reducir su capacidad opresiva en la fase de calles. Para ello, vamos a trasladar parte del daño de los primeros niveles a los últimos en forma de daño y relación de PH básicos. Además, el daño al golpear con Duplicaformas también se ha reducido ligeramente, por lo que ahora supondrá una menor amenaza, ya que también tendrá menos oro. Q - Estallido floreciente Daño : 80/125/170/215/260 (+50 % del PH) ⇒ 60/110/160/210/260 (+60 % del PH) . W - Duplicaformas Daño mágico adicional : 40/75/110/145/180 ⇒ 30/65/100/135/170 ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el daño de la E (forma felina). Últimamente Nidalee se ha dejado ver más por la escena profesional, y esto es gracias a su poder en la calle superior. Queremos volver a potenciar su capacidad para ser una amenaza de PH en la jungla, así que vamos a echarle una mano para que tome las riendas de la partida cuando se pone a punto. E - Zarpazo (Forma felina) Daño : 70/130/190/250 (+70 % del DA adicional) (+40 % del PH) ⇒ 70/130/190/250 (+70 % del DA adicional) (+55 % del PH) ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Hemos ajustado todas las habilidades. En esta versión, vamos a actualizar a Rammus con tres objetivos en mente. En primer lugar, queremos que siga siendo un tanque potente contra los autoataques, pero, dentro de ese umbral, también nos gustaría que pudiese brillar ante autoataques de daño mágico, con la esperanza de que no solo sea la última selección contra equipos enteros de DA. Después, nos gustaría que sus habilidades tuvieran más potencia, para que Bola de poder y Golpe veloz tengan más impacto al usarse. Por último, queremos eliminar parte de la complejidad innecesaria del campeón que obliga a seguir una secuencia de habilidades en concreto, sin margen de maniobra. Con esta actualización, esperamos que Rammus sea un tanque viable en una variedad más amplia de situaciones, un gran enamorado de Malla de espinas y una incorporación más que aceptable en otros equipos. Estadísticas básicas Armadura básica : 40 ⇒ 35 . Crecimiento de armadura : 5,5 ⇒ 4,5 . Velocidad de ataque al nivel 1 : 0,656 ⇒ 0,7 . Daño de ataque básico : 55 ⇒ 65 . Pasiva - Armazón de pinchos ELIMINADO : Los ataques básicos de Rammus ya no otorgan 10 de daño mágico al golpear (+10 %) (que aumenta un 50 % con la W) en función de la armadura. NOVEDAD : Rammus ahora obtiene un 15 % de su armadura y resistencia mágica en total como DA adicional. Q - Bola de poder Daño : 80/110/140/170/200 ⇒ 80/120/160/200/240 . Meneíto de caderas : Bola de poder ya no impide que Rammus pueda lanzar su E durante 0,375 s tras colisionar contra un enemigo. W - Posición defensiva Duración 6 ⇒ 7 s . Duración del ataque básico : La duración de la W ya no aumenta con los ataques básicos. Armadura adicional : 40 (+35/45/55/65/75 % de la armadura total) ⇒ 27 (+30/37,5/45/42,5/60 % de la armadura total) . Resistencia mágica adicional : 10 (+30/35/40/45/50 % de la resistencia mágica total) ⇒ 27 (+30/37,5/45/42,5/60 % de la resistencia mágica total) . Daño reflejado : 15 (+15 % de la armadura total) ⇒ 15 (+10 % de la armadura total) (+10 % de la resistencia mágica total) . Daño de dragón : La W de Rammus ahora refleja correctamente el daño de los ataques básicos del dragón (al igual que Malla de espinas). Mejoras de la descripción : La descripción de la W ahora indica claramente la cantidad de armadura y resistencia mágica que otorga la habilidad. Mejoras de la descripción : La descripción de la W ya no se queda en blanco cuando la habilidad está activa y ahora indicará la cantidad de daño reflejado. E - Provocación frenética Velocidad de ataque : La E ya no otorga un 20/25/30/35/40 % de velocidad de ataque adicional a Rammus. Daño a monstruos : La E ahora inflige 80/100/120/140/160 (+70 % del PH) a los monstruos tras el lanzamiento (nota: esta habilidad no inflige daño a los campeones) . R - Golpe veloz Enfriamiento : 90 ⇒ 120/105/90 s . Daño inicial : 100/175/250 (+60 % del PH) ⇒ 150/ 250/350 (+60 % del PH) . Daño en el epicentro : La R ya no inflige un 50 % de daño adicional en el centro del impacto. Se ha eliminado el daño de Reverberacción : La R ya no inflige 20/30/40 (+10 % del PH) de daño tras las réplicas. Ralentización : 15/17,5/20 % por acumulación, hasta un 60/70/80 % ⇒ 30/40/50 %; ya no se acumula . Mejora de calidad : Rammus ahora puede usar Bola de poder mientras vuela, aunque esté sobre un enemigo, si se lanza Golpe veloz rápidamente. Mejora de calidad : Hemos modificado los tiempos de la animación de la R para que se reproduzca la animación al completo en el deslizamiento. Corrección de error : Si se lanzan a la vez, la R ya no interrumpe su animación ni falla el impacto de Bola de poder. Corrección de error : Hemos corregido un error en el que la animación de la R fallaba a corta distancia."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el daño de la Q. Se reduce la ralentización de la E. Últimamente, Rumble es el único que le disputa la corona a Gwen en la calle superior, siendo ambos campeones los favoritos en este rol, así que vamos a reducir su poder. Debido a sus breves enfriamientos y el increíble daño que inflige a sus objetivos, es un gran campeón en la selección a ciegas. Vamos a reducir parte del poder de Escupellamas y la potencia de las ralentizaciones de su E, por lo que debería ser menos dominante. Q - Escupellamas Daño mágico total : 60/90/120/150/180 (+110 % del PH) (+6/7/8/9/10 % de la vida máxima del objetivo) ⇒ 60/90/120/150/180 (+110 % del PH) (+6/6,5/7/7,5/8 % de la vida máxima del objetivo) . E - Arpón eléctrico Ralentización : 15/20/25/30/35 % ⇒ 10/15/20/25/30 % . Ralentización mejorada : 22,5/30/37,5/45/52,5 % ⇒ 15/22,5/30/37,5/45 % ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta la velocidad de movimiento adicional de la pasiva. Aumenta el daño de la Q. Las mejoras al robo de vida de Samira en la última versión salieron a pedir de boca, ya que ahora Sanguinaria se ha convertido en una primera opción más que viable, aunque esto ha hecho que quede en tierra de nadie. Vamos a optar por una mejora más directa a su fase de calles inicial mediante un pequeño aumento al daño de su habilidad más usada, así como una mejora a su capacidad para lanzarse sobre sus oponentes con estilo. Pasiva - Impulso temerario Velocidad de movimiento adicional de estilo por acumulación : 2/2,5/3/3,5 % (máx. de acumulaciones: 12/15/18/21 %) ⇒ 2,75/3/3,25/3,5 % (máx. de acumulaciones: 16,5/18/19,5/21 %) . Q - Clase Daño : 0/5/10/15/20 (+95/102,5/110/117,5/125 % del DA) ⇒ 5/10/15/20/25 (+95/102,5/110/117,5/125 % del DA)."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce la probabilidad de obtener almas al matar súbditos. Resulta que la mejora importante que hicimos a la versión ADC de Senna en la versión 15.10 resultó en que los jugadores comprasen Puñal de Statikk sin pensarlo. Ahora que los jugadores se han decantado por este objeto, ya no necesita gran parte de las mejoras específicas para este rol que implementamos el mes pasado. Por tanto, vamos a reducirlas para ver qué tal le va con este nuevo ajuste. Pasiva - Absolución Probabilidad de obtención de almas : 14 % ⇒ 10 %"
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce la relación de vida adicional de la E. Shen es uno de los campeones de la calle superior más fuertes del juego, si no el que más, y aunque creemos que está genial que sea uno de los mejores porque da lugar a situaciones únicas e interesantes frente a otros campeones de la calle superior, tampoco hace falta que avasalle a sus rivales tal y como lo hace ahora. Nos gustaría conservar su durabilidad, afinidad con sus compañeros y capacidad para batirse en duelo con otros rivales, pero no necesita esa explosividad en los combates a final de la partida, así que vamos a reducir parte del daño progresivo de su E. E - Movimiento de sombra Daño : 60/85/110/135/160 (+60 % del 1% adicional vida) ⇒ 60/85/110/135/160 (+11 % del PH) ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce la resistencia mágica básica. Se reduce el daño de la Q. Taliyah lleva ya varias versiones derrocando a todo campeón que se le ponga por delante en la calle central con una gran curva de maestría, así que vamos a bajarle los humos en esta versión para que sea más débil y su Q potenciada inflija menos daño. Estadísticas básicas Resistencia mágica básica 30 ⇒ 28 . Q - Lanzarrocas Daño potenciado : 190 % ⇒ 180 % ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta la velocidad de ataque adicional de la E. Se reduce el enfriamiento de la R. A Twisted Fate apenas se le ha visto el pelo en lo que va de año, independientemente del nivel de juego. Creemos que los cambios a Libro de hechizos y un empujoncito a su poder lo convertirán en una opción de lo más interesante para los equipos profesionales. Vamos a aumentar la velocidad de ataque que obtiene con Baraja de cartas y a reducir el enfriamiento de su teletransporte general para que pueda usarlo con más frecuencia. E - Baraja de cartas Velocidad de ataque adicional : 10/20/30/40/50 % ⇒ 15/25/35/45/55 % . R - Destino Enfriamiento : 180/150/120 ⇒ 160/130/100 s ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce la armadura básica. La fuerza de Varus en la fase de calles, combinada con su capacidad para elegir entre objetos de hostigar o de daño al golpear, lo han convertido en uno de los ADCs con mayor presencia en la escena profesional. En esta versión, vamos a reducir parte de su poder en la fase de calles para que otros carries también puedan brillar. Estadísticas básicas Armadura básica : 27 ⇒ 24 ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se ajusta el daño de la W y se reduce su velocidad de ataque adicional. Daño de la E ajustado. Vi está en un punto un tanto extraño ahora mismo, ya que su porcentaje de victorias y su presencia en la escena profesional no tienen nada que ver. Parte de esta disparidad se debe al orden poco intuitivo de sus habilidades, ya que lo óptimo para Vi es mejorar la W como segunda opción. En esta versión, vamos a realizar cambios neutrales a nivel de poder para que maximizar la E y la W dé lugar a niveles de poder similares. W - Abolladuras Daño en función de la vida máxima del objetivo : 4/5,5/7/8,5/10 % (+2,857 % del DA adicional) ⇒ 4/5/6/7/8 (+3,5 % del DA adicional) . Velocidad de ataque adicional : 30/37,5/45/52,5/60 % ⇒ 30/35/40/45 /50 % . E - Fuerza implacable Daño adicional : 0/15/30/45/60 (+120 % del DA) (+100 % del PH) ⇒ 10/30/50/70/90 (+110 % del DA) (+100 % del PH)."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se ha ajustado la velocidad de ataque adicional de los caminantes de la Niebla. Se reduce el daño de la Q. En esta versión, vamos a centrarnos en el poder de Yorick al final de la fase de calles, donde se vuelve totalmente inexpugnable hasta que acaba viniéndose abajo. Vamos a reducir el poder que tiene al principio de la partida para trasladar parte del mismo a los caminantes de la Niebla al final de la partida. Pasiva - Pastor de almas Velocidad de ataque de los caminantes de la Niebla : 0,5 (+100 % de la velocidad de ataque adicional de Yorick) ⇒ 0,5 (+8-80 % de la velocidad de ataque) . Q - Ritos funerarios Daño : 30/55/80/105/130 (+50 % del DA) ⇒ 30/50/70/90/110 (+50 % del DA)."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumentan el daño del rayo y de la R. Zeri es otra campeona que deja huella cuando llega a la escena profesional. Como depende de crear todos esos momentos electrizantes, vamos a otorgarle más poder a su definitiva, que es cuando brilla con luz propia (de forma literal y figurada). R - Choque de rayos Daño : 175/275/375 (+85 % del DA adicional) (+110 % del PH) ⇒ 200/ 300/400 (+100 % del DA adicional) (+110 % del PH). Daño del rayo : 30 % del DA ⇒ 40 % del DA . Runas"
+          ],
+          "subsections": []
+        }
+      ]
+    },
+    {
+      "title": "Runas",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "No nos gusta nada que Garras del inmortal aparezca como elemento principal en enfrentamientos de calles de campeones a distancia contra campeones cuerpo a cuerpo, que es algo que han comentado mucho los jugadores de esos campeones cuerpo a cuerpo. Nos gustaría dejar claro que equipar Garras del inmortal en campeones a distancia no es buena idea, pero tampoco queremos que la runa resulte inservible la mitad del tiempo a los campeones que cambian de forma. Este cambio supone una debilitación del 33 % a la runa en campeones a distancia, lo que debería evitar que siga siendo una opción para campeones que luchan exclusivamente a distancia. Efectividad a distancia : 60 % ⇒ 40 % . Atakhan"
+          ],
+          "subsections": []
+        }
+      ]
+    },
+    {
+      "title": "Atakhan",
+      "heading_level": 2,
+      "blocks": [
+        "Vamos a ajustar la lógica de aparición de Atakhan para que no haya tanta diferencia entre su presencia en la calle inferior y superior, ya que ahora mismo tiene abandonada esta última. Dragón"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Dragón",
+      "heading_level": 2,
+      "blocks": [
+        "Vamos a corregir un antiguo error que provocaba que todos los ataques de los dragones fuesen ataques básicos a los que les faltaban un par de etiquetas. Ahora los ataques serán similares a los ataques de otros monstruos épicos e interactuarán con Malla de espinas, Rammus y Jax como deberían. Golpes dracónicos : Todos los ataques básicos de los dragones ahora activan los eventos al golpear (como Malla de espinas o Posición defensiva). Esquivas dracónicas : Todos los ataques básicos de los dragones ahora respetan las esquivas. ARAM"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "ARAM",
+      "heading_level": 2,
+      "blocks": [
+        "¡Holi, fans de ARAM! En esta versión, vamos a realizar algunas actualizaciones concretas para que algunos campeones se sientan como en casa en ARAM. La versión de asesino de Kayn ahora tendrá algo más de acceso a las habilidades de movilidad y de daño para que pueda conseguir asesinatos con mayor facilidad. Mientras tanto, a Shyvana, a la que tanto le cuesta generar furia en comparación con otros campeones que no hacen uso del maná, le resultará más fácil generarla y, por tanto, transformarse con mayor frecuencia. También vamos a debilitar Extenuación ligeramente para que los campeones tengan más posibilidades de iniciar combate y los combates sean más dinámicos. Como de costumbre, ¡gracias por jugar y nos vemos en el Abismo de los Lamentos! Campeones Bel'Veth Tenacidad : 100 % ⇒ 120 % . Daño recibido : 100 % ⇒ 95 % . Kayn Relación de DA adicional de la Q : 85 % ⇒ 95 % . Enfriamiento de la E (Asesino de las sombras) : 10 ⇒ 7 s . Kennen Daño infligido : 105 % ⇒ 100 % . Shyvana Regeneración de furia y curación por súbdito con cañón o de asedio : 0,05 ⇒ 0,1 . Sion Vida de la W por eliminación de unidad/campeón : 8 ⇒ 5 . Objetos Hoja del rey arruinado Daño de la pasiva : 10/8 % ⇒ 12/10 % de la vida actual del objetivo . Hechizos de invocador Extenuación Enfriamiento : 240 ⇒ 290 (nota: ARAM tiene 70 de velocidad de hechizos de invocador, así que, en la práctica, esto pasa de 140 a 170 s) . Trifulca"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Trifulca",
+      "heading_level": 2,
+      "blocks": [
+        "Creemos que es importante que Trifulca refleje todo el aumento de poder que se vive en las partidas de LoL. Sin embargo, nos hemos dado cuenta de que los jugadores no pueden hacer tanto uso como nos gustaría (y seguro que a ellos también) del nivel de poder al final de las partidas. Creemos que Trifulca representa a un nicho de jugadores que disfruta de partidas muy cortas, así que, en lugar de aumentar la duración de las partidas, vamos a centrarnos en la relación de poder para que los jugadores puedan disfrutar de una experiencia de juego intensa durante más tiempo. También vamos a añadir la posibilidad de que sigáis gastando oro cuando ya tengáis los 6 objetos, que sabemos que os gusta derrochar. Campeones Kayle Anteriormente, Kayle tenía una obtención de experiencia pasiva para que le fuese posible subir al nivel 16. Con el aumento de la experiencia pasiva a nivel global, esto ya no es necesario. EXP pasiva : Kayle ya no obtendrá experiencia pasiva en Trifulca. Sistemas Oro pasivo Oro pasivo : 65 de oro cada 10 s ⇒ 75 de oro cada 10 s, que aumenta hasta 100 de oro cada 10 s una vez transcurridos 5 minutos . Experiencia pasiva Experiencia pasiva : 20 de EXP cada 10 s ⇒ 20 de EXP cada 10 s, que aumenta a 30 de EXP cada 10 s una vez transcurridos 5 minutos. Zumitos Nuevas ofrendas : Se han añadido Zumito de poder, de vitalidad y de velocidad de Bandle. Estos objetos consumibles otorgan una mejora acumulable permanente y solo se podrán comprar tras subir al nivel 16. ¡También os darán sombreros! Así que, para que no haya excedente de sombreros, ¡nos despedimos de Zumito de la risa! Clash - Copa MSI"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Clash - Copa MSI",
+      "heading_level": 2,
+      "blocks": [
+        "¡La Copa MSI se celebrará esta versión! ¡Conseguid un equipo de cinco y preparaos para darlo todo! Comienzo de la inscripción: 16 de junio a las 11:00 (hora local). Fechas del torneo: 21 y 22 de junio (entre las 16:00 y las 19:00 [hora local], varía en función de la región). Si tenéis preguntas o buscáis el calendario completo de los torneos de Clash en 2025, echad un vistazo a las preguntas frecuentes sobre Clash . Vinculación a posiciones en la selección de campeones de Modo rápido"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Vinculación a posiciones en la selección de campeones de Modo rápido",
+      "heading_level": 2,
+      "blocks": [
+        "Al igual que ya hicimos en las colas normales y clasificatorias, hemos añadido la vinculación a posiciones a Modo rápido para mejorar la coherencia entre las reglas que se aplican en las partidas en la Grieta. Cambio de campeones en ARAM"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Cambio de campeones en ARAM",
+      "heading_level": 2,
+      "blocks": [
+        "Hemos recibido comentarios que indican que el intercambio de campeones en ARAM no es tan evidente como el anterior que tanto os gustaba, así que vamos a eliminar la necesidad de hacer un clic adicional, ya que solo hay una opción. ¡Guardaos ese clic para la partida! Corrección de errores y mejoras de calidad"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Corrección de errores y mejoras de calidad",
+      "heading_level": 2,
+      "blocks": [
+        "Mejoras de calidad Malla de espinas ahora refleja correctamente el daño de los ataques básicos del dragón. Corrección de errores Hemos corregido un error que provocaba que el Heraldo de la Grieta no bailase cuando se destruía un nexo cercano. Hemos corregido un error que provocaba que el salto de Rengar fallase al marcar el nexo o unidades grandes como objetivo, o cuando se aumentaba su alcance. Hemos corregido un error que provocaba que la amplificación de daño de Tonada sanguina no ampliase el efecto de sangrado de Baile de la muerte. Hemos corregido un error que provocaba que el audio de Tonada sanguina se reprodujese en todas las ocasiones, incluso si ya teníais la mejora. Hemos corregido un error que provocaba que la R de Brand se perdiese si la siguiente unidad objetivo había muerto. Hemos corregido un error que provocaba que el indicador de la pasiva de Akali a veces apareciese alrededor de los personajes incorrectos. Hemos corregido un error que provocaba que la E2 de Sylas aplicase el daño y la curación de la W múltiples veces. Hemos corregido un error que provocaba que el indicador de ejecución de la pasiva de Aurelion Sol a veces no fuese preciso. Hemos corregido un error que provocaba que Llamasombría aumentase el daño de Prender. Hemos corregido un error que provocaba que el Heraldo de la Grieta pudiese cargar contra una torreta del nexo sin infligirle daño mientras lo pilotaba un jugador. Hemos corregido un error que provocaba que el Heraldo de la Grieta a veces fallase su ataque cargado. Hemos corregido un error que provocaba que los efectos de sonido de Darius bestia lunar no se reprodujesen o se cortasen antes de tiempo. Hemos corregido un error que provocaba que los espectros de la Niebla de Senna consumiesen las bonificaciones de los efectos de impacto, como Puñal de Statikk o Brillo. Hemos corregido un error que provocaba que el efecto visual de la Q de Mordekaiser siguiese la dirección hacia la que estaba el campeón, en lugar de hacerlo en el lugar donde había lanzado y asestado la habilidad. Hemos corregido un error que provocaba que la Q de Mordekaiser se girase hacia la dirección en la que estaba el campeón al usar Destello durante su canalización. Hemos corregido un error que provocaba que la E de Swain pudiese atraer a Yone a la ubicación inicial de su R. Hemos corregido un error que provocaba que las mejoras de la pantalla al morir no funcionasen correctamente en diferentes modos de juego. Hemos corregido un error que provocaba que Margarita de Ivern no pudiese atacar a los inhibidores ni a los nexos. Hemos corregido un error que provocaba que el texto de debug apareciese cuando los jugadores de nivel de honor 5 usaban sus alertas. Hemos corregido un error que provocaba que las alertas de Compás letal y Sexto sentido no apareciesen correctamente. Hemos corregido un error que provocaba que el doblaje de Samira no se reprodujese correctamente al asesinar a un campeón. Próximos aspectos y chromas"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Próximos aspectos y chromas",
+      "heading_level": 2,
+      "blocks": [
+        "Lanzaremos los siguientes aspectos a lo largo de esta versión: Vayne leyenda alzada Kai'Sa leyenda alzada Kai'Sa leyenda inmortal Renekton sombra de tinta Pyke sombra de tinta Lee Sin sombra de tinta Nilah sombra de tinta Lanzaremos los siguientes chromas a lo largo de esta versión: Renekton sombra de tinta Pyke sombra de tinta Lee Sin sombra de tinta Nilah sombra de tinta Vayne leyenda alzada Ashe dragona feérica Ezreal helado PROYECTO: Lucian Artículos relacionados"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Artículos relacionados",
+      "heading_level": 2,
+      "blocks": [
+        "Actualizaciones del juego 2025-08-12T18:00:00.000Z Notas de la versión 25.16 ¡Versión 25.16 lista para el despegue! Actualizaciones del juego 2025-05-13T18:00:00.000Z Notas de la versión 25.10 La versión 25.10 está escrita en las estrellas ✨ Actualizaciones del juego 2025-02-19T19:00:00.000Z Notas de la versión 25.04 ¡No os perdáis la última versión del acto 1! Actualizaciones del juego 2024-08-13T18:00:00.000Z Notas de la versión 14.16 ¡Celebrad la grandeza durante la versión 14.16! Actualizaciones del juego 2023-02-07T19:00:00.000Z Notas de la versión 13.3 Preparaos para una versión cósmica, ¡ya está aquí la 13.3! Actualizaciones del juego 2022-12-06T19:00:00.000Z Notas de la versión 12.23 ¡Ya está aquí la versión 12.23, la última del año! Actualizaciones del juego 2022-11-01T18:00:00.000Z Notas de la versión 12.21 ¡Ya está aquí la final del Campeonato Mundial de LoL! ¡Y K'Sante! ¡Y la pretemporada está a la vuelta de la esquina! Con tantas cosas a las que prestar atención, aquí tenemos la versión 12.21, porque lo bueno y breve... Actualizaciones del juego 2022-10-04T18:00:00.000Z Notas de la versión 12.19 ¿Mejoras a Blitzcrank luchador? ¿Mejoras a Rakan de PH? ¿Estamos soñando o ya es la versión 12.19? ¡Os damos la bienvenida a una versión llena de mejoras fuera del metajuego! Actualizaciones del juego 2022-09-07T18:00:00.000Z Notas de la versión 12.17 ¡La penúltima versión antes del mundial! Actualizaciones del juego 2022-06-07T18:00:00.000Z Notas de la versión 12.11 ¡Uníos a Bel'Veth y al mar lavanda en la versión 12.11!"
+      ],
+      "subsections": []
+    }
+  ],
+  "assets": [],
+  "scraper_version": "legacy-v33b",
+  "raw_html_ref": null
+}

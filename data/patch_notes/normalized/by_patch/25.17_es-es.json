@@ -1,0 +1,265 @@
+{
+  "publisher": "riot",
+  "game": "lol",
+  "channel": "site",
+  "source_locale": "es-es",
+  "patch_version": "25.17",
+  "title": "Notas de la versión 25.17",
+  "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/patch-25-17-notes",
+  "published_at": "2025-08-26T00:00:00Z",
+  "fetched_at": "2026-05-15T07:30:56.326583Z",
+  "content_hash": "26fd86a44ca759545192cc026a055c1a4de0182740cf0a0016fe82502d783f6e",
+  "summary": "¡Os damos la bienvenida a la Temporada 3! En esta versión, tenemos un montón de actualizaciones a lo largo y ancho del juego, como el regreso del mapa normal de la Grieta del Invocador para la Temporada 3 y el modo Bots Malditos, el lavado de cara a Xin Zhao, un nuevo pase de bat…",
+  "sections": [
+    {
+      "title": "Introducción",
+      "heading_level": 2,
+      "blocks": [
+        "¡Os damos la bienvenida a la Temporada 3! En esta versión, tenemos un montón de actualizaciones a lo largo y ancho del juego, como el regreso del mapa normal de la Grieta del Invocador para la Temporada 3 y el modo Bots Malditos, el lavado de cara a Xin Zhao, un nuevo pase de batalla, mejoras a la información de seguimiento de partida, como los temporizadores de la jungla, y un porrón de mejoras de calidad y correcciones de errores. También tenemos cambios de equilibrio para ARAM y el reinicio de la fama de Arena. Esta es la segunda versión consecutiva en la que nos centramos en añadir nuevas herramientas con las que jugar. Sumamos a Vayne y a Sett a la jungla, a Irelia PH y a Kayn como campeón de la fase de calles. Aprovechamos también para reforzar los objetos más débiles, ¡así tendréis que replantearos las configuraciones de DA de asesinos y de velocidad de PH! Además, traemos algunos cambios de equilibrio a pequeña escala, como seguimiento a los últimos cambios. ¿Buscáis más información sobre League of Legends? Echad un vistazo a la wiki de nuestra comunidad aquí . ¡ Aquí tenéis las notas de la versión de TFT! Caden \"Riot Sakaar\" House Los platos fuertes de la versión"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Los platos fuertes de la versión",
+      "heading_level": 2,
+      "blocks": [
+        "Garen visión de los caídos, Tryndamere visión de los caídos, Jhin arcano, Lulu arcana, Alistar bosque ancestral y Jarvan IV visión de los caídos de prestigio estarán disponibles el 27 de agosto de 2025. ¡Ya está aquí la Temporada 3!"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "¡Ya está aquí la Temporada 3!",
+      "heading_level": 2,
+      "blocks": [
+        "Pase de batalla de la Temporada 3: Acto 1 Además de esta actualización, ¡tenemos un nuevo pase de batalla de temporada! Echad un vistazo a Lulu arcana, Jhin arcano, Jarvan IV visión de los caídos de prestigio, emoticonos, iconos y mucho más. Este también será el primer pase que cuente con 48 niveles, en lugar de 50. La EXP necesaria por nivel sigue siendo la misma, así que os debería resultar más rápido completarlo. Os dejamos todas las recompensas del pase a continuación: Nivel 1: 3 orbes de los Oscuros Nivel 2: Icono Belleza imperfecta Nivel 3: 3000 esencias azules Nivel 4: Chispa ancestral Nivel 5: Icono misterioso Nivel 6: Campeona permanente - Lulu Nivel 7: Cofre y llave hextech Nivel 8: Lulu arcana Nivel 9: Icono Lulu arcana + borde Nivel 10: Icono misterioso Nivel 11: Cápsula de campeón Nivel 12: Emoticono ¿Dónde está mi ayudante? Nivel 13: Icono Coronación de la Ruina Nivel 14: 3000 esencias azules Nivel 15: Emoticono Gira y gira sin parar Nivel 16: Cofre y llave hextech Nivel 17: Orbe de los Oscuros Nivel 18: Cofre y llave hextech Nivel 19: Emoticono Ninja dorado Nivel 20: Icono misterioso Nivel 21: 3000 esencias azules Nivel 22: Campeón permanente - Jhin Nivel 23: Orbe de los Oscuros Nivel 24: Jhin arcano Nivel 25: Icono Jhin arcano + borde Nivel 26: Icono misterioso Nivel 27: Cofre y llave hextech Nivel 28: Emoticono misterioso Nivel 29: Mirada de los Oscuros Nivel 30: Cofre y llave hextech Nivel 31: Cápsula de campeón Nivel 32: 25 esencias míticas Nivel 33: Icono La Rosa Negra no olvida Nivel 34: Orbe de los Oscuros Nivel 35: Cápsula de campeón Nivel 36: Cofre y llave hextech Nivel 37: 500 esencias naranjas Nivel 38: Cofre y llave hextech Nivel 39: Cápsula de campeón gloriosa Nivel 40: Título Disciplina del crepúsculo Nivel 41: Icono Sello del senescal Nivel 42: Emoticono misterioso Nivel 43: Cofre y llave hextech Nivel 44: Estandarte de Desafíos del crepúsculo Nivel 45: 500 esencias naranjas Nivel 46: Campeón permanente - Jarvan IV Nivel 47: Orbe de los Oscuros Nivel 48: Jarvan IV visión de los caídos de prestigio Misiones recurrentes: Nivel 49: 750 esencias azules Nivel 50: 750 esencias azules Nivel 51: 750 esencias azules Nivel 52: 25 esencias naranjas Nivel 53: 750 esencias azules Nivel 54: 750 esencias azules Nivel 55: 750 esencias azules Nivel 56: 25 esencias naranjas Comienzo de la Temporada clasificatoria 3 La Temporada clasificatoria 3 comenzará el 27 de agosto a las 12:00 (hora local). De forma similar en el paso de la Temporada 1 a la 2, el progreso de PL clasificatorios no se reiniciará, pero la misión victoriosa sí (necesitaréis ganar 15 partidas clasificatorias). La cola clasificatoria se desactivará durante el periodo en el que la temporada clasificatoria no esté disponible, es decir, unas 12 horas. Las recompensas de final de la Temporada clasificatoria 2 se enviarán a lo largo de los días posteriores al comienzo de la temporada. El servicio de transferencia se deshabilitará temporalmente antes de que concluya la temporada y volverá a estar disponible una vez se otorguen las recompensas pertinentes. Atakhan (ahora con armas) En esta versión, veréis que Atakhan tiene un arma normal y corriente. A nivel de mecánicas no supone ningún cambio, es más un ajuste visual, que vemos venir a los fans de las historias y los secretos ávidos de información. Es que le apetecía tener un arma sin más, quién sabe. Actualización visual de Xin Zhao"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Actualización visual de Xin Zhao",
+      "heading_level": 2,
+      "blocks": [
+        "Ya tenemos aquí la actualización visual de Xin Zhao, con modelos, animaciones, iconos de habilidad, doblaje, efectos visuales, efectos de sonido, ilustraciones y aspectos actualizados. De forma similar a actualizaciones visuales anteriores de otros campeones, los aspectos de Xin Zhao comando e imperial van a aumentar de precio, de 520 a 750 RP, para reflejar esta mejora de calidad. Si no tenéis estos aspectos, podréis haceros con ellos a un precio reducido antes de que implementemos la actualización visual mañana, ¡así que daos prisa! Además, hemos desempolvado sus aspectos para que estén disponibles hasta la versión 25.18, así que si no tenéis alguno, ¡aprovechad ahora! Estad pendientes de la nueva música de campeón de Xin Zhao, que estará disponible el viernes 29 de agosto. Actualización de Xin Zhao y páginas de los campeones en Universo"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Actualización de Xin Zhao y páginas de los campeones en Universo",
+      "heading_level": 2,
+      "blocks": [
+        "Con la actualización de Xin Zhao en la versión 25.17, vamos a modificar la presentación de su historia en la página de Universo para representar mejor el estado del campeón en las historias de temporada en el momento de su lanzamiento. Esta modificación reflejará toda la información publicada hasta la fecha, a través de las temporadas, los diferentes cómics animados y el metajuego de la Temporada 2. Para quienes necesitáis más información sobre la línea temporal: Las tres temporadas de 2025 tienen lugar directamente tras los sucesos de Arcane, poco después del golpe de estado de Swain en Noxus, pero antes de los eventos más recientes, como la rebelión de Sylas en Demacia. Conforme vayan pasando las temporadas, iremos buscando la forma de reflejar la historia de nuestros campeones en sus páginas de Universo, independientemente de si se cuenta en metajuegos, en cómics animados, cinemáticas o cualquier otro lugar. Bots Malditos"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Bots Malditos",
+      "heading_level": 2,
+      "blocks": [
+        "Con la llegada de la versión 25.17, ¡también damos la bienvenida de nuevo a este icónico (aunque no tan nuevo) modo de juego! Bots Malditos regresa después de pasar por chapa y pintura, con algunas novedades bajo la manga. Bots Malditos es un modo de juego PvE en el que cinco jugadores se enfrentan a Veigar y a su ejército de bots superchetados. Vuestro objetivo consiste en sobrevivir a los bots durante 15 minutos para, después, ¡derrotar a Veigar mientras protegéis el nexo! Si no habéis jugado desde la última vez que estuvo disponible, ¡os adelantamos que incluye jefes, bots, maldiciones y un modo de dificultad totalmente nuevos! Si os gustaría saber más, aquí tenéis un artículo de desarrollo con todos los detalles de lo que encontraréis en el modo. Desafíos de la muerte En esta versión de Bots Malditos, ¡encontraréis los Desafíos de la muerte! Los Desafíos de la muerte son versiones de Bots Malditos donde añadimos o cambiamos elementos principales del modo de juego para crear desafíos concretos que tendréis que superar para derrotar a Veigar. En las primeras tres versiones de Bots Malditos, habrá un Desafío de muerte diferente. En la última versión del modo, se reactivarán los tres desafíos para que podáis haceros con esas victorias que se os hayan resistido. Si conseguís superar todos los desafíos de Veigar, recibiréis el título Esto no es un bot. Nosotros nos morimos de ganas por echarle el guante, ¡así que nos vemos en el modo de juego! La maldad de Veigar El primer desafío es La maldad de Veigar. En este desafío, todos los bots malditos reciben la pasiva de Veigar, Maldad increíble. Esto significa que, cada vez que aciertan una habilidad, obtienen fuerza adaptable. Además, las maldiciones y las habilidades de Veigar no serán temporales, sino que estarán activas durante toda la partida. Así que, al minuto 15, ¡habrá 10 maldiciones diferentes activas! ¡Toca mover el esqueleto! Pero no todo va a ser de color de rosas para el villano más malvado de todos. Para que podáis plantarle cara, tenéis un montón de velocidad de objetos, así como un objeto prismático adicional en la tienda: la Corona del rey demonio. Reunid al mejor equipo posible, decidid una estrategia e intentad superar la maldad de Veigar. Mejoras del seguimiento de la información de partida"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Mejoras del seguimiento de la información de partida",
+      "heading_level": 2,
+      "blocks": [
+        "Hace ya un tiempo que lanzamos League of Legends, y cuenta con un ecosistema de aplicaciones de lo más amplio. Estas aplicaciones proporcionan muchísima información a quienes las descargan, pues ayudan a los jugadores a elegir las mejores configuraciones de objetos y runas, les muestran la información de su rendimiento, proporcionan información sobre el equipo y los rivales, o añaden funcionalidades al juego, como temporizadores a los monstruos de la jungla o los hechizos de invocador, entre otros. Durante todo este tiempo, hemos recibido comentarios en los que nos indicáis que no es justo que solo algunos de los jugadores tengan acceso a estas funciones, y coincidimos con vosotros. La integridad competitiva de LoL es de vital importancia para nosotros y queremos protegerla a toda costa, pero también sabemos lo útiles que son algunas de estas funciones. Para poder sacar partido a lo mejor de ambas partes, vamos a actualizar nuestra Política de aplicaciones de terceros y a restringir el uso de algunas funciones. Además, vamos a añadir otras funciones al juego para que todos los jugadores tengan acceso a ellas. Temporizadores de la jungla en el minimapa En su época, LoL no contaba con contadores de objetivos ni anuncios globales. La única forma de saber si alguien había asesinado al dragón era siendo testigo de dicha hazaña o asomándose al foso. A lo largo del tiempo, hemos añadido temporizadores en la pestaña a la que podéis acceder con el tabulador para animaros a coordinaros y luchar por estos objetivos, lo que nos ha dado algunos de los momentos más increíbles de LoL. Y ahora, nos centramos en el presente. Los temporizadores del minimapa son una de las funciones más usadas por aplicaciones de terceros, así que hemos decidido apostar por ella. Para que el minimapa por defecto siga siendo de utilidad para todos los jugadores, tenemos dos opciones: la vista básica y la avanzada. En la vista básica, encontraréis los temporizadores de los campamentos épicos, pero se usará un icono de un reloj de arena para el resto de campamentos, el cual se mostrará 30 y 10 segundos antes de que reaparezcan. Sin embargo, al pulsar el tabulador, encontraréis los temporizadores de todos los campamentos, por lo que tendréis ambas opciones a mano sin sobrecargaros de información. En la vista avanzada, se muestra toda la información de todos los campamentos. Encontraréis esta opción en la sección Interfaz del menú de ajustes. Para asegurarnos de que el minimapa sigue siendo legible y que los campamentos más importantes destaquen, los temporizadores tendrán un aspecto diferente y resonarán con más fuerza en función del tiempo que quede para su reaparición. Con este cambio, esperamos que podáis centraros más en las calles, seguir una ruta determinada y planificar con tiempo vuestro siguiente gran objetivo, en lugar de ir mirando cuándo reaparecen los campamentos. Buscamos equilibrar la experiencia de juego, dando lugar a una mayor coordinación alrededor de los objetivos y facilitando el rol de jungla. Se han añadido los temporizadores de la jungla al minimapa. En la vista básica, se muestran los temporizadores de los campamentos épicos. Los temporizadores de los demás campamentos estarán disponibles al pulsar el tabulador. En la vista avanzada, se muestran los temporizadores de todos los campamentos en todo momento. Disponible en la sección Interfaz de los ajustes. Registro de muertes y seguimiento de los hechizos de invocador A principios de este año, trabajamos con los desarrolladores de aplicaciones de terceros para eliminar la información sobre el enfriamiento de las definitivas de los enemigos, ya que creemos que se requiere de una gran destreza para llevar el tiempo de las habilidades más importantes. Puede suponer la diferencia entre saber que una incursión saldrá bien o que vuestro oponente haga una jugada increíble en un combate de uno contra dos, y eso es lo que le da vidilla al juego. De forma similar, vamos a restringir las herramientas que permiten controlar el enfriamiento. Teniendo esto en cuenta, haremos ciertas mejoras para que podáis saber cuándo se han usado ciertas habilidades definitivas y habilidades para ayudar a coordinaros como equipo. Cuando Diana use todas sus habilidades para mataros, veréis dichas habilidades en el registro de muertes, y podréis enviar alertas sobre las mismas sin tener que abrir la tabla de puntuaciones. Ahora también aparecerán hechizos que no infligen daño, como Destello o Teleportar. En el chat, podréis enviar una alerta que indique que Diana ha usado Destello. Y si enviáis la misma alerta tres veces mientras estáis delante de un espejo, igual vuestro jungla le hace una visita antes de que se vuelva a la base. Además, si estáis jugando a Yorick en la calle superior y decidís cotillear en la calle inferior, podréis enviar una alerta sobre un hechizo desde la tabla de puntuaciones en los 15 segundos posteriores a su uso, ¡así todo el mundo sabrá que Jinx ha usado Destello! Por otro lado, ya que estábamos con esto, hemos desplazado el registro de muertes y hemos añadido vuestra contribución al combate, con el daño infligido, el control de adversario aplicado y el oro que habéis ganado. Se ha desplazado el registro de muertes al lateral de la pantalla y ahora podéis mostrarlo u ocultarlo a vuestro antojo. Ahora se mostrarán todos los hechizos de invocador y las habilidades definitivas que se usen en el registro de muertes, incluso las que no infligen daño, como Destello. Al enviar una alerta sobre una habilidad del registro de muertes, se mostrará en el chat de texto. Si una unidad aliada ve que se ha usado una habilidad o un hechizo y enviáis una alerta desde la tabla de puntuaciones en los 15 segundos posteriores, esto también se mostrará en el chat de texto. Se ha añadido información sobre la contribución al combate (daño infligido, oro ganado) al registro de muertes. Campeones"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Campeones",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce la armadura básica y aumenta el crecimiento de la velocidad de ataque. Se reduce la ralentización de la R en los niveles más bajos. En manos expertas, Gwen sigue siendo muy poderosa, sobre todo tras los cambios de la versión 15.6. Aunque los jugadores de Gwen han disfrutado de lo lindo arrasando en la fase de calles, queremos que tenga rivales a los que temer y no pueda darle la vuelta a la situación sin más al nivel 6. Aun así, vamos a compensar esta debilitación para no dejar a su kit tiritando. Estadísticas básicas Armadura : 36 ⇒ 33 . Crecimiento de la velocidad de ataque : 2,25 % ⇒ 2,5 % . R - Bordado Ralentización inicial : 60 % ⇒ 30/45/60 % . Ralentización posterior : 25 % ⇒ 15/20/25 % ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta la relación de PH de la W. Se reduce el enfriamiento de la E en los niveles superiores y se aumenta la relación de daño de PH. La versión de PH de Irelia no está recibiendo nada de amor, así que vamos a darle un toque mágico a la campeona mejorando su explosividad al apostar por el poder de habilidad. Nos vamos a centrar en sus tiros de habilidad para que tenga un estilo de juego diferente al de sus configuraciones de DA. W - Danza desafiante Daño mínimo : 10/20/30/40/50 (+40 % del DA) (+40 % del PH) ⇒ 10/20/30/40/50 (+40 % del DA) (+50 % del PH) . Daño máximo : 30/60/90/120/150 (+120 % del DA) (+120 % del PH) ⇒ 30/60/90/120/150 (+120 % del DA) (+150 % del PH) . E - Dúo impecable Enfriamiento : 16/15/14/13/12 ⇒ 16/14,5/13/11,5/10 . Daño : 70/110/150/190/230 (+80 del PH) ⇒ 70/110/150/190/230 (+100 % del PH) ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el daño de la Q. Aumenta el daño de la E. El porcentaje de victorias de Kassadin está cayendo en picado, como su índice de selección. Para ponerle remedio, vamos a potenciar su daño al final de la partida. De esta forma, os empujamos a asumir riesgos para obtener grandes recompensas, algo que sabemos que os encanta con este campeón. Q - Esfera negativa Daño : 65/95/125/155/185 (+60 % del PH) ⇒ 65/95/125/155/185 (+70 % del PH) . E - Pulso de fuerza Daño : 70/100/130/160/190 (+65 % del PH) ⇒ 70/100/130/160/190 (+70 % del PH) ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el coste de maná de la Q y la W. Hay un montón de jugadores a los que les encanta jugar a Kayn (Layn) en las calles, y queremos que tengan oportunidad de ganar las partidas. Para ello, y sin que suponga una mejora para Jayn (Kayn jungla), vamos a reducir el coste de maná, de esta forma podrá despejar las oleadas de súbditos y lanzarse a por su rival en la fase de calles con mayor facilidad. Q - Corte de guadaña Coste de maná : 50 ⇒ 40 . W - Golpe de hoja Coste de maná : 60/65/70/75/80 ⇒ 40/45/50/55/60 ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el daño de la Q. Aumenta el daño de la W. Aumenta el daño de la R en los niveles superiores. Hace muchas temporadas, la Boca del Abismo era un campeón que habitaba la calle central y hostigaba a los rivales de lo lindo para dar rienda suelta a un gran poder a final de partida. En realidad, tampoco está tan lejos de llegar a ser el que era, así que vamos a otorgarle algo más de poder para hacer realidad esa fantasía. Eso sí, sin que su versión de la calle inferior apueste por el PH para eliminar las oleadas de súbditos más rápido. Q - Baba cáustica Daño : 80/125/170/215/260 (+80 % del PH) ⇒ 80/125/170/215/260 (+90 % del PH) . W - Andanada bioarcana Daño de impacto : 3/3,75/4,5/5,25/6% (+1 % por cada 100 de PH) de la vida máx. del objetivo ⇒ 3/3,75/4,5/5,25/6% (+1,5 % por cada 100 de PH) de la vida máx. del objetivo . R - Artillería viviente Daño mínimo : 100/140/180 (+75 % del DA adicional) (+35 % del PH) ⇒ 100/140/180 (+75 % del DA adicional) (+35/40/45 % del PH) . Se sigue duplicando el daño máximo."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce la vida básica. Se reduce el daño de la Q. Las correcciones que permitían que la Q de Maestro Yi aplicase Verdugo de krakens y El final han supuesto una clara mejora para el campeón. Ahora que el sistema le favorece, vamos a reducir su poder al apostar por objetos con efectos al impactar. De esta forma, será más vulnerable al principio de la partida, lo que le bajará los humos. Estadísticas básicas Vida básica : 669 ⇒ 655 . Q - Golpe fulgurante Modificador de daño de impacto : 75 % ⇒ 65 % ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el DA básico. Ojalá hubiera una forma de describir el estado actual de Miss Fortune. Puf, no se me ocurre ninguna... En fin, vamos a darle un poco de amor en esta versión para que no se quede atrás. Estadísticas básicas Daño de ataque básico : 53 ⇒ 55 ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el coste de maná de la W en los niveles superiores. Aumenta el daño de la W en los niveles inferiores. En la última versión, nos quedó muy claro cuánto poder ha obtenido cada rol al mejorar la coherencia del daño de la W de Morgana. Ahora que se han asentado los cambios, vamos a hacerle otra visitilla para mejorarla directamente, a fin de permitirle luchar mejor hacia el principio de la partida y de conseguir que despejar las oleadas de súbditos hacia el final le resulte menos inclemente. W - Sombra atormentada Coste de maná : 70/85/100/115/130 ⇒ 70/80/90/100/110 . Daño mínimo por segundo : 14/28/42/56/70 ⇒ 18/31/44/57/70 ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el daño secundario de la Q a monstruos. Este cambio no convertirá a Nilah en una jungla viable, pero la restricción actual al poquísimo daño por salpicadura que inflige a los monstruos de la jungla no es necesaria. Vamos a eliminar esta modificación innecesaria por el momento y, más adelante, igual profundizamos en esto para conseguir que sea viable en dicho rol. Q - Hoja sin forma Daño secundario a monstruos : 10 % del DA total ⇒ 100 % del DA total ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el daño de la pasiva. Se reduce el daño de la Q en los niveles superiores. El porcentaje de victorias de Rumble ha crecido muchísimo desde los cambios que implementamos en la versión anterior, por lo que vamos a pasar a otra parte el poder de Escupellamas y Titán del desguace. Pasiva - Titán del desguace Daño sobrecalentado : 5-40 (+25 % del PH) + 5 % de la vida máxima del objetivo ⇒ 5-40 (+25 % del PH) (+4 % de la vida máxima del objetivo) . Q - Escupellamas Daño a lo largo de 3 s : 60/90/120/150/180 (+100 % del PH) + 6/6,5/7/7,5/8 % de la vida máxima del objetivo ⇒ 60/85/110/135/160 (+100 % del PH) + 6/6,5/7/7,5/8 % de la vida máxima del objetivo."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el crecimiento de la velocidad de ataque. Aumenta la curación de la Q. Actualmente, el rendimiento de Senna en la calle inferior deja mucho que desear, e incluso más como apoyo. Vamos a devolverle parte del crecimiento de la velocidad de ataque que tenía anteriormente para mejorar sus configuraciones de ataque, y también potenciaremos un poquito la curación básica de su Q. Estadísticas básicas Crecimiento de la velocidad de ataque : 2 % ⇒ 2,6 % . Q - Oscuridad lacerante Curación : 40/55/70/85/100 (+40 % del DA adicional) (+50 % del PH) ⇒ 40/60/80/100/120 (+40 % del DA adicional) (+50 % del PH)."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el daño de la E contra monstruos. Sett está mucho más cerca de ser viable en la jungla de lo que cree la gente, pero sigue necesitando un empujoncito para conseguirlo. ¡Disfrutad! E - Trastazo Daño adicional a monstruos : 100 ⇒ 125-250 (según el nivel) ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el daño de la Q por aplicación. Singed se ha sometido a múltiples cambios con la versión anterior y eso ha provocado que la primera activación de daño de Singed en el bando rojo fuese instantánea, en lugar de tardar 0,25 s, y que el veneno de Singed en el bando azul se reiniciase de una forma mucho más fiable. El resultado de estos cambios es que, en la mayoría de los casos, Singed inflige mucho más daño en casi todos los contextos. Vamos a implementar diversos cambios entre bastidores a la duración del veneno para que Rastro de veneno se asemeje más a su versión anterior, pero sin las diferencias que hay cuando se juega en los lados azul o rojo. Q - Rastro de veneno Duración : 2,2 s ⇒ 2 s . Pulsos de daño máximos por aplicación : 9 ⇒ 8 ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Ahora, las setas (y los huevos y demás objetos) son mucho más visibles. Vamos a hacer un pequeño cambio visual que permitirá que las trampas de Teemo sean más fáciles de distinguir. Seguirán volviéndose invisibles y sus mecánicas serán idénticas, pero ahora serán más opacas para que distingáis qué son antes de que os exploten en toda la cara. R - Trampa ponzoñosa Opacidad de trampa : 30 % ⇒ 50 % ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el daño de la W a monstruos. Vayne jungla está mucho más cerca de ser viable en la jungla de lo que cree la gente, pero la mayoría de los jugadores no tienen ni idea del orden que deberían seguir con las habilidades. Si queréis jugar con Vayne en la jungla, deberíais empezar con Proyectiles de plata y, después, maximizar Pirueta. ¡Disfrutad! W - Proyectiles de plata Daño a monstruos : 6/7/8/9/10 % de la vida máxima, con un límite de 200 ⇒ 140/155/170/185/200 de daño independientemente de la vida ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Hemos corregido múltiples errores que provocaban que Yunara infligiese más o menos daño del intencionado con los efectos de impacto. Conforme los jugadores han ido mejorando con Yunara, esta se ha convertido en una de las ADC más poderosas del juego. Esta versión trae consigo correcciones para diversos errores que debilitarán su popular configuración de Verdugo de krakens + Huracán. Seguiremos atentos a las métricas de su rendimiento para ver qué tal se asientan estos cambios. Q - Florescencia del espíritu Hemos corregido un error que provocaba que, a veces, el rebote pudiese generar múltiples acumulaciones por rebote para algunos objetos. La idea es que Yunara genere una acumulación por rebote. Hemos corregido un error que provocaba que, a veces, algunos objetos no infligiesen daño con los rebotes de la Q en aquellas situaciones en las que se daba una gran cantidad de rebotes (los poros que hay entre bastidores con calculadoras ya están listos). Hemos corregido un error que provocaba que algunos objetos, como Huracán de Runaan, infligiesen el daño de impacto total al rebotar de un objetivo secundario al objetivo principal, por lo que el daño de impacto total se activaba múltiples veces con un solo autoataque. Hemos corregido un error que provocaba que el daño de impacto de los dardos de Huracán de Runaan se redujese incorrectamente, por lo que ahora aplicarán el daño de impacto total de forma correcta. Objetos"
+          ],
+          "subsections": []
+        }
+      ]
+    },
+    {
+      "title": "Objetos",
+      "heading_level": 2,
+      "blocks": [
+        "Arco axiomático Arco axiomático es demasiado débil e impopular para tratarse de un objeto de DA legendario para asesinos. Vamos a sacarle brillo para que sea viable entre el mundillo de los asesinos, permitiendo que acumulen poder antes gracias a esta compra. Coste total de oro : 3000 ⇒ 2750 . Precisión infalible Precisión infalible sigue siendo una opción poco popular como objeto agresivo de PH y velocidad de habilidades, sobre todo porque es un tanto débil. Vamos a mejorar su viabilidad haciendo que resulte más sencillo incluirlo en vuestras configuraciones, y asegurándonos de que su daño merezca la pena. Poder de habilidad : 115 ⇒ 125 . Coste total de oro : 2800 ⇒ 2750 . Receta : Códice diabólico + Códice diabólico + Vara explosiva + 250 de oro ⇒ Códice diabólico + Códice diabólico + Vara explosiva + 200 de oro . Hidra profana Hidra profana es un objeto para asesinos un tanto débil actualmente y no consigue encajar del todo con la curva de poder típica de los asesinos de DA, que intentan acumular poder rápidamente. A fin de mejorar este objeto sin que se nos vaya de las manos hacia el final, vamos a convertirlo en una opción más competitiva hacia el principio rebajándolo un cacho. Daño de ataque : 60 ⇒ 55 . Coste total de oro : 3200 ⇒ 2850 . Receta : Tiamat + Embrutecedor + 663 de oro ⇒ Tiamat + Embrutecedor + 313 de oro . Actualización por la Temporada 3 de Arena"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Actualización por la Temporada 3 de Arena",
+      "heading_level": 2,
+      "blocks": [
+        "De cara a la Temporada 3, ¡vamos a actualizar las recompensas de Arena! Los aumentos que anteriormente estaban incluidos en las recompensas ahora se desbloquearán de forma automática, por lo que lucharéis por conseguir otras recompensas nuevas. Los aumentos nuevos están repartidos en un total de 12 niveles: Nuevas recompensas de fama Guardaespaldas Poder mejorado Entrada al enfrentamiento Valentía sin igual Cambio adicional Cerbero Infusión espiritual Entrada al enfrentamiento Misión: Sombrerero loco Riesgo calculado La caja de Pandora Entrada al enfrentamiento Selección de campeón Hemos fusionado las fases de bloqueo y selección de campeón. Durante la selección de campeón, ambos jugadores deberán bloquear y elegir campeones al mismo tiempo, a fin de disfrutar de una experiencia más breve en la sala. Podréis ver las elecciones de los rivales cuando hayan terminado de seleccionarlas. La duración total de cada fase ha pasado de 35 s a 40 s. Aumentos Locomotora Nos gusta este aumento, pero tiene demasiado impacto y no encaja bien con los aumentos plateados. En lugar de debilitarlo, lo hemos convertido en un aumento dorado a fin de que su poder sea más equiparable al de otras opciones. El nivel de rareza ha pasado de plateado a dorado. Sobrecarga Lo mismo que con Locomotora. El nivel de rareza ha pasado de plateado a dorado. Valentía Estamos muy contentos con el patrón de juego de Valentía, pero es algo débil, por lo que vamos a potenciarla un poco. Yunque de estadísticas adicional : Sin cambios. Cambios iniciales adicionales : 2 ⇒ 1 . NOVEDAD : 2 cambios adicionales en las rondas de los Yunques de estadísticas. NOVEDAD : 100 de oro adicional en las rondas de objetos legendarios. Mejoras de calidad y corrección de errores de Arena Mejoras de calidad Ya no se obtienen sombreros al eliminar a un equipo, ni tampoco se pierden al morir. Hemos añadido más aumentos que interactúan con los sombreros, por lo que hemos decidido actualizar esto antes de implementar las nuevas interacciones que traerá consigo esta versión. Ahora, los aumentos Transmutar y Mutación indican el aumento en el que se transformarán en su descripción. La posibilidad de salir antes de tiempo mientras el combate sigue en marcha vuelve a estar disponible con esta versión. Hemos corregido un problema que provocaba que los campeones que se transforman, como Viego o Nidalee, no progresasen en lo relativo a la fama de Arena. Hemos corregido un error que otorgaba a los aliados de Kled su Q. Cambios de equilibrio de ARAM"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Cambios de equilibrio de ARAM",
+      "heading_level": 2,
+      "blocks": [
+        "¡Saludos, dioses, diosas y deidades de ARAM! En esta versión, intentaremos potenciar a los luchadores dando un poquito de amor a los objetos que más compran y haciendo algún que otro favorcillo a los objetos para asesinos menos populares. La mayoría de los cambios de esta versión estarán relacionados con eso, pero también hemos preparado ajustes para casos extremos como los de Ziggs, cuya popularidad subió como la espuma tras los recientes cambios que experimentó en la Grieta del Invocador, y Maokai, que ha florecido ahora que sabe demasiado bien qué debe comprar. Esperamos que estéis disfrutando de los mapas en rotación y del nuevo sistema de cartas. Buenas suerte, que siempre os toquen vuestros campeones favoritos, ¡y nos vemos en ARAM! Sistemas Mapa de Aguas Estancadas Radio de levantamiento del cañón de Aguas Estancadas : 275 ⇒ 325 . Velocidad del vuelo del cañón de Aguas Estancadas : 2300 ⇒ 2800 . Puente de Koeshin Hemos reducido el radio de activación de los portales para evitar que los crucéis por accidente. Hemos perfilado la zona de los nexos y los portales para TKTK Campeones Kai'Sa Relación de DA adicional de la Q : 55 % ⇒ 65 % . Maokai Reducción de enfriamiento de la pasiva : 4 s ⇒ 3 s . Enfriamiento de la Q : 7/6,5/6/5,5/5 ⇒ 8/7,5/7/6,5/6 . Shyvana Regeneración de furia por acumulación de la pasiva : 0,1 ⇒ 0,2 . Resistencias adicionales por acumulación de la pasiva : 1 ⇒ 1,5 . Ziggs Relación de PH de la Q : 60/65/70/75/80 % ⇒ 60/62,5/65/67,5/70 % . Relación de PH de la E : 25/30/35/40/45 % ⇒ 25/27,5/30/32,5/35 % . Duración de la E : 10 s ⇒ 7 s . Objetos Baile de la muerte Curación adicional según el DA : 75 % ⇒ 100 % . Eclipse Relación de DA adicional del escudo : 40 %/20 % ⇒ 50 %/25 % . Filo de la noche Enfriamiento : 40 ⇒ 30 . Tormento de Liandry Porcentaje de vida de la quemadura : 2 % ⇒ 1,75 % . Hidra voraz Relación de DA de la activa : 80 % ⇒ 100 % . Sable espectral Hemos corregido la función que permite finalizar su efecto antes de tiempo, que permitía a algunos campeones teleportar al enemigo a la ubicación inicial. Calibrador de Sterak DA adicional según el DA básico : 45 % ⇒ 50 % . Relación del escudo en función de la vida adicional : 60 % ⇒ 70 % . Cortasendas Relación de DA de la activa : 80 % ⇒ 100 % . Velocidad de movimiento por campeón golpeado : 35 % ⇒ 45 % . Filo fantasmal de Youmuu Velocidad de movimiento fuera de combate : 20/10 ⇒ 30/15 . Velocidad de movimiento de la activa : 20/15 % ⇒ 40/35 % . Rotación de mapas de ARAM Probabilidades de rotación de los mapas Ahora que se ha terminado la Temporada de Florecer espiritual, las probabilidades de aparición de cada mapa de la rotación serán equivalentes para todos los mapas de ARAM. Probabilidades de selección de los mapas : 50/25/25, a favor del Paso de Koeshin ⇒ Misma probabilidad para cada mapa (33,333333 %) (ya sabéis). Aspectos"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Aspectos",
+      "heading_level": 2,
+      "blocks": [
+        "Regreso al sanctasanctórum Vamos a probar a recuperar variantes míticas pasadas, empezando por Almirante Miss Fortune conejo de batalla, y a modificarlas para que encajen en el formato del sanctasanctórum actual (40 tiradas máx.). Además, el emoticono mítico contará como recompensa de rango A. El icono mítico se añadirá a la sección destacada de la tienda mítica, y podréis conseguirlo por 5 esencias míticas durante el evento. Además, pasará a formar parte de la rotación diaria. Sin embargo, de forma similar a los aspectos de prestigio que vuelven a la tienda mítica, el icono y el borde no estarán disponibles al mismo tiempo, ya que queremos asegurarnos de que los jugadores que los consigan al principio tengan cierta distinción. Aspectos rescatados de Bots Malditos Desde que anunciamos el regreso de Bots Malditos, montones de jugadores estudiaron los vídeos detenidamente y se percataron de que estábamos utilizando aspectos antiguos. Nos habéis pedido muchísimo que rescatemos dichos aspectos, ¡así que vamos a hacerlo para celebrar el retorno de Bots Malditos! Los aspectos rescatados estarán disponibles para su compra directa a partir de la versión 25.17 y estarán disponibles hasta que Bots Malditos nos abandone al final de la versión 25.20. Jinx exterminadora - 1350 RP Wukong del inframundo - 1350 RP Soraka segadora de almas - 1350 RP Brand zombi - 1820 RP Tristana diablilla - 1350 RP También vamos a añadir algunos de los chromas especiales de Bots Malditos, pues los que llevan equipados no están disponibles. Los chromas especiales del evento estarán disponibles en la sección destacada de la tienda mítica a cambio de 35 EM. Los implementaremos en una futura versión (probablemente, en la versión 25.18). Tras la marcha de Bots Malditos, se añadirán a la rotación semanal. Los chromas serán para los siguientes aspectos: Jinx exterminadora Wukong del inframundo Soraka segadora de almas Brand zombi Corrección de errores y mejoras de calidad"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Corrección de errores y mejoras de calidad",
+      "heading_level": 2,
+      "blocks": [
+        "Mejoras de calidad Partidas personalizadas ¡Las partidas personalizadas van a recibir unas cuantas mejoras! Hemos actualizado por completo los sistemas secundarios de las partidas personalizadas, y hemos aprovechado para implementar diversas mejoras de calidad. ¡El botón \"Volver a jugar\" vuelve a funcionar! Ahora el chat de voz de LoL funcionará en las partidas personalizadas aunque los espectadores estén deshabilitados. Ahora será posible cambiar el modo de juego sin tener que crear otra sala, lo que incluye salir de una partida personalizada para pasar a una de un modo emparejado. Ahora será posible ocultar una sala en la lista pública de partidas personalizadas. Ahora la selección de campeón funcionará como en los modos emparejados, incluido ARAM en el mapa del Abismo de los Lamentos*. * Nota: La rotación de mapas aleatoria todavía no está disponible en las partidas personalizadas de ARAM, por lo que el mapa seguirá siendo el Abismo de los Lamentos por el momento. Ahora será posible eliminar el retardo de los espectadores en las partidas personalizadas para los espectadores de la sala*. * Nota: Al habilitar esta opción, no será posible para vuestros amigos ver vuestras partidas desde la lista de amigos. Nuevos efectos de sonido para los cambios del orden de selección y de los roles En la versión 25.15, empezamos a estudiar lo que nos habíais contado sobre la confusión causada por el intercambio de roles y del orden de selección, que provocaba que los jugadores aceptasen los cambios por error. Ya hemos actualizado los efectos visuales, pero ahora vamos a renovar los efectos de sonido. Ahora, sonarán de una forma diferente y tendrán un aspecto distinto. Actualizaciones de efectos visuales Puesto que vamos a volver al mapa básico de la Grieta del Invocador, hemos aprovechado para actualizar las animaciones básicas de las torretas, para mejorar su calidad. Progresión del honor Hemos aplicado algunos cambios entre bastidores a la progresión del honor, por lo que os resultará más sencillo alcanzar los niveles superiores si soléis jugar con amigos o en modos ajenos a la Grieta del Invocador. Corrección de errores Hemos corregido un error en el que se pudiese provocar que el cliente se quedase colgado enviando mensajes con determinados caracteres. Hemos corregido un error que provocaba que Briar no atacase de inmediato al objetivo correcto tras usar su W. Hemos corregido un error que provocaba que la E de Gangplank pudiese reiniciar los ataques en curso de sus enemigos y los suyos propios. Hemos corregido un error que provocaba que los cronómetros iniciales de los campamentos no apareciesen en el minimapa al ver una partida en modo espectador o una repetición, independientemente de los ajustes. Hemos corregido un error que provocaba que la pasiva de Aatrox apareciese en el registro de muertes como daño físico en lugar de daño mágico. Hemos corregido un error que provocaba que no se reprodujesen los efectos de sonido de la R potenciada de Jayce inventor de Arcane. Hemos corregido un error que provocaba que algunas runas considerasen que Kayle era una campeona a distancia antes de aprender su definitiva. Hemos corregido un error que provocaba que la Q de Sett no activase Lanza de Shojin. Hemos corregido un error que provocaba que la E de Bel'Veth solo redujese el enfriamiento de su Q visualmente al usar Filoveloz de Navori. Hemos corregido un error que provocaba que la descripción de la R de Aurora incluyese una duración incorrecta en los niveles superiores. Hemos corregido un error que provocaba que, a veces, los demás jugadores viesen un icono de depuración cuando alguien jugaba con Jayce. Hemos corregido un error que provocaba que la E de Xin Zhao no se lanzase al usarla contra un objetivo fuera de su alcance máximo durante la R. Hemos corregido un error que provocaba que Viego pudiese recibir dos impactos críticos con Firmamento desgarrado cuando poseía a un campeón. Hemos corregido un error que provocaba que fuese posible comprar Brazalete quebrado directamente en la tienda. Próximos aspectos y chromas"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Próximos aspectos y chromas",
+      "heading_level": 2,
+      "blocks": [
+        "Lanzaremos los siguientes aspectos a lo largo de esta versión: Jarvan IV visión de los caídos de prestigio Tryndamere visión de los caídos Garen visión de los caídos Alistar bosque ancestral Lulu arcana Jhin arcano Lanzaremos los siguientes chromas a lo largo de esta versión: Tryndamere visión de los caídos Garen visión de los caídos Alistar bosque ancestral Artículos relacionados"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Artículos relacionados",
+      "heading_level": 2,
+      "blocks": [
+        "Actualizaciones del juego 2025-08-12T18:00:00.000Z Notas de la versión 25.16 ¡Versión 25.16 lista para el despegue! Actualizaciones del juego 2025-05-13T18:00:00.000Z Notas de la versión 25.10 La versión 25.10 está escrita en las estrellas ✨ Actualizaciones del juego 2025-02-19T19:00:00.000Z Notas de la versión 25.04 ¡No os perdáis la última versión del acto 1! Actualizaciones del juego 2024-08-13T18:00:00.000Z Notas de la versión 14.16 ¡Celebrad la grandeza durante la versión 14.16! Actualizaciones del juego 2023-02-07T19:00:00.000Z Notas de la versión 13.3 Preparaos para una versión cósmica, ¡ya está aquí la 13.3! Actualizaciones del juego 2022-12-06T19:00:00.000Z Notas de la versión 12.23 ¡Ya está aquí la versión 12.23, la última del año! Actualizaciones del juego 2022-11-01T18:00:00.000Z Notas de la versión 12.21 ¡Ya está aquí la final del Campeonato Mundial de LoL! ¡Y K'Sante! ¡Y la pretemporada está a la vuelta de la esquina! Con tantas cosas a las que prestar atención, aquí tenemos la versión 12.21, porque lo bueno y breve... Actualizaciones del juego 2022-10-04T18:00:00.000Z Notas de la versión 12.19 ¿Mejoras a Blitzcrank luchador? ¿Mejoras a Rakan de PH? ¿Estamos soñando o ya es la versión 12.19? ¡Os damos la bienvenida a una versión llena de mejoras fuera del metajuego! Actualizaciones del juego 2022-09-07T18:00:00.000Z Notas de la versión 12.17 ¡La penúltima versión antes del mundial! Actualizaciones del juego 2022-06-07T18:00:00.000Z Notas de la versión 12.11 ¡Uníos a Bel'Veth y al mar lavanda en la versión 12.11!"
+      ],
+      "subsections": []
+    }
+  ],
+  "assets": [],
+  "scraper_version": "legacy-v33b",
+  "raw_html_ref": null
+}

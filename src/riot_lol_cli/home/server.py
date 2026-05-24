@@ -16,9 +16,10 @@ from pathlib import Path
 
 import httpx
 from fastapi import APIRouter, FastAPI, HTTPException
-from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse, Response
 from fastapi.staticfiles import StaticFiles
 
+from riot_lol_cli.http_utils import UTF8JSONResponse
 from riot_lol_cli.settings import (
     get_draft_advisor_port,
     get_home_host,
@@ -27,6 +28,7 @@ from riot_lol_cli.settings import (
     get_jungle_meta_port,
     get_meta_api_port,
     get_meta_scraper_port,
+    get_patch_notes_port,
 )
 
 logger = logging.getLogger(__name__)
@@ -38,16 +40,19 @@ _SRC_DIR = str(_MODULE_DIR.parent.parent)  # e.g. …\src  (PYTHONPATH for subpr
 _DESIGN_SYSTEM_DIR = _MODULE_DIR.parent / "draft_advisor" / "static" / "design-system"
 _VERSION_FILE = _MODULE_DIR.parent.parent.parent / "config" / "version.json"
 _JUNGLAS_PRO_DIR = _MODULE_DIR.parent.parent.parent / "projects" / "active" / "junglas-pro"
+_FAVICON_PATH = _STATIC_DIR / "favicon.svg"
 
 router = APIRouter()
 
 # Args appended to sys.executable to launch each service.
 _LAUNCH_CMDS: dict[str, list[str]] = {
     "meta_api": ["scripts/run_api.py"],
+    "esports_research": ["scripts/run_api.py"],
     "draft_advisor": ["-m", "riot_lol_cli.draft_advisor.server"],
     "meta_scraper": ["-m", "riot_lol_cli.meta_scraper.server"],
     "jungle_meta": ["-m", "riot_lol_cli.jungle_meta.server"],
     "items_browser": ["-m", "riot_lol_cli.items_browser.server"],
+    "patch_notes": ["-m", "riot_lol_cli.patch_notes.server"],
 }
 
 # Processes spawned by this hub (service_id → Popen).
@@ -74,6 +79,16 @@ SERVICES = [
         "ui_path": "/draft",
         "icon": "🎯",
         "accent": "gold",
+    },
+    {
+        "id": "esports_research",
+        "name": "Esports Research",
+        "description": "Cockpit de drafts, torneos, comfort picks y counterpicks pro-stage.",
+        "port_fn": get_meta_api_port,
+        "health_path": "/api/v1/esports/health",
+        "ui_path": "/esports/",
+        "icon": "ER",
+        "accent": "cyan",
     },
     {
         "id": "meta_scraper",
@@ -104,6 +119,16 @@ SERVICES = [
         "ui_path": "/",
         "icon": "⚔️",
         "accent": "warning",
+    },
+    {
+        "id": "patch_notes",
+        "name": "Patch Notes",
+        "description": "Notas de parche oficiales de LoL — campeones, ítems y mecánicas.",
+        "port_fn": get_patch_notes_port,
+        "health_path": "/health",
+        "ui_path": "/",
+        "icon": "📝",
+        "accent": "gold",
     },
 ]
 
@@ -144,6 +169,14 @@ async def health():
         "port": get_home_port(),
         "version": _load_version(),
     }
+
+
+@router.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    """Sirve favicon explicito para evitar 404 ruidosos en consola."""
+    if _FAVICON_PATH.exists():
+        return FileResponse(str(_FAVICON_PATH), media_type="image/svg+xml")
+    return Response(status_code=204)
 
 
 @router.get("/api/v1/home/version")
@@ -247,6 +280,7 @@ def create_app() -> FastAPI:
         title="LOLCLI Home — Centro de Operaciones",
         description="Hub central de acceso a todos los subsistemas de riot_lol_cli.",
         version="1.0.0",
+        default_response_class=UTF8JSONResponse,
     )
 
     if _STATIC_DIR.exists():

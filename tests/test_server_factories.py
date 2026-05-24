@@ -18,8 +18,10 @@ def test_draft_advisor_create_app_registers_core_routes():
     paths = _route_paths(app)
 
     assert "/draft" in paths
+    assert "/favicon.ico" in paths
     assert "/api/v1/draft/health" in paths
     assert "/api/v1/draft/recommend" in paths
+    assert "/api/v1/draft/champions/junglers" in paths
 
 
 def test_draft_advisor_create_app_serves_root_and_health():
@@ -33,6 +35,13 @@ def test_draft_advisor_create_app_serves_root_and_health():
     assert health.status_code == 200
     assert health.json()["status"] == "ok"
 
+    ui = client.get("/draft")
+    assert ui.status_code == 200
+    assert "/static/favicon.svg" in ui.text
+
+    favicon = client.get("/favicon.ico")
+    assert favicon.status_code == 200
+
 
 def test_draft_advisor_create_app_uses_isolated_services():
     first = create_draft_advisor_app()
@@ -44,6 +53,8 @@ def test_draft_advisor_create_app_uses_isolated_services():
 
 def test_meta_api_create_app_serves_health_and_openapi():
     client = TestClient(create_meta_api_app())
+    paths = _route_paths(create_meta_api_app())
+    assert "/favicon.ico" in paths
 
     health = client.get("/health")
     assert health.status_code == 200
@@ -53,12 +64,25 @@ def test_meta_api_create_app_serves_health_and_openapi():
     assert openapi.status_code == 200
     assert openapi.json()["info"]["title"].startswith("LOLCLI Meta Analyzer")
 
+    dashboard = client.get("/dashboard")
+    assert dashboard.status_code == 200
+    assert "Home Hub" in dashboard.text
+    assert "http://localhost:8080/" in dashboard.text
+
+    dashboard_enhanced = client.get("/dashboard-enhanced")
+    assert dashboard_enhanced.status_code == 200
+    assert "Home Hub" in dashboard_enhanced.text
+
+    favicon = client.get("/favicon.ico")
+    assert favicon.status_code == 200
+
 
 def test_meta_scraper_create_app_registers_core_routes():
     app = create_meta_scraper_app()
     paths = _route_paths(app)
 
     assert "/" in paths
+    assert "/favicon.ico" in paths
     assert "/health" in paths
     assert "/api/v1/meta/scrape" in paths
     assert "/api/v1/meta/scrape/adc" in paths
@@ -78,6 +102,13 @@ def test_meta_scraper_create_app_serves_health_and_openapi():
     openapi = client.get("/openapi.json")
     assert openapi.status_code == 200
     assert openapi.json()["info"]["title"].startswith("Meta Scraper")
+
+    ui = client.get("/")
+    assert ui.status_code == 200
+    assert "/static/favicon.svg" in ui.text
+
+    favicon = client.get("/favicon.ico")
+    assert favicon.status_code == 200
 
 
 def test_meta_scraper_create_app_uses_isolated_runtime_state():
@@ -133,6 +164,7 @@ def test_jungle_meta_create_app_registers_core_routes():
     paths = _route_paths(app)
 
     assert "/" in paths
+    assert "/favicon.ico" in paths
     assert "/health" in paths
     assert "/api/v1/jungle/tier-list" in paths
     assert "/api/v1/jungle/tier/{tier}" in paths
@@ -154,6 +186,13 @@ def test_jungle_meta_create_app_serves_health_and_openapi():
     openapi = client.get("/openapi.json")
     assert openapi.status_code == 200
     assert openapi.json()["info"]["title"].startswith("Jungle Metagame")
+
+    ui = client.get("/")
+    assert ui.status_code == 200
+    assert "/static/favicon.svg" in ui.text
+
+    favicon = client.get("/favicon.ico")
+    assert favicon.status_code == 200
 
 
 def test_jungle_meta_categories_and_item_abusers_endpoints():
@@ -180,6 +219,7 @@ def test_items_browser_create_app_registers_core_routes():
     paths = _route_paths(app)
 
     assert "/" in paths
+    assert "/favicon.ico" in paths
     assert "/health" in paths
     assert "/api/v1/items/all" in paths
     assert "/api/v1/items/groups" in paths
@@ -216,11 +256,19 @@ def test_items_browser_health_and_endpoints():
     assert 4633 in ids
     assert 224633 not in ids
 
+    ui = client.get("/")
+    assert ui.status_code == 200
+    assert "/static/favicon.svg" in ui.text
+
+    favicon = client.get("/favicon.ico")
+    assert favicon.status_code == 200
+
 
 def test_home_create_app_registers_launch_and_status_routes():
     app = create_home_app()
     paths = _route_paths(app)
     assert "/health" in paths
+    assert "/favicon.ico" in paths
     assert "/api/v1/home/status" in paths
     assert "/api/v1/home/launch/{service_id}" in paths
 
@@ -233,6 +281,13 @@ def test_home_status_includes_health_path():
     assert len(services) > 0
     for svc in services:
         assert "health_path" in svc, f"health_path missing for {svc['id']}"
+
+    ui = client.get("/")
+    assert ui.status_code == 200
+    assert "/static/favicon.svg" in ui.text
+
+    favicon = client.get("/favicon.ico")
+    assert favicon.status_code == 200
 
 
 def test_home_launch_unknown_service_returns_404():

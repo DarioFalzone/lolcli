@@ -73,7 +73,16 @@ class ChampionListItem(BaseModel):
     range_type: str
     is_adc: bool
     is_support: bool
+    is_jungler: bool = False
     has_priority_profile: bool
+
+
+class JungleChampionListItem(ChampionListItem):
+    jungle_tier: str | None = None
+    jungle_winrate: float | None = None
+    jungle_pickrate: float | None = None
+    jungle_banrate: float | None = None
+    jungle_reason: str | None = None
 
 
 class HealthResponse(BaseModel):
@@ -96,6 +105,11 @@ class VersionInfoResponse(BaseModel):
     adc_meta_age_hours: float | None = None
     adc_mastery_last_updated: str | None = None
     adc_mastery_source_image: str | None = None
+    jungle_meta_patch: str | None = None
+    jungle_meta_updated_at: str | None = None
+    jungle_meta_status: str = "missing"
+    jungle_meta_source: str | None = None
+    jungle_meta_champion_count: int = 0
 
 
 # ============================================================================
@@ -122,6 +136,7 @@ async def version_info(services: DraftServicesDep):
     manifest = svc.manifest
     adc_meta = svc.get_adc_meta_snapshot_info()
     adc_mastery = svc.get_personal_adc_mastery_info()
+    jungle_meta = svc.get_jungle_meta_snapshot_info()
     return VersionInfoResponse(
         live_patch_label=manifest.live_patch_label if manifest else "unknown",
         static_data_version=manifest.static_data_version if manifest else "unknown",
@@ -135,6 +150,11 @@ async def version_info(services: DraftServicesDep):
         adc_meta_age_hours=adc_meta.get("age_hours"),
         adc_mastery_last_updated=adc_mastery.get("last_updated"),
         adc_mastery_source_image=adc_mastery.get("source_image"),
+        jungle_meta_patch=jungle_meta.get("patch"),
+        jungle_meta_updated_at=jungle_meta.get("date_updated"),
+        jungle_meta_status=jungle_meta.get("status", "missing"),
+        jungle_meta_source=jungle_meta.get("source"),
+        jungle_meta_champion_count=jungle_meta.get("champion_count", 0),
     )
 
 
@@ -144,6 +164,7 @@ async def get_champions(services: DraftServicesDep):
     svc = services.data_service
     adc_ids = svc.get_adc_ids()
     support_ids = svc.get_support_ids()
+    jungler_ids = svc.get_jungler_ids()
     result = []
 
     for champ in svc.get_all_champions().values():
@@ -157,6 +178,7 @@ async def get_champions(services: DraftServicesDep):
                 range_type=champ.range_type.value,
                 is_adc=champ.id in adc_ids,
                 is_support=champ.id in support_ids,
+                is_jungler=champ.id in jungler_ids,
                 has_priority_profile=svc.is_priority_champion(champ.id),
             )
         )
@@ -185,11 +207,47 @@ async def get_adcs(services: DraftServicesDep):
                     range_type=champ.range_type.value,
                     is_adc=True,
                     is_support=False,
+                    is_jungler=False,
                     has_priority_profile=svc.is_priority_champion(champ.id),
                 )
             )
 
     result.sort(key=lambda x: x.display_name)
+    return result
+
+
+@router.get("/champions/junglers", response_model=list[JungleChampionListItem])
+async def get_junglers(services: DraftServicesDep):
+    """Get jungle champions from Jungle Meta."""
+    svc = services.data_service
+    jungle_rows = svc.get_jungle_meta_champions()
+    result = []
+
+    for champ_id, meta in jungle_rows.items():
+        champ = svc.get_champion(champ_id)
+        if champ:
+            result.append(
+                JungleChampionListItem(
+                    id=champ.id,
+                    display_name=champ.display_name,
+                    primary_role=champ.primary_role.value,
+                    combat_class=champ.combat_class.value,
+                    damage_type=champ.damage_type.value,
+                    range_type=champ.range_type.value,
+                    is_adc=champ.id in svc.get_adc_ids(),
+                    is_support=champ.id in svc.get_support_ids(),
+                    is_jungler=True,
+                    has_priority_profile=svc.is_priority_champion(champ.id),
+                    jungle_tier=meta.get("tier"),
+                    jungle_winrate=meta.get("winrate"),
+                    jungle_pickrate=meta.get("pickrate"),
+                    jungle_banrate=meta.get("banrate"),
+                    jungle_reason=meta.get("reason_text"),
+                )
+            )
+
+    tier_order = {"S": 0, "A": 1, "B": 2, "C": 3}
+    result.sort(key=lambda x: (tier_order.get(x.jungle_tier or "", 9), x.display_name))
     return result
 
 
@@ -218,6 +276,8 @@ async def recommend(draft_state: DraftState, services: DraftServicesDep):
             raise HTTPException(400, f"Campeón '{champ_id}' no está en los perfiles de Soporte")
         elif draft_state.target_role == AdvisorMode.ADC and champ_id not in svc.get_adc_ids():
             raise HTTPException(400, f"Campeón '{champ_id}' no está en los perfiles de ADC")
+        elif draft_state.target_role == AdvisorMode.JUNGLE and champ_id not in svc.get_jungler_ids():
+            raise HTTPException(400, f"Campeón '{champ_id}' no está en Jungle Meta")
 
     try:
         result = engine.recommend(draft_state)

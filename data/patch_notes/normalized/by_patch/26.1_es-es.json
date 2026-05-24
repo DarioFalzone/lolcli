@@ -1,0 +1,3951 @@
+{
+  "publisher": "riot",
+  "game": "lol",
+  "channel": "site",
+  "source_locale": "es-es",
+  "patch_version": "26.1",
+  "title": "Notas de la versión 26.1",
+  "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/patch-26-1-notes",
+  "published_at": "2026-01-07T19:00:00Z",
+  "fetched_at": "2026-05-15T08:54:27.455297Z",
+  "content_hash": "f2d1a5ebcc718a7782101c7b60f378f5e70c8203f86ea1a15715b2782fbb5884",
+  "summary": "Morgana dama del velo de prestigio, Cho'Gath de petricita, Nautilus de petricita y Taliyah legado de Durand estarán disponibles el 8 de enero de 2026.",
+  "sections": [
+    {
+      "title": "Actualización de mitad de versión",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Actualizaciones de mitad de versión - 09/01/2026",
+              "heading_level": 4,
+              "blocks": [],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Aphelios",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Pasiva - El Asesino y la Vidente",
+              "heading_level": 4,
+              "blocks": [
+                "Letalidad por nivel de la E: 5,5 ⇒ 4,5."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Graves",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Pasiva - Nuevo destino",
+              "heading_level": 4,
+              "blocks": [
+                "Progresión de crítico: 35 % del daño crítico adicional ⇒ 50 % del daño crítico adicional.",
+                "Daño máximo de los críticos en relación con los ataques normales: x1,8 ⇒ x2."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Kayle",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Pasiva - Ascenso divino",
+              "heading_level": 4,
+              "blocks": [
+                "Velocidad de ataque por acumulación: 6 % (+1 % por cada 100 de PH) ⇒ 6 %."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Q - Ráfaga radiante",
+              "heading_level": 4,
+              "blocks": [
+                "Coste de maná: 70/75/80/85/90 ⇒ 60/70/80/90/100.",
+                "Ralentización: 26/32/38/44/50 % ⇒ 25/30/35/40/45 %."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Nilah",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Estadísticas básicas",
+              "heading_level": 4,
+              "blocks": [
+                "Progresión de la velocidad de ataque: 2 % ⇒ 1,25 %."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Q - Hoja sin forma",
+              "heading_level": 4,
+              "blocks": [
+                "Multiplicador de la progresión de crítico: 80 % del daño crítico adicional ⇒ 70 % del daño crítico adicional."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Quinn",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Estadísticas básicas",
+              "heading_level": 4,
+              "blocks": [
+                "Crecimiento de DA: 2,7 ⇒ 3,2."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Pasiva - Acosar",
+              "heading_level": 4,
+              "blocks": [
+                "Enfriamiento básico: 8 s ⇒ 7 s."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Rammus",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Estadísticas básicas",
+              "heading_level": 4,
+              "blocks": [
+                "Vida: 675 ⇒ 645."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "W - Posición defensiva",
+              "heading_level": 4,
+              "blocks": [
+                "Resistencia mágica: 27/32/37/42/47 ⇒ 20/25/30/35/40."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Tryndamere",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "W - Grito de mofa",
+              "heading_level": 4,
+              "blocks": [
+                "Duración de la ralentización: 2,5 s ⇒ 3,25 s."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "E - Cuchillada giratoria",
+              "heading_level": 4,
+              "blocks": [
+                "Daño básico: 70/105/140/175/210 ⇒ 80/120/160/200/240."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Segador de esencia",
+              "heading_level": 4,
+              "blocks": [
+                "Coste total: 2900 de oro ⇒ 3050 de oro.",
+                "Receta: Brillo + Martillo de guerra de Caulfield + Capa de agilidad + 350 de oro ⇒ Brillo + Martillo de guerra de Caulfield + Capa de agilidad + 500 de oro.",
+                "Daño de ataque: 55 de oro ⇒ 50 de oro."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Actualización al calendario de Clash",
+              "heading_level": 4,
+              "blocks": [],
+              "subsections": []
+            },
+            {
+              "title": "Actualizaciones de ARAM y ARAM: Caos",
+              "heading_level": 4,
+              "blocks": [
+                "Hemos deshabilitado el objeto Quiebrabastiones en ARAM y ARAM: Caos.",
+                "Hemos deshabilitado temporalmente el aumento Exterminador para Gangplank, debido a una interacción accidental.",
+                "Hemos deshabilitado temporalmente el aumento Llamativo mientras corregimos algunos errores que provoca.",
+                "Hemos corregido un error que permitía acumular un mismo aumento múltiples veces.",
+                "Ya hemos encontrado el error que provocaba la aparición de dos Navajas de asalto en la tienda.",
+                "Hemos corregido un error que permitía a Zeri superar el límite de la velocidad de ataque. (Lo corregimos en la versión 16.1, pero no lo incluimos en las notas de la misma)."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Corrección de errores",
+              "heading_level": 4,
+              "blocks": [
+                "Hemos corregido múltiples errores que permitían a Actualizador aumentar los costes de maná de forma incorrecta e indefinida."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Errores conocidos",
+              "heading_level": 4,
+              "blocks": [
+                "Algunos ajustes no están disponibles en las clasificatorias.",
+                "Al adelantar una partida en el modo espectador, las torretas permanecen en pie tras haber sido destruidas.",
+                "El Barón de la Grieta Invernal sigue apareciendo. Se siente, pero el Barón quiere seguir en la Grieta Invernal un poquito más. Ya se quitará los guantecitos más adelante."
+              ],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Los platos fuertes de la versión",
+      "heading_level": 2,
+      "blocks": [
+        "Morgana dama del velo de prestigio, Cho'Gath de petricita, Nautilus de petricita y Taliyah legado de Durand estarán disponibles el 8 de enero de 2026."
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Misiones por roles",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "La cola",
+              "heading_level": 4,
+              "blocks": [
+                "Ahora, los jugadores deberán seleccionar una posición en las salas personalizadas de la Grieta del Invocador.",
+                "Esta función no se aplicará al Modo rápido ni a los modos de juego en rotación, que conservarán las reglas previas por lo que respecta a las misiones de apoyos y junglas."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Completar las misiones",
+              "heading_level": 4,
+              "blocks": [],
+              "subsections": []
+            },
+            {
+              "title": "Calle superior",
+              "heading_level": 4,
+              "blocks": [
+                "El oro y la experiencia de los súbditos se reduce un 25 % fuera de la calle superior hasta el nivel 3."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Progreso de la misión:",
+              "heading_level": 4,
+              "blocks": [
+                "Se necesitan 1200 puntos para completar la misión.",
+                "+1 por súbdito asesinado (+2 en la calle superior).",
+                "+30 por eliminación de monstruo épico.",
+                "+25 por eliminación de torreta (+50 en la calle superior).",
+                "+20 por placa de torreta (+40 en la calle superior).",
+                "+15 por eliminación de campeón.",
+                "Tras 1:05 min de partida, se generará 1 punto cada 3 s de forma pasiva, que aumenta a 8 cada 5 s en la calle superior y sus alrededores (más o menos, pasada la torreta más lejana de vuestra calle sin destruir)."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Recompensas de la misión:",
+              "heading_level": 4,
+              "blocks": [
+                "El nivel máximo aumenta a 20.",
+                "+600 de experiencia.",
+                "Toda la experiencia obtenida en un futuro aumenta un 12,5 %.",
+                "Si el campeón de la calle superior no había elegido Teleportar como hechizo de invocador, obtiene Teleportar desatado con un enfriamiento de 7 min.",
+                "Si el campeón de la calle superior había elegido Teleportar como hechizo de invocador, recibe un escudo equivalente a un 30 % de su vida máxima al llegar que dura 30 s."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Jungla",
+              "heading_level": 4,
+              "blocks": [
+                "Acumulaciones de la mascota necesarias para completar la misión: 40 ⇒ 35.",
+                "Duración de la velocidad de movimiento de Caminabrisas: 2 s ⇒ 1,5 s.",
+                "Daño de Aplastar: 600/900/1200 ⇒ 600/1000/1400.",
+                "Tras completar la misión, los junglas obtienen un 4 % de velocidad de movimiento en la jungla o el río, que aumenta a un 8 % fuera de combate.",
+                "Tras completar la misión, los junglas obtienen 10 de oro y 10 de EXP por cada monstruo gigante asesinado."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Calle central",
+              "heading_level": 4,
+              "blocks": [
+                "El oro y la experiencia de los súbditos se reduce un 25 % fuera de la calle central hasta el nivel 3."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Progreso de la misión:",
+              "heading_level": 4,
+              "blocks": [
+                "Se necesitan 1350 puntos para completar la misión.",
+                "Los campeones a distancia obtienen un 1,5 % del daño infligido a campeones como progreso de la misión.",
+                "Los campeones cuerpo a cuerpo obtienen un 3 % del daño infligido a campeones como progreso de la misión.",
+                "+1 por súbdito asesinado (+2 en la calle central).",
+                "+30 por eliminación de monstruo épico.",
+                "+25 por eliminación de torreta (+50 en la calle central).",
+                "+20 por placa de torreta (+40 en la calle central).",
+                "+25 por eliminación de campeón.",
+                "Tras 1:05 min de partida, se generará 1 punto cada 3 s de forma pasiva, que aumenta a 8 cada 5 s en la calle central y sus alrededores."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Recompensas de la misión:",
+              "heading_level": 4,
+              "blocks": [
+                "Se mejoran las botas de nivel 2 a las botas de nivel 3 correspondientes. Si no tenéis unas botas de nivel 2 en vuestro inventario al completar la misión, evolucionarán al comprarlas.",
+                "Cada 5 min, obtendrán una retirada potenciada, que acortará la canalización de 8 s a 4 s.",
+                "Las eliminaciones de campeones reducen el enfriamiento de la retirada potenciada en 1 min."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Lucidez carmesí",
+              "heading_level": 4,
+              "blocks": [
+                "Evoluciona a partir de Botas jonias de la lucidez.",
+                "Velocidad de habilidades: 20.",
+                "Velocidad de movimiento: 45.",
+                "Lucidez jonia: Otorga 20 de velocidad de hechizos de invocador.",
+                "Prisa noxiana: Potenciar o proteger a los aliados con habilidades, infligir daño a los campeones enemigos con habilidades o lanzar un hechizo de invocador otorga un 10 % de velocidad de movimiento durante 4 s."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Marcha veloz",
+              "heading_level": 4,
+              "blocks": [
+                "Evoluciona a partir de Botas de rapidez.",
+                "Velocidad de movimiento: 65.",
+                "Pies ligeros: La eficacia de las ralentizaciones se reduce un 40 %.",
+                "Fervor noxiano: Otorga un 5 % de tu velocidad de movimiento como fuerza adaptable."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Botas del lanzahechizos",
+              "heading_level": 4,
+              "blocks": [
+                "Evoluciona a partir de Botas de hechicero.",
+                "Penetración mágica: 18.",
+                "Penetración mágica: 8 %.",
+                "Velocidad de movimiento: 45."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Grebas de metal",
+              "heading_level": 4,
+              "blocks": [
+                "Evoluciona a partir de Grebas de berserker.",
+                "Velocidad de ataque: 40 %.",
+                "Velocidad de movimiento: 45.",
+                "Robo de vida: 5 %."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Trituradoras encadenadas",
+              "heading_level": 4,
+              "blocks": [
+                "Evoluciona a partir de Botas de mercurio.",
+                "Resistencia mágica: 30.",
+                "Velocidad de movimiento: 45.",
+                "Perseverancia noxiana (15 s de enfriamiento): Tras recibir daño mágico de un campeón, obtienes un escudo mágico de (10-120 [según el nivel] + 10 % de la vida) durante 5 s."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Avance blindado",
+              "heading_level": 4,
+              "blocks": [
+                "Evoluciona a partir de Botas blindadas.",
+                "Armadura: 35.",
+                "Velocidad de movimiento: 45.",
+                "Placas: Reduce un 10 % el daño sufrido por ataques.",
+                "Resistencia noxiana (15 s de enfriamiento): Tras recibir daño físico de un campeón, obtienes un escudo físico de (10-120 [según el nivel] + 10 % de la vida) durante 5 s."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Calle inferior",
+              "heading_level": 4,
+              "blocks": [
+                "El oro y la experiencia de los súbditos se reduce un 25 % fuera de la calle inferior hasta el nivel 3."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Progreso de la misión:",
+              "heading_level": 4,
+              "blocks": [
+                "Se necesitan 1350 puntos para completar la misión.",
+                "+1,5 por súbdito asesinado (+3 en la calle inferior).",
+                "+30 por eliminación de monstruo épico.",
+                "+25 por eliminación de torreta (+50 en la calle inferior).",
+                "+20 por placa de torreta (+40 en la calle inferior).",
+                "+15 por eliminación de campeón.",
+                "Tras 1:05 min de partida, se generará 1 punto cada 3 s de forma pasiva, que aumenta a 8 cada 5 s en la zona de juego de la calle inferior."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Recompensas de la misión:",
+              "heading_level": 4,
+              "blocks": [
+                "+300 de oro.",
+                "+2 de oro por súbdito asesinado durante el resto de la partida.",
+                "+50 de oro por eliminación de campeón durante el resto de la partida.",
+                "Las botas pasan al hueco generado por la misión del rol, liberando espacio para un séptimo objeto."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Apoyo",
+              "heading_level": 4,
+              "blocks": [
+                "El oro y la experiencia de los súbditos asesinados y de los objetos de la misión de apoyo se reduce un 25 % fuera de la calle inferior hasta el nivel 3.",
+                "Perforaplanos de Zaz'Zak, Trineo del solsticio, Tonada sanguina, Tejesueños y Detracción celestial: 5 de oro cada 10 s ⇒ 9 de oro cada 10 s.",
+                "Tras completar la misión, el coste de los guardianes de control se reduce a 40 de oro.",
+                "Tras completar la misión, se podrán acumular hasta 2 guardianes de control en el hueco generado por la misión del rol, en vez de en el inventario."
+              ],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Atakhan, rosas de sangre, hazañas y asesinatos",
+      "heading_level": 2,
+      "blocks": [
+        "Hemos eliminado las hazañas de fuerza del juego.",
+        "La primera sangre vuelve a otorgar 100 de oro adicional al asesino.",
+        "La primera torreta destruida vuelve a otorgar 300 de oro adicional.",
+        "Se ha eliminado a Atakhan del juego, por lo que ya no aparecerá más.",
+        "Se han eliminado las rosas de sangre del juego, por lo que ya no aparecerán más.",
+        "Devaluación del oro por asesinato por cada 1 de oro otorgado al morir: 0,2 ⇒ 0,4. Por ejemplo, si morís y otorgáis 300 de oro, vuestro oro por asesinato básico se reducirá 75 de oro.",
+        "Revaluación del oro por asesinato por cada 1 de oro obtenido: 0,1 ⇒ 0,2. Este cambio no afecta a la acumulación de botín positivo."
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Ajustes a los objetivos épicos",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Dragones elementales",
+              "heading_level": 4,
+              "blocks": [
+                "Nivel mínimo: 6 (sin cambios).",
+                "Vida: 5730-13 790 ⇒ 3625 + 375 de crecimiento (5106-10 000).",
+                "Armadura: 21 ⇒ 34 + 8 de crecimiento (66-170).",
+                "Resistencia mágica: 30 ⇒ 32 + 4 de crecimiento (48-100).",
+                "Los dragones de montaña tienen un +15 % de vida (4200 + 430 de crecimiento), en lugar de +20 de armadura y resistencia mágica.",
+                "Reducción de daño de Venganza del dragón: 7/14/21 % ⇒ 15/30/45 %.",
+                "Venganza del dragón ya no aumenta el daño contra campeones un 20/40/60 %.",
+                "Ahora, la descripción de Venganza del dragón incluye cifras más precisas.",
+                "Oro por asesinato: 25 ⇒ 75.",
+                "EXP local: 150-330 (6-15) ⇒ 160-400 (6-18).",
+                "Ahora, la experiencia de la remontada es lineal, en lugar de cuadrática, pero progresa a hasta el doble de velocidad con una desventaja de 4 niveles."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Dragón anciano",
+              "heading_level": 4,
+              "blocks": [
+                "Nivel mínimo: 10 ⇒ 13.",
+                "Armadura: 120-189 ⇒ 34 + 8 de crecimiento (122-170).",
+                "Resistencia mágica: 70-113 ⇒ 32 + 4 de crecimiento (76-100).",
+                "Vida: 13 650-17 130 ⇒ 11 500 + 575 de crecimiento (17 796-21 275).",
+                "Oro: 100 por asesinato + 250 global ⇒ 100 por asesinato + 150 global.",
+                "Oro total: 1350 ⇒ 850.",
+                "Experiencia: 830 local + 500 global ⇒ 0 local + 650 global.",
+                "Experiencia total: 3330 ⇒ 3250.",
+                "Ahora, la experiencia de la remontada es lineal, en lugar de cuadrática, pero progresa a hasta el doble de velocidad con una desventaja de 4 niveles."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Larvas del Vacío",
+              "heading_level": 4,
+              "blocks": [
+                "Nivel mínimo: 4 ⇒ 7.",
+                "Armadura: 0 ⇒ 34 + 8 de crecimiento (+73).",
+                "Resistencia mágica: 0 ⇒ 32 + 4 de crecimiento (+51).",
+                "Vida: 2250-3750 ⇒ 1300 + 200 de crecimiento (+2269).",
+                "DA: 30-45 según la duración de la partida ⇒ 12 + 2 de crecimiento (+22).",
+                "Ahora, las larvas del Vacío infligen un 50 % de daño adicional a las unidades que no sean campeones, al igual que el dragón y el Barón.",
+                "DA de los parásitos: 4,2-6,6 según la duración de la partida ⇒ 1,8 + 0,3 de crecimiento (+3).",
+                "Vida de los parásitos: 470-710 según la duración de la partida ⇒ 180 + 30 de crecimiento (+325).",
+                "Oro: 20 local + 50 global (210 de oro) ⇒ 30 local (90 de oro).",
+                "Experiencia: 75 + 2 % por nivel / 4 (79,5-84) ⇒ 65 (195 por cada 3).",
+                "Radio de la EXP: 0 ⇒ 2000.",
+                "Ya no cura 60 de vida al asesino."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Heraldo de la Grieta",
+              "heading_level": 4,
+              "blocks": [
+                "Nivel mínimo: 6 ⇒ 9.",
+                "Armadura: 60 ⇒ 34 + 8 de crecimiento (+88).",
+                "Resistencia mágica: 50 ⇒ 32 + 4 de crecimiento (+59).",
+                "Vida: 10 688-14 250 ⇒ 7000 + 700 de crecimiento (+11 718).",
+                "Enfriamiento del Ojo del Heraldo de la Grieta: 8 ⇒ 6.",
+                "El enfriamiento del Ojo ya no se reduce por impacto.",
+                "Ahora, el Heraldo de la Grieta inflige un 50 % de daño adicional a las unidades que no sean campeones, al igual que el dragón y el Barón.",
+                "Valor de la experiencia: 309-330 ⇒ 240.",
+                "Radio de la EXP: 600 ⇒ 2000.",
+                "Oro: 200-600 según los campeones cercanos: 100 de oro al asesino.",
+                "Daño de la carga del Heraldo de la Grieta subyugado: 2500-3000 ⇒ 3000.",
+                "Vida del Heraldo de la Grieta subyugado: 4770-6360 ⇒ 2500 + 270 de crecimiento (+4059).",
+                "Armadura del Heraldo de la Grieta subyugado: 60 ⇒ 34 + 8 de crecimiento (+88).",
+                "Resistencia mágica del Heraldo de la Grieta subyugado: 50 ⇒ 32 + 4 de crecimiento (+59)."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Atakhan",
+              "heading_level": 4,
+              "blocks": [
+                "Aparece ⇒ Ya no aparece."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Barón Nashor",
+              "heading_level": 4,
+              "blocks": [
+                "Tiempo de aparición: 25 min ⇒ 20 min.",
+                "Nivel mínimo: 11.",
+                "Vida: 15 600-19 020 según la duración de la partida ⇒ 16 300 + 170 de crecimiento (17 792-19 190).",
+                "Armadura: 120 ⇒ 34 + 8 de crecimiento (104-170).",
+                "Resistencia mágica: 70 ⇒ 32 + 4 de crecimiento (67-100).",
+                "Daño de ataque: 350-520 del minuto 20 al 57 ⇒ 175 + 20 de crecimiento (351-515).",
+                "Daño de ataque secundario de la corrosión: 70 + 20 % del DA total ⇒ 35 % del DA total.",
+                "Daño de charco de ácido: 200 + 10 % del DA total ⇒ 100 % del DA total.",
+                "Daño de la atracción del Barón territorial: 300 ⇒ 100 % del DA total.",
+                "Daño total de la falla del Barón omnisciente: 1000 ⇒ 140 % del DA total.",
+                "Daño del proyectil de ácido: 200 + 50 % del DA total ⇒ 100 % del DA total.",
+                "Daño del lanzamiento por los aires del tentáculo: 200 + 25 % del DA total ⇒ 100 % del DA total.",
+                "Se ha vuelto a implementar: Desgarra 0,5 de armadura/resistencia mágica por segundo a todos los enemigos cercanos.",
+                "Experiencia: 800 local + 600 global ⇒ 650 global.",
+                "Experiencia total: 3800 ⇒ 3250.",
+                "Oro: 25 por asesinato + 300 global ⇒ 100 por asesinato + 150 global.",
+                "Oro total: 1525 ⇒ 850.",
+                "Ahora, el Barón Nashor otorga experiencia según las mecánicas de remontada, igual que los dragones. Los jugadores del equipo que vaya perdiendo obtendrán un 25 % de experiencia adicional por cada nivel que lleven de retraso, con un límite de x2.",
+                "Hemos corregido un icono erróneo en el registro de muertes que afectaba a una de las habilidades del Barón."
+              ],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Ajustes a la jungla",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Campamentos con mejora",
+              "heading_level": 4,
+              "blocks": [
+                "La aparición del Barón ya no corromperá las mejoras azul y roja, lo que provocaba que se volviesen globales y otorgara un 30 % más de vida a los monstruos. Tras la transición del terreno elemental, seguirán dejando caer una segunda versión de sus mejoras.",
+                "Regeneración de la mejora roja: 0,5/1/3 % en los niveles 1/4/6 ⇒ 0,5/1/1,5/3 % en los niveles 1/4/6/11.",
+                "Ralentización cuerpo a cuerpo de la mejora roja: 5/10/15/20 % ⇒ 10/15/20 %.",
+                "Ralentización a distancia de la mejora roja: 5/7,5/10 % (sin cambios).",
+                "Quemadura de la mejora roja: 10-75 ⇒ 15-54.",
+                "Ahora, la quemadura muestra el daño acumulado que ha infligido a su objetivo.",
+                "Ahora, las descripciones de las mejoras roja y azul indican cuánto poder otorgan exactamente.",
+                "Corrección de error: Las mejoras roja y azul ya no duran 30 s adicionales si el jungla mata a un campeón para conseguirlas."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Reglas de la jungla",
+              "heading_level": 4,
+              "blocks": [
+                "Amplificación del daño a monstruos: 25 % ⇒ 10 %.",
+                "Daño de Aplastar: 600/900/1200 ⇒ 600/1000/1400.",
+                "NOVEDAD: Los junglas reciben un 50 % de daño por parte de los monstruos que no sean épicos.",
+                "Curación máxima por asesinato: 81 + 13,5/nivel (1-10), máximo de 202,5 ⇒ 90 + 20/nivel (1-9), máximo de 250.",
+                "Curación mínima por asesinato: 36 + 6 (44 % del máximo), máximo de 90 ⇒ 0 (0 % del máximo).",
+                "NOVEDAD: Ahora, restaura 15 de energía al matar a un monstruo gigante.",
+                "Curación de la mascota por segundo: 14-37 (1-10) ⇒ 6-36 (1-18).",
+                "DPS básico de la mascota: 20-90 ⇒ 20-150.",
+                "DPS básico de la mascota contra monstruos épicos: 15,5 ⇒ 20-150.",
+                "El Escurridizo ya no aparece con 1 nivel menos, por lo que el oro y EXP que otorga aumentan.",
+                "Asesinatos necesarios para su primera evolución: 20 ⇒ 15.",
+                "Completar la misión de la jungla: 40 acumulaciones ⇒ 35 acumulaciones."
+              ],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Luces feéricas y cambios a la visión",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Luces feéricas",
+              "heading_level": 4,
+              "blocks": [
+                "Otorga un +25 % de radio de visión al guardián.",
+                "Revela una región de visión adicional durante 45 s.",
+                "La forma de la región de visión adicional depende de la ubicación de la luz feérica.",
+                "Solo vuestro equipo puede ver las partículas de la región adicional.",
+                "La región de visión adicional no se ve afectada por el tipo de guardián utilizado (los guardianes de control no la mejoran, por ejemplo).",
+                "Esta duración se representará con un círculo que irá menguando en el guardián.",
+                "La región de visión adicional puede ver dentro de las malezas si se encuentran albergadas dentro de su perímetro.",
+                "Los enemigos sabrán si están en la región adicional si su equipo activa el efecto de un detector o una lente en la región.",
+                "Los enemigos sabrán si están en la región adicional si su equipo ha avisado del guardián directamente con una alerta (incluyendo las de Sexto sentido).",
+                "Todas las mejoras del Superguardián de luz feérica se suprimen mientras se limita la visión del guardián y se eliminan cuando el guardián queda destruido.",
+                "Si vuestro equipo ya ha colocado un guardián en una luz feérica, dicho guardián quedará destruido para dejar espacio al nuevo superguardián.",
+                "En lo referido a la puntuación de visión, el guardián tiene un modificador de puntuación del +25 %.",
+                "En lo que respecta a la puntuación de visión, la región de visión adicional se considera un guardián adicional que se rige por la regla del modificador según la posición, pero por ningún otro modificador (como el estancamiento)."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Ubicación de las luces feéricas",
+              "heading_level": 4,
+              "blocks": [
+                "Una cerca de cada portal de la base (4 en total), que permite ver la jungla cercana.",
+                "Una en cada maleza aislada cercana a las calles superior e inferior (2 en total), que permitirán ver el río.",
+                "Una en cada maleza del muro del río cercana a la calle central, es decir, la maleza con forma de plátano (2 en total), que os permitirá ver el río cercano (rodeando la maleza de la calle central, pero dejándola fuera).",
+                "[Después de la transformación de la Grieta elemental] Una cerca de las calles laterales en cada cuadrante (4 en total), para ver el camino de la jungla que avanza en paralelo a la calle."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Otros cambios a la visión",
+              "heading_level": 4,
+              "blocks": [
+                "Enfriamiento del talismán de Guardián invisible: 210-120 s (según el nivel) ⇒ 170-90 s (según el nivel).",
+                "Duración del talismán de Lente del oráculo: 6 s ⇒ 8 s.",
+                "Tiempo de reaparición predeterminado de la flor del adivino: 260-350 s (aleatorio) ⇒ 200-260 s (aleatorio).",
+                "Una en cada orilla del río cerca de las calles laterales (2 en total).",
+                "Una tras cada torreta interior de las calles laterales (4 en total).",
+                "Una cerca de las rocas de la base, donde aparecen los hexportales (4 en total).",
+                "Las ubicaciones de las flores del adivino que brotan con la Grieta elemental cerca de dichas posiciones han quedado obsoletas, y hemos reposicionado las demás plantas que crecían cerca.",
+                "Las flores del adivino de las nuevas ubicaciones tienen un tiempo de reaparición mucho más breve de forma predeterminada: 90-120 s (aleatorio)."
+              ],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "A salvo",
+      "heading_level": 2,
+      "blocks": [
+        "A salvo ya no tiene una duración limitada.",
+        "Ahora, A salvo desaparece tras llegar al final del camino, entrar en combate o adentrarse en la jungla.",
+        "A salvo siempre perdurará, al menos, hasta llegar a la torreta más lejana que siga en pie de vuestra calle.",
+        "A salvo siempre perdurará, al menos, hasta el inhibidor de vuestra base.",
+        "Tras 14:00 min de partida o después de que se haya destruido al menos una torreta de cada equipo en la calle pertinente, A salvo pasará a tener en cuenta la oleada de súbditos más alejada de dicha calle y desaparecerá a unas 2000 unidades, aproximadamente, de dicha oleada.",
+        "Antes de que transcurran 14:00 min de partida, A salvo otorga un 80 % de velocidad de movimiento, que va disminuyendo hasta el 40 % a lo largo de 4 s.",
+        "Tras 14:00 min de partida, A salvo otorga un 150 % de velocidad de movimiento, que va disminuyendo hasta el 65 % a lo largo de 4 s.",
+        "En el Modo rápido, A salvo siempre otorgará un 200 % de velocidad de movimiento, que irá disminuyendo hasta el 100 % a lo largo de 4 s."
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Sobrecrecimiento cristalino",
+      "heading_level": 2,
+      "blocks": [
+        "Ahora, las torretas alcanzables de las calles pueden generar Sobrecrecimiento cristalino.",
+        "Sobrecrecimiento cristalino aparecerá tras un enfriamiento de 90 s (30 s en el Modo rápido). A partir de ese momento, la torreta recibirá daño verdadero la próxima vez que un campeón enemigo la ataque.",
+        "El sobrecrecimiento infligirá su daño mínimo durante 60 s (30 s en el Modo rápido). Después, su daño irá aumentando de forma lineal a lo largo de 240 s (180 s en el Modo rápido). Tras eso, infligirá su daño máximo indefinidamente.",
+        "El cálculo del daño se basa en el nivel medio del equipo atacante:",
+        "En el nivel 1, el daño varía entre un 2 % y un 3,3 % de la vida máxima de la torreta (2,15 % - 3,76 % en el Modo rápido).",
+        "En el nivel 18, el daño varía entre un 8,8 % y un 18,9 % de la vida máxima de la torreta (13,2 % - 39,6 % en el Modo rápido).",
+        "El cuadro de impacto para atacar las torretas aumentará según el tamaño del sobrecrecimiento en el caso de los campeones cuerpo a cuerpo.",
+        "El sobrecrecimiento no se activará con ataques si la torreta tiene activa la protección contra backdoors.",
+        "Si hay una unidad enemiga cerca de la torreta cuando Sobrecrecimiento cristalino se vaya a activar, tras 90 s, su efecto se suprimirá y no aparecerá. Cuando los enemigos hayan desaparecido, se aplicará el sobrecrecimiento y se acelerará el proceso hasta llegar al punto en el que debería estar. La idea es evitar que se active a mitad del avance enemigo."
+      ],
+      "subsections": [
+        {
+          "title": "",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Demoler",
+              "heading_level": 4,
+              "blocks": [
+                "Activación de Demoler: Cargas un poderoso ataque contra una torreta mientras estés cerca de ella. ⇒ El tercer ataque contra una torreta inflige daño físico adicional.",
+                "Enfriamiento: 45 s ⇒ 30 s.",
+                "Daño cuerpo a cuerpo: 100 + (35 % de la vida máxima) ⇒ 85 + (28 % de la vida máxima).",
+                "Daño a distancia: 100 + (35 % de la vida máxima) ⇒ 50 + (20 % de la vida máxima)."
+              ],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Tiempo hasta el inicio de la partida",
+      "heading_level": 2,
+      "blocks": [
+        "Aparición de los súbditos: 1:05 min ⇒ 30 s.",
+        "Campamentos de lóbregos, Coloso celeste, Ancestro ígneo y picuchillos: Aparecen tras 55 s.",
+        "Campamentos de krugs y Gromp: Aparecen tras 1:07 min.",
+        "Campamento del Escurridizo: Aparece tras 2:55 min.",
+        "Barón Nashor: 25:00 min ⇒ 20:00 min.",
+        "A menos que se haya indicado lo contrario, la aparición de los monstruos épicos no sufrirá ningún cambio.",
+        "Inicio del oro del entorno: 65 s.",
+        "La mayoría de los sistemas relacionados con el principio de la partida (como la primera carga de Atlas mundial) empezarán 35 s antes.",
+        "Posibilidad de rehacer la partida: 1:30 min a 3:00 min ⇒ 0:55 min a 2:25 min.",
+        "Posibilidad de rendición anticipada (debido a inactividad): 3:30 min ⇒ 2:55 min."
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Torretas",
+      "heading_level": 2,
+      "blocks": [
+        "Duración de la resistencia de Baluarte: 20 s y se reinicia con cada placa destruida: 20 s y su duración se solapa.",
+        "Hemos actualizado la visualización de la resistencia de Baluarte y añadido nuevos efectos. Los efectos visuales ya no desaparecen cuando los campeones salen de su alcance.",
+        "Las placas de las torretas reciben un 17 % menos de daño por parte de súbditos y campeones a distancia ⇒ Las torretas reciben un 20 % de daño adicional por parte de campeones cuerpo a cuerpo.",
+        "Hemos actualizado las descripciones de todos los objetos que interactúan con las torretas para explicar sus mecánicas de una forma más clara.",
+        "Alcance de la visión verdadera de las torretas: 1095 ⇒ 1100. Hemos actualizado la descripción para indicar su alcance con precisión."
+      ],
+      "subsections": [
+        {
+          "title": "",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Torretas exteriores",
+              "heading_level": 4,
+              "blocks": [
+                "Ahora, se recompensa a los jugadores cercanos con 300 de oro compartido por destruir la primera torreta de la partida.",
+                "Ahora, las placas son permanentes, en lugar de desaparecer tras 14:00 min.",
+                "Resistencias: 40 de armadura y resistencia mágica tras 14 min ⇒ Pierden 15 de armadura y resistencia mágica por minuto tras 11:00 min de partida, con un límite de -60.",
+                "Oro de las placas: Las placas de las torretas desaparecen tras 14:00 min y dejan de otorgar oro ⇒ El valor de las placas se reduce en 10 de oro por minuto tras 11:00 min de partida, con un límite de -40.",
+                "Umbrales de las placas: 20/40/60/80/100 % ⇒ 10/25/45/70/100 % de la vida que falte.",
+                "Ya no obtienen 50 de resistencias permanentes por cada placa destruida.",
+                "Hemos eliminado el modelo de las placas de las torretas. Ahora solo aparecen como barras de vida.",
+                "Resistencias básicas: 15 ⇒ 60.",
+                "Vida básica: 5000 ⇒ 9000.",
+                "DA adicional máximo: 192 a los 16:00 min ⇒ 168 a los 14:00 min.",
+                "Oro local: 250 ⇒ 0.",
+                "Oro por placas de torreta: 125 ⇒ 120.",
+                "Oro local máximo: 875 ⇒ 600.",
+                "Oro local mínimo: 250 ⇒ 400."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Torretas interiores e inhibidoras",
+              "heading_level": 4,
+              "blocks": [
+                "NOVEDAD: Se destruirán placas de torreta cuando les falte un 10/25/45/70/100 % de vida.",
+                "Oro local de las torretas interiores: 425/675 ⇒ 600 repartido en 5 placas.",
+                "Vida de las torretas interiores: 4000 ⇒ 5000.",
+                "Resistencias de las torretas interiores: 55 ⇒ 60.",
+                "Las torretas interiores ya no obtienen hasta 15 de armadura y resistencia mágica tras 16-30 min.",
+                "Oro local de las torretas inhibidoras: 375 ⇒ 600 repartido en 5 placas.",
+                "Umbrales de regeneración de las torretas inhibidoras: 33/66 % de la vida ⇒ 30/75 % de la vida.",
+                "Vida de las torretas inhibidoras: 3500 ⇒ 4750.",
+                "Resistencias de las torretas inhibidoras: 70 ⇒ 60."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Torretas del nexo",
+              "heading_level": 4,
+              "blocks": [
+                "NOVEDAD: Se destruirán placas de torreta cuando les falte un 10/25/45/70/100 % de vida.",
+                "Vida de las torretas del nexo: 3000 ⇒ 3500.",
+                "Resistencias de las torretas del nexo: 70 ⇒ 60.",
+                "Vida al reaparecer de las torretas del nexo: 100 % ⇒ 40 %.",
+                "Regeneración de 6 de vida por segundo de las torretas del nexo: 33/66 % ⇒ 40/70 % de la vida.",
+                "Hemos añadido un nuevo elemento para mostrar cuándo reaparecen las torretas del nexo."
+              ],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Súbditos",
+      "heading_level": 2,
+      "blocks": [
+        "A partir del minuto 14, las oleadas de súbditos ahora aparecen cada 25 segundos. Cuando en estas oleadas aparece un súbdito con cañón, se genera un súbdito cuerpo a cuerpo menos.",
+        "A partir del minuto 30, las oleadas de súbditos ahora aparecen cada 20 segundos. En estas oleadas aparece un súbdito lanzador menos.",
+        "Daño de súbdito a torretas: 55 % ⇒ 60 %.",
+        "Velocidad de movimiento básica: 325 ⇒ 350.",
+        "Oleada del primer súbdito con cañón: oleada 4 ⇒ oleada 3.",
+        "DA del súbdito con cañón: 39, +1,5 cada 90 segundos ⇒ 39, +1,5 cada 90 segundos, luego +4 cada 90 segundos a partir de la oleada 15.",
+        "DA básico del supersúbdito: 210 ⇒ 180.",
+        "Experiencia compartida: 95/62/41,3/31/24,8/20,7 % ⇒ 100/65/43,3/32,5/26/21,7 %.",
+        "EXP de súbdito cuerpo a cuerpo: 65 (61,75/40,3) ⇒ 62 (62/40,3).",
+        "Oro por súbdito cuerpo a cuerpo: 21 ⇒ 20.",
+        "EXP del súbdito a distancia: 32 (30,4/19,84) ⇒ 31 (31/20,15).",
+        "EXP de supersúbdito/súbdito con cañón: 100 (95/62) ⇒ 75 (75/48,75).",
+        "Oro de supersúbdito/súbdito con cañón: 60 + 3 cada 90 segundos ⇒ 50 +1 cada 90 segundos.",
+        "Daño de súbdito con cañón a torretas: 82,5 % ⇒ 84 %.",
+        "Hemos actualizado el elemento del súbdito con cañón para que muestre sus reglas especiales con respecto a atacar torretas."
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Campeones",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "Cassiopeia",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Estadísticas básicas",
+              "heading_level": 4,
+              "blocks": [
+                "Velocidad de movimiento básica: 328 ⇒ 335."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Pasiva - Elegancia serpentina",
+              "heading_level": 4,
+              "blocks": [
+                "Actualización de la pasiva: Obtiene 4-72 de velocidad de movimiento (según el nivel), pero no puede comprar botas. ⇒ Aumenta un 6-40 % la efectividad de todas las mejoras de velocidad de movimiento (según el nivel)."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Samira",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Q - Clase",
+              "heading_level": 4,
+              "blocks": [
+                "Daño normal de la Q: 5/10/15/20/25 (+95/102,5/110/117,5/125 % del DA total) ⇒ 0/5/10/15/20 (+110 % del DA total).",
+                "Daño de impacto crítico de la Q: x1,25/x1,65 con Filo infinito ⇒ 50 % del daño crítico adicional: x1,5/x1,65 con Filo infinito."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "R - Gatillo infernal",
+              "heading_level": 4,
+              "blocks": [
+                "Daño normal de la R: 5/15/25 (+45 % del DA total) ⇒ 20/40/60 (+30 % del DA total).",
+                "Daño crítico de la R: x1,75/x2,15 con Filo infinito ⇒ 100 % del daño crítico adicional: x2/x2,3 con Filo infinito."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Aphelios",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Calibrum",
+              "heading_level": 4,
+              "blocks": [
+                "Daño adicional por marca: 15 (+20 % del DA adicional) ⇒ 15 (+10 % del DA adicional)."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Severum",
+              "heading_level": 4,
+              "blocks": [
+                "Daño de Arremetida por impacto: 10/15/20/25/30/35/40 (+22/25/28/31/34/37/40 % del DA adicional) ⇒ (+19/22,5/26/29,5/33/36,5/40 % del DA adicional).",
+                "Sigue asestando impactos críticos que infligen un 100 % de daño crítico (x1,75/x2,15 ⇒ x2/x2,3)."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Infernum",
+              "heading_level": 4,
+              "blocks": [
+                "Daño de la activa de Onda crepuscular: 25/31,67/38,33/45/51,67/58,33/65 (+56/60/64/68/72/76/80 % del DA adicional) ⇒ 20/35/50/65/80/95/110 (+10/11/12/13/14/15/16 % del DA adicional).",
+                "El ataque consecutivo sigue asestando impactos críticos que infligen un 100 % de daño crítico (x1,75/x2,15 ⇒ x2/x2,3)."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Crescendum",
+              "heading_level": 4,
+              "blocks": [
+                "Daño de la activa de Centinela: 35/50/65/80/95/110/125 (+42/45/48/51/54/57/60 % del DA adicional) ⇒ 35/50/65/80/95/110/125 (+30/32/34/36/38/40/42 % del DA adicional).",
+                "Sigue asestando impactos críticos que infligen un 100 % de daño crítico (x1,75/x2,15 ⇒ x2/x2,3)."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "R - Vigilia lunar",
+              "heading_level": 4,
+              "blocks": [
+                "Daño crítico del ataque consecutivo: x1,2/x1,6 con Filo infinito ⇒ 30 % del daño de impacto crítico adicional: x1,3/x1,39 con Filo infinito."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Caitlyn",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Pasiva - Disparo a la cabeza",
+              "heading_level": 4,
+              "blocks": [
+                "Progresión de crítico: 0-148,75/182,75 % del DA total ⇒ 100 % del daño crítico adicional (0-100/130 % del DA total)."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "R - As en la manga",
+              "heading_level": 4,
+              "blocks": [
+                "Progresión de crítico: Hasta un x1,5 ⇒ 30 % del daño de impacto crítico adicional: Hasta un x1,3/x1,39 con Filo infinito."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Tristana",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "E - Carga explosiva",
+              "heading_level": 4,
+              "blocks": [
+                "Daño normal: 60/70/80/90/100 (+100/110/120/130/140 % del DA adicional) ⇒ 60/85/110/135/160 (+80 % del DA adicional).",
+                "Progresión de crítico: 100 %: Hasta un x1,75/x2,15 con Filo infinito ⇒ 40 % del daño crítico adicional: x1,40/x1,52 con Filo infinito."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Nilah",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Estadísticas básicas",
+              "heading_level": 4,
+              "blocks": [
+                "Crecimiento de la velocidad de ataque: 2,25 % ⇒ 2 %."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Q - Hoja sin forma",
+              "heading_level": 4,
+              "blocks": [
+                "Daño de la activa: 5/10/15/20/25 (+90/95/100/105/110 % del DA total) ⇒ 0/10/20/30/40 (+100 % del DA total).",
+                "Progresión de crítico: Hasta un x2 ⇒ 80 % del daño de impacto crítico adicional: x1,8/x2,04.",
+                "Progresión de crítico de penetración de armadura: 0-33 % ⇒ 0-30 %."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "R - Apoteosis",
+              "heading_level": 4,
+              "blocks": [
+                "Coste de maná: 80 ⇒ 100."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Jinx",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Estadísticas básicas",
+              "heading_level": 4,
+              "blocks": [
+                "Crecimiento de la velocidad de ataque: 1,4 % ⇒ 1 %."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "R - ¡Supermegacohete mortal!",
+              "heading_level": 4,
+              "blocks": [
+                "Daño fijo máximo: 250/400/550 (+130 % del DA adicional) ⇒ 200/350/500 (+120 % del DA adicional)."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Jhin",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Estadísticas básicas",
+              "heading_level": 4,
+              "blocks": [
+                "Modificador de daño crítico multiplicativo: 86 % ⇒ 75 % (x1,505 ⇒ x1,5)."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Sivir",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Q - Cuchilla bumerán",
+              "heading_level": 4,
+              "blocks": [
+                "Daño: 60/85/110/135/160 (+85 % del DA adicional) ⇒ 60/85/110/135/160 (+70 % del DA adicional).",
+                "Progresión de crítico: Hasta un x1,5 ⇒ 40 %: x1,4/x1,52."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Zeri",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "W - Ultradescarga láser",
+              "heading_level": 4,
+              "blocks": [
+                "Daño: 30/70/110/150/190 (+130 % del DA total) ⇒ 30/70/110/150/190 (+120 % del DA total).",
+                "Daño a través de muros: x1,75/x2,15 con Filo infinito ⇒ 75 % del daño de impacto crítico adicional: x1,75/x1,975 con Filo infinito.",
+                "La descripción ahora indica el daño mejorado.",
+                "Ahora se ve el impacto crítico cuando se asesta daño a través de un muro."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "E - Subida de tensión",
+              "heading_level": 4,
+              "blocks": [
+                "Daño: 20/22/24/26/28 (+12 % del DA adicional) ⇒ 17/19/21/23/25 (+10 % del DA adicional).",
+                "Progresión de crítico: Hasta un x1,85 por impacto ⇒ 100 % del daño crítico adicional al asestar un impacto crítico: x2/x2,3 con Filo infinito."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "R - Choque de rayos",
+              "heading_level": 4,
+              "blocks": [
+                "Daño de la activa: 200/300/400 (+100 % del DA adicional) ⇒ 150/250/350 (+100 % del DA adicional)."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Lucian",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Estadísticas básicas",
+              "heading_level": 4,
+              "blocks": [
+                "Crecimiento de daño de ataque: 2,9 ⇒ 2,5.",
+                "Crecimiento de la velocidad de ataque: 3,3 % ⇒ 2,5 %."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Q - Luz lacerante",
+              "heading_level": 4,
+              "blocks": [
+                "Daño: 85/115/145/175/205 (+60/75/90/105/120 % del DA adicional) ⇒ 80/115/150/185/220 (+100 % del DA adicional)."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "R - El sacrificio",
+              "heading_level": 4,
+              "blocks": [
+                "Proyectiles adicionales de la R por probabilidad de crítico: Hasta 25 ⇒ 100 % del daño crítico adicional: Hasta 22/28.",
+                "Proyectiles totales de la R: 22-47 (según la probabilidad de impacto crítico) ⇒ 22-44/50 (según la probabilidad de impacto crítico y el daño)."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Xayah",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "E - Dagas a mí",
+              "heading_level": 4,
+              "blocks": [
+                "Daño: 55/65/75/85/95 (+60 % del DA adicional) ⇒ 50/65/80/95/110 (+40 % del DA adicional).",
+                "Progresión de crítico: Hasta un 75 % ⇒ Hasta un 50 % del daño crítico adicional: x1,5/x1,65."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Draven",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Estadísticas básicas",
+              "heading_level": 4,
+              "blocks": [
+                "Crecimiento de DA: 3,6 ⇒ 3."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "W - Subidón de adrenalina",
+              "heading_level": 4,
+              "blocks": [
+                "Velocidad de ataque: 30/35/40/45/50 % ⇒ 20/25/30/35/40 %."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Yunara",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Q - Florescencia del espíritu",
+              "heading_level": 4,
+              "blocks": [
+                "Velocidad de ataque: 25/35/45/55/65 % ⇒ 20/30/40/50/60 %."
+              ],
+              "subsections": []
+            },
+            {
+              "title": ">R+W - Arco de la ruina",
+              "heading_level": 4,
+              "blocks": [
+                "Daño: 175/350/525 (+150 % del DA adicional) ⇒ 160/320/480 (+120 % del DA adicional)."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Akshan",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Pasiva - Artimañas",
+              "heading_level": 4,
+              "blocks": [
+                "Daño crítico del segundo disparo de la pasiva: 30 % de daño crítico adicional (x1,225/x1,345) ⇒ 100 % de daño crítico adicional: x2/x2,3.",
+                "Hemos corregido un error que provocaba que el segundo disparo ignorara la ceguera si no asestaba un golpe crítico."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Q - Bumerán vengador",
+              "heading_level": 4,
+              "blocks": [
+                "Daño: 5/25/45/65/85 (+80 % del DA total) ⇒ 45/75/105/135/165 (+70 % del DA adicional)."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "E - Balanceo heroico",
+              "heading_level": 4,
+              "blocks": [
+                "Daño: 15/30/45/60/75 (+15 % del DA total) ⇒ 8/16/24/32/40 (+25 % del DA total).",
+                "Progresión de crítico: x1,575/x1,935 ⇒ 50 % del daño de impacto crítico adicional: x1,5/x1,65.",
+                "Hemos aclarado en la descripción que el daño progresa con la velocidad de ataque."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "R - Merecido",
+              "heading_level": 4,
+              "blocks": [
+                "Progresión de crítico: x1,5/x1,7 ⇒ 30 % del daño de impacto crítico adicional: x1,3/x1,42."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Gangplank",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Pasiva - Prueba de fuego",
+              "heading_level": 4,
+              "blocks": [
+                "Daño: 50-250 (según el nivel) (+100 % del DA adicional) (+200 % de probabilidad de crítico) ⇒ 50-250 (+100 % del DA adicional) (+0 % de progresión de crítico)."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "E - Barril de pólvora",
+              "heading_level": 4,
+              "blocks": [
+                "Daño adicional de campeón: 75/105/135/165/195 ⇒ 75/95/115/135/155.",
+                "Ya no reduce el temporizador a 0,25 segundos al nivel 19.",
+                "Ya no inflige un 5 % más de daño si es un impacto crítico."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Yone",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Estadísticas básicas",
+              "heading_level": 4,
+              "blocks": [
+                "Daño crítico: x1,75/x2,15 ⇒ 90 % (x1,8/x2,07)."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Yasuo",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Estadísticas básicas",
+              "heading_level": 4,
+              "blocks": [
+                "Daño crítico: x1,75/x2,15 ⇒ 90 % (x1,8/x2,07)."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Miss Fortune",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Q - Redoble",
+              "heading_level": 4,
+              "blocks": [
+                "Daño crítico activo: x1,75/x2,15 ⇒ 50 % del daño crítico adicional (x1,5/x1,65)."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "R - Lluvia de balas",
+              "heading_level": 4,
+              "blocks": [
+                "Daño: 80 % del DA total (+25 % del PH) ⇒ 20/30/40 (+60 % del DA total) (+25 % del PH).",
+                "Progresión de crítico: x1,2/x1,28 ⇒ 30 % del daño de impacto crítico adicional: (x1,3/x1,39)."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Tryndamere",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Q - Sed de sangre",
+              "heading_level": 4,
+              "blocks": [
+                "DA adicional: 5/10/15/20/25 (+ hasta 15/25/35/45/55 según la vida que falte) ⇒ 0 (+20/35/50/65/80 según la vida que falte).",
+                "DA adicional máximo: Máximo con un 0 % de vida restante ⇒ Máximo con un 10 % de vida restante.",
+                "Hemos aclarado en la descripción de la Q cuáles son según la Furia y la curación máxima."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "W - Grito de mofa",
+              "heading_level": 4,
+              "blocks": [
+                "Ya no ralentiza durante 4 segundos a los enemigos que miren en la dirección opuesta al lanzarse.",
+                "Ahora, ralentiza a cualquier enemigo mientras le dé la espalda a Tryndamere durante el efecto de 2,5 segundos.",
+                "Ralentización: 30/37,5/45/52,5/60 % ⇒ 30/35/40/45/50 %.",
+                "Se mantiene la reducción de daño de ataque del enemigo de 4 segundos."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "E - Cuchillada giratoria",
+              "heading_level": 4,
+              "blocks": [
+                "Daño: 75/105/135/165/195 (+130 % del DA adicional) ⇒ 70/105/140/175/210 (+100 % del DA adicional)."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Twitch",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Estadísticas básicas",
+              "heading_level": 4,
+              "blocks": [
+                "Crecimiento de la velocidad de ataque: 3,38 % ⇒ 3 %.",
+                "Crecimiento de daño de ataque: 3,1 ⇒ 3."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Q - Emboscada",
+              "heading_level": 4,
+              "blocks": [
+                "Velocidad de ataque adicional: 45/50/55/60/65 % ⇒ 40/45/50/55/60 %."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Ashe",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Estadísticas básicas",
+              "heading_level": 4,
+              "blocks": [
+                "Crecimiento de la velocidad de ataque: 3,33 % ⇒ 3 %.",
+                "Crecimiento de daño de ataque: 3,45 ⇒ 3."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Pasiva - Tiro congelador",
+              "heading_level": 4,
+              "blocks": [
+                "Progresión de crítico: 100 % (hasta x1,75/x2,15) ⇒ 100 % (hasta x2/x2,3)."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "W - Descarga",
+              "heading_level": 4,
+              "blocks": [
+                "Daño: 60/95/130/165/200 (+110 % del DA adicional) ⇒ 60/95/130/165/200 (+100 % del DA adicional)."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Smolder",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Q - Aliento supermegaabrasador",
+              "heading_level": 4,
+              "blocks": [
+                "Progresión de crítico: Hasta x1,75/x2,15 ⇒ 50 % de daño crítico adicional (hasta x1,5/x1,65) (también afecta a las acumulaciones de la pasiva de la Q)."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Kindred",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "E - Temor creciente",
+              "heading_level": 4,
+              "blocks": [
+                "Crítico por vida restante: x1,5/x1,9 si el objetivo se encuentra por debajo del 25-75 % de vida (según la probabilidad de crítico) ⇒ 50 % de la probabilidad de crítico y del daño crítico adicionales en todo momento (hasta x1,5/x1,65).",
+                "Daño del salto: x1,75/x2,15 al asestar un impacto crítico ⇒ 50 % de la probabilidad de crítico y del daño crítico adicionales en todo momento (hasta x1,5/x1,65).",
+                "Límite de daño a monstruos: 300 (incluye el daño básico y la relación de DA adicional) ⇒ 200 (solo la parte del porcentaje de vida). Supone una mejora en casi todos los casos."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Corki",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "W - Valquiria",
+              "heading_level": 4,
+              "blocks": [
+                "Daño por segundo: 40/55/70/85/100 (+40 % del DA adicional) (+30 % del PH) ⇒ 30/45/60/75/90 (+40 % del DA adicional) (+ 30 % del PH)."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Shaco",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Pasiva - Puñalada por la espalda",
+              "heading_level": 4,
+              "blocks": [
+                "Daño: 20-35 (según el nivel) (+25 % del DA adicional) ⇒ 20-35 (según el nivel) (+20 % del DA adicional).",
+                "Modificador de crítico: 100 % (x1,75/x2,15) ⇒ 100 % (x2,0/x2,3)."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Q - Engañar",
+              "heading_level": 4,
+              "blocks": [
+                "Modificador de Puñalada por la espalda: x1,55/x1,95 ⇒ 60 % del daño crítico adicional (x1,6/x1,78).",
+                "Puñalada por la espalda crítica: 100 % (x1,75/x2,15) ⇒ 100 % (x2,0/x2,3)."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Graves",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Estadísticas básicas",
+              "heading_level": 4,
+              "blocks": [
+                "Daño crítico: 45 % del adicional (33,75/51,75 %) ⇒ 35 % del adicional (35/45,5 %).",
+                "Daño total con crítico: 250-357 % del DA total ⇒ 252-360 % del DA total."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Quinn",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Pasiva - Acosar",
+              "heading_level": 4,
+              "blocks": [
+                "Daño: 10-95 (según el nivel) (+16-50 % del DA total según el nivel) ⇒ 15-120 (según el nivel) (+ 40 % del DA adicional)."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Senna",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Estadísticas básicas",
+              "heading_level": 4,
+              "blocks": [
+                "Daño crítico: 100 % del daño crítico total (x1,75/x2,15) ⇒ 90 % del total (x1,8/x2,07)."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Garen",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "E - Juicio",
+              "heading_level": 4,
+              "blocks": [
+                "Relación de crítico de la E: 80 % del total (x1,4/x1,72) ⇒ 30 % del adicional (x1,3/x1,39)."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Rengar",
+          "heading_level": 3,
+          "blocks": [
+            "Se ha renovado el código de todas las habilidades."
+          ],
+          "subsections": [
+            {
+              "title": "Q - Fiereza",
+              "heading_level": 4,
+              "blocks": [
+                "La Q se puede consumir ahora en las plantas.",
+                "La Q ya no se considera un impacto crítico siempre.",
+                "La Q ya no inflige hasta un 101,25 % del DA total como daño adicional según la probabilidad de crítico y el daño.",
+                "Ahora, la Q inflige un 100/130 % del DA total como daño adicional si asesta un golpe crítico."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Viego",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Q - Hoja del Rey Arruinado",
+              "heading_level": 4,
+              "blocks": [
+                "Progresión de crítico según el porcentaje de vida actual: 100 % del total (x1,75/x2,15) ⇒ 50 % del adicional (x1,5/x1,65).",
+                "Progresión de crítico del segundo golpe: 100 % del total (x1,75/x2,15) ⇒ 100 % del adicional (x2/x2,3).",
+                "Modificador de crítico activo: 100 % del total (hasta x1,75/x2,15) ⇒ 50 % del adicional (hasta x1,5/x1,65)."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "R - Rompecorazones",
+              "heading_level": 4,
+              "blocks": [
+                "Progresión de crítico: Hasta x2 ⇒ 70 % del adicional (hasta x1,7/x1,91)."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Elise",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Q - Neurotoxina / Mordisco venenoso",
+              "heading_level": 4,
+              "blocks": [
+                "Límite del daño a monstruos: 75/100/125/150/175 ⇒ 65/85/105/125/145 (+90 % del PH).",
+                "Daño máximo contra monstruos:: 115/170/225/280/335 ⇒ 105/155/205/255/305 (+90 % del PH)."
+              ],
+              "subsections": []
+            }
+          ]
+        },
+        {
+          "title": "Jax",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Pasiva - Asalto implacable",
+              "heading_level": 4,
+              "blocks": [
+                "Ahora obtiene un 1,5 % de velocidad de ataque adicional por acumulación al nivel 19."
+              ],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Omnisucción",
+      "heading_level": 2,
+      "blocks": [
+        "Omnisucción: Ahora se aplica con un 100 % del valor, reducido a un 33 % cuando proviene de mascotas, daño prolongado y hechizos con efecto en área contra súbditos."
+      ],
+      "subsections": [
+        {
+          "title": "",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Espada de Doran",
+              "heading_level": 4,
+              "blocks": [
+                "Eliminada: Pasiva Drenaje de vida.",
+                "Añadido: 2,5 % de omnisucción."
+              ],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Objetos nuevos",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Amanecer y anochecer",
+              "heading_level": 4,
+              "blocks": [
+                "Receta: Brillo + Vara explosiva + Gema avivadora + Daga + 300 de oro.",
+                "Coste total de oro: 3100.",
+                "Poder de habilidad: 70.",
+                "Vida: 300.",
+                "Velocidad de habilidades: 20.",
+                "Velocidad de ataque: 25 %.",
+                "Hoja encantada (1,5 s de enfriamiento): Tras usar una habilidad, tu siguiente ataque inflige un 100 % del daño de ataque básico + un 10 % del poder de habilidad en forma de daño mágico adicional al impactar y aplica efectos de impacto durante un periodo prolongado."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Dardos rastreademonios",
+              "heading_level": 4,
+              "blocks": [
+                "Receta: Fervor + Honda de explorador + 850 de oro.",
+                "Coste total de oro: 2650.",
+                "Velocidad de ataque: 40 %.",
+                "Probabilidad de impacto crítico: 25 %.",
+                "Velocidad de movimiento: 4 %.",
+                "Vigilia nocturna: Obtienes 30 de velocidad de habilidad definitiva.",
+                "Andanada inicial (45 s de enfriamiento): Tras lanzar tu habilidad definitiva, tus siguientes 3 ataques básicos en los próximos 8 s segundos obtienen un 50 % de velocidad de ataque y asestan impactos críticos, que infligen un 75 % de tu daño de impacto crítico normal. Si un ataque fuera a infligir un impacto crítico, inflige daño de impacto crítico normal y también un 10 % de daño verdadero adicional."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Hambre insaciable",
+              "heading_level": 4,
+              "blocks": [
+                "Receta: Martillo de guerra de Caulfield + Pico + 1075 de oro.",
+                "Coste total de oro: 3000.",
+                "Daño de ataque: 60.",
+                "Tenacidad: 20 %.",
+                "Omnisucción: 5 %.",
+                "Hambruna: Otorga (5 + 10 % del DA adicional) de velocidad de habilidades.",
+                "Festín: Cuando un campeón al que has infligido daño en los últimos 3 s muere, otorga un 15 % de omnisucción durante 8 s."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Quiebrabastiones",
+              "heading_level": 4,
+              "blocks": [
+                "Receta: Embrutecedor + Daga dentada + 863 de oro.",
+                "Coste total de oro: 3200.",
+                "Daño de ataque: 55.",
+                "Letalidad: 22.",
+                "Velocidad de habilidades: 15.",
+                "Carga moldeada: Infligir daño con habilidades a un campeón o monstruo épico inflige (30 + 150 % de letalidad) de daño verdadero adicional.",
+                "Sabotaje: Al eliminar a un campeón al que has infligido daño en los últimos 3 s, otorga Sabotaje durante 90 s. Mientras tienes Sabotaje, tu siguiente ataque contra un monstruo épico o torreta inflige (300 + 2500 % de letalidad) de daño verdadero adicional a lo largo de 3 s."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Actualizador",
+              "heading_level": 4,
+              "blocks": [
+                "Receta: Capítulo perdido + Vara explosiva + 1050 de oro.",
+                "Coste total de oro: 3100.",
+                "Poder de habilidad: 90.",
+                "Maná: 300.",
+                "Velocidad de habilidades: 10.",
+                "[ACTIVA] Maná hecho realidad (60 s de enfriamiento): durante 8 s, tu maná se potencia. Mientras está potenciado, tus habilidades cuestan un 100 % más de maná; obtienes (15 + 0,005 % del maná adicional) % de daño, escudos y curaciones adicionales con habilidades; y los enfriamientos de las habilidades básicas son un 30 % más rápidos."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Óptica hextech C44",
+              "heading_level": 4,
+              "blocks": [
+                "Receta: Pico + Carcaj del mediodía + Espada larga + 275 de oro.",
+                "Coste total de oro: 2800.",
+                "Daño de ataque: 50.",
+                "Probabilidad de impacto crítico: 25 %.",
+                "Magnificación: Inflige hasta un 10 % de daño adicional con ataques, según la distancia a la que se encuentre el enemigo (daño máximo a 750 de alcance).",
+                "Puntería arcana: Cuando un campeón al que has infligido daño en los últimos 3 s muere, otorga 100 de alcance de ataque adicional durante 6 s."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Bandlemusa",
+              "heading_level": 4,
+              "blocks": [
+                "Receta: Gema avivadora + Armadura de tela + Manto de anulación de magia + 500 de oro.",
+                "Coste total de oro: 2000.",
+                "Vida: 200.",
+                "Armadura: 20.",
+                "Resistencia mágica: 20.",
+                "Velocidad de habilidades: 15.",
+                "Fanfarria: Ralentizar o inmovilizar a un campeón enemigo otorga Fanfarria durante 8 s (cuerpo a cuerpo) / 4 s (a distancia). Fanfarria otorga 20 de velocidad de movimiento. Mientras tengas Fanfarria, los aliados cercanos y tú obtenéis 30 % (cuerpo a cuerpo) / 20 % (a distancia) de velocidad de ataque."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Arnés de protoplasma",
+              "heading_level": 4,
+              "blocks": [
+                "Receta: Gema avivadora + Cinturón de gigante + 800 de oro.",
+                "Coste total de oro: 2500.",
+                "Vida: 600.",
+                "Velocidad de habilidades: 15.",
+                "Salvavidas: Al recibir daño que reduzca la vida por debajo del 30 %, obtienes 200 de vida máxima durante 5 s y recuperas (200-400 [según el nivel] + 250 % de la armadura + 250 % de la resistencia mágica) de vida a lo largo del efecto. Mientras regeneras vida, obtienes un 15 % de tamaño adicional, un 10 % de velocidad de movimiento y un 25 % de tenacidad."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Diadema susurrante / Diadema melodiosa",
+              "heading_level": 4,
+              "blocks": [],
+              "subsections": []
+            },
+            {
+              "title": "Diadema susurrante",
+              "heading_level": 4,
+              "blocks": [
+                "Receta: Ídolo prohibido + Cristal de rubí + Lágrima de la diosa + 850 de oro.",
+                "Coste total de oro: 2250.",
+                "Vida: 200.",
+                "Maná: 300.",
+                "Regeneración de maná básica: 75 %.",
+                "Poder de curaciones y escudos: 8 %.",
+                "Armonía: Obtienes (0,005 % del maná adicional) % de poder de curaciones y escudos.",
+                "Flujo de maná: Asestar habilidades otorga 4 de maná máximo (se duplica contra campeones). Se transforma en Diadema melodiosa al alcanzar 360 de maná máximo."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Diadema melodiosa",
+              "heading_level": 4,
+              "blocks": [
+                "Vida: 200.",
+                "Maná: 1000.",
+                "Regeneración de maná básica: 100 %.",
+                "Poder de curaciones y escudos: 8 %.",
+                "Armonía: Obtienes (0,005 % del maná adicional) % de poder de curaciones y escudos.",
+                "Consonancia: Mientras tú o un aliado al que hayas otorgado una curación o escudo en los últimos 3 s estáis en combate con campeones, cura (0,008 % del maná adicional) por segundo al campeón aliado cercano con menos vida."
+              ],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Objetos que regresan",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Sable-pistola hextech",
+              "heading_level": 4,
+              "blocks": [
+                "Receta: Cetro vampírico + Alternador hextech + Tomo amplificador + 600 de oro.",
+                "Coste total de oro: 3000.",
+                "Poder de habilidad: 80.",
+                "Daño de ataque: 40.",
+                "Omnisucción: 10 %.",
+                "[ACTIVA] Relámpago (60 s de enfriamiento): Electrocuta al campeón enemigo objetivo, lo que le inflige (175-253 [según el nivel] + 30 % del poder de habilidad) de daño mágico y lo ralentiza un 25 % durante 1,5 s."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Navaja de asalto",
+              "heading_level": 4,
+              "blocks": [
+                "Receta: Espadón + Capa de agilidad + Honda de explorador + 700 de oro.",
+                "Coste total de oro: 3200.",
+                "Daño de ataque: 50.",
+                "Velocidad de ataque: 20 %.",
+                "Probabilidad de impacto crítico: 25 %.",
+                "Vigor: Moverse y atacar genera un ataque con vigor.",
+                "Proyectil: Tus ataques con vigor infligen 100 de daño mágico adicional y otorgan 45 % de velocidad de movimiento durante 1,5 s."
+              ],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Objetos renovados",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Desesperanza eterna",
+              "heading_level": 4,
+              "blocks": [
+                "Receta: Protección de la legión + Cinturón de gigante + 800 de oro ⇒ Chaleco de cadenas + Gema avivadora + Cristal de rubí + 800 de oro.",
+                "Coste total de oro: 2800 (sin cambios).",
+                "Armadura: Aumentada de 25 ⇒ 50.",
+                "Resistencia mágica: 25 ⇒ 0 (ELIMINADA).",
+                "Velocidad de habilidades: Aumenta de 10 ⇒ 15."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Protección de la legión",
+              "heading_level": 4,
+              "blocks": [
+                "Eliminado del juego."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Precisión infalible",
+              "heading_level": 4,
+              "blocks": [
+                "Receta: Códice diabólico + Códice diabólico + Vara explosiva + 200 de oro ⇒ Códice diabólico + Códice diabólico + Tomo amplificador + 600 de oro.",
+                "Coste total de oro: 2750 ⇒ 2700 de oro.",
+                "Poder de habilidad: 125 ⇒ 75.",
+                "Velocidad de habilidades: 25 (sin cambios).",
+                "Hiperdisparo: Infligir daño con habilidades a los campeones a 600 unidades de alcance o más desde la posición del lanzamiento los revela durante 6 s. ⇒ Infligir daño con habilidades a los campeones a 600 de alcance o más los revela durante 6 s. Inflige un 10 % de daño adicional a los enemigos revelados con Hiperdisparo.",
+                "Concentración (30 s de enfriamiento): Cuando se activa Hiperdisparo, revela a los demás campeones enemigos a 1400 de alcance durante 3 s."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Firmamento desgarrado",
+              "heading_level": 4,
+              "blocks": [
+                "Daño de ataque: 40 ⇒ 45.",
+                "Golpe de Escudo de Luz: daño de impacto crítico reducido de 100 % ⇒ 80 %.",
+                "Enfriamiento de Golpe de Escudo de Luz: 8 s ⇒ 10 s."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Compañera de Luden",
+              "heading_level": 4,
+              "blocks": [
+                "Nombre: Compañera de Luden ⇒ Eco de Luden.",
+                "Icono: Revertido al bastón."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Ecos de Helia",
+              "heading_level": 4,
+              "blocks": [
+                "Gema avivadora + Espejo de cristal de Bandle + 500 de oro (2200 de oro).",
+                "35 De poder de habilidad.",
+                "200 De vida.",
+                "125 % de regeneración de maná básica.",
+                "20 De velocidad de habilidades.",
+                "Absorbealmas: Otorga un 35 % del daño premitigado infligido a campeones como cargas de alma, hasta un máximo de (80-250 [según el nivel]) cargas. Curar u otorgar un escudo a un aliado consume todas las cargas de alma para restaurar el 100 % de esa cantidad como vida."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Segador de esencia",
+              "heading_level": 4,
+              "blocks": [
+                "Receta: Pico + Martillo de guerra de Caulfield + Capa de agilidad + 375 de oro ⇒ Brillo + Martillo de guerra de Caulfield + Capa de agilidad + 350 de oro.",
+                "Coste total de oro: 2900 (sin cambios).",
+                "Daño de ataque: 60 ⇒ 55.",
+                "25 % de probabilidad de crítico.",
+                "Velocidad de habilidades: 15 ⇒ 20.",
+                "Hoja encantada (1,5 s de enfriamiento): Tras usar una habilidad, tu siguiente ataque inflige (125 % del daño de ataque básico + [50 * probabilidad de crítico]) de daño físico adicional y otorga un 50 % del daño como maná al golpear.",
+                "Se ha eliminado la pasiva Drenaje de esencia."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Guja sombría",
+              "heading_level": 4,
+              "blocks": [
+                "Receta: Daga dentada + Martillo de guerra de Caulfield + 450 de oro ⇒ Daga dentada + Martillo de guerra de Caulfield + 750 de oro.",
+                "Coste total de oro: 2500 ⇒ 2800 de oro.",
+                "Daño de ataque: 55 ⇒ 60.",
+                "Velocidad de habilidades: 10 ⇒ 15.",
+                "Letalidad: 15 ⇒ 18.",
+                "Acechador nocturno: Cuando los enemigos no te hayan visto durante 1 s, tu siguiente ataque contra un campeón inflige (50 + 150 % de letalidad) de daño verdadero adicional.",
+                "Apagón (90 s de enfriamiento): Al estar cerca de guardianes invisibles y trampas de los rivales, los revela durante 8 s. Mientras revelas un guardián, tus ataques le infligen 3 (cuerpo a cuerpo) / 2 (a distancia) de daño.",
+                "Se ha eliminado Sofoco (Forma parte de Apagón)."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Redención",
+              "heading_level": 4,
+              "blocks": [
+                "Receta: Gema avivadora + Ídolo prohibido + 900 de oro ⇒ Códice diabólico + Ídolo prohibido + 850 de oro.",
+                "Coste total de oro: 2300 ⇒ 2250 de oro.",
+                "Vida: 200 ⇒ 0.",
+                "NUEVO 30 de poder de habilidad."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Convergencia de Zeke",
+              "heading_level": 4,
+              "blocks": [
+                "NUEVO Criocombustión: Otorga 15 de velocidad de habilidad definitiva."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Objetos de Lágrima (Muramana, El gran invierno)",
+              "heading_level": 4,
+              "blocks": [],
+              "subsections": []
+            },
+            {
+              "title": "Lágrima (objetos de Flujo de maná)",
+              "heading_level": 4,
+              "blocks": [
+                "Único ⇒ Semiúnico.",
+                "Ahora podéis tener un objeto de acumulación de Lágrima en el inventario en cualquier momento. Cuando vuestro objeto de Lágrima se transforme, ¡podréis comprar otra y volver a acumularla!"
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Muramana",
+              "heading_level": 4,
+              "blocks": [
+                "Maná: 860 ⇒ 1000."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "El gran invierno",
+              "heading_level": 4,
+              "blocks": [
+                "Maná: 860 ⇒ 1000."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Recordatorio letal",
+              "heading_level": 4,
+              "blocks": [
+                "Receta: Llamada del verdugo + Últimas palabras + Capa de agilidad + 450 de oro ⇒ Llamada del verdugo + Últimas palabras + Capa de agilidad + 150 de oro.",
+                "Coste: 3300 de oro ⇒ 3000 de oro.",
+                "Penetración de armadura: 35 % ⇒ 30 %."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Recuerdos de lord Dominik",
+              "heading_level": 4,
+              "blocks": [
+                "Receta: Últimas palabras + Carcaj del mediodía + 350 de oro ⇒ Últimas palabras + Carcaj del mediodía + 550 de oro.",
+                "Coste: 3100 de oro ⇒ 3300 de oro.",
+                "Penetración de armadura: 40 % ⇒ 35 %.",
+                "NUEVO Verdugo de gigantes: Infliges hasta un 15 % de daño adicional a campeones, según su vida adicional. El máximo de daño adicional se alcanza con 1500 de vida adicional."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Flechas de los Yun Tal",
+              "heading_level": 4,
+              "blocks": [
+                "Receta: Espadón + Honda de explorador + Espada larga + 750 de oro ⇒ Espadón + Honda de explorador + Espada larga + 850 de oro.",
+                "Coste: 3000 de oro ⇒ 3100 de oro.",
+                "Daño de ataque: 55 ⇒ 50.",
+                "Velocidad de ataque: 35 % ⇒ 40 %."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Filo infinito",
+              "heading_level": 4,
+              "blocks": [
+                "Receta: Espadón + Pico + Capa de agilidad + 675 de oro ⇒ Espadón + Pico + Capa de agilidad + 725 de oro.",
+                "Coste: 3450 de oro ⇒ 3500 de oro.",
+                "Daño de ataque: 65 ⇒ 75.",
+                "Daño de impacto crítico: 40 % ⇒ 30 %."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Suelas simbióticas",
+              "heading_level": 4,
+              "blocks": [
+                "Eliminado."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Piedra de visión vigilante",
+              "heading_level": 4,
+              "blocks": [
+                "Eliminado."
+              ],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Clasificatorias y emparejamiento de la GI",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Final de la Temporada 3 de 2025 e inicio de la Temporada 1 de 2026",
+              "heading_level": 4,
+              "blocks": [
+                "Las transferencias de región se desactivarán a las 09:00 del 07/01/2026 (hora peninsular) a nivel global mientras nos preparamos para otorgar las recompensas de clasificatoria.",
+                "La Temporada clasificatoria 1 de 2026 empezará el 08/01/2026 a las 12:00:00 (hora local del servidor). Las colas clasificatorias (solo/dúo y flexible) volverán a activarse al inicio de la temporada. Las misiones de recompensa clasificatoria de la Temporada 1 de 2026 comenzarán al mismo tiempo.",
+                "Cuando comience la nueva temporada en 2026, se reiniciará el rango de los jugadores. Tras jugar 5 partidas provisionales, se les asignará un rango inicial para empezar a ascender en la nueva temporada."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Recompensas de clasificatoria de final de temporada de 2025",
+              "heading_level": 4,
+              "blocks": [
+                "Borde de aspecto victorioso compatible con los tres aspectos victoriosos de 2025 (se deben tener los tres aspectos victoriosos del año).",
+                "Emoticono de clasificatoria de 2025",
+                "Icono de clasificatoria de 2025",
+                "Para poder recibir las recompensas, los jugadores deberán tener un nivel de honor igual o superior a 3."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Égida de valor",
+              "heading_level": 4,
+              "blocks": [
+                "Abandonar la selección de campeón no evitará el polivalente automático. Si un jugador con polivalente automático abandona la selección de campeón, la asignación se mantendrá hasta que juegue una partida como polivalente.",
+                "Los jugadores en Maestro y niveles superiores perderán más PL al abandonar la selección de campeón de una partida clasificatoria.",
+                "Las clasificatorias flexibles tendrán un índice de destreza mejorado y más razonable, que se basará en vuestro rango de solo/dúo."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Restricción para dúos en los niveles superiores de la cola solo/dúo",
+              "heading_level": 4,
+              "blocks": [
+                "Un jugador D1 puede jugar con alguien de D3-D1, Maestro, Gran Maestro y Aspirante.",
+                "Un Gran Maestro puede jugar con alguien de D1, Maestro, Gran Maestro y Aspirante.",
+                "Un Aspirante puede jugar con alguien de D1, Maestro, Gran Maestro o Aspirante.",
+                "Un Maestro puede jugar con alguien de D1, Maestro, Gran Maestro o Aspirante.",
+                "En CN, se permite la cola dúo hasta Maestro con alguien de grupo D1. En CN, solo se permite la cola en solitario en Gran Maestro y Aspirante.",
+                "En KR, solo se permite la cola en solitario en Maestro, Gran Maestro y Aspirante.",
+                "Al igual que en años anteriores, en KR y CN, se eliminará de manera temporal la restricción de MMR para dúos de niveles superiores durante la versión 26.1 (MMR límite de Gran Maestro en CN y de Maestro en KR). De este modo, si tenéis un MMR de Gran Maestro en CN o de Maestro en KR y no habéis alcanzado vuestra clasificación visible porque seguís ascendiendo, todavía podréis jugar en dúo. Las restricciones de la clasificación visible estarán siempre activas."
+              ],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Modo rápido",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Ritmo del inicio de la partida",
+              "heading_level": 4,
+              "blocks": [
+                "Nivel inicial: 1 ⇒ 3.",
+                "Oro inicial: 500 ⇒ 1400 de oro.",
+                "Se ha eliminado Espada de Doran, Escudo de Doran y Anillo de Doran de la tienda de objetos.",
+                "Se ha añadido Cuerno del guardián, Orbe del guardián, Espada del guardián y Martillo del guardián a la tienda de objetos del Modo rápido."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Objetivos",
+              "heading_level": 4,
+              "blocks": [
+                "Se han eliminado las larvas del Vacío.",
+                "Se ha eliminado el Heraldo de la Grieta.",
+                "El Barón Nashor aparece en el minuto 12:00.",
+                "La mejora Mano del Barón se mantendrá después de morir.",
+                "Se ha eliminado a Atakhan, igual que en las demás colas de la Grieta.",
+                "Los dragones elementales aparecen dos veces como máximo.",
+                "El Alma de dragón se otorga ahora al equipo que consiga matar a ambos dragones elementales.",
+                "La transformación de la Grieta elemental tendrá lugar cuando muera el primer dragón elemental, y coincidirá con el elemento del segundo dragón.",
+                "Ahora, el Dragón anciano aparece en el minuto 15:00. Si todavía quedara un dragón elemental en el foso, este último desaparecerá.",
+                "Si ningún dragón elemental muere, no se producirá la transformación de la Grieta elemental."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Cambios al ritmo",
+              "heading_level": 4,
+              "blocks": [
+                "Inicio de las mecánicas de remontada: 4:00 ⇒ 0:30.",
+                "Las ganancias de oro y experiencia se aceleran más a lo largo de la partida.",
+                "Se reducen ligeramente las mecánicas de remontada por cada obtención de oro o experiencia.",
+                "Las mecánicas de remontada ya no pueden añadir un valor superior al 100 % de una sola fuente de oro o experiencia.",
+                "Se ha corregido un error que afectaba a la aceleración de oro según la duración de la partida y hacía que las mecánicas de remontada valieran el doble en algunos casos.",
+                "Las torres empiezan a perder resistencias: 25:00 ⇒ 20:00.",
+                "Las torres empiezan a arder por muerte súbita: 30:00 ⇒ 25:00.",
+                "Tiempo de reaparición al morir por nivel: 10 s - 52,5 s ⇒ 10 s - 40 s.",
+                "El tiempo de reaparición al morir ya no progresa con el tiempo de partida hasta el minuto 25:00; progresa hasta un máximo de 50 % más al 27:30.",
+                "Los súbditos progresan un 50 % más rápido.",
+                "Progresión de vida de los súbditos con cañón: 85 ⇒ 100.",
+                "Inicio de la aparición de oleadas de súbditos cada 25 segundos.",
+                "Ahora, todas las oleadas de súbditos a partir de la tercera tendrán un súbdito con cañón.",
+                "Las torretas infligen daño reducido a los súbditos con cañón.",
+                "Multiplicador del daño a torretas de los súbditos: 50 % ⇒ 60 %."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Frenesí de súbditos",
+              "heading_level": 4,
+              "blocks": [
+                "Velocidad de movimiento de los súbditos: +125.",
+                "Velocidad de ataque de los súbditos: +100 %.",
+                "Daño de los súbditos a súbditos enemigos y torretas: 150 % ⇒ 250 % según la duración de la partida (progresa de manera lineal desde el minuto 1:00 al 20:00).",
+                "Los súbditos propagan Frenesí a otros súbditos aliados cercanos en la misma calle.",
+                "Duración de la marca de mejora en campeones: 90 s o hasta morir.",
+                "Duración de Frenesí: 10 s ⇒ 30 s según la duración de la partida."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Cambios en la jungla",
+              "heading_level": 4,
+              "blocks": [
+                "Acumulaciones necesarias para completar la misión de la jungla: 30 ⇒ 25.",
+                "Tiempo de reaparición del Ancestro ígneo y del Coloso celeste: 300 s ⇒ 270 s.",
+                "Tiempo de reaparición de los campamentos de los lóbregos, picuchillos, Gromp y krugs: 135 s ⇒ 120 s.",
+                "Los aliados cercanos reciben un 30 % del valor en oro de los monstruos no épicos de la jungla asesinados. Quien asesta el último golpe recibe el 100 % del valor."
+              ],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Arena",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "General",
+              "heading_level": 4,
+              "blocks": [
+                "El daño de impacto crítico adicional aumenta de 190 % a 200 %."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Recompensas de fama",
+              "heading_level": 4,
+              "blocks": [
+                "Híbrido - 100 de fama",
+                "Furia justiciera - 1600 de fama",
+                "Carta de introducción al combate - 3600 de fama",
+                "Habitación del pánico - 6100 de fama",
+                "Cambio adicional - 9100 de fama",
+                "Multiherramienta - 12 600 de fama",
+                "Enérgico - 16 600 de fama",
+                "Carta de introducción al combate - 21 600 de fama",
+                "Mente colmena - 26 600 de fama",
+                "Apunta a la cabeza - 31 600 de fama",
+                "Misión: Ritual del dios de la forja - 37 600 de fama",
+                "Carta de introducción al combate - 47 600 de fama"
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Aumentos",
+              "heading_level": 4,
+              "blocks": [
+                "Acertar una habilidad potencia tu siguiente ataque. Acertar un ataque potencia tu siguiente habilidad.",
+                "Curar u otorgar escudos aumenta el daño de tus habilidades durante la ronda.",
+                "La primera vez que fueras a morir, se te apartará de forma segura a un lugar lejano.",
+                "Obtienes un objeto especial que se convierte en uno nuevo de tu elección en cada ronda.",
+                "Adquieres vigor mucho más rápido. Activar Vigor hace que se disparen proyectiles mágicos.",
+                "¡Recogerás abejas atacando a las plantas! Al infligir daño a enemigos, les lanzarás las abejas.",
+                "Tu probabilidad de crítico tiene un límite menor. Obtienes un montón de daño crítico.",
+                "Tras comprar algunos yunques de objetos, todos tus objetos se vuelven selectos.",
+                "Ahora podrás utilizar tu definitiva en campeones aliados. Obtienes 50 de velocidad de habilidad definitiva."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Campeones",
+              "heading_level": 4,
+              "blocks": [
+                "Relación de DA de la pasiva: 1,5-2,8 ⇒ 1-2.",
+                "Valor de la curación de la pasiva: 30 %-75 % ⇒ 30 %-45 %.",
+                "Relación de DA de la Q: 20 %-60 % ⇒ 10 %-50 %.",
+                "Curación de la Q contra campeones: 5 %-9 % ⇒ 3 %-7 %.",
+                "Daño de la R: 250/400/550 200 % del DA adicional ⇒ 200/350/500 150 % del DA adicional."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Objetos",
+              "heading_level": 4,
+              "blocks": [],
+              "subsections": []
+            },
+            {
+              "title": "Corrección de errores",
+              "heading_level": 4,
+              "blocks": [
+                "Se ha corregido un error que provocaba que Muere otro día no se lanzase si eras inalcanzable en el momento de usarlo."
+              ],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "ARAM: Caos",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Campeones",
+              "heading_level": 4,
+              "blocks": [
+                "Daño infligido: 95 % ⇒ 100 %.",
+                "Escudos otorgados: 80 % ⇒ 100 %.",
+                "Daño infligido: 95 % ⇒ 100 %.",
+                "Daño recibido: 105 % ⇒ 100 %.",
+                "Curación: 90 % ⇒ 100 %.",
+                "Escudos: 95 % ⇒ 100 %.",
+                "Daño adicional de R+Q: 40/90/140/190 ⇒ 40/100/160/220.",
+                "Curación: 95 % ⇒ 100 %.",
+                "Escudos: 90 % ⇒ 100 %.",
+                "Velocidad de habilidades: -10 ⇒ 0.",
+                "Daño infligido: 95 % ⇒ 100 %.",
+                "Daño recibido: 105 % ⇒ 100 %.",
+                "Daño infligido: 95 % ⇒ 100 %.",
+                "Escudos: 80 % ⇒ 100 %.",
+                "Relación de curación de la W: 20 % ⇒ 30 %",
+                "Relación del escudo de la W: 20 % ⇒ 25 %.",
+                "Enfriamiento de la Q: 10 s ⇒ 8 s."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Aumentos",
+              "heading_level": 4,
+              "blocks": [
+                "Nivel del aumento: Prismático ⇒ dorado.",
+                "En lugar de almacenar daño de todas las fuentes, solo almacena el del propietario del aumento.",
+                "En lugar de otorgar una carga cada 180 s, otorgará las 3 cargas cada 120 s.",
+                "Hemos cambiado la funcionalidad de la recompensa, que ahora multiplicará las futuras acumulaciones por 3 y no solo las acumulaciones en el momento de completarla.",
+                "La descripción ya lo sugería, pero no funcionaba así, de modo que pasará a hacerlo para cumplir con la expectativa y para que Corazón de acero haga *clin*.",
+                "Estadísticas de Espátula dorada:",
+                "Daño de ataque: 60 ⇒ 90.",
+                "Poder de habilidad: 80 ⇒ 110.",
+                "Velocidad de movimiento: 5 % ⇒ 10 %.",
+                "Alcance de Inmolar: 300 ⇒ 400."
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Corrección de errores",
+              "heading_level": 4,
+              "blocks": [
+                "Se ha corregido un error que provocaba que la barra de mejora de Despertar definitivo mostrase una velocidad de habilidades incorrecta.",
+                "Hemos añadido un medidor de enfriamiento de Despertar definitivo.",
+                "Se ha corregido un error que provocaba que Exterminador no funcionase con las habilidades básicas de Rengar.",
+                "Se ha corregido un error que provocaba que el daño contra el terreno de Láser orbital infligiese el daño incorrecto contra súbditos.",
+                "Se ha corregido un error que provocaba que Láser orbital registrase el daño infligido a súbditos.",
+                "Se ha corregido un error que provocaba que A precio de sangre no funcionase si un aliado también lo escogía."
+              ],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "El ascenso de Demacia",
+      "heading_level": 2,
+      "blocks": [
+        "Habrá disponibles misiones diarias y semanales que proporcionarán grandes cantidades de escudos plateados. Si jugáis a LoL o TFT y completáis misiones, conseguiréis suficientes escudos plateados para completar el juego.",
+        "Al comprar el pase de batalla, recibiréis una recompensa instantánea de escudos plateados, y también aumentará la cantidad que recibáis de la misión recurrente.",
+        "Si jugáis una partida con un aspecto que se lance durante la primera temporada, recibiréis una bonificación única de escudos plateados."
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Actualizaciones sobre las imposiciones en la sala y el comportamiento de los jugadores",
+      "heading_level": 2,
+      "blocks": [
+        "Las selecciones de campeones finalizarán cuando un jugador reciba un informe y el sistema determine que está imponiéndose en la sala para forzar un abandono o con cualquier otro fin. Eso no sucederá si no se envía un informe durante la selección de campeón, así que no olvidéis informar sobre los jugadores que tengan estas conductas.",
+        "Cuando finaliza una selección de campeón por detección de imposición, el infractor recibirá una penalización que le impedirá volver a ponerse en cola de inmediato, y los demás jugadores volverán al emparejamiento de forma similar a cuando un jugador abandona.",
+        "Aumentan las penalizaciones por comportamientos disruptivos recurrentes.",
+        "Mejora la detección de la falta de participación deliberada en partida.",
+        "Si recibís una suspensión por tener un Riot ID inapropiado, no podréis cambiarlo hasta que la suspensión expire."
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Emparejamiento de polivalente automático por calles",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": []
+    },
+    {
+      "title": "Pacto de la comunidad de Riot Games",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": []
+    },
+    {
+      "title": "Clash - Copa de Demacia de la Grieta del Invocador",
+      "heading_level": 2,
+      "blocks": [
+        "Inicio del registro: 12 de enero a las 11:00 (hora local)",
+        "Fechas del torneo: 17 y 18 de enero de 16:00 a 19:00 (hora local) aproximadamente; varía según la región."
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Corrección de errores y mejoras de calidad",
+      "heading_level": 2,
+      "blocks": [
+        "Hemos corregido un error que provocaba que los ataques básicos de la W de Fizz se escucharan desde la niebla de guerra.",
+        "Hemos corregido un error que provocaba que faltasen las etiquetas de objeto único en las descripciones de los objetos de Guardián en ARAM.",
+        "Hemos corregido un error que provocaba que la E de Ivern no rompiese el escudo de hechizos de Velo del hada.",
+        "Hemos corregido un error que provocaba que los autoataques de la Q de Skarner no generasen acumulaciones de Lanza de Shojin (gracias a los jugadores de Skarner que lo tuitearon).",
+        "Hemos corregido un error que permitía a los jugadores hacer clic derecho sobre la interfaz de selección de misión de rol, lo que resultaba en comandos de movimiento no deseados.",
+        "Hemos corregido un error que permitía obtener oro en exceso de las mecánicas de remontada en las partidas más largas.",
+        "Hemos corregido un error que provocaba que faltase la opción \"Activar modo streamer\" en los ajustes de la interfaz.",
+        "Hemos corregido un error que provocaba que la R de Rengar dejara de seleccionar a un campeón si este se hacía invisible.",
+        "Hemos corregido un error que provocaba que Rengar pudiese saltar tras un autoataque cuerpo a cuerpo durante la R.",
+        "Hemos corregido un error que provocaba que Rengar ganase acumulaciones de Conquistador u otros efectos de manera incongruente.",
+        "Hemos corregido un error que provocaba que el salto de Rengar no activase algunos efectos de ataque (como Filofugaz o Compás letal).",
+        "Hemos corregido un error que impedía que el daño de la R de Rengar aumentase mediante amplificación de daño de definitiva (como en el caso de Arcanólogo axiomático).",
+        "Hemos corregido un error que provocaba que Rengar ganase vida gris antes de subir la W de nivel por primera vez.",
+        "Hemos corregido un error que provocaba que Rengar aplicase desgarrar/daño de la R a los monstruos dentro de su alcance cuerpo a cuerpo.",
+        "Hemos corregido un error que provocaba que la E de Rengar no inmovilizase a Dr. Mundo.",
+        "Hemos corregido un error que provocaba que, a veces, Rengar no ganase Ferocidad con un ataque cuerpo a cuerpo desde un arbusto o con la R.",
+        "Hemos corregido un error que provocaba que el estado potenciado de Rengar anulase ciertos efectos de reducción de enfriamiento (como en el caso de Filofugaz o Trascendencia).",
+        "Hemos corregido un error que provocaba que Rengar no pudiese saltar durante un breve lapso al utilizar Destello durante la R.",
+        "Hemos corregido un error que provocaba que Rengar infligiese más daño con la Q a las torres si la utilizaba durante su salto.",
+        "Hemos corregido un error que provocaba que la Q de Rengar no entrase en enfriamiento si se mantenía con 4 cargas de Ferocidad.",
+        "Hemos corregido un error que provocaba que Rengar no viese los indicadores de camuflaje durante la R.",
+        "Hemos corregido un error que provocaba que las habilidades básicas de Rengar no se reiniciasen con las funciones de la herramienta de práctica.",
+        "Hemos corregido un error que provocaba que, a veces, Rengar no infligiese daño al nexo al saltar.",
+        "Hemos corregido un error que provocaba que, a veces, Rengar no pudiese saltar un muro cuando su objetivo se encontraba cerca del borde.",
+        "Hemos corregido un error que impedía que la R de Kayn Verdugo lo curase si su objetivo moría durante algún momento concreto de la habilidad.",
+        "Hemos corregido un error que provocaba que Zeri pudiese lanzar la Q durante la R de Bardo o Kalista aliados.",
+        "Hemos añadido el daño básico de la R de Kayn verdugo a la descripción de subida de nivel.",
+        "Hemos corregido un error que provocaba que la conmemoración de fin de temporada clasificatoria mostrase el año equivocado.",
+        "Hemos corregido un error que provocaba que la conmemoración de fin de temporada clasificatoria mostrase la recompensa errónea debido a una discrepancia relacionada con la base de datos del nivel de honor."
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Próximos aspectos y chromas",
+      "heading_level": 2,
+      "blocks": [
+        "Lanzaremos los siguientes aspectos a lo largo de esta versión:"
+      ],
+      "subsections": [
+        {
+          "title": "",
+          "heading_level": 3,
+          "blocks": [],
+          "subsections": [
+            {
+              "title": "Morgana dama del velo de prestigio",
+              "heading_level": 4,
+              "blocks": [],
+              "subsections": []
+            },
+            {
+              "title": "Cho'Gath de petricita",
+              "heading_level": 4,
+              "blocks": [],
+              "subsections": []
+            },
+            {
+              "title": "Nautilus de petricita",
+              "heading_level": 4,
+              "blocks": [],
+              "subsections": []
+            },
+            {
+              "title": "Taliyah legado de Durand",
+              "heading_level": 4,
+              "blocks": [
+                "Lanzaremos los siguientes chromas a lo largo de esta versión:"
+              ],
+              "subsections": []
+            },
+            {
+              "title": "Morgana dama del velo de prestigio",
+              "heading_level": 4,
+              "blocks": [],
+              "subsections": []
+            },
+            {
+              "title": "Nautilus de petricita",
+              "heading_level": 4,
+              "blocks": [],
+              "subsections": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Artículos relacionados",
+      "heading_level": 2,
+      "blocks": [
+        "Actualizaciones del juego12/5/2026Notas de la versión 26.10¡La temporada de los demonios continúa con la versión 26.10!",
+        "Actualizaciones del juego28/4/2026Notas de la versión 26.9 de League of Legends¡Toca cazar demonios con la versión 26.9!",
+        "Actualizaciones del juego14/4/2026Notas de la versión 26.8 LoL¡Toca cambiar de onda con la versión 26.8!",
+        "Actualizaciones del juego31/3/2026Notas de la versión 26.7 de League of Legends¡Os esperan toneladas de diversión y pollo frito!",
+        "Actualizaciones del juego17/3/2026Notas de la versión 26.6 de League of Legends¡Comienza el First Stand y damos la bienvenida a la actualización de Shyvana!",
+        "Actualizaciones del juego3/3/2026Notas de la versión 26.5¡Os damos la bienvenida a la versión oficial del First Stand, el \nprimer gran torneo internacional del año!",
+        "Actualizaciones del juego18/2/2026League of Legends Patch 26.4 NotesHappy Lunar Revel, welcome to patch 26.4!",
+        "Actualizaciones del juego3/2/2026Notas de la versión 26.3Celebrad el año nuevo y deleitaos con la versión 26.3 🎊",
+        "Actualizaciones del juego21/1/2026Notas de la versión 26.2¡La versión 26.2 está lista para el despliegue!"
+      ],
+      "subsections": []
+    }
+  ],
+  "assets": [
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/dae5b2dc2bf5472edc69262a289e065394ee790b-1920x1080.jpg?accountingTag=LoL&auto=format&fit=fill&q=80&w=1920",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/dae5b2dc2bf5472edc69262a289e065394ee790b-1920x1080.jpg?accountingTag=LoL&auto=format&fit=fill&q=80&w=1184",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/1eaf25db2cb788bbb07762d4b879c1598a9ac6ce-200x200.jpg",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/11276526bb012a19d624efa3b313569988c96ebe-193x190.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=http://ddragon.leagueoflegends.com/cdn/16.1.1/img/champion/Aphelios.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.1.1/img/passive/ApheliosP.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=http://ddragon.leagueoflegends.com/cdn/16.1.1/img/champion/Graves.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.1.1/img/passive/GravesTrueGrit.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=http://ddragon.leagueoflegends.com/cdn/16.1.1/img/champion/Kayle.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.1.1/img/passive/Kayle_P.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.1.1/img/spell/KayleQ.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=http://ddragon.leagueoflegends.com/cdn/16.1.1/img/champion/Nilah.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.1.1/img/spell/NilahQ.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=http://ddragon.leagueoflegends.com/cdn/16.1.1/img/champion/Quinn.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.1.1/img/passive/Quinn_Passive.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=http://ddragon.leagueoflegends.com/cdn/16.1.1/img/champion/Rammus.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.1.1/img/spell/DefensiveBallCurl.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=http://ddragon.leagueoflegends.com/cdn/16.1.1/img/champion/Tryndamere.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.1.1/img/spell/TryndamereW.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.1.1/img/spell/TryndamereE.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/16.1.1/img/item/3508.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/8a98d18d6c30b6149ddba936d36af2e3e9553d92-1920x1080.jpg",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Cassiopeia.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/passive/Cassiopeia_Passive.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Samira.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/SamiraQ.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/SamiraR.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Aphelios.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/380531c217e089de3e5928eeffa252d716a90380-512x512.jpg",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/94aaa4838fc1cc9d75d5924b03341f81ed85efda-64x64.jpg",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/699292f3f9b182473644b4a2a8945a6984321936-512x512.jpg",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/4f4a6f159efb14ba5505646551aa785c1705a731-64x64.jpg",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://ddragon.leagueoflegends.com/cdn/15.24.1/img/spell/ApheliosR.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Caitlyn.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/passive/Caitlyn_Headshot.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/CaitlynR.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Tristana.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/TristanaE.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Nilah.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/NilahQ.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/NilahR.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Jinx.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/JinxR.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Jhin.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Sivir.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/SivirQ.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Zeri.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/ZeriW.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/ZeriE.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/ZeriR.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Lucian.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/LucianQ.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/LucianR.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Xayah.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/XayahE.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Draven.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/DravenFury.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Yunara.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/YunaraQ.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/d3e2460c8e815ea4646468f2269455be853ff933-512x512.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Akshan.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/passive/akshan_p.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/AkshanQ.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/AkshanE.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/AkshanR.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Gangplank.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/passive/Gangplank_Passive.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/GangplankE.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Yone.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Yasuo.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/MissFortune.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/MissFortuneRicochetShot.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/MissFortuneBulletTime.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Tryndamere.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/TryndamereQ.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/TryndamereW.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/TryndamereE.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Twitch.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/TwitchHideInShadows.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Ashe.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/passive/Ashe_P.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/Volley.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Smolder.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/SmolderQ.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Kindred.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/KindredEWrapper.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Corki.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/CarpetBomb.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Shaco.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/passive/Jester_CarefulStrikes.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/Deceive.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Graves.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Quinn.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/passive/Quinn_Passive.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Senna.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Garen.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/GarenE.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Rengar.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/RengarQ.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Viego.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/ViegoQ.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/ViegoR.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Elise.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/spell/EliseHumanQ.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/champion/Jax.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.23.1/img/passive/Armsmaster_MasterOfArms.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.16.1/img/item/1055.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/1c0b545b1455a9cf6bb429747d38039b3541020c-512x512.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/4bea613218c7f2ea570b52bc4e025aa26fda612e-512x512.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/46965cb79b66b7fd974b053bed2e0efe4ba636db-512x512.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/b8c689f6fbc43def8b4824471ad8d070a7d5118c-512x512.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/57cc211873e36a0c1cff7d3f873221d89ea304b5-512x512.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/348aaff919f18aa74f3126904468e8f83d253300-512x512.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/e48f306ecf376fda8e155585a56609ec569e79db-512x512.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/49e21ed423d5290d2a7c0e6db3450d64e63000e9-512x512.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/5e0aaa681c7fcaaeffd075cdefc3e5dd2bea820c-512x512.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.16.1/img/item/3146.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.16.1/img/item/3095.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.16.1/img/item/2502.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.16.1/img/item/3105.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.16.1/img/item/4628.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.16.1/img/item/6610.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.16.1/img/item/6655.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.16.1/img/item/226620.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.16.1/img/item/3508.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.16.1/img/item/3179.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.16.1/img/item/3107.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.16.1/img/item/3050.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/8d0c6b96f23b5bc2bd926c258f89dc23a423b429-512x512.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.16.1/img/item/3042.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.16.1/img/item/223121.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.16.1/img/item/3033.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.16.1/img/item/223036.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.16.1/img/item/223032.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.16.1/img/item/3031.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.16.1/img/item/3010.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://am-a.akamaihd.net/image?f=https://ddragon.leagueoflegends.com/cdn/15.16.1/img/item/4643.png",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/dae5b2dc2bf5472edc69262a289e065394ee790b-1920x1080.jpg",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/5540f50093e3e498dc0d9a2d5223676ca959d0a8-1920x1081.jpg",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/e133fb2a0cac7e76f1be3a9ee9e0b5e3f1bc6e8e-1920x1081.jpg",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/79e9fd0cefbaa44c2a45d9ab15263905f9b5a539-1920x1199.jpg",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/8642fb699c4122975b224e0d3f449f210f67bb69-1610x590.jpg",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/fb5d68421b70997de3614a7bc81acb229d07136e-1610x590.jpg",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/6ee41cd6a039966520450f721c40c0012a8c870f-2048x1208.jpg?accountingTag=LoL&auto=format&fit=crop&q=80&h=270&w=480&crop=center",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/b2e196d8bf9c21cdc7bdde5c7680249bda2b82de-1920x1080.jpg?accountingTag=LoL&auto=format&fit=crop&q=80&h=270&w=480&crop=center",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/0925832fd385df3f5e442886d2450e209ffb8846-1920x1080.jpg?accountingTag=LoL&auto=format&fit=crop&q=80&h=270&w=480&crop=center",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/13375a6633f09dee4e4397083ca37fc294592203-1920x1133.jpg?accountingTag=LoL&auto=format&fit=crop&q=80&h=270&w=480&crop=center",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/e77a2205583ecc1e4c17856c64c3c1f2fcec070d-1920x1080.jpg?accountingTag=LoL&auto=format&fit=crop&q=80&h=270&w=480&crop=center",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/1c6e3c541e7dbfc4759097a24f350b7b2dfb13a3-1920x1080.jpg?accountingTag=LoL&auto=format&fit=crop&q=80&h=270&w=480&crop=center",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/99c3a609a45061dca9c9a2056a3e033702a64bb5-1920x1080.jpg?accountingTag=LoL&auto=format&fit=crop&q=80&h=270&w=480&crop=center",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/26009ed5cbbbf58f100561ac6d54d06e88b39afe-1920x1080.jpg?accountingTag=LoL&auto=format&fit=crop&q=80&h=270&w=480&crop=center",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "image",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/8450bda0b6eb809ffb11c0161157d2e0b4d692d8-1920x1080.jpg?accountingTag=LoL&auto=format&fit=crop&q=80&h=270&w=480&crop=center",
+      "alt": null,
+      "text": null
+    },
+    {
+      "asset_type": "link",
+      "src": "https://euw.leagueoflegends.com/es-es/",
+      "alt": null,
+      "text": "mainLogoRiotFist21mainMenuDownNonHover"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/how-to-play/",
+      "alt": null,
+      "text": "Resumen del juego"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/",
+      "alt": null,
+      "text": "Campeones"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/",
+      "alt": null,
+      "text": "TODAS"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates",
+      "alt": null,
+      "text": "ACTUALIZACIONES DEL JUEGO"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/esports",
+      "alt": null,
+      "text": "ESPORTS"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/dev",
+      "alt": null,
+      "text": "DESARROLLO"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/lore",
+      "alt": null,
+      "text": "HISTORIAS"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/media",
+      "alt": null,
+      "text": "MULTIMEDIA"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/merch",
+      "alt": null,
+      "text": "MERCHANDISING"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/community",
+      "alt": null,
+      "text": "COMUNIDAD"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/riot-games",
+      "alt": null,
+      "text": "RIOT GAMES"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/tags/patch-notes",
+      "alt": null,
+      "text": "Notas de la versión"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://euw.leagueoflegends.com/es/featured/league-displays",
+      "alt": null,
+      "text": "LEAGUE DISPLAYS"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://halloflegends.leagueoflegends.com/",
+      "alt": null,
+      "text": "HALL OF LEGENDS"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/riot-games/hello-riot-mobile-farewell-league/",
+      "alt": null,
+      "text": "RIOT MOBILE"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://lolesports.com/",
+      "alt": null,
+      "text": "EsportsmainNavLinkOut"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://universe.leagueoflegends.com/es_ES/",
+      "alt": null,
+      "text": "UniversemainNavLinkOut"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://merch.riotgames.com/es-es",
+      "alt": null,
+      "text": "MerchandisingmainNavLinkOut"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://support.riotgames.com/hc/es-es/",
+      "alt": null,
+      "text": "AsistenciamainNavLinkOut"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/how-to-play/",
+      "alt": null,
+      "text": "Resumen del juego"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/",
+      "alt": null,
+      "text": "Campeones"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/patch-26-1-notes/#",
+      "alt": null,
+      "text": "NoticiassubMenuRight"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/tags/patch-notes",
+      "alt": null,
+      "text": "Notas de la versión"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/patch-26-1-notes/#",
+      "alt": null,
+      "text": "DescubrirsubMenuRight"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://lolesports.com/",
+      "alt": null,
+      "text": "EsportsmainNavLinkOut"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://universe.leagueoflegends.com/es_ES/",
+      "alt": null,
+      "text": "UniversemainNavLinkOut"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://merch.riotgames.com/es-es",
+      "alt": null,
+      "text": "MerchandisingmainNavLinkOut"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://support.riotgames.com/hc/es-es/",
+      "alt": null,
+      "text": "AsistenciamainNavLinkOut"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/",
+      "alt": null,
+      "text": "Actualizaciones del juego"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/dev/dev-2026-season-one-gameplay-preview/",
+      "alt": null,
+      "text": "este"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://wiki.leagueoflegends.com/en-us/",
+      "alt": null,
+      "text": "aquí"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://teamfighttactics.leagueoflegends.com/es-es/news/game-updates/teamfight-tactics-patch-16-2/",
+      "alt": null,
+      "text": "Aquí"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/en-us/champions/cassiopeia/",
+      "alt": null,
+      "text": "Cassiopeia"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/samira/",
+      "alt": null,
+      "text": "Samira"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/en-us/champions/aphelios/",
+      "alt": null,
+      "text": "Aphelios"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/caitlyn/",
+      "alt": null,
+      "text": "Caitlyn"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/tristana/",
+      "alt": null,
+      "text": "Tristana"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/en-us/champions/nilah/",
+      "alt": null,
+      "text": "Nilah"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/jinx/",
+      "alt": null,
+      "text": "Jinx"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/jhin/",
+      "alt": null,
+      "text": "Jhin"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/en-us/champions/sivir/",
+      "alt": null,
+      "text": "Sivir"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/zeri/",
+      "alt": null,
+      "text": "Zeri"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/lucian/",
+      "alt": null,
+      "text": "Lucian"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/xayah/",
+      "alt": null,
+      "text": "Xayah"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/draven/",
+      "alt": null,
+      "text": "Draven"
+    },
+    {
+      "asset_type": "link",
+      "src": "http://www.leagueoflegends.com/es-es/champions/yunara/",
+      "alt": null,
+      "text": "Yunara"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/akshan/",
+      "alt": null,
+      "text": "Akshan"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/gangplank/",
+      "alt": null,
+      "text": "Gangplank"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/yone/",
+      "alt": null,
+      "text": "Yone"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/en-us/champions/yasuo/",
+      "alt": null,
+      "text": "Yasuo"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/missfortune/",
+      "alt": null,
+      "text": "Miss Fortune"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/tryndamere/",
+      "alt": null,
+      "text": "Tryndamere"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/twitch/",
+      "alt": null,
+      "text": "Twitch"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/ashe/",
+      "alt": null,
+      "text": "Ashe"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/smolder/",
+      "alt": null,
+      "text": "Smolder"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/kindred/",
+      "alt": null,
+      "text": "Kindred"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/corki/",
+      "alt": null,
+      "text": "Corki"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/shaco/",
+      "alt": null,
+      "text": "Shaco"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/graves/",
+      "alt": null,
+      "text": "Graves"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/quinn/",
+      "alt": null,
+      "text": "Quinn"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/senna/",
+      "alt": null,
+      "text": "Senna"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/garen/",
+      "alt": null,
+      "text": "Garen"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/rengar/",
+      "alt": null,
+      "text": "Rengar"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/viego/",
+      "alt": null,
+      "text": "Viego"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/elise/",
+      "alt": null,
+      "text": "Elise"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/champions/jax/",
+      "alt": null,
+      "text": "Jax"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://support-leagueoflegends.riotgames.com/hc/es/articles/46478966644883",
+      "alt": null,
+      "text": "artículo de asistencia"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://support-leagueoflegends.riotgames.com/hc/es/articles/360000951548-Clash-FAQ",
+      "alt": null,
+      "text": "preguntas frecuentes sobre Clash"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/dae5b2dc2bf5472edc69262a289e065394ee790b-1920x1080.jpg",
+      "alt": null,
+      "text": "Morgana dama del velo de prestigio"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/5540f50093e3e498dc0d9a2d5223676ca959d0a8-1920x1081.jpg",
+      "alt": null,
+      "text": "Cho'Gath de petricita"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/e133fb2a0cac7e76f1be3a9ee9e0b5e3f1bc6e8e-1920x1081.jpg",
+      "alt": null,
+      "text": "Nautilus de petricita"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/79e9fd0cefbaa44c2a45d9ab15263905f9b5a539-1920x1199.jpg",
+      "alt": null,
+      "text": "Taliyah legado de Durand"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/8642fb699c4122975b224e0d3f449f210f67bb69-1610x590.jpg",
+      "alt": null,
+      "text": "Morgana dama del velo de prestigio"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://cmsassets.rgpub.io/sanity/images/dsfx7636/news_live/fb5d68421b70997de3614a7bc81acb229d07136e-1610x590.jpg",
+      "alt": null,
+      "text": "Nautilus de petricita"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-10-notes",
+      "alt": null,
+      "text": "Actualizaciones del juego12/5/2026Notas de la versión 26.10¡La temporada de los demonios continúa con la versión 26.10!"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-9-notes",
+      "alt": null,
+      "text": "Actualizaciones del juego28/4/2026Notas de la versión 26.9 de League of Legends¡Toca cazar demonios con la versión 26.9!"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-8-notes",
+      "alt": null,
+      "text": "Actualizaciones del juego14/4/2026Notas de la versión 26.8 LoL¡Toca cambiar de onda con la versión 26.8!"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-7-notes",
+      "alt": null,
+      "text": "Actualizaciones del juego31/3/2026Notas de la versión 26.7 de League of Legends¡Os esperan toneladas de diversión y pollo frito!"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-6-notes",
+      "alt": null,
+      "text": "Actualizaciones del juego17/3/2026Notas de la versión 26.6 de League of Legends¡Comienza el First Stand y damos la bienvenida a la actualización de Shyvana!"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-5-notes",
+      "alt": null,
+      "text": "Actualizaciones del juego3/3/2026Notas de la versión 26.5¡Os damos la bienvenida a la versión oficial del First Stand, el \nprimer gran torneo internacional del año!"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/league-of-legends-patch-26-4-notes",
+      "alt": null,
+      "text": "Actualizaciones del juego18/2/2026League of Legends Patch 26.4 NotesHappy Lunar Revel, welcome to patch 26.4!"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/patch-26-3-notes",
+      "alt": null,
+      "text": "Actualizaciones del juego3/2/2026Notas de la versión 26.3Celebrad el año nuevo y deleitaos con la versión 26.3 🎊"
+    },
+    {
+      "asset_type": "link",
+      "src": "https://www.leagueoflegends.com/es-es/news/game-updates/patch-26-2-notes",
+      "alt": null,
+      "text": "Actualizaciones del juego21/1/2026Notas de la versión 26.2¡La versión 26.2 está lista para el despliegue!"
+    }
+  ],
+  "scraper_version": "patch_notes_v2.0.0",
+  "raw_html_ref": null,
+  "enrichments": []
+}

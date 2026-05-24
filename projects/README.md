@@ -16,10 +16,12 @@ pueden vivir fisicamente dentro de `projects/active/` o `projects/legacy/`.
 | Proyecto | Manifest | Codigo, datos o artefactos reales |
 |----------|----------|------------------------------------|
 | CLI Match History | `active/cli-match-history/README.md` | `main.py`, `src/riot_lol_cli/cli.py`, `src/riot_lol_cli/api.py`, `src/riot_lol_cli/rendering.py`, `templates/`, `data/cache/` |
+| Patch Notes Viewer | `active/patch-notes/README.md` | `src/riot_lol_cli/patch_notes/`, `data/patch_notes/`, `tests/patch_notes/`, `scripts/seed_patch_notes_from_legacy.py` |
 | Splash Gallery | `active/splash-gallery/README.md` | `src/riot_lol_cli/splash.py`, `templates/splash-viewer.html`, `assets/splash_arts/`, `data/ddragon-splash-catalog.json`, `data/splash-manifest.json`, `outputs/splash-viewer.html` |
 | Home Hub | `active/home-hub/README.md` | `src/riot_lol_cli/home/`, `scripts/bat/home.bat`, `scripts/bat/levantar_todo.bat` |
 | Draft Advisor | `active/draft-advisor/README.md` | `src/riot_lol_cli/draft_advisor/`, `data/draft_advisor/`, `KB/`, `tests/draft_advisor/` |
 | Meta Analyzer + Dashboard | `active/meta-analyzer-dashboard/README.md` | `src/riot_lol_cli/meta_api/`, `src/riot_lol_cli/meta_analyzer/`, `src/riot_lol_cli/database/`, `src/riot_lol_cli/dashboard*.py`, `data/meta_analyzer.db` |
+| Esports Research | `active/meta-analyzer-dashboard/README.md` | `src/riot_lol_cli/esports_research/`, `src/riot_lol_cli/meta_api/routes/esports.py`, `src/riot_lol_cli/meta_api/static/esports/`, `data/esports_research/`, `tests/esports_research/` |
 | Meta Scraper | `active/meta-scraper/README.md` | `src/riot_lol_cli/meta_scraper/`, `data/meta_scraper/`, `tests/meta_scraper/` |
 | Jungle Meta | `active/jungle-meta/README.md` | `src/riot_lol_cli/jungle_meta/`, `data/jungle_meta/`, `tests/jungle_meta/` |
 | Items Browser | `active/items-browser/README.md` | `src/riot_lol_cli/items_browser/`, `data/items/database.json`, `assets/items/`, `tests/items_browser/` |
@@ -36,14 +38,17 @@ pueden vivir fisicamente dentro de `projects/active/` o `projects/legacy/`.
 
 | Proyecto | Ruta | Estado |
 |----------|------|--------|
-| Copia antigua del paquete | `legacy/riot-lol-cli/` | No runtime |
+| Copia antigua del paquete | `legacy/riot-lol-cli/` | Referencia histórica — el proyecto activo es `active/cli-match-history/` |
 | Scraper de items/Data Dragon | `legacy/ddragon-item-scraper/` | Experimento archivado |
 | Screenshots ADC | `legacy/adc-screenshots/` | Experimento archivado |
-| Scraper de notas de parche | `legacy/patch-notes-scraper-v33a/` | Experimento archivado |
-| Web/proyecto de notas de parche | `legacy/patch-notes-web-v33b/` | Experimento archivado |
+| Scraper de notas de parche (v33a) | `legacy/patch-notes-scraper-v33a/` | Referencia histórica — supersedido por `active/patch-notes/` |
+| Web/proyecto de notas de parche (v33b) | `legacy/patch-notes-web-v33b/` | Referencia histórica — supersedido por `active/patch-notes/` |
 
 ## Historial de organizacion
 
+- 2026-05-15: `patch-notes-scraper-v33a` y `patch-notes-web-v33b` reactivados como `active/patch-notes/`
+  (proyecto standalone con scraper + frontend + datos). Legacy originals conservados como referencia.
+  `cli-match-history` reactivado con README exhaustivo listo para refactor de estrategia visual.
 - 2026-04-23/24: primera reorganizacion del repo heterogeneo hacia un proyecto
   Python navegable con `src/`, `data/`, `assets/`, `scripts/`, `docs/` y
   archivo historico.

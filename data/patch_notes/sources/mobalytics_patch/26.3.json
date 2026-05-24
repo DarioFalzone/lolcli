@@ -1,0 +1,316 @@
+{
+  "source": "mobalytics_patch",
+  "source_url": "https://mobalytics.gg/lol/tier-list",
+  "fetched_at": "2026-05-15T09:15:26.956599Z",
+  "content_hash": "0a6409d64a4d502ea36bb0ca9fd29180e2b6507ac7dc2edf79c62418a3a29bd6",
+  "payload": {
+    "source_url": "https://mobalytics.gg/lol/tier-list",
+    "patch_label_active": "26.3",
+    "patch_label_reported": "26.10",
+    "rows_count": 80,
+    "rows": [
+      {
+        "name": "Garen",
+        "slug": "garen",
+        "href": "https://mobalytics.gg/lol/champions/garen/build"
+      },
+      {
+        "name": "Nocturne",
+        "slug": "nocturne",
+        "href": "https://mobalytics.gg/lol/champions/nocturne/build"
+      },
+      {
+        "name": "Xerath",
+        "slug": "xerath",
+        "href": "https://mobalytics.gg/lol/champions/xerath/build"
+      },
+      {
+        "name": "Ashe",
+        "slug": "ashe",
+        "href": "https://mobalytics.gg/lol/champions/ashe/build"
+      },
+      {
+        "name": "Nami",
+        "slug": "nami",
+        "href": "https://mobalytics.gg/lol/champions/nami/build"
+      },
+      {
+        "name": "Darius",
+        "slug": "darius",
+        "href": "https://mobalytics.gg/lol/champions/darius/build/top"
+      },
+      {
+        "name": "Malphite",
+        "slug": "malphite",
+        "href": "https://mobalytics.gg/lol/champions/malphite/build/top"
+      },
+      {
+        "name": "Sett",
+        "slug": "sett",
+        "href": "https://mobalytics.gg/lol/champions/sett/build/top"
+      },
+      {
+        "name": "Olaf",
+        "slug": "olaf",
+        "href": "https://mobalytics.gg/lol/champions/olaf/build/top"
+      },
+      {
+        "name": "Kayle",
+        "slug": "kayle",
+        "href": "https://mobalytics.gg/lol/champions/kayle/build/top"
+      },
+      {
+        "name": "Aatrox",
+        "slug": "aatrox",
+        "href": "https://mobalytics.gg/lol/champions/aatrox/build/top"
+      },
+      {
+        "name": "Shen",
+        "slug": "shen",
+        "href": "https://mobalytics.gg/lol/champions/shen/build/top"
+      },
+      {
+        "name": "Irelia",
+        "slug": "irelia",
+        "href": "https://mobalytics.gg/lol/champions/irelia/build/top"
+      },
+      {
+        "name": "Ornn",
+        "slug": "ornn",
+        "href": "https://mobalytics.gg/lol/champions/ornn/build/top"
+      },
+      {
+        "name": "Gangplank",
+        "slug": "gangplank",
+        "href": "https://mobalytics.gg/lol/champions/gangplank/build/top"
+      },
+      {
+        "name": "Camille",
+        "slug": "camille",
+        "href": "https://mobalytics.gg/lol/champions/camille/build/top"
+      },
+      {
+        "name": "Urgot",
+        "slug": "urgot",
+        "href": "https://mobalytics.gg/lol/champions/urgot/build/top"
+      },
+      {
+        "name": "Nasus",
+        "slug": "nasus",
+        "href": "https://mobalytics.gg/lol/champions/nasus/build/top"
+      },
+      {
+        "name": "Kled",
+        "slug": "kled",
+        "href": "https://mobalytics.gg/lol/champions/kled/build/top"
+      },
+      {
+        "name": "Vayne",
+        "slug": "vayne",
+        "href": "https://mobalytics.gg/lol/champions/vayne/build/top"
+      },
+      {
+        "name": "Mordekaiser",
+        "slug": "mordekaiser",
+        "href": "https://mobalytics.gg/lol/champions/mordekaiser/build/top"
+      },
+      {
+        "name": "Singed",
+        "slug": "singed",
+        "href": "https://mobalytics.gg/lol/champions/singed/build/top"
+      },
+      {
+        "name": "Pantheon",
+        "slug": "pantheon",
+        "href": "https://mobalytics.gg/lol/champions/pantheon/build/top"
+      },
+      {
+        "name": "Sion",
+        "slug": "sion",
+        "href": "https://mobalytics.gg/lol/champions/sion/build/top"
+      },
+      {
+        "name": "Fiora",
+        "slug": "fiora",
+        "href": "https://mobalytics.gg/lol/champions/fiora/build/top"
+      },
+      {
+        "name": "Yone",
+        "slug": "yone",
+        "href": "https://mobalytics.gg/lol/champions/yone/build/top"
+      },
+      {
+        "name": "Zaahen",
+        "slug": "zaahen",
+        "href": "https://mobalytics.gg/lol/champions/zaahen/build/top"
+      },
+      {
+        "name": "Gragas",
+        "slug": "gragas",
+        "href": "https://mobalytics.gg/lol/champions/gragas/build/top"
+      },
+      {
+        "name": "Jax",
+        "slug": "jax",
+        "href": "https://mobalytics.gg/lol/champions/jax/build/top"
+      },
+      {
+        "name": "Ambessa",
+        "slug": "ambessa",
+        "href": "https://mobalytics.gg/lol/champions/ambessa/build/top"
+      },
+      {
+        "name": "Riven",
+        "slug": "riven",
+        "href": "https://mobalytics.gg/lol/champions/riven/build/top"
+      },
+      {
+        "name": "Quinn",
+        "slug": "quinn",
+        "href": "https://mobalytics.gg/lol/champions/quinn/build/top"
+      },
+      {
+        "name": "Renekton",
+        "slug": "renekton",
+        "href": "https://mobalytics.gg/lol/champions/renekton/build/top"
+      },
+      {
+        "name": "Dr. Mundo",
+        "slug": "drmundo",
+        "href": "https://mobalytics.gg/lol/champions/drmundo/build/top"
+      },
+      {
+        "name": "Poppy",
+        "slug": "poppy",
+        "href": "https://mobalytics.gg/lol/champions/poppy/build/top"
+      },
+      {
+        "name": "Warwick",
+        "slug": "warwick",
+        "href": "https://mobalytics.gg/lol/champions/warwick/build/top"
+      },
+      {
+        "name": "Rumble",
+        "slug": "rumble",
+        "href": "https://mobalytics.gg/lol/champions/rumble/build/top"
+      },
+      {
+        "name": "K'Sante",
+        "slug": "ksante",
+        "href": "https://mobalytics.gg/lol/champions/ksante/build/top"
+      },
+      {
+        "name": "Tahm Kench",
+        "slug": "tahmkench",
+        "href": "https://mobalytics.gg/lol/champions/tahmkench/build/top"
+      },
+      {
+        "name": "Trundle",
+        "slug": "trundle",
+        "href": "https://mobalytics.gg/lol/champions/trundle/build/top"
+      },
+      {
+        "name": "Yorick",
+        "slug": "yorick",
+        "href": "https://mobalytics.gg/lol/champions/yorick/build/top"
+      },
+      {
+        "name": "Yasuo",
+        "slug": "yasuo",
+        "href": "https://mobalytics.gg/lol/champions/yasuo/build/top"
+      },
+      {
+        "name": "Kennen",
+        "slug": "kennen",
+        "href": "https://mobalytics.gg/lol/champions/kennen/build/top"
+      },
+      {
+        "name": "Heimerdinger",
+        "slug": "heimerdinger",
+        "href": "https://mobalytics.gg/lol/champions/heimerdinger/build/top"
+      },
+      {
+        "name": "Tryndamere",
+        "slug": "tryndamere",
+        "href": "https://mobalytics.gg/lol/champions/tryndamere/build/top"
+      },
+      {
+        "name": "Gwen",
+        "slug": "gwen",
+        "href": "https://mobalytics.gg/lol/champions/gwen/build/top"
+      },
+      {
+        "name": "Gnar",
+        "slug": "gnar",
+        "href": "https://mobalytics.gg/lol/champions/gnar/build/top"
+      },
+      {
+        "name": "Akali",
+        "slug": "akali",
+        "href": "https://mobalytics.gg/lol/champions/akali/build/top"
+      },
+      {
+        "name": "Teemo",
+        "slug": "teemo",
+        "href": "https://mobalytics.gg/lol/champions/teemo/build/top"
+      },
+      {
+        "name": "Varus",
+        "slug": "varus",
+        "href": "https://mobalytics.gg/lol/champions/varus/build/top"
+      },
+      {
+        "name": "Cho'Gath",
+        "slug": "chogath",
+        "href": "https://mobalytics.gg/lol/champions/chogath/build/top"
+      },
+      {
+        "name": "Illaoi",
+        "slug": "illaoi",
+        "href": "https://mobalytics.gg/lol/champions/illaoi/build/top"
+      },
+      {
+        "name": "Volibear",
+        "slug": "volibear",
+        "href": "https://mobalytics.gg/lol/champions/volibear/build/top"
+      },
+      {
+        "name": "Jayce",
+        "slug": "jayce",
+        "href": "https://mobalytics.gg/lol/champions/jayce/build/top"
+      },
+      {
+        "name": "Diana",
+        "slug": "diana",
+        "href": "https://mobalytics.gg/lol/champions/diana/build/jungle"
+      },
+      {
+        "name": "Master Yi",
+        "slug": "masteryi",
+        "href": "https://mobalytics.gg/lol/champions/masteryi/build/jungle"
+      },
+      {
+        "name": "Viego",
+        "slug": "viego",
+        "href": "https://mobalytics.gg/lol/champions/viego/build/jungle"
+      },
+      {
+        "name": "Jarvan IV",
+        "slug": "jarvaniv",
+        "href": "https://mobalytics.gg/lol/champions/jarvaniv/build/jungle"
+      },
+      {
+        "name": "Naafiri",
+        "slug": "naafiri",
+        "href": "https://mobalytics.gg/lol/champions/naafiri/build/jungle"
+      },
+      {
+        "name": "Graves",
+        "slug": "graves",
+        "href": "https://mobalytics.gg/lol/champions/graves/build/jungle"
+      }
+    ],
+    "fetched_at": "2026-05-15T09:15:26.956022+00:00"
+  },
+  "error": null
+}

@@ -137,11 +137,17 @@
 
   const _OPEN_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
 
+  async function fetchStatusSnapshot() {
+    const resp = await fetch(STATUS_URL);
+    if (!resp.ok) throw new Error('HTTP ' + resp.status);
+    return resp.json();
+  }
+
   // --- Empty / loading states ---
 
   function buildSkeletonCard(_, index) {
     const delay = 'animation-delay:' + (index * 0.08).toFixed(2) + 's';
-    return '<article class="service-card service-card--skeleton" style="' + delay + '" aria-hidden="true">'
+    return '<article class="card service-card service-card--skeleton" style="' + delay + '" aria-hidden="true">'
       + '<div class="card-accent-line"></div>'
       + '<div class="card-top">'
       +   '<div class="skel skel-icon"></div>'
@@ -208,7 +214,7 @@
     const accent = escapeHtml(svc.accent || 'gold');
 
     return ''
-      + '<article class="service-card" data-accent="' + accent + '" data-service-id="' + escapeHtml(svc.id) + '" data-shortcut="' + (index + 1) + '" style="' + delay + '">'
+      + '<article class="card service-card" data-accent="' + accent + '" data-service-id="' + escapeHtml(svc.id) + '" data-shortcut="' + (index + 1) + '" style="' + delay + '">'
       +   '<div class="card-accent-line"></div>'
       +   '<div class="card-top">'
       +     '<div class="service-icon-wrap" aria-hidden="true">' + escapeHtml(svc.icon || '⚙') + '</div>'
@@ -276,9 +282,7 @@
    */
   async function fetchAndRender() {
     try {
-      const resp = await fetch(STATUS_URL);
-      if (!resp.ok) throw new Error('HTTP ' + resp.status);
-      const data = await resp.json();
+      const data = await fetchStatusSnapshot();
 
       updateGlobalStatus(data);
       lastServices = data.services;
@@ -335,6 +339,7 @@
   }
 
   async function launchAndOpen(svcId, openUrl) {
+    const pendingWindow = window.open('', '_blank');
     launchingServices.add(svcId);
     refreshCardButton(svcId);
 
@@ -345,21 +350,24 @@
       if (data.status === 'already_online') {
         launchingServices.delete(svcId);
         refreshCardButton(svcId);
-        window.open(openUrl, '_blank', 'noopener');
+        if (pendingWindow && !pendingWindow.closed) {
+          pendingWindow.location.replace(openUrl);
+        } else {
+          window.open(openUrl, '_blank', 'noopener');
+        }
         return;
       }
     } catch (err) {
       console.error('[Home Hub] launch request failed:', err);
       launchingServices.delete(svcId);
       refreshCardButton(svcId);
+      if (pendingWindow && !pendingWindow.closed) {
+        pendingWindow.close();
+      }
       return;
     }
 
-    // Poll the service health directly until online or timeout.
-    const svcDef = lastServices.find((s) => s.id === svcId);
-    if (!svcDef) { launchingServices.delete(svcId); return; }
-
-    const healthUrl = 'http://localhost:' + svcDef.port + svcDef.health_path;
+    // Poll the Home Hub aggregate status to avoid cross-origin /health fetches.
     const deadline = Date.now() + LAUNCH_TIMEOUT_MS;
 
     const timer = setInterval(async () => {
@@ -371,16 +379,23 @@
         return;
       }
       try {
-        const r = await fetch(healthUrl);
-        if (r.ok) {
+        const snapshot = await fetchStatusSnapshot();
+        updateGlobalStatus(snapshot);
+        lastServices = snapshot.services;
+
+        const svcDef = snapshot.services.find((s) => s.id === svcId);
+        if (svcDef && svcDef.status === 'online') {
           clearInterval(timer);
           launchingServices.delete(svcId);
-          // Optimistically mark online in lastServices so button renders correctly.
-          const idx = lastServices.findIndex((s) => s.id === svcId);
-          if (idx !== -1) lastServices[idx] = Object.assign({}, lastServices[idx], { status: 'online' });
           refreshCardButton(svcId);
-          window.open(openUrl, '_blank', 'noopener');
+          if (pendingWindow && !pendingWindow.closed) {
+            pendingWindow.location.replace(openUrl);
+          } else {
+            window.open(openUrl, '_blank', 'noopener');
+          }
           fetchAndRender(); // sync stats strip
+        } else if (svcDef) {
+          refreshCardButton(svcId);
         }
       } catch (_) { /* still starting */ }
     }, LAUNCH_POLL_MS);
@@ -522,7 +537,7 @@
 
   // --- Init ---
   applyTweaks();
-  renderGridSkeletons(5);   // show placeholders immediately, replaced on first fetch
+  renderGridSkeletons(7);   // show placeholders immediately, replaced on first fetch
   fetchAndRender();
   setInterval(fetchAndRender, POLL_INTERVAL_MS);
 })();

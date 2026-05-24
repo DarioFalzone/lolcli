@@ -1,0 +1,41 @@
+# Pre-commit hooks para riot_lol_cli
+#
+# Instalación:
+#   pip install pre-commit
+#   pre-commit install
+#
+# Estos hooks corren ANTES de cada commit y rompen el commit si hay regresiones.
+# Foco: evitar mojibake y encoding incorrecto (incidente 2026-05-15).
+#
+# Para correr manualmente:
+#   pre-commit run --all-files
+
+repos:
+  - repo: local
+    hooks:
+      - id: ruff-lint
+        name: ruff (lint)
+        entry: ruff check src tests scripts
+        language: system
+        types: [python]
+        pass_filenames: false
+
+      - id: ruff-format-check
+        name: ruff (format check)
+        entry: ruff format --check src tests scripts
+        language: system
+        types: [python]
+        pass_filenames: false
+
+      - id: pytest-encoding-guards
+        name: pytest encoding guards (mojibake, BOM, charset)
+        entry: pytest tests/test_no_mojibake.py tests/test_encoding_global.py tests/patch_notes/test_encoding.py -q
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: no-utf8-bom-in-json
+        name: detectar BOM UTF-8 en archivos JSON nuevos/modificados
+        entry: python scripts/check_no_bom.py
+        language: system
+        types: [json]

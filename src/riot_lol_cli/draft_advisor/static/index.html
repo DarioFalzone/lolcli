@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
     <title>Draft Advisor — League of Legends</title>
     <meta name="description" content="Motor de recomendación de picks asistido por IA para drafts de League of Legends. Obtené sugerencias de campeones a nivel experto basadas en tu composición de equipo.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Beaufort+for+LOL:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Anton&family=JetBrains+Mono:wght@400;600&family=Beaufort+for+LOL:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/design-system/tokens.css?v=2">
-    <link rel="stylesheet" href="/static/design-system/compat-spa.css?v=2">
-    <link rel="stylesheet" href="/static/styles.css?v=11">
+    <link rel="stylesheet" href="/static/design-system/patterns.css?v=2">
+    <link rel="stylesheet" href="/static/styles.css?v=13">
 </head>
-<body>
+<body class="app-shell">
 
-<div class="app-shell">
+<div class="draft-container">
 
     <!-- ═══════════════════════════════════════════
          HEADER
@@ -49,7 +50,11 @@
                 </div>
             </div>
             <div class="header-meta">
-                <span class="patch-badge" id="patch-badge" aria-live="polite">
+                <a class="home-hub-link" href="http://localhost:8080/" title="Volver al Home Hub">
+                    <span class="home-hub-link__icon" aria-hidden="true">⌂</span>
+                    <span>Home Hub</span>
+                </a>
+                <span class="pill pill-success patch-badge" id="patch-badge" aria-live="polite">
                     <span class="patch-dot" aria-hidden="true"></span>
                     Cargando…
                 </span>
@@ -63,8 +68,8 @@
     <main class="main-layout" role="main">
 
         <!-- ── COLUMNA IZQUIERDA: Tablero de Draft ───────── -->
-        <aside class="panel panel-draft" aria-label="Tablero de draft">
-            <div class="panel-head">
+        <aside class="card panel panel-draft" aria-label="Tablero de draft">
+            <div class="card-header panel-head">
                 <span class="panel-icon" aria-hidden="true">
                     <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
                         <path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm0 14A6 6 0 1110 4a6 6 0 010 12z"/>
@@ -72,12 +77,12 @@
                     </svg>
                 </span>
                 <h2 class="panel-title">Tablero de Draft</h2>
-                <button class="btn-clear" onclick="clearBoard()" title="Limpiar todos los campeones para una nueva partida" aria-label="Nueva partida: limpiar tablero">
+                <button class="btn btn-ghost btn-clear" onclick="clearBoard()" title="Limpiar todos los campeones para una nueva partida" aria-label="Nueva partida: limpiar tablero">
                     <svg viewBox="0 0 16 16" fill="currentColor" width="12" height="12" aria-hidden="true"><path d="M2 3h12v1.5L12 6v7a1 1 0 01-1 1H5a1 1 0 01-1-1V6L2 4.5V3zm3 3v6h1V6H5zm3 0v6h1V6H8zm2 0v6h1V6h-1zM5.5 1h5a.5.5 0 010 1h-5a.5.5 0 010-1z"/></svg>
                     Nueva partida
                 </button>
             </div>
-            <div class="panel-body">
+            <div class="card-body panel-body">
 
                 <!-- Equipo Aliado -->
                 <section class="team-section" aria-label="Equipo aliado">
@@ -87,19 +92,19 @@
                         <span class="team-line" aria-hidden="true"></span>
                     </div>
                     <div class="champion-slots" id="ally-slots" role="list" aria-label="Slots del equipo aliado">
-                        <div class="champion-slot" role="listitem" data-team="ally" data-index="0" onclick="openChampionPicker('ally', 0)" tabindex="0" aria-label="Slot aliado 1, vacío">
+                        <div class="slot champion-slot" role="listitem" data-team="ally" data-index="0" onclick="openChampionPicker('ally', 0)" tabindex="0" aria-label="Slot aliado 1, vacío">
                             <span class="slot-plus" aria-hidden="true">+</span>
                         </div>
-                        <div class="champion-slot" role="listitem" data-team="ally" data-index="1" onclick="openChampionPicker('ally', 1)" tabindex="0" aria-label="Slot aliado 2, vacío">
+                        <div class="slot champion-slot" role="listitem" data-team="ally" data-index="1" onclick="openChampionPicker('ally', 1)" tabindex="0" aria-label="Slot aliado 2, vacío">
                             <span class="slot-plus" aria-hidden="true">+</span>
                         </div>
-                        <div class="champion-slot" role="listitem" data-team="ally" data-index="2" onclick="openChampionPicker('ally', 2)" tabindex="0" aria-label="Slot aliado 3, vacío">
+                        <div class="slot champion-slot" role="listitem" data-team="ally" data-index="2" onclick="openChampionPicker('ally', 2)" tabindex="0" aria-label="Slot aliado 3, vacío">
                             <span class="slot-plus" aria-hidden="true">+</span>
                         </div>
-                        <div class="champion-slot" role="listitem" data-team="ally" data-index="3" onclick="openChampionPicker('ally', 3)" tabindex="0" aria-label="Slot aliado 4, vacío">
+                        <div class="slot champion-slot" role="listitem" data-team="ally" data-index="3" onclick="openChampionPicker('ally', 3)" tabindex="0" aria-label="Slot aliado 4, vacío">
                             <span class="slot-plus" aria-hidden="true">+</span>
                         </div>
-                        <div class="champion-slot slot--role-locked" id="target-role-slot" aria-label="Tu pick (bloqueado)" tabindex="-1">
+                        <div class="slot champion-slot slot--role-locked" id="target-role-slot" aria-label="Tu pick (bloqueado)" tabindex="-1">
                             <span class="slot-role-label" id="target-role-label">ADC</span>
                         </div>
                     </div>
@@ -116,19 +121,19 @@
                         <span class="team-line" aria-hidden="true"></span>
                     </div>
                     <div class="champion-slots" id="enemy-slots" role="list" aria-label="Slots del equipo enemigo">
-                        <div class="champion-slot" role="listitem" data-team="enemy" data-index="0" onclick="openChampionPicker('enemy', 0)" tabindex="0" aria-label="Slot enemigo 1, vacío">
+                        <div class="slot champion-slot" role="listitem" data-team="enemy" data-index="0" onclick="openChampionPicker('enemy', 0)" tabindex="0" aria-label="Slot enemigo 1, vacío">
                             <span class="slot-plus" aria-hidden="true">+</span>
                         </div>
-                        <div class="champion-slot" role="listitem" data-team="enemy" data-index="1" onclick="openChampionPicker('enemy', 1)" tabindex="0" aria-label="Slot enemigo 2, vacío">
+                        <div class="slot champion-slot" role="listitem" data-team="enemy" data-index="1" onclick="openChampionPicker('enemy', 1)" tabindex="0" aria-label="Slot enemigo 2, vacío">
                             <span class="slot-plus" aria-hidden="true">+</span>
                         </div>
-                        <div class="champion-slot" role="listitem" data-team="enemy" data-index="2" onclick="openChampionPicker('enemy', 2)" tabindex="0" aria-label="Slot enemigo 3, vacío">
+                        <div class="slot champion-slot" role="listitem" data-team="enemy" data-index="2" onclick="openChampionPicker('enemy', 2)" tabindex="0" aria-label="Slot enemigo 3, vacío">
                             <span class="slot-plus" aria-hidden="true">+</span>
                         </div>
-                        <div class="champion-slot" role="listitem" data-team="enemy" data-index="3" onclick="openChampionPicker('enemy', 3)" tabindex="0" aria-label="Slot enemigo 4, vacío">
+                        <div class="slot champion-slot" role="listitem" data-team="enemy" data-index="3" onclick="openChampionPicker('enemy', 3)" tabindex="0" aria-label="Slot enemigo 4, vacío">
                             <span class="slot-plus" aria-hidden="true">+</span>
                         </div>
-                        <div class="champion-slot" role="listitem" data-team="enemy" data-index="4" onclick="openChampionPicker('enemy', 4)" tabindex="0" aria-label="Slot enemigo 5, vacío">
+                        <div class="slot champion-slot" role="listitem" data-team="enemy" data-index="4" onclick="openChampionPicker('enemy', 4)" tabindex="0" aria-label="Slot enemigo 5, vacío">
                             <span class="slot-plus" aria-hidden="true">+</span>
                         </div>
                     </div>
@@ -140,6 +145,7 @@
                         <label class="ctx-label" for="target-role">Rol objetivo</label>
                         <select class="ctx-select" id="target-role" onchange="changeTargetRole(this.value)">
                             <option value="adc" selected>ADC</option>
+                            <option value="jungle">Jungla</option>
                             <option value="support">Soporte</option>
                         </select>
                     </div>
@@ -163,7 +169,7 @@
                 </div>
 
                 <!-- Botón de análisis -->
-                <button class="btn-analyze" id="recommend-btn" onclick="getRecommendation()" aria-label="Analizar el draft y obtener recomendación">
+                <button class="btn btn-primary btn-analyze" id="recommend-btn" onclick="getRecommendation()" aria-label="Analizar el draft y obtener recomendación">
                     <span class="btn-analyze-icon" aria-hidden="true">⚡</span>
                     <span class="btn-analyze-text">Analizar Draft</span>
                 </button>
@@ -173,7 +179,7 @@
 
         <!-- ── COLUMNA DERECHA: Resultados ───────────────── -->
         <div class="results-column">
-            <div class="results-empty" id="results-empty" aria-live="polite">
+            <div class="state-block results-empty" id="results-empty" aria-live="polite">
                 <div class="empty-icon" aria-hidden="true">
                     <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M32 8L52 18V46L32 56L12 46V18L32 8Z" stroke="url(#eHex)" stroke-width="1.5" stroke-linejoin="round"/>
@@ -208,8 +214,8 @@
                 <div class="top-pick-card" id="top-pick-card"></div>
 
                 <!-- Alternativas -->
-                <div class="results-block" id="alternatives-block" style="display:none;">
-                    <div class="block-head">
+                <div class="card results-block" id="alternatives-block" style="display:none;">
+                    <div class="card-header block-head">
                         <span class="block-icon" aria-hidden="true">≡</span>
                         <h3 class="block-title">Alternativas</h3>
                     </div>
@@ -225,12 +231,12 @@
 <!-- ═══════════════════════════════════════════
      MODAL: Selector de Campeón
 ══════════════════════════════════════════════ -->
-<div class="modal-backdrop" id="champion-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-    <div class="modal-box">
+<div class="modal-overlay modal-backdrop" id="champion-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal modal-box">
 
-        <div class="modal-top">
+        <div class="modal-header modal-top">
             <h2 class="modal-title" id="modal-title">Seleccionar Campeón</h2>
-            <button class="modal-close-btn" onclick="closeModal()" aria-label="Cerrar selector">
+            <button class="modal-close modal-close-btn" onclick="closeModal()" aria-label="Cerrar selector">
                 <svg viewBox="0 0 20 20" fill="currentColor" width="18" height="18">
                     <path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"/>
                 </svg>
@@ -273,6 +279,6 @@
     </div>
 </div>
 
-<script src="/static/app.js?v=17"></script>
+<script src="/static/app.js?v=19"></script>
 </body>
 </html>

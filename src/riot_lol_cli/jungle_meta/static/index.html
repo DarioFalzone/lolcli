@@ -3,14 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
     <title>Jungle Tier List — Patch 26.09</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Outfit:wght@400;700;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Anton&family=JetBrains+Mono:wght@400;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/design-system/tokens.css?v=2" />
+    <link rel="stylesheet" href="/design-system/patterns.css?v=2" />
+    <link rel="stylesheet" href="/static/styles.css?v=2" />
   </head>
   <body>
     <div id="app">
@@ -19,10 +22,16 @@
 
     <!-- Templates -->
     <template id="tpl-overview">
-      <header class="hero">
+      <header class="hero hero--dual">
         <div class="hero-row">
           <span class="hero-eyebrow">SKILLCAPPED</span>
-          <span class="hero-patch">PATCH <span data-bind="patch"></span></span>
+          <div class="hero-actions">
+            <a class="home-hub-link" href="http://localhost:8080/" title="Volver al Home Hub">
+              <span class="home-hub-link__icon" aria-hidden="true">⌂</span>
+              <span>Home Hub</span>
+            </a>
+            <span class="hero-patch">PATCH <span data-bind="patch"></span></span>
+          </div>
         </div>
         <h1 class="hero-title">TIER LIST</h1>
         <div class="hero-bottom">
@@ -40,15 +49,15 @@
 
       <main class="overview">
         <aside class="sidebar">
-          <section class="cat cat--op">
+          <section class="cat-card cat-card--accent-cyan cat cat--op">
             <h2 class="cat-title"><span class="cat-icon">⚡</span> OVERPOWERED</h2>
             <div class="cat-list" data-bind="overpowered"></div>
           </section>
-          <section class="cat cat--lowelo">
+          <section class="cat-card cat-card--accent-gold cat cat--lowelo">
             <h2 class="cat-title"><span class="cat-icon">🎯</span> LOW ELO PICKS</h2>
             <div class="cat-list" data-bind="low_elo_picks"></div>
           </section>
-          <section class="cat cat--bans">
+          <section class="cat-card cat-card--accent-error cat cat--bans">
             <h2 class="cat-title"><span class="cat-icon">🚫</span> RECOMMENDED BANS</h2>
             <div class="cat-list" data-bind="bans"></div>
           </section>
@@ -57,10 +66,10 @@
         <section class="tier-grid">
           <div class="tier-tabs" role="tablist">
             <button class="tier-tab active" data-tier="ALL" role="tab">All</button>
-            <button class="tier-tab tier-tab--s" data-tier="S" role="tab">S</button>
-            <button class="tier-tab tier-tab--a" data-tier="A" role="tab">A</button>
-            <button class="tier-tab tier-tab--b" data-tier="B" role="tab">B</button>
-            <button class="tier-tab tier-tab--c" data-tier="C" role="tab">C</button>
+            <button class="tier-tab tier-s" data-tier="S" role="tab">S</button>
+            <button class="tier-tab tier-a" data-tier="A" role="tab">A</button>
+            <button class="tier-tab tier-b" data-tier="B" role="tab">B</button>
+            <button class="tier-tab tier-c" data-tier="C" role="tab">C</button>
           </div>
           <div class="tier-rows" data-bind="tier_rows"></div>
         </section>
@@ -70,6 +79,7 @@
     <template id="tpl-champion-detail">
       <header class="detail-hero">
         <a class="back-link" href="#overview">← Back to tier list</a>
+        <a class="detail-home-link" href="http://localhost:8080/" title="Volver al Home Hub">⌂ Home Hub</a>
         <div class="detail-hero-bg" data-bind="splash_bg"></div>
         <div class="detail-hero-content">
           <div class="detail-portrait">
@@ -85,7 +95,7 @@
       </header>
 
       <main class="detail-body">
-        <section class="detail-stats">
+        <section class="stat-strip detail-stats">
           <div class="stat"><span class="stat-label">WIN RATE</span><span class="stat-value" data-bind="winrate"></span></div>
           <div class="stat"><span class="stat-label">PICK RATE</span><span class="stat-value" data-bind="pickrate"></span></div>
           <div class="stat"><span class="stat-label">BAN RATE</span><span class="stat-value" data-bind="banrate"></span></div>
@@ -109,6 +119,6 @@
       </main>
     </template>
 
-    <script src="/static/app.js"></script>
+    <script src="/static/app.js?v=2"></script>
   </body>
 </html>

@@ -9,7 +9,9 @@ ENHANCED_DASHBOARD_HTML = r"""
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico" type="image/svg+xml">
     <title>LOLCLI Meta Analyzer - Enhanced</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Anton&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <style>
@@ -34,7 +36,7 @@ ENHANCED_DASHBOARD_HTML = r"""
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, var(--forge-black) 0%, var(--primary) 100%);
             color: var(--light);
             min-height: 100vh;
@@ -53,8 +55,11 @@ ENHANCED_DASHBOARD_HTML = r"""
 
         header h1 {
             font-size: 28px;
+            font-family: 'Anton', sans-serif;
+            font-style: italic;
             color: var(--arc-gold);
             margin-bottom: 10px;
+            letter-spacing: 0.02em;
         }
 
         .header-info {
@@ -69,6 +74,30 @@ ENHANCED_DASHBOARD_HTML = r"""
             display: flex;
             gap: 20px;
             font-size: 14px;
+        }
+
+        .home-hub-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            border: 1px solid rgba(200, 155, 60, 0.28);
+            background: rgba(200, 155, 60, 0.1);
+            color: var(--light);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+        }
+
+        .home-hub-link:hover {
+            transform: translateY(-1px);
+            border-color: rgba(200, 155, 60, 0.45);
+            background: rgba(200, 155, 60, 0.16);
+            box-shadow: 0 8px 20px rgba(200, 155, 60, 0.14);
         }
 
         .status-item {
@@ -279,25 +308,7 @@ ENHANCED_DASHBOARD_HTML = r"""
             font-weight: bold;
         }
 
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(5px);
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
+        /* Modal — overlay usa patterns.css .modal-overlay, content local */
         .modal-content {
             background: rgba(10, 30, 61, 0.95);
             border: 2px solid var(--arc-gold-dark);
@@ -310,7 +321,8 @@ ENHANCED_DASHBOARD_HTML = r"""
             position: relative;
         }
 
-        .modal-close {
+        /* Mayor especificidad para ganarle a patterns.css */
+        .modal-content .modal-close {
             position: absolute;
             top: 10px;
             right: 10px;
@@ -324,9 +336,10 @@ ENHANCED_DASHBOARD_HTML = r"""
             font-size: 16px;
             font-weight: bold;
             transition: all 0.2s ease;
+            margin-left: 0;
         }
 
-        .modal-close:hover {
+        .modal-content .modal-close:hover {
             transform: rotate(90deg);
             background: #ff0000;
         }
@@ -433,20 +446,29 @@ ENHANCED_DASHBOARD_HTML = r"""
             }
         }
     </style>
+    <link rel="stylesheet" href="/design-system/tokens.css?v=2">
+    <link rel="stylesheet" href="/design-system/patterns.css?v=2">
 </head>
-<body>
-    <!-- Header -->
-    <header>
-        <h1>⚔️ LOLCLI Meta Analyzer - Enhanced</h1>
-        <div class="header-info">
-            <div class="header-status">
-                <div class="status-item">
-                    <span class="status-dot"></span>
-                    <span>Sistema: <strong id="system-status">Conectando...</strong></span>
+<body class="app-shell">
+    <!-- Hero -->
+    <header class="hero hero-compact">
+        <div class="hero-row" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;">
+            <div>
+                <div class="hero-eyebrow">LOLCLI</div>
+                <h1 class="hero-title">META ANALYZER</h1>
+                <div class="hero-meta">Enhanced Dashboard</div>
+            </div>
+            <div class="header-info">
+                <div class="header-status">
+                    <div class="status-item">
+                        <span class="status-dot"></span>
+                        <span>Sistema: <strong id="system-status">Conectando...</strong></span>
+                    </div>
+                    <div class="status-item">
+                        Última actualización: <strong id="last-update">--:--</strong>
+                    </div>
                 </div>
-                <div class="status-item">
-                    Última actualización: <strong id="last-update">--:--</strong>
-                </div>
+                <a class="home-hub-link" href="http://localhost:8080/">⌂ Home Hub</a>
             </div>
         </div>
     </header>
@@ -454,17 +476,17 @@ ENHANCED_DASHBOARD_HTML = r"""
     <!-- Main Content -->
     <div class="container">
         <!-- Summary Stats -->
-        <div class="card grid mb-20">
-            <div class="summary-stat">
-                <div class="stat-value" id="stat-champions">0</div>
+        <div class="stat-strip mb-20">
+            <div class="stat">
+                <div class="stat-value gold" id="stat-champions">0</div>
                 <div class="stat-label">Campeones ADC</div>
             </div>
-            <div class="summary-stat">
-                <div class="stat-value" id="stat-matches">0</div>
+            <div class="stat">
+                <div class="stat-value cyan" id="stat-matches">0</div>
                 <div class="stat-label">Partidas Analizadas</div>
             </div>
-            <div class="summary-stat">
-                <div class="stat-value" id="stat-anomalies">0</div>
+            <div class="stat">
+                <div class="stat-value warning" id="stat-anomalies">0</div>
                 <div class="stat-label">Anomalías</div>
             </div>
         </div>
@@ -475,6 +497,7 @@ ENHANCED_DASHBOARD_HTML = r"""
             <button class="tab" onclick="switchTab(event, 'matchups')">⚡ Matchups</button>
             <button class="tab" onclick="switchTab(event, 'items')">🛡️ Items</button>
             <button class="tab" onclick="switchTab(event, 'raw-data')">📋 Raw Data</button>
+            <button class="tab" onclick="switchTab(event, 'jungle-research')">🌲 Jungla 360</button>
         </div>
 
         <!-- Tab: Dashboard (Tier List) -->
@@ -611,10 +634,143 @@ ENHANCED_DASHBOARD_HTML = r"""
                 </div>
             </div>
         </div>
+
+        <!-- Tab: Jungla 360 (Jungle Research) -->
+        <div id="jungle-research" class="tab-content">
+            <!-- Header del tab: freshness + patch + estado Riot API + gaps -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div style="display:flex; flex-wrap:wrap; gap:20px; align-items:center; justify-content:space-between;">
+                    <div>
+                        <div style="font-size:11px; color: var(--arc-gold); text-transform:uppercase; letter-spacing:0.08em; font-weight:bold;">Jungla 360</div>
+                        <div style="font-size:18px; font-family:'Anton', sans-serif; font-style:italic; color:#f0f0f0; letter-spacing:0.02em;">Knowledge Base de Jungla</div>
+                    </div>
+                    <div id="jr-header-meta" style="display:flex; flex-wrap:wrap; gap:14px; font-size:12px;">
+                        <span>Último refresh: <strong id="jr-freshness">--</strong></span>
+                        <span>Patch: <strong id="jr-patch">--</strong></span>
+                        <span>Riot API: <strong id="jr-riot-key">--</strong></span>
+                        <span>Gaps: <strong id="jr-gaps-count">--</strong></span>
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                        <button onclick="jrRefresh('soloq')" style="padding:8px 14px; background:var(--arc-gold); color:#010a13; border:none; border-radius:4px; cursor:pointer; font-weight:bold; font-size:12px;">↻ Refrescar SoloQ</button>
+                        <button onclick="jrRefresh('riot_pros')" style="padding:8px 14px; background:transparent; color:var(--arc-gold); border:1px solid var(--arc-gold-dark); border-radius:4px; cursor:pointer; font-size:12px;">↻ Riot Pros</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub-tabs internos -->
+            <div class="tabs" style="margin-bottom:15px;">
+                <button class="tab active" onclick="jrSwitchSubtab(event, 'jr-consensus')">🎯 Consenso</button>
+                <button class="tab" onclick="jrSwitchSubtab(event, 'jr-sources')">🔗 Fuentes</button>
+                <button class="tab" onclick="jrSwitchSubtab(event, 'jr-pros')">👤 Pros</button>
+                <button class="tab" onclick="jrSwitchSubtab(event, 'jr-otps')">🏆 OTPs</button>
+                <button class="tab" onclick="jrSwitchSubtab(event, 'jr-report')">📈 Reporte diario</button>
+            </div>
+
+            <!-- Sub-vista Consenso: tier list final -->
+            <div id="jr-consensus" class="jr-subtab active">
+                <div class="card">
+                    <div class="card-title">Tier list final por consenso</div>
+                    <p style="color:#aaa; font-size:12px; margin-bottom:12px;">
+                        Score normalizado por percentil dentro de la cohorte (patch · region · elo · queue).
+                        No copia ninguna tier list externa — agrega múltiples fuentes con pesos explícitos.
+                    </p>
+                    <div class="data-table">
+                        <table id="jr-consensus-table">
+                            <thead>
+                                <tr>
+                                    <th>Tier</th>
+                                    <th>Campeón</th>
+                                    <th>Score</th>
+                                    <th>Confidence</th>
+                                    <th>SoloQ</th>
+                                    <th>Pro presence</th>
+                                    <th>Sources</th>
+                                    <th>Warnings</th>
+                                    <th>Explicación</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="9" class="loading">⏳ Cargando consenso...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub-vista Fuentes: registry con estado + telemetría runs -->
+            <div id="jr-sources" class="jr-subtab" style="display:none;">
+                <div class="card">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
+                        <div class="card-title" style="margin:0; padding:0; border:0;">Registry de fuentes</div>
+                        <button onclick="jrRefresh('soloq_extra')" style="padding:6px 12px; background:transparent; color:var(--arc-gold); border:1px solid var(--arc-gold-dark); border-radius:4px; cursor:pointer; font-size:11px;">↻ Probar adapters V3</button>
+                    </div>
+                    <p style="color:#aaa; font-size:12px; margin-bottom:12px;">
+                        active = consumida en V1 · planned = registrada, sin scrape aún · gap = intentamos pero falla. La columna "Último run" se llena tras invocar al adapter (POST /refresh).
+                    </p>
+                    <div class="data-table">
+                        <table id="jr-sources-table">
+                            <thead>
+                                <tr>
+                                    <th>Estado</th>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Tipo</th>
+                                    <th>Region</th>
+                                    <th>Prioridad</th>
+                                    <th>Último run</th>
+                                    <th>URL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="8" class="loading">⏳ Cargando fuentes...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub-vista Pros: cards del seed -->
+            <div id="jr-pros" class="jr-subtab" style="display:none;">
+                <div class="card">
+                    <div class="card-title">Pro players seed</div>
+                    <p style="color:#aaa; font-size:12px; margin-bottom:12px;">
+                        Para resolver cuentas reales, agregar <code>riot_id</code> + <code>server</code> al seed y exportar <code>RIOT_API_KEY</code>.
+                    </p>
+                    <div id="jr-pros-cards" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:12px;">
+                        <p class="loading">⏳ Cargando pros...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub-vista OTPs: V1 placeholder -->
+            <div id="jr-otps" class="jr-subtab" style="display:none;">
+                <div class="card">
+                    <div class="card-title">Rankings OTP por campeón</div>
+                    <div style="padding:20px; background:rgba(255, 153, 0, 0.08); border:1px solid var(--state-warning); border-radius:6px;">
+                        <div style="font-weight:bold; color:var(--state-warning); margin-bottom:8px;">⚠ Pipeline planned (V1)</div>
+                        <p style="font-size:13px; color:#ccc; line-height:1.5;">
+                            El pipeline <code>otp_rankings</code> está registrado pero no implementado en V1.
+                            Fuentes objetivo: Onetricks.gg, League of Graphs (rankings/summoners), PORO.GG Champion Masters.
+                            Cuando se active, mostrará top jugadores por campeón meta detectado.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub-vista Reporte diario -->
+            <div id="jr-report" class="jr-subtab" style="display:none;">
+                <div class="card">
+                    <div class="card-title">Reporte diario</div>
+                    <div id="jr-report-content">
+                        <p class="loading">⏳ Cargando reporte...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Modal - Champion Details -->
-    <div id="champion-modal" class="modal">
+    <!-- Modal - Champion Details (modal-overlay = patterns.css toggle) -->
+    <div id="champion-modal" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal()">✕</button>
             <div class="modal-title">
@@ -640,9 +796,18 @@ ENHANCED_DASHBOARD_HTML = r"""
 
         async function initializeDashboard() {
             try {
-                // Cargar lista de campeones
-                const response = await axios.get(`${API_BASE}/champions/list`);
-                allChampions = response.data.champions || [];
+                // Cargar lista de campeones desde raw-data
+                const rawResp = await axios.get(`${API_BASE}/champions/all/raw-data?limit=200`);
+                const rawRows = rawResp.data.data || [];
+                const seen = new Set();
+                allChampions = rawRows.map(r => r.champion).filter(c => c && !seen.has(c) && seen.add(c));
+
+                // Cargar summary para el counter de anomalías
+                try {
+                    const summaryResp = await axios.get(`${API_BASE}/dashboard/summary`);
+                    const summary = summaryResp.data.summary || {};
+                    document.getElementById("stat-anomalies").textContent = summary.active_anomalies ?? 0;
+                } catch (_) { /* no bloquea el resto */ }
 
                 // Llenar selects
                 populateSelects();
@@ -691,56 +856,52 @@ ENHANCED_DASHBOARD_HTML = r"""
         async function updateDashboard() {
             try {
                 const response = await axios.get(`${API_BASE}/tier-list/current`);
-                const tiers = response.data;
+                const raw = response.data;
 
                 let html = '';
-
-                // Contar estadísticas
                 let totalChamps = 0;
-                let totalMatches = 0;
-                let tierSCount = tiers.S?.length || 0;
 
-                Object.keys(tiers).forEach(tier => {
-                    const champions = tiers[tier] || [];
+                const tierColors = {
+                    S: { bg: 'linear-gradient(135deg, #ff6b6b, #ff4444)', name: 'OP' },
+                    A: { bg: 'linear-gradient(135deg, #ffa500, #ff8c00)', name: 'Muy Bueno' },
+                    B: { bg: 'linear-gradient(135deg, #4ecdc4, #44b7aa)', name: 'Viable' },
+                    C: { bg: 'linear-gradient(135deg, #95e1d3, #38a169)', name: 'Aceptable' },
+                    D: { bg: 'linear-gradient(135deg, #cccccc, #999999)', name: 'Débil' }
+                };
+
+                // API devuelve tier_s / tier_a / tier_b / tier_c / tier_d con objetos {champion, winrate, pickrate, ...}
+                [['tier_s','S'], ['tier_a','A'], ['tier_b','B'], ['tier_c','C'], ['tier_d','D']].forEach(([key, tier]) => {
+                    const champions = raw[key] || [];
                     if (champions.length === 0) return;
 
                     totalChamps += champions.length;
-
-                    const tierColors = {
-                        S: { bg: 'linear-gradient(135deg, #ff6b6b, #ff4444)', name: 'OP' },
-                        A: { bg: 'linear-gradient(135deg, #ffa500, #ff8c00)', name: 'Muy Bueno' },
-                        B: { bg: 'linear-gradient(135deg, #4ecdc4, #44b7aa)', name: 'Viable' },
-                        C: { bg: 'linear-gradient(135deg, #95e1d3, #38a169)', name: 'Aceptable' },
-                        D: { bg: 'linear-gradient(135deg, #cccccc, #999999)', name: 'Débil' }
-                    };
-
                     const tierInfo = tierColors[tier] || { bg: '#666', name: tier };
 
-                    html += \`
+                    html += `
                         <div class="mb-20">
                             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 2px solid var(--arc-gold-dark);">
-                                <div style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: \${tierInfo.bg}; color: white; font-weight: bold; font-size: 20px;">\${tier}</div>
-                                <div><strong>Tier \${tier} - \${tierInfo.name}</strong> <span style="color: var(--arc-gold);">(\${champions.length})</span></div>
+                                <div style="width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 4px; background: ${tierInfo.bg}; color: white; font-weight: bold; font-size: 20px;">${tier}</div>
+                                <div><strong>Tier ${tier} - ${tierInfo.name}</strong> <span style="color: var(--arc-gold);">(${champions.length})</span></div>
                             </div>
                             <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px;">
-                    \`;
+                    `;
 
                     champions.forEach(champ => {
-                        html += \`
-                            <div style="background: rgba(0, 0, 0, 0.3); border: 1px solid var(--arc-gold-dark); border-radius: 4px; padding: 10px; text-align: center; cursor: pointer; transition: all 0.3s ease;" onclick="showChampionDetails('\${champ.name}')">
-                                <div style="font-weight: bold; color: var(--arc-gold); margin-bottom: 5px; font-size: 12px;">\${champ.name}</div>
+                        html += `
+                            <div style="background: rgba(0, 0, 0, 0.3); border: 1px solid var(--arc-gold-dark); border-radius: 4px; padding: 10px; text-align: center; cursor: pointer; transition: all 0.3s ease;" onclick="showChampionDetails('${champ.champion}')">
+                                <div style="font-weight: bold; color: var(--arc-gold); margin-bottom: 5px; font-size: 12px;">${champ.champion}</div>
                                 <div style="font-size: 11px; color: #aaa;">
-                                    <div>WR: <span class="text-success">\${champ.winrate.toFixed(1)}%</span></div>
-                                    <div>PR: <span class="text-info">\${champ.pickrate.toFixed(1)}%</span></div>
+                                    <div>WR: <span class="text-success">${champ.winrate?.toFixed(1)}%</span></div>
+                                    <div>PR: <span class="text-info">${champ.pickrate?.toFixed(1)}%</span></div>
                                 </div>
                             </div>
-                        \`;
+                        `;
                     });
 
                     html += '</div></div>';
                 });
 
-                document.getElementById("tier-list-content").innerHTML = html;
+                document.getElementById("tier-list-content").innerHTML = html || '<p style="color:#aaa;">Sin datos de tier list</p>';
                 document.getElementById("stat-champions").textContent = totalChamps;
 
             } catch (error) {
@@ -761,7 +922,7 @@ ENHANCED_DASHBOARD_HTML = r"""
                 const limit = document.getElementById('matchup-limit-filter').value;
 
                 const response = await axios.get(
-                    `\${API_BASE}/champions/\${champion}/matchups?limit=\${limit}&hours=\${hours}`
+                    `${API_BASE}/champions/${champion}/matchups?limit=${limit}&hours=${hours}`
                 );
 
                 const data = response.data.data || [];
@@ -772,18 +933,18 @@ ENHANCED_DASHBOARD_HTML = r"""
                     return;
                 }
 
-                tbody.innerHTML = data.map(row => \`
+                tbody.innerHTML = data.map(row => `
                     <tr>
-                        <td>\${new Date(row.hour).toLocaleString('es-ES')}</td>
-                        <td>\${row.champion}</td>
-                        <td>\${row.matches}</td>
-                        <td class="text-success">\${row.wins}</td>
-                        <td class="text-danger">\${row.losses}</td>
-                        <td class="text-info">\${row.winrate?.toFixed(1)}%</td>
-                        <td class="trend-\${row.trend?.toLowerCase() || 'stable'}">\${row.trend || 'STABLE'}</td>
-                        <td><span class="source-badge">\${row.source}</span></td>
+                        <td>${new Date(row.hour_bucket).toLocaleString('es-ES')}</td>
+                        <td>${row.champion}</td>
+                        <td>${row.matches}</td>
+                        <td class="text-success">${row.wins}</td>
+                        <td class="text-danger">${row.losses}</td>
+                        <td class="text-info">${row.winrate?.toFixed(1)}%</td>
+                        <td class="trend-${row.trend?.toLowerCase() || 'stable'}">${row.trend || 'STABLE'}</td>
+                        <td><span class="source-badge">${row.source}</span></td>
                     </tr>
-                \`).join('');
+                `).join('');
 
             } catch (error) {
                 console.error("Error loading matchups:", error);
@@ -803,7 +964,7 @@ ENHANCED_DASHBOARD_HTML = r"""
             try {
                 const limit = document.getElementById('items-limit-filter').value;
                 const response = await axios.get(
-                    `\${API_BASE}/champions/\${champion}/items?limit=\${limit}`
+                    `${API_BASE}/champions/${champion}/items?limit=${limit}`
                 );
 
                 const data = response.data.data || [];
@@ -814,14 +975,14 @@ ENHANCED_DASHBOARD_HTML = r"""
                     return;
                 }
 
-                tbody.innerHTML = data.map(row => \`
+                tbody.innerHTML = data.map(row => `
                     <tr>
-                        <td>\${row.item_id}</td>
-                        <td class="text-success">\${row.frequency}</td>
-                        <td>\${row.build_path || 'N/A'}</td>
-                        <td><span class="source-badge">\${row.source}</span></td>
+                        <td>${row.item_id}</td>
+                        <td class="text-success">${row.frequency}</td>
+                        <td>${row.build_path || 'N/A'}</td>
+                        <td><span class="source-badge">${row.source}</span></td>
                     </tr>
-                \`).join('');
+                `).join('');
 
             } catch (error) {
                 console.error("Error loading items:", error);
@@ -835,8 +996,8 @@ ENHANCED_DASHBOARD_HTML = r"""
                 const champion = document.getElementById('raw-champion-filter').value;
                 const limit = document.getElementById('raw-limit-filter').value;
 
-                let url = `\${API_BASE}/champions/all/raw-data?limit=\${limit}`;
-                if (champion) url += `&champion=\${champion}`;
+                let url = `${API_BASE}/champions/all/raw-data?limit=${limit}`;
+                if (champion) url += `&champion=${champion}`;
 
                 const response = await axios.get(url);
                 const data = response.data.data || [];
@@ -847,16 +1008,16 @@ ENHANCED_DASHBOARD_HTML = r"""
                     return;
                 }
 
-                tbody.innerHTML = data.map((row, idx) => \`
-                    <tr onclick="showChampionDetails('\${row.champion}')">
-                        <td style="cursor: pointer; color: var(--arc-gold); font-weight: bold;">\${row.champion}</td>
-                        <td>\${new Date(row.hour).toLocaleString('es-ES')}</td>
-                        <td>\${row.matches}</td>
-                        <td class="text-success">\${row.winrate?.toFixed(1)}%</td>
-                        <td class="text-info">\${row.pickrate?.toFixed(1)}%</td>
-                        <td><span class="source-badge">\${row.source}</span></td>
+                tbody.innerHTML = data.map((row, idx) => `
+                    <tr onclick="showChampionDetails('${row.champion}')">
+                        <td style="cursor: pointer; color: var(--arc-gold); font-weight: bold;">${row.champion}</td>
+                        <td>${new Date(row.hour_bucket).toLocaleString('es-ES')}</td>
+                        <td>${row.matches}</td>
+                        <td class="text-success">${row.winrate?.toFixed(1)}%</td>
+                        <td class="text-info">${row.pickrate?.toFixed(1)}%</td>
+                        <td><span class="source-badge">${row.source}</span></td>
                     </tr>
-                \`).join('');
+                `).join('');
 
                 document.getElementById("stat-matches").textContent = data.length;
 
@@ -872,7 +1033,7 @@ ENHANCED_DASHBOARD_HTML = r"""
 
             try {
                 const response = await axios.get(
-                    `\${API_BASE}/champions/\${championName}/details`
+                    `${API_BASE}/champions/${championName}/details`
                 );
 
                 const data = response.data;
@@ -880,58 +1041,58 @@ ENHANCED_DASHBOARD_HTML = r"""
 
                 if (data.champion_data) {
                     const stats = data.champion_data;
-                    html += \`
+                    html += `
                         <div class="modal-section">
                             <div class="modal-section-title">📊 Estadísticas Actuales</div>
                             <table style="width: 100%; margin-top: 10px;">
                                 <tr>
                                     <td style="padding: 5px;"><strong>Winrate:</strong></td>
-                                    <td class="text-success">\${stats.winrate?.toFixed(1)}%</td>
+                                    <td class="text-success">${stats.winrate?.toFixed(1)}%</td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 5px;"><strong>Pickrate:</strong></td>
-                                    <td class="text-info">\${stats.pickrate?.toFixed(1)}%</td>
+                                    <td class="text-info">${stats.pickrate?.toFixed(1)}%</td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 5px;"><strong>Partidas:</strong></td>
-                                    <td>\${stats.matches}</td>
+                                    <td>${stats.matches}</td>
                                 </tr>
                                 <tr>
                                     <td style="padding: 5px;"><strong>Tierrada:</strong></td>
-                                    <td style="color: var(--arc-gold);">\${stats.tier || 'N/A'}</td>
+                                    <td style="color: var(--arc-gold);">${stats.tier || 'N/A'}</td>
                                 </tr>
                             </table>
                         </div>
-                    \`;
+                    `;
                 }
 
                 if (data.anomalies && data.anomalies.length > 0) {
-                    html += \`
+                    html += `
                         <div class="modal-section">
                             <div class="modal-section-title">⚠️ Anomalías Detectadas</div>
-                    \`;
+                    `;
 
                     data.anomalies.forEach(anom => {
-                        html += \`
+                        html += `
                             <div style="background: rgba(255, 153, 0, 0.1); border-left: 3px solid var(--state-warning); padding: 10px; margin-bottom: 10px; border-radius: 4px;">
-                                <div><strong>\${anom.type}</strong> - Confianza: <span class="text-warning">\${(anom.confidence * 100).toFixed(0)}%</span></div>
-                                <div style="margin-top: 5px; color: #ccc;">\${anom.description}</div>
+                                <div><strong>${anom.type}</strong> - Confianza: <span class="text-warning">${(anom.confidence * 100).toFixed(0)}%</span></div>
+                                <div style="margin-top: 5px; color: #ccc;">${anom.description}</div>
                             </div>
-                        \`;
+                        `;
                     });
 
                     html += '</div>';
                 }
 
-                html += \`
+                html += `
                     <div class="modal-section">
-                        <div class="modal-section-title">ℹ️ Información</div>
+                        <div class="modal-section-title">Información</div>
                         <div style="color: #aaa; font-size: 12px;">
-                            <div><strong>Fuente de Datos:</strong> <span class="source-badge">\${data.source}</span></div>
-                            <div style="margin-top: 5px;"><strong>Última Actualización:</strong> \${new Date(data.timestamp).toLocaleString('es-ES')}</div>
+                            <div><strong>Fuente de Datos:</strong> <span class="source-badge">${data.source}</span></div>
+                            <div style="margin-top: 5px;"><strong>Última Actualización:</strong> ${new Date(data.timestamp).toLocaleString('es-ES')}</div>
                         </div>
                     </div>
-                \`;
+                `;
 
                 document.getElementById('modal-champion-name').textContent = championName;
                 document.getElementById('modal-source').textContent = data.source;
@@ -1001,6 +1162,369 @@ ENHANCED_DASHBOARD_HTML = r"""
             if (e.target.id === 'champion-modal') {
                 closeModal();
             }
+        });
+
+        // ============================================================
+        // Jungla 360 — sub-vistas + endpoints /api/v1/jungle-research/*
+        // ============================================================
+
+        const JR_BASE = `${API_BASE}/jungle-research`;
+        let jrInitialized = false;
+
+        function jrSwitchSubtab(event, subtabId) {
+            const container = document.getElementById('jungle-research');
+            container.querySelectorAll('.tabs .tab').forEach(t => t.classList.remove('active'));
+            container.querySelectorAll('.jr-subtab').forEach(s => { s.classList.remove('active'); s.style.display = 'none'; });
+            event.currentTarget.classList.add('active');
+            const subtab = document.getElementById(subtabId);
+            subtab.classList.add('active');
+            subtab.style.display = 'block';
+        }
+
+        function jrFmtPct(v) { return (v === null || v === undefined) ? '--' : (v * 100).toFixed(0) + '%'; }
+        function jrFmtScore(v) { return (v === null || v === undefined) ? '--' : Number(v).toFixed(2); }
+        function jrFmtTimestamp(iso) {
+            if (!iso) return '--';
+            try { return new Date(iso).toLocaleString('es-AR'); } catch { return iso; }
+        }
+        function jrTierColor(tier) {
+            const map = {S: '#ff4444', A: '#ff8c00', B: '#4ecdc4', C: '#38a169', D: '#999'};
+            return map[tier] || '#666';
+        }
+        function jrEscape(s) {
+            if (s === null || s === undefined) return '';
+            return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        }
+
+        async function jrLoadAll() {
+            await Promise.all([
+                jrLoadOverview(),
+                jrLoadConsensus(),
+                jrLoadSources(),
+                jrLoadPros(),
+                jrLoadDailyReport()
+            ]);
+            jrInitialized = true;
+        }
+
+        async function jrLoadOverview() {
+            try {
+                const resp = await axios.get(`${JR_BASE}/overview`);
+                const d = resp.data;
+                document.getElementById('jr-freshness').textContent = jrFmtTimestamp(d.freshness);
+                document.getElementById('jr-patch').textContent = d.patch || '--';
+                document.getElementById('jr-riot-key').textContent = d.riot_api_key_present ? '✓ presente' : '✗ ausente';
+                document.getElementById('jr-riot-key').style.color = d.riot_api_key_present ? 'var(--state-success)' : 'var(--state-warning)';
+                document.getElementById('jr-gaps-count').textContent = (d.gaps || []).length;
+            } catch (e) {
+                console.error('jrLoadOverview error', e);
+            }
+        }
+
+        async function jrLoadConsensus() {
+            const tbody = document.querySelector('#jr-consensus-table tbody');
+            try {
+                const resp = await axios.get(`${JR_BASE}/current?limit=80`);
+                const entries = resp.data.data || [];
+                if (!entries.length) {
+                    tbody.innerHTML = '<tr><td colspan="9" class="no-data">Sin tier list aún. Hacé click en "Refrescar SoloQ".</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = entries.map(e => {
+                    const tier = e.final_tier || 'D';
+                    const warnings = (e.warning_flags || []).map(w => `<span style="background:rgba(255,153,0,0.15); color:var(--state-warning); padding:2px 6px; border-radius:3px; font-size:10px; margin-right:4px;">${jrEscape(w)}</span>`).join('');
+                    return `<tr>
+                        <td><span style="display:inline-block; width:28px; height:28px; line-height:28px; text-align:center; border-radius:4px; background:${jrTierColor(tier)}; color:white; font-weight:bold;">${jrEscape(tier)}</span></td>
+                        <td style="font-weight:bold; color:var(--arc-gold);">${jrEscape(e.champion_name)}</td>
+                        <td>${jrFmtScore(e.final_score)}</td>
+                        <td>${jrFmtScore(e.confidence)}</td>
+                        <td>${jrFmtScore(e.soloq_score)}</td>
+                        <td>${jrFmtScore(e.pro_soloq_score)}</td>
+                        <td>${e.source_count || 0}</td>
+                        <td>${warnings || '—'}</td>
+                        <td style="font-size:11px; color:#aaa;">${jrEscape(e.explanation || '')}</td>
+                    </tr>`;
+                }).join('');
+            } catch (e) {
+                console.error('jrLoadConsensus error', e);
+                tbody.innerHTML = '<tr><td colspan="9" class="text-danger">Error al cargar consenso</td></tr>';
+            }
+        }
+
+        async function jrLoadSources() {
+            const tbody = document.querySelector('#jr-sources-table tbody');
+            try {
+                const resp = await axios.get(`${JR_BASE}/sources`);
+                const sources = resp.data.sources || [];
+                if (!sources.length) {
+                    tbody.innerHTML = '<tr><td colspan="8" class="no-data">Sin sources registradas</td></tr>';
+                    return;
+                }
+                const statusColor = {active: 'var(--state-success)', planned: 'var(--state-warning)', gap: 'var(--state-error)'};
+                const runColor = {ok: 'var(--state-success)', not_implemented: '#888', error: 'var(--state-error)', disabled: '#666'};
+                tbody.innerHTML = sources.map(s => {
+                    let lastRun = '<span style="color:#666; font-size:10px;">—</span>';
+                    if (s.last_attempted_at) {
+                        const status = s.last_run_status || 'unknown';
+                        const color = runColor[status] || '#999';
+                        const when = jrFmtTimestamp(s.last_attempted_at);
+                        const tooltip = jrEscape((s.last_run_reason || '').substring(0, 200));
+                        const countBadge = s.last_run_champion_count > 0
+                            ? `<span style="margin-left:4px; font-size:10px; color:#aaa;">(${s.last_run_champion_count} champs)</span>`
+                            : '';
+                        lastRun = `<div title="${tooltip}">
+                            <span style="color:${color}; font-size:11px; font-weight:bold;">${jrEscape(status)}</span>${countBadge}
+                            <div style="font-size:10px; color:#888;">${when}</div>
+                        </div>`;
+                    }
+                    return `<tr>
+                        <td><span style="background:${statusColor[s.status] || '#666'}; color:white; padding:3px 8px; border-radius:3px; font-size:11px; font-weight:bold; text-transform:uppercase;">${jrEscape(s.status)}</span></td>
+                        <td><code style="font-size:11px;">${jrEscape(s.id)}</code></td>
+                        <td>${jrEscape(s.name)}</td>
+                        <td><span style="font-size:10px; color:#aaa;">${jrEscape(s.source_type)}</span></td>
+                        <td>${(s.region_focus || []).join(', ') || '—'}</td>
+                        <td>${s.scrape_priority || 0}</td>
+                        <td>${lastRun}</td>
+                        <td><a href="${jrEscape(s.base_url)}" target="_blank" rel="noopener" style="color:var(--info); font-size:11px;">${jrEscape(s.base_url)}</a></td>
+                    </tr>`;
+                }).join('');
+            } catch (e) {
+                console.error('jrLoadSources error', e);
+                tbody.innerHTML = '<tr><td colspan="8" class="text-danger">Error al cargar fuentes</td></tr>';
+            }
+        }
+
+        const JR_SERVERS = ['KR', 'EUW', 'NA', 'EUNE', 'BR', 'LAN', 'LAS', 'JP', 'TR', 'RU', 'OCE', 'VN', 'TW', 'CN'];
+
+        async function jrLoadPros() {
+            const container = document.getElementById('jr-pros-cards');
+            try {
+                const resp = await axios.get(`${JR_BASE}/pros`);
+                const rows = resp.data.data || [];
+                const keyPresent = resp.data.riot_api_key_present;
+                const keyBanner = keyPresent
+                    ? ''
+                    : `<div style="grid-column:1 / -1; padding:10px 14px; background:rgba(255,153,0,0.08); border:1px solid var(--state-warning); border-radius:6px; font-size:12px; color:#ccc;">
+                        <strong style="color:var(--state-warning);">⚠ RIOT_API_KEY ausente.</strong> Podés cargar Riot IDs igual; la resolución a PUUID se hará cuando exportes la key y refresques.
+                    </div>`;
+                container.innerHTML = keyBanner + rows.map(p => jrProCard(p)).join('');
+            } catch (e) {
+                console.error('jrLoadPros error', e);
+                container.innerHTML = '<p class="text-danger">Error al cargar pros</p>';
+            }
+        }
+
+        function jrProCard(p) {
+            const tierColors = {S: '#ff4444', A: '#ff8c00', B: '#4ecdc4'};
+            const tierBadge = `<span style="display:inline-block; padding:2px 6px; border-radius:3px; background:${tierColors[p.priority_tier] || '#666'}; color:white; font-size:10px; font-weight:bold; margin-left:6px;">${jrEscape(p.priority_tier || '?')}</span>`;
+            let stateBlock;
+            if (p.puuid) {
+                stateBlock = `<div style="margin-top:8px; padding:6px 8px; background:rgba(10,200,0,0.1); border-radius:4px; font-size:11px; color:var(--state-success);">
+                    ✓ resuelto · <code style="color:#aaa; font-size:10px;">${jrEscape(p.puuid).substring(0, 16)}…</code>
+                </div>`;
+            } else if (p.gap_flag === 'no_riot_key') {
+                stateBlock = `<div style="margin-top:8px; padding:6px 8px; background:rgba(255,153,0,0.1); border-radius:4px; font-size:10px; color:var(--state-warning);">⚠ no_riot_key — exportá RIOT_API_KEY</div>`;
+            } else if (p.riot_id) {
+                stateBlock = `<div style="margin-top:8px; padding:6px 8px; background:rgba(255,61,61,0.1); border-radius:4px; font-size:10px; color:var(--state-error);">✗ ${jrEscape(p.gap_flag || 'resolución pendiente')}</div>`;
+            } else {
+                stateBlock = `<div style="margin-top:8px; padding:6px 8px; background:rgba(255,153,0,0.1); border-radius:4px; font-size:10px; color:var(--state-warning);">⚠ needs_account_resolution</div>`;
+            }
+            const currentRiot = p.riot_id ? jrEscape(p.riot_id) : '';
+            const currentServer = p.server || '';
+            const serverOptions = JR_SERVERS.map(s => `<option value="${s}" ${s === currentServer ? 'selected' : ''}>${s}</option>`).join('');
+            return `<div style="background:rgba(10, 30, 61, 0.6); border:1px solid var(--arc-gold-dark); border-radius:6px; padding:14px;">
+                <div style="display:flex; justify-content:space-between; align-items:baseline;">
+                    <div>
+                        <div style="font-weight:bold; color:var(--arc-gold); font-size:14px;">${jrEscape(p.player_name)}${tierBadge}</div>
+                        <div style="font-size:10px; color:#aaa; margin-top:2px;">${jrEscape(p.real_name || '')} · ${jrEscape(p.country || '?')}</div>
+                    </div>
+                </div>
+                ${stateBlock}
+                <details style="margin-top:10px; font-size:11px;">
+                    <summary style="cursor:pointer; color:#aaa;">Editar cuenta</summary>
+                    <div style="margin-top:8px; display:flex; flex-direction:column; gap:6px;">
+                        <input type="text" id="jr-pro-rid-${jrEscape(p.player_name)}" placeholder="GameName#TAG" value="${currentRiot}" style="padding:6px; background:rgba(0,0,0,0.4); border:1px solid var(--arc-gold-dark); color:#f0f0f0; border-radius:3px; font-size:11px;">
+                        <select id="jr-pro-srv-${jrEscape(p.player_name)}" style="padding:6px; background:rgba(0,0,0,0.4); border:1px solid var(--arc-gold-dark); color:#f0f0f0; border-radius:3px; font-size:11px;">
+                            <option value="">— Server —</option>
+                            ${serverOptions}
+                        </select>
+                        <div style="display:flex; gap:6px;">
+                            <button onclick="jrSavePro('${jrEscape(p.player_name)}')" style="flex:1; padding:6px; background:var(--arc-gold); color:#010a13; border:none; border-radius:3px; cursor:pointer; font-size:11px; font-weight:bold;">Guardar</button>
+                            <button onclick="jrClearPro('${jrEscape(p.player_name)}')" style="padding:6px 10px; background:transparent; color:#aaa; border:1px solid var(--arc-gold-dark); border-radius:3px; cursor:pointer; font-size:11px;">Limpiar</button>
+                        </div>
+                        <div id="jr-pro-msg-${jrEscape(p.player_name)}" style="font-size:10px; color:#aaa;"></div>
+                    </div>
+                </details>
+            </div>`;
+        }
+
+        async function jrSavePro(name) {
+            const ridInput = document.getElementById(`jr-pro-rid-${name}`);
+            const srvSel = document.getElementById(`jr-pro-srv-${name}`);
+            const msg = document.getElementById(`jr-pro-msg-${name}`);
+            const riot_id = ridInput.value.trim() || null;
+            const server = srvSel.value || null;
+            if (riot_id && !riot_id.includes('#')) {
+                msg.textContent = '✗ Formato: GameName#TAG';
+                msg.style.color = 'var(--state-error)';
+                return;
+            }
+            if (riot_id && !server) {
+                msg.textContent = '✗ Elegí un server';
+                msg.style.color = 'var(--state-error)';
+                return;
+            }
+            msg.textContent = '⏳ Guardando…';
+            msg.style.color = '#aaa';
+            try {
+                const resp = await axios.post(`${JR_BASE}/pros/${encodeURIComponent(name)}/account`, {riot_id, server});
+                const d = resp.data;
+                if (d.error) {
+                    msg.textContent = `✗ ${d.error}`;
+                    msg.style.color = 'var(--state-error)';
+                    return;
+                }
+                if (d.resolved) {
+                    msg.textContent = `✓ Resuelto · PUUID obtenido`;
+                    msg.style.color = 'var(--state-success)';
+                } else if (d.gap_flag) {
+                    msg.textContent = `Guardado · ${d.gap_flag}`;
+                    msg.style.color = 'var(--state-warning)';
+                } else {
+                    msg.textContent = '✓ Guardado';
+                    msg.style.color = 'var(--state-success)';
+                }
+                // Refrescar la grilla.
+                setTimeout(() => jrLoadPros(), 600);
+            } catch (e) {
+                console.error('jrSavePro error', e);
+                msg.textContent = '✗ Error de red';
+                msg.style.color = 'var(--state-error)';
+            }
+        }
+
+        async function jrClearPro(name) {
+            try {
+                await axios.post(`${JR_BASE}/pros/${encodeURIComponent(name)}/account`, {riot_id: null, server: null});
+                jrLoadPros();
+            } catch (e) {
+                console.error('jrClearPro error', e);
+            }
+        }
+
+        async function jrLoadDailyReport() {
+            const container = document.getElementById('jr-report-content');
+            try {
+                const resp = await axios.get(`${JR_BASE}/daily-report`);
+                const data = resp.data.data;
+                if (!data) {
+                    container.innerHTML = `<div style="padding:14px; background:rgba(255,153,0,0.08); border:1px solid var(--state-warning); border-radius:6px; color:#ccc;">
+                        ${(resp.data.gaps || ['Sin reporte aún. Hacé click en "Refrescar SoloQ" para generar la tier list base.']).join('<br>')}
+                    </div>`;
+                    return;
+                }
+                const movementHtml = (movements, label, color) => {
+                    if (!movements || !movements.length) return '';
+                    return `<div style="margin-top:14px;"><div style="font-weight:bold; color:${color}; margin-bottom:8px;">${label}</div>
+                        <ul style="list-style:none; padding:0;">${movements.map(m => `
+                            <li style="padding:4px 8px; border-bottom:1px solid rgba(200,155,60,0.1); font-size:13px;">
+                                <strong>${jrEscape(m.champion_name)}</strong>
+                                <span style="font-size:11px; color:#aaa;"> ${jrEscape(m.previous_tier || '?')} → ${jrEscape(m.current_tier)}</span>
+                                <span style="float:right; color:${color};">${m.delta > 0 ? '+' : ''}${jrFmtScore(m.delta)}</span>
+                            </li>`).join('')}</ul></div>`;
+                };
+                const contradictionsHtml = (data.contradictions || []).length === 0 ? '' : `
+                    <div style="margin-top:14px;"><div style="font-weight:bold; color:var(--state-warning); margin-bottom:8px;">⚠ Contradicciones entre fuentes</div>
+                        <ul style="list-style:none; padding:0;">${data.contradictions.map(c => `
+                            <li style="padding:4px 8px; font-size:13px;">
+                                <strong>${jrEscape(c.champion_name)}</strong>: spread WR ${jrFmtScore(c.spread)}pp
+                                <span style="font-size:11px; color:#aaa; display:block;">${Object.entries(c.by_source || {}).map(([s, v]) => `${s}: ${v}%`).join(' · ')}</span>
+                            </li>`).join('')}</ul></div>`;
+                container.innerHTML = `
+                    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:18px;">
+                        <div>
+                            <div style="font-weight:bold; color:var(--arc-gold); margin-bottom:8px;">Top junglers</div>
+                            <ul style="list-style:none; padding:0;">${(data.top_junglers || []).slice(0, 10).map(t => `
+                                <li style="padding:4px 8px; border-bottom:1px solid rgba(200,155,60,0.1); font-size:13px;">
+                                    <span style="display:inline-block; width:22px; height:22px; line-height:22px; text-align:center; border-radius:3px; background:${jrTierColor(t.final_tier)}; color:white; font-weight:bold; font-size:11px; margin-right:8px;">${jrEscape(t.final_tier)}</span>
+                                    <strong>${jrEscape(t.champion_name)}</strong>
+                                    <span style="float:right; color:#aaa; font-size:11px;">${jrFmtScore(t.final_score)}</span>
+                                </li>`).join('')}</ul>
+                        </div>
+                        <div>${movementHtml(data.risers, '📈 Risers', 'var(--state-success)')}${movementHtml(data.fallers, '📉 Fallers', 'var(--state-error)')}</div>
+                        <div>${contradictionsHtml || '<div style="font-size:12px; color:#888;">Sin contradicciones detectadas.</div>'}</div>
+                    </div>
+                `;
+            } catch (e) {
+                console.error('jrLoadDailyReport error', e);
+                container.innerHTML = '<p class="text-danger">Error al cargar reporte</p>';
+            }
+        }
+
+        async function jrRefresh(mode) {
+            try {
+                const resp = await axios.post(`${JR_BASE}/refresh?mode=${encodeURIComponent(mode)}`);
+                console.log('jrRefresh', mode, resp.data);
+                await jrLoadAll();
+            } catch (e) {
+                console.error('jrRefresh error', e);
+                alert('Refresh falló — revisá la consola.');
+            }
+        }
+
+        // Hook: cargar Jungla 360 cuando el tab se active
+        const _origSwitchTab = switchTab;
+        switchTab = function(event, tabName) {
+            _origSwitchTab(event, tabName);
+            if (tabName === 'jungle-research' && !jrInitialized) {
+                jrLoadAll();
+            }
+        };
+
+        // Helper: activa primary + sub-tab directamente (sin simular clicks).
+        // Evita el race condition donde switchTab() global toca también los .tab
+        // de los sub-tabs y deja state inconsistente.
+        function jrActivateView(primaryTabId, subtabId) {
+            // Primary tabs: solo los del contenedor raíz (.container > .tabs).
+            const rootTabsBar = document.querySelector('.container > .tabs');
+            if (rootTabsBar) {
+                rootTabsBar.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                const primaryBtn = rootTabsBar.querySelector(`button[onclick*="'${primaryTabId}'"]`);
+                if (primaryBtn) primaryBtn.classList.add('active');
+            }
+            // Tab content principal.
+            document.querySelectorAll('.container > .tab-content').forEach(c => c.classList.remove('active'));
+            const primaryContent = document.getElementById(primaryTabId);
+            if (primaryContent) primaryContent.classList.add('active');
+            // Carga lazy de Jungla 360 si aplica.
+            if (primaryTabId === 'jungle-research' && !jrInitialized) {
+                jrLoadAll();
+            }
+            // Sub-tab si se pidió.
+            if (subtabId && primaryContent) {
+                primaryContent.querySelectorAll('.tabs .tab').forEach(t => t.classList.remove('active'));
+                const subBtn = primaryContent.querySelector(`.tabs button[onclick*="'${subtabId}'"]`);
+                if (subBtn) subBtn.classList.add('active');
+                primaryContent.querySelectorAll('.jr-subtab').forEach(s => {
+                    s.classList.remove('active');
+                    s.style.display = 'none';
+                });
+                const subView = document.getElementById(subtabId);
+                if (subView) {
+                    subView.classList.add('active');
+                    subView.style.display = 'block';
+                }
+            }
+        }
+
+        // Hook: hash #<tab>[/<subtab>] activa tabs anidados al cargar.
+        // Útil para smoke visual: /dashboard-enhanced#jungle-research/jr-sources
+        document.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (!hash) return;
+            const [primary, secondary] = hash.split('/');
+            // Pequeño delay para dejar que initializeDashboard() arranque.
+            setTimeout(() => jrActivateView(primary, secondary), 100);
         });
     </script>
 </body>

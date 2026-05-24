@@ -1,0 +1,424 @@
+{
+  "publisher": "riot",
+  "game": "lol",
+  "channel": "site",
+  "source_locale": "es-es",
+  "patch_version": "25.16",
+  "title": "Notas de la versión 25.16",
+  "canonical_url": "https://www.leagueoflegends.com/es-es/news/game-updates/patch-25-16-notes",
+  "published_at": "2025-08-12T00:00:00Z",
+  "fetched_at": "2026-05-15T07:30:56.326583Z",
+  "content_hash": "33cdecd79b1ee3486fd404b3092bbeb9c58fbc7c6d550a4a3299de179dd85e80",
+  "summary": "¡La versión 25.16 se prepara para el despegue! Con los cambios de esta versión, queremos poner un poco patas arriba el metajuego, abriendo la puerta a nuevos junglas, dando amor a los magos de apoyo más débiles, debilitando a los campeones más destacados y dando pie a configuraci…",
+  "sections": [
+    {
+      "title": "Introducción",
+      "heading_level": 2,
+      "blocks": [
+        "¡La versión 25.16 se prepara para el despegue! Con los cambios de esta versión, queremos poner un poco patas arriba el metajuego, abriendo la puerta a nuevos junglas, dando amor a los magos de apoyo más débiles, debilitando a los campeones más destacados y dando pie a configuraciones de objetos alternativas. También vamos a repasar los últimos cambios que les hicimos a Rek'Sai e Illaoi para darles el poder que se merecen. Por otro lado, aprovecharemos para corregir viejos errores de Singed y Rumble que hacían que tuviesen menos poder al jugar en el equipo rojo. Esta es la última versión del split clasificatorio de la temporada 2, así que si queréis haceros con Fiora victoriosa, ¡más vale que ganéis las partidas necesarias! En otro orden de cosas, tenemos un Clash de ARAM en esta versión, ¡así que id calentando con vuestro equipo! También tenemos dos aspectos variados que llegarán volando (¡o rodando!) a la Grieta del Invocador. ¡Dad la bienvenida a Corki de juguete y Lillia liga de bolos! ¡Nos vemos en la Grieta! ¿Buscáis más información sobre League of Legends? Echad un vistazo a la wiki de nuestra comunidad aquí . ¿No son estas las notas de versión que buscabais? ¡ Aquí tenéis las notas de la versión de TFT! Lilu \"Riot Riru\" Cabreros Los platos fuertes de la versión"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Los platos fuertes de la versión",
+      "heading_level": 2,
+      "blocks": [
+        "Corki de juguete y Lillia liga de bolos estarán disponibles el 13 de agosto de 2025 a las 21:00 (hora peninsular). Cambios al pase de batalla"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Cambios al pase de batalla",
+      "heading_level": 2,
+      "blocks": [
+        "A partir de la temporada 3, introduciremos nuevos cambios al pase de batalla. Además de alguna que otra actualización visual, hemos reducido el número de metas principales de 50 a 48, por lo que tardaréis algo menos en completarlas. Las recompensas del pase y la EXP necesaria para cada meta siguen siendo las mismas, pero más condensadas. Esperamos que tengáis ganas de descubrir las actualizaciones en la nueva temporada. Fin de la Temporada clasificatoria 2 de la Grieta del Invocador"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Fin de la Temporada clasificatoria 2 de la Grieta del Invocador",
+      "heading_level": 2,
+      "blocks": [
+        "La segunda Temporada clasificatoria de la Grieta del Invocador llegará a su fin el último día de la versión 25.16, más concretamente a las 23:59:59 (hora local del servidor) el 26 de agosto. La Temporada 3 comenzará el 27 de agosto a las 12:00:00 (hora local del servidor), que será el primer día de la versión 25.17. Las recompensas de clasificatoria de la Temporada 2 se otorgarán poco después del comienzo de la Temporada 3. De forma similar a lo que ocurrió al inicio de la Temporada 2, no se reiniciará el rango de PL ni el progreso en el nivel, solo la misión de recompensa de clasificatoria (ganar 15 partidas clasificatorias). Campeones"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Campeones",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el daño contra monstruos de la pasiva. Aumenta la duración del aturdimiento de la Q. Se reduce el enfriamiento de la R. La última debilitación a Brand extinguió gran parte de sus llamas, así que queremos devolverle un poco de fuerza. Además, ahora que hay margen de mejora para Brand, queremos aprovechar para implementar una mejora más orientada a la escena profesional, relacionada con la duración del aturdimiento de Abrasar. También le otorgaremos más poder para que vuelva a ser una opción en la jungla. Pasiva - Nube de fuego Daño contra monstruos por pulso : 240 % ⇒ 260 % . Q - Abrasar Duración de los aturdimientos de En llamas : 1,5 ⇒ 1,75 s . R - Detonación ígnea Enfriamiento : 110/100/90 ⇒ 100/90/80 s ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el enfriamiento de la Q. Gnar se ha vuelto una bolita de pelo triste y refunfuñona en la calle superior, y ni siquiera en la escena profesional han querido darle su sitio. Para ayudar a nuestro yordle prehistórico favorito, vamos a darle un poco de amor a la habilidad con mayor satisfacción y capacidad de contraataque para que pueda lanzar madera y rocas a principio de partida. Además, como solo tiene dos habilidades en su forma de bebé, creemos que poder usarlas con mayor frecuencia le sacará una sonrisa... ¡Y a ver quién se resiste a esa carita cuando sonríe! Q - Bumerán / Peñascazo Enfriamiento : 20/17,5/15/12,5/10 ⇒ 16/14,5/13/11,5/10 s ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el daño de la pasiva y se reduce el enfriamiento. Los cambios a Illaoi de la última versión la debilitaron más de la cuenta, así que vamos a ponerle remedio con la mejora que se merece. Queremos que pueda generar tentáculos en nuevos lugares con mayor rapidez, algo muy pedido por sus fans. Además, vamos a aumentar su daño más porque ahora asesta menos golpes tras los cambios de la última versión. Pasiva - Profeta de un dios antiguo Relación de DA total : 105 % ⇒ 110 % . Enfriamiento de generación : 20 - 7,25 s (según el nivel) ⇒ 18 - 7 s (según el nivel) ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el crecimiento de armadura. Jarvan IV se ha vuelto imparable debido a su capacidad para iniciar combates y sus capacidades como tanque. En esta versión, queremos equilibrar el campo de juego en la jungla, así que vamos a reducir su armadura durante la partida para que haya periodos donde sea más vulnerable y sus oponentes puedan plantarle cara. Estadísticas básicas Crecimiento de armadura : 5,2 ⇒ 4,6 ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el crecimiento de DA. Aumenta la progresión de daño de PH de la E. Kalista por fin se ha zafado de los profesionales, por lo que tenemos margen para mejorarla como campeona para el resto de mortales. Eso sí, nada de modificarla en los tres primeros niveles, pues su excesivo dominio en la fase de calles es lo que nos provocó tantos problemas. En su lugar, vamos a reforzar el final de la fase de calles, el poder que obtiene al conseguir un segundo objetivo y demás. Esperamos que así sea una opción viable en la cola en solitario, pero sin que sea implacable con los rivales. Aunque es posible que os parezca que mejorar el PH es un tanto extraño, supone 9-13,5 de daño adicional por cada acumulación de Desgarrar gracias a los 30 de PH de Hoja de furia. Además, las últimas mejoras a Hoja del rey arruinado también le han venido de perlas, así que si ha pasado un tiempo desde la última vez que le disteis una oportunidad, ¡os recomendamos que volváis a hacerlo! Estadísticas básicas Crecimiento de daño de ataque : 4 ⇒ 4,25 . E - Desgarrar Relación de PH del daño inicial : 20 % ⇒ 65 % . Relación de PH del daño consecutivo : 20 % ⇒ 50 % ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el enfriamiento de la E y se reducen el daño y el poder de escudos. Lulu se resiste con uñas y dientes a las debilitaciones, y sigue siendo una campeona de apoyo de diez. Con estas debilitaciones, nos gustaría que fuese algo más débil al principio de la fase de calles, dando la oportunidad a los jugadores más agresivos de sacar cierta ventaja antes de que el carry de Lulu vaya ganando fuerza. E - ¡Ayuda, Pix! Enfriamiento : 8 s ⇒ 10/9,5/9/8,5/8 s . Daño básico : 80/120/160/200/240 ⇒ 70/110/150/190/230 . Escudo : 80/120/160/200/240 (+55 % del PH) ⇒ 70/110/150/190/230 (+50 % del PH) ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "La Q ahora otorga acumulaciones de Verdugo de krakens y Ultimátum. Cuando lanzamos Verdugo de krakens, no queríamos que Golpe fulgurante otorgase acumulaciones al objeto. Sin embargo, como ya no es un objeto mítico, creemos que no tenemos que preocuparnos por ese daño explosivo, así que vamos a dar rienda suelta a la sinergia con este objeto y con El final. Q - Golpe fulgurante Sinergia al golpear : Golpe fulgurante ahora otorga acumulaciones de Verdugo de krakens y El final."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se ha añadido una relación de DA a la Q. Para que Mordekaiser pueda decantarse por otros objetos, vamos a aumentar su relación de daño de ataque adicional, así abriremos la puerta a configuraciones que apuesten por el daño cuerpo a cuerpo. Esto supone una mejora directa a cada uso de su habilidad definitiva, pero nuestra intención es recuperar las configuraciones de DA y objetos que otorguen otras estadísticas, como Calibrador de Sterak. En resumen, el daño de ataque adicional hará que su maza golpee con más fuerza. Q - Aniquilación Relación de DA : 0 % del DA adicional ⇒ 120 % del DA adicional ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se ha ajustado el daño de la W. Morgana ahora mismo da bastante pena y no le vendría nada mal algo más de poder en cualquiera de sus tres roles. Buscamos que su principal habilidad para infligir daño tenga una mayor relevancia, y, para ello, debe pasar factura a los objetivos con más vida. Este cambio es un tanto arriesgado y es posible que no tenga el impacto que buscamos, pero ¡no os preocupéis! Si Morgana no se vuelve más fuerte tras estos cambios, volveremos a la carga con más mejoras. W - Sombra atormentada Daño mínimo : 60/115/170/225/280 (+85 % del PH) ⇒ 70/140/210/280/350 (+100 % del PH) . Daño máximo : 162/310,5/459/607,5/756 (+ 229,5 % del PH) ⇒ 140/280/420/560/700 (+ 200% del PH) ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el daño de la E contra monstruos. Vamos a dar un empujón a la versión de jungla de Nautilus, ya que nos gustaría que volviese a campar en la jungla como antiguamente. Apostamos por modificar el daño a monstruos, ya que dependerá menos de optimizar los golpes múltiples de Aguas revueltas. De esta forma, también será mucho más fácil de jugar en manos inexpertas, ya que no requiere de tanta exactitud. Sin embargo, quienes lleven tiempo dándole amor al campeón verán recompensado su esfuerzo al calcular los golpes. E - Aguas revueltas Modificador de daño a monstruos : 150 % ⇒ El primer impacto de la E inflige 125/165/205/245/285 (+50 % del PH) de daño adicional a monstruos."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el crecimiento de armadura. Se reduce el DA adicional de la Q. Ahora mismo, Nocturne tiene el mayor porcentaje de victorias de toda la jungla, así que hay que ponerle los pies en la tierra (aunque no tenga). Teniendo en cuenta la mejora a Experimento de hexarmadura, la debilitación será un poco más potente de lo normal, ya que vamos a reducir una combinación de daño y durabilidad. Estadísticas básicas Crecimiento de armadura : 4,7 ⇒ 4,2 . Q - Portador del anochecer DA adicional : 20/30/40/50/60 ⇒ 15/25/35/45/55 ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el daño de la Q. Aumenta la velocidad de ataque adicional de la W. Qiyana ya es lo suficientemente fuerte en las manos adecuadas, pero no está en el grupo de las popus, ya que carece de un buen índice de bloqueo a la altura de una reina como ella. Para echarle una mano, vamos a aumentar el daño al principio de la partida de su Q. Además, también potenciaremos la velocidad de ataque de su W para que pueda despejar la jungla a principio de partida y combinar habilidades con autoataques más fácilmente. Q - Filo de Ixtal / Ira elemental Daño básico : 60/90/120/150/180 ⇒ 70/100/130/160/190 . W - Terraformar Velocidad de ataque adicional : 5/10/15/20/25 % ⇒ 15/20/25/30/35 % ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el DA básico. Corrección de errores. Tras los cambios a Rek'Sai de la última versión, la hemos hundido más de la cuenta en las profundidades, así que vamos a compensarlo con mejoras a su capacidad de despeje al inicio de la partida, ya que ahora mismo es bastante deficiente. También vamos a corregir un par de errores. El primero, no le permitía acercarse tanto como quería a la ubicación objetivo, mientras que el segundo provocaba que pudiese fallar ataques con la Q. Estadísticas básicas Daño de ataque básico : 58 ⇒ 62 . Corrección de errores Q - Ira de la reina : Si ataca al final de la mejora, ahora inflige daño. E - Túnel : Ya no se desplaza a una ubicación que no se corresponda con la salida del túnel."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el escudo de la W. Las debilitaciones a Rell de la última versión no han salido como queríamos, así que vamos a reducir un poco más el tiempo que puede permanecer en combate. W - Ferromancia: Caída Escudo : 20/40/60/80/100 (+13 % de la vida máxima) ⇒ 20/40/60/80/100 (+11 % de la vida máxima) ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el daño de la Q. Mejoras de la Q y la R; se han corregido errores que influían en el poder. En esta versión, queremos poner remedio a una serie de problemas que ha sufrido Rumble, ya que provocaban que infligiese menos daño a los campeones al formar parte del equipo rojo. Además, vamos a modificar el funcionamiento de Escupellamas para que funcione de manera similar a un efecto de daño verdadero prolongado. Cada golpe prenderá fuego a su objetivo, quien recibirá dos pulsos adicionales de daño, lo que supone una mejora al efecto final de la habilidad. También vamos a modificar Equilibrador para que todas las zonas inflijan daño mientras el efecto visual siga en el mapa. De esta forma, el comienzo de su definitiva será más reactivo, y el final supondrá un peligro durante más tiempo. Como estos cambios suponen mejoras importantes a las partidas, vamos a debilitar el daño de Escupellamas de forma preventiva. Creemos que estos cambios supondrán una mejora en comparación a su estado anterior, y esperamos que cohesione la experiencia de juego del campeón. Q - Escupellamas Daño durante 3 s : 60/90/120/150/180 (+110 % del PH) (+6/6,8/7,6/8,4/9,2 % de la vida máx. del objetivo) ⇒ 60/90/120/150/180 (+100 % del PH) (+ 6/6,5/7/7,5/8 % de la vida máx. del objetivo) . Duración máxima de la quemadura : 3 s ⇒ 3,5 s . Ahora aplica correctamente la duración de la debilitación. El equipo rojo ya no inflige daño retardado o menos daño a los campeones. La debilitación ya no comprueba si el objetivo es inalcanzable antes de infligir daño. La debilitación ya no comprueba si el objetivo se encuentra a 700 unidades de Rumble antes de infligir daño. R - Equilibrador Tasa de pulsos: 0,5 s ⇒ 0,25 s. Ahora dura el tiempo que se indica durante toda la zona que inflige daño. Ahora inflige daño más rápido si se lanza al principio. El equipo rojo ya no inflige daño retardado o menos daño a los campeones."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el daño de la pasiva. Se reduce el daño de la Q y aumenta el enfriamiento. El índice de bloqueo de Shaco no ha hecho más que crecer, por lo que vamos a retocar algunos elementos para evitar que resulte tan frustrante enfrentarse a él, como la repetida invisibilidad de su Q. Actualmente, su configuración centrada en el PH es mejor que la alternativa de DA, pero esta segunda sigue siendo su configuración principal. Por tanto, vamos a ajustar ambas opciones. Pasiva - Puñalada por la espalda Relación de DA adicional 30 % ⇒ 25 % . Q - Engañar Relación de DA adicional 65 % ⇒ 60 % . Enfriamiento : 12/11,5/11/10,5/10 s ⇒ 13/12,5/12/11,5/11 s ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta la frecuencia de restablecimiento de la Q. Se ha corregido un error que influía en el poder del campeón. Al igual que pasaba con Rumble, hemos corregido un error que provocaba que Singed infligiese daño retardado o menos daño en el equipo rojo. De paso, hemos aumentado la frecuencia de restablecimiento de su debilitación, por lo que infligirá más daño de media, puesto que será más probable que Singed provoque el restablecimiento del veneno que aplica a sus rivales. Q - Rastro de veneno En el lado rojo, Singed ya no inflige daño retardado o menos daño a los campeones. Frecuencia de restablecimiento del veneno : 0,5 s ⇒ 0,25 s ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce la pérdida de vida de la pasiva. Aumenta el desgarro de armadura de la E. Aumenta el daño de la R. El Sion de DA las ha estado pasando canutas últimamente, así que vamos a echarle un cable. Empezaremos por devolver la tasa de pulsos de la pasiva de Sion a su estado previo a debilitarla, lo que le permitirá moler a palos a sus rivales más tiempo e infligir más daño cuando acierte a alguien con su E. Además, queremos que el impacto del tren sea apoteósico, por lo que aumentaremos la relación de DA adicional de su R para que sea más explosiva. Aunque estos cambios resultarán positivos a nivel general, nos hemos centrado en aquellos elementos que hacen más feliz al Sion centrado en el DA. Pasiva - Gloria en la muerte Vida perdida por pulso : 2,3 - 24,4 (según el nivel) ⇒ 2 - 19 (según el nivel) . E - Rugido del asesino Reducción de armadura : 20 % ⇒ 25 % . R - Embestida imparable Relación de DA adicional (según la distancia recorrida) : 40 - 80 % ⇒ 60 - 120 % ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "La pasiva ahora inflige daño adicional a los monstruos. Sylas es un jungla bastante popular, pese a ser incapaz de desempeñar bien su papel en dicho rol. Con tal de ayudar a quienes quieren utilizarlo en ese rol, vamos a pulir su capacidad para despejar la jungla permitiéndole dar latigazos con sus cadenas y asesinar a los campamentos. Pasiva - Arranque de petricita Modificador de daño a monstruos : 100 % ⇒ 150 % ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce la velocidad de ataque de la W al final de la partida y aumenta el enfriamiento. Trundle está destrozando a absolutamente todos los otros junglas en todos los niveles de destreza. Además, es muy popular en la escena profesional. Por ello, necesitamos reducir su poder en combate. Aumentaremos el enfriamiento de Reino helado para dejar claro cuándo deberíais enfrentaros a él, y reduciremos ligeramente la velocidad de ataque que obtiene por nivel. W - Reino helado Velocidad de ataque adicional : 30/50/70/90/110 % ⇒ 30/45/60/75/90 % . Enfriamiento : 16/15/14/13/12 s ⇒ 18/17/16/15/14 s ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el daño de la Q. Aumenta el daño de la W hacia el final de la partida. Se reduce el daño de la E. Corrección de error. En esta versión, ajustaremos a Varus para que sea más poderoso en manos del jugador medio, al mismo tiempo que lo debilitamos en la escena profesional. Para conseguirlo, hemos reducido su letalidad, pues es su principal configuración entre los profesionales, y potenciaremos sus configuraciones de impacto como compensación. Q - Flecha penetrante Daño básico : 90/160/230/300/370 ⇒ 80/150/220/290/360 . W - Carcaj infectado Daño mágico adicional al golpear : 6/12/18/24/30 ⇒ 6/14/22/30/38 . E - Lluvia de flechas Daño : 60/100/140/180/220 (+100 % del DA adicional) ⇒ 60/90/120/150/180 (+90 % del DA adicional) . Corrección de error De nuevo, los objetivos recibirán daño por cada acumulación de Infección que tengan cuando la R de Varus se propague hasta ellos desde el objetivo principal."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el crecimiento de velocidad de ataque. Se debilita la Q contra monstruos y se potencia contra unidades que no sean monstruos. Viego ha vuelto a alzarse como la espuma hasta lo alto de la cadena trófica de la jungla gracias, en parte, a las recientes mejoras de Verdugo de krakens. En lugar de debilitarlo directamente, vamos a traspasar parte de su poder en la jungla a las calles en solitario, pues multitud de jugadores lo usaban ahí cuando lo lanzamos. La forma de conseguirlo consiste en hacer que su Q sea más útil contra campeones y súbditos, al mismo tiempo que la hacemos menos útil contra los monstruos de la jungla. Estadísticas básicas Crecimiento de la velocidad de ataque : 2,5 % ⇒ 2,25 % . Q - Hoja del Rey Arruinado Daño : 15/30/45/60/75 ⇒ 25/40/55/70/85 . Multiplicador de impacto crítico : 100 % ⇒ 75 % . Daño adicional a monstruos : 15 ⇒ 0 . Curación por súbdito marcado : 50 % ⇒ 100 % . Curación por monstruo marcado : 145 % ⇒ 125 % . Curación por campeón marcado : 135 % ⇒ 150 % ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Aumenta el DA básico. Se reduce el daño de la pasiva al principio de la partida. Lo sencillo que resulta aprender a usar a Warwick y jugar con él se refleja en su tasa de victorias moderadamente alta, algo típico de los junglas más accesibles. Sin embargo, es demasiado poderoso en la calle superior, y eso trae consigo experiencias muy frustrante en las que hay que matarlo lanzándose con todo o, de lo contrario, retrocederá para ir regenerándose fuera del alcance del rival. Vamos a traspasar parte del poder de su pasiva hacia el principio a su daño de ataque básico, con tal de debilitar su capacidad para curarse sin gastar recursos hacia el principio sin tocar su daño ni la curación de la Q, llegando a mejorarlos en algunos casos. La idea es que estos cambios resulten neutrales para el Warwick jungla, pero negativos en la calle superior. Estadísticas básicas Daño de ataque básico : 60 ⇒ 65 . Pasiva - Sed insaciable Daño de impacto adicional : 12 - 46 (según el nivel) ⇒ 6 - 46 (según el nivel) ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce la vida básica. Se reduce el daño de la Q. Actualmente, Xin Zhao es uno de los mejores junglas del título, si no el mejor. Por ello, vamos a reducir el daño que inflige a campeones y monstruos, así como su durabilidad, que es mayor de lo imaginable. Estadísticas básicas Vida básica : 640 ⇒ 620 . Q - Golpe de tres garras Daño adicional fijo por golpe : 20/35/50/65/80 ⇒ 15/30/45/60/75 ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el daño de la Q. Se reducen el poder de curaciones y escudos y la curación por impacto de la W. Yuumi ha resistido de maravilla sus recientes debilitaciones, así que venimos a dar carpetazo a esta minina. Y, con dar carpetazo, queremos decir que vamos a debilitarla hasta alcanzar un nivel de poder apropiado haciendo que siembre menos el caos hacia el final de la partida. Q - Misil acechador Daño básico potenciado : 80/140/200/260/320/380 ⇒ 80/135/190/245/300/355 . W - ¡Yupi! Poder de curaciones y escudos : 5/7,5/10/12,5/15 % ⇒ 4/5 /6/7/8 % . Curación al golpear : 3/5/7/9/11 (+4 % del PH) ⇒ 3/4/5/6/7 (+3 % del PH) ."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Se reduce el enfriamiento de la E. Aumenta el daño de la R. Zyra se está marchitando un poquito, y ha caído por debajo de un nivel de poder saludable. A fin de echarle una vid, vamos a regarla con mejoras para reforzar las raíces de Tuercespinas para asegurarnos de que siga destacando tanto como antes en los combates de equipo. La mejora de la R enfocada al final de la partida está más centrada en la Zyra de la calle central, pero sabemos que nos queda mucho trabajo por delante antes de que se sienta lo suficientemente cómoda como para echar raíces en esa calle. E - Raíces atenazadoras Enfriamiento 12 s ⇒ 11 s. R - Tuercespinas Daño básico : 180/265/350 ⇒ 200/300/400 . Objetos"
+          ],
+          "subsections": []
+        }
+      ]
+    },
+    {
+      "title": "Objetos",
+      "heading_level": 2,
+      "blocks": [
+        "Experimento de hexarmadura Experimento de hexarmadura es un objeto muy de nicho y muy vinculado a campeones concretos (¡holi, Nocturne!). Queremos abrirlo a más usuarios, por lo que vamos a mejorar mucho su potenciación. Velocidad de ataque de Sobrecarga : 30 % ⇒ 50 % . Velocidad de movimiento de Sobrecarga : 15 % ⇒ 20 % . Barón Nashor"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Barón Nashor",
+      "heading_level": 2,
+      "blocks": [
+        "Cuando eliminamos la regeneración de vida del Barón en la versión anterior, se nos pasó la regeneración adicional por cada minuto de la partida que había recibido. Hemos localizado esa escurridiza cifra y nos la hemos cargado, por lo que la vida del Barón ya no se regenerará a mitad del combate. Como la última vez, se lo compensaremos con vida para que las batallas contra el Barón sean, de media, igual de largas. Vida básica : 11 500 ⇒ 11 800 . Vida por minuto 180 ⇒ 190 . Regeneración de vida por segundo obtenida por minuto : 0,375 ⇒ 0 . Arena"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Arena",
+      "heading_level": 2,
+      "blocks": [
+        "En esta versión, queremos dar el amor que tanta falta les hace a los luchadores, principalmente a través de los objetos. Para ello, vamos a reducir la velocidad de movimiento excesiva, así como actualizar el infame Guantazo místico. También vamos a introducir algunas de las mejoras que tanto nos habéis pedido. Fase de compra Sabemos que muchos sentís que no tenéis tiempo suficiente para dar una paliza a nuestro objetivo de práctica, ¡y para eso estamos aquí! A partir de esta versión, el objetivo de práctica aparecerá en la fase de compra. Además, podréis seguir dándole una buena tunda mientras compráis y deshacéis las compras en la tienda. Los objetivos de práctica ahora aparecerán transcurridos 5 s de la fase de compra, independientemente de si el equipo ha terminado de comprar o no. Ahora podéis deshacer la compra de la tienda en cualquier momento durante la fase de compra. Sin embargo, en cuanto comience el combate, tendréis que vender vuestros objetos como siempre si queréis decantaros por otro. Marcar como objetivo a otros campeones durante la fase de compra actualizará la tabla de puntuaciones para que podáis echarle un ojo a su equipo. Al investigar a los equipos rivales haciendo uso de los paneles de la derecha, veréis al primer jugador de dicho equipo. Salida temprana No siempre se puede ganar, a todos nos ha pasado (excepto a mí, obvio), y a veces queréis saltar rápido a la siguiente partida y olvidaros de todo lo demás, sin ver qué tal le va al resto. Ahora, cuando hayan eliminado a vuestro equipo, se os presentará la opción de no esperar a que terminen los demás combates. No obstante, las estadísticas de la partida serán imprecisas hasta que concluyan dichos combates y tendréis que esperar para recibir vuestra fama. También vamos a eliminar la pestaña Progreso de la pantalla de final de partida para que lleguéis a la tabla de puntuaciones al instante y ahorraros un clic si queréis volver a la cola. Cuando hayan terminado vuestros combates y vuestro equipo haya quedado eliminado, podréis marcharos del tirón. Campeones (Arena)"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Campeones (Arena)",
+      "heading_level": 2,
+      "blocks": [],
+      "subsections": [
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Braum está algo flojucho, por lo que vamos a darle un buen empujón para cuando su pasiva haya aturdido a un objetivo. Daño de la pasiva aumentado: 20 % ⇒ 25 %. Relación de la vida máxima de la Q aumentada: 2,5 % ⇒ 5 %."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Kled lleva un tiempo un tanto triste, pues Skaarl le tiene miedo a volver al combate. Por eso mismo, hemos ideado unos cambios con los que ayudarlos. Ahora obtiene 15 de coraje con las flores de poder. Enfriamiento para volver a montar con la P reducido: 30 s ⇒ 15 s. Armadura y resistencia mágica adicionales de la P aumentadas: 30 % ⇒ 40 % por cada campeón enemigo cercano. Tiempo que tarda la R en alcanzar su máxima potencia: 3 s ⇒ 1,5 s."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "En comparación con otros ADC, Ezreal parece un tanto tristón, por lo que vamos a aumentar su daño para que esté a la altura. Al mismo tiempo, vamos a debilitar algunos de los objetos prismáticos para ADC más espectaculares. Relación de DA de la Q aumentada: 140 % ⇒ 150 %. Relación de PH de la Q aumentada: 20 % ⇒ 30 %."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "La idea es deshacernos de parte del poder adicional del que disfruta Orianna en Arena. No se trata de un ajuste muy relevante, pero reducirá el daño oculto que es capaz de infligir. Relación de PH de la P al golpear revertida: 25 % ⇒ 15 %."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Rakan depende enormemente de su compañero, y queremos asegurarnos de que no lo decepcione. Esto servirá para que su relación esté en igualdad de condiciones (aunque no a la altura de la que tiene con Xayah). Reembolso del enfriamiento del escudo de la P con ataques básicos e impactos de habilidades: 1 s ⇒ 2 s. Relación de PH del daño de la Q: 70 % ⇒ 80 %. Relación de PH de la curación de la Q: 55 % ⇒ 60 %."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "La pasiva de Renata le permite equiparse con configuraciones de lo más interesantes, por lo que debería estar a la altura del resto del plantel de League of Legends. Sabemos que esto puede írsenos de las manos fácilmente, así que lo vigilaremos de cerca por si necesitamos lanzar algún cambio. Relación de PH de la P aumentada: 1 % por cada 100 de PH ⇒ 2 % por cada 100 de PH (igual que en la Grieta del Invocador)."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Jugar con Qiyana es algo complejo. Dicho esto, lo pasa mal cuando es incapaz de acabar de golpe con su objetivo. Vamos a ajustar las herramientas de las que dispone en los combates más largos, de modo que seguirá pudiendo eliminar a los objetivos débiles y defenderse al enfrentarse a objetivos más resistentes. Relación de DA de la W al impactar: 20 % adicional ⇒ 35 % adicional. Daño básico de la R: 100/200/300 ⇒ 150/300/450."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "A veces, puede parecer imposible enfrentarse a Ziggs, por lo que queremos evitar que resulte tan frustrante sin dejarlo fuera de juego. Enfriamiento de la Q aumentado: 4 ⇒ 6-4 (igual que en la Grieta del Invocador). Duración de la E reducida: 10 s ⇒ 7 s."
+          ],
+          "subsections": []
+        },
+        {
+          "title": "—",
+          "heading_level": 3,
+          "blocks": [
+            "Zilean empezó estando por los suelos, y ya veis dónde ha llegado. Cuando actualizamos su pasiva para Arena, no esperábamos que pasase de ser uno de los campeones más débiles a uno de los más poderosos. Cualquiera que haya jugado con o contra un Zilean decente puede afirmar una cosa: es un aliado estupendo. Queremos dar marcha atrás con su pasiva un poquitín y ver qué tal le va después. La pasiva otorgará 1 nivel cada 2 ⇒ 3 rondas. Aumentos y yunques"
+          ],
+          "subsections": []
+        }
+      ]
+    },
+    {
+      "title": "Aumentos y yunques",
+      "heading_level": 2,
+      "blocks": [
+        "Guantazo místico Guantazo místico es una de las opciones más populares y nos encanta cómo empasta con la mayoría de los campeones. Sin embargo, al convertirse en un \"combo de un aumento\" y dar la victoria automática a varios campeones, nos toca entrar en acción e implementar los ajustes necesarios. Esto os permitirá disfrutar de divertidas sinergias con los efectos de impacto y hará frente a los casos más abusivos, al combinarlo con efectos de control de adversario con poco enfriamiento. Cambio: Restaura 1,25 s del enfriamiento de todas las habilidades al golpear ⇒ Restaura un 15 % del enfriamiento restante de todas las habilidades al golpear. Contundencia Cuando mejoramos EscaPHaDA, dejamos Contundencia en la estacada. Vamos a echarle un cable. Amplificación de DA: 15 ⇒ 20 %. Misión: Tres tesoros sagrados Yunara es un pelín demasiado poderosa cuando completa esta misión. Completarla debería resultar satisfactorio, pero igual nos hemos pasado. Vamos a reducir su poder y a asegurarnos de no ofrecer esta opción en las rondas finales. Relación de DA: 100 % ⇒ 75 %. Relación de PH: 75 % ⇒ 60 %. Ahora, solo se ofrece en las rodas de la 1 a la 5. Fragmento de estadísticas de velocidad de movimiento prismático Queremos echar el freno a los casos más extremos relacionados con la velocidad de movimiento, pues pueden hacer que Arena sea demasiado caótico. Alcanzar velocidades extremas seguirá siendo posible, pero no tan común si no conseguís los aumentos correctos. Velocidad de movimiento: 22,5 % ⇒ 18 %. Se reduce el tamaño un 10 %. Objetos"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Objetos",
+      "heading_level": 2,
+      "blocks": [
+        "Capa de piromante La mayor parte del poder de este objeto reside en Chispa, cuando debería tratarse de un efecto secundario. Daño por nivel de Chispa reducido: 200 - 450 ⇒ 100 - 350. Guantelete del agujero negro Guantelete del agujero negro parece el premio gordo para los tanques, pues les permite infligir demasiado daño sin problema alguno y resulta frustrante para los enemigos. Queremos reducir el daño que infligen los tanques, y esta parece una buena forma de hacerlo. Ralentización reducida: 35 % ⇒ 30 %. Relación de vida del daño por segundo reducida: 6,5 % ⇒ 5 %. Capa de fuego solar El daño que inflige Capa de fuego solar también puede irse de madre un poco cuando se tiene mucha vida. No queremos deshacernos de los tanques y este objeto debería ser una de sus principales fuentes de daño, solo queremos ponerle límites. Daño en área: 4 % de la vida total ⇒ 4 % de la vida adicional. Fulgor vano Vamos a dejar Fulgor vano a la altura de Capa de fuego solar, pues la distinción entre armadura y resistencia mágica es menos relevante y el efecto que se activa con los asesinatos no es lo más útil, por lo que creemos que ambas opciones deberían ser más similares. 3 % de la vida total ⇒ 4 % de la vida adicional (igual que Capa de fuego solar). Mejoras a los objetos de luchador Arena dispone de varios multiplicadores, que permiten que vuestro daño y durabilidad alcancen cotas inimaginables. Los luchadores suelen pasarlas canutas porque necesitan varias cosas distintas, por lo que creemos que sus objetos son el elemento que les permite reunir todo lo que necesitan. Calibrador de Sterak - Poder del escudo: 60 % ⇒ 70 % del DA adicional. Sangría del soberano - DA adicional según la vida perdida: 15 % ⇒ 17,5 %. Eclipse: 6 % de la vida máxima como daño físico ⇒ 8 % de la vida máxima como daño físico. Eclipse - Escudo: 40 % del DA para campeones cuerpo a cuerpo ⇒ 50 % del DA para campeones cuerpo a cuerpo. Baile de la muerte - Reducción de daño: 30 %/10 % ⇒ 35 %/10 %. Experimento de hexarmadura - Velocidad de ataque: 20 % ⇒ 30 %. Chupasangre: +10 % de omnisucción. El precio de la siega Este objeto es ideal para aquellos campeones que quieren mucha velocidad de ataque, pero creemos que se pasa de la raya un poco. Al reducir su multiplicador de la velocidad de movimiento y de ataque, esperamos llevarlo al nivel de otros objetos prismáticos sin que pierda su identidad. Velocidad de ataque adicional reducida: 25 % ⇒ 15 %. Velocidad de movimiento reducida: 10 % ⇒ 5 %. Reducción de la velocidad de movimiento Como ya hemos mencionado, queremos reducir la velocidad de movimiento innecesaria que otorgan los objetos prismáticos. Estos son esos cambios: Tallarrunas - Velocidad de movimiento reducida: 8 % ⇒ 4 %. Hoja espejismo - Velocidad de movimiento reducida: 12 % ⇒ 6 %. Viento huracanado - Velocidad de movimiento reducida: 12 % ⇒ 6 %. Decapitador - Velocidad de movimiento reducida: 12 % ⇒ 6 %. Garras de acero oscuro - Velocidad de movimiento reducida: 10 % ⇒ 5 %. Corrección de errores de Arena"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Corrección de errores de Arena",
+      "heading_level": 2,
+      "blocks": [
+        "Ahora, si vendéis uno de los objetos de Misión: Tres tesoros sagrados, perderéis el progreso de la misión. Ahora, Chupasangre cuenta con un tiempo de lanzamiento correcto. Ya no se pierde el vínculo de Promesa de caballero entre algunas rondas. La interacción entre Impugnar (W) de Mel y el aumento Erosión ya no reducirá a 0 las resistencias enemigas. Clash de ARAM"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Clash de ARAM",
+      "heading_level": 2,
+      "blocks": [
+        "¡La copa de ARAM se celebrará en esta versión! ¡Conseguid un equipo de cinco y preparaos para darlo todo! Inicio del registro: 11 de agosto a las 11:00 (hora local). Fechas del torneo: 16 y 17 de agosto de 16:00 a 19:00 (hora local) aproximadamente; varía según la región. Si tenéis preguntas o buscáis el calendario completo de los torneos de Clash en 2025, echad un vistazo a las preguntas frecuentes sobre Clash . Corrección de errores y mejoras de calidad"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Corrección de errores y mejoras de calidad",
+      "heading_level": 2,
+      "blocks": [
+        "Mejoras de calidad Mejora a la selección de campeón: Los intercambios de campeones dejarán de estar disponibles durante los últimos 5 segundos de la selección de campeón (antes de que comience la partida). La idea es evitar los cambios realizados por error y las decisiones tomadas con prisas. Ahora, la pasiva de Vladimir también restaura su vida si está en la fuente. Ahora, los iconos de las habilidades de Rumble incluyen el calor generado en la interfaz al habilitar la opción \"Mostrar costes de los hechizos\". Corrección de errores Hemos corregido un error que provocaba que Viego recibiese una notificación emergente cada vez que poseía a un campeón con una, como Kai'Sa o Graves centinela. Hemos corregido un error que provocaba que, a veces, Sexto sentido dejase de funcionar si el jugador moría mientras la runa salía del enfriamiento. Hemos corregido un error que provocaba que los efectos de audio de la retirada de Vladimir se escuchasen sin importar la posición de la cámara. Hemos corregido un error que provocaba que, a veces, la E de Wukong cancelase los ataques en curso del enemigo. Hemos corregido un error que provocaba que la Q de Yunara aplicase el efecto de Rylai al objetivo principal. Hemos corregido un error que provocaba que Mel recibiese la mejora de un dragón múltiples veces si lo mataba con una habilidad reflejada con su W. Hemos corregido un error que provocaba que la zona curativa de la definitiva de Fiora no se crease si mataba al enemigo con el daño de Brillo. Hemos corregido un error que provocaba que Viego conservase la armadura y resistencia mágica de la forma desmontada de Kled tras el fin de la posesión. Hemos corregido un error que provocaba que el escudo potenciado de la W de Seraphine volviese invencibles a Seraphine y sus aliados si la cantidad del escudo era dos veces superior al daño recibido. Hemos corregido un error que provocaba que el antiguo icono de la pasiva de Janna apareciese en la pantalla del registro de muertes. Hemos corregido un error que provocaba que los efectos visuales de la Q de Yunara se dividiesen al atacar a determinadas unidades. Hemos corregido un error que provocaba que las larvas del Vacío no contasen de cara a las hazañas si robaban la última larva. Hemos corregido un error que provocaba que Gwen rebotase dentro de la W de Yorick si movía su propia W para evitar el empujón. Hemos corregido un error que provocaba que el daño de las larvas del Vacío a las torretas impidiese a Viego volverse invisible dentro de su E. Hemos corregido un error que provocaba que la R de Sett pudiese parar la R de Sion. Próximos aspectos y chromas"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Próximos aspectos y chromas",
+      "heading_level": 2,
+      "blocks": [
+        "Lanzaremos los siguientes aspectos a lo largo de esta versión: Corki de juguete Lillia liga de bolos Fiora victoriosa Lanzaremos los siguientes chromas a lo largo de esta versión: Corki de juguete Lillia liga de bolos Fiora victoriosa Artículos relacionados"
+      ],
+      "subsections": []
+    },
+    {
+      "title": "Artículos relacionados",
+      "heading_level": 2,
+      "blocks": [
+        "Actualizaciones del juego 2025-05-13T18:00:00.000Z Notas de la versión 25.10 La versión 25.10 está escrita en las estrellas ✨ Actualizaciones del juego 2025-02-19T19:00:00.000Z Notas de la versión 25.04 ¡No os perdáis la última versión del acto 1! Actualizaciones del juego 2024-08-13T18:00:00.000Z Notas de la versión 14.16 ¡Celebrad la grandeza durante la versión 14.16! Actualizaciones del juego 2023-02-07T19:00:00.000Z Notas de la versión 13.3 Preparaos para una versión cósmica, ¡ya está aquí la 13.3! Actualizaciones del juego 2022-12-06T19:00:00.000Z Notas de la versión 12.23 ¡Ya está aquí la versión 12.23, la última del año! Actualizaciones del juego 2022-11-01T18:00:00.000Z Notas de la versión 12.21 ¡Ya está aquí la final del Campeonato Mundial de LoL! ¡Y K'Sante! ¡Y la pretemporada está a la vuelta de la esquina! Con tantas cosas a las que prestar atención, aquí tenemos la versión 12.21, porque lo bueno y breve... Actualizaciones del juego 2022-10-04T18:00:00.000Z Notas de la versión 12.19 ¿Mejoras a Blitzcrank luchador? ¿Mejoras a Rakan de PH? ¿Estamos soñando o ya es la versión 12.19? ¡Os damos la bienvenida a una versión llena de mejoras fuera del metajuego! Actualizaciones del juego 2022-09-07T18:00:00.000Z Notas de la versión 12.17 ¡La penúltima versión antes del mundial! Actualizaciones del juego 2022-06-07T18:00:00.000Z Notas de la versión 12.11 ¡Uníos a Bel'Veth y al mar lavanda en la versión 12.11! Actualizaciones del juego 2022-02-15T19:00:00.000Z Notas de la versión 12.4 El progreso tiene un precio. ¡Llegad a lo más alto con Renata Glasc en la versión 12.4!"
+      ],
+      "subsections": []
+    }
+  ],
+  "assets": [],
+  "scraper_version": "legacy-v33b",
+  "raw_html_ref": null
+}

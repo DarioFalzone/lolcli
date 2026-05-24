@@ -1,0 +1,19 @@
+{
+  "type": "champion",
+  "format": "standAloneComplex",
+  "version": "15.20.1",
+  "data": {
+    "Aatrox": {
+      "id": "Aatrox",
+      "key": "266",
+      "name": "Aatrox",
+      "tags": ["Fighter", "Tank"]
+    },
+    "MonkeyKing": {
+      "id": "MonkeyKing",
+      "key": "62",
+      "name": "Wukong",
+      "tags": ["Fighter", "Tank"]
+    }
+  }
+}
