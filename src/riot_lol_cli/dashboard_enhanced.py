@@ -650,8 +650,9 @@ ENHANCED_DASHBOARD_HTML = r"""
                         <span>Riot API: <strong id="jr-riot-key">--</strong></span>
                         <span>Gaps: <strong id="jr-gaps-count">--</strong></span>
                     </div>
-                    <div style="display:flex; gap:8px;">
+                    <div style="display:flex; gap:8px; flex-wrap:wrap;">
                         <button onclick="jrRefresh('soloq')" style="padding:8px 14px; background:var(--arc-gold); color:#010a13; border:none; border-radius:4px; cursor:pointer; font-weight:bold; font-size:12px;">↻ Refrescar SoloQ</button>
+                        <button onclick="jrRefresh('asia')" style="padding:8px 14px; background:transparent; color:var(--arc-gold); border:1px solid var(--arc-gold-dark); border-radius:4px; cursor:pointer; font-size:12px;">↻ Asia (V4)</button>
                         <button onclick="jrRefresh('riot_pros')" style="padding:8px 14px; background:transparent; color:var(--arc-gold); border:1px solid var(--arc-gold-dark); border-radius:4px; cursor:pointer; font-size:12px;">↻ Riot Pros</button>
                     </div>
                 </div>
@@ -683,6 +684,7 @@ ENHANCED_DASHBOARD_HTML = r"""
                                     <th>Score</th>
                                     <th>Confidence</th>
                                     <th>SoloQ</th>
+                                    <th>Asia (V4)</th>
                                     <th>Pro presence</th>
                                     <th>Sources</th>
                                     <th>Warnings</th>
@@ -690,7 +692,7 @@ ENHANCED_DASHBOARD_HTML = r"""
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr><td colspan="9" class="loading">⏳ Cargando consenso...</td></tr>
+                                <tr><td colspan="10" class="loading">⏳ Cargando consenso...</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -1227,19 +1229,29 @@ ENHANCED_DASHBOARD_HTML = r"""
                 const resp = await axios.get(`${JR_BASE}/current?limit=80`);
                 const entries = resp.data.data || [];
                 if (!entries.length) {
-                    tbody.innerHTML = '<tr><td colspan="9" class="no-data">Sin tier list aún. Hacé click en "Refrescar SoloQ".</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="10" class="no-data">Sin tier list aún. Hacé click en "Refrescar SoloQ".</td></tr>';
                     return;
                 }
                 tbody.innerHTML = entries.map(e => {
                     const tier = e.final_tier || 'D';
                     const warnings = (e.warning_flags || []).map(w => `<span style="background:rgba(255,153,0,0.15); color:var(--state-warning); padding:2px 6px; border-radius:3px; font-size:10px; margin-right:4px;">${jrEscape(w)}</span>`).join('');
+                    const asiaCell = e.asia_score
+                        ? `<span style="color:var(--info); font-weight:bold;">${jrFmtScore(e.asia_score)}</span>`
+                        : '<span style="color:#666;">—</span>';
+                    // PR-C: badge "ES" (esports bridge) cuando pro_presence > 0.
+                    // En V0 no diferenciamos fuente por entry; si > 0 asumimos esports
+                    // (porque Riot match-v5 requiere RIOT_API_KEY que rara vez está).
+                    const proCell = e.pro_soloq_score && e.pro_soloq_score > 0
+                        ? `${jrFmtScore(e.pro_soloq_score)} <span title="Fuente: esports_research comfort" style="display:inline-block; padding:1px 5px; margin-left:4px; border:1px solid var(--arc-cyan, #5bc0de); color:var(--arc-cyan, #5bc0de); border-radius:3px; font-size:9px; font-weight:bold;">ES</span>`
+                        : jrFmtScore(e.pro_soloq_score);
                     return `<tr>
                         <td><span style="display:inline-block; width:28px; height:28px; line-height:28px; text-align:center; border-radius:4px; background:${jrTierColor(tier)}; color:white; font-weight:bold;">${jrEscape(tier)}</span></td>
                         <td style="font-weight:bold; color:var(--arc-gold);">${jrEscape(e.champion_name)}</td>
                         <td>${jrFmtScore(e.final_score)}</td>
                         <td>${jrFmtScore(e.confidence)}</td>
                         <td>${jrFmtScore(e.soloq_score)}</td>
-                        <td>${jrFmtScore(e.pro_soloq_score)}</td>
+                        <td>${asiaCell}</td>
+                        <td>${proCell}</td>
                         <td>${e.source_count || 0}</td>
                         <td>${warnings || '—'}</td>
                         <td style="font-size:11px; color:#aaa;">${jrEscape(e.explanation || '')}</td>
@@ -1247,7 +1259,7 @@ ENHANCED_DASHBOARD_HTML = r"""
                 }).join('');
             } catch (e) {
                 console.error('jrLoadConsensus error', e);
-                tbody.innerHTML = '<tr><td colspan="9" class="text-danger">Error al cargar consenso</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="10" class="text-danger">Error al cargar consenso</td></tr>';
             }
         }
 

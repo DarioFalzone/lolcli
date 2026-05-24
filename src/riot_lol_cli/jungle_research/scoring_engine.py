@@ -155,6 +155,7 @@ def score_snapshots(
     region: str,
     elo: str,
     pro_presence: dict[str, float] | None = None,
+    asia_presence: dict[str, float] | None = None,
     previous_scores: dict[str, float] | None = None,
     now: datetime | None = None,
 ) -> list[FinalJungleTierEntry]:
@@ -165,11 +166,18 @@ def score_snapshots(
         snapshots: snapshots de la cohorte (mismo patch, region, elo, queue).
         patch/region/elo: contexto canónico.
         pro_presence: dict champion_name → score 0-1 (opcional, V1 puede ser {}).
-        previous_scores: dict champion_name → score previo (para trend).
+        asia_presence: dict champion_name → score 0-1 con presencia en alto
+            elo asiático (KR/CN/JP). Hook V4 — vacío hasta que se active
+            el pipeline `meta_asia`. Alimenta el peso `high_elo_presence`
+            del `final_score`.
+        previous_scores: NO-OP hoy. Reservado para implementación real de
+            `trend_score` desde backups (roadmap V10). Mantener firma para
+            no romper callers; los valores se ignoran.
         now: inyectable para tests.
     """
     pro_presence = pro_presence or {}
-    previous_scores = previous_scores or {}
+    asia_presence = asia_presence or {}
+    _ = previous_scores  # explícitamente sin usar — ver docstring
     now = now or datetime.now(timezone.utc)
 
     grouped = _group_by_champion(snapshots)
@@ -212,14 +220,18 @@ def score_snapshots(
             0.40 * wr_score + 0.30 * pr_score + 0.10 * br_score + 0.20 * ss_score
         )
 
-        # high_elo y pro placeholder.
-        high_elo_score = 0.0  # V1: pipeline asia no implementado
+        # high_elo (asia) y pro presence — desde dicts inyectados por pipelines.
+        # Si `asia_presence` viene vacio (V1 sin pipeline meta_asia), queda en 0.
+        high_elo_score = max(0.0, min(1.0, asia_presence.get(champ, 0.0)))
         pro_score = pro_presence.get(champ, 0.0)
 
-        # Trend.
-        prev = previous_scores.get(champ)
-        trend_score = 0.5 if prev is None else max(0.0, min(1.0, 0.5 + (prev - 0.5)))
-        # nota: el delta real se calcula tras conocer final_score; acá es neutro.
+        # Trend - neutro hasta tener implementación real basada en backups.
+        # NOTA: la fórmula previa `0.5 + (prev - 0.5)` no medía tendencia,
+        # solo replicaba el score previo. Además `previous_scores` nunca
+        # se conectó desde el orquestador. Mantener trend_score=0.5
+        # constante hasta implementar trend real (diff vs último backup
+        # con ventana mínima) — ver roadmap V10.
+        trend_score = 0.5
 
         final = (
             WEIGHTS_FINAL["win_rate"] * wr_score
@@ -266,7 +278,7 @@ def score_snapshots(
                 final_tier=JungleTier.D,  # asignado en la 2da pasada
                 final_score=final,
                 soloq_score=soloq_score,
-                asia_score=None,
+                asia_score=high_elo_score if high_elo_score else None,
                 pro_soloq_score=pro_score if pro_score else None,
                 pro_stage_score=None,
                 otp_score=None,

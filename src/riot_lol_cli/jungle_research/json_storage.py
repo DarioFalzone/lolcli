@@ -31,6 +31,7 @@ para snapshots.
 from __future__ import annotations
 
 import json
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -43,6 +44,7 @@ SOURCES_FILE = ROOT / "sources.json"
 PRO_PLAYERS_SEED_FILE = ROOT / "pro_players_seed.json"
 PRO_ACCOUNTS_FILE = ROOT / "pro_accounts.json"
 ADAPTER_RUNS_FILE = ROOT / "adapter_runs.json"
+ASIA_PRESENCE_FILE = ROOT / "asia_presence.json"
 
 CHAMPION_SNAPSHOTS_DIR = ROOT / "champion_meta_snapshots"
 CHAMPION_SNAPSHOTS_LATEST = CHAMPION_SNAPSHOTS_DIR / "latest.json"
@@ -61,13 +63,19 @@ DAILY_REPORTS_DIR = ROOT / "daily_reports"
 
 
 def _timestamp_slug() -> str:
-    """Slug ISO seguro para nombres de archivo: 2026-05-11T20-15-30."""
-    return (
-        datetime.now(timezone.utc)
-        .replace(microsecond=0, tzinfo=None)
-        .isoformat()
-        .replace(":", "-")
-    )
+    """
+    Slug ISO con microsegundos + sufijo aleatorio para nombres de archivo.
+
+    Formato: `2026-05-11T20-15-30-123456-ab12cd34`
+    - microsegundos: previene colisión cuando dos writes ocurren en el
+      mismo segundo (típico bajo cron/scheduler V9).
+    - sufijo hex 8-char: tie-breaker adicional si dos procesos golpean el
+      mismo microsegundo (improbable pero posible bajo virtualización).
+    """
+    now = datetime.now(timezone.utc).replace(tzinfo=None)
+    iso = now.isoformat(timespec="microseconds").replace(":", "-").replace(".", "-")
+    suffix = uuid.uuid4().hex[:8]
+    return f"{iso}-{suffix}"
 
 
 def ensure_directories() -> None:
@@ -209,6 +217,19 @@ def save_adapter_runs(payload: dict[str, Any]) -> Path:
     ensure_directories()
     _write_json_atomic(ADAPTER_RUNS_FILE, payload)
     return ADAPTER_RUNS_FILE
+
+
+def read_asia_presence() -> dict[str, Any]:
+    """Lee el último cache de asia_presence. Devuelve {} si no existe."""
+    data = read_json(ASIA_PRESENCE_FILE)
+    return data if isinstance(data, dict) else {}
+
+
+def save_asia_presence(payload: dict[str, Any]) -> Path:
+    """Persiste cache de asia_presence (mutable, sin rotación)."""
+    ensure_directories()
+    _write_json_atomic(ASIA_PRESENCE_FILE, payload)
+    return ASIA_PRESENCE_FILE
 
 
 def read_sources() -> list[dict[str, Any]]:

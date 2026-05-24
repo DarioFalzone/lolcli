@@ -6,61 +6,291 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
-<<<<<<< HEAD
-## [2026-05-24] Esports Research E.1 - ingest real con dry_run=false
+## [2026-05-24] PR-C: Integracion cruzada esports -> jungle.pro_presence
 
-Se habilito `POST /api/v1/esports/ingest?dry_run=false` para ejecutar ingesta real opt-in desde la API sin cambiar el default seguro.
+### Que se hizo
 
-- `dry_run=true` sigue siendo el default y conserva la respuesta `status="dry_run"`.
-- `dry_run=false` despacha a los ingests V0 disponibles para `leaguepedia`, `gol_gg` y `data_dragon`.
-- Fuentes sin contrato suficiente en este endpoint devuelven `status="gap"` con razon visible.
-- Errores de ingesta se degradan a `status="gap"` para smoke/UX, sin automatizar bypasses ni cambiar compliance.
+Cierre del gap reportado en el audit del scoring jungle:
+`pro_presence_score` estaba hardcoded a 0 cuando no había
+`RIOT_API_KEY` + cuentas resueltas. Ahora se alimenta desde
+`esports_research/gold/comfort_features_*.json` sin depender de Riot
+API.
 
-Tests nuevos cubren exito mockeado de `leaguepedia` y gap para fuente activa no cableada por el endpoint.
+**Bridge nuevo** (`pipelines/pro_stage_bridge.py`):
+
+- `load_pro_presence_from_esports(role="jungle")` lee el
+  `comfort_features_<fecha>.json` mas reciente del gold dir.
+- Agrega `max(comfort_score)` por `champion_id` entre jugadores.
+- Mapea `champion_id` (Data Dragon canonical, ej. `MonkeyKing`) a
+  `champion_name` (`Wukong`) usando `data/draft_advisor/champion_base.json`.
+- Si no hay mapping, usa `champion_id` directo + flag visible.
+- Normaliza a `[0, 1]` (max del pool = 1.0).
+- Retorna `ProStageBridgeResult` con `pro_presence` dict, `source_file`,
+  `extracted_at`, `champion_count`, `gaps`.
+
+**Orchestrator wire** (`STEP_PRO_STAGE`):
+
+- Nuevo step `pro_stage` agregado a `VALID_STEPS`.
+- Se ejecuta después de `STEP_EXTRA` y antes de `_score_and_persist`,
+  alimentando `pro_presence_from_bridge`.
+- `_score_and_persist` resuelve `pro_presence` por prioridad:
+  1. `plan.pro_presence_override` (override explícito).
+  2. `pro_presence_from_bridge` (esports bridge).
+  3. `{}` (scoring usa 0, comportamiento previo).
+- Tier list payload incluye nuevos campos `pro_presence_applied` y
+  `pro_presence_source` ("override" | "esports_bridge" | "none").
+
+**Endpoint** (`POST /api/v1/jungle-research/refresh`):
+
+- `mode=pro_stage` agregado al Literal legacy.
+- `mode=all` ahora incluye `STEP_PRO_STAGE` automáticamente.
+- `modes=list[str]` acepta `pro_stage` igual que los otros.
+
+**UI tab Consenso**: badge "ES" cyan al lado del `pro_soloq_score`
+cuando es > 0, para indicar visualmente que el dato viene de
+esports_research (no de Riot match-v5). Tooltip: "Fuente: esports_research comfort".
+
+### Decisiones clave
+
+- **Bridge read-only**: NO ejecuta el pipeline esports. Solo consume
+  artefactos ya generados (`gold/comfort_features_*.json`). Mantiene
+  separación: para regenerar comfort, correr esports orchestrator
+  aparte.
+- **Mapping `champion_id` → `champion_name` opcional**: si
+  `champion_base.json` no existe, el bridge usa el ID directo. Esto
+  permite testear sin dependencia + degrada bien si el roster canónico
+  no está disponible.
+- **`mode=pro_stage` por sí solo NO regenera tier list** (default
+  `regenerate_tierlist=False`). Comportamiento alineado con `asia` —
+  solo refresca el bridge data. Para regenerar usar
+  `?modes=soloq&modes=pro_stage` o `?modes=...&regenerate_tierlist=true`.
+- **Badge "ES" en UI**: simple discriminador visual. V0 asume que si
+  pro > 0 viene de esports (porque Riot API rara vez está disponible).
+  Cuando coexistan ambas fuentes (V1+), agregar metadata por entry.
+
+### Verificacion
+
+- `pytest tests/jungle_research/test_pro_stage_bridge.py -q` -> 9 passed
+  (8 unit + 1 E2E con monkey-patches del orchestrator completo).
+- `pytest tests/jungle_research -q` -> 145 passed.
+- `ruff check src tests scripts` -> All checks passed.
+- `pytest tests/test_no_mojibake.py -q` -> verde.
+- Smoke: `RefreshPlan(steps={"soloq", "pro_stage"})` con fixture
+  sintético → tier list final con `pro_presence_applied=2` y
+  `pro_presence_source="esports_bridge"`.
+
+### Archivos creados
+
+- `src/riot_lol_cli/jungle_research/pipelines/pro_stage_bridge.py`
+  (bridge esports → pro_presence, ~160 líneas).
+- `tests/jungle_research/test_pro_stage_bridge.py` (9 tests).
+
+### Archivos modificados
+
+- `src/riot_lol_cli/jungle_research/orchestrator.py` -> agrega
+  `STEP_PRO_STAGE` a `VALID_STEPS`, import del bridge, lógica de wire
+  después de STEP_EXTRA, prioridad de resolución de `pro_presence`,
+  payload `pro_presence_applied`/`pro_presence_source`.
+- `src/riot_lol_cli/meta_api/routes/jungle_research.py` -> import
+  `STEP_PRO_STAGE`, `pro_stage` en `_LEGACY_MODE_TO_STEPS` y en
+  `_LEGACY_MODE_LITERAL`. `mode=all` ahora incluye pro_stage.
+- `src/riot_lol_cli/dashboard_enhanced.py` -> badge "ES" cyan al lado
+  del pro_soloq_score cuando > 0 (UI tab Consenso, tabla principal).
+- `bitacora_de_cambios.md` -> esta entrada.
+
+### Pendiente
+
+- Cuando `RIOT_API_KEY` esté disponible + cuentas pro resueltas,
+  agregar lógica de prioridad: Riot match-v5 > esports bridge >
+  override. Hoy V0 trata todo > 0 como esports.
+- ComfortScore podría incorporar `role` como campo para que el bridge
+  filtre por rol. Hoy V0 NO filtra (asume que el dataset comfort viene
+  ya filtrado al rol que se está scoreando).
+- UI: cuando coexistan fuentes pro (Riot + esports), agregar metadata
+  por entry y discriminar badges (RIOT vs ES).
 
 ---
 
-## [2026-05-24] Esports Research B.1 - selectores reales Gol.gg draft
+## [2026-05-24] PR-B: V3.7 METAsrc real - primer extract activo
 
-Se reemplazo el parser generico de `gol_gg.parse_draft_html` por selectores validados contra HTML vivo de Gol.gg (`/game/stats/78125/page-game/`, 200 OK).
+### Que se hizo
 
-- Detecta columnas de equipo por `.blue-line-header` y `.red-line-header`.
-- Extrae filas rotuladas `Bans` y `Picks`.
-- Lee campeones desde `img.champion_icon_medium` y prioriza el ID canonico del filename (`JarvanIV.png`).
-- Completa `action_type` real (`BAN`/`PICK`) y `team_side` real (`BLUE`/`RED`).
-- Deriva fases V0 (`BAN_PHASE_1/2`, `PICK_PHASE_1/2`) segun posicion dentro de cada fila.
-- Conserva fallback legacy para fixtures simples y HTML antiguo.
+Primer adapter V3 activado con extract real. `metasrc.py` pasa de stub
+a parser HTML robusto con 3 estrategias en cascada:
 
-La validacion live se hizo con una unica lectura manual del HTML, sin captcha/login ni bypass de contenido. El entorno Windows requirio `curl -k` por problema local de certificado, no por bloqueo de Gol.gg.
+1. **embedded_json**: busca `<script>` con `__NEXT_DATA__` u objeto JSON
+   con `champions` + `win_rate`/`wr`.
+2. **table**: parsea `<table>` con thead/tbody. Construye `col_map`
+   semantico desde headers (Win Rate -> win_rate, Pick Rate -> pick_rate,
+   etc.) para tolerar reordenamientos de columnas.
+3. **data_attrs**: fallback para divs con `data-champion="..."` +
+   `data-wr`/`data-pr`/`data-br`/`data-tier`.
+
+Si ninguna estrategia matchea, retorna `status: gap` con razon clara
+(no rompe orquestador).
+
+Helpers nuevos:
+- `_id_from_name`: canonicaliza "Lee Sin" -> "LeeSin" (Data Dragon ID).
+- `_to_float`/`_to_int`: tolera "52.3%" y "45,231".
+- `_normalize_tier`: collapsa S+/S/S- -> S; soporta GOD/GREAT/GOOD/OK/BAD.
+
+Fixture sintetico `tests/jungle_research/fixtures/metasrc_jungle_sample.html`
+con tabla de 4 champions (Wukong S+, Lee Sin S, Kayn A+, Nocturne B)
+para test E2E sin red.
+
+### Decisiones clave
+
+- **Parser tolerante a cambios de markup**: 3 estrategias en cascada
+  + `col_map` semantico permite que METAsrc reordene columnas o cambie
+  estructura sin romper el adapter de inmediato.
+- **Bug fixed en `_build_col_map`**: la regla previa `"tier" in header
+  or "rank" in header` mapeaba "Rank" (numero de orden) como columna
+  tier. Ahora solo "tier" mapea a tier; "rank" se ignora explicitamente.
+- **`fetch_champion_detail` queda como `not_implemented`**: V3.7 solo
+  activo tier list. Detalle por champion requiere navegar
+  `/lol/{region}/champion/{name}` — fuera de scope.
+- **Tests previos actualizados**: `test_pipeline_meta_soloq_extra` +
+  `test_adapters_v3` + `test_routes` ahora distinguen entre stubs
+  (mobalytics/leagueofgraphs/tracker_gg) y adapter activo (metasrc).
+  Donde antes asumian "todos stubs", ahora mockean metasrc para
+  aislar tests de network.
+
+### Verificacion
+
+- `pytest tests/jungle_research/test_adapter_metasrc.py -q` -> 14 passed.
+- `pytest tests/jungle_research -q` -> 134 passed (incluye 14 nuevos +
+  4 tests fixed por el cambio de status de metasrc).
+- Smoke API:
+  - `POST /api/v1/jungle-research/refresh?mode=soloq_extra` -> 200.
+  - metasrc retorna `status: gap` con razon `http_fetch_failed: SSL
+    CERTIFICATE_VERIFY_FAILED` en este entorno Windows. En entorno con
+    SSL ok, deberia retornar `ok` (o gap con razon distinta si markup
+    real difiere del fixture).
+- Mobalytics/LoG/Tracker.gg siguen `not_implemented` (sin cambios).
+
+### Archivos creados
+
+- `tests/jungle_research/fixtures/metasrc_jungle_sample.html` (fixture
+  HTML sintetico, 4 champions).
+- `tests/jungle_research/test_adapter_metasrc.py` (14 tests: parse OK,
+  vacio, data-attrs, fetch con mock, helpers).
+
+### Archivos modificados
+
+- `src/riot_lol_cli/meta_scraper/adapters/metasrc.py` -> stub reemplazado
+  por parser real con 3 estrategias. Quitado `_NOT_IMPLEMENTED_NOTE` y
+  `_stub_response`.
+- `tests/jungle_research/test_pipeline_meta_soloq_extra.py` -> renombrado
+  `test_default_adapters_all_not_implemented` a
+  `test_default_adapters_have_4_ids`, mockea metasrc.
+- `tests/jungle_research/test_adapters_v3.py` -> separa `_STUB_ADAPTERS`
+  (3 que siguen stubs) de `MetaSrcAdapter` (activo).
+- `tests/jungle_research/test_routes.py` -> 2 tests actualizados con
+  mock de metasrc.
+- `bitacora_de_cambios.md` -> esta entrada.
+
+### Pendiente
+
+- Activar mobalytics (V3.9), leagueofgraphs (V3.8), tracker_gg (V3.10)
+  con el mismo patron: parser real + fixture + tests aislados de red.
+- Cuando se tenga acceso a la pagina METAsrc en vivo, capturar HTML
+  real y validar que las 3 estrategias matchean. Si no, ajustar
+  selectores y agregar fixture nuevo con caso real.
+- Test `test_metasrc_integra_con_meta_soloq_extra` valida flujo
+  end-to-end con fixture; agregar test E2E con fetch real (opt-in,
+  marker `@pytest.mark.network`) cuando se decida correr scrape real
+  en CI.
 
 ---
 
-## [2026-05-24] Esports Research E.2 - telemetria por source
+## [2026-05-24] PR-A: Audit `esports_research` V0 (read-only)
 
-Se agrego telemetria mutable por source para monitorear salud de ingestas sin leer logs manuales.
+### Que se hizo
 
-- Nuevo `data/esports_research/adapter_runs.json` gestionado por `json_storage`.
-- Helpers `read_adapter_runs`, `save_adapter_runs` y `save_adapter_run`.
-- Endpoint `GET /api/v1/esports/sources/{source_id}/last-run`.
-- Respuesta normalizada con `status`, `last_attempted_at`, `timestamp`, `rows_ingested`, `gaps` y `source_status`.
-- Si la fuente existe pero aun no corrio, devuelve `status="never_run"` y gap visible.
-- Si la fuente no existe, devuelve `data=null` y gap `unknown source`.
+Cierre del audit del trabajo de Codex sobre `esports_research` V0
+(commit `f9faa77`). PR atomico read-only — NO toca codigo de Codex,
+solo entrega documento estructurado de feedback.
 
-Tests cubren round-trip de storage, fuente sin corridas, fuente desconocida y corrida exitosa con rows ingestados.
+Audit cubrio las 6 dimensiones del plan:
+
+1. **Arquitectura y diseno** — separacion modulo/router/adapters
+   alineada al patron de `jungle_research`. Storage bronze/silver/gold
+   correcto. 3 issues menores (A.1-A.3).
+2. **Calidad de codigo** — 4 adapters reales validados (leaguepedia
+   Cargo API, oracles_elixir CSV S3, gol_gg HTML conservador con
+   robots check, data_dragon CDN). 6 stubs cumplen contrato.
+   5 issues (B.1-B.5).
+3. **Testing** — 126 tests passing, coverage global 83%. Coverage
+   crítico bajo en `base_esports.py` (38%) y 3 modulos al 0%. 6 issues
+   (C.1-C.6).
+4. **Frontend** — 6 paginas con Pattern Library v2 aplicada
+   correctamente. UI consistente con Draft Advisor/Jungla 360.
+   3 issues de UX menores (D.1-D.3).
+5. **Operativa y datos** — `/ingest` dry-run con `# NOTE V0:` correcto
+   (proteccion contra scraping accidental). Falta flag opt-in y
+   telemetria por source. 4 issues (E.1-E.4).
+6. **Documentacion** — README/roadmap/source-activation-guide existen.
+   3 issues menores (F.1-F.3).
+
+**Top 5 issues priorizados** para PRs futuros (no bloquean merge):
+
+1. C.1 Tests del `BaseEsportsAdapter` (~2h) — paths 429/403/retry sin cubrir.
+2. E.1 Flag `dry_run=false` en `/ingest` (~1h).
+3. B.1 Selectores reales en `gol_gg.parse_draft_html` (~2-3h).
+4. E.2 Telemetria por source (`last_attempted_at`) (~1.5h).
+5. C.5 Test del endpoint `/ingest` dry-run (~30min).
+
+### Decisiones clave
+
+- **Audit es documento puro**: PR-A no modifica codigo de Codex. Issues
+  quedan documentados; quien los fixea se decide en PRs futuros.
+- **PR #2 mergeable sin bloqueo**: ningun issue es defecto critico.
+  Base solida, compliance Riot 100%.
+- **Desviaciones vs plan original**: NINGUNA significativa. Codex
+  excedio el target de tests (~110 plan vs 126 real).
+
+### Verificacion
+
+- `pytest tests/esports_research -q` -> 126 passed.
+- Coverage global 83% (esports_research + adapters/esports + routes/esports).
+- `pytest tests/test_no_mojibake.py -q` -> verde (audit doc sin mojibake).
+- `test_compliance.py` -> 5 tests pasan (no live, no VOD download,
+  rate limits, User-Agent + email).
+- Smoke visual de 6 paginas `/esports/*` en `:8010` -> PNGs guardados
+  en `outputs/visual-smoke/audit-esports-*.png`.
+- Smoke API: `GET /api/v1/esports/health` -> 200 con
+  `sources: {active: 4, stub: 6, planned: 1, restricted: 1}`.
+
+### Archivos creados
+
+- `docs/esports_research/audit_2026-05-24.md` (6 dimensiones + Top 5 +
+  desviaciones vs plan + recomendaciones).
+- `outputs/visual-smoke/audit-esports-{index,drafts,teams,players,counterpicks,tournaments}.png`.
+- `~/.claude/projects/.../memory/project_esports_research_v0.md`.
+
+### Archivos modificados
+
+- `bitacora_de_cambios.md` (esta entrada).
+- `~/.claude/projects/.../memory/MEMORY.md` (link a memoria nueva).
 
 ---
 
-## [2026-05-24] Esports Research C.5 - test endpoint ingest dry-run
+## [2026-05-24] Docs - prompt de contexto para Anti Gravity
 
-Se reforzo el test del endpoint `POST /api/v1/esports/ingest` para validar explicitamente el contrato V0:
+### Que se hizo
 
-- status code HTTP 200;
-- `data.status == "dry_run"`;
-- gap visible `external ingest disabled by default in V0 API surface`.
+- Se audito el mapa documental activo del repo para identificar el orden de
+  lectura recomendado para un agente nuevo.
+- Se creo `docs/anti-gravity-context-prompt.md` con un prompt completo de
+  onboarding para Anti Gravity: lectura obligatoria, mapa mental del repo,
+  docs por subsistema, reglas duras, verificacion proporcional y cierre.
+- Se agrego el nuevo documento al indice `docs/README.md`.
 
-El PR es test-only y no cambia comportamiento runtime.
+### Archivos modificados
 
----
+- `docs/anti-gravity-context-prompt.md` - prompt reutilizable para agentes nuevos.
+- `docs/README.md` - link al prompt dentro de las guias principales.
+- `bitacora_de_cambios.md` - registro de esta iteracion documental.
 
 ## [2026-05-24] Esports Research V0 - subsistema pro-stage
 
@@ -544,6 +774,243 @@ consumir:
 ### Por que
 
 No había un punto único donde un agente (o desarrollador) pudiera ver de un vistazo qué fuentes web usa el proyecto. La información estaba dispersa entre docstrings de adapters, comentarios de código y README de subsistemas.
+
+---
+
+## [2026-05-24] Jungle Research - audit-driven fixes Tier 1 + Tier 2
+
+### Que se hizo
+
+Round de saneamiento despues del audit de Codex sobre V1-V4. Cerrados los
+5 fixes de Tier 1 (bugs reales activos) + los 3 de Tier 2 (deuda
+estructural antes de seguir agregando fases).
+
+**Tier 1 - Bugs reales (~80 min)**:
+
+- **T1.1 `trend_score` neutralizado a 0.5 constante**: la formula previa
+  `0.5 + (prev - 0.5)` no medía tendencia, replicaba el score previo, y
+  ademas `previous_scores` nunca se conectaba desde el orquestador.
+  Contaminaba silenciosamente el `final_score`. Ahora es 0.5 hardcoded
+  hasta implementar trend real basado en diff vs backup (queda en V10).
+  `previous_scores` queda en la firma como no-op documentado.
+- **T1.2 TTL + warning `asia_presence_stale`** (48h por default):
+  `read_cached_asia_presence()` ahora retorna `{}` si el cache esta
+  stale, evitando que tier list use `asia_presence` de hace dias
+  silenciosamente. Nueva helper
+  `read_cached_asia_presence_with_metadata()` para que el orquestador
+  vea `age_hours` y emita gap visible.
+- **T1.3 `_compute_asia_presence` sample-aware**: agrega `games_boost`
+  basado en `games` reportado (full trust >=2000, escalado 200-2000,
+  piso 0.3 bajo 200). Previene que un champion con WR 54% en 50 muestras
+  normalice a 1.0 si es el max del pool. Devuelve tuple `(presence,
+  warnings_by_champion)` con flags `asia_sample_low` y
+  `asia_sample_unknown` que el orquestador inyecta a `warning_flags` del
+  tier list entry.
+- **T1.4 `_timestamp_slug` con microsegundos + UUID corto**: previene
+  colisiones en `backups/` y `history/` cuando V9 scheduler corra cron.
+  Formato: `2026-05-24T00-15-30-123456-ab12cd34`.
+- **T1.5 Anti-mojibake guard cubre `data/`**: agrega
+  `data/meta_analyzer/jungle_research`, `data/draft_advisor`,
+  `data/jungle_meta` al scan. NO incluye `data/meta_scraper/` (snapshots
+  de fuentes externas que pueden tener mojibake genuino).
+
+**Tier 2 - Deuda estructural (~3-4h)**:
+
+- **T2.6 Orquestador extraido a `jungle_research/orchestrator.py`**: nueva
+  interfaz declarativa `RefreshPlan(steps={"soloq", "extra", "asia"})`
+  con orden de ejecucion fijo (asia primero → poblar cache; soloq+extras
+  → pool de snapshots; scoring + tier list; pros aparte). El router
+  queda como adaptador HTTP delgado. Function `_consolidate_and_save`
+  queda como wrapper de compat retroactiva para tests externos.
+- **T2.7 `mode=asia` NO regenera tier list por default**: solo cachea
+  `asia_presence` y persiste telemetria. El user que quiera regenerar
+  con cache fresca puede pasar `?modes=asia&modes=soloq&regenerate_tierlist=true`.
+  Elimina la UX engañosa de "toco Asia y current no cambia".
+- **T2.8 `modes=list[str]` con compat de `mode` legacy**: nuevo endpoint
+  acepta composicion libre via `?modes=soloq&modes=asia`. El `mode`
+  legacy se mantiene con mapeo fijo a sets de steps (`soloq → {soloq}`,
+  `all → {soloq, extra, asia, riot_pros}`). Si ambos se pasan, gana
+  `modes`. Validacion explicita 400 si `modes` invalido.
+
+Lateral: configurado `flake8-bugbear.extend-immutable-calls` en
+`pyproject.toml` para FastAPI Query/Depends/Body/etc. Ruff B008 ya no
+warning sobre el patron canonico FastAPI.
+
+### Causa raiz / decisiones clave
+
+- **`trend_score` aparentaba existir pero no medía nada**: bug clase
+  "fórmula plausible que no implementa el concepto". Mejor neutralizar
+  que mantener pretensión de cobertura.
+- **Cache asia sin TTL**: error de diseño original. Stale data nunca debe
+  ser silenciosa — siempre con warning visible y opt-out (`{}` al
+  scoring) por default.
+- **Sample size en presence**: la heuristica original `region × wr_boost`
+  era ingenua para muestras chicas. La penalización por games es la
+  defensa más cheap antes de meter modelos bayesianos completos.
+- **Orquestador**: hicimos `_consolidate_and_save` crecer función a
+  función. El audit acertó: extraer ANTES de V5 que va a sumar más
+  pipelines.
+- **`modes=list[str]`** sobre `mode=Literal[...]`: el `Literal` enumera
+  combinaciones (`all`, `soloq_extra`, etc.) que escalan mal. El set
+  `steps` permite ortogonalidad real sin enumerar cada combo.
+- **`mode=asia` no regenera**: UX vs corrección. El comportamiento previo
+  era engañoso (telemetría se actualizaba pero `current` no). El nuevo
+  default es honesto: tocás "Asia" → ves la telemetría; regenerás
+  cuando quieras (flag explícito o `mode=all`).
+- **Wrapper `_consolidate_and_save` retroactivo**: evita romper tests
+  externos / scripts que importaban la función. Adapta el nuevo shape al
+  histórico. Marcado como compat para deprecar cuando no haya callers.
+
+### Verificacion
+
+- `pytest -q` → **529 passed** (incluye 3 tests nuevos: refresh con
+  `modes=list`, validacion 400, regenerate explicito).
+- `ruff check src tests scripts` → All checks passed (con B008 ignorado
+  en Query/Depends).
+- Smoke API end-to-end `:8000`:
+  - `POST /refresh?modes=soloq&modes=asia` → 200, `steps=[asia, soloq]`,
+    `regenerate_tierlist=true`, `tierlist.entries=36`.
+  - `POST /refresh?mode=asia` → 200, `regenerate_tierlist=false`
+    (default cambiado), `asia.runs=9` con `not_implemented`.
+  - `POST /refresh?modes=invalid_step` → 400 con mensaje claro.
+- Anti-mojibake guard verde para todo el repo incluyendo
+  `data/meta_analyzer/`, `data/draft_advisor/`, `data/jungle_meta/`.
+
+### Archivos creados
+
+- `src/riot_lol_cli/jungle_research/orchestrator.py` — `RefreshPlan`,
+  `OrchestratorResult`, `consolidate()`.
+
+### Archivos modificados
+
+- `src/riot_lol_cli/jungle_research/scoring_engine.py` — `trend_score=0.5`
+  constante; `previous_scores` docstring no-op.
+- `src/riot_lol_cli/jungle_research/json_storage.py` — `_timestamp_slug`
+  con microsegundos + UUID.
+- `src/riot_lol_cli/jungle_research/pipelines/meta_asia.py` — TTL en
+  cache, `read_cached_asia_presence_with_metadata`,
+  `_compute_asia_presence` con `_games_boost` + warnings, payload
+  persistido incluye `warnings_by_champion`.
+- `src/riot_lol_cli/meta_api/routes/jungle_research.py` — `_consolidate_and_save`
+  wrapper de compat; endpoint `/refresh` usa orquestador, acepta `modes`,
+  `regenerate_tierlist` explicito.
+- `tests/test_no_mojibake.py` — agrega 3 paths de `data/` al SCAN_DIRS.
+- `tests/jungle_research/test_routes.py` — actualizado shape de payload
+  (`tierlist`/`extra`/`asia` separados); 3 tests nuevos para
+  `modes=list`, validacion 400, regenerate explicito.
+- `pyproject.toml` — `extend-immutable-calls` para FastAPI callables.
+- `bitacora_de_cambios.md` — esta entrada.
+
+---
+
+## [2026-05-12] Jungle Research V4 - Asia meta (chasis + asia_presence end-to-end)
+
+### Que se hizo
+
+V4 cerrado en modo chasis (idem V3): 9 adapters asiaticos como stubs, pipeline
+orquestador funcional, `asia_presence` calculado y alimentando el scoring
+end-to-end. El peso `high_elo_presence_score` (0.10 del `final_score`), que
+estaba hardcoded a 0 desde V1, ahora se activa cuando algun adapter V4 retorna
+datos reales.
+
+**Pre-V4 fixes (mismo dia, ver entrada arriba)**: orquestador mergeaba
+correctamente snapshots V3, scoring engine ya aceptaba `asia_presence`. Eso
+dejo el camino limpio para V4.
+
+V4.1-V4.8: 8 fuentes asiaticas como un solo modulo
+`src/riot_lol_cli/meta_scraper/adapters/asia.py` (clase base
+`_AsiaStubAdapter` + 9 clases concretas porque OP.GG tiene 3 locales). Cada
+adapter retorna `status: not_implemented` con instrucciones precisas en
+`note` para activar el extract real (parser HTML, Playwright, encoding
+GB18030 para Tencent, etc.).
+
+V4.9: pipeline `src/riot_lol_cli/jungle_research/pipelines/meta_asia.py`
+orienta los 9 adapters, produce `ChampionMetaSnapshot` con `region` real
+(KR/JP/CN, NO mezclado con cohorte global) y calcula `asia_presence` con
+heuristica V1:
+- `REGION_WEIGHT`: KR 1.0, CN 0.8, JP 0.5 (KR pesa mas por anticipar meta)
+- `wr_boost`: WR>=53% full (1.0), 50-53% medio (0.6), <50% bajo (0.2)
+- Normalizado al maximo del pool -> dict champion_name: 0-1
+- Cachea en `data/meta_analyzer/jungle_research/asia_presence.json` para no
+  re-invocar adapters en cada scoring
+
+V4.9 lateral: telemetria compartida con V3 via `_persist_runs` de
+`meta_soloq_extra` - los 9 adapters V4 aparecen en `adapter_runs.json` con
+merge por adapter_id; la sub-vista Fuentes ya los muestra automaticamente.
+
+V4.10: `_consolidate_and_save` acepta `include_asia=True`. Cuando hay `mode=all`:
+- Corre `meta_soloq` (cohorte SoloQ global)
+- Corre `meta_soloq_extra` (adapters V3, mergea al pool)
+- Corre `meta_asia` (cohorte asia separada, produce `asia_presence`)
+- Pasa `asia_presence` al `score_snapshots` -> `final_score` lo aplica
+  con peso 0.10, `FinalJungleTierEntry.asia_score` queda poblado
+- Sin re-invocar adapters: `asia_presence` cacheado se lee si caller no
+  pasa uno explicito (`meta_asia.read_cached_asia_presence()`)
+
+V4.11: UI tab Consenso ahora tiene columna "Asia (V4)" entre SoloQ y Pro
+presence. Muestra `asia_score` formateado (color cyan, fuerte) o "—" si
+es null. Header con boton "↻ Asia (V4)" para disparar `mode=asia` y
+poblar el cache sin re-consolidar.
+
+Endpoint `POST /refresh` acepta nuevo `mode=asia` y `mode=all` lo incluye.
+
+### Decisiones clave
+
+- **Cohortes separadas**: snapshots asia se persisten con `region=KR/JP/CN`,
+  NO se mezclan con SoloQ global. Esto respeta la regla central del
+  scoring: "nunca comparar Emerald+ global con Challenger KR sin capa
+  explicita". `asia_presence` es la capa explicita.
+- **Cache de `asia_presence`**: para no re-llamar 9 adapters en cada
+  scoring, el dict se cachea en JSON y se relee. Cuando `meta_asia` se
+  invoca por refresh, regenera el cache.
+- **Pesos por region**: KR 1.0 > CN 0.8 > JP 0.5 reflejan ranking
+  historico de poder predictivo (Worlds metrics).
+- **Modulo unico vs archivos separados**: las 9 fuentes asia comparten
+  estado stub, asi que viven en un solo `asia.py` (vs V3 que tiene archivo
+  por adapter). Si alguna se vuelve compleja al activar el extract real,
+  se extrae a su propio archivo.
+- **WR boost por bracket**: 53%/50% son los thresholds historicos de
+  "campeon dominante" vs "balanceado" en jungla; el cutoff <50% reduce
+  peso pero NO descarta (un campeon "underperforma" en asia puede ser
+  meta global por otras razones).
+
+### Verificacion
+
+- `pytest -q` -> 400 passed (11 nuevos V4: 9 pipeline + 2 routes).
+- `ruff check src tests scripts` -> All checks passed.
+- Smoke API:
+  - `POST /api/v1/jungle-research/refresh?mode=asia` -> 200 con 9 runs
+    `not_implemented`, asia_snapshots=0, asia_presence_size=0.
+  - `POST /api/v1/jungle-research/refresh?mode=all` -> 200 con
+    `soloq.asia.asia_snapshots`, `asia_presence_applied`.
+  - End-to-end con fixture (test): adapter mock devuelve Wukong WR=56% en
+    KR -> `asia_presence={"Wukong": 1.0}` -> `current` muestra Wukong con
+    `asia_score=1.0`.
+- Smoke visual `#jungle-research/jr-consensus` -> tabla con nueva columna
+  "Asia (V4)" entre SoloQ y Pro presence; boton "↻ Asia (V4)" en header.
+
+### Archivos creados
+
+- `src/riot_lol_cli/meta_scraper/adapters/asia.py` (9 clases adapter stub)
+- `src/riot_lol_cli/jungle_research/pipelines/meta_asia.py`
+- `tests/jungle_research/test_pipeline_meta_asia.py` (9 tests)
+
+### Archivos modificados
+
+- `src/riot_lol_cli/jungle_research/json_storage.py` -> agrega
+  `ASIA_PRESENCE_FILE` + `read_asia_presence()` + `save_asia_presence()`.
+- `src/riot_lol_cli/meta_api/routes/jungle_research.py` -> import
+  `meta_asia`, `_consolidate_and_save(include_asia)`, endpoint `mode=asia`,
+  `mode=all` incluye asia automaticamente. Quita `asia_meta: planned` de
+  `planned_gaps`.
+- `src/riot_lol_cli/dashboard_enhanced.py` -> columna "Asia (V4)" en
+  tabla Consenso, boton "↻ Asia (V4)" en header.
+- `outputs/meta-analyzer-dashboard-enhanced.html` -> regenerado.
+- `tests/jungle_research/test_routes.py` -> 2 tests nuevos
+  (refresh asia + refresh all alimenta scoring con asia_presence).
+- `docs/meta_analyzer/jungle-research-roadmap.md` -> V4 marcado done en
+  modo chasis, V4.12+ son activaciones 1-a-1 de extracts reales.
+- `bitacora_de_cambios.md` -> esta entrada.
 
 ---
 

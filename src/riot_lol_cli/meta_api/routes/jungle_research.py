@@ -15,22 +15,40 @@ from typing import Any, Literal
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel, Field
 
-from riot_lol_cli.jungle_research import json_storage
+from riot_lol_cli.jungle_research import json_storage, orchestrator
+from riot_lol_cli.jungle_research.orchestrator import (
+    STEP_ASIA,
+    STEP_EXTRA,
+    STEP_PRO_STAGE,
+    STEP_RIOT_PROS,
+    STEP_SOLOQ,
+    VALID_STEPS,
+    RefreshPlan,
+)
 from riot_lol_cli.jungle_research.pipelines import (
     match_history as match_history_pipeline,
 )
-from riot_lol_cli.jungle_research.pipelines import meta_soloq, meta_soloq_extra
-from riot_lol_cli.jungle_research.pipelines import pro_accounts as pro_accounts_pipeline
+from riot_lol_cli.jungle_research.pipelines import (
+    pro_accounts as pro_accounts_pipeline,
+)
 from riot_lol_cli.jungle_research.reports import daily_report
 from riot_lol_cli.jungle_research.riot_bridge import RiotBridge
 from riot_lol_cli.jungle_research.schemas import (
-    ChampionMetaSnapshot,
-    FinalJungleTierList,
     ProAccount,
     utcnow_iso,
 )
-from riot_lol_cli.jungle_research.scoring_engine import score_snapshots
 from riot_lol_cli.jungle_research.source_registry import SourceRegistry
+
+# Mapeo `mode` legacy -> set de steps del orquestador. Compat retroactiva.
+_LEGACY_MODE_TO_STEPS: dict[str, tuple[set[str], bool]] = {
+    # (steps, regenerate_tierlist)
+    "soloq": ({STEP_SOLOQ}, True),
+    "soloq_extra": ({STEP_EXTRA}, False),  # solo telemetría, no toca tier list
+    "asia": ({STEP_ASIA}, False),  # solo cache asia + telemetría
+    "riot_pros": ({STEP_RIOT_PROS}, False),
+    "pro_stage": ({STEP_PRO_STAGE}, False),  # PR-C: bridge esports, sin regenerar
+    "all": ({STEP_SOLOQ, STEP_EXTRA, STEP_ASIA, STEP_RIOT_PROS, STEP_PRO_STAGE}, True),
+}
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/v1/jungle-research", tags=["jungle-research"])
@@ -61,41 +79,45 @@ def _consolidate_and_save(
     elo: str,
     queue: str,
     pro_presence: dict[str, float] | None = None,
+    asia_presence: dict[str, float] | None = None,
+    include_extra: bool = True,
+    include_asia: bool = False,
 ) -> dict[str, Any]:
-    """Corre meta_soloq + scoring; persiste latest snapshots y tierlist."""
-    soloq = meta_soloq.run(region=region, elo=elo, queue=queue, persist=True)
-    snapshots: list[ChampionMetaSnapshot] = soloq.snapshots
-    if not snapshots:
-        return {
-            "success": False,
-            "gaps": soloq.gaps + [{"reason": "0 snapshots para consolidar"}],
-            "extracted_at": soloq.extracted_at,
-        }
-    entries = score_snapshots(
-        snapshots,
-        patch=soloq.patch or "unknown",
-        region=region,
-        elo=elo,
-        pro_presence=pro_presence or {},
-    )
-    tierlist = FinalJungleTierList(
-        generated_at=utcnow_iso(),
-        patch=soloq.patch or "unknown",
+    """
+    Wrapper de compat retroactiva. La lógica real vive en
+    `jungle_research.orchestrator.consolidate(RefreshPlan(...))`.
+
+    Mantenido para no romper tests externos. Nuevos callers deben usar
+    el orquestador directamente.
+    """
+    steps = {STEP_SOLOQ}
+    if include_extra:
+        steps.add(STEP_EXTRA)
+    if include_asia:
+        steps.add(STEP_ASIA)
+    plan = RefreshPlan(
+        steps=steps,
         region=region,
         elo=elo,
         queue=queue,
-        entries=entries,
-        source_count_total=len(soloq.sources_used),
-        gaps=[g.get("reason", str(g)) for g in soloq.gaps],
+        asia_presence_override=asia_presence,
+        pro_presence_override=pro_presence,
     )
-    json_storage.save_final_tierlist(tierlist.model_dump(mode="json"))
+    result = orchestrator.consolidate(plan)
+    # Adaptar al shape histórico (success + entries + sources_used + gaps...).
+    if result.tierlist_summary and result.tierlist_summary.get("success"):
+        out = dict(result.tierlist_summary)
+        out["extra"] = result.extra_summary
+        out["asia"] = result.asia_summary
+        return out
+    # Sin tier list (0 snapshots): adaptar al shape previo.
     return {
-        "success": True,
-        "patch": tierlist.patch,
-        "entries": len(entries),
-        "sources_used": soloq.sources_used,
-        "gaps": tierlist.gaps,
-        "generated_at": tierlist.generated_at,
+        "success": False,
+        "gaps": [{"reason": g} for g in result.gaps]
+        + [{"reason": "0 snapshots para consolidar"}],
+        "extracted_at": result.started_at,
+        "extra": result.extra_summary,
+        "asia": result.asia_summary,
     }
 
 
@@ -489,56 +511,112 @@ async def daily_report_endpoint(date: str | None = None) -> dict[str, Any]:
 # ---------------------------------------------------------------------------
 
 
+_LEGACY_MODE_LITERAL = Literal[
+    "soloq", "soloq_extra", "asia", "riot_pros", "pro_stage", "all"
+]
+
+
 @router.post("/refresh")
 async def refresh(
-    mode: Literal["soloq", "soloq_extra", "riot_pros", "all"] = Query("all"),
+    mode: _LEGACY_MODE_LITERAL | None = Query(
+        None,
+        description=(
+            "Modo legacy (compat). Mapea a un set de steps fijo. "
+            "Preferir `modes` para composición libre."
+        ),
+    ),
+    modes: list[str] | None = Query(
+        None,
+        description=(
+            "Lista de steps a ejecutar. Valores válidos: "
+            "soloq, extra, asia, riot_pros. Ejemplo: ?modes=soloq&modes=asia"
+        ),
+    ),
+    regenerate_tierlist: bool | None = Query(
+        None,
+        description=(
+            "Si se pasa, fuerza/saltea regeneración del final_jungle_tierlist. "
+            "Default: True si steps incluyen soloq o extra; False si solo asia "
+            "o riot_pros (cache + telemetría sin tocar tier list)."
+        ),
+    ),
     region: str = Query("GLOBAL"),
     elo: str = Query("EMERALD_PLUS"),
     queue: str = Query("ranked_solo_5x5"),
 ) -> dict[str, Any]:
     """
-    Dispara pipelines disponibles.
+    Dispara pipelines según `modes` (preferido) o `mode` (legacy).
 
-    - `soloq`: lee Meta Scraper local + Jungle Meta curated, consolida tierlist.
-    - `soloq_extra`: invoca adapters V3 (METAsrc/Mobalytics/LoG/Tracker.gg).
-      Por defecto retornan `status=not_implemented` (stubs); cuando se
-      activen los extracts reales, agregan al snapshot consolidado.
-    - `riot_pros`: solo si RIOT_API_KEY, resuelve cuentas pro con Riot ID.
-    - `all`: ejecuta lo activo + registra gaps de lo planned.
+    **Nuevo (V2.8)**: `modes=list[str]` permite composición libre.
+    Ejemplos:
+      - `?modes=soloq&modes=asia` → regenera tier list con asia fresh
+      - `?modes=asia&regenerate_tierlist=true` → asia fresh + regenera con cache
+      - `?modes=asia` → solo refresca cache asia, NO toca tier list (default)
+
+    **Legacy (`mode=`)**: mapeado a steps fijos.
+      - `soloq`: solo Meta Scraper local + Jungle Meta curated → regenera
+      - `soloq_extra`: solo telemetría adapters V3 → NO regenera
+      - `asia`: solo cache asia + telemetría V4 → NO regenera
+      - `riot_pros`: resuelve cuentas pro si hay RIOT_API_KEY → NO regenera
+      - `all`: todo + regenera tier list con todo aplicado
+
+    Si `mode` y `modes` se pasan ambos, gana `modes`.
     """
-    started_at = utcnow_iso()
-    out: dict[str, Any] = {"success": True, "mode": mode, "started_at": started_at}
+    if mode is None and modes is None:
+        mode = "all"
 
     try:
-        if mode in ("soloq", "all"):
-            out["soloq"] = _consolidate_and_save(region=region, elo=elo, queue=queue)
+        plan = _build_refresh_plan(
+            mode=mode,
+            modes=modes,
+            regenerate_tierlist=regenerate_tierlist,
+            region=region,
+            elo=elo,
+            queue=queue,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
 
-        if mode in ("soloq_extra", "all"):
-            extra = meta_soloq_extra.run(region=region, elo=elo, queue=queue, persist=True)
-            out["soloq_extra"] = {
-                "extra_snapshots": len(extra.snapshots),
-                "runs": [r.__dict__ for r in extra.runs],
-                "extracted_at": extra.extracted_at,
-            }
-
-        if mode in ("riot_pros", "all"):
-            bridge = RiotBridge()
-            pro_result = pro_accounts_pipeline.run(bridge=bridge, persist=True)
-            out["pros"] = {
-                "resolved": pro_result.resolved_count,
-                "total": len(pro_result.accounts),
-                "gaps": pro_result.gaps,
-            }
-
-        if mode == "all":
-            out["planned_gaps"] = [
-                "asia_meta: pipeline planned",
-                "pro_stage: pipeline planned",
-                "otp_rankings: pipeline planned",
-            ]
+    try:
+        result = orchestrator.consolidate(plan)
     except Exception as exc:  # noqa: BLE001
         logger.exception("Refresh falló")
         raise HTTPException(status_code=500, detail=str(exc)) from exc
 
-    out["finished_at"] = utcnow_iso()
-    return out
+    return result.to_payload()
+
+
+def _build_refresh_plan(
+    *,
+    mode: str | None,
+    modes: list[str] | None,
+    regenerate_tierlist: bool | None,
+    region: str,
+    elo: str,
+    queue: str,
+) -> RefreshPlan:
+    """Convierte parámetros HTTP (mode legacy o modes nuevo) a RefreshPlan."""
+    if modes:
+        steps = set(modes)
+        invalid = steps - VALID_STEPS
+        if invalid:
+            raise ValueError(
+                f"modes inválidos: {sorted(invalid)}. Válidos: {sorted(VALID_STEPS)}"
+            )
+        # Por defecto regenera si el set incluye fuentes que aportan snapshots
+        # (soloq, extra). Solo asia o riot_pros no regenera salvo override.
+        default_regen = bool(steps & {STEP_SOLOQ, STEP_EXTRA})
+    elif mode and mode in _LEGACY_MODE_TO_STEPS:
+        steps, default_regen = _LEGACY_MODE_TO_STEPS[mode]
+        steps = set(steps)  # copia (frozenset → mutable)
+    else:
+        raise ValueError(f"mode desconocido: {mode!r}")
+
+    regen = default_regen if regenerate_tierlist is None else regenerate_tierlist
+    return RefreshPlan(
+        steps=steps,
+        region=region,
+        elo=elo,
+        queue=queue,
+        regenerate_tierlist=regen,
+    )
