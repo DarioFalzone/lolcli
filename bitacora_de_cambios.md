@@ -6,7 +6,102 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
-<<<<<<< HEAD
+## [2026-05-25] PR-D1: Split jungle-research-roadmap en 3 docs por foco
+
+Tier 3 deuda doc cerrada parcial: el roadmap monolítico de 226 líneas se
+dividió en 3 archivos por foco distinto, para que escale a medida que
+cierran fases y se agregan ADRs.
+
+- `docs/meta_analyzer/jungle-research-status.md` — estado actual (V1 done,
+  V2 parcial, V3 chasis + V3.7 done por PR-B, PR-A/B/C [2026-05-24]).
+- `docs/meta_analyzer/jungle-research-roadmap.md` — solo fases futuras
+  (V2.b, V3.8+, V4-V10) + reglas heredadas. Limpio de estado actual.
+- `docs/meta_analyzer/jungle-research-decisions.md` — ADRs 1-9 (storage,
+  Playwright, Riot key, i18n, snapshots, gap controlado, encoding,
+  datos inventados, visibilidad).
+- README de `meta_analyzer/` linkea los 3 docs en la sección "Jungla 360".
+
+Cross-references internos: las fases del roadmap linkean a ADRs por
+ancla (`#adr-N-slug`). El status linkea al roadmap para "qué falta".
+
+Sin cambios de código. Solo docs.
+
+---
+
+## [2026-05-25] Creación e Integración de Duo Analiser (Sinergias con la Jungla)
+
+### Qué se hizo
+- **Estructura y Microservicio de Duo Analiser:** Se creó el subsistema modular `duo_analiser` bajo FastAPI en el puerto `8006` con la interfaz en `server.py`, schemas Pydantic V2 en `schemas.py`, y enrutador asíncrono en `api.py`.
+- **Persistencia Segura (UTF-8 sin BOM):** Se estructuró la base de datos estática `data/duo_analiser/synergies.json` pre-populando Lux, Yasuo, Ahri y Caitlyn con métricas precisas y ventajas técnicas escritas en español con acento local.
+- **Generador Fallback Dinámico:** Se implementó un algoritmo determinista (basado en el hash del nombre del campeón) para autogenerar ventajas y winrates coherentes para campeones no curados, previniendo pantallas en blanco.
+- **Orquestación en Home Hub:** Se modificó `src/riot_lol_cli/settings.py` y `src/riot_lol_cli/home/server.py` para integrar nativamente el monitoreo de salud y el encendido automático de Duo Analiser en el puerto `8006` desde el cockpit central `:8080`.
+- **Interfaz SPA Premium (Hextech):** Se creó una SPA interactiva en la ruta raíz `/` de dos columnas responsivas (buscador de campeones y filtros por rol a la izquierda, y tabla de sinergias y acordeón táctico a la derecha) utilizando los tokens CSS compartidos.
+- **Suite de Pruebas de Integración:** Se creó `tests/duo_analiser/test_duo_api.py` certificando la correcta decodificación, no-BOM, lógica de fallback y validación de schemas con 7 tests exitosos.
+
+### Causa raíz (si fue bug fix)
+- Requerimiento de usuario para implementar una página ágil de recomendación de dúos (campeón + jungla) con estadísticas detalladas y resúmenes tácticos interactivos.
+
+### Archivos modificados
+- `src/riot_lol_cli/settings.py` ➔ Adición de constantes y getters de Duo Analiser.
+- `src/riot_lol_cli/home/server.py` ➔ Registro en la botonera central de servicios.
+- `data/duo_analiser/synergies.json` ➔ Base de datos estática curada (UTF-8 sin BOM).
+- `src/riot_lol_cli/duo_analiser/schemas.py` ➔ Modelos Pydantic V2.
+- `src/riot_lol_cli/duo_analiser/api.py` ➔ Backend, endpoints y generador fallback.
+- `src/riot_lol_cli/duo_analiser/server.py` ➔ Servidor FastAPI y montajes estáticos.
+- `src/riot_lol_cli/duo_analiser/static/index.html` ➔ Maqueta SPA Hextech responsiva.
+- `src/riot_lol_cli/duo_analiser/static/styles.css` ➔ Estilos y animaciones personalizadas.
+- `src/riot_lol_cli/duo_analiser/static/app.js` ➔ Controlador reactivo y acordeón expansible.
+- `src/riot_lol_cli/duo_analiser/static/favicon.svg` ➔ Favicon explícito.
+- `tests/duo_analiser/test_duo_api.py` ➔ Pruebas de integración.
+- `bitacora_de_cambios.md` ➔ Registro histórico.
+
+---
+
+## [2026-05-25] Registro Global de Gaps (Consola de Estado Maestro)
+
+### Qué se hizo
+- **Registro Global de Gaps (Gaps Registry Core):** Se creó el nuevo módulo core `src/riot_lol_cli/gaps_registry.py` con una interfaz atómica y persistencia atómica en `data/global_gaps.json` mediante escritura temporal `.tmp` y formato UTF-8 sin BOM.
+- **Integración de Pipelines:** Se vinculó el registro centralizado a los flujos críticos. `riot_bridge.py` despacha globalmente `no_riot_key`; `pro_accounts.py` inyecta y remueve de forma dinámica los gaps por jugador (`pending_{name}`); y `meta_soloq.py` sincroniza el estado de las fuentes locales ausentes.
+- **API Endpoint Global:** Se implementó `GET /api/v1/gaps` en `src/riot_lol_cli/meta_api/routes/core.py` (puerto 8000) sirviendo directamente el registro en tiempo real.
+- **Suite de Pruebas Core:** Se creó `tests/test_gaps_registry.py` logrando 6 passed exitosos y garantizando cero regresiones de formato ni encoding (543 passed totales en E2E).
+
+### Causa raíz (si fue bug fix)
+- La necesidad de auditar y centralizar de forma no volátil todas las brechas técnicas (gaps) que ocurren en múltiples servidores y flujos asincrónicos, permitiendo que el operador tenga una consola unificada de resolución de problemas.
+
+### Archivos modificados
+- `src/riot_lol_cli/gaps_registry.py` ➔ Core del registry.
+- `src/riot_lol_cli/jungle_research/riot_bridge.py` ➔ Integración en Riot Client.
+- `src/riot_lol_cli/jungle_research/pipelines/pro_accounts.py` ➔ Integración en resolución de pros.
+- `src/riot_lol_cli/jungle_research/pipelines/meta_soloq.py` ➔ Integración en SoloQ y curados.
+- `src/riot_lol_cli/meta_api/routes/core.py` ➔ Endpoint HTTP de consulta.
+- `tests/test_gaps_registry.py` ➔ Tests unitarios y de encoding.
+- `bitacora_de_cambios.md` ➔ Registro de esta iteración.
+
+---
+
+## [2026-05-25] Regularización y Auditoría del Repositorio (Fase 1)
+
+### Qué se hizo
+- **Regularización de "Asia Presence" (Jungle Research):** Se resolvió la integración incompleta del hook de Asia (V4). Se agregó la constante `ASIA_PRESENCE_FILE` y las funciones `save_asia_presence()` y `read_asia_presence()` a `json_storage.py`. Se modificó `scoring_engine.py` para integrar la presencia de Asia (`asia_presence`) en la métrica de ponderación de High Elo y poblar `asia_score` en `FinalJungleTierEntry`.
+- **Regularización de "MongoDB Atlas Export" (Patch Notes):** Se indexó formalmente el script `scripts/export_patch_notes_to_mongo.py` y su guía `docs/patch_notes_mongo_export.md` en `projects/README.md`, `AGENTS.md` y `docs/README.md`.
+- **Onboarding rápido:** Se creó `docs/onboarding_rapido.md` con un mapa visual de una sola línea por subsistema e indicaciones sobre los principios fundamentales de "atomización de código" y la regla de "no mojibake" (UTF-8 sin BOM).
+- **Hardening de tests:** Se corrigieron todas las discrepancias y la suite de pruebas quedó en 100% verde (537 passed).
+- **Limpieza documental:** Se removió basura de git (`<<<<<<< HEAD`) al inicio de la bitácora.
+
+### Causa raíz (si fue bug fix)
+- El pipeline de Asia y el exportador de MongoDB eran desarrollos a medio camino que causaban 11 fallos en la suite de pruebas por llamadas a métodos inexistentes y desajuste de firmas. La regularización se llevó a cabo aplicando el checklist de auditoría atómica para garantizar que no existan discrepancias entre el código runtime y el ecosistema de pruebas.
+
+### Archivos modificados
+- `src/riot_lol_cli/jungle_research/json_storage.py` — Adición de persistencia de Asia.
+- `src/riot_lol_cli/jungle_research/scoring_engine.py` — Integración de Asia en la métrica de scoring.
+- `projects/README.md` — Indexación del exportador a MongoDB.
+- `AGENTS.md` — Registro del exportador de MongoDB y telemetría de Asia.
+- `docs/README.md` — Enlace a la guía de MongoDB.
+- `README.md` — Enlace a la guía de Onboarding rápido.
+- `bitacora_de_cambios.md` — Registro de esta iteración y remoción de git conflict string.
+
+---
+
 ## [2026-05-24] Esports Research E.1 - ingest real con dry_run=false
 
 Se habilito `POST /api/v1/esports/ingest?dry_run=false` para ejecutar ingesta real opt-in desde la API sin cambiar el default seguro.

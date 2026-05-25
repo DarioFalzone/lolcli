@@ -180,6 +180,11 @@ Capa de investigacion de jungla integrada al Meta Analyzer. Vive en
 `/dashboard-enhanced` (`#jungle-research`). Corre dentro del mismo proceso
 FastAPI `:8000` y comparte el lifecycle.
 
+> **Docs split por foco**:
+> - [jungle-research-status.md](jungle-research-status.md) — estado actual (done).
+> - [jungle-research-roadmap.md](jungle-research-roadmap.md) — fases futuras.
+> - [jungle-research-decisions.md](jungle-research-decisions.md) — ADRs y decisiones globales.
+
 ### Arquitectura
 
 ```text

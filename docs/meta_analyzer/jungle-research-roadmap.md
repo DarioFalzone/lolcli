@@ -1,94 +1,43 @@
-# Jungle Research - Hoja de ruta
+# Jungle Research - Roadmap (fases futuras)
 
-Roadmap evolutivo para `src/riot_lol_cli/jungle_research/`. Esta es la fuente
-de verdad de **lo que falta** y en qué orden encararlo. Se actualiza al cierre
-de cada PR, marcando lo hecho y reordenando si cambian prioridades.
+Lo **que viene** en `src/riot_lol_cli/jungle_research/`. Fuente de verdad
+para elegir el próximo PR. Se actualiza al cierre de cada PR, marcando lo
+hecho (que migra a [jungle-research-status.md](jungle-research-status.md))
+y reordenando si cambian prioridades.
 
-> Esta doc complementa `docs/meta_analyzer/README.md` (sección "Jungla 360").
-> El README cuenta el estado actual; este archivo cuenta lo que viene.
+> Documentos hermanos:
+> - [jungle-research-status.md](jungle-research-status.md) — lo que ya está done.
+> - [jungle-research-decisions.md](jungle-research-decisions.md) — ADRs y decisiones globales.
 
-## Estado actual (V1)
+## V2.b - Cierre del registry de pros
 
-Cerrado en `[2026-05-12]` con 3 PRs por fases. Ver bitácora.
-
-| Capa | Estado |
-|------|--------|
-| Schemas Pydantic V2 | OK 8 modelos compatibles SQL |
-| Storage JSON inmutable + rotación | OK escritura atómica via `.tmp` |
-| Source registry (35 fuentes) | OK 7 active, 28 planned |
-| Scoring engine (percentil + consenso) | OK 7 pesos final + 4 confidence |
-| Riot bridge (RiotClient + SERVER_ROUTING) | OK gap controlado sin key |
-| Pipeline `meta_soloq` | OK Meta Scraper + Jungle Meta curated |
-| Pipeline `pro_accounts` | OK manual seed, sin scrape |
-| Pipeline `match_history` | OK match-v5 si hay PUUID + key |
-| Reporte diario | OK risers/fallers/contradictions |
-| 11 endpoints HTTP `/api/v1/jungle-research/*` | OK |
-| Tab `Jungla 360` en `/dashboard-enhanced` | OK 5 sub-vistas |
-| Tests | OK 79 nuevos, 280 totales en suite |
-
-## V2 - Apertura del registry de pros (parcialmente cerrada)
-
-Foco: **resolución real de cuentas pro**. Hoy todos los pros del seed quedan
-en `needs_account_resolution` porque no se trae ningún Riot ID. Esto bloquea
-todo el resto de la cadena (`pro_presence` en scoring, picks recientes,
-match history). Es la mayor brecha entre "datos de demo" y "datos reales".
+Tareas que quedaron de V2 al estar bloqueadas por scheduler / cache de
+matches.
 
 | # | Tarea | Estado | Notas |
 |---|-------|--------|-------|
-| V2.1 | Documentar formato `riot_id` + `server` en `pro_players_seed.json` | ✅ Done [2026-05-12] | Campo `_format_help` en el seed con ejemplos + servers válidos |
-| V2.2 | Cargar Riot IDs públicos verificables al seed | ⊘ Descartado | Datos volátiles. UI da el form para que cada uno cargue lo que conoce/verifica |
-| V2.3 | Endpoint `POST /api/v1/jungle-research/pros/{name}/account` | ✅ Done [2026-05-12] | Body `{riot_id, server}`. Valida formato, persiste atómico, dispara resolución |
-| V2.3b | Endpoint `GET /api/v1/jungle-research/pros` | ✅ Done [2026-05-12] | Lista seed + estado real (puuid, gap_flag, last_seen_at) |
-| V2.4 | UI sub-vista Pros: form para agregar Riot ID + server por pro | ✅ Done [2026-05-12] | Cards con `<details>` expandible, input + select de 14 servers, mensajes inline |
 | V2.5 | Auto-refresh `match_history` para cuentas resueltas | ⏳ V2.b | Requiere scheduler — sale con V9.5 |
 | V2.6 | Persistir `pro_recent_picks` agregado en `final_jungle_tierlist` | ⏳ V2.b | Cachear para evitar re-llamar Riot en cada scoring |
 | V2.7 | Sub-vista Pros: mostrar últimos N champion picks reales por jugador | ⏳ V2.b | Lee `match_history/<puuid>/*.json` |
 
-**Bloqueador**: `RIOT_API_KEY` válida (dev keys expiran cada 24h). Para V2.5-V2.7
-hay que decidir si se asume key local o se aplica para prod key permanente.
+**Bloqueador**: `RIOT_API_KEY` válida. Ver [ADR-3](jungle-research-decisions.md#adr-3-riot_api_key).
 
-**Bug fix lateral (mismo PR V2)**: el hash hook anidado del cockpit
-(`#jungle-research/jr-sources`) fallaba al activar el primary tab. Refactor a
-helper `jrActivateView` que setea state directo sin simular clicks anidados.
-
-## V3 - Adapters de SoloQ extra (chasis cerrado, extracts pendientes)
-
-Foco: **redundancia de fuentes**. Hoy si Meta Scraper falla en U.GG/LoLalytics,
-todo el sistema queda con 1 fuente o 0. Agregar adapters propios para no
-depender solo de la pipeline existente.
-
-Cerrado en `[2026-05-12]` modo chasis: los 4 adapters existen como módulos
-en `meta_scraper/adapters/`, el pipeline los invoca, la telemetría se
-persiste y se visualiza. Los extracts reales quedan como activaciones
-manuales por adapter (1 PR por adapter cuando se valide markup en vivo).
+## V3.8+ - Activación de adapters V3 restantes
 
 | # | Tarea | Estado | Notas |
 |---|-------|--------|-------|
-| V3.1 | Adapter `mobalytics_jungle` (SPA, requiere Playwright) | ✅ Stub [2026-05-12] | Rate limit 5-10s; `meta_scraper/adapters/mobalytics.py`. Activar = reemplazar `_stub_response()` con Playwright + extract |
-| V3.2 | Adapter `metasrc_jungle` (HTML parseable) | ✅ Stub [2026-05-12] | `meta_scraper/adapters/metasrc.py`. Activar = parse del HTML SSR con BeautifulSoup |
-| V3.3 | Adapter `leagueofgraphs_jungle` (HTML, rate limit estricto) | ✅ Stub [2026-05-12] | Min_delay 8s configurado. `meta_scraper/adapters/leagueofgraphs.py` |
-| V3.4 | Adapter `tracker_gg_lol` (SPA, posibles XHR) | ✅ Stub [2026-05-12] | `meta_scraper/adapters/tracker_gg.py`. Inspeccionar XHR antes de Playwright |
-| V3.5 | Pipeline `meta_soloq_extra` que orqueste los adapters | ✅ Done [2026-05-12] | `jungle_research/pipelines/meta_soloq_extra.py` + merge histórico de telemetría |
-| V3.6 | Sub-vista Fuentes: `last_attempted_at` por fuente + razón del último gap | ✅ Done [2026-05-12] | Columna "Último run" con badges coloreados; botón "Probar adapters V3" |
-
-**Decisión tomada**: viven en `meta_scraper/adapters/` siguiendo el patrón
-existente (LoLalytics/OP.GG/U.GG). El pipeline orquestador vive en
-`jungle_research/pipelines/` porque es Jungle Research quien los consume.
-
-**Próximas tareas opcionales** (V3.7+, una por adapter cuando se priorice):
-
-| # | Tarea | Estado |
-|---|-------|--------|
-| V3.7 | Activar extract real de `metasrc_jungle` | ⏳ Pendiente — bajo costo, empezar por acá |
-| V3.8 | Activar extract real de `leagueofgraphs_jungle` | ⏳ Pendiente |
+| V3.8 | Activar extract real de `leagueofgraphs_jungle` | ⏳ Pendiente — siguiente lógico tras V3.7 |
 | V3.9 | Activar extract real de `mobalytics_jungle` (requiere Playwright) | ⏳ Pendiente |
 | V3.10 | Activar extract real de `tracker_gg_lol` | ⏳ Pendiente — opcional, alta fricción |
+
+**Patrón a seguir**: V3.7 (METAsrc) en `feat/metasrc-real-v37`. 3 estrategias
+en cascada (embedded_json / table / data_attrs), fixture HTML guardado,
+tests aislados de red. Reusar el mismo esquema.
 
 ## V4 - Asia meta (señal temprana KR/CN/JP)
 
 Foco: **detectar tendencias antes que el meta global**. Las regiones asiáticas
-históricamente se anticipan al cambio meta por 1-2 patches. Necesario para
-el caso de uso "campeones emergentes".
+históricamente se anticipan al cambio meta por 1-2 patches.
 
 | # | Tarea | Tipo | Notas técnicas |
 |---|-------|------|----------------|
@@ -96,7 +45,7 @@ el caso de uso "campeones emergentes".
 | V4.2 | Adapter `opgg_jp` | adapter | Idem `/ja/` |
 | V4.3 | Adapter `opgg_cn` | adapter | Idem `/zh-cn/`; verificar geolock |
 | V4.4 | Adapter `porogg_champions` (KR) | adapter | Stats KR, requiere parsing JSON dentro del HTML |
-| V4.5 | Adapter `fow_kr` | adapter | Stats históricos KR; encoding mixto UTF-8/EUC-KR (cuidado con `tests/test_no_mojibake.py`) |
+| V4.5 | Adapter `fow_kr` | adapter | Stats históricos KR; encoding mixto UTF-8/EUC-KR ([ADR-8](jungle-research-decisions.md#adr-8-encoding-utf-8-sin-bom)) |
 | V4.6 | Adapter `lolps` | adapter | SPA, lang=ko forzado |
 | V4.7 | Adapter `deeplol_kr_jungle` | adapter | Ranking KR |
 | V4.8 | Adapter `tencent_101` + `tencent_rank` | adapter | CN; encoding GB18030, geolock probable |
@@ -104,25 +53,27 @@ el caso de uso "campeones emergentes".
 | V4.10 | Scoring: integrar `high_elo_presence_score` real (hoy = 0) usando KR Challenger como pivot | scoring | Requiere cohorte separada `(patch, region=KR, elo=CHALLENGER)` |
 | V4.11 | Sub-vista Consenso: columna "Asia score" + filtro region | UI | baja |
 
-**Riesgo**: muchas de estas fuentes asiáticas pueden cambiar su markup sin
-aviso o requerir cookies de sesión. Implementar con `playwright` y guardar
+**Riesgo**: muchas fuentes asiáticas pueden cambiar markup sin aviso o
+requerir cookies de sesión. Implementar con Playwright ([ADR-2](jungle-research-decisions.md#adr-2-scraping-con-playwright)) y guardar
 raw HTML como fallback.
 
-## V5 - Pro stage / esports
+## V5 - Pro stage / esports (mayormente cubierto por esports_research)
 
-Foco: **picks competitivos**. Los pros en stage hacen drafts curados, no SoloQ.
-Distinguir entre meta SoloQ y meta stage es clave para el cuadrante "fuerte
-en SoloQ pero débil en pro" (y viceversa).
+Foco: **picks competitivos**. Distinguir meta SoloQ de meta stage es clave
+para el cuadrante "fuerte en SoloQ pero débil en pro" (y viceversa).
+
+**Nota cross-subsystem**: PR-C [2026-05-24] cerró el flujo `esports comfort
+→ jungle.pro_presence_score` vía bridge. Los items V5.x restantes son
+incrementales sobre esa base.
 
 | # | Tarea | Tipo | Notas |
 |---|-------|------|-------|
-| V5.1 | Adapter `riot_esports_data` (datos oficiales) | adapter | Posible login/auth; verificar terms |
-| V5.2 | Adapter `gol_gg` (fallback público) | adapter | HTML parseable; estable históricamente |
-| V5.3 | Adapter `gol_picks_of_the_week` | adapter | URL patrón `/champion/picks-of-the-week/selectdate-LAST/` |
-| V5.4 | Pipeline `pro_stage` que genere `pro_stage_score` por campeón | pipeline | Pondera por torneo (Worlds > regionals > playoffs) |
+| V5.4 | Pipeline `pro_stage` que pondere por torneo (Worlds > regionals > playoffs) | pipeline | Hoy bridge usa max(comfort) sin ponderar |
 | V5.5 | Endpoint `GET /api/v1/jungle-research/pro-stage/recent` | endpoint | Filtros por tournament, days_back |
 | V5.6 | Sub-vista nueva "Pro Stage" en Jungla 360 | UI | Tabla de picks/bans por torneo, jugador |
 | V5.7 | Reporte diario: agregar sección "diferencia SoloQ vs Pro Stage" | report | Usa `soloq_vs_pro_diff` que ya está en `DailyReport` schema |
+
+V5.1-V5.3 (adapters esports) cubiertos por `esports_research/` (Codex V0).
 
 ## V6 - OTP rankings y descubrimiento
 
@@ -142,8 +93,7 @@ top players de ese campeón ayuda a estudiar builds, runas, matchups.
 ## V7 - Matchups y counters
 
 Foco: **datos de matchup específicos**. Hoy el scoring no diferencia "Lee Sin
-es S tier" de "Lee Sin es S tier salvo contra Karthus". Para draft real,
-matchups importan tanto como el tier.
+es S tier" de "Lee Sin es S tier salvo contra Karthus".
 
 | # | Tarea | Tipo | Notas |
 |---|-------|------|-------|
@@ -155,26 +105,23 @@ matchups importan tanto como el tier.
 
 ## V8 - Migración a SQLite/PostgreSQL
 
-Foco: **escala y consultas analíticas**. Cuando los snapshots crezcan
-(>1000 archivos `history/`), JSON deja de servir para queries cross-snapshot
-del estilo "dame el WR promedio de Wukong en los últimos 30 patches en KR".
+Foco: **escala y consultas analíticas**. Disparada por trigger de snapshots
+(ver [ADR-1](jungle-research-decisions.md#adr-1-storage-final)).
 
 | # | Tarea | Tipo | Notas |
 |---|-------|------|-------|
-| V8.1 | Decidir DB target (SQLite local vs PostgreSQL) | decision | SQLite alcanza si stays single-machine; PG necesario si Home Hub se sube a un host |
+| V8.1 | Decidir DB target (SQLite local vs PostgreSQL) | decision | Ya decidido en [ADR-1](jungle-research-decisions.md#adr-1-storage-final): SQLite |
 | V8.2 | DDL inicial mapeando los 8 schemas a tablas | migration | Todos los campos ya están en `schemas.py` |
 | V8.3 | Repositorio `jungle_research/repository/` con interfaz común | refactor | Inyectable para permitir tests con SQLite in-memory |
 | V8.4 | Migrador `scripts/jungle_research_migrate_json_to_db.py` | script | Lee history/ + latest.json y popula DB |
 | V8.5 | Index strategies: `(champion_name, generated_at, region, elo)` para queries de evolución | index | |
 | V8.6 | Endpoint `GET /api/v1/jungle-research/champions/{id}/timeseries?from=&to=` | endpoint | Imposible/lento sobre JSON, trivial sobre SQL |
 
-**Trigger**: cuando `data/meta_analyzer/jungle_research/champion_meta_snapshots/history/`
-supere los 500 archivos, encarar V8.
+**Trigger**: cuando `champion_meta_snapshots/history/` supere los 500 archivos.
 
 ## V9 - Operación: jobs programados y reportes
 
-Foco: **automatización**. Hoy refresh es manual desde el cockpit. Para que
-el sistema sea útil sin intervención, necesita correr periódicamente.
+Foco: **automatización**. Hoy refresh es manual desde el cockpit.
 
 | # | Tarea | Tipo | Frecuencia sugerida |
 |---|-------|------|---------------------|
@@ -199,28 +146,18 @@ el sistema sea útil sin intervención, necesita correr periódicamente.
 | V10.3 | Alertas en `daily_report` si una fuente lleva > 24h en `gap` | feature | Genera entrada con flag `alert:source_down` |
 | V10.4 | Dashboard "salud del sistema" en sub-vista Fuentes con sparklines | UI | |
 
-## Decisiones globales pendientes
-
-Cosas que afectan a múltiples fases y vale la pena decidir antes de avanzar:
-
-1. **Storage final**: ¿JSON eternamente, o SQLite cuando crezca, o PostgreSQL? - **Mi recomendación**: SQLite cuando V8 se dispare, PG solo si se sube a host.
-2. **Scraping con Playwright**: ¿permitir? Hoy Meta Scraper ya lo usa. - **Recomendación**: sí, con rate limit estricto y respetando robots.txt.
-3. **`RIOT_API_KEY` en producción**: ¿dev key rotada manualmente, o aplicar a prod key permanente? - **Recomendación**: dev por ahora, solicitar prod cuando V2 estabilice.
-4. **Localizar UI**: el cockpit está mezclado español/inglés. ¿Migrar todo a español, o mantener bilingüe técnico? - **Recomendación**: mantener nombres canónicos (Riot ID, PUUID, jungle, etc.) en inglés y copy en español rioplatense.
-5. **Visibilidad**: ¿el Home Hub (`:8080`) debería linkear directamente al tab `#jungle-research`? - **Recomendación**: sí, agregar al grid del Home Hub como acceso directo.
-
 ## Cómo se prioriza el siguiente PR
 
-Cuando quieras arrancar el próximo, leer este archivo y elegir 1-3 ítems
+Cuando arranques el próximo, leer este archivo y elegir 1-3 ítems
 **de la fase más temprana sin terminar**. Las fases están ordenadas por
-impacto (V2 desbloquea pros, V3 reduce dependencia de Meta Scraper, V4 da
-señal temprana asiática). No saltear fases sin justificación.
+impacto (V2.b desbloquea pros, V3.8+ reduce dependencia de Meta Scraper,
+V4 da señal temprana asiática). No saltear fases sin justificación.
 
 Reglas heredadas que aplican a todo PR de Jungle Research:
 
-- Cero scraping agresivo. Respetar `Retry-After` y rate limits.
-- Cero datos inventados; gap controlado siempre que falte fuente.
-- Snapshots inmutables; rotar a `backups/` antes de pisar `latest`.
-- UTF-8 sin BOM (test `tests/test_no_mojibake.py` rompe build si entra mojibake).
+- Cero scraping agresivo. Respetar `Retry-After` y rate limits ([ADR-2](jungle-research-decisions.md#adr-2-scraping-con-playwright)).
+- Cero datos inventados; gap controlado siempre que falte fuente ([ADR-7](jungle-research-decisions.md#adr-7-gap-controlado-vs-error), [ADR-9](jungle-research-decisions.md#adr-9-cero-datos-inventados)).
+- Snapshots inmutables; rotar a `backups/` antes de pisar `latest` ([ADR-6](jungle-research-decisions.md#adr-6-snapshots-inmutables--rotación)).
+- UTF-8 sin BOM ([ADR-8](jungle-research-decisions.md#adr-8-encoding-utf-8-sin-bom)).
 - Smoke visual obligatorio para cualquier cambio en el tab del cockpit.
 - Bitácora actualizada en el mismo PR.
