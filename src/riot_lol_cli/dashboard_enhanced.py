@@ -678,19 +678,16 @@ ENHANCED_DASHBOARD_HTML = r"""
                         <table id="jr-consensus-table">
                             <thead>
                                 <tr>
+                                    <th style="width:24px;"></th>
                                     <th>Tier</th>
                                     <th>Campeón</th>
                                     <th>Score</th>
                                     <th>Confidence</th>
-                                    <th>SoloQ</th>
-                                    <th>Pro presence</th>
                                     <th>Sources</th>
-                                    <th>Warnings</th>
-                                    <th>Explicación</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr><td colspan="9" class="loading">⏳ Cargando consenso...</td></tr>
+                                <tr><td colspan="6" class="loading">⏳ Cargando consenso...</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -1221,33 +1218,55 @@ ENHANCED_DASHBOARD_HTML = r"""
             }
         }
 
+        function jrToggleConsensusRow(idx) {
+            const detailRow = document.getElementById(`jr-consensus-detail-${idx}`);
+            const caret = document.getElementById(`jr-consensus-caret-${idx}`);
+            if (!detailRow || !caret) return;
+            const isOpen = detailRow.style.display !== 'none';
+            detailRow.style.display = isOpen ? 'none' : 'table-row';
+            caret.textContent = isOpen ? '▶' : '▼';
+            caret.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+        }
+
         async function jrLoadConsensus() {
             const tbody = document.querySelector('#jr-consensus-table tbody');
             try {
                 const resp = await axios.get(`${JR_BASE}/current?limit=80`);
                 const entries = resp.data.data || [];
                 if (!entries.length) {
-                    tbody.innerHTML = '<tr><td colspan="9" class="no-data">Sin tier list aún. Hacé click en "Refrescar SoloQ".</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="6" class="no-data">Sin tier list aún. Hacé click en "Refrescar SoloQ".</td></tr>';
                     return;
                 }
-                tbody.innerHTML = entries.map(e => {
+                tbody.innerHTML = entries.map((e, idx) => {
                     const tier = e.final_tier || 'D';
                     const warnings = (e.warning_flags || []).map(w => `<span style="background:rgba(255,153,0,0.15); color:var(--state-warning); padding:2px 6px; border-radius:3px; font-size:10px; margin-right:4px;">${jrEscape(w)}</span>`).join('');
-                    return `<tr>
+                    const proCell = e.pro_soloq_score && e.pro_soloq_score > 0
+                        ? `${jrFmtScore(e.pro_soloq_score)} <span title="Fuente: esports_research comfort" style="background:rgba(0,200,255,0.15); color:#00c8ff; padding:1px 5px; border-radius:3px; font-size:9px; font-weight:bold; margin-left:4px;">ES</span>`
+                        : jrFmtScore(e.pro_soloq_score);
+                    return `<tr class="jr-consensus-row" style="cursor:pointer;" onclick="jrToggleConsensusRow(${idx})">
+                        <td><span id="jr-consensus-caret-${idx}" aria-expanded="false" style="color:var(--arc-gold); font-size:10px;">▶</span></td>
                         <td><span style="display:inline-block; width:28px; height:28px; line-height:28px; text-align:center; border-radius:4px; background:${jrTierColor(tier)}; color:white; font-weight:bold;">${jrEscape(tier)}</span></td>
                         <td style="font-weight:bold; color:var(--arc-gold);">${jrEscape(e.champion_name)}</td>
                         <td>${jrFmtScore(e.final_score)}</td>
                         <td>${jrFmtScore(e.confidence)}</td>
-                        <td>${jrFmtScore(e.soloq_score)}</td>
-                        <td>${jrFmtScore(e.pro_soloq_score)}</td>
                         <td>${e.source_count || 0}</td>
-                        <td>${warnings || '—'}</td>
-                        <td style="font-size:11px; color:#aaa;">${jrEscape(e.explanation || '')}</td>
+                    </tr>
+                    <tr id="jr-consensus-detail-${idx}" class="jr-consensus-detail" style="display:none; background:rgba(10,30,61,0.4);">
+                        <td colspan="6" style="padding:12px 18px;">
+                            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px; margin-bottom:10px;">
+                                <div><strong style="color:var(--arc-gold); font-size:11px; text-transform:uppercase;">SoloQ score</strong><br><span style="font-size:14px;">${jrFmtScore(e.soloq_score)}</span></div>
+                                <div><strong style="color:var(--arc-gold); font-size:11px; text-transform:uppercase;">Pro presence</strong><br><span style="font-size:14px;">${proCell}</span></div>
+                                <div><strong style="color:var(--arc-gold); font-size:11px; text-transform:uppercase;">Asia score</strong><br><span style="font-size:14px;">${jrFmtScore(e.asia_score)}</span></div>
+                                <div><strong style="color:var(--arc-gold); font-size:11px; text-transform:uppercase;">High elo</strong><br><span style="font-size:14px;">${jrFmtScore(e.high_elo_presence_score)}</span></div>
+                            </div>
+                            ${warnings ? `<div style="margin-top:8px;"><strong style="color:var(--arc-gold); font-size:11px; text-transform:uppercase;">Warnings</strong><br>${warnings}</div>` : ''}
+                            ${e.explanation ? `<div style="margin-top:8px;"><strong style="color:var(--arc-gold); font-size:11px; text-transform:uppercase;">Explicación</strong><br><span style="font-size:11px; color:#bbb;">${jrEscape(e.explanation)}</span></div>` : ''}
+                        </td>
                     </tr>`;
                 }).join('');
             } catch (e) {
                 console.error('jrLoadConsensus error', e);
-                tbody.innerHTML = '<tr><td colspan="9" class="text-danger">Error al cargar consenso</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="6" class="text-danger">Error al cargar consenso</td></tr>';
             }
         }
 

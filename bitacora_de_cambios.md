@@ -6,7 +6,32 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
-<<<<<<< HEAD
+## [2026-05-25] PR-D2: Drill-down expandible en tabla Consenso (Jungla 360)
+
+Tier 3 deuda UI parcial: la tabla de consenso de Jungla 360 pasó de 9
+columnas planas a 6 visibles + drill-down expandible por fila.
+
+**Antes**: 9 columnas (Tier, Champ, Score, Confidence, SoloQ, Pro presence,
+Sources, Warnings, Explicación) — saturaba en mobile y diluía la
+información primaria.
+
+**Ahora**: 6 columnas visibles (caret expandir, Tier, Campeón, Score,
+Confidence, Sources). Click en la fila (o en el caret ▶) expande una
+fila de detalle con: SoloQ score, Pro presence (con badge "ES" si viene
+de esports_research comfort), Asia score, High elo, Warnings, Explicación.
+
+**Implementación**:
+- `jrToggleConsensusRow(idx)` nueva función JS toggle por índice.
+- `jrLoadConsensus()` renderiza fila principal + fila detail con
+  `display:none` por default.
+- CSS inline para grid responsive del detail.
+- Aria: `aria-expanded` en el caret + cursor pointer en la fila.
+
+Beneficio: tabla mucho más legible en pantallas chicas, datos secundarios
+siguen disponibles 1 click, mismo dataset (sin pérdida).
+
+---
+
 ## [2026-05-24] Esports Research E.1 - ingest real con dry_run=false
 
 Se habilito `POST /api/v1/esports/ingest?dry_run=false` para ejecutar ingesta real opt-in desde la API sin cambiar el default seguro.
