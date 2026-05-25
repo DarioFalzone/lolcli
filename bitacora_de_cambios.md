@@ -6,6 +6,43 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-05-25] PR-D3: Extracción HTML/CSS/JS de dashboard_enhanced.py a archivos
+
+Tier 3 deuda UI estructural: el dashboard mejorado dejó de ser un monolito
+de 1568 líneas con CSS+HTML+JS dentro de un raw string Python. Ahora vive
+en 3 archivos editables:
+
+- `src/riot_lol_cli/meta_api/static/dashboard-enhanced/dashboard.css`
+  (~410 líneas — CSS completo del shell + tabla + modal + responsive).
+- `src/riot_lol_cli/meta_api/static/dashboard-enhanced/dashboard.js`
+  (~565 líneas — JS de Meta Analyzer + Jungla 360 + drill-down).
+- `src/riot_lol_cli/meta_api/static/dashboard-enhanced/index.html`
+  (~290 líneas — HTML body con placeholders `{{DASHBOARD_CSS}}` y
+  `{{DASHBOARD_JS}}` para CSS y JS).
+
+`dashboard_enhanced.py` quedó en 50 líneas. En import-time lee los 3
+archivos y sustituye placeholders construyendo `ENHANCED_DASHBOARD_HTML`,
+manteniendo el contrato API previo (string completo embebido). El route
+`GET /dashboard-enhanced` y `save_enhanced_dashboard()` siguen
+funcionando igual.
+
+**Beneficio**:
+- Editar CSS/JS sin tocar Python (mejor DX para refactors futuros).
+- Diff de cambios es legible (antes era diff de string Python con
+  indentación de 8 espacios).
+- Setup para migración a `StaticFiles` real en PR futuro (se elige
+  cuándo).
+
+**Verificación**:
+- `python -c "from riot_lol_cli import dashboard_enhanced; ..."` →
+  importa OK, HTML armado con CSS + JS + drill-down preservado.
+- `pytest tests/test_no_mojibake.py tests/jungle_research -q` →
+  114 passed.
+
+Sin cambios de routing. Sin mini-router (queda para PR futuro).
+
+---
+
 ## [2026-05-25] PR-D2: Drill-down expandible en tabla Consenso (Jungla 360)
 
 Tier 3 deuda UI parcial: la tabla de consenso de Jungla 360 pasó de 9

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico" type="image/svg+xml">
+    <title>LOLCLI Meta Analyzer - Enhanced</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Anton&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+/* {{DASHBOARD_CSS}} */
+    </style>
+    <link rel="stylesheet" href="/design-system/tokens.css?v=2">
+    <link rel="stylesheet" href="/design-system/patterns.css?v=2">
+</head>
+<body class="app-shell">
+    <!-- Hero -->
+    <header class="hero hero-compact">
+        <div class="hero-row" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;">
+            <div>
+                <div class="hero-eyebrow">LOLCLI</div>
+                <h1 class="hero-title">META ANALYZER</h1>
+                <div class="hero-meta">Enhanced Dashboard</div>
+            </div>
+            <div class="header-info">
+                <div class="header-status">
+                    <div class="status-item">
+                        <span class="status-dot"></span>
+                        <span>Sistema: <strong id="system-status">Conectando...</strong></span>
+                    </div>
+                    <div class="status-item">
+                        Última actualización: <strong id="last-update">--:--</strong>
+                    </div>
+                </div>
+                <a class="home-hub-link" href="http://localhost:8080/">⌂ Home Hub</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Summary Stats -->
+        <div class="stat-strip mb-20">
+            <div class="stat">
+                <div class="stat-value gold" id="stat-champions">0</div>
+                <div class="stat-label">Campeones ADC</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value cyan" id="stat-matches">0</div>
+                <div class="stat-label">Partidas Analizadas</div>
+            </div>
+            <div class="stat">
+                <div class="stat-value warning" id="stat-anomalies">0</div>
+                <div class="stat-label">Anomalías</div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab(event, 'dashboard')">📊 Dashboard</button>
+            <button class="tab" onclick="switchTab(event, 'matchups')">⚡ Matchups</button>
+            <button class="tab" onclick="switchTab(event, 'items')">🛡️ Items</button>
+            <button class="tab" onclick="switchTab(event, 'raw-data')">📋 Raw Data</button>
+            <button class="tab" onclick="switchTab(event, 'jungle-research')">🌲 Jungla 360</button>
+        </div>
+
+        <!-- Tab: Dashboard (Tier List) -->
+        <div id="dashboard" class="tab-content active">
+            <div class="card">
+                <div class="card-title">Tier List - ADCs Actuales</div>
+                <p style="color: #aaa; margin-bottom: 15px;">Haz click en un campeón para ver más detalles</p>
+                <div id="tier-list-content">
+                    <p class="loading">⏳ Cargando tier list...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Matchups -->
+        <div id="matchups" class="tab-content">
+            <div class="card">
+                <div class="card-title">Historial de Matchups - Por Campeón</div>
+
+                <!-- Filters -->
+                <div class="filters">
+                    <div class="filter-group">
+                        <label>Campeón:</label>
+                        <select id="matchup-champion-filter" onchange="loadMatchupData()">
+                            <option value="">Seleccionar...</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Últimas (horas):</label>
+                        <input type="number" id="matchup-hours-filter" value="24" min="1" max="240" onchange="loadMatchupData()">
+                    </div>
+                    <div class="filter-group">
+                        <label>Límite:</label>
+                        <input type="number" id="matchup-limit-filter" value="50" min="10" max="500" onchange="loadMatchupData()">
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="data-table">
+                    <table id="matchup-table">
+                        <thead>
+                            <tr>
+                                <th onclick="sortTable('matchup-table', 0)">Hora</th>
+                                <th onclick="sortTable('matchup-table', 1)">Campeón Rival</th>
+                                <th onclick="sortTable('matchup-table', 2)">Partidas</th>
+                                <th onclick="sortTable('matchup-table', 3)">Victorias</th>
+                                <th onclick="sortTable('matchup-table', 4)">Derrotas</th>
+                                <th onclick="sortTable('matchup-table', 5)">WR %</th>
+                                <th onclick="sortTable('matchup-table', 6)">Tendencia</th>
+                                <th>Fuente</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td colspan="8" class="no-data">Selecciona un campeón para ver matchups</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Items -->
+        <div id="items" class="tab-content">
+            <div class="card">
+                <div class="card-title">Construcción de Items - Por Campeón</div>
+
+                <!-- Filters -->
+                <div class="filters">
+                    <div class="filter-group">
+                        <label>Campeón:</label>
+                        <select id="items-champion-filter" onchange="loadItemsData()">
+                            <option value="">Seleccionar...</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Top Items:</label>
+                        <input type="number" id="items-limit-filter" value="10" min="5" max="50" onchange="loadItemsData()">
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="data-table">
+                    <table id="items-table">
+                        <thead>
+                            <tr>
+                                <th onclick="sortTable('items-table', 0)">Item ID</th>
+                                <th onclick="sortTable('items-table', 1)">Frecuencia</th>
+                                <th onclick="sortTable('items-table', 2)">Ruta de Build</th>
+                                <th>Fuente</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td colspan="4" class="no-data">Selecciona un campeón para ver items</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Raw Data -->
+        <div id="raw-data" class="tab-content">
+            <div class="card">
+                <div class="card-title">Datos Sin Filtrar - Raw Data</div>
+
+                <!-- Filters -->
+                <div class="filters">
+                    <div class="filter-group">
+                        <label>Campeón (opcional):</label>
+                        <select id="raw-champion-filter" onchange="loadRawData()">
+                            <option value="">Todos</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Límite:</label>
+                        <input type="number" id="raw-limit-filter" value="100" min="10" max="1000" onchange="loadRawData()">
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="data-table">
+                    <table id="raw-table">
+                        <thead>
+                            <tr>
+                                <th onclick="sortTable('raw-table', 0)">Campeón</th>
+                                <th onclick="sortTable('raw-table', 1)">Hora</th>
+                                <th onclick="sortTable('raw-table', 2)">Partidas</th>
+                                <th onclick="sortTable('raw-table', 3)">WR %</th>
+                                <th onclick="sortTable('raw-table', 4)">PR %</th>
+                                <th>Fuente</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td colspan="6" class="loading">⏳ Cargando datos...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Jungla 360 (Jungle Research) -->
+        <div id="jungle-research" class="tab-content">
+            <!-- Header del tab: freshness + patch + estado Riot API + gaps -->
+            <div class="card" style="margin-bottom: 15px;">
+                <div style="display:flex; flex-wrap:wrap; gap:20px; align-items:center; justify-content:space-between;">
+                    <div>
+                        <div style="font-size:11px; color: var(--arc-gold); text-transform:uppercase; letter-spacing:0.08em; font-weight:bold;">Jungla 360</div>
+                        <div style="font-size:18px; font-family:'Anton', sans-serif; font-style:italic; color:#f0f0f0; letter-spacing:0.02em;">Knowledge Base de Jungla</div>
+                    </div>
+                    <div id="jr-header-meta" style="display:flex; flex-wrap:wrap; gap:14px; font-size:12px;">
+                        <span>Último refresh: <strong id="jr-freshness">--</strong></span>
+                        <span>Patch: <strong id="jr-patch">--</strong></span>
+                        <span>Riot API: <strong id="jr-riot-key">--</strong></span>
+                        <span>Gaps: <strong id="jr-gaps-count">--</strong></span>
+                    </div>
+                    <div style="display:flex; gap:8px;">
+                        <button onclick="jrRefresh('soloq')" style="padding:8px 14px; background:var(--arc-gold); color:#010a13; border:none; border-radius:4px; cursor:pointer; font-weight:bold; font-size:12px;">↻ Refrescar SoloQ</button>
+                        <button onclick="jrRefresh('riot_pros')" style="padding:8px 14px; background:transparent; color:var(--arc-gold); border:1px solid var(--arc-gold-dark); border-radius:4px; cursor:pointer; font-size:12px;">↻ Riot Pros</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub-tabs internos -->
+            <div class="tabs" style="margin-bottom:15px;">
+                <button class="tab active" onclick="jrSwitchSubtab(event, 'jr-consensus')">🎯 Consenso</button>
+                <button class="tab" onclick="jrSwitchSubtab(event, 'jr-sources')">🔗 Fuentes</button>
+                <button class="tab" onclick="jrSwitchSubtab(event, 'jr-pros')">👤 Pros</button>
+                <button class="tab" onclick="jrSwitchSubtab(event, 'jr-otps')">🏆 OTPs</button>
+                <button class="tab" onclick="jrSwitchSubtab(event, 'jr-report')">📈 Reporte diario</button>
+            </div>
+
+            <!-- Sub-vista Consenso: tier list final -->
+            <div id="jr-consensus" class="jr-subtab active">
+                <div class="card">
+                    <div class="card-title">Tier list final por consenso</div>
+                    <p style="color:#aaa; font-size:12px; margin-bottom:12px;">
+                        Score normalizado por percentil dentro de la cohorte (patch · region · elo · queue).
+                        No copia ninguna tier list externa — agrega múltiples fuentes con pesos explícitos.
+                    </p>
+                    <div class="data-table">
+                        <table id="jr-consensus-table">
+                            <thead>
+                                <tr>
+                                    <th style="width:24px;"></th>
+                                    <th>Tier</th>
+                                    <th>Campeón</th>
+                                    <th>Score</th>
+                                    <th>Confidence</th>
+                                    <th>Sources</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="6" class="loading">⏳ Cargando consenso...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub-vista Fuentes: registry con estado + telemetría runs -->
+            <div id="jr-sources" class="jr-subtab" style="display:none;">
+                <div class="card">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
+                        <div class="card-title" style="margin:0; padding:0; border:0;">Registry de fuentes</div>
+                        <button onclick="jrRefresh('soloq_extra')" style="padding:6px 12px; background:transparent; color:var(--arc-gold); border:1px solid var(--arc-gold-dark); border-radius:4px; cursor:pointer; font-size:11px;">↻ Probar adapters V3</button>
+                    </div>
+                    <p style="color:#aaa; font-size:12px; margin-bottom:12px;">
+                        active = consumida en V1 · planned = registrada, sin scrape aún · gap = intentamos pero falla. La columna "Último run" se llena tras invocar al adapter (POST /refresh).
+                    </p>
+                    <div class="data-table">
+                        <table id="jr-sources-table">
+                            <thead>
+                                <tr>
+                                    <th>Estado</th>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Tipo</th>
+                                    <th>Region</th>
+                                    <th>Prioridad</th>
+                                    <th>Último run</th>
+                                    <th>URL</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td colspan="8" class="loading">⏳ Cargando fuentes...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub-vista Pros: cards del seed -->
+            <div id="jr-pros" class="jr-subtab" style="display:none;">
+                <div class="card">
+                    <div class="card-title">Pro players seed</div>
+                    <p style="color:#aaa; font-size:12px; margin-bottom:12px;">
+                        Para resolver cuentas reales, agregar <code>riot_id</code> + <code>server</code> al seed y exportar <code>RIOT_API_KEY</code>.
+                    </p>
+                    <div id="jr-pros-cards" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:12px;">
+                        <p class="loading">⏳ Cargando pros...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub-vista OTPs: V1 placeholder -->
+            <div id="jr-otps" class="jr-subtab" style="display:none;">
+                <div class="card">
+                    <div class="card-title">Rankings OTP por campeón</div>
+                    <div style="padding:20px; background:rgba(255, 153, 0, 0.08); border:1px solid var(--state-warning); border-radius:6px;">
+                        <div style="font-weight:bold; color:var(--state-warning); margin-bottom:8px;">⚠ Pipeline planned (V1)</div>
+                        <p style="font-size:13px; color:#ccc; line-height:1.5;">
+                            El pipeline <code>otp_rankings</code> está registrado pero no implementado en V1.
+                            Fuentes objetivo: Onetricks.gg, League of Graphs (rankings/summoners), PORO.GG Champion Masters.
+                            Cuando se active, mostrará top jugadores por campeón meta detectado.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub-vista Reporte diario -->
+            <div id="jr-report" class="jr-subtab" style="display:none;">
+                <div class="card">
+                    <div class="card-title">Reporte diario</div>
+                    <div id="jr-report-content">
+                        <p class="loading">⏳ Cargando reporte...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal - Champion Details (modal-overlay = patterns.css toggle) -->
+    <div id="champion-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">✕</button>
+            <div class="modal-title">
+                <span id="modal-champion-name"></span>
+                <span class="source-badge" id="modal-source">data_dragon</span>
+            </div>
+            <div id="modal-body">
+                <!-- Se llena con JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+/* {{DASHBOARD_JS}} */
+    </script>
+</body>
+</html>
