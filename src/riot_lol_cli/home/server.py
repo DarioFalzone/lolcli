@@ -22,6 +22,7 @@ from fastapi.staticfiles import StaticFiles
 from riot_lol_cli.http_utils import UTF8JSONResponse
 from riot_lol_cli.settings import (
     get_draft_advisor_port,
+    get_duo_analiser_port,
     get_home_host,
     get_home_port,
     get_items_browser_port,
@@ -53,6 +54,7 @@ _LAUNCH_CMDS: dict[str, list[str]] = {
     "jungle_meta": ["-m", "riot_lol_cli.jungle_meta.server"],
     "items_browser": ["-m", "riot_lol_cli.items_browser.server"],
     "patch_notes": ["-m", "riot_lol_cli.patch_notes.server"],
+    "duo_analiser": ["-m", "riot_lol_cli.duo_analiser.server"],
 }
 
 # Processes spawned by this hub (service_id → Popen).
@@ -128,6 +130,16 @@ SERVICES = [
         "health_path": "/health",
         "ui_path": "/",
         "icon": "📝",
+        "accent": "gold",
+    },
+    {
+        "id": "duo_analiser",
+        "name": "Duo Analiser",
+        "description": "Buscador de mejores sinergias y dúos de campeones con la jungla.",
+        "port_fn": get_duo_analiser_port,
+        "health_path": "/health",
+        "ui_path": "/",
+        "icon": "👥",
         "accent": "gold",
     },
 ]

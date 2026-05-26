@@ -21,7 +21,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from riot_lol_cli import paths
+from riot_lol_cli import gaps_registry, paths
 from riot_lol_cli.jungle_research.json_storage import save_champion_snapshots
 from riot_lol_cli.jungle_research.schemas import ChampionMetaSnapshot, utcnow_iso
 
@@ -235,6 +235,7 @@ def run(
     # Fuente 1: Meta Scraper local.
     scraper_payload = _read_json(META_SCRAPER_NORMALIZED)
     if scraper_payload:
+        gaps_registry.clear_gap("jungle_research:meta_soloq", "meta_scraper_local_missing")
         scraper_snaps, scraper_gaps, scraper_sources = _meta_scraper_snapshots(
             scraper_payload, region=region, elo=elo, queue=queue
         )
@@ -243,6 +244,13 @@ def run(
         sources_used.extend(scraper_sources)
         patch = scraper_payload.get("patch") or patch
     else:
+        gaps_registry.register_gap(
+            "jungle_research:meta_soloq",
+            "meta_scraper_local_missing",
+            "latest_jungle_tier.json no existe en meta_scraper/normalized",
+            severity="warning",
+            action_required="Ejecutar un scrape de SoloQ en el puerto 8002.",
+        )
         gaps.append(
             {
                 "source": "meta_scraper_local",
@@ -255,6 +263,7 @@ def run(
     # Fuente 2: Jungle Meta curated.
     curated_path = _latest_jungle_meta_patch_file()
     if curated_path:
+        gaps_registry.clear_gap("jungle_research:meta_soloq", "jungle_meta_local_missing")
         curated_payload = _read_json(curated_path)
         if curated_payload:
             curated_snaps = _curated_local_snapshots(
@@ -264,6 +273,13 @@ def run(
             sources_used.append("jungle_meta_local")
             patch = patch or curated_payload.get("patch")
     else:
+        gaps_registry.register_gap(
+            "jungle_research:meta_soloq",
+            "jungle_meta_local_missing",
+            "Ningún archivo de patch curado encontrado en data/jungle_meta",
+            severity="warning",
+            action_required="Asegurar la existencia de al menos un archivo patch_*.json en data/jungle_meta/.",
+        )
         gaps.append(
             {
                 "source": "jungle_meta_local",

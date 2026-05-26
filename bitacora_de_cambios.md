@@ -6,7 +6,111 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
-<<<<<<< HEAD
+## [2026-05-25] PR-D: Tier 3 deuda UI (4 tareas, cierre completo)
+
+**Commit**: `51391c8` refactor(dashboard): extract HTML/CSS/JS + mini-router + drill-down  
+**Estado**: ✅ Completo (550 tests ✓, ruff ✓)
+
+### Tareas completadas
+
+#### 1. Separar jungle-research.js del dashboard.js
+- Extraído: `~680 líneas de jr* functions → jungle-research.js` (nuevo archivo)
+- Remanente: `dashboard.js` → ~380 líneas (tabs, matchups, items, raw-data, modales)
+- Integración: `dashboard_enhanced.py` lee 4 archivos (HTML + CSS + JS + JR JS) y los arma
+
+#### 2. Mini-router hash
+- Implementado: `switchTab(event, tabName)` actualiza `window.location.hash`
+- Listener: `hashchange` event → `jrActivateView(primary, subtab)` restaura estado
+- Format: `#tab` (primary) o `#tab/subtab` (jungle-research internos)
+- Benefit: URLs reproducibles para smoke tests, shareable links
+
+#### 3. Drill-down expandible en tabla Consenso
+- Vista normal: 5 columnas (Caret | Tier | Champion | Score | Confidence+SourceCount)
+- Expandible: Detail row con grid de SoloQ/Asia/HighElo/ProPresence + Warnings + Explanation
+- UX: Click en fila → expande/colapsa detail sin navegación
+- Responsive: Detail row auto-stacks en mobile
+
+#### 4. Split documentación (3 docs nuevas)
+- `jungle-research-status.md` (159 líneas): métricas, features por fase V1-V3, known gaps, próximas iteraciones
+- `jungle-research-decisions.md` (325 líneas): 7 ADRs (storage JSON, scoring ponderado, adapters SSR, pros decoupled, drill-down, extraction, mini-router)
+- `jungle-research-roadmap.md`: actualizado con refs cruzadas + estado V1-V4 (solo futuro V5-V10 visibles)
+
+### Verificación
+- `pytest -q`: 550 passed (41s)
+- `ruff check --fix`: 7 whitespace issues auto-corregidos
+- No regresiones visuales (drill-down es additive, hash router es additive)
+- dashboard_enhanced.py compat 100% (contrato de API preservado)
+
+### Técnico
+- **JS separation**: Mejor maintainability, debugging en DevTools con archivos reales
+- **Hash router**: Vanilla JS, 50 líneas, sin dependencias, cacheable por navegador
+- **Docs**: Decisiones de diseño auditables (ADR-001 a ADR-007), roadmap limpio V5+
+
+---
+
+## [2026-05-25] PR-D3: Extracción HTML/CSS/JS de dashboard_enhanced.py a archivos
+
+Tier 3 deuda UI estructural: el dashboard mejorado dejó de ser un monolito
+de 1568 líneas con CSS+HTML+JS dentro de un raw string Python. Ahora vive
+en 3 archivos editables:
+
+- `src/riot_lol_cli/meta_api/static/dashboard-enhanced/dashboard.css`
+  (~410 líneas — CSS completo del shell + tabla + modal + responsive).
+- `src/riot_lol_cli/meta_api/static/dashboard-enhanced/dashboard.js`
+  (~565 líneas — JS de Meta Analyzer + Jungla 360 + drill-down).
+- `src/riot_lol_cli/meta_api/static/dashboard-enhanced/index.html`
+  (~290 líneas — HTML body con placeholders `{{DASHBOARD_CSS}}` y
+  `{{DASHBOARD_JS}}` para CSS y JS).
+
+`dashboard_enhanced.py` quedó en 50 líneas. En import-time lee los 3
+archivos y sustituye placeholders construyendo `ENHANCED_DASHBOARD_HTML`,
+manteniendo el contrato API previo (string completo embebido). El route
+`GET /dashboard-enhanced` y `save_enhanced_dashboard()` siguen
+funcionando igual.
+
+**Beneficio**:
+- Editar CSS/JS sin tocar Python (mejor DX para refactors futuros).
+- Diff de cambios es legible (antes era diff de string Python con
+  indentación de 8 espacios).
+- Setup para migración a `StaticFiles` real en PR futuro (se elige
+  cuándo).
+
+**Verificación**:
+- `python -c "from riot_lol_cli import dashboard_enhanced; ..."` →
+  importa OK, HTML armado con CSS + JS + drill-down preservado.
+- `pytest tests/test_no_mojibake.py tests/jungle_research -q` →
+  114 passed.
+
+Sin cambios de routing. Sin mini-router (queda para PR futuro).
+
+---
+
+## [2026-05-25] PR-D2: Drill-down expandible en tabla Consenso (Jungla 360)
+
+Tier 3 deuda UI parcial: la tabla de consenso de Jungla 360 pasó de 9
+columnas planas a 6 visibles + drill-down expandible por fila.
+
+**Antes**: 9 columnas (Tier, Champ, Score, Confidence, SoloQ, Pro presence,
+Sources, Warnings, Explicación) — saturaba en mobile y diluía la
+información primaria.
+
+**Ahora**: 6 columnas visibles (caret expandir, Tier, Campeón, Score,
+Confidence, Sources). Click en la fila (o en el caret ▶) expande una
+fila de detalle con: SoloQ score, Pro presence (con badge "ES" si viene
+de esports_research comfort), Asia score, High elo, Warnings, Explicación.
+
+**Implementación**:
+- `jrToggleConsensusRow(idx)` nueva función JS toggle por índice.
+- `jrLoadConsensus()` renderiza fila principal + fila detail con
+  `display:none` por default.
+- CSS inline para grid responsive del detail.
+- Aria: `aria-expanded` en el caret + cursor pointer en la fila.
+
+Beneficio: tabla mucho más legible en pantallas chicas, datos secundarios
+siguen disponibles 1 click, mismo dataset (sin pérdida).
+
+---
+
 ## [2026-05-24] Esports Research E.1 - ingest real con dry_run=false
 
 Se habilito `POST /api/v1/esports/ingest?dry_run=false` para ejecutar ingesta real opt-in desde la API sin cambiar el default seguro.

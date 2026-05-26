@@ -47,11 +47,12 @@ El repo esta en evolucion activa y puede tener un working tree sucio. Antes de e
 | Draft KB | `KB/`, `data/draft_advisor/kb/` | Markdown, JSON estructurado | Activo | Fuente conceptual y reglas estructuradas del Draft Advisor |
 | Meta Scraper | `src/riot_lol_cli/meta_scraper/` | FastAPI, Playwright, JSON | Activo | Scraping/normalizacion de meta support/ADC en puerto 8002 |
 | Jungle Meta | `src/riot_lol_cli/jungle_meta/` | FastAPI, JSON, SPA | Activo | Tier list de campeones jungla por patch en puerto 8003 |
-| Patch Notes | `src/riot_lol_cli/patch_notes/` | FastAPI, Playwright, Pydantic V2, APScheduler, SPA | Activo | **V2**: scraping multi-source con 7 adapters (oficial + dev + calendar + ddragon + ugg/opgg/lolalytics/mobalytics). Búsqueda full-text, diff entre versiones, multi-locale UI, cron opcional. Puerto 8005. |
+| Patch Notes | `src/riot_lol_cli/patch_notes/` | FastAPI, Playwright, Pydantic V2, APScheduler, SPA | Activo | **V2**: scraping multi-source con 7 adapters (oficial + dev + calendar + ddragon + ugg/opgg/lolalytics/mobalytics). Búsqueda full-text, diff, cron, y exportación idempotente a MongoDB Atlas. Puerto 8005. |
 | Jungle Research | `src/riot_lol_cli/jungle_research/` | Python, Pydantic V2, JSON | Activo | Knowledge base consolidada de jungla (registry + scoring + pipelines + reports). Vive dentro de Meta API :8000 bajo `/api/v1/jungle-research/*` y se visualiza como tab "Jungla 360" en `/dashboard-enhanced` |
 | Esports Research | `src/riot_lol_cli/esports_research/` | Python, Pydantic V2, FastAPI, JSON, SPA vanilla | Activo | Investigacion historica pro-stage con 4 adapters activos, 6 stubs, bronze/silver/gold, API `/api/v1/esports/*` y cockpit `/esports/` dentro de Meta API :8000 |
 | Items Browser | `src/riot_lol_cli/items_browser/` | FastAPI, JSON, SPA | Activo | Catalogo de items LoL EN+ES con filtros por grupo en puerto 8004 |
 | Home Hub | `src/riot_lol_cli/home/` | FastAPI, JS vanilla, SPA | Activo | Centro de operaciones / portal unificado en puerto 8080 |
+| Duo Analiser | `src/riot_lol_cli/duo_analiser/` | FastAPI, Pydantic V2, JS vanilla, SPA | Activo | Buscador de mejores sinergias y dúos de campeones con la jungla en puerto 8006 |
 | Schemas Riot | `src/riot_lol_cli/schemas/` | Pydantic V2 | Activo | Modelos tipados para payloads de Match-V5 |
 | Scripts | `scripts/`, `scripts/bat/` | Python, Batch, Shell | Activo | Automatizacion de setup, fetch, dashboards y assets |
 | Tests/CI | `tests/`, `.github/workflows/ci.yml` | pytest, ruff | Activo | Unit/eval tests y CI |
@@ -73,12 +74,13 @@ imports, rutas de assets, scripts y tests.
 | Patch Notes Viewer | `projects/active/patch-notes/README.md` | `projects/active/patch-notes/` (standalone, no forma parte del paquete Python) |
 | Splash Gallery | `projects/active/splash-gallery/README.md` | `src/riot_lol_cli/splash.py`, `assets/splash_arts/`, `data/ddragon-splash-catalog.json`, `data/splash-manifest.json` |
 | Home Hub | `projects/active/home-hub/README.md` | `src/riot_lol_cli/home/`, `scripts/bat/home.bat`, `scripts/bat/levantar_todo.bat` |
+| Duo Analiser | `projects/active/home-hub/README.md` | `src/riot_lol_cli/duo_analiser/`, `data/duo_analiser/synergies.json` |
 | Meta Analyzer + Dashboard | `projects/active/meta-analyzer-dashboard/README.md` | `meta_api/`, `meta_analyzer/`, `database/`, `dashboard*.py` |
 | Esports Research | `projects/active/meta-analyzer-dashboard/README.md` | `esports_research/`, `meta_api/routes/esports.py`, `meta_api/static/esports/`, `data/esports_research/` |
 | Draft Advisor | `projects/active/draft-advisor/README.md` | `draft_advisor/`, `data/draft_advisor/`, `KB/` |
 | Meta Scraper | `projects/active/meta-scraper/README.md` | `meta_scraper/`, `data/meta_scraper/` |
 | Jungle Meta | `projects/active/jungle-meta/README.md` | `src/riot_lol_cli/jungle_meta/`, `data/jungle_meta/`, `tests/jungle_meta/` |
-| Patch Notes | `projects/active/patch-notes/README.md` | `src/riot_lol_cli/patch_notes/`, `data/patch_notes/`, `tests/patch_notes/` |
+| Patch Notes | `projects/active/patch-notes/README.md` | `src/riot_lol_cli/patch_notes/`, `data/patch_notes/`, `tests/patch_notes/`, `scripts/export_patch_notes_to_mongo.py`, `docs/patch_notes_mongo_export.md` |
 | Items Browser | `projects/active/items-browser/README.md` | `src/riot_lol_cli/items_browser/`, `data/items/database.json`, `assets/items/`, `tests/items_browser/` |
 | Assets y Datos Riot | `projects/active/assets-and-data/README.md` | `assets/`, `data/`, scripts de descarga/fetch |
 | Junglas Pro | `projects/active/junglas-pro/README.md` | `projects/active/junglas-pro/index.html`, `docs/`, `img/` |
@@ -131,7 +133,7 @@ src/riot_lol_cli/meta_scraper/server.py
   -> data/draft_advisor/champion_base.json (normalizacion de nombres)
 ```
 
-Hay siete servidores FastAPI separados:
+Hay ocho servidores FastAPI separados:
 
 | Servicio | Entry point | Puerto | UI principal | Docs |
 |----------|-------------|--------|--------------|------|
@@ -142,6 +144,7 @@ Hay siete servidores FastAPI separados:
 | Jungle Meta | `python -m riot_lol_cli.jungle_meta.server` | 8003 | `http://localhost:8003` | `http://localhost:8003/docs` |
 | Items Browser | `python -m riot_lol_cli.items_browser.server` | 8004 | `http://localhost:8004` | `http://localhost:8004/docs` |
 | Patch Notes | `python -m riot_lol_cli.patch_notes.server` | 8005 | `http://localhost:8005` | `http://localhost:8005/docs` |
+| Duo Analiser | `python -m riot_lol_cli.duo_analiser.server` | 8006 | `http://localhost:8006` | `http://localhost:8006/docs` |
 
 ## Flujos Operativos
 
@@ -545,6 +548,7 @@ Notas operativas V2:
 - El scrape se ejecuta en `threading.Thread`, no en `BackgroundTask`, para evitar
   el asyncio loop de FastAPI que rompe sync Playwright.
 - Endpoints: `GET /sources/registry`, `POST /scrape/{source}`, `GET /{patch}/sources`.
+- Sincronización opcional a base de datos externa MongoDB Atlas free tier mediante `scripts/export_patch_notes_to_mongo.py` (ver detalles y guía paso a paso en `docs/patch_notes_mongo_export.md`).
 
 ## Documentacion Viva
 

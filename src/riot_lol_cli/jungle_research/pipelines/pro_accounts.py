@@ -24,6 +24,7 @@ import logging
 from dataclasses import dataclass, field
 from typing import Any
 
+from riot_lol_cli import gaps_registry
 from riot_lol_cli.jungle_research import json_storage
 from riot_lol_cli.jungle_research.riot_bridge import RiotBridge
 from riot_lol_cli.jungle_research.schemas import ProAccount, utcnow_iso
@@ -84,6 +85,15 @@ def run(*, bridge: RiotBridge | None = None, persist: bool = True) -> ProAccount
         parsed = _parse_riot_id(riot_id_raw)
 
         if not parsed or not server:
+            gaps_registry.register_gap(
+                "jungle_research:pro_accounts",
+                f"pending_{player_name}",
+                f"Falta configurar el Riot ID o Server público para el jugador pro {player_name}",
+                severity="warning",
+                action_required=f"Setear el Riot ID en la sub-vista de Pros para {player_name}.",
+            )
+            gaps_registry.clear_gap("jungle_research:pro_accounts", f"no_key_{player_name}")
+            gaps_registry.clear_gap("jungle_research:pro_accounts", f"fail_{player_name}")
             accounts.append(
                 ProAccount(
                     pro_player_id=player_name,
@@ -103,6 +113,15 @@ def run(*, bridge: RiotBridge | None = None, persist: bool = True) -> ProAccount
 
         game_name, tagline = parsed
         if not bridge.has_key():
+            gaps_registry.register_gap(
+                "jungle_research:pro_accounts",
+                f"no_key_{player_name}",
+                f"Resolución de pro player {player_name} bloqueada por falta de RIOT_API_KEY",
+                severity="warning",
+                action_required="Configurar la API Key en tu archivo .env desde el panel de Riot Developer Portal.",
+            )
+            gaps_registry.clear_gap("jungle_research:pro_accounts", f"pending_{player_name}")
+            gaps_registry.clear_gap("jungle_research:pro_accounts", f"fail_{player_name}")
             accounts.append(
                 ProAccount(
                     pro_player_id=player_name,
@@ -140,14 +159,25 @@ def run(*, bridge: RiotBridge | None = None, persist: bool = True) -> ProAccount
         )
         if result.puuid:
             resolved += 1
+            gaps_registry.clear_gap("jungle_research:pro_accounts", f"pending_{player_name}")
+            gaps_registry.clear_gap("jungle_research:pro_accounts", f"no_key_{player_name}")
+            gaps_registry.clear_gap("jungle_research:pro_accounts", f"fail_{player_name}")
         else:
-            gaps.append(
-                {
-                    "player": player_name,
-                    "reason": result.error or result.gap_flag or "resolución falló",
-                    "attempted_at": extracted_at,
-                }
+            gaps_registry.register_gap(
+                "jungle_research:pro_accounts",
+                f"fail_{player_name}",
+                f"Fallo al resolver PUUID de pro player {player_name}: {result.error or result.gap_flag}",
+                severity="warning",
+                action_required="Verificar el Riot ID en la sub-vista de Pros o rotar la API Key.",
             )
+            gaps_registry.clear_gap("jungle_research:pro_accounts", f"pending_{player_name}")
+            gaps_registry.clear_gap("jungle_research:pro_accounts", f"no_key_{player_name}")
+            gaps_append = {
+                "player": player_name,
+                "reason": result.error or result.gap_flag or "resolución falló",
+                "attempted_at": extracted_at,
+            }
+            gaps.append(gaps_append)
 
     out = ProAccountsResult(
         accounts=accounts, gaps=gaps, resolved_count=resolved, extracted_at=extracted_at

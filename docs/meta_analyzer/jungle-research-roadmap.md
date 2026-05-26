@@ -1,11 +1,24 @@
-# Jungle Research - Hoja de ruta
+# Jungle Research — Roadmap (V5+)
 
-Roadmap evolutivo para `src/riot_lol_cli/jungle_research/`. Esta es la fuente
-de verdad de **lo que falta** y en qué orden encararlo. Se actualiza al cierre
-de cada PR, marcando lo hecho y reordenando si cambian prioridades.
+Visión a futuro del subsistema `jungle_research/`. Este archivo cubre **qué viene después de V3.7**.  
+El estado actual vive en [`jungle-research-status.md`](jungle-research-status.md).  
+Las decisiones de diseño viven en [`jungle-research-decisions.md`](jungle-research-decisions.md).
 
-> Esta doc complementa `docs/meta_analyzer/README.md` (sección "Jungla 360").
-> El README cuenta el estado actual; este archivo cuenta lo que viene.
+> **Estado actual**: V3.7 (METAsrc extraído, esports integrado, HTML/CSS/JS separado)  
+> **Última actualización**: 2026-05-25 (PR-D cerrado)
+
+---
+
+## 🔄 Fases completadas (referencia)
+
+| Fase | Foco | Status |
+|------|------|--------|
+| **V1** | Scoring + registry + endpoints base | ✅ Cerrada [2026-05-12] |
+| **V2** | Pro players seed + account resolution | ✅ Cerrada [2026-05-12] |
+| **V3** | Adapter chasis + METAsrc V3.7 real | ✅ Cerrada [2026-05-25] |
+| **V4** | Asia meta (KR/CN/JP) | ⏳ Planned |
+
+Ver [`jungle-research-status.md`](jungle-research-status.md) para detalles V1-V3.
 
 ## Estado actual (V1)
 

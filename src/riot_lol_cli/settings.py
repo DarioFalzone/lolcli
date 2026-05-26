@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import os
 
 DEFAULT_DDRAGON_VERSION = "16.9.1"
@@ -13,6 +15,8 @@ DEFAULT_ITEMS_BROWSER_HOST = "0.0.0.0"
 DEFAULT_ITEMS_BROWSER_PORT = 8004
 DEFAULT_PATCH_NOTES_HOST = "0.0.0.0"
 DEFAULT_PATCH_NOTES_PORT = 8005
+DEFAULT_DUO_ANALISER_HOST = "0.0.0.0"
+DEFAULT_DUO_ANALISER_PORT = 8006
 DEFAULT_HOME_HOST = "0.0.0.0"
 DEFAULT_HOME_PORT = 8080
 
@@ -80,6 +84,14 @@ def get_patch_notes_port() -> int:
     return _get_env_int("LOLCLI_PATCH_NOTES_PORT", DEFAULT_PATCH_NOTES_PORT)
 
 
+def get_duo_analiser_host() -> str:
+    return os.getenv("LOLCLI_DUO_ANALISER_HOST", DEFAULT_DUO_ANALISER_HOST)
+
+
+def get_duo_analiser_port() -> int:
+    return _get_env_int("LOLCLI_DUO_ANALISER_PORT", DEFAULT_DUO_ANALISER_PORT)
+
+
 def get_patch_notes_cron_enabled() -> bool:
     """True si LOLCLI_PATCH_NOTES_CRON_ENABLED=1 (default: off)."""
     return os.getenv("LOLCLI_PATCH_NOTES_CRON_ENABLED", "0").strip() in {"1", "true", "True", "yes"}
@@ -99,3 +111,22 @@ def get_home_host() -> str:
 
 def get_home_port() -> int:
     return _get_env_int("LOLCLI_HOME_PORT", DEFAULT_HOME_PORT)
+
+
+# --- MongoDB Atlas export (opcional) ---
+# Ver scripts/export_patch_notes_to_mongo.py y docs/patch_notes_mongo_export.md.
+
+
+def get_mongo_uri() -> str | None:
+    """Connection string MongoDB Atlas. None si no esta configurado."""
+    raw = os.getenv("LOLCLI_MONGO_URI", "").strip()
+    return raw or None
+
+
+def get_mongo_db_name() -> str:
+    return os.getenv("LOLCLI_MONGO_DB", "lolcli_patch_notes")
+
+
+def get_mongo_export_cron_enabled() -> bool:
+    """True si LOLCLI_MONGO_EXPORT_CRON_ENABLED=1 (default: off)."""
+    return os.getenv("LOLCLI_MONGO_EXPORT_CRON_ENABLED", "0").strip() in {"1", "true", "True", "yes"}

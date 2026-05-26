@@ -27,6 +27,10 @@ SCAN_DIRS = (
     "outputs",
     "projects/active",
     ".agent/rules",
+    # JSONs curados por nosotros (NO snapshots de scrapers externos).
+    "data/meta_analyzer/jungle_research",
+    "data/draft_advisor",
+    "data/jungle_meta",
 )
 SCAN_FILES = (
     "AGENTS.md",

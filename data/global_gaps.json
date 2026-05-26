@@ -1,0 +1,98 @@
+[
+  {
+    "source": "jungle_research:pro_accounts",
+    "gap_id": "pending_Peanut",
+    "description": "Falta configurar el Riot ID o Server público para el jugador pro Peanut",
+    "severity": "warning",
+    "detected_at": "2026-05-26T00:18:02.734951Z",
+    "action_required": "Setear el Riot ID en la sub-vista de Pros para Peanut."
+  },
+  {
+    "source": "jungle_research:pro_accounts",
+    "gap_id": "pending_Jankos",
+    "description": "Falta configurar el Riot ID o Server público para el jugador pro Jankos",
+    "severity": "warning",
+    "detected_at": "2026-05-26T00:18:02.739978Z",
+    "action_required": "Setear el Riot ID en la sub-vista de Pros para Jankos."
+  },
+  {
+    "source": "jungle_research:pro_accounts",
+    "gap_id": "pending_XUN",
+    "description": "Falta configurar el Riot ID o Server público para el jugador pro XUN",
+    "severity": "warning",
+    "detected_at": "2026-05-26T00:18:02.742451Z",
+    "action_required": "Setear el Riot ID en la sub-vista de Pros para XUN."
+  },
+  {
+    "source": "jungle_research:pro_accounts",
+    "gap_id": "pending_Tian",
+    "description": "Falta configurar el Riot ID o Server público para el jugador pro Tian",
+    "severity": "warning",
+    "detected_at": "2026-05-26T00:18:02.745026Z",
+    "action_required": "Setear el Riot ID en la sub-vista de Pros para Tian."
+  },
+  {
+    "source": "jungle_research:pro_accounts",
+    "gap_id": "pending_Blaber",
+    "description": "Falta configurar el Riot ID o Server público para el jugador pro Blaber",
+    "severity": "warning",
+    "detected_at": "2026-05-26T00:18:02.747495Z",
+    "action_required": "Setear el Riot ID en la sub-vista de Pros para Blaber."
+  },
+  {
+    "source": "jungle_research:pro_accounts",
+    "gap_id": "pending_Wei",
+    "description": "Falta configurar el Riot ID o Server público para el jugador pro Wei",
+    "severity": "warning",
+    "detected_at": "2026-05-26T00:18:02.749782Z",
+    "action_required": "Setear el Riot ID en la sub-vista de Pros para Wei."
+  },
+  {
+    "source": "jungle_research:pro_accounts",
+    "gap_id": "pending_Pyosik",
+    "description": "Falta configurar el Riot ID o Server público para el jugador pro Pyosik",
+    "severity": "warning",
+    "detected_at": "2026-05-26T00:18:02.752277Z",
+    "action_required": "Setear el Riot ID en la sub-vista de Pros para Pyosik."
+  },
+  {
+    "source": "jungle_research:pro_accounts",
+    "gap_id": "pending_Tarzan",
+    "description": "Falta configurar el Riot ID o Server público para el jugador pro Tarzan",
+    "severity": "warning",
+    "detected_at": "2026-05-26T00:18:02.754697Z",
+    "action_required": "Setear el Riot ID en la sub-vista de Pros para Tarzan."
+  },
+  {
+    "source": "jungle_research:meta_soloq",
+    "gap_id": "jungle_meta_local_missing",
+    "description": "Ningún archivo de patch curado encontrado en data/jungle_meta",
+    "severity": "warning",
+    "detected_at": "2026-05-26T00:18:02.823685Z",
+    "action_required": "Asegurar la existencia de al menos un archivo patch_*.json en data/jungle_meta/."
+  },
+  {
+    "source": "jungle_research:pro_accounts",
+    "gap_id": "pending_Oner",
+    "description": "Falta configurar el Riot ID o Server público para el jugador pro Oner",
+    "severity": "warning",
+    "detected_at": "2026-05-26T00:18:02.732424Z",
+    "action_required": "Setear el Riot ID en la sub-vista de Pros para Oner."
+  },
+  {
+    "source": "jungle_research:pro_accounts",
+    "gap_id": "pending_Kanavi",
+    "description": "Falta configurar el Riot ID o Server público para el jugador pro Kanavi",
+    "severity": "warning",
+    "detected_at": "2026-05-26T00:18:02.737409Z",
+    "action_required": "Setear el Riot ID en la sub-vista de Pros para Kanavi."
+  },
+  {
+    "source": "jungle_research:pro_accounts",
+    "gap_id": "no_key_Canyon",
+    "description": "Resolución de pro player Canyon bloqueada por falta de RIOT_API_KEY",
+    "severity": "warning",
+    "detected_at": "2026-05-26T00:18:02.728446Z",
+    "action_required": "Configurar la API Key en tu archivo .env desde el panel de Riot Developer Portal."
+  }
+]

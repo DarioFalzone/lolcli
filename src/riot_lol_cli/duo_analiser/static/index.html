@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+    <title>Duo Analiser — LoL Jungle Synergies</title>
+    <meta name="description" content="Descubrí las mejores sinergias y campeones dúo entre carriles individuales y la jungla para dominar el mapa en League of Legends.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&family=Anton&display=swap" rel="stylesheet">
+    
+    <!-- Hojas de Estilos centralizadas -->
+    <link rel="stylesheet" href="/design-system/tokens.css">
+    <link rel="stylesheet" href="/design-system/patterns.css">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="app-shell">
+
+<div class="duo-container">
+
+    <!-- ═══════════════════════════════════════════
+         HEADER
+    ══════════════════════════════════════════════ -->
+    <header class="site-header" role="banner">
+        <div class="header-inner">
+            <div class="header-brand">
+                <div class="brand-icon" aria-hidden="true">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 2L28 8V24L16 30L4 24V8L16 2Z" stroke="url(#gHex)" stroke-width="1.5"/>
+                        <path d="M16 7L23 11V19L16 23L9 19V11L16 7Z" fill="url(#gHexFill)" opacity="0.3"/>
+                        <circle cx="16" cy="16" r="4" fill="url(#gCore)"/>
+                        <defs>
+                            <linearGradient id="gHex" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#c89b3c"/>
+                                <stop offset="1" stop-color="#0ac8b9"/>
+                            </linearGradient>
+                            <linearGradient id="gHexFill" x1="9" y1="7" x2="23" y2="23" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#c89b3c"/>
+                                <stop offset="1" stop-color="#0bc6e3"/>
+                            </linearGradient>
+                            <linearGradient id="gCore" x1="12" y1="12" x2="20" y2="20" gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#e4c870"/>
+                                <stop offset="1" stop-color="#0ac8b9"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <h1 class="brand-title">Duo Analiser</h1>
+                    <p class="brand-sub">Sinergias y Dúos con la Jungla</p>
+                </div>
+            </div>
+            <div class="header-meta">
+                <a class="home-hub-link" href="http://localhost:8080/" title="Volver al Home Hub">
+                    <span class="home-hub-link__icon" aria-hidden="true">⌂</span>
+                    <span>Home Hub</span>
+                </a>
+                <span class="pill pill-gold patch-badge" aria-live="polite">
+                    <span class="patch-dot" aria-hidden="true"></span>
+                    <span id="patch-badge-text">PATCH —</span>
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ═══════════════════════════════════════════
+         MAIN LAYOUT
+    ══════════════════════════════════════════════ -->
+    <main class="main-layout" role="main">
+
+        <!-- ── COLUMNA IZQUIERDA: Selector de Campeón ───────── -->
+        <aside class="card panel panel-selector" aria-label="Buscador de campeón">
+            <div class="card-header panel-head">
+                <span class="panel-icon" aria-hidden="true">👤</span>
+                <h2 class="panel-title">Elegir Campeón</h2>
+            </div>
+            
+            <div class="card-body panel-body flex-column-layout">
+                <!-- Buscador de Texto -->
+                <div class="search-wrapper">
+                    <input
+                        type="search"
+                        id="champion-search"
+                        class="search-input"
+                        placeholder="Buscar campeón… (ej. Lux, Yasuo)"
+                        oninput="filterChampions(this.value)"
+                        autocomplete="off"
+                        spellcheck="false"
+                        aria-label="Buscar campeón"
+                    >
+                </div>
+
+                <!-- Botonera de Filtros de Rol -->
+                <nav class="role-filters segmented" aria-label="Filtrar por rol">
+                    <button class="active" data-role="all" onclick="filterByRole('all')" aria-pressed="true">Todos</button>
+                    <button data-role="Top" onclick="filterByRole('Top')" aria-pressed="false">Top</button>
+                    <button data-role="Jungle" onclick="filterByRole('Jungle')" aria-pressed="false">Jungla</button>
+                    <button data-role="Mid" onclick="filterByRole('Mid')" aria-pressed="false">Mid</button>
+                    <button data-role="Bot" onclick="filterByRole('Bot')" aria-pressed="false">ADC</button>
+                    <button data-role="Support" onclick="filterByRole('Support')" aria-pressed="false">Soporte</button>
+                </nav>
+
+                <!-- Grid de Campeones -->
+                <div class="champion-scroll-container">
+                    <div class="champion-grid" id="champion-grid" role="list" aria-label="Lista de campeones">
+                        <!-- Poblado dinámicamente por JS -->
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ── COLUMNA DERECHA: Resultados de Sinergias ───────── -->
+        <section class="results-column" aria-label="Resultados de sinergias">
+            <div class="results-wrapper" id="results-wrapper">
+                
+                <!-- Hero de Foco de Campeón Seleccionado -->
+                <div class="hero-focus card">
+                    <div class="focus-layout">
+                        <div class="focus-portrait-container">
+                            <img id="focus-portrait" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Lux">
+                        </div>
+                        <div class="focus-details">
+                            <span class="focus-role-badge pill pill-cyan" id="focus-role">SUPPORT</span>
+                            <h2 class="focus-name" id="focus-name">Lux</h2>
+                            <p class="focus-title" id="focus-title">the Lady of Luminosity</p>
+                        </div>
+                        <div class="focus-stats">
+                            <div class="focus-stat-card">
+                                <span class="stat-label">Win Rate Solo</span>
+                                <span class="stat-value text-gold" id="focus-winrate">—</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Título e Introducción de la Tabla -->
+                <div class="section-title-bar">
+                    <h3 class="section-title">Recomendaciones de Dúo Jungla</h3>
+                    <p class="section-subtitle">Ordenado por tasa de victoria promedio combinada en SoloQ</p>
+                </div>
+
+                <!-- Tabla de Sinergias -->
+                <div class="card table-wrap">
+                    <table class="data-table duo-table">
+                        <thead>
+                            <tr>
+                                <th class="col-rank">#</th>
+                                <th class="col-jungler">Jungla</th>
+                                <th class="col-wr num">WR Solo</th>
+                                <th class="col-duowr num">Duo Win Rate</th>
+                                <th class="col-synergy num">Sinergía</th>
+                                <th class="col-pick num">Partidas</th>
+                                <th class="col-tier">Tier</th>
+                                <th class="col-action">Análisis</th>
+                            </tr>
+                        </thead>
+                        <tbody id="synergies-table-body">
+                            <!-- Poblado dinámicamente por JS -->
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+</div>
+
+<!-- Scripts -->
+<script src="/static/app.js"></script>
+</body>
+</html>

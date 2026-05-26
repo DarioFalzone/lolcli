@@ -1,0 +1,255 @@
+{
+  "schema_version": "1.0",
+  "last_updated": "2026-05-24",
+  "curated_champions": ["Lux", "Yasuo", "Ahri", "Caitlyn"],
+  "synergies": {
+    "Lux": [
+      {
+        "jungler_id": "Nocturne",
+        "jungler_name": "Nocturne",
+        "base_winrate": 50.8,
+        "jungle_winrate": 51.5,
+        "duo_winrate": 53.75,
+        "synergy_factor": 2.6,
+        "duo_pickrate": 0.85,
+        "matches": 4200,
+        "tier": "S",
+        "advantages": [
+          "La definitiva de Nocturne (Paranoia) niega la visión al rival, lo que te permite encajar tu combo completo de Lux (Q-E-R) de manera ultra segura y a ciegas.",
+          "El atrapamiento a larga distancia de tu Q (Hechizo Luminoso) le regala a Nocturne el tiempo exacto para canalizar su E (Terror Creciente) sin que el rival pueda flashearlo.",
+          "Aportás un escudo bestial (W) que escala espectacular en peleas de equipo, mitigando el daño que Nocturne recibe al zambullirse directo en el carry rival."
+        ]
+      },
+      {
+        "jungler_id": "JarvanIV",
+        "jungler_name": "Jarvan IV",
+        "base_winrate": 50.8,
+        "jungle_winrate": 50.6,
+        "duo_winrate": 52.8,
+        "synergy_factor": 2.1,
+        "duo_pickrate": 1.15,
+        "matches": 5800,
+        "tier": "S",
+        "advantages": [
+          "El Cataclismo (R) de Jarvan IV encierra a los enemigos en una zona circular estrecha, convirtiéndolos en blancos perfectos para el daño en área de tu E y la definitiva Chispa Final (R).",
+          "El knockup rápido del combo E-Q de J4 asegura un control inmediato que te permite conectar tu Q sobre objetivos clave sin chance de fallo.",
+          "La pasiva de Jarvan IV y su capacidad de armarse tanque combinan de perlas con tu hostigamiento de rango, dándote una línea frontal impenetrable en peleas por el dragón."
+        ]
+      },
+      {
+        "jungler_id": "Sejuani",
+        "jungler_name": "Sejuani",
+        "base_winrate": 50.8,
+        "jungle_winrate": 49.8,
+        "duo_winrate": 51.9,
+        "synergy_factor": 1.6,
+        "duo_pickrate": 0.55,
+        "matches": 2400,
+        "tier": "A",
+        "advantages": [
+          "La enorme cantidad de ralentizaciones y aturdimientos de Sejuani te permite mantener las distancias a la perfección y desgastar al enemigo con total tranquilidad.",
+          "La iniciación definitiva con su R (Prisión Glacial) deshabilita al rival el tiempo suficiente para que metas tu combo completo con detonación de pasiva incluida.",
+          "Te da una línea frontal extremadamente sólida y duradera, algo vital para tapar la fragilidad de Lux en el juego medio y tardío."
+        ]
+      },
+      {
+        "jungler_id": "LeeSin",
+        "jungler_name": "Lee Sin",
+        "base_winrate": 50.8,
+        "jungle_winrate": 50.2,
+        "duo_winrate": 51.75,
+        "synergy_factor": 1.25,
+        "duo_pickrate": 2.1,
+        "matches": 11200,
+        "tier": "A",
+        "advantages": [
+          "Una combinación clásica de juego temprano: el daño explosivo de Lee Sin y el hostigamiento de Lux dominan el mapa a base de emboscadas rápidas e invasiones coordinadas.",
+          "Si Lee Sin conecta una buena patada (R - Ira del Dragón) hacia tu posición o contra una pared, te regala un blanco inmóvil ideal para borrarlo con tu R.",
+          "El escudo cruzado (tu W y la W de Lee Sin) le permite hacer zambullidas agresivas bajo torre en los primeros minutos de la partida sin tanto riesgo de morir."
+        ]
+      },
+      {
+        "jungler_id": "Vi",
+        "jungler_name": "Vi",
+        "base_winrate": 50.8,
+        "jungle_winrate": 49.5,
+        "duo_winrate": 51.15,
+        "synergy_factor": 1.0,
+        "duo_pickrate": 0.72,
+        "matches": 3100,
+        "tier": "B",
+        "advantages": [
+          "El botón de 'bloqueo' definitivo: la R de Vi (Asalto y Lesiones) es un control que no se puede esquivar y te asegura un foco inmediato para que descargues tu combo sin pestañear.",
+          "El poder de trituración de armadura de la pasiva de Vi potencia de manera colateral el daño general del equipo si hay escaramuzas largas.",
+          "La sinergia es letal para anular por completo a campeones escurridizos como Yasuo, Katarina o Zed en la línea del medio."
+        ]
+      }
+    ],
+    "Yasuo": [
+      {
+        "jungler_id": "Gragas",
+        "jungler_name": "Gragas",
+        "base_winrate": 49.5,
+        "jungle_winrate": 50.2,
+        "duo_winrate": 52.85,
+        "synergy_factor": 3.0,
+        "duo_pickrate": 1.45,
+        "matches": 8600,
+        "tier": "S",
+        "advantages": [
+          "La R (Barril Explosivo) de Gragas descoloca y lanza por los aires a múltiples enemigos en un área enorme, dándote la chance de meter un Último Aliento (R) demoledor y masivo.",
+          "El desplazamiento con la panza de Gragas (E - Lanzamiento de Barriga) es un knockup rapidísimo de corto enfriamiento que te permite iniciar jugadas en cualquier arbusto.",
+          "Combinación perfecta de daño mágico pesado y daño físico constante, impidiendo que el equipo rival se arme armadura de forma efectiva en el juego temprano."
+        ]
+      },
+      {
+        "jungler_id": "Diana",
+        "jungler_name": "Diana",
+        "base_winrate": 49.5,
+        "jungle_winrate": 50.8,
+        "duo_winrate": 52.4,
+        "synergy_factor": 2.25,
+        "duo_pickrate": 0.95,
+        "matches": 5100,
+        "tier": "S",
+        "advantages": [
+          "La definitiva de Diana (Lluvia de Estrellas) atrae y levanta por el aire a todos los enemigos cercanos a ella en un solo instante, ideal para ganar partidas con tu R de Yasuo.",
+          "Tienen una velocidad de limpieza de oleadas y capacidad de escaramuza 2v2 bestial en el río, lo que les asegura el control total de los primeros vacíos del vacío y escurridizos.",
+          "Diana inicia el daño explosivo en área y Yasuo remata con DPS sostenido y robo de vida, haciendo trizas la línea trasera enemiga."
+        ]
+      },
+      {
+        "jungler_id": "JarvanIV",
+        "jungler_name": "Jarvan IV",
+        "base_winrate": 49.5,
+        "jungle_winrate": 50.6,
+        "duo_winrate": 51.55,
+        "synergy_factor": 1.5,
+        "duo_pickrate": 1.05,
+        "matches": 4900,
+        "tier": "A",
+        "advantages": [
+          "El combo bandera-lanza (E-Q) de Jarvan IV levanta a todos los objetivos en línea recta, dándote una iniciación de rango muy cómoda para colar tu R.",
+          "El Cataclismo de Jarvan encierra a los rivales y tu Muro de Viento (W) puede bloquear todos los proyectiles que intenten tirarle desde afuera para defenderlos.",
+          "La bonificación de velocidad de ataque de la bandera de Jarvan IV te ayuda a alcanzar el límite de enfriamiento de tu Q de Yasuo mucho más rápido en las primeras peleas."
+        ]
+      },
+      {
+        "jungler_id": "LeeSin",
+        "jungler_name": "Lee Sin",
+        "base_winrate": 49.5,
+        "jungle_winrate": 50.2,
+        "duo_winrate": 50.85,
+        "synergy_factor": 1.0,
+        "duo_pickrate": 3.4,
+        "matches": 15600,
+        "tier": "A",
+        "advantages": [
+          "La patada de Lee Sin (R) actúa como un excelente knockup de un solo objetivo (o múltiples si los alinea), habilitando tu definitiva de manera precisa sobre el carry rival.",
+          "Son un dúo hiperactivo en juego temprano: la gran movilidad de ambos les permite rotar al instante a cualquier escaramuza y dominar el mapa a base de puras manos.",
+          "La W de Lee y tu pasiva de escudo te dan una supervivencia extra espectacular en las peleas divididas en el carril central."
+        ]
+      }
+    ],
+    "Ahri": [
+      {
+        "jungler_id": "Nocturne",
+        "jungler_name": "Nocturne",
+        "base_winrate": 51.2,
+        "jungle_winrate": 51.5,
+        "duo_winrate": 53.95,
+        "synergy_factor": 2.6,
+        "duo_pickrate": 1.1,
+        "matches": 6700,
+        "tier": "S",
+        "advantages": [
+          "El combo de cazadas definitivo: cuando Nocturne activa la Paranoia (R), tu movilidad con los dashes de la R y tu Charm (E) te permiten cazar a cualquier rival aislado sin que el equipo enemigo pueda reaccionar.",
+          "La combinación de control es brutal: si metés el Charm de Ahri, le asegurás a Nocturne conectar su Terror Creciente (E) sin que el objetivo pueda flashear a tiempo.",
+          "Aportan un daño mixto (mágico con Ahri y físico con Nocturne) muy difícil de mitigar para los campeones blanditos en el juego medio."
+        ]
+      },
+      {
+        "jungler_id": "Viego",
+        "jungler_name": "Viego",
+        "base_winrate": 51.2,
+        "jungle_winrate": 50.4,
+        "duo_winrate": 52.7,
+        "synergy_factor": 1.9,
+        "duo_pickrate": 1.65,
+        "matches": 8900,
+        "tier": "S",
+        "advantages": [
+          "Ahri aporta el control inicial seguro a media distancia con su Charm (E) para que Viego conecte su aturdimiento de W y empiece a derretir al objetivo con su combo.",
+          "Viego necesita conseguir reinicios de pasiva rápidos para dar vuelta las peleas de equipo; el burst limpio y la movilidad de Ahri aseguran esa primera baja clave al instante.",
+          "Tienen una escaramuza 2v2 impecable y muy ágil que les permite invadir la jungla enemiga y castigar al jungla rival sin recibir respuesta."
+        ]
+      },
+      {
+        "jungler_id": "LeeSin",
+        "jungler_name": "Lee Sin",
+        "base_winrate": 51.2,
+        "jungle_winrate": 50.2,
+        "duo_winrate": 51.9,
+        "synergy_factor": 1.2,
+        "duo_pickrate": 2.8,
+        "matches": 13400,
+        "tier": "A",
+        "advantages": [
+          "La gran movilidad de ambos hace que sea virtualmente imposible cazarlos en el río o la jungla, permitiéndoles jugar al límite constantemente.",
+          "El Charm (E) de Ahri regala el objetivo inmóvil perfecto para que Lee Sin conecte su Onda Sónica (Q) a máximo rango con total seguridad y active su combo explosivo.",
+          "Tienen una capacidad soberbia para denegar visión y presionar las líneas laterales de forma coordinada a partir del nivel 6."
+        ]
+      }
+    ],
+    "Caitlyn": [
+      {
+        "jungler_id": "Morgana",
+        "jungler_name": "Morgana",
+        "base_winrate": 50.1,
+        "jungle_winrate": 48.6,
+        "duo_winrate": 52.35,
+        "synergy_factor": 3.0,
+        "duo_pickrate": 0.45,
+        "matches": 1900,
+        "tier": "S",
+        "advantages": [
+          "La clásica y destructiva 'cadena de CC': si Morgana conecta su Q (Hechizo Oscuro), tenés el tiempo exacto para plantar una trampa (W) bajo los pies del rival y reventarlo con un tiro a la cabeza potenciado.",
+          "El Escudo Negro (E) de Morgana es la salvación de Caitlyn, permitiéndote pegar a máxima distancia en las peleas de equipo sin miedo a que te frenen con algún control.",
+          "Tienen una capacidad de asedio bajo torre opresiva que les permite tirar placas a mansalva y castigar al tirador rival hasta sacarlo de la partida."
+        ]
+      },
+      {
+        "jungler_id": "Sejuani",
+        "jungler_name": "Sejuani",
+        "base_winrate": 50.1,
+        "jungle_winrate": 49.8,
+        "duo_winrate": 51.85,
+        "synergy_factor": 1.9,
+        "duo_pickrate": 0.82,
+        "matches": 3100,
+        "tier": "S",
+        "advantages": [
+          "Sejuani aporta una de las mejores defensas ('peel') de toda la jungla, manteniendo a raya a asesinos y luchadores mientras vos pegás libremente desde atrás con tu enorme rango.",
+          "La helada profunda de la R de Sejuani te permite encajar tu trampa (W) con una comodidad total para asegurar el tiro a la cabeza potenciado.",
+          "Tienen un control de emboscadas defensivas bajo torre brillante, siendo capaces de neutralizar cualquier intento de diveo rival en la zona inferior del mapa."
+        ]
+      },
+      {
+        "jungler_id": "JarvanIV",
+        "jungler_name": "Jarvan IV",
+        "base_winrate": 50.1,
+        "jungle_winrate": 50.6,
+        "duo_winrate": 51.45,
+        "synergy_factor": 1.1,
+        "duo_pickrate": 1.1,
+        "matches": 4200,
+        "tier": "A",
+        "advantages": [
+          "Jarvan IV encierra a los enemigos inmóviles en su Cataclismo (R), lo que te permite plantar trampas justo en los bordes de la pared circular o simplemente castigarlos a tiros desde una distancia segura.",
+          "La bandera de Jarvan aporta una bonificación de velocidad de ataque pasiva tremenda que potencia tu DPS sostenido en peleas grupales.",
+          "Excelente capacidad de desenganche rápido: si el enemigo intenta iniciarles, Jarvan pone la línea frontal y vos usás la red calibre 90 (E) para reposicionarte al instante."
+        ]
+      }
+    ]
+  }
+}

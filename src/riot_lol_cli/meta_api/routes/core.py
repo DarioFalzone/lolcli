@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from fastapi.responses import FileResponse, Response
 
+from riot_lol_cli import gaps_registry
 from riot_lol_cli.meta_api import dependencies
 
 router = APIRouter(tags=["core"])
@@ -63,3 +64,9 @@ async def root():
         "docs": "/docs",
         "openapi": "/openapi.json",
     }
+
+
+@router.get("/api/v1/gaps")
+async def get_global_gaps():
+    """Obtiene la consola consolidada de todos los gaps del repositorio."""
+    return gaps_registry.read_global_gaps()

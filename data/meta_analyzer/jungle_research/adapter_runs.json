@@ -1,13 +1,13 @@
 {
   "schema_version": 1,
-  "last_updated_at": "2026-05-12T03:09:42Z",
+  "last_updated_at": "2026-05-24T20:44:22Z",
   "runs": {
     "metasrc_jungle": {
       "adapter_id": "metasrc_jungle",
-      "status": "not_implemented",
-      "reason": "Adapter stub. Para activar: implementar parse_html() con BeautifulSoup sobre el HTML inicial (METAsrc trae datos en el SSR), validar selectores contra la pagina actual, y eliminar este short-circuit.",
+      "status": "gap",
+      "reason": "http_fetch_failed: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1032)",
       "champion_count": 0,
-      "last_attempted_at": "2026-05-12T03:09:42Z",
+      "last_attempted_at": "2026-05-24T20:44:22Z",
       "source_url": "https://www.metasrc.com/lol/na/tier-list/jungle"
     },
     "mobalytics_jungle_tierlist": {
@@ -15,7 +15,7 @@
       "status": "not_implemented",
       "reason": "Adapter stub. Para activar: usar Playwright (chromium) para renderizar la SPA, esperar selector de tabla de tiers, extraer rows con champion + tier + WR/PR/BR. Mobalytics tiene curacion propia de tier ademas de stats.",
       "champion_count": 0,
-      "last_attempted_at": "2026-05-12T03:09:42Z",
+      "last_attempted_at": "2026-05-24T20:45:34Z",
       "source_url": "https://mobalytics.gg/lol/tier-list/jungle"
     },
     "leagueofgraphs_jungle": {
@@ -23,7 +23,7 @@
       "status": "not_implemented",
       "reason": "Adapter stub. Para activar: parse del HTML inicial con BeautifulSoup, extraer rows de la tabla principal con champion + WR/PR. CUIDADO: LoG tiene rate limit estricto, mantener min_delay >= 8s y respetar 429.",
       "champion_count": 0,
-      "last_attempted_at": "2026-05-12T03:09:42Z",
+      "last_attempted_at": "2026-05-24T20:45:34Z",
       "source_url": "https://www.leagueofgraphs.com/champions/stats/jungle"
     },
     "tracker_gg_lol": {
@@ -31,8 +31,80 @@
       "status": "not_implemented",
       "reason": "Adapter stub. Para activar: inspeccionar Network del SPA, identificar endpoints XHR/JSON internos y consumirlos directo (preferir sobre Playwright). Si no hay endpoints estables, fallback a Playwright.",
       "champion_count": 0,
-      "last_attempted_at": "2026-05-12T03:09:42Z",
+      "last_attempted_at": "2026-05-24T20:45:34Z",
       "source_url": "https://tracker.gg/lol/insights"
+    },
+    "opgg_kr": {
+      "adapter_id": "opgg_kr",
+      "status": "not_implemented",
+      "reason": "Stub. Activar: reusar logica de meta_scraper/adapters/opgg.py cambiando locale ko + filtrar elo=challenger por defecto.",
+      "champion_count": 0,
+      "last_attempted_at": "2026-05-24T06:33:03Z",
+      "source_url": "https://op.gg/ko/lol/statistics/champions"
+    },
+    "opgg_jp": {
+      "adapter_id": "opgg_jp",
+      "status": "not_implemented",
+      "reason": "Stub. Activar: idem opgg_kr con locale ja.",
+      "champion_count": 0,
+      "last_attempted_at": "2026-05-24T06:33:03Z",
+      "source_url": "https://op.gg/ja/lol/statistics/champions"
+    },
+    "opgg_cn": {
+      "adapter_id": "opgg_cn",
+      "status": "not_implemented",
+      "reason": "Stub. Activar: locale zh-cn. CUIDADO: posibles diferencias de payload vs locales latinos por dataset Tencent.",
+      "champion_count": 0,
+      "last_attempted_at": "2026-05-24T06:33:03Z",
+      "source_url": "https://op.gg/zh-cn/lol/statistics/champions"
+    },
+    "porogg_champions": {
+      "adapter_id": "porogg_champions",
+      "status": "not_implemented",
+      "reason": "Stub. Activar: parse del SSR. Tiene JSON embebido en <script id=__NEXT_DATA__>. Preferible eso sobre scraping del DOM.",
+      "champion_count": 0,
+      "last_attempted_at": "2026-05-24T06:33:03Z",
+      "source_url": "https://poro.gg/champions"
+    },
+    "fow_kr": {
+      "adapter_id": "fow_kr",
+      "status": "not_implemented",
+      "reason": "Stub. Activar: parse HTML clasico. CUIDADO con encoding mixto UTF-8/EUC-KR en algunas paginas; usar response.encoding='utf-8' explicito y validar con tests/test_no_mojibake.py antes de persistir.",
+      "champion_count": 0,
+      "last_attempted_at": "2026-05-24T06:33:03Z",
+      "source_url": "https://ss.fow.kr/statistics"
+    },
+    "lolps": {
+      "adapter_id": "lolps",
+      "status": "not_implemented",
+      "reason": "Stub. Activar: SPA, requiere Playwright. Forzar lang=ko en query string. Sospechar de XHR internos antes de ir a browser headless.",
+      "champion_count": 0,
+      "last_attempted_at": "2026-05-24T06:33:03Z",
+      "source_url": "https://lol.ps/statistics?lang=ko"
+    },
+    "deeplol_kr_jungle": {
+      "adapter_id": "deeplol_kr_jungle",
+      "status": "not_implemented",
+      "reason": "Stub. Activar: parse HTML, ranking de jugadores KR jungle.",
+      "champion_count": 0,
+      "last_attempted_at": "2026-05-24T06:33:03Z",
+      "source_url": "https://www.deeplol.gg/ranking/KR/jungle"
+    },
+    "tencent_101": {
+      "adapter_id": "tencent_101",
+      "status": "not_implemented",
+      "reason": "Stub. Activar: SPA, geolock probable desde fuera de CN. Considerar proxy o tratar como fuente opt-in geografica.",
+      "champion_count": 0,
+      "last_attempted_at": "2026-05-24T06:33:03Z",
+      "source_url": "https://101.qq.com/"
+    },
+    "tencent_rank": {
+      "adapter_id": "tencent_rank",
+      "status": "not_implemented",
+      "reason": "Stub. Activar: SPA. Encoding GB18030 (NO UTF-8). Geolock probable. Usar response.encoding='gb18030' explicito y convertir a UTF-8 antes de persistir para evitar romper tests/test_no_mojibake.py.",
+      "champion_count": 0,
+      "last_attempted_at": "2026-05-24T06:33:03Z",
+      "source_url": "https://lol.qq.com/guides/rank.shtml"
     }
   }
 }

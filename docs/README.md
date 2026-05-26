@@ -11,6 +11,8 @@ en `../projects/README.md`.
 | [api-guide.md](api-guide.md) | Riot API y APIs locales |
 | [splash-viewer.md](splash-viewer.md) | Visor de splash arts |
 | [design-system.md](design-system.md) | Tokens CSS y componentes visuales |
+| [anti-gravity-context-prompt.md](anti-gravity-context-prompt.md) | Onboarding para agentes nuevos (Anti Gravity) |
+| [patch_notes_mongo_export.md](patch_notes_mongo_export.md) | Guía de sincronización a MongoDB Atlas desde Patch Notes |
 
 ## Subsistemas
 
@@ -32,6 +34,7 @@ conocida y docs relacionadas.
 | CLI Match History | `../projects/active/cli-match-history/README.md` |
 | Splash Gallery | `../projects/active/splash-gallery/README.md` |
 | Home Hub | `../projects/active/home-hub/README.md` |
+| Duo Analiser | `../projects/active/home-hub/README.md` |
 | Draft Advisor | `../projects/active/draft-advisor/README.md` |
 | Meta Analyzer + Dashboard | `../projects/active/meta-analyzer-dashboard/README.md` |
 | Esports Research | integrado en Meta Analyzer; docs en `esports_research/README.md` |

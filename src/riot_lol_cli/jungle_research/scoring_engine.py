@@ -155,6 +155,7 @@ def score_snapshots(
     region: str,
     elo: str,
     pro_presence: dict[str, float] | None = None,
+    asia_presence: dict[str, float] | None = None,
     previous_scores: dict[str, float] | None = None,
     now: datetime | None = None,
 ) -> list[FinalJungleTierEntry]:
@@ -165,10 +166,12 @@ def score_snapshots(
         snapshots: snapshots de la cohorte (mismo patch, region, elo, queue).
         patch/region/elo: contexto canónico.
         pro_presence: dict champion_name → score 0-1 (opcional, V1 puede ser {}).
+        asia_presence: dict champion_name → score 0-1 (opcional, V4 de Asia presence).
         previous_scores: dict champion_name → score previo (para trend).
         now: inyectable para tests.
     """
     pro_presence = pro_presence or {}
+    asia_presence = asia_presence or {}
     previous_scores = previous_scores or {}
     now = now or datetime.now(timezone.utc)
 
@@ -212,8 +215,9 @@ def score_snapshots(
             0.40 * wr_score + 0.30 * pr_score + 0.10 * br_score + 0.20 * ss_score
         )
 
-        # high_elo y pro placeholder.
-        high_elo_score = 0.0  # V1: pipeline asia no implementado
+        # high_elo (Asia Presence) y pro score.
+        raw_asia = asia_presence.get(champ, 0.0)
+        high_elo_score = max(0.0, min(1.0, raw_asia))  # clamp a [0, 1]
         pro_score = pro_presence.get(champ, 0.0)
 
         # Trend.
@@ -266,7 +270,7 @@ def score_snapshots(
                 final_tier=JungleTier.D,  # asignado en la 2da pasada
                 final_score=final,
                 soloq_score=soloq_score,
-                asia_score=None,
+                asia_score=high_elo_score if champ in asia_presence else None,
                 pro_soloq_score=pro_score if pro_score else None,
                 pro_stage_score=None,
                 otp_score=None,

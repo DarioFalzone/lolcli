@@ -27,6 +27,20 @@ ignore = [
 "scripts/*.py" = ["E402"]  # Scripts con sys.path.insert al inicio
 "src/riot_lol_cli/cli.py" = ["E501"]  # HTML/CSS embebido
 
+[tool.ruff.lint.flake8-bugbear]
+# FastAPI usa Query/Depends/Body/Path como defaults — es el patron canonico
+# y no son mutables, no causan el bug que B008 intenta prevenir.
+extend-immutable-calls = [
+    "fastapi.Query",
+    "fastapi.Depends",
+    "fastapi.Body",
+    "fastapi.Path",
+    "fastapi.Header",
+    "fastapi.Cookie",
+    "fastapi.Form",
+    "fastapi.File",
+]
+
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"

@@ -16,6 +16,7 @@ import os
 from collections.abc import Iterable
 from dataclasses import dataclass
 
+from riot_lol_cli import gaps_registry
 from riot_lol_cli.api import RiotAPIError, RiotClient
 
 logger = logging.getLogger(__name__)
@@ -81,6 +82,13 @@ class RiotBridge:
     ) -> ResolutionResult:
         """Resuelve Riot ID → PUUID. Devuelve gap si no hay key o falla."""
         if not self.api_key:
+            gaps_registry.register_gap(
+                "riot_client",
+                "no_riot_key",
+                "RIOT_API_KEY ausente en el archivo .env",
+                severity="critical",
+                action_required="Configurar la API Key en tu archivo .env desde el panel de Riot Developer Portal.",
+            )
             return ResolutionResult(
                 riot_id_game_name=game_name,
                 riot_id_tagline=tagline,
@@ -106,6 +114,7 @@ class RiotBridge:
                 error=str(exc),
                 gap_flag="riot_api_error",
             )
+        gaps_registry.clear_gap("riot_client", "no_riot_key")
         return ResolutionResult(
             riot_id_game_name=game_name,
             riot_id_tagline=tagline,
