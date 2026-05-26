@@ -6,6 +6,48 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-05-25] PR-D: Tier 3 deuda UI (4 tareas, cierre completo)
+
+**Commit**: `51391c8` refactor(dashboard): extract HTML/CSS/JS + mini-router + drill-down  
+**Estado**: ✅ Completo (550 tests ✓, ruff ✓)
+
+### Tareas completadas
+
+#### 1. Separar jungle-research.js del dashboard.js
+- Extraído: `~680 líneas de jr* functions → jungle-research.js` (nuevo archivo)
+- Remanente: `dashboard.js` → ~380 líneas (tabs, matchups, items, raw-data, modales)
+- Integración: `dashboard_enhanced.py` lee 4 archivos (HTML + CSS + JS + JR JS) y los arma
+
+#### 2. Mini-router hash
+- Implementado: `switchTab(event, tabName)` actualiza `window.location.hash`
+- Listener: `hashchange` event → `jrActivateView(primary, subtab)` restaura estado
+- Format: `#tab` (primary) o `#tab/subtab` (jungle-research internos)
+- Benefit: URLs reproducibles para smoke tests, shareable links
+
+#### 3. Drill-down expandible en tabla Consenso
+- Vista normal: 5 columnas (Caret | Tier | Champion | Score | Confidence+SourceCount)
+- Expandible: Detail row con grid de SoloQ/Asia/HighElo/ProPresence + Warnings + Explanation
+- UX: Click en fila → expande/colapsa detail sin navegación
+- Responsive: Detail row auto-stacks en mobile
+
+#### 4. Split documentación (3 docs nuevas)
+- `jungle-research-status.md` (159 líneas): métricas, features por fase V1-V3, known gaps, próximas iteraciones
+- `jungle-research-decisions.md` (325 líneas): 7 ADRs (storage JSON, scoring ponderado, adapters SSR, pros decoupled, drill-down, extraction, mini-router)
+- `jungle-research-roadmap.md`: actualizado con refs cruzadas + estado V1-V4 (solo futuro V5-V10 visibles)
+
+### Verificación
+- `pytest -q`: 550 passed (41s)
+- `ruff check --fix`: 7 whitespace issues auto-corregidos
+- No regresiones visuales (drill-down es additive, hash router es additive)
+- dashboard_enhanced.py compat 100% (contrato de API preservado)
+
+### Técnico
+- **JS separation**: Mejor maintainability, debugging en DevTools con archivos reales
+- **Hash router**: Vanilla JS, 50 líneas, sin dependencias, cacheable por navegador
+- **Docs**: Decisiones de diseño auditables (ADR-001 a ADR-007), roadmap limpio V5+
+
+---
+
 ## [2026-05-25] PR-D3: Extracción HTML/CSS/JS de dashboard_enhanced.py a archivos
 
 Tier 3 deuda UI estructural: el dashboard mejorado dejó de ser un monolito
