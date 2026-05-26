@@ -43,6 +43,7 @@ SOURCES_FILE = ROOT / "sources.json"
 PRO_PLAYERS_SEED_FILE = ROOT / "pro_players_seed.json"
 PRO_ACCOUNTS_FILE = ROOT / "pro_accounts.json"
 ADAPTER_RUNS_FILE = ROOT / "adapter_runs.json"
+ASIA_PRESENCE_FILE = ROOT / "asia_presence.json"
 
 CHAMPION_SNAPSHOTS_DIR = ROOT / "champion_meta_snapshots"
 CHAMPION_SNAPSHOTS_LATEST = CHAMPION_SNAPSHOTS_DIR / "latest.json"
@@ -225,3 +226,16 @@ def read_pro_players_seed() -> list[dict[str, Any]]:
     if not data:
         return []
     return data.get("players", []) if isinstance(data, dict) else data
+
+
+def save_asia_presence(payload: Any) -> Path:
+    """Persiste la presencia de Asia cacheada (sin rotación)."""
+    ensure_directories()
+    _write_json_atomic(ASIA_PRESENCE_FILE, payload)
+    return ASIA_PRESENCE_FILE
+
+
+def read_asia_presence() -> dict[str, Any]:
+    """Lee la presencia de Asia cacheada. Devuelve {} si no existe."""
+    data = read_json(ASIA_PRESENCE_FILE)
+    return data if isinstance(data, dict) else {}

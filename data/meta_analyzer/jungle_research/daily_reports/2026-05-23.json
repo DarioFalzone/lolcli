@@ -1,0 +1,244 @@
+{
+  "report_date": "2026-05-23",
+  "generated_at": "2026-05-23T23:46:05Z",
+  "patch": "26.9",
+  "top_junglers": [
+    {
+      "champion_name": "Shyvana",
+      "role": "jungle",
+      "final_tier": "S",
+      "final_score": 0.6488888888888888,
+      "soloq_score": 0.8327777777777778,
+      "asia_score": null,
+      "pro_soloq_score": null,
+      "pro_stage_score": null,
+      "otp_score": null,
+      "confidence": 0.7453402342384232,
+      "explanation": "WR p91 PR p72 BR p69 N=267215 sources=3 pro=0.00",
+      "source_count": 3,
+      "warning_flags": [
+        "stale_>72h"
+      ],
+      "generated_at": "2026-05-23T23:46:01.501822Z",
+      "patch": "26.9",
+      "region": "GLOBAL",
+      "elo": "EMERALD_PLUS"
+    },
+    {
+      "champion_name": "Nocturne",
+      "role": "jungle",
+      "final_tier": "S",
+      "final_score": 0.6041666666666666,
+      "soloq_score": 0.7666666666666667,
+      "asia_score": null,
+      "pro_soloq_score": null,
+      "pro_stage_score": null,
+      "otp_score": null,
+      "confidence": 0.5458333333333334,
+      "explanation": "WR p83 PR p66 BR p83 N=180432 sources=1 pro=0.00",
+      "source_count": 1,
+      "warning_flags": [
+        "stale_>72h"
+      ],
+      "generated_at": "2026-05-23T23:46:01.501822Z",
+      "patch": "26.9",
+      "region": "GLOBAL",
+      "elo": "EMERALD_PLUS"
+    },
+    {
+      "champion_name": "Kayn (Slayer / Red)",
+      "role": "jungle",
+      "final_tier": "S",
+      "final_score": 0.5722222222222223,
+      "soloq_score": 0.7361111111111112,
+      "asia_score": null,
+      "pro_soloq_score": null,
+      "pro_stage_score": null,
+      "otp_score": null,
+      "confidence": 0.35833333333333334,
+      "explanation": "WR p94 PR p94 BR p75 N=0 sources=1 pro=0.00",
+      "source_count": 1,
+      "warning_flags": [
+        "stale_>72h"
+      ],
+      "generated_at": "2026-05-23T23:46:01.501822Z",
+      "patch": "26.9",
+      "region": "GLOBAL",
+      "elo": "EMERALD_PLUS"
+    },
+    {
+      "champion_name": "LeeSin",
+      "role": "jungle",
+      "final_tier": "S",
+      "final_score": 0.5611111111111112,
+      "soloq_score": 0.7166666666666666,
+      "asia_score": null,
+      "pro_soloq_score": null,
+      "pro_stage_score": null,
+      "otp_score": null,
+      "confidence": 0.6083333333333334,
+      "explanation": "WR p38 PR p91 BR p86 N=301607 sources=1 pro=0.00",
+      "source_count": 1,
+      "warning_flags": [
+        "stale_>72h"
+      ],
+      "generated_at": "2026-05-23T23:46:01.501822Z",
+      "patch": "26.9",
+      "region": "GLOBAL",
+      "elo": "EMERALD_PLUS"
+    },
+    {
+      "champion_name": "Xin Zhao",
+      "role": "jungle",
+      "final_tier": "S",
+      "final_score": 0.5611111111111111,
+      "soloq_score": 0.7250000000000001,
+      "asia_score": null,
+      "pro_soloq_score": null,
+      "pro_stage_score": null,
+      "otp_score": null,
+      "confidence": 0.35833333333333334,
+      "explanation": "WR p100 PR p88 BR p58 N=0 sources=1 pro=0.00",
+      "source_count": 1,
+      "warning_flags": [
+        "stale_>72h"
+      ],
+      "generated_at": "2026-05-23T23:46:01.501822Z",
+      "patch": "26.9",
+      "region": "GLOBAL",
+      "elo": "EMERALD_PLUS"
+    },
+    {
+      "champion_name": "Graves",
+      "role": "jungle",
+      "final_tier": "S",
+      "final_score": 0.5397222222222222,
+      "soloq_score": 0.6844444444444444,
+      "asia_score": null,
+      "pro_soloq_score": null,
+      "pro_stage_score": null,
+      "otp_score": null,
+      "confidence": 0.5958333333333333,
+      "explanation": "WR p36 PR p86 BR p91 N=274145 sources=1 pro=0.00",
+      "source_count": 1,
+      "warning_flags": [
+        "stale_>72h"
+      ],
+      "generated_at": "2026-05-23T23:46:01.501822Z",
+      "patch": "26.9",
+      "region": "GLOBAL",
+      "elo": "EMERALD_PLUS"
+    },
+    {
+      "champion_name": "Hecarim",
+      "role": "jungle",
+      "final_tier": "A",
+      "final_score": 0.5166666666666666,
+      "soloq_score": 0.6666666666666667,
+      "asia_score": null,
+      "pro_soloq_score": null,
+      "pro_stage_score": null,
+      "otp_score": null,
+      "confidence": 0.35833333333333334,
+      "explanation": "WR p75 PR p100 BR p66 N=0 sources=1 pro=0.00",
+      "source_count": 1,
+      "warning_flags": [
+        "stale_>72h"
+      ],
+      "generated_at": "2026-05-23T23:46:01.501822Z",
+      "patch": "26.9",
+      "region": "GLOBAL",
+      "elo": "EMERALD_PLUS"
+    },
+    {
+      "champion_name": "Naafiri",
+      "role": "jungle",
+      "final_tier": "A",
+      "final_score": 0.5161111111111111,
+      "soloq_score": 0.6427777777777778,
+      "asia_score": null,
+      "pro_soloq_score": null,
+      "pro_stage_score": null,
+      "otp_score": null,
+      "confidence": 0.5333333333333333,
+      "explanation": "WR p52 PR p63 BR p100 N=178187 sources=1 pro=0.00",
+      "source_count": 1,
+      "warning_flags": [
+        "stale_>72h"
+      ],
+      "generated_at": "2026-05-23T23:46:01.501822Z",
+      "patch": "26.9",
+      "region": "GLOBAL",
+      "elo": "EMERALD_PLUS"
+    },
+    {
+      "champion_name": "Udyr",
+      "role": "jungle",
+      "final_tier": "A",
+      "final_score": 0.5027777777777778,
+      "soloq_score": 0.6444444444444444,
+      "asia_score": null,
+      "pro_soloq_score": null,
+      "pro_stage_score": null,
+      "otp_score": null,
+      "confidence": 0.35833333333333334,
+      "explanation": "WR p97 PR p69 BR p47 N=0 sources=1 pro=0.00",
+      "source_count": 1,
+      "warning_flags": [
+        "stale_>72h"
+      ],
+      "generated_at": "2026-05-23T23:46:01.501822Z",
+      "patch": "26.9",
+      "region": "GLOBAL",
+      "elo": "EMERALD_PLUS"
+    },
+    {
+      "champion_name": "MasterYi",
+      "role": "jungle",
+      "final_tier": "A",
+      "final_score": 0.5011111111111112,
+      "soloq_score": 0.6227777777777778,
+      "asia_score": null,
+      "pro_soloq_score": null,
+      "pro_stage_score": null,
+      "otp_score": null,
+      "confidence": 0.5083333333333333,
+      "explanation": "WR p63 PR p52 BR p88 N=148128 sources=1 pro=0.00",
+      "source_count": 1,
+      "warning_flags": [
+        "stale_>72h"
+      ],
+      "generated_at": "2026-05-23T23:46:01.501822Z",
+      "patch": "26.9",
+      "region": "GLOBAL",
+      "elo": "EMERALD_PLUS"
+    }
+  ],
+  "risers": [],
+  "fallers": [],
+  "pro_recent_picks": [],
+  "contradictions": [],
+  "soloq_vs_pro_diff": [],
+  "confidence_summary": {
+    "min": 0.35833333333333334,
+    "max": 0.7453402342384232,
+    "avg": 0.44027582948822225
+  },
+  "gaps": [
+    "Page.evaluate: SyntaxError: Unexpected end of input\n    at eval (<anonymous>)\n    at UtilityScript.evaluate (<anonymous>:290:30)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+    "1 campeones filtrados por no pertenecer al rol jungle",
+    "metasrc_jungle: Adapter stub. Para activar: implementar parse_html() con BeautifulSoup sobre el HTML inicial (METAsrc trae datos en el SSR), validar selecto",
+    "mobalytics_jungle_tierlist: Adapter stub. Para activar: usar Playwright (chromium) para renderizar la SPA, esperar selector de tabla de tiers, extraer rows con champion",
+    "leagueofgraphs_jungle: Adapter stub. Para activar: parse del HTML inicial con BeautifulSoup, extraer rows de la tabla principal con champion + WR/PR. CUIDADO: LoG ",
+    "tracker_gg_lol: Adapter stub. Para activar: inspeccionar Network del SPA, identificar endpoints XHR/JSON internos y consumirlos directo (preferir sobre Play",
+    "opgg_kr: Stub. Activar: reusar logica de meta_scraper/adapters/opgg.py cambiando locale ko + filtrar elo=challenger por defecto.",
+    "opgg_jp: Stub. Activar: idem opgg_kr con locale ja.",
+    "opgg_cn: Stub. Activar: locale zh-cn. CUIDADO: posibles diferencias de payload vs locales latinos por dataset Tencent.",
+    "porogg_champions: Stub. Activar: parse del SSR. Tiene JSON embebido en <script id=__NEXT_DATA__>. Preferible eso sobre scraping del DOM.",
+    "fow_kr: Stub. Activar: parse HTML clasico. CUIDADO con encoding mixto UTF-8/EUC-KR en algunas paginas; usar response.encoding='utf-8' explicito y va",
+    "lolps: Stub. Activar: SPA, requiere Playwright. Forzar lang=ko en query string. Sospechar de XHR internos antes de ir a browser headless.",
+    "deeplol_kr_jungle: Stub. Activar: parse HTML, ranking de jugadores KR jungle.",
+    "tencent_101: Stub. Activar: SPA, geolock probable desde fuera de CN. Considerar proxy o tratar como fuente opt-in geografica.",
+    "tencent_rank: Stub. Activar: SPA. Encoding GB18030 (NO UTF-8). Geolock probable. Usar response.encoding='gb18030' explicito y convertir a UTF-8 antes de p"
+  ]
+}

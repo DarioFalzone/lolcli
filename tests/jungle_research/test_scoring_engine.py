@@ -106,6 +106,42 @@ def test_multiple_sources_aggregated_per_champion():
     assert entries[0].source_count == 3
 
 
+def test_asia_presence_lifts_score_via_high_elo_weight():
+    """Hook V4: asia_presence alimenta el peso `high_elo_presence` (0.10)."""
+    snaps = [_snap("Wukong", win_rate=50.0), _snap("Other", win_rate=50.0)]
+    no_asia = score_snapshots(
+        snaps, patch="14.10", region="GLOBAL", elo="EMERALD_PLUS", now=NOW
+    )
+    with_asia = score_snapshots(
+        snaps,
+        patch="14.10",
+        region="GLOBAL",
+        elo="EMERALD_PLUS",
+        asia_presence={"Wukong": 1.0},
+        now=NOW,
+    )
+    a = next(e for e in no_asia if e.champion_name == "Wukong")
+    b = next(e for e in with_asia if e.champion_name == "Wukong")
+    assert b.final_score > a.final_score
+    # asia_score llenado en el entry final.
+    assert b.asia_score == 1.0
+    assert a.asia_score is None
+
+
+def test_asia_presence_clamps_to_unit_interval():
+    snaps = [_snap("X")]
+    entries = score_snapshots(
+        snaps,
+        patch="14.10",
+        region="GLOBAL",
+        elo="EMERALD_PLUS",
+        asia_presence={"X": 5.0},  # fuera de rango
+        now=NOW,
+    )
+    # Debe quedar clampeado a 1.0; no debe romper.
+    assert entries[0].asia_score == 1.0
+
+
 def test_pro_presence_lifts_score():
     snaps = [_snap("Wukong", win_rate=50.0), _snap("Other", win_rate=50.0)]
     entries_no_pro = score_snapshots(

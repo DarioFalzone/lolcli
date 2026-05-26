@@ -14,17 +14,19 @@ from pathlib import Path
 _STATIC_DIR = Path(__file__).parent / "meta_api" / "static" / "dashboard-enhanced"
 _CSS_PATH = _STATIC_DIR / "dashboard.css"
 _JS_PATH = _STATIC_DIR / "dashboard.js"
+_JR_JS_PATH = _STATIC_DIR / "jungle-research.js"
 _HTML_PATH = _STATIC_DIR / "index.html"
 
 
 def _build_dashboard_html() -> str:
-    """Lee los 3 archivos extraídos y sustituye placeholders."""
+    """Lee los 4 archivos extraídos y sustituye placeholders."""
     css = _CSS_PATH.read_text(encoding="utf-8")
     js = _JS_PATH.read_text(encoding="utf-8")
+    jr_js = _JR_JS_PATH.read_text(encoding="utf-8")
     html = _HTML_PATH.read_text(encoding="utf-8")
     return html.replace("/* {{DASHBOARD_CSS}} */", css).replace(
         "/* {{DASHBOARD_JS}} */", js
-    )
+    ).replace("/* {{JUNGLE_RESEARCH_JS}} */", jr_js)
 
 
 ENHANCED_DASHBOARD_HTML = _build_dashboard_html()

@@ -25,7 +25,7 @@ python main.py --platform la2 --summoner "Nombre#TAG" --html-template claude-4-5
 scripts\bat\levantar_todo.bat
 ```
 
-En Linux/macOS: `source .venv/bin/activate`. Ver [docs/getting-started.md](docs/getting-started.md).
+En Linux/macOS: `source .venv/bin/activate`. Ver la guía de [onboarding_rapido.md](docs/onboarding_rapido.md) o [docs/getting-started.md](docs/getting-started.md).
 
 ## Catalogo de proyectos
 
@@ -185,6 +185,7 @@ ruff format --check src tests scripts
 | Documento | Uso |
 |-----------|-----|
 | [AGENTS.md](AGENTS.md) | Mapa maestro detallado para agentes IA (subsistemas, gotchas, flujos) |
+| [docs/onboarding_rapido.md](docs/onboarding_rapido.md) | Onboarding rápido y mapa maestro del ecosistema en 3 minutos |
 | [projects/README.md](projects/README.md) | Indice por proyectos activos y legacy |
 | [docs/README.md](docs/README.md) | Indice de documentacion tecnica |
 | [docs/getting-started.md](docs/getting-started.md) | Setup y primeros pasos |

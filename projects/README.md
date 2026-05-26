@@ -16,9 +16,10 @@ pueden vivir fisicamente dentro de `projects/active/` o `projects/legacy/`.
 | Proyecto | Manifest | Codigo, datos o artefactos reales |
 |----------|----------|------------------------------------|
 | CLI Match History | `active/cli-match-history/README.md` | `main.py`, `src/riot_lol_cli/cli.py`, `src/riot_lol_cli/api.py`, `src/riot_lol_cli/rendering.py`, `templates/`, `data/cache/` |
-| Patch Notes Viewer | `active/patch-notes/README.md` | `src/riot_lol_cli/patch_notes/`, `data/patch_notes/`, `tests/patch_notes/`, `scripts/seed_patch_notes_from_legacy.py` |
+| Patch Notes Viewer | `active/patch-notes/README.md` | `src/riot_lol_cli/patch_notes/`, `data/patch_notes/`, `tests/patch_notes/`, `scripts/seed_patch_notes_from_legacy.py`, `scripts/export_patch_notes_to_mongo.py` |
 | Splash Gallery | `active/splash-gallery/README.md` | `src/riot_lol_cli/splash.py`, `templates/splash-viewer.html`, `assets/splash_arts/`, `data/ddragon-splash-catalog.json`, `data/splash-manifest.json`, `outputs/splash-viewer.html` |
 | Home Hub | `active/home-hub/README.md` | `src/riot_lol_cli/home/`, `scripts/bat/home.bat`, `scripts/bat/levantar_todo.bat` |
+| Duo Analiser | `active/home-hub/README.md` | `src/riot_lol_cli/duo_analiser/`, `data/duo_analiser/synergies.json`, `tests/duo_analiser/` |
 | Draft Advisor | `active/draft-advisor/README.md` | `src/riot_lol_cli/draft_advisor/`, `data/draft_advisor/`, `KB/`, `tests/draft_advisor/` |
 | Meta Analyzer + Dashboard | `active/meta-analyzer-dashboard/README.md` | `src/riot_lol_cli/meta_api/`, `src/riot_lol_cli/meta_analyzer/`, `src/riot_lol_cli/database/`, `src/riot_lol_cli/dashboard*.py`, `data/meta_analyzer.db` |
 | Esports Research | `active/meta-analyzer-dashboard/README.md` | `src/riot_lol_cli/esports_research/`, `src/riot_lol_cli/meta_api/routes/esports.py`, `src/riot_lol_cli/meta_api/static/esports/`, `data/esports_research/`, `tests/esports_research/` |

@@ -30,3 +30,8 @@ playwright>=1.40.0
 # apscheduler: cron in-process opcional (LOLCLI_PATCH_NOTES_CRON_ENABLED=1).
 beautifulsoup4>=4.12.0
 apscheduler>=3.10.0
+
+# Patch Notes -> MongoDB Atlas export (opcional)
+# Solo necesario para scripts/export_patch_notes_to_mongo.py.
+# El script aborta con exit code 2 si pymongo no está instalado.
+pymongo>=4.6,<5
