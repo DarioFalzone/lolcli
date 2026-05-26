@@ -15,14 +15,14 @@ client = TestClient(app)
 def test_synergies_json_encoding_and_no_bom():
     """Verifica que data/duo_analiser/synergies.json exista, sea UTF-8 válido y no tenga BOM."""
     assert _SYNERGIES_FILE.exists(), f"Falta el archivo: {_SYNERGIES_FILE}"
-    
+
     # Comprobar marca de orden de bytes (BOM)
     with open(_SYNERGIES_FILE, "rb") as f:
         raw = f.read(4)
         assert raw[:3] != codecs.BOM_UTF8, "El archivo synergies.json tiene BOM de UTF-8 indeseado."
-    
+
     # Comprobar validez de decodificación JSON en UTF-8 puro
-    with open(_SYNERGIES_FILE, "r", encoding="utf-8") as f:
+    with open(_SYNERGIES_FILE, encoding="utf-8") as f:
         data = json.load(f)
         assert data.get("schema_version") == "1.0"
         assert "Lux" in data.get("synergies", {})
@@ -68,11 +68,11 @@ def test_api_get_synergies_curated_lux():
     resp = client.get("/api/v1/duo/synergies/Lux")
     assert resp.status_code == 200
     data = resp.json()
-    
+
     assert data["champion_id"] == "Lux"
     assert data["display_name"] == "Lux"
     assert len(data["synergies"]) > 0
-    
+
     # Nocturne debe ser una recomendación
     noc = next((s for s in data["synergies"] if s["jungler_id"] == "Nocturne"), None)
     assert noc is not None
@@ -88,10 +88,10 @@ def test_api_get_synergies_fallback_dynamic():
     resp = client.get("/api/v1/duo/synergies/Aatrox")
     assert resp.status_code == 200
     data = resp.json()
-    
+
     assert data["champion_id"] == "Aatrox"
     assert len(data["synergies"]) == 5  # Debe tener 5 junglers fallback
-    
+
     # Comprobar determinismo: consultar de nuevo y verificar igualdad estadística
     resp2 = client.get("/api/v1/duo/synergies/Aatrox")
     data2 = resp2.json()
