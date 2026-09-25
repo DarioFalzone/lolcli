@@ -10,14 +10,14 @@ lado: azul a la izquierda y rojo a la derecha.
 |------|--------|
 | `design-system/` | Copia versionada de los archivos del artifact Rift Duel: `tokens.json`, `README.md` (reglas de uso), `design-system.json` (índice) y `components/` (`bundle.css`, previews y README de cada componente, y la portada). |
 | `build_gallery.py` | Genera `gallery.html` a partir de `design-system/`. |
-| `gallery.html` | Galería local generada: portada, colores, tipografía y los 17 componentes. No editar a mano. |
+| `gallery.html` | Galería local generada y autocontenida: portada, colores, tipografía y los 17 componentes. No editar a mano. |
 
 El prompt para Claude Design está en `../rift-duel-prompt.md`.
 
 ## Cómo verlo
 
 - **Página oficial:** https://claude.ai/artifact/2pYJqbC4tHCaMhQ5Umiu2N. Es privada: se abre con la cuenta de claude.ai dueña del artifact.
-- **Local:** abrir `gallery.html` con doble clic, desde esta carpeta, porque usa `design-system/` que está al lado. Solo necesita internet para las fuentes de Google Fonts.
+- **Local:** abrir `gallery.html` con doble clic. Es autocontenido: lleva el CSS adentro, no usa iframes ni JavaScript, y se ve igual aunque lo copies a otra carpeta o lo abras desde un visor de archivos. Solo necesita internet para las fuentes de Google Fonts.
 - **Regenerar la galería** después de cambiar algo en `design-system/`:
 
 ```powershell

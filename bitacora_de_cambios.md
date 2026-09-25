@@ -6,6 +6,29 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-09-25] Fix: galería local de Rift Duel sin estilos fuera de su carpeta
+
+### Qué se hizo
+- `gallery.html` pasa a ser autocontenido: los tokens compilados y `bundle.css` van dentro de la página una sola vez, los 17 componentes se dibujan directo en la página (sin iframes) y la portada va inline con su CSS encerrado en `.rd-cover-inline`. Ya no usa JavaScript. Pesa 75 KB (antes 163 KB).
+- Las reglas propias de la galería apuntan solo a hijos directos (`.rd-comp > h3`, `.rd-comp > p`) para no pisar los estilos de los componentes.
+
+### Causa raíz
+- La versión anterior enlazaba `design-system/components/bundle.css` por ruta relativa, desde la página y desde cada iframe. Abierta sin esa carpeta al lado (visor de archivos, copia suelta del HTML), la página quedaba blanca y los componentes, en texto negro sobre fondo negro: 1 de 18 previews con estilo.
+- Además, el alto de cada iframe lo ajustaba un script. Sin JavaScript quedaban 4 componentes cortados (Banner, GameResult, VersusHero, ChampionTile).
+- El render local de la iteración anterior no lo detectó porque se probó solo desde la carpeta del repo. Ahora la verificación cubre los tres casos.
+
+### Verificación
+- Script de verificación con Chromium y Playwright, fuera del repo: 26 chequeos de estilos computados, uno o más por componente, más portada, swatches y ausencia de iframes y de scroll horizontal. Da 26/26 en los tres casos: desde la carpeta del repo, copia suelta en una carpeta vacía y con JavaScript desactivado.
+- `ruff check` y `ruff format` sin cambios pendientes en `build_gallery.py`.
+
+### Archivos modificados
+- `claude-design-handoff/rift-duel/build_gallery.py` — genera la página autocontenida.
+- `claude-design-handoff/rift-duel/gallery.html` — regenerado.
+- `claude-design-handoff/rift-duel/README.md` — "Cómo verlo" ya no pide abrir la galería desde la carpeta.
+- `bitacora_de_cambios.md` — esta entrada.
+
+---
+
 ## [2026-09-25] Rift Duel: prompt de Claude Design y design system para serie 1v1 Bo3
 
 ### Qué se hizo
