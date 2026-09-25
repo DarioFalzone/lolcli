@@ -6,6 +6,44 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-09-25] Rift Duel: fondo con franjas del main, tarjetas verticales y datos de prueba
+
+### Qué se hizo
+- Se sacó el avatar que iba al lado del nombre: por ahora no hay íconos de jugador.
+- Campo opcional `main` por jugador en `fixture.json`, validado contra el catálogo con sugerencia si está mal escrito.
+  - Detrás de cada mitad del VersusHero, desde el borde hasta el "vs", van 6 franjas verticales con splash del main: el Classic y los 5 más nuevos por `skinNum`.
+  - Las franjas llevan velos oscuros, más fuertes abajo y hacia el centro, para no tapar nombres, tarjetas ni el "vs".
+  - En la fila de tags aparece el chip "Main X". Esos tags y pills llevan fondo oscuro, y los nombres un halo.
+- Pool: tarjetas verticales 4:5 a todo el ancho de la columna (196×245 a 1440px; antes ~190×118).
+  - La imagen se ve completa, sin texto encima. El nombre y "Usado en Pn" van abajo.
+  - La atenuación Fearless solo corre mientras la serie está en juego. Los "Por elegir" son semitransparentes.
+- Regla en la cabecera: una sola condición por partida, gana el primero que la consigue. El modelo ya guardaba una condición y un minuto por partida.
+- Datos de prueba en el 01, cargados por un subagente en un worktree aparte: Cuex, main Yasuo (Yasuo, Zed, Yone), le gana 2-1 a Mingo, main Akali (Akali, Katarina, Qiyana).
+  - P1: Akali, First Blood, 04:12.
+  - P2: Zed, Primera torre, 10:47.
+  - P3: Yone, 100 CS, 08:53.
+- `--pages` también copia los splash de las franjas. Rama `gh-pages` (`de0e9f0`): 16 splash, 2,8 MB.
+
+### Verificación
+- `ruff check` y `ruff format` limpios.
+- 11/11 casos negativos pasan. El nuevo: con el main mal escrito ("Yasou"), sugiere Yasuo. El caso de alias da OK y `fixture.html` no se toca.
+- Chromium (Playwright, fuentes locales), en el 01:
+  - 24/24 imágenes: 12 franjas, 6 tarjetas y 6 retratos.
+  - El hero mide 1366px con el "vs" en 683; la franja azul va de 1 a 682 y la roja de 685 a 1365.
+  - Tarjetas de 196×245 a 1440px y 92×115 a 390px. Ningún texto encima de la imagen y las pools alineadas (0px).
+  - Sin scroll horizontal a 1440 ni a 390px. Capturas revisadas.
+- `scripts/visual_smoke.py` contra `serve_fixture.py` (puerto 8017): OK, sin mojibake.
+  - En este contenedor hizo falta un wrapper de Chromium con `--no-sandbox`, porque corre como root.
+  - Google Fonts no carga por el proxy, así que se ve la fuente de reemplazo.
+- `index.html` de gh-pages: 16 referencias de imagen, ninguna faltante.
+- `pytest` no se corrió: no está instalado en este entorno y no hay `.venv`. El cambio no toca código cubierto por tests.
+
+### Archivos modificados
+- `claude-design-handoff/rift-duel/build_fixture.py`, `fixture.json`, `fixture.html` (regenerado), `README.md`.
+- `bitacora_de_cambios.md`.
+
+---
+
 ## [2026-09-25] Rift Duel: nombres dorado/plateado, tarjetas grandes y plantilla limpia
 
 ### Qué se hizo

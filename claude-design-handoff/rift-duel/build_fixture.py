@@ -5,12 +5,14 @@ Uso, desde la raiz del repo:
     python claude-design-handoff/rift-duel/build_fixture.py otro.json --out otro.html
     python claude-design-handoff/rift-duel/build_fixture.py --pages ../lolcli-pages
 
-Lee fixture.json y valida los datos: pools, regla Fearless, marcador de la serie
-y nombres de campeon contra el catalogo de Data Dragon del repo. Despues genera
-una pagina estatica (CSS adentro, sin iframes ni JavaScript). Los retratos son
-los splash arts Classic que ya estan en assets/splash_arts/. Con --pages escribe
-index.html en la carpeta de la rama gh-pages y copia al lado solo los splash que
-usa. Si hay errores, los lista todos, sale con codigo 1 y no toca el HTML anterior.
+Lee fixture.json y valida los datos: pools, main de cada jugador, regla Fearless,
+marcador de la serie y nombres de campeon contra el catalogo de Data Dragon del
+repo. Despues genera una pagina estatica (CSS adentro, sin iframes ni JavaScript).
+Las tarjetas de la pool usan el splash Classic de assets/splash_arts/; detras de
+cada jugador van 6 franjas verticales con splash de su main (el Classic y los mas
+nuevos). Con --pages escribe index.html en la carpeta de la rama gh-pages y copia
+al lado solo los splash que usa. Si hay errores, los lista todos, sale con codigo 1
+y no toca el HTML anterior.
 """
 
 from __future__ import annotations
@@ -46,10 +48,12 @@ SIDE_TAG = {"blue": "Lado azul", "red": "Lado rojo"}
 CONDITIONS = {"first_blood": "First Blood", "cs_100": "100 CS", "first_tower": "Primera torre"}
 WINS_NEEDED = 2
 MAX_GAMES = 3
+STRIPS = 6  # franjas de splash del main detras de cada jugador
 
-# Composicion propia del fixture: grillas, hero compacto, tarjetas de campeon, slots
-# pendientes y responsive. Todo sale de los tokens del design system, salvo los
-# degrades metalicos de los nombres (dorado lado azul, plateado lado rojo).
+# Composicion propia del fixture: grillas, hero compacto con el fondo de franjas del
+# main, tarjetas de campeon, slots pendientes y responsive. Todo sale de los tokens del
+# design system, salvo los degrades metalicos de los nombres (dorado lado azul,
+# plateado lado rojo) y los velos oscuros que mantienen legible lo que va encima.
 PAGE_CSS = """
 :root {
   --fx-gold-metal: linear-gradient(180deg, #fff6d8 0%, #f0e6d2 22%, #dcbc6c 46%, #c89b3c 62%, #8f6d2e 100%);
@@ -74,51 +78,69 @@ PAGE_CSS = """
 .fx-match-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
 .fx-match-title { margin: 0; font-family: var(--font-display); font-size: var(--font-display-sm);
   font-weight: var(--weight-bold); color: var(--arc-gold-bright); letter-spacing: var(--tracking-tight); }
-.fx-versus { padding: var(--space-6); margin-bottom: 0; border-radius: var(--radius-md); }
+.fx-versus { padding: var(--space-6); margin-bottom: 0; border-radius: var(--radius-md); isolation: isolate; }
+.fx-versus > .fx-versus-bg { position: absolute; inset: 0; z-index: 0; display: grid; grid-template-columns: 1fr 1fr;
+  column-gap: 3px; pointer-events: none; }
+.fx-bg { position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 3px; min-width: 0; }
+.fx-bg img { width: 100%; height: 100%; min-width: 0; object-fit: cover; object-position: 50% 20%; opacity: 0.6; }
+.fx-bg::after { content: ""; position: absolute; inset: 0; }
+.fx-bg.side-blue::after { background: linear-gradient(90deg, rgba(1, 10, 19, 0) 50%, rgba(1, 10, 19, 0.7) 100%),
+  linear-gradient(180deg, rgba(1, 10, 19, 0.15) 0%, rgba(1, 10, 19, 0.5) 40%, rgba(1, 10, 19, 0.85) 100%); }
+.fx-bg.side-red::after { background: linear-gradient(270deg, rgba(1, 10, 19, 0) 50%, rgba(1, 10, 19, 0.7) 100%),
+  linear-gradient(180deg, rgba(1, 10, 19, 0.15) 0%, rgba(1, 10, 19, 0.5) 40%, rgba(1, 10, 19, 0.85) 100%); }
 .fx-versus-grid { display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: var(--space-6); }
 .fx-player { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; }
 .fx-player.side-red { align-items: flex-end; text-align: right; }
-.fx-player-head { display: flex; align-items: center; gap: var(--space-4); }
-.fx-player.side-red .fx-player-head { flex-direction: row-reverse; }
 .fx-player-id { display: flex; flex-direction: column; gap: var(--space-1); min-width: 0; }
 .fx-player.side-red .fx-player-id { align-items: flex-end; }
-.fx-tagrow { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); min-height: 22px; }
+.fx-tagrow { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); min-height: 26px; }
 .fx-player.side-red .fx-tagrow { flex-direction: row-reverse; }
+.fx-main { padding: 2px var(--space-2); border: 1px solid var(--border-metal); border-radius: var(--radius-pill);
+  background: rgba(1, 10, 19, 0.7); font-family: var(--font-display); font-size: var(--font-caption);
+  font-weight: var(--weight-semibold); line-height: 1.3; letter-spacing: var(--tracking-wide);
+  text-transform: uppercase; color: var(--text-secondary); }
+.fx-main b { color: var(--text-primary); }
+.fx-versus .fx-tagrow .side-tag { padding: 2px var(--space-2); border-radius: var(--radius-pill);
+  background: rgba(1, 10, 19, 0.7); }
+.fx-versus .fx-tagrow .pill { background: rgba(1, 10, 19, 0.8); }
 .fx-name { display: inline-block; padding-right: 0.12em; font-family: var(--font-anton); font-style: italic;
   font-weight: var(--weight-regular); font-size: clamp(2.4rem, 3.6vw, 3.4rem); line-height: 1.05;
   letter-spacing: var(--tracking-hero); text-transform: uppercase; overflow-wrap: anywhere;
   color: transparent; -webkit-text-fill-color: transparent; -webkit-background-clip: text; background-clip: text; }
 .fx-player.side-blue .fx-name { background-image: var(--fx-gold-metal);
-  filter: drop-shadow(0 2px 0 rgba(1, 10, 19, 0.9)) drop-shadow(0 0 16px rgba(200, 155, 60, 0.5)); }
+  filter: drop-shadow(0 2px 0 rgba(1, 10, 19, 0.9)) drop-shadow(0 0 6px rgba(1, 10, 19, 0.8))
+    drop-shadow(0 0 16px rgba(200, 155, 60, 0.45)); }
 .fx-player.side-red .fx-name { background-image: var(--fx-silver-metal);
-  filter: drop-shadow(0 2px 0 rgba(1, 10, 19, 0.9)) drop-shadow(0 0 16px rgba(205, 215, 225, 0.4)); }
+  filter: drop-shadow(0 2px 0 rgba(1, 10, 19, 0.9)) drop-shadow(0 0 6px rgba(1, 10, 19, 0.8))
+    drop-shadow(0 0 16px rgba(205, 215, 225, 0.35)); }
 .series-side.side-blue .series-name, .result-side.side-blue:not(.loser) strong { color: var(--arc-gold-text); }
 .series-side.side-red .series-name, .result-side.side-red:not(.loser) strong { color: var(--fx-silver-text); }
 .fx-vs { align-self: center; font-family: var(--font-anton); font-style: italic; font-size: var(--font-display-lg);
-  text-transform: uppercase; }
-.champ-portrait.fx-avatar { width: 72px; height: 72px; flex: none; font-size: var(--font-display-md); }
-.fx-player.winner .fx-avatar { border-color: var(--arc-gold); box-shadow: var(--glow-gold); }
-.fx-player.loser .fx-name { filter: saturate(0.3) brightness(0.7) drop-shadow(0 2px 0 rgba(1, 10, 19, 0.9)); }
-.fx-player.loser .fx-avatar { background: var(--surface-raised); }
-.fx-pool { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); width: 100%;
-  max-width: 600px; }
-.fx-card { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--radius-md);
-  border: 1px solid var(--arc-gold-dark); background: var(--side-deep, var(--surface-raised)); box-shadow: var(--elevation-1); }
-.fx-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%;
+  text-transform: uppercase; text-shadow: 0 2px 12px rgba(1, 10, 19, 0.9); }
+.fx-player.loser .fx-name { filter: saturate(0.3) brightness(0.7) drop-shadow(0 2px 0 rgba(1, 10, 19, 0.9))
+  drop-shadow(0 0 6px rgba(1, 10, 19, 0.8)); }
+.fx-pool { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); width: 100%; }
+.fx-card { display: flex; flex-direction: column; min-width: 0; margin: 0; overflow: hidden; border-radius: var(--radius-md);
+  border: 1px solid var(--arc-gold-dark); background: rgba(1, 10, 19, 0.78); box-shadow: var(--elevation-2); }
+.fx-card-art { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--side-deep, var(--surface-raised)); }
+.fx-card-art img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%;
   transition: transform var(--motion-slow); }
-.fx-card:hover img { transform: scale(1.05); }
+.fx-card:hover .fx-card-art img { transform: scale(1.04); }
 .fx-card-glyph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
   font-family: var(--font-display); font-size: var(--font-display-lg); font-weight: var(--weight-bold);
   color: var(--text-primary); }
-.fx-card-name { position: absolute; left: 0; right: 0; bottom: 0; padding: var(--space-6) var(--space-2) var(--space-2);
-  background: linear-gradient(180deg, transparent, rgba(1, 10, 19, 0.92)); font-family: var(--font-display);
-  font-size: var(--font-body-sm); font-weight: var(--weight-bold); color: var(--text-primary); text-align: center;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8); }
-.fx-card-flag { position: absolute; top: var(--space-2); left: var(--space-2); background: rgba(1, 10, 19, 0.88); }
-.fx-card.used img { filter: grayscale(0.5) brightness(0.8); }
-.fx-card.empty { background: var(--forge-darker); border: 1px dashed var(--border-metal); box-shadow: none; }
+.fx-card-name { display: flex; flex: 1; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: var(--space-1) var(--space-2); padding: var(--space-2); border-top: 1px solid var(--border-metal);
+  font-family: var(--font-display); font-size: var(--font-body-sm); font-weight: var(--weight-bold); line-height: 1.2;
+  color: var(--text-primary); text-align: center; }
+.fx-card.used .fx-card-art img { filter: grayscale(0.5) brightness(0.8); }
+.fx-card.used .fx-card-name { color: var(--text-secondary); }
+.fx-card.empty { border: 1px dashed rgba(200, 155, 60, 0.45); background: rgba(1, 10, 19, 0.35); box-shadow: none;
+  -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px); }
+.fx-card.empty .fx-card-art { background: none; }
 .fx-card.empty .fx-card-glyph { color: var(--text-tertiary); font-size: var(--font-display-md); }
-.fx-card.empty .fx-card-name { background: none; color: var(--text-secondary); font-weight: var(--weight-semibold); }
+.fx-card.empty .fx-card-name { border-top-color: transparent; color: var(--text-secondary);
+  font-weight: var(--weight-semibold); }
 .fx-portrait { position: relative; overflow: hidden; }
 .fx-portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
 .fx-games { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); align-items: start; }
@@ -134,8 +156,14 @@ PAGE_CSS = """
 @media (max-width: 820px) {
   .fx-versus-grid { grid-template-columns: 1fr; gap: var(--space-4); }
   .fx-vs { justify-self: center; }
+  .fx-versus > .fx-versus-bg { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; column-gap: 0; row-gap: 3px; }
+  .fx-bg.side-blue::after, .fx-bg.side-red::after { background: linear-gradient(180deg, rgba(1, 10, 19, 0.2) 0%,
+    rgba(1, 10, 19, 0.55) 35%, rgba(1, 10, 19, 0.85) 100%); }
+  .fx-match { padding: var(--space-3); }
+  .fx-versus { padding: var(--space-4); }
   .fx-pool { gap: var(--space-2); }
-  .fx-card-name { font-size: var(--font-caption); padding-top: var(--space-4); }
+  .fx-card-name { font-size: var(--font-caption); padding: var(--space-1); }
+  .fx-card-flag { padding: 1px 6px; font-size: 0.62rem; letter-spacing: 0.02em; }
   .series-score { grid-template-columns: 1fr 1fr; gap: var(--space-4); padding: var(--space-4); }
   .series-side.side-blue { grid-column: 1; grid-row: 1; }
   .series-side.side-red { grid-column: 2; grid-row: 1; }
@@ -154,15 +182,19 @@ def norm(name: str) -> str:
     return "".join(ch for ch in decomposed if ch.isalnum() and not unicodedata.combining(ch)).lower()
 
 
-def load_catalog(path: Path = CATALOG) -> tuple[dict[str, dict], dict[str, str]]:
-    """Indice de alias -> campeon y archivo del splash Classic (skinNum 0) por id."""
+def load_catalog(path: Path = CATALOG) -> tuple[dict[str, dict], dict[str, list[tuple[int, str]]]]:
+    """Indice de alias -> campeon y splash de cada id ordenados por skinNum (0 = Classic)."""
     catalog = json.loads(path.read_text(encoding="utf-8"))
     index: dict[str, dict] = {}
     for champ in catalog["champions"]:
         for alias in (champ["id"], champ["name"], champ["nameEn"]):
             index[norm(alias)] = champ
-    classic = {img["championId"]: img["file"] for img in catalog.get("images", []) if img.get("skinNum") == 0}
-    return index, classic
+    skins: dict[str, list[tuple[int, str]]] = {}
+    for img in catalog.get("images", []):
+        skins.setdefault(img["championId"], []).append((int(img.get("skinNum", 0)), img["file"]))
+    for files in skins.values():
+        files.sort()
+    return index, skins
 
 
 @dataclass
@@ -174,10 +206,18 @@ class Champion:
 
 
 @dataclass
+class Main:
+    name: str  # nombre para mostrar
+    strips: list[str]  # URLs de las franjas vistas desde la pagina; la primera es el Classic
+    splashes: list[str]  # las mismas como "<id>/<archivo>" dentro de assets/splash_arts
+
+
+@dataclass
 class Match:
     id: str
     players: dict[str, str]
     pools: dict[str, list[Champion]]
+    mains: dict[str, Main | None] = field(default_factory=dict)
     games: list[dict] = field(default_factory=list)
     live: bool = False
     slots: int = 3  # tamaño de la pool; lo que falta se muestra como "Por elegir"
@@ -197,11 +237,20 @@ class Match:
 class Resolver:
     """Convierte nombres de campeon en Champion; junta errores con sugerencias."""
 
-    def __init__(self, index: dict[str, dict], classic: dict[str, str], img_base: str = IMG_BASE_REPO):
+    def __init__(self, index: dict[str, dict], skins: dict[str, list[tuple[int, str]]], img_base: str = IMG_BASE_REPO):
         self.index = index
-        self.classic = classic
+        self.skins = skins
         self.img_base = img_base
         self.missing: set[str] = set()  # campeones sin splash en assets/splash_arts
+        self.bare: set[str] = set()  # mains sin splash para el fondo
+
+    def lookup(self, name: str, where: str, errors: list[str]) -> dict | None:
+        champ = self.index.get(norm(name))
+        if champ is None:
+            close = difflib.get_close_matches(norm(name), self.index.keys(), n=1, cutoff=0.6)
+            hint = f" ¿Quisiste decir {self.index[close[0]]['name']}?" if close else ""
+            errors.append(f"{where}: '{name}' no está en el catálogo de campeones.{hint}")
+        return champ
 
     def resolve(self, raw: object, where: str, errors: list[str]) -> Champion | None:
         name = str(raw or "").strip()
@@ -210,17 +259,33 @@ class Resolver:
             return None
         if PLACEHOLDER.match(name):
             return Champion(name=name, key=norm(name), icon=None)
-        champ = self.index.get(norm(name))
+        champ = self.lookup(name, where, errors)
         if champ is None:
-            close = difflib.get_close_matches(norm(name), self.index.keys(), n=1, cutoff=0.6)
-            hint = f" ¿Quisiste decir {self.index[close[0]]['name']}?" if close else ""
-            errors.append(f"{where}: '{name}' no está en el catálogo de campeones.{hint}")
             return None
-        splash = f"{champ['id']}/{self.classic.get(champ['id'], champ['id'] + '_Classic.jpg')}"
+        cid = champ["id"]
+        classic = next((f for num, f in self.skins.get(cid, []) if num == 0), f"{cid}_Classic.jpg")
+        splash = f"{cid}/{classic}"
         if not (SPLASH_DIR / splash).is_file():
             self.missing.add(champ["name"])
-            return Champion(name=champ["name"], key=champ["id"], icon=None)
-        return Champion(name=champ["name"], key=champ["id"], icon=f"{self.img_base}/{splash}", splash=splash)
+            return Champion(name=champ["name"], key=cid, icon=None)
+        return Champion(name=champ["name"], key=cid, icon=f"{self.img_base}/{splash}", splash=splash)
+
+    def main(self, raw: object, where: str, errors: list[str]) -> Main | None:
+        """Main del jugador; es opcional. Las franjas son el Classic y los splash más nuevos."""
+        name = str(raw or "").strip()
+        if not name or PLACEHOLDER.match(name):
+            return None
+        champ = self.lookup(name, where, errors)
+        if champ is None:
+            return None
+        cid = champ["id"]
+        files = [f"{cid}/{f}" for _, f in self.skins.get(cid, []) if (SPLASH_DIR / cid / f).is_file()]
+        if not files:
+            self.bare.add(champ["name"])
+            return Main(name=champ["name"], strips=[], splashes=[])
+        picks = files[:1] + files[:0:-1][: STRIPS - 1]  # por skinNum: el Classic y los 5 más nuevos
+        picks = (picks * STRIPS)[:STRIPS]  # con menos skins se repiten hasta llenar las franjas
+        return Main(name=champ["name"], strips=[f"{self.img_base}/{p}" for p in picks], splashes=picks)
 
 
 def validate(data: dict, resolver: Resolver) -> tuple[list[Match], list[str], list[str]]:
@@ -245,6 +310,7 @@ def validate(data: dict, resolver: Resolver) -> tuple[list[Match], list[str], li
 
         players: dict[str, str] = {}
         pools: dict[str, list[Champion]] = {}
+        mains: dict[str, Main | None] = {}
         for side in SIDES:
             slot = raw.get(side) or {}
             player = str(slot.get("player", "")).strip()
@@ -253,6 +319,7 @@ def validate(data: dict, resolver: Resolver) -> tuple[list[Match], list[str], li
             else:
                 appearances.setdefault(player, []).append(mid)
             players[side] = player or SIDE_TAG[side]
+            mains[side] = resolver.main(slot.get("main"), f"{where}, main de {players[side]}", errors)
             # Plantilla: una pool puede venir incompleta o vacía; lo que falta queda "Por elegir".
             pool_raw = [c for c in (slot.get("pool") or []) if str(c or "").strip()]
             if len(pool_raw) > pool_size:
@@ -265,7 +332,9 @@ def validate(data: dict, resolver: Resolver) -> tuple[list[Match], list[str], li
             for dup in sorted({k for k in keys if keys.count(k) > 1}):
                 errors.append(f"{where}: la pool de {players[side]} repite {dup}")
 
-        match = Match(id=mid, players=players, pools=pools, live=bool(raw.get("live", False)), slots=pool_size)
+        match = Match(
+            id=mid, players=players, pools=pools, mains=mains, live=bool(raw.get("live", False)), slots=pool_size
+        )
         games_raw = raw.get("games") or []
         if len(games_raw) > MAX_GAMES:
             errors.append(f"{where}: tiene {len(games_raw)} partidas y el máximo es {MAX_GAMES}")
@@ -309,6 +378,8 @@ def validate(data: dict, resolver: Resolver) -> tuple[list[Match], list[str], li
             warnings.append(f"{player} aparece en más de un enfrentamiento: {', '.join(mids)}")
     for name in sorted(resolver.missing):
         warnings.append(f"no está el splash de {name} en assets/splash_arts: se muestra la inicial")
+    for name in sorted(resolver.bare):
+        warnings.append(f"no hay splash de {name} en assets/splash_arts: el fondo de su jugador queda liso")
     return matches, errors, warnings
 
 
@@ -328,19 +399,24 @@ def portrait(champ: Champion) -> str:
     return f'<span class="champ-portrait fx-portrait" aria-hidden="true">{esc(initials(champ.name))}{img}</span>'
 
 
-def champ_card(champ: Champion | None, used_in: int | None = None) -> str:
-    """Tarjeta grande de la pool: splash del campeón con el nombre encima; None = lugar vacío."""
+def champ_card(champ: Champion | None, used_in: int | None = None, dim: bool = True) -> str:
+    """Tarjeta grande de la pool: el splash sin texto encima y el nombre abajo; None = lugar vacío.
+
+    Si el campeón ya se jugó lleva "Usado en Pn"; con dim (serie en curso) además se atenúa.
+    """
     if champ is None:
         return (
-            '<div class="fx-card empty"><span class="fx-card-glyph" aria-hidden="true">?</span>'
-            '<span class="fx-card-name">Por elegir</span></div>'
+            '<figure class="fx-card empty"><div class="fx-card-art">'
+            '<span class="fx-card-glyph" aria-hidden="true">?</span></div>'
+            '<figcaption class="fx-card-name">Por elegir</figcaption></figure>'
         )
-    cls = "fx-card used" if used_in else "fx-card"
+    cls = "fx-card used" if used_in and dim else "fx-card"
     img = f'<img src="{esc(champ.icon)}" alt="" loading="lazy">' if champ.icon else ""
     flag = f'<span class="pill pill-neutral fx-card-flag">Usado en P{used_in}</span>' if used_in else ""
     return (
-        f'<div class="{cls}"><span class="fx-card-glyph" aria-hidden="true">{esc(initials(champ.name))}</span>'
-        f'{img}{flag}<span class="fx-card-name">{esc(champ.name)}</span></div>'
+        f'<figure class="{cls}"><div class="fx-card-art">'
+        f'<span class="fx-card-glyph" aria-hidden="true">{esc(initials(champ.name))}</span>{img}</div>'
+        f'<figcaption class="fx-card-name">{esc(champ.name)}{flag}</figcaption></figure>'
     )
 
 
@@ -359,18 +435,36 @@ def status_pill(match: Match) -> str:
 def player_block(match: Match, side: str) -> str:
     state = "" if not match.winner else (" winner" if match.winner == side else " loser")
     name = match.players[side]
+    main = match.mains.get(side)
+    main_tag = f'<span class="fx-main">Main <b>{esc(main.name)}</b></span>' if main else ""
     trophy = '<span class="pill pill-gold">Ganó la serie</span>' if match.winner == side else ""
     used = match.used_in(side)
     pool = match.pools[side]
-    tiles = "".join(champ_card(c, used.get(c.key)) for c in pool)
+    # Terminada la serie no se atenúa nada: las usadas solo llevan la marca.
+    tiles = "".join(champ_card(c, used.get(c.key), dim=match.winner is None) for c in pool)
     tiles += champ_card(None) * max(0, match.slots - len(pool))
     return (
         f'<div class="fx-player side-{side}{state}">'
-        f'<div class="fx-player-head"><span class="champ-portrait fx-avatar" aria-hidden="true">{esc(initials(name))}</span>'
-        f'<div class="fx-player-id"><div class="fx-tagrow"><span class="side-tag">{SIDE_TAG[side]}</span>{trophy}</div>'
-        f'<span class="versus-name fx-name">{esc(name)}</span></div></div>'
+        f'<div class="fx-player-id"><div class="fx-tagrow"><span class="side-tag">{SIDE_TAG[side]}</span>'
+        f"{main_tag}{trophy}</div>"
+        f'<span class="versus-name fx-name">{esc(name)}</span></div>'
         f'<div class="fx-pool" role="group" aria-label="Pool de {esc(name)}">{tiles}</div></div>'
     )
+
+
+def versus_bg(match: Match) -> str:
+    """Fondo del VersusHero: por lado, franjas verticales del main desde el borde hasta el vs."""
+    halves = []
+    for side in SIDES:
+        main = match.mains.get(side)
+        strips = main.strips if main else []
+        if side == "red":
+            strips = strips[::-1]  # el Classic queda en el borde de afuera en los dos lados
+        imgs = "".join(f'<img src="{esc(src)}" alt="" loading="lazy" decoding="async">' for src in strips)
+        halves.append(f'<div class="fx-bg side-{side}">{imgs}</div>')
+    if not any(m and m.strips for m in match.mains.values()):
+        return ""
+    return f'<div class="fx-versus-bg" aria-hidden="true">{"".join(halves)}</div>'
 
 
 def series_score(match: Match) -> str:
@@ -442,7 +536,7 @@ def match_section(match: Match) -> str:
         f'<section class="fx-match" id="{anchor}" aria-labelledby="{anchor}-t">'
         f'<header class="fx-match-head"><h2 class="fx-match-title" id="{anchor}-t">Enfrentamiento {esc(match.id)}</h2>'
         f"{status_pill(match)}</header>"
-        f'<div class="hero versus-hero fx-versus"><div class="fx-versus-grid">'
+        f'<div class="hero versus-hero fx-versus">{versus_bg(match)}<div class="fx-versus-grid">'
         f'{player_block(match, "blue")}<span class="versus-vs fx-vs">vs</span>{player_block(match, "red")}'
         f"</div></div>"
         f"{series_score(match)}"
@@ -487,7 +581,7 @@ def render(data: dict, matches: list[Match]) -> str:
 <h1 class="hero-title">{esc(title)}</h1>
 <p class="hero-subtitle">{esc(event.get("subtitle", ""))} · {len(matches)} enfrentamientos</p>
 <div class="win-conds fx-rules">{rules}
-<p class="fx-rules-note">Gana la partida el primero que consigue una. Fearless: cada campeón se usa una sola vez por serie.</p>
+<p class="fx-rules-note">Una sola condición por partida: gana el primero que la consigue. Fearless: cada campeón se usa una sola vez por serie.</p>
 </div>
 </header>
 <nav class="fx-nav" aria-label="Enfrentamientos">{nav}</nav>
@@ -517,8 +611,8 @@ def main() -> int:
     except (OSError, json.JSONDecodeError) as exc:
         print(f"ERROR: no se pudo leer {args.data}: {exc}", file=sys.stderr)
         return 1
-    index, classic = load_catalog()
-    resolver = Resolver(index, classic, IMG_BASE_PAGES if pages else IMG_BASE_REPO)
+    index, skins = load_catalog()
+    resolver = Resolver(index, skins, IMG_BASE_PAGES if pages else IMG_BASE_REPO)
     matches, errors, warnings = validate(data, resolver)
     for warning in warnings:
         print(f"AVISO: {warning}")
@@ -531,7 +625,10 @@ def main() -> int:
     page = render(data, matches)
     out.write_text(page, encoding="utf-8")
     if pages:
-        splashes = sorted({c.splash for m in matches for pool in m.pools.values() for c in pool if c.splash})
+        splashes = sorted(
+            {c.splash for m in matches for pool in m.pools.values() for c in pool if c.splash}
+            | {s for m in matches for main in m.mains.values() if main for s in main.splashes}
+        )
         for rel in splashes:
             dst = pages / IMG_BASE_PAGES / rel
             dst.parent.mkdir(parents=True, exist_ok=True)

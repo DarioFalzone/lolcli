@@ -6,7 +6,7 @@
     "poolSize": 3
   },
   "matches": [
-    {"id": "01", "blue": {"player": "Cuex", "pool": []}, "red": {"player": "Mingo", "pool": []}, "live": false, "games": []},
+    {"id": "01", "blue": {"player": "Cuex", "main": "Yasuo", "pool": ["Yasuo", "Zed", "Yone"]}, "red": {"player": "Mingo", "main": "Akali", "pool": ["Akali", "Katarina", "Qiyana"]}, "live": false, "games": [{"winner": "red", "blue": "Yasuo", "red": "Akali", "condition": "first_blood", "time": "04:12"}, {"winner": "blue", "blue": "Zed", "red": "Katarina", "condition": "first_tower", "time": "10:47"}, {"winner": "blue", "blue": "Yone", "red": "Qiyana", "condition": "cs_100", "time": "08:53"}]},
     {"id": "02", "blue": {"player": "Jugador 03", "pool": []}, "red": {"player": "Jugador 04", "pool": []}, "live": false, "games": []},
     {"id": "03", "blue": {"player": "Jugador 05", "pool": []}, "red": {"player": "Jugador 06", "pool": []}, "live": false, "games": []},
     {"id": "04", "blue": {"player": "Jugador 07", "pool": []}, "red": {"player": "Jugador 08", "pool": []}, "live": false, "games": []},
