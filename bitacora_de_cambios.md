@@ -6,6 +6,24 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-09-25] Rift Duel: fixture servido en localhost (:8007)
+
+### Qué se hizo
+- Nuevo `scripts/bat/rift_duel.bat`: regenera `fixture.html` y sirve `claude-design-handoff/rift-duel/` con `python -m http.server` en `127.0.0.1:8007` (`LOLCLI_RIFT_DUEL_PORT`). Después abre el navegador en `/fixture.html`. Si el puerto ya está escuchando, solo abre el navegador; el chequeo usa `Get-NetTCPConnection` porque `netstat` cambia según el idioma de Windows (LISTENING o ESCUCHANDO). Usa `.venv` si existe y, si no, el `python` del PATH: solo necesita la librería estándar.
+- Si `fixture.json` tiene errores, avisa y sirve la última versión válida, que el generador no pisa.
+- Puerto documentado en `AGENTS.md` (nota bajo la tabla de FastAPI, porque no es uno), en `README.md` (catálogo de proyectos) y en el README de `rift-duel`.
+
+### Verificación
+- En el contenedor (Linux) se levantó el mismo servidor: `GET /fixture.html` devolvió 200 `text/html` y los 23 chequeos de render contra `http://127.0.0.1:8007/fixture.html` dieron 23/23.
+- El `.bat` no se pudo ejecutar acá. Quedó en ASCII, sin BOM, con fin de línea LF como los demás `.bat` del repo y sin `-Encoding UTF8`, que es lo que revisan las guardas de encoding del CI. Esas guardas no se corrieron porque el contenedor no tiene `pytest`.
+
+### Archivos modificados
+- `scripts/bat/rift_duel.bat` — nuevo.
+- `claude-design-handoff/rift-duel/README.md`, `AGENTS.md`, `README.md` — puerto 8007 y cómo levantarlo.
+- `bitacora_de_cambios.md` — esta entrada.
+
+---
+
 ## [2026-09-25] Rift Duel: fixture one-page (plantilla de 10 enfrentamientos)
 
 ### Qué se hizo

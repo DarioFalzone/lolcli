@@ -43,6 +43,7 @@ En Linux/macOS: `source .venv/bin/activate`. Ver la guía de [onboarding_rapido.
 | Splash Gallery | Generador HTML | [src/riot_lol_cli/splash.py](src/riot_lol_cli/splash.py) | — | `outputs/splash-viewer.html` |
 | Assets and Data | Recurso compartido | [assets/](assets/), [data/](data/), [scripts/](scripts/) | — | — |
 | Junglas Pro | Standalone HTML | [projects/active/junglas-pro/](projects/active/junglas-pro/) | — | `index.html` |
+| Rift Duel (fixture 1v1) | HTML estático generado | [claude-design-handoff/rift-duel/](claude-design-handoff/rift-duel/) + `scripts\bat\rift_duel.bat` | 8007 | http://localhost:8007/fixture.html |
 
 ### Proyectos legacy (preservados, no runtime)
 

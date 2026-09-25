@@ -31,6 +31,13 @@ python claude-design-handoff/rift-duel/build_gallery.py
 
 `fixture.html` muestra cada enfrentamiento con el design system. Arriba va el VersusHero, con el avatar de cada jugador y su pool de 3 campeones debajo del nombre. Después vienen el SeriesScore y un GameResult por partida (P1 a P3). Es autocontenido como la galería: se abre con doble clic y los estados se ven sin JavaScript.
 
+- **Levantarlo local:** `scripts\bat\rift_duel.bat` regenera `fixture.html` y lo sirve en http://localhost:8007/fixture.html (puerto configurable con `LOLCLI_RIFT_DUEL_PORT`). Abre el navegador solo y se corta con Ctrl+C. Si cambian los datos con el servidor andando, alcanza con regenerar y refrescar la página. Sin el `.bat`:
+
+```powershell
+python claude-design-handoff/rift-duel/build_fixture.py
+python -m http.server 8007 --bind 127.0.0.1 --directory claude-design-handoff/rift-duel
+```
+
 - **Datos:** todo sale de `fixture.json`. El HTML no se toca a mano.
 - **Regenerar** después de cambiar los datos:
 
