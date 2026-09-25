@@ -6,13 +6,26 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
-## [2026-09-25] Rift Duel: prompt de Claude Design para serie 1v1 Bo3
+## [2026-09-25] Rift Duel: prompt de Claude Design y design system para serie 1v1 Bo3
 
 ### Qué se hizo
 - Nuevo `claude-design-handoff/rift-duel-prompt.md`: prompt para generar en Claude Design los mockups de una serie 1v1 al mejor de 3 entre amigos (Quex vs Mingo), con pool predefinida, regla Fearless y victoria por First Blood, 100 CS o primera torre. Seis pantallas con datos ficticios coherentes (0-0, 1-1, 2-1).
 - Colores de lado nuevos, solo para Rift Duel: `blue-side` `#4a97ff`, `red-side` `#ff5a68`, sus variantes `-deep` y `-soft`, y `text-on-side`. No tocan `tokens.css` ni `docs/design-system.md`.
 - Contraste verificado con script WCAG 2: `blue-side` da mínimo 4.78:1 y `red-side` 4.62:1 como texto sobre `forge-black`, `surface-card`, `surface-raised` y `surface-overlay`. Los primeros candidatos (`#3a8dff`, `#ff4f5e`) fallaban sobre `surface-overlay` (4.30 y 4.36).
-- Design system Rift Duel (artifact privado del tipo Design System): https://claude.ai/artifact/2pYJqbC4tHCaMhQ5Umiu2N. Retoma una sesión anterior que creó el artifact pero se cortó por límite de uso antes de cargarle contenido.
+- Design system Rift Duel (artifact privado del tipo Design System): https://claude.ai/artifact/2pYJqbC4tHCaMhQ5Umiu2N. Retoma una sesión anterior que creó el artifact pero se cortó por límite de uso antes de cargarle contenido. Ahora tiene:
+  - `tokens.json` generado por script desde `tokens.css` (valores exactos): 43 colores, 13 estilos de texto, spacing, radius, shadow, escala tipográfica y layout. Quedan afuera `tier-*` (no hay tier lists) y `motion-*`, que el tipo no soporta como familia y viven en `bundle.css`.
+  - README con reglas de uso (lados, ganador y perdedor, Fearless, color, tipografía, layout).
+  - `bundle.css`: 9 patrones de Pattern Library v2 copiados sin cambios y 8 componentes nuevos del duelo (VersusHero, SeriesScore, PlayerCard, ChampionTile, ChampionPool, WinCondition, MatchTracker, GameResult). Todo HTML + CSS, sin JS.
+  - 17 previews estáticas y la portada.
+- Los archivos fuente del design system viven en el artifact, no en el repo.
+
+### Verificación
+- Contraste de los colores nuevos medido con un script WCAG 2 (números arriba).
+- Render local de las 18 previews con Chromium (Playwright), inyectando un `tokens.css` compilado como indica el formato del tipo: 0 errores de consola y sin scroll horizontal.
+- Dos bugs encontrados en ese render y corregidos antes de publicar:
+  - En ChampionPool, a 1120px o menos, la pill "Usado en P1" se salía de su casilla. Ahora pasa a dos líneas; a 1440px entra en una.
+  - Atenuar al perdedor con `opacity: 0.55` bajaba su `text-secondary` a 2.8:1. Ahora se atenúa sacándole el tinte y el borde del lado, sin opacidad.
+- Google Fonts se sirvió local (bajado con curl) porque el Chromium del contenedor no confía en el CA del proxy. La página real del artifact no se pudo abrir desde el contenedor porque es privada.
 
 ### Archivos modificados
 - `claude-design-handoff/rift-duel-prompt.md` — nuevo; supuestos de la serie explícitos en una tabla para confirmar.
