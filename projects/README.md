@@ -28,6 +28,7 @@ pueden vivir fisicamente dentro de `projects/active/` o `projects/legacy/`.
 | Items Browser | `active/items-browser/README.md` | `src/riot_lol_cli/items_browser/`, `data/items/database.json`, `assets/items/`, `tests/items_browser/` |
 | Assets y datos Riot | `active/assets-and-data/README.md` | `assets/`, `data/`, scripts de descarga/fetch |
 | Junglas Pro | `active/junglas-pro/README.md` | `active/junglas-pro/index.html`, `active/junglas-pro/research-notes.md`, `active/junglas-pro/docs/deeps_searchs/`, `active/junglas-pro/img/` |
+| Rift Duel (design system + fixture 1v1) | `../claude-design-handoff/rift-duel/README.md` | `claude-design-handoff/rift-duel/design-system/`, `claude-design-handoff/rift-duel/fixture.json`, `claude-design-handoff/rift-duel/fixture.html`, `claude-design-handoff/rift-duel/gallery.html` |
 
 ## Herramientas manuales
 

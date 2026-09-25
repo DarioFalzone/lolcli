@@ -6,6 +6,30 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-09-25] Rift Duel: fixture one-page (plantilla de 10 enfrentamientos)
+
+### Qué se hizo
+- Nuevo `claude-design-handoff/rift-duel/fixture.html`, el fixture del torneo 1v1 armado con el design system Rift Duel. Sigue el dibujo de Darío: por enfrentamiento van el VersusHero con el avatar de cada jugador y su pool de 3 campeones bajo el nombre, el SeriesScore y un GameResult por partida (P1-P3; las que faltan, como "Pendiente", "En juego" o "No se jugó"). MatchTracker no se usa.
+- Los datos van en `fixture.json` y `build_fixture.py` genera el HTML. Reutiliza `DS`, `FONTS_URL` y `compile_tokens()` de `build_gallery.py` sin modificarlo. La página es autocontenida (CSS adentro, sin iframes ni JavaScript) y su CSS propio es solo composición con tokens, sin colores nuevos.
+- Validación antes de generar: pool de `poolSize` (3), Fearless, serie al mejor de 3 (nada después de llegar a 2), `mm:ss`, condición, `live` coherente y cada campeón contra `data/ddragon-splash-catalog.json`, con sugerencia si hay un error de tipeo (`difflib`). Si hay errores, sale con código 1 y no toca el HTML.
+- Los campeones reales muestran su ícono de Data Dragon (versión del catálogo, 16.9.1) sobre la inicial, que queda como respaldo sin JavaScript. Los placeholders `Campeón NN` muestran el número.
+- Datos de prueba: 01 Quex vs Mingo con campeones reales, terminado 2-1; 02 en curso 1-0 con P2 en juego; 03-10 pendientes con placeholders.
+
+### Verificación
+- `ruff check` y `ruff format` sin cambios pendientes en `build_fixture.py`.
+- 10 casos negativos con copias rotas del JSON: campeón mal escrito (sugiere LeBlanc), fuera de la pool, Fearless, 3 victorias, tiempo "6:42", condición inválida, pool de 2, id repetido, `live` con la serie terminada y `winner` inválido. Los 10 fallan con su mensaje y el `fixture.html` real queda igual (sha256). Los alias (`wukong`, `Nunu & Willump`, `kai'sa`) resuelven al id correcto.
+- Render con Chromium y Playwright: 23 chequeos de estructura y estados (10 enfrentamientos, 60 casillas, 30 pips, 30 slots, estilos de ganador y perdedor, pip y slot en juego, Fearless, sin scroll horizontal). Dan 23/23 con archivo suelto, desde el repo, sin JavaScript y a 390, 820 y 1440px. A 1440px las pools de los dos lados quedan alineadas (0px de diferencia).
+- No se pudieron comprobar las URLs de Data Dragon: la política de red de este entorno bloquea `ddragon.leagueoflegends.com` (403). El patrón es el mismo de `src/riot_lol_cli/rendering.py`. Con el host bloqueado, se verificó que se ve la inicial de respaldo.
+
+### Archivos modificados
+- `claude-design-handoff/rift-duel/fixture.json`, `build_fixture.py` y `fixture.html` — nuevos.
+- `claude-design-handoff/rift-duel/README.md` — sección "Fixture del torneo" con el formato para pasar datos por el chat.
+- `claude-design-handoff/README.md` — puntero al fixture.
+- `projects/README.md` — fila "Rift Duel" en proyectos activos.
+- `bitacora_de_cambios.md` — esta entrada.
+
+---
+
 ## [2026-09-25] Fix: galería local de Rift Duel sin estilos fuera de su carpeta
 
 ### Qué se hizo

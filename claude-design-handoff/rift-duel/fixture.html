@@ -1,0 +1,1138 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rift Duel — Fixture</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap">
+<!-- Generado por build_fixture.py desde fixture.json. No editar a mano. -->
+<style>
+/* tokens.css (compilado desde design-system/tokens.json) */
+:root, [data-theme="dark"] {
+  --arc-gold: #c89b3c;
+  --arc-gold-bright: #f0e6d2;
+  --arc-gold-dark: #785a28;
+  --arc-gold-accent: #c8aa6e;
+  --arc-gold-text: #d4b15c;
+  --arc-cyan: #0bc6e3;
+  --arc-cyan-bright: #0ac8b9;
+  --arc-cyan-dark: #0397ab;
+  --forge-black: #010a13;
+  --forge-darker: #05101c;
+  --forge-dark: #0a1428;
+  --surface-base: #0d1b2a;
+  --surface-card: #0f1923;
+  --surface-raised: #1b2838;
+  --surface-overlay: #1e2d3d;
+  --text-primary: #f0e6d2;
+  --text-secondary: #a09b8c;
+  --text-tertiary: #5b5a56;
+  --text-muted: #3c3c41;
+  --text-on-gold: #010a13;
+  --state-success: #00d084;
+  --state-success-dim: rgba(0, 208, 132, 0.15);
+  --state-error: #ff4655;
+  --state-error-dim: rgba(255, 70, 85, 0.18);
+  --state-warning: #ff9a3c;
+  --state-warning-dim: rgba(255, 154, 60, 0.15);
+  --state-info: #0bc6e3;
+  --state-info-dim: rgba(11, 198, 227, 0.15);
+  --state-neutral: #8b9cb3;
+  --border-subtle: rgba(200, 155, 60, 0.12);
+  --border-metal: rgba(200, 155, 60, 0.20);
+  --border-metal-strong: rgba(200, 155, 60, 0.40);
+  --border-cyan: rgba(11, 198, 227, 0.30);
+  --border-error: rgba(255, 70, 85, 0.30);
+  --border-success: rgba(0, 208, 132, 0.30);
+  --border-divider: #1f2937;
+  --blue-side: #4a97ff;
+  --blue-side-deep: #143a80;
+  --blue-side-soft: rgba(74, 151, 255, 0.14);
+  --red-side: #ff5a68;
+  --red-side-deep: #7a1622;
+  --red-side-soft: rgba(255, 90, 104, 0.14);
+  --text-on-side: var(--forge-black);
+  --elevation-1: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --elevation-2: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --elevation-3: 0 16px 48px rgba(0, 0, 0, 0.6);
+  --elevation-4: 0 25px 50px -12px rgba(0, 0, 0, 0.55);
+  --glow-gold: 0 0 20px rgba(200, 155, 60, 0.40), 0 0 40px rgba(200, 155, 60, 0.18);
+  --glow-gold-sm: 0 0 12px rgba(200, 155, 60, 0.25);
+  --glow-cyan: 0 0 24px rgba(11, 198, 227, 0.40), 0 0 48px rgba(11, 198, 227, 0.18);
+  --glow-cyan-sm: 0 0 16px rgba(11, 198, 227, 0.30);
+  --glow-error: 0 0 16px rgba(255, 70, 85, 0.30);
+  --glow-success: 0 0 16px rgba(0, 208, 132, 0.30);
+  --focus-ring: 0 0 0 2px rgba(200, 155, 60, 0.6), 0 0 0 4px rgba(200, 155, 60, 0.18);
+}
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill: 999px;
+  --radius-circle: 50%;
+  --font-hero: clamp(3rem, 8vw, 6.5rem);
+  --font-display-xl: 2.4rem;
+  --font-display-lg: 2rem;
+  --font-display-md: 1.5rem;
+  --font-display-sm: 1.2rem;
+  --font-body-lg: 1.05rem;
+  --font-body-md: 1rem;
+  --font-body-sm: 0.9rem;
+  --font-body-xs: 0.85rem;
+  --font-caption: 0.8rem;
+  --font-caption-sm: 0.75rem;
+  --font-micro: 0.7rem;
+  --font-pill: 0.65rem;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-display: 800;
+  --weight-heavy: 900;
+  --leading-tight: 1.2;
+  --leading-snug: 1.4;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.6;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.08em;
+  --tracking-widest: 0.12em;
+  --tracking-hero: 0.02em;
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1440px;
+  --sidebar-width: 280px;
+  --touch-target: 44px;
+  --font-body: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Outfit", "Inter", system-ui, sans-serif;
+  --font-anton: "Anton", "Outfit Black", sans-serif;
+  --font-mono: ui-monospace, "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+.type-hero { font-family: var(--font-anton); font-size: 6.5rem; line-height: 0.95; font-weight: 400; letter-spacing: 0.02em; font-style: italic; }
+.type-display-xl { font-family: var(--font-display); font-size: 2.4rem; line-height: 1.2; font-weight: 800; }
+.type-display-lg { font-family: var(--font-display); font-size: 2rem; line-height: 1.2; font-weight: 700; }
+.type-display-md { font-family: var(--font-display); font-size: 1.5rem; line-height: 1.2; font-weight: 700; }
+.type-display-sm { font-family: var(--font-display); font-size: 1.2rem; line-height: 1.4; font-weight: 700; letter-spacing: -0.02em; }
+.type-body-lg { font-family: var(--font-body); font-size: 1.05rem; line-height: 1.6; font-weight: 400; }
+.type-body-md { font-family: var(--font-body); font-size: 1rem; line-height: 1.5; font-weight: 400; }
+.type-body-sm { font-family: var(--font-body); font-size: 0.9rem; line-height: 1.5; font-weight: 400; }
+.type-body-xs { font-family: var(--font-body); font-size: 0.85rem; line-height: 1.4; font-weight: 600; letter-spacing: 0.05em; }
+.type-caption { font-family: var(--font-body); font-size: 0.8rem; line-height: 1.4; font-weight: 600; letter-spacing: 0.05em; }
+.type-caption-sm { font-family: var(--font-body); font-size: 0.75rem; line-height: 1.4; font-weight: 600; letter-spacing: 0.12em; }
+.type-micro { font-family: var(--font-body); font-size: 0.7rem; line-height: 1.4; font-weight: 700; letter-spacing: 0.12em; }
+.type-pill { font-family: var(--font-body); font-size: 0.65rem; line-height: 1.4; font-weight: 700; letter-spacing: 0.12em; }
+/* design-system/components/bundle.css */
+500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap");
+/* ============================================================
+   Rift Duel — bundle.css
+   ============================================================
+   1) Motion: el tipo Design System no tiene familia de tokens
+      para motion, asi que las variables del source viven aca.
+   2) Patrones de lolcli Pattern Library v2 (patterns.css del
+      repo DarioFalzone/lolcli@c5678fe), copiados sin cambios.
+   3) Componentes del duelo 1v1 (adiciones de Rift Duel).
+   ============================================================ */
+:root {
+  --motion-fast:        120ms ease;
+  --motion-default:     180ms ease;
+  --motion-slow:        320ms cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-bar:         600ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out:           cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ===== Reset minimo ===== */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-primary);
+  background: var(--forge-black);
+  line-height: var(--leading-normal);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+input, select, textarea { font-family: inherit; }
+
+/* ===== Body firma del sistema (uso opcional) =====
+   Aplica un fondo radial + grid sutil. Solo en surfaces
+   "premium" (Home, Draft Advisor). Items/Meta usan fondo plano. */
+.app-shell {
+  background:
+    radial-gradient(ellipse 1400px 900px at 20% -15%, rgba(11,198,227,0.10), transparent 60%),
+    radial-gradient(ellipse 1200px 800px at 80% 115%, rgba(200,155,60,0.08), transparent 60%),
+    linear-gradient(180deg, var(--forge-black) 0%, var(--forge-dark) 40%, var(--surface-base) 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* Container sizes */
+.container { max-width: var(--container-2xl); margin: 0 auto; padding: var(--space-6); }
+.container-sm { max-width: var(--container-md); margin: 0 auto; padding: var(--space-6); }
+
+/* ============================================================
+   1. HERO — patron firma (Items, Tier List, Home Hub)
+   ============================================================
+   Un bloque compacto de identidad: eyebrow / version a izq+der,
+   titulo display gigantesco al centro, subtitle opcional. Patron
+   diagonal sutil al fondo. NO ocupa toda la pantalla.
+   ============================================================ */
+.hero {
+  background:
+    linear-gradient(135deg, var(--forge-dark), var(--surface-base));
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-12) var(--space-8);
+  margin-bottom: var(--space-8);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, transparent 0 60px, rgba(200,155,60,0.04) 60px 61px);
+  pointer-events: none;
+}
+.hero--dual::before {
+  background-image:
+    repeating-linear-gradient(45deg, transparent 0 60px, rgba(200,155,60,0.04) 60px 61px),
+    repeating-linear-gradient(-45deg, transparent 0 60px, rgba(11,198,227,0.03) 60px 61px);
+}
+.hero-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  position: relative;
+  margin-bottom: var(--space-4);
+}
+.hero-eyebrow {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-widest);
+  font-size: var(--font-body-sm);
+  color: var(--text-primary);
+  text-transform: uppercase;
+}
+.hero-meta {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  font-size: var(--font-body-md);
+  color: var(--arc-cyan);
+}
+.hero-title {
+  font-family: var(--font-anton);
+  font-style: italic;
+  font-size: var(--font-hero);
+  line-height: 0.95;
+  letter-spacing: var(--tracking-hero);
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--text-primary);
+  text-shadow: 0 0 24px rgba(200,155,60,0.10), 0 4px 0 rgba(0,0,0,0.4);
+  margin: var(--space-4) 0;
+  position: relative;
+}
+.hero-subtitle {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: var(--font-body-sm);
+  letter-spacing: var(--tracking-wide);
+  position: relative;
+}
+/* Hero con icono lateral al subtitle (Tier List variant) */
+.hero-bottom {
+  display: flex; align-items: center; justify-content: center;
+  gap: var(--space-6);
+  position: relative;
+  margin-top: var(--space-4);
+}
+.hero-icon {
+  width: 84px; height: 84px;
+  background: var(--forge-black);
+  border: 2px solid var(--text-primary);
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-primary);
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.35), 0 6px 20px rgba(0,0,0,0.5);
+}
+.hero-icon svg { width: 56px; height: 56px; }
+.hero-bottom-meta { display: flex; flex-direction: column; gap: var(--space-1); }
+.hero-bottom-meta .role {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  font-size: var(--font-display-sm);
+  letter-spacing: var(--tracking-widest);
+  color: var(--arc-cyan);
+}
+.hero-bottom-meta .updated {
+  font-size: var(--font-body-xs);
+  color: var(--text-secondary);
+  letter-spacing: var(--tracking-wide);
+}
+
+
+/* ============================================================
+   4. SEGMENTED CONTROL (lang toggle, EN/ES, view modes)
+   ============================================================ */
+.segmented {
+  display: inline-flex;
+  border: 1px solid var(--border-metal);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--forge-darker);
+}
+.segmented > button {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 8px 16px;
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wide);
+  font-size: var(--font-body-xs);
+  transition: var(--motion-fast);
+  min-height: 36px;
+}
+.segmented > button + button { border-left: 1px solid var(--border-divider); }
+.segmented > button.active,
+.segmented > button[aria-pressed="true"] {
+  background: var(--arc-gold);
+  color: var(--forge-black);
+}
+.segmented > button:hover:not(.active) { color: var(--arc-gold-text); }
+
+
+/* ============================================================
+   6. BUTTON
+   ============================================================ */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--touch-target);
+  padding: 12px 24px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: var(--font-body-md);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  cursor: pointer;
+  transition: var(--motion-default);
+  user-select: none;
+}
+.btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.btn:disabled, .btn[aria-disabled="true"] {
+  opacity: 0.45; cursor: not-allowed; transform: none !important; box-shadow: none !important;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--arc-gold-dark), var(--arc-gold));
+  color: var(--text-on-gold);
+  border-color: var(--arc-gold);
+  font-weight: var(--weight-bold);
+  box-shadow: var(--glow-gold-sm);
+}
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--glow-gold);
+  background: linear-gradient(135deg, var(--arc-gold), var(--arc-gold-bright));
+}
+.btn-primary:active:not(:disabled) { transform: translateY(0); }
+
+.btn-secondary {
+  background: rgba(200, 155, 60, 0.08);
+  color: var(--arc-gold-text);
+  border-color: var(--border-metal);
+}
+.btn-secondary:hover:not(:disabled) {
+  background: rgba(200, 155, 60, 0.16);
+  border-color: var(--border-metal-strong);
+  box-shadow: var(--glow-gold-sm);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border-color: var(--border-divider);
+}
+.btn-ghost:hover:not(:disabled) {
+  color: var(--arc-gold-text);
+  border-color: var(--border-metal);
+  background: rgba(200, 155, 60, 0.06);
+}
+.btn-ghost.active { color: var(--arc-gold); border-color: var(--border-metal-strong); background: rgba(200,155,60,0.12); }
+
+.btn-icon {
+  width: var(--touch-target); height: var(--touch-target);
+  padding: 0;
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-divider);
+  color: var(--text-secondary);
+  font-size: 18px;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: var(--motion-default);
+}
+.btn-icon:hover { color: var(--arc-gold-text); border-color: var(--border-metal); }
+
+
+/* ============================================================
+   7. PILL / BADGE
+   ============================================================ */
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 12px;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-pill);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  border: 1px solid;
+  background: transparent;
+  white-space: nowrap;
+}
+.pill-gold     { color: var(--arc-gold);      border-color: var(--border-metal-strong); background: rgba(200,155,60,0.10); }
+.pill-cyan     { color: var(--arc-cyan);      border-color: var(--border-cyan);         background: rgba(11,198,227,0.10); }
+.pill-success  { color: var(--state-success); border-color: var(--border-success);      background: rgba(0,208,132,0.10); }
+.pill-error    { color: var(--state-error);   border-color: var(--border-error);        background: rgba(255,70,85,0.10); }
+.pill-warning  { color: var(--state-warning); border-color: rgba(255,154,60,0.4);       background: rgba(255,154,60,0.10); }
+.pill-neutral  { color: var(--state-neutral); border-color: rgba(139,156,179,0.4);      background: rgba(139,156,179,0.08); }
+.pill-dashed   { border-style: dashed; }
+
+
+/* ============================================================
+   8. CARD
+   ============================================================ */
+.card {
+  background: var(--surface-card);
+  border: 1px solid var(--border-divider);
+  border-radius: var(--radius-md);
+  box-shadow: var(--elevation-1);
+  overflow: hidden;
+  transition: var(--motion-default);
+}
+.card.interactive { cursor: pointer; }
+.card.interactive:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-metal);
+  box-shadow: var(--elevation-2), var(--glow-gold-sm);
+}
+.card-header {
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--border-divider);
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--space-3);
+  background: linear-gradient(180deg, rgba(200,155,60,0.03), transparent);
+}
+.card-header h2, .card-header h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--font-display-sm);
+  font-weight: var(--weight-bold);
+  color: var(--arc-gold-bright);
+  letter-spacing: var(--tracking-tight);
+}
+.card-body { padding: var(--space-5); }
+
+/* ============================================================
+   10. STAT STRIP / METRIC BADGE
+   ============================================================ */
+.stat-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--space-4);
+}
+.stat {
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  text-align: center;
+}
+.stat-label {
+  display: block;
+  font-size: var(--font-caption-sm);
+  letter-spacing: var(--tracking-widest);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-1);
+  text-transform: uppercase;
+  font-weight: var(--weight-semibold);
+}
+.stat-value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--font-display-md);
+  font-weight: var(--weight-bold);
+  color: var(--arc-gold-bright);
+  font-variant-numeric: tabular-nums;
+}
+.stat-value.cyan    { color: var(--arc-cyan); }
+.stat-value.success { color: var(--state-success); }
+.stat-value.error   { color: var(--state-error); }
+
+
+/* ============================================================
+   11. TABLE — dense list pattern
+   ============================================================ */
+.table-wrap {
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+table.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-body-sm);
+}
+table.data-table th {
+  background: var(--forge-darker);
+  text-align: left;
+  font-family: var(--font-display);
+  font-size: var(--font-caption-sm);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border-divider);
+}
+table.data-table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border-divider);
+  color: var(--text-primary);
+}
+table.data-table tr:last-child td { border-bottom: 0; }
+table.data-table tbody tr:hover { background: rgba(200, 155, 60, 0.04); }
+table.data-table td.num,
+table.data-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+
+/* ============================================================
+   13. EMPTY / LOADING / ERROR states
+   ============================================================ */
+.state-block {
+  background: var(--surface-card);
+  border: 1px dashed var(--border-metal);
+  border-radius: var(--radius-md);
+  padding: var(--space-12) var(--space-6);
+  text-align: center;
+  color: var(--text-secondary);
+}
+.state-block .icon {
+  font-size: 32px;
+  color: var(--text-tertiary);
+  margin-bottom: var(--space-3);
+  display: block;
+}
+.state-block.error { border-color: var(--border-error); color: var(--state-error); }
+.state-block .title {
+  font-family: var(--font-display);
+  font-weight: var(--weight-bold);
+  font-size: var(--font-display-sm);
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+}
+.state-block .hint { font-size: var(--font-body-sm); }
+
+/* Skeleton */
+.skeleton {
+  position: relative; overflow: hidden;
+  background: var(--surface-raised);
+  border-radius: var(--radius-sm);
+}
+.skeleton::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(200,155,60,0.08), transparent);
+  animation: pl-shimmer 1.4s linear infinite;
+}
+@keyframes pl-shimmer {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(100%); }
+}
+
+
+/* ============================================================
+   14. TOAST / INLINE STATUS
+   ============================================================ */
+.toast {
+  display: inline-flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  border: 1px solid;
+  background: var(--surface-overlay);
+  box-shadow: var(--elevation-2);
+  font-size: var(--font-body-sm);
+}
+.toast.success { border-color: var(--border-success); color: var(--state-success); }
+.toast.error   { border-color: var(--border-error);   color: var(--state-error); }
+.toast.info    { border-color: var(--border-cyan);    color: var(--arc-cyan); }
+.toast .dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; box-shadow: 0 0 8px currentColor; }
+
+/* Inline banner */
+.banner {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-body-sm);
+  border: 1px solid;
+  display: flex; align-items: center; gap: var(--space-3);
+}
+.banner.info    { background: var(--state-info-dim);    border-color: var(--border-cyan);    color: var(--arc-cyan); }
+.banner.success { background: var(--state-success-dim); border-color: var(--border-success); color: var(--state-success); }
+.banner.warning { background: var(--state-warning-dim); border-color: rgba(255,154,60,0.4);  color: var(--state-warning); }
+.banner.error   { background: var(--state-error-dim);   border-color: var(--border-error);   color: var(--state-error); }
+
+
+/* ============================================================
+   15. SCORE BAR (Draft Advisor)
+   ============================================================ */
+.score-factor {
+  display: grid;
+  grid-template-columns: 130px 1fr 36px;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+.score-factor-label {
+  font-size: var(--font-caption);
+  font-weight: var(--weight-semibold);
+  color: var(--text-secondary);
+  letter-spacing: var(--tracking-wide);
+}
+.score-bar-track {
+  height: 6px;
+  background: rgba(0,0,0,0.5);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+}
+.score-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--arc-cyan), var(--arc-gold));
+  border-radius: inherit;
+  transition: width var(--motion-bar);
+}
+.score-factor-value {
+  font-family: var(--font-display);
+  font-size: var(--font-body-sm);
+  font-weight: var(--weight-bold);
+  color: var(--arc-gold-bright);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* ============================================================
+   RIFT DUEL — componentes del duelo 1v1 (adiciones)
+   ============================================================
+   Todo lo de un lado se pinta con --side / --side-soft / --side-deep.
+   .side-blue y .side-red los definen: el lado define el color,
+   no el jugador. Azul siempre a la izquierda, rojo a la derecha.
+   ============================================================ */
+.side-blue { --side: var(--blue-side); --side-soft: var(--blue-side-soft); --side-deep: var(--blue-side-deep); }
+.side-red  { --side: var(--red-side);  --side-soft: var(--red-side-soft);  --side-deep: var(--red-side-deep); }
+
+/* Etiqueta de lado: "Lado azul" / "Lado rojo" (el color nunca va solo) */
+.side-tag {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-size: var(--font-micro);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--side, var(--text-secondary));
+}
+.side-tag::before {
+  content: ""; width: 8px; height: 8px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+/* Pill en el color del lado ("Elegido") */
+.pill-side { color: var(--side); border-color: var(--side); background: var(--side-soft); }
+
+/* ---------- VERSUS HERO (se apoya en .hero) ---------- */
+.versus-hero { border-color: var(--border-metal); }
+.versus-hero::after {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(90deg, var(--blue-side-soft), transparent 38%),
+    linear-gradient(270deg, var(--red-side-soft), transparent 38%);
+  pointer-events: none;
+}
+.versus-hero > * { position: relative; z-index: 1; }
+.versus-title {
+  display: flex; align-items: baseline; justify-content: center;
+  gap: var(--space-6);
+  margin: var(--space-4) 0;
+  font-family: var(--font-anton);
+  font-style: italic;
+  font-weight: var(--weight-regular);
+  font-size: var(--font-hero);
+  line-height: 0.95;
+  letter-spacing: var(--tracking-hero);
+  text-transform: uppercase;
+  text-shadow: 0 4px 0 rgba(0,0,0,0.4);
+}
+.versus-name { color: var(--side); }
+.versus-vs { color: var(--arc-gold); font-size: 0.45em; }
+.versus-meta {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-4);
+}
+.versus-meta .side-red { justify-self: end; }
+.versus-meta .hero-subtitle { margin: 0; }
+
+/* ---------- SERIES SCORE ---------- */
+.series-score {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-6);
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-6);
+}
+.series-side { display: flex; align-items: center; gap: var(--space-4); }
+.series-side.side-red { justify-content: flex-end; }
+.series-player { display: flex; flex-direction: column; gap: var(--space-1); }
+.series-side.side-red .series-player { align-items: flex-end; }
+.series-name {
+  font-family: var(--font-display);
+  font-size: var(--font-display-sm);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+}
+.series-wins {
+  font-family: var(--font-display);
+  font-size: var(--font-display-xl);
+  font-weight: var(--weight-display);
+  line-height: 1;
+  color: var(--side);
+  font-variant-numeric: tabular-nums;
+  min-width: 1ch;
+  text-align: center;
+}
+.series-mid { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); }
+.series-format {
+  font-size: var(--font-caption-sm);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+.series-games { display: flex; gap: var(--space-2); margin: 0; padding: 0; list-style: none; }
+.game-pip {
+  display: flex; flex-direction: column; align-items: center;
+  min-width: 76px;
+  padding: var(--space-1) var(--space-2);
+  border: 1px dashed var(--state-neutral);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-pill);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-wider);
+  text-transform: uppercase;
+  color: var(--state-neutral);
+  line-height: var(--leading-snug);
+}
+.game-pip b { font-family: var(--font-display); font-size: var(--font-body-xs); letter-spacing: var(--tracking-wide); }
+.game-pip.live { border-style: solid; border-color: var(--border-cyan); color: var(--arc-cyan); background: var(--state-info-dim); }
+.game-pip.won { border-style: solid; border-color: var(--side); background: var(--side); color: var(--text-on-side); }
+
+/* ---------- PLAYER CARD ---------- */
+.player-card {
+  background: var(--surface-card) linear-gradient(180deg, var(--side-soft), transparent 70%);
+  border: 1px solid var(--side);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+  display: flex; flex-direction: column; gap: var(--space-3);
+  min-width: 240px;
+  transition: var(--motion-default);
+}
+.player-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--font-display-lg);
+  font-weight: var(--weight-display);
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+}
+.player-stats {
+  display: grid; grid-template-columns: repeat(3, auto);
+  justify-content: start;
+  gap: var(--space-5);
+  margin: 0;
+}
+.player-stats dt {
+  font-size: var(--font-caption-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+.player-stats dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--font-body-lg);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+.player-card-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+.player-card.winner { border-color: var(--arc-gold); box-shadow: var(--glow-gold); }
+/* Perdedor: se atenua sin opacidad (el texto sigue >= 4.5:1) */
+.player-card.loser { border-color: var(--border-divider); background: var(--surface-card); }
+.player-card.loser .player-name { color: var(--text-secondary); }
+
+/* ---------- CHAMPION TILE (deriva de .slot y .champ-card) ---------- */
+.champ-tile {
+  display: flex; flex-direction: column; align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  min-width: 96px;
+  background: var(--forge-darker);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  text-align: center;
+  transition: var(--motion-fast);
+}
+.champ-portrait {
+  width: 64px; height: 64px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--side-deep, var(--surface-raised));
+  border: 1px solid var(--arc-gold-dark);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: var(--font-display-md);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+}
+.champ-name {
+  font-size: var(--font-body-xs);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-tight);
+  color: var(--text-primary);
+}
+.champ-tile .pill { margin-top: 2px; max-width: 100%; padding: 3px var(--space-2); letter-spacing: var(--tracking-wide); white-space: normal; text-align: center; line-height: var(--leading-tight); }
+.champ-tile.picked { border: 2px solid var(--side); padding: calc(var(--space-2) - 1px); background: var(--side-soft); }
+.champ-tile.used .champ-portrait,
+.champ-tile.used .champ-name { opacity: 0.45; filter: grayscale(1); }
+.champ-tile.used .champ-name { text-decoration: line-through; }
+
+/* ---------- CHAMPION POOL ---------- */
+.champ-pool {
+  background: var(--surface-card) linear-gradient(180deg, var(--side-soft), transparent 60%);
+  border: 1px solid var(--side);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+.champ-pool-head {
+  display: flex; align-items: baseline; flex-wrap: wrap;
+  gap: var(--space-2) var(--space-3);
+  margin-bottom: var(--space-4);
+}
+.champ-pool-head h3 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--font-display-sm);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  color: var(--text-primary);
+}
+.champ-pool-count {
+  margin-left: auto;
+  font-size: var(--font-body-xs);
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+.champ-pool-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+.champ-pool-grid .champ-tile { min-width: 0; padding-left: var(--space-1); padding-right: var(--space-1); }
+
+/* ---------- WIN CONDITION ---------- */
+.win-conds { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.win-cond {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  min-height: 32px;
+  padding: 0 var(--space-3);
+  background: var(--forge-darker);
+  border: 1px solid var(--border-metal);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-body-xs);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+.win-cond.decided {
+  color: var(--arc-gold-text);
+  border-color: var(--arc-gold);
+  background: rgba(200, 155, 60, 0.10);
+  box-shadow: var(--glow-gold-sm);
+}
+.win-cond .win-cond-time { font-variant-numeric: tabular-nums; color: var(--text-primary); }
+
+/* ---------- MATCH TRACKER ---------- */
+.match-tracker {
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.match-tracker-head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  border-bottom: 1px solid var(--border-divider);
+  background: var(--forge-darker);
+}
+.match-tracker-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--font-display-sm);
+  font-weight: var(--weight-bold);
+  color: var(--arc-gold-bright);
+}
+.match-clock {
+  font-family: var(--font-display);
+  font-size: var(--font-display-md);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+.match-tracker-body { padding: var(--space-4) var(--space-5); display: flex; flex-direction: column; gap: var(--space-4); }
+.tracker-row {
+  display: grid;
+  grid-template-columns: 1fr 136px 1fr;
+  align-items: center;
+  gap: var(--space-4);
+}
+.tracker-label {
+  text-align: center;
+  font-size: var(--font-caption-sm);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+.tracker-cell { display: flex; align-items: center; gap: var(--space-3); }
+.tracker-cell.side-blue { flex-direction: row-reverse; }
+.tracker-value {
+  min-width: 72px;
+  font-family: var(--font-display);
+  font-size: var(--font-body-md);
+  font-weight: var(--weight-bold);
+  color: var(--side);
+  font-variant-numeric: tabular-nums;
+}
+.tracker-cell.side-blue .tracker-value { text-align: right; }
+.tracker-track {
+  flex: 1;
+  height: 8px;
+  display: flex;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+.tracker-cell.side-blue .tracker-track { justify-content: flex-end; }
+.tracker-fill { height: 100%; background: var(--side); border-radius: inherit; transition: width var(--motion-bar); }
+.tracker-state { font-size: var(--font-body-xs); color: var(--state-neutral); }
+.tracker-cell.side-blue .tracker-state { margin-left: auto; }
+.tracker-champs { display: grid; grid-template-columns: 1fr 136px 1fr; align-items: center; gap: var(--space-4); }
+.tracker-champ { display: flex; align-items: center; gap: var(--space-3); }
+.tracker-champ.side-blue { flex-direction: row-reverse; text-align: right; }
+.tracker-champ .champ-portrait { width: 56px; height: 56px; }
+.tracker-champ strong { display: block; font-family: var(--font-display); font-size: var(--font-body-lg); color: var(--text-primary); }
+.tracker-vs { text-align: center; font-family: var(--font-anton); font-style: italic; font-size: var(--font-display-lg); color: var(--arc-gold); text-transform: uppercase; }
+.match-tracker-foot {
+  display: flex; justify-content: flex-end; gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  border-top: 1px solid var(--border-divider);
+}
+
+/* ---------- GAME RESULT ---------- */
+.game-result {
+  background: var(--surface-card);
+  border: 1px solid var(--border-metal);
+  border-radius: var(--radius-md);
+  box-shadow: var(--elevation-1);
+  overflow: hidden;
+}
+.game-result-head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-5);
+  border-bottom: 1px solid var(--border-divider);
+  background: linear-gradient(180deg, rgba(200,155,60,0.03), transparent);
+}
+.game-result-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--font-display-sm);
+  font-weight: var(--weight-bold);
+  color: var(--arc-gold-bright);
+}
+.game-result-body { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3); padding: var(--space-4) var(--space-5); }
+.result-side {
+  display: flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--side-soft);
+  border: 1px solid var(--side);
+  border-radius: var(--radius-sm);
+}
+.result-side .champ-portrait { width: 56px; height: 56px; }
+.result-who { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.result-who strong { font-family: var(--font-display); font-size: var(--font-body-lg); font-weight: var(--weight-bold); color: var(--text-primary); }
+.result-who .result-champ { font-size: var(--font-body-sm); color: var(--text-secondary); }
+.result-side.winner { border-color: var(--arc-gold); box-shadow: var(--glow-gold-sm); }
+.result-side.loser { background: transparent; border-color: var(--border-divider); }
+.result-side.loser strong { color: var(--text-secondary); }
+.result-side.loser .champ-portrait { filter: grayscale(1); }
+.game-result-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--space-3) var(--space-5);
+  border-top: 1px solid var(--border-divider);
+  font-size: var(--font-body-sm);
+  color: var(--text-secondary);
+}
+.game-result-foot b {
+  font-family: var(--font-display);
+  font-size: var(--font-display-sm);
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Variante por lado de la barra del source (.score-bar-fill) */
+.score-bar-fill.side { background: var(--side); }
+
+/* ---------- Solo previews ---------- */
+.pv { padding: var(--space-4); display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+.pv-col { padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-3); }
+.pv-grid-2 { padding: var(--space-4); display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); align-items: start; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* ============================================================
+   RESPETAR prefers-reduced-motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* fixture */
+
+.fx-page { max-width: var(--container-2xl); margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-16); }
+.fx-hero { margin-bottom: var(--space-6); }
+.fx-rules { justify-content: center; margin-top: var(--space-4); position: relative; }
+.fx-rules-note { width: 100%; text-align: center; font-size: var(--font-body-sm); color: var(--text-secondary); }
+.fx-nav { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: var(--space-2);
+  margin: 0 0 var(--space-8); }
+.fx-nav a { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2) var(--space-3);
+  background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm);
+  font-size: var(--font-body-sm); color: var(--text-primary); transition: var(--motion-fast); }
+.fx-nav a:hover { border-color: var(--border-metal-strong); }
+.fx-nav a:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.fx-nav b { font-family: var(--font-display); color: var(--arc-gold-text); font-variant-numeric: tabular-nums; }
+.fx-match { background: var(--forge-darker); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg);
+  padding: var(--space-5); margin-bottom: var(--space-8); display: flex; flex-direction: column; gap: var(--space-4);
+  scroll-margin-top: var(--space-4); }
+.fx-match-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
+.fx-match-title { margin: 0; font-family: var(--font-display); font-size: var(--font-display-sm);
+  font-weight: var(--weight-bold); color: var(--arc-gold-bright); letter-spacing: var(--tracking-tight); }
+.fx-versus { padding: var(--space-6); margin-bottom: 0; border-radius: var(--radius-md); }
+.fx-versus-grid { display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: var(--space-6); }
+.fx-player { display: flex; flex-direction: column; gap: var(--space-4); min-width: 0; }
+.fx-player.side-red { align-items: flex-end; text-align: right; }
+.fx-player-head { display: flex; align-items: center; gap: var(--space-4); }
+.fx-player.side-red .fx-player-head { flex-direction: row-reverse; }
+.fx-player-id { display: flex; flex-direction: column; gap: var(--space-1); min-width: 0; }
+.fx-player.side-red .fx-player-id { align-items: flex-end; }
+.fx-tagrow { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); min-height: 22px; }
+.fx-player.side-red .fx-tagrow { flex-direction: row-reverse; }
+.fx-name { font-family: var(--font-anton); font-style: italic; font-weight: var(--weight-regular);
+  font-size: var(--font-display-xl); line-height: 1; letter-spacing: var(--tracking-hero); text-transform: uppercase;
+  overflow-wrap: anywhere; }
+.fx-vs { align-self: center; font-family: var(--font-anton); font-style: italic; font-size: var(--font-display-lg);
+  text-transform: uppercase; }
+.champ-portrait.fx-avatar { width: 72px; height: 72px; flex: none; font-size: var(--font-display-md); }
+.fx-player.winner .fx-avatar { border-color: var(--arc-gold); box-shadow: var(--glow-gold); }
+.fx-player.loser .fx-name { color: var(--text-secondary); }
+.fx-player.loser .fx-avatar { background: var(--surface-raised); }
+.fx-pool { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-2); width: 100%;
+  max-width: 420px; }
+.fx-pool .champ-tile { min-width: 0; }
+.fx-portrait { position: relative; overflow: hidden; }
+.fx-portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.fx-games { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); align-items: start; }
+.fx-games .game-result-body { grid-template-columns: 1fr; }
+.fx-slot { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
+  padding: var(--space-4) var(--space-5); border: 1px dashed var(--border-metal); border-radius: var(--radius-md); }
+.fx-slot.live { border-style: solid; border-color: var(--border-cyan); background: var(--state-info-dim); }
+.fx-slot .game-result-title { color: var(--text-secondary); }
+.fx-slot.live .game-result-title { color: var(--text-primary); }
+@media (max-width: 1100px) {
+  .fx-games { grid-template-columns: 1fr; }
+}
+@media (max-width: 820px) {
+  .fx-versus-grid { grid-template-columns: 1fr; gap: var(--space-4); }
+  .fx-vs { justify-self: center; }
+  .series-score { grid-template-columns: 1fr 1fr; gap: var(--space-4); padding: var(--space-4); }
+  .series-side.side-blue { grid-column: 1; grid-row: 1; }
+  .series-side.side-red { grid-column: 2; grid-row: 1; }
+  .series-mid { grid-column: 1 / -1; grid-row: 2; }
+  .series-side { gap: var(--space-2); }
+  .series-score .side-tag { white-space: nowrap; }
+  .series-games { width: 100%; }
+  .game-pip { flex: 1; min-width: 0; }
+}
+
+</style>
+</head>
+<body>
+<main class="fx-page">
+<header class="hero fx-hero">
+<div class="hero-row"><span class="hero-eyebrow">Fixture</span><span class="hero-meta">Hoy 22:00</span></div>
+<h1 class="hero-title">Rift Duel</h1>
+<p class="hero-subtitle">Fixture 1v1 · Mejor de 3 · 10 enfrentamientos</p>
+<div class="win-conds fx-rules"><span class="win-cond">First Blood</span><span class="win-cond">100 CS</span><span class="win-cond">Primera torre</span>
+<p class="fx-rules-note">Gana la partida el primero que consigue una. Fearless: cada campeón se usa una sola vez por serie.</p>
+</div>
+</header>
+<nav class="fx-nav" aria-label="Enfrentamientos"><a href="#m01"><b>01</b>Quex vs Mingo</a><a href="#m02"><b>02</b>Jugador 03 vs Jugador 04</a><a href="#m03"><b>03</b>Jugador 05 vs Jugador 06</a><a href="#m04"><b>04</b>Jugador 07 vs Jugador 08</a><a href="#m05"><b>05</b>Jugador 09 vs Jugador 10</a><a href="#m06"><b>06</b>Jugador 11 vs Jugador 12</a><a href="#m07"><b>07</b>Jugador 13 vs Jugador 14</a><a href="#m08"><b>08</b>Jugador 15 vs Jugador 16</a><a href="#m09"><b>09</b>Jugador 17 vs Jugador 18</a><a href="#m10"><b>10</b>Jugador 19 vs Jugador 20</a></nav>
+<section class="fx-match" id="m01" aria-labelledby="m01-t"><header class="fx-match-head"><h2 class="fx-match-title" id="m01-t">Enfrentamiento 01</h2><span class="pill pill-gold">Mingo gana 2-1</span></header><div class="hero versus-hero fx-versus"><div class="fx-versus-grid"><div class="fx-player side-blue loser"><div class="fx-player-head"><span class="champ-portrait fx-avatar" aria-hidden="true">Q</span><div class="fx-player-id"><div class="fx-tagrow"><span class="side-tag">Lado azul</span></div><span class="versus-name fx-name">Quex</span></div></div><div class="fx-pool" role="group" aria-label="Pool de Quex"><div class="champ-tile used"><span class="champ-portrait fx-portrait" aria-hidden="true">A<img src="https://ddragon.leagueoflegends.com/cdn/16.9.1/img/champion/Ahri.png" alt="" loading="lazy"></span><span class="champ-name">Ahri</span><span class="pill pill-neutral">Usado en P1</span></div><div class="champ-tile used"><span class="champ-portrait fx-portrait" aria-hidden="true">Z<img src="https://ddragon.leagueoflegends.com/cdn/16.9.1/img/champion/Zed.png" alt="" loading="lazy"></span><span class="champ-name">Zed</span><span class="pill pill-neutral">Usado en P2</span></div><div class="champ-tile used"><span class="champ-portrait fx-portrait" aria-hidden="true">S<img src="https://ddragon.leagueoflegends.com/cdn/16.9.1/img/champion/Syndra.png" alt="" loading="lazy"></span><span class="champ-name">Syndra</span><span class="pill pill-neutral">Usado en P3</span></div></div></div><span class="versus-vs fx-vs">vs</span><div class="fx-player side-red winner"><div class="fx-player-head"><span class="champ-portrait fx-avatar" aria-hidden="true">M</span><div class="fx-player-id"><div class="fx-tagrow"><span class="side-tag">Lado rojo</span><span class="pill pill-gold">Ganó la serie</span></div><span class="versus-name fx-name">Mingo</span></div></div><div class="fx-pool" role="group" aria-label="Pool de Mingo"><div class="champ-tile used"><span class="champ-portrait fx-portrait" aria-hidden="true">V<img src="https://ddragon.leagueoflegends.com/cdn/16.9.1/img/champion/Viktor.png" alt="" loading="lazy"></span><span class="champ-name">Viktor</span><span class="pill pill-neutral">Usado en P1</span></div><div class="champ-tile used"><span class="champ-portrait fx-portrait" aria-hidden="true">A<img src="https://ddragon.leagueoflegends.com/cdn/16.9.1/img/champion/Akali.png" alt="" loading="lazy"></span><span class="champ-name">Akali</span><span class="pill pill-neutral">Usado en P2</span></div><div class="champ-tile used"><span class="champ-portrait fx-portrait" aria-hidden="true">L<img src="https://ddragon.leagueoflegends.com/cdn/16.9.1/img/champion/Leblanc.png" alt="" loading="lazy"></span><span class="champ-name">LeBlanc</span><span class="pill pill-neutral">Usado en P3</span></div></div></div></div></div><div class="series-score" role="group" aria-label="Marcador: Quex 1, Mingo 2"><div class="series-side side-blue"><div class="series-player"><span class="side-tag">Lado azul</span><span class="series-name">Quex</span></div><span class="series-wins">1</span></div><div class="series-mid"><span class="series-format">Mejor de 3</span><ol class="series-games"><li class="game-pip won side-blue"><b>P1</b>Quex</li><li class="game-pip won side-red"><b>P2</b>Mingo</li><li class="game-pip won side-red"><b>P3</b>Mingo</li></ol></div><div class="series-side side-red"><span class="series-wins">2</span><div class="series-player"><span class="side-tag">Lado rojo</span><span class="series-name">Mingo</span></div></div></div><div class="fx-games"><article class="game-result"><header class="game-result-head"><h3 class="game-result-title">Partida 1</h3><span class="win-cond decided">First Blood · <span class="win-cond-time">06:42</span></span></header><div class="game-result-body"><div class="result-side side-blue winner"><span class="champ-portrait fx-portrait" aria-hidden="true">A<img src="https://ddragon.leagueoflegends.com/cdn/16.9.1/img/champion/Ahri.png" alt="" loading="lazy"></span><div class="result-who"><span class="side-tag">Lado azul</span><strong>Quex</strong><span class="result-champ">Ahri</span></div><span class="pill pill-gold">Ganó</span></div><div class="result-side side-red loser"><span class="champ-portrait fx-portrait" aria-hidden="true">V<img src="https://ddragon.leagueoflegends.com/cdn/16.9.1/img/champion/Viktor.png" alt="" loading="lazy"></span><div class="result-who"><span class="side-tag">Lado rojo</span><strong>Mingo</strong><span class="result-champ">Viktor</span></div></div></div><footer class="game-result-foot"><span>Serie</span><b>1-0</b></footer></article><article class="game-result"><header class="game-result-head"><h3 class="game-result-title">Partida 2</h3><span class="win-cond decided">100 CS · <span class="win-cond-time">09:15</span></span></header><div class="game-result-body"><div class="result-side side-blue loser"><span class="champ-portrait fx-portrait" aria-hidden="true">Z<img src="https://ddragon.leagueoflegends.com/cdn/16.9.1/img/champion/Zed.png" alt="" loading="lazy"></span><div class="result-who"><span class="side-tag">Lado azul</span><strong>Quex</strong><span class="result-champ">Zed</span></div></div><div class="result-side side-red winner"><span class="champ-portrait fx-portrait" aria-hidden="true">A<img src="https://ddragon.leagueoflegends.com/cdn/16.9.1/img/champion/Akali.png" alt="" loading="lazy"></span><div class="result-who"><span class="side-tag">Lado rojo</span><strong>Mingo</strong><span class="result-champ">Akali</span></div><span class="pill pill-gold">Ganó</span></div></div><footer class="game-result-foot"><span>Serie</span><b>1-1</b></footer></article><article class="game-result"><header class="game-result-head"><h3 class="game-result-title">Partida 3</h3><span class="win-cond decided">Primera torre · <span class="win-cond-time">11:03</span></span></header><div class="game-result-body"><div class="result-side side-blue loser"><span class="champ-portrait fx-portrait" aria-hidden="true">S<img src="https://ddragon.leagueoflegends.com/cdn/16.9.1/img/champion/Syndra.png" alt="" loading="lazy"></span><div class="result-who"><span class="side-tag">Lado azul</span><strong>Quex</strong><span class="result-champ">Syndra</span></div></div><div class="result-side side-red winner"><span class="champ-portrait fx-portrait" aria-hidden="true">L<img src="https://ddragon.leagueoflegends.com/cdn/16.9.1/img/champion/Leblanc.png" alt="" loading="lazy"></span><div class="result-who"><span class="side-tag">Lado rojo</span><strong>Mingo</strong><span class="result-champ">LeBlanc</span></div><span class="pill pill-gold">Ganó</span></div></div><footer class="game-result-foot"><span>Serie</span><b>1-2</b></footer></article></div></section><section class="fx-match" id="m02" aria-labelledby="m02-t"><header class="fx-match-head"><h2 class="fx-match-title" id="m02-t">Enfrentamiento 02</h2><span class="pill pill-cyan">En juego</span></header><div class="hero versus-hero fx-versus"><div class="fx-versus-grid"><div class="fx-player side-blue"><div class="fx-player-head"><span class="champ-portrait fx-avatar" aria-hidden="true">03</span><div class="fx-player-id"><div class="fx-tagrow"><span class="side-tag">Lado azul</span></div><span class="versus-name fx-name">Jugador 03</span></div></div><div class="fx-pool" role="group" aria-label="Pool de Jugador 03"><div class="champ-tile used"><span class="champ-portrait fx-portrait" aria-hidden="true">01</span><span class="champ-name">Campeón 01</span><span class="pill pill-neutral">Usado en P1</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">02</span><span class="champ-name">Campeón 02</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">03</span><span class="champ-name">Campeón 03</span></div></div></div><span class="versus-vs fx-vs">vs</span><div class="fx-player side-red"><div class="fx-player-head"><span class="champ-portrait fx-avatar" aria-hidden="true">04</span><div class="fx-player-id"><div class="fx-tagrow"><span class="side-tag">Lado rojo</span></div><span class="versus-name fx-name">Jugador 04</span></div></div><div class="fx-pool" role="group" aria-label="Pool de Jugador 04"><div class="champ-tile used"><span class="champ-portrait fx-portrait" aria-hidden="true">04</span><span class="champ-name">Campeón 04</span><span class="pill pill-neutral">Usado en P1</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">05</span><span class="champ-name">Campeón 05</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">06</span><span class="champ-name">Campeón 06</span></div></div></div></div></div><div class="series-score" role="group" aria-label="Marcador: Jugador 03 1, Jugador 04 0"><div class="series-side side-blue"><div class="series-player"><span class="side-tag">Lado azul</span><span class="series-name">Jugador 03</span></div><span class="series-wins">1</span></div><div class="series-mid"><span class="series-format">Mejor de 3</span><ol class="series-games"><li class="game-pip won side-blue"><b>P1</b>Jugador 03</li><li class="game-pip live"><b>P2</b>En juego</li><li class="game-pip"><b>P3</b>Pendiente</li></ol></div><div class="series-side side-red"><span class="series-wins">0</span><div class="series-player"><span class="side-tag">Lado rojo</span><span class="series-name">Jugador 04</span></div></div></div><div class="fx-games"><article class="game-result"><header class="game-result-head"><h3 class="game-result-title">Partida 1</h3><span class="win-cond decided">100 CS · <span class="win-cond-time">08:47</span></span></header><div class="game-result-body"><div class="result-side side-blue winner"><span class="champ-portrait fx-portrait" aria-hidden="true">01</span><div class="result-who"><span class="side-tag">Lado azul</span><strong>Jugador 03</strong><span class="result-champ">Campeón 01</span></div><span class="pill pill-gold">Ganó</span></div><div class="result-side side-red loser"><span class="champ-portrait fx-portrait" aria-hidden="true">04</span><div class="result-who"><span class="side-tag">Lado rojo</span><strong>Jugador 04</strong><span class="result-champ">Campeón 04</span></div></div></div><footer class="game-result-foot"><span>Serie</span><b>1-0</b></footer></article><article class="fx-slot live"><h3 class="game-result-title">Partida 2</h3><span class="pill pill-cyan">En juego</span></article><article class="fx-slot"><h3 class="game-result-title">Partida 3</h3><span class="pill pill-neutral">Pendiente</span></article></div></section><section class="fx-match" id="m03" aria-labelledby="m03-t"><header class="fx-match-head"><h2 class="fx-match-title" id="m03-t">Enfrentamiento 03</h2><span class="pill pill-neutral">Pendiente</span></header><div class="hero versus-hero fx-versus"><div class="fx-versus-grid"><div class="fx-player side-blue"><div class="fx-player-head"><span class="champ-portrait fx-avatar" aria-hidden="true">05</span><div class="fx-player-id"><div class="fx-tagrow"><span class="side-tag">Lado azul</span></div><span class="versus-name fx-name">Jugador 05</span></div></div><div class="fx-pool" role="group" aria-label="Pool de Jugador 05"><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">01</span><span class="champ-name">Campeón 01</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">02</span><span class="champ-name">Campeón 02</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">03</span><span class="champ-name">Campeón 03</span></div></div></div><span class="versus-vs fx-vs">vs</span><div class="fx-player side-red"><div class="fx-player-head"><span class="champ-portrait fx-avatar" aria-hidden="true">06</span><div class="fx-player-id"><div class="fx-tagrow"><span class="side-tag">Lado rojo</span></div><span class="versus-name fx-name">Jugador 06</span></div></div><div class="fx-pool" role="group" aria-label="Pool de Jugador 06"><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">04</span><span class="champ-name">Campeón 04</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">05</span><span class="champ-name">Campeón 05</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">06</span><span class="champ-name">Campeón 06</span></div></div></div></div></div><div class="series-score" role="group" aria-label="Marcador: Jugador 05 0, Jugador 06 0"><div class="series-side side-blue"><div class="series-player"><span class="side-tag">Lado azul</span><span class="series-name">Jugador 05</span></div><span class="series-wins">0</span></div><div class="series-mid"><span class="series-format">Mejor de 3</span><ol class="series-games"><li class="game-pip"><b>P1</b>Pendiente</li><li class="game-pip"><b>P2</b>Pendiente</li><li class="game-pip"><b>P3</b>Pendiente</li></ol></div><div class="series-side side-red"><span class="series-wins">0</span><div class="series-player"><span class="side-tag">Lado rojo</span><span class="series-name">Jugador 06</span></div></div></div><div class="fx-games"><article class="fx-slot"><h3 class="game-result-title">Partida 1</h3><span class="pill pill-neutral">Pendiente</span></article><article class="fx-slot"><h3 class="game-result-title">Partida 2</h3><span class="pill pill-neutral">Pendiente</span></article><article class="fx-slot"><h3 class="game-result-title">Partida 3</h3><span class="pill pill-neutral">Pendiente</span></article></div></section><section class="fx-match" id="m04" aria-labelledby="m04-t"><header class="fx-match-head"><h2 class="fx-match-title" id="m04-t">Enfrentamiento 04</h2><span class="pill pill-neutral">Pendiente</span></header><div class="hero versus-hero fx-versus"><div class="fx-versus-grid"><div class="fx-player side-blue"><div class="fx-player-head"><span class="champ-portrait fx-avatar" aria-hidden="true">07</span><div class="fx-player-id"><div class="fx-tagrow"><span class="side-tag">Lado azul</span></div><span class="versus-name fx-name">Jugador 07</span></div></div><div class="fx-pool" role="group" aria-label="Pool de Jugador 07"><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">01</span><span class="champ-name">Campeón 01</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">02</span><span class="champ-name">Campeón 02</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">03</span><span class="champ-name">Campeón 03</span></div></div></div><span class="versus-vs fx-vs">vs</span><div class="fx-player side-red"><div class="fx-player-head"><span class="champ-portrait fx-avatar" aria-hidden="true">08</span><div class="fx-player-id"><div class="fx-tagrow"><span class="side-tag">Lado rojo</span></div><span class="versus-name fx-name">Jugador 08</span></div></div><div class="fx-pool" role="group" aria-label="Pool de Jugador 08"><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">04</span><span class="champ-name">Campeón 04</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">05</span><span class="champ-name">Campeón 05</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">06</span><span class="champ-name">Campeón 06</span></div></div></div></div></div><div class="series-score" role="group" aria-label="Marcador: Jugador 07 0, Jugador 08 0"><div class="series-side side-blue"><div class="series-player"><span class="side-tag">Lado azul</span><span class="series-name">Jugador 07</span></div><span class="series-wins">0</span></div><div class="series-mid"><span class="series-format">Mejor de 3</span><ol class="series-games"><li class="game-pip"><b>P1</b>Pendiente</li><li class="game-pip"><b>P2</b>Pendiente</li><li class="game-pip"><b>P3</b>Pendiente</li></ol></div><div class="series-side side-red"><span class="series-wins">0</span><div class="series-player"><span class="side-tag">Lado rojo</span><span class="series-name">Jugador 08</span></div></div></div><div class="fx-games"><article class="fx-slot"><h3 class="game-result-title">Partida 1</h3><span class="pill pill-neutral">Pendiente</span></article><article class="fx-slot"><h3 class="game-result-title">Partida 2</h3><span class="pill pill-neutral">Pendiente</span></article><article class="fx-slot"><h3 class="game-result-title">Partida 3</h3><span class="pill pill-neutral">Pendiente</span></article></div></section><section class="fx-match" id="m05" aria-labelledby="m05-t"><header class="fx-match-head"><h2 class="fx-match-title" id="m05-t">Enfrentamiento 05</h2><span class="pill pill-neutral">Pendiente</span></header><div class="hero versus-hero fx-versus"><div class="fx-versus-grid"><div class="fx-player side-blue"><div class="fx-player-head"><span class="champ-portrait fx-avatar" aria-hidden="true">09</span><div class="fx-player-id"><div class="fx-tagrow"><span class="side-tag">Lado azul</span></div><span class="versus-name fx-name">Jugador 09</span></div></div><div class="fx-pool" role="group" aria-label="Pool de Jugador 09"><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">01</span><span class="champ-name">Campeón 01</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">02</span><span class="champ-name">Campeón 02</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">03</span><span class="champ-name">Campeón 03</span></div></div></div><span class="versus-vs fx-vs">vs</span><div class="fx-player side-red"><div class="fx-player-head"><span class="champ-portrait fx-avatar" aria-hidden="true">10</span><div class="fx-player-id"><div class="fx-tagrow"><span class="side-tag">Lado rojo</span></div><span class="versus-name fx-name">Jugador 10</span></div></div><div class="fx-pool" role="group" aria-label="Pool de Jugador 10"><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">04</span><span class="champ-name">Campeón 04</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">05</span><span class="champ-name">Campeón 05</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">06</span><span class="champ-name">Campeón 06</span></div></div></div></div></div><div class="series-score" role="group" aria-label="Marcador: Jugador 09 0, Jugador 10 0"><div class="series-side side-blue"><div class="series-player"><span class="side-tag">Lado azul</span><span class="series-name">Jugador 09</span></div><span class="series-wins">0</span></div><div class="series-mid"><span class="series-format">Mejor de 3</span><ol class="series-games"><li class="game-pip"><b>P1</b>Pendiente</li><li class="game-pip"><b>P2</b>Pendiente</li><li class="game-pip"><b>P3</b>Pendiente</li></ol></div><div class="series-side side-red"><span class="series-wins">0</span><div class="series-player"><span class="side-tag">Lado rojo</span><span class="series-name">Jugador 10</span></div></div></div><div class="fx-games"><article class="fx-slot"><h3 class="game-result-title">Partida 1</h3><span class="pill pill-neutral">Pendiente</span></article><article class="fx-slot"><h3 class="game-result-title">Partida 2</h3><span class="pill pill-neutral">Pendiente</span></article><article class="fx-slot"><h3 class="game-result-title">Partida 3</h3><span class="pill pill-neutral">Pendiente</span></article></div></section><section class="fx-match" id="m06" aria-labelledby="m06-t"><header class="fx-match-head"><h2 class="fx-match-title" id="m06-t">Enfrentamiento 06</h2><span class="pill pill-neutral">Pendiente</span></header><div class="hero versus-hero fx-versus"><div class="fx-versus-grid"><div class="fx-player side-blue"><div class="fx-player-head"><span class="champ-portrait fx-avatar" aria-hidden="true">11</span><div class="fx-player-id"><div class="fx-tagrow"><span class="side-tag">Lado azul</span></div><span class="versus-name fx-name">Jugador 11</span></div></div><div class="fx-pool" role="group" aria-label="Pool de Jugador 11"><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">01</span><span class="champ-name">Campeón 01</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">02</span><span class="champ-name">Campeón 02</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">03</span><span class="champ-name">Campeón 03</span></div></div></div><span class="versus-vs fx-vs">vs</span><div class="fx-player side-red"><div class="fx-player-head"><span class="champ-portrait fx-avatar" aria-hidden="true">12</span><div class="fx-player-id"><div class="fx-tagrow"><span class="side-tag">Lado rojo</span></div><span class="versus-name fx-name">Jugador 12</span></div></div><div class="fx-pool" role="group" aria-label="Pool de Jugador 12"><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">04</span><span class="champ-name">Campeón 04</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">05</span><span class="champ-name">Campeón 05</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">06</span><span class="champ-name">Campeón 06</span></div></div></div></div></div><div class="series-score" role="group" aria-label="Marcador: Jugador 11 0, Jugador 12 0"><div class="series-side side-blue"><div class="series-player"><span class="side-tag">Lado azul</span><span class="series-name">Jugador 11</span></div><span class="series-wins">0</span></div><div class="series-mid"><span class="series-format">Mejor de 3</span><ol class="series-games"><li class="game-pip"><b>P1</b>Pendiente</li><li class="game-pip"><b>P2</b>Pendiente</li><li class="game-pip"><b>P3</b>Pendiente</li></ol></div><div class="series-side side-red"><span class="series-wins">0</span><div class="series-player"><span class="side-tag">Lado rojo</span><span class="series-name">Jugador 12</span></div></div></div><div class="fx-games"><article class="fx-slot"><h3 class="game-result-title">Partida 1</h3><span class="pill pill-neutral">Pendiente</span></article><article class="fx-slot"><h3 class="game-result-title">Partida 2</h3><span class="pill pill-neutral">Pendiente</span></article><article class="fx-slot"><h3 class="game-result-title">Partida 3</h3><span class="pill pill-neutral">Pendiente</span></article></div></section><section class="fx-match" id="m07" aria-labelledby="m07-t"><header class="fx-match-head"><h2 class="fx-match-title" id="m07-t">Enfrentamiento 07</h2><span class="pill pill-neutral">Pendiente</span></header><div class="hero versus-hero fx-versus"><div class="fx-versus-grid"><div class="fx-player side-blue"><div class="fx-player-head"><span class="champ-portrait fx-avatar" aria-hidden="true">13</span><div class="fx-player-id"><div class="fx-tagrow"><span class="side-tag">Lado azul</span></div><span class="versus-name fx-name">Jugador 13</span></div></div><div class="fx-pool" role="group" aria-label="Pool de Jugador 13"><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">01</span><span class="champ-name">Campeón 01</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">02</span><span class="champ-name">Campeón 02</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">03</span><span class="champ-name">Campeón 03</span></div></div></div><span class="versus-vs fx-vs">vs</span><div class="fx-player side-red"><div class="fx-player-head"><span class="champ-portrait fx-avatar" aria-hidden="true">14</span><div class="fx-player-id"><div class="fx-tagrow"><span class="side-tag">Lado rojo</span></div><span class="versus-name fx-name">Jugador 14</span></div></div><div class="fx-pool" role="group" aria-label="Pool de Jugador 14"><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">04</span><span class="champ-name">Campeón 04</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">05</span><span class="champ-name">Campeón 05</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">06</span><span class="champ-name">Campeón 06</span></div></div></div></div></div><div class="series-score" role="group" aria-label="Marcador: Jugador 13 0, Jugador 14 0"><div class="series-side side-blue"><div class="series-player"><span class="side-tag">Lado azul</span><span class="series-name">Jugador 13</span></div><span class="series-wins">0</span></div><div class="series-mid"><span class="series-format">Mejor de 3</span><ol class="series-games"><li class="game-pip"><b>P1</b>Pendiente</li><li class="game-pip"><b>P2</b>Pendiente</li><li class="game-pip"><b>P3</b>Pendiente</li></ol></div><div class="series-side side-red"><span class="series-wins">0</span><div class="series-player"><span class="side-tag">Lado rojo</span><span class="series-name">Jugador 14</span></div></div></div><div class="fx-games"><article class="fx-slot"><h3 class="game-result-title">Partida 1</h3><span class="pill pill-neutral">Pendiente</span></article><article class="fx-slot"><h3 class="game-result-title">Partida 2</h3><span class="pill pill-neutral">Pendiente</span></article><article class="fx-slot"><h3 class="game-result-title">Partida 3</h3><span class="pill pill-neutral">Pendiente</span></article></div></section><section class="fx-match" id="m08" aria-labelledby="m08-t"><header class="fx-match-head"><h2 class="fx-match-title" id="m08-t">Enfrentamiento 08</h2><span class="pill pill-neutral">Pendiente</span></header><div class="hero versus-hero fx-versus"><div class="fx-versus-grid"><div class="fx-player side-blue"><div class="fx-player-head"><span class="champ-portrait fx-avatar" aria-hidden="true">15</span><div class="fx-player-id"><div class="fx-tagrow"><span class="side-tag">Lado azul</span></div><span class="versus-name fx-name">Jugador 15</span></div></div><div class="fx-pool" role="group" aria-label="Pool de Jugador 15"><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">01</span><span class="champ-name">Campeón 01</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">02</span><span class="champ-name">Campeón 02</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">03</span><span class="champ-name">Campeón 03</span></div></div></div><span class="versus-vs fx-vs">vs</span><div class="fx-player side-red"><div class="fx-player-head"><span class="champ-portrait fx-avatar" aria-hidden="true">16</span><div class="fx-player-id"><div class="fx-tagrow"><span class="side-tag">Lado rojo</span></div><span class="versus-name fx-name">Jugador 16</span></div></div><div class="fx-pool" role="group" aria-label="Pool de Jugador 16"><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">04</span><span class="champ-name">Campeón 04</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">05</span><span class="champ-name">Campeón 05</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">06</span><span class="champ-name">Campeón 06</span></div></div></div></div></div><div class="series-score" role="group" aria-label="Marcador: Jugador 15 0, Jugador 16 0"><div class="series-side side-blue"><div class="series-player"><span class="side-tag">Lado azul</span><span class="series-name">Jugador 15</span></div><span class="series-wins">0</span></div><div class="series-mid"><span class="series-format">Mejor de 3</span><ol class="series-games"><li class="game-pip"><b>P1</b>Pendiente</li><li class="game-pip"><b>P2</b>Pendiente</li><li class="game-pip"><b>P3</b>Pendiente</li></ol></div><div class="series-side side-red"><span class="series-wins">0</span><div class="series-player"><span class="side-tag">Lado rojo</span><span class="series-name">Jugador 16</span></div></div></div><div class="fx-games"><article class="fx-slot"><h3 class="game-result-title">Partida 1</h3><span class="pill pill-neutral">Pendiente</span></article><article class="fx-slot"><h3 class="game-result-title">Partida 2</h3><span class="pill pill-neutral">Pendiente</span></article><article class="fx-slot"><h3 class="game-result-title">Partida 3</h3><span class="pill pill-neutral">Pendiente</span></article></div></section><section class="fx-match" id="m09" aria-labelledby="m09-t"><header class="fx-match-head"><h2 class="fx-match-title" id="m09-t">Enfrentamiento 09</h2><span class="pill pill-neutral">Pendiente</span></header><div class="hero versus-hero fx-versus"><div class="fx-versus-grid"><div class="fx-player side-blue"><div class="fx-player-head"><span class="champ-portrait fx-avatar" aria-hidden="true">17</span><div class="fx-player-id"><div class="fx-tagrow"><span class="side-tag">Lado azul</span></div><span class="versus-name fx-name">Jugador 17</span></div></div><div class="fx-pool" role="group" aria-label="Pool de Jugador 17"><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">01</span><span class="champ-name">Campeón 01</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">02</span><span class="champ-name">Campeón 02</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">03</span><span class="champ-name">Campeón 03</span></div></div></div><span class="versus-vs fx-vs">vs</span><div class="fx-player side-red"><div class="fx-player-head"><span class="champ-portrait fx-avatar" aria-hidden="true">18</span><div class="fx-player-id"><div class="fx-tagrow"><span class="side-tag">Lado rojo</span></div><span class="versus-name fx-name">Jugador 18</span></div></div><div class="fx-pool" role="group" aria-label="Pool de Jugador 18"><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">04</span><span class="champ-name">Campeón 04</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">05</span><span class="champ-name">Campeón 05</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">06</span><span class="champ-name">Campeón 06</span></div></div></div></div></div><div class="series-score" role="group" aria-label="Marcador: Jugador 17 0, Jugador 18 0"><div class="series-side side-blue"><div class="series-player"><span class="side-tag">Lado azul</span><span class="series-name">Jugador 17</span></div><span class="series-wins">0</span></div><div class="series-mid"><span class="series-format">Mejor de 3</span><ol class="series-games"><li class="game-pip"><b>P1</b>Pendiente</li><li class="game-pip"><b>P2</b>Pendiente</li><li class="game-pip"><b>P3</b>Pendiente</li></ol></div><div class="series-side side-red"><span class="series-wins">0</span><div class="series-player"><span class="side-tag">Lado rojo</span><span class="series-name">Jugador 18</span></div></div></div><div class="fx-games"><article class="fx-slot"><h3 class="game-result-title">Partida 1</h3><span class="pill pill-neutral">Pendiente</span></article><article class="fx-slot"><h3 class="game-result-title">Partida 2</h3><span class="pill pill-neutral">Pendiente</span></article><article class="fx-slot"><h3 class="game-result-title">Partida 3</h3><span class="pill pill-neutral">Pendiente</span></article></div></section><section class="fx-match" id="m10" aria-labelledby="m10-t"><header class="fx-match-head"><h2 class="fx-match-title" id="m10-t">Enfrentamiento 10</h2><span class="pill pill-neutral">Pendiente</span></header><div class="hero versus-hero fx-versus"><div class="fx-versus-grid"><div class="fx-player side-blue"><div class="fx-player-head"><span class="champ-portrait fx-avatar" aria-hidden="true">19</span><div class="fx-player-id"><div class="fx-tagrow"><span class="side-tag">Lado azul</span></div><span class="versus-name fx-name">Jugador 19</span></div></div><div class="fx-pool" role="group" aria-label="Pool de Jugador 19"><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">01</span><span class="champ-name">Campeón 01</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">02</span><span class="champ-name">Campeón 02</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">03</span><span class="champ-name">Campeón 03</span></div></div></div><span class="versus-vs fx-vs">vs</span><div class="fx-player side-red"><div class="fx-player-head"><span class="champ-portrait fx-avatar" aria-hidden="true">20</span><div class="fx-player-id"><div class="fx-tagrow"><span class="side-tag">Lado rojo</span></div><span class="versus-name fx-name">Jugador 20</span></div></div><div class="fx-pool" role="group" aria-label="Pool de Jugador 20"><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">04</span><span class="champ-name">Campeón 04</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">05</span><span class="champ-name">Campeón 05</span></div><div class="champ-tile"><span class="champ-portrait fx-portrait" aria-hidden="true">06</span><span class="champ-name">Campeón 06</span></div></div></div></div></div><div class="series-score" role="group" aria-label="Marcador: Jugador 19 0, Jugador 20 0"><div class="series-side side-blue"><div class="series-player"><span class="side-tag">Lado azul</span><span class="series-name">Jugador 19</span></div><span class="series-wins">0</span></div><div class="series-mid"><span class="series-format">Mejor de 3</span><ol class="series-games"><li class="game-pip"><b>P1</b>Pendiente</li><li class="game-pip"><b>P2</b>Pendiente</li><li class="game-pip"><b>P3</b>Pendiente</li></ol></div><div class="series-side side-red"><span class="series-wins">0</span><div class="series-player"><span class="side-tag">Lado rojo</span><span class="series-name">Jugador 20</span></div></div></div><div class="fx-games"><article class="fx-slot"><h3 class="game-result-title">Partida 1</h3><span class="pill pill-neutral">Pendiente</span></article><article class="fx-slot"><h3 class="game-result-title">Partida 2</h3><span class="pill pill-neutral">Pendiente</span></article><article class="fx-slot"><h3 class="game-result-title">Partida 3</h3><span class="pill pill-neutral">Pendiente</span></article></div></section>
+</main>
+</body>
+</html>

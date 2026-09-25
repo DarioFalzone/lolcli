@@ -1,0 +1,86 @@
+{
+  "event": {
+    "title": "Rift Duel",
+    "subtitle": "Fixture 1v1 · Mejor de 3",
+    "date": "Hoy 22:00",
+    "poolSize": 3
+  },
+  "matches": [
+    {
+      "id": "01",
+      "blue": {"player": "Quex", "pool": ["Ahri", "Zed", "Syndra"]},
+      "red": {"player": "Mingo", "pool": ["Viktor", "Akali", "LeBlanc"]},
+      "live": false,
+      "games": [
+        {"winner": "blue", "blue": "Ahri", "red": "Viktor", "condition": "first_blood", "time": "06:42"},
+        {"winner": "red", "blue": "Zed", "red": "Akali", "condition": "cs_100", "time": "09:15"},
+        {"winner": "red", "blue": "Syndra", "red": "LeBlanc", "condition": "first_tower", "time": "11:03"}
+      ]
+    },
+    {
+      "id": "02",
+      "blue": {"player": "Jugador 03", "pool": ["Campeón 01", "Campeón 02", "Campeón 03"]},
+      "red": {"player": "Jugador 04", "pool": ["Campeón 04", "Campeón 05", "Campeón 06"]},
+      "live": true,
+      "games": [
+        {"winner": "blue", "blue": "Campeón 01", "red": "Campeón 04", "condition": "cs_100", "time": "08:47"}
+      ]
+    },
+    {
+      "id": "03",
+      "blue": {"player": "Jugador 05", "pool": ["Campeón 01", "Campeón 02", "Campeón 03"]},
+      "red": {"player": "Jugador 06", "pool": ["Campeón 04", "Campeón 05", "Campeón 06"]},
+      "live": false,
+      "games": []
+    },
+    {
+      "id": "04",
+      "blue": {"player": "Jugador 07", "pool": ["Campeón 01", "Campeón 02", "Campeón 03"]},
+      "red": {"player": "Jugador 08", "pool": ["Campeón 04", "Campeón 05", "Campeón 06"]},
+      "live": false,
+      "games": []
+    },
+    {
+      "id": "05",
+      "blue": {"player": "Jugador 09", "pool": ["Campeón 01", "Campeón 02", "Campeón 03"]},
+      "red": {"player": "Jugador 10", "pool": ["Campeón 04", "Campeón 05", "Campeón 06"]},
+      "live": false,
+      "games": []
+    },
+    {
+      "id": "06",
+      "blue": {"player": "Jugador 11", "pool": ["Campeón 01", "Campeón 02", "Campeón 03"]},
+      "red": {"player": "Jugador 12", "pool": ["Campeón 04", "Campeón 05", "Campeón 06"]},
+      "live": false,
+      "games": []
+    },
+    {
+      "id": "07",
+      "blue": {"player": "Jugador 13", "pool": ["Campeón 01", "Campeón 02", "Campeón 03"]},
+      "red": {"player": "Jugador 14", "pool": ["Campeón 04", "Campeón 05", "Campeón 06"]},
+      "live": false,
+      "games": []
+    },
+    {
+      "id": "08",
+      "blue": {"player": "Jugador 15", "pool": ["Campeón 01", "Campeón 02", "Campeón 03"]},
+      "red": {"player": "Jugador 16", "pool": ["Campeón 04", "Campeón 05", "Campeón 06"]},
+      "live": false,
+      "games": []
+    },
+    {
+      "id": "09",
+      "blue": {"player": "Jugador 17", "pool": ["Campeón 01", "Campeón 02", "Campeón 03"]},
+      "red": {"player": "Jugador 18", "pool": ["Campeón 04", "Campeón 05", "Campeón 06"]},
+      "live": false,
+      "games": []
+    },
+    {
+      "id": "10",
+      "blue": {"player": "Jugador 19", "pool": ["Campeón 01", "Campeón 02", "Campeón 03"]},
+      "red": {"player": "Jugador 20", "pool": ["Campeón 04", "Campeón 05", "Campeón 06"]},
+      "live": false,
+      "games": []
+    }
+  ]
+}
