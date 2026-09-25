@@ -146,7 +146,7 @@ Hay ocho servidores FastAPI separados:
 | Patch Notes | `python -m riot_lol_cli.patch_notes.server` | 8005 | `http://localhost:8005` | `http://localhost:8005/docs` |
 | Duo Analiser | `python -m riot_lol_cli.duo_analiser.server` | 8006 | `http://localhost:8006` | `http://localhost:8006/docs` |
 
-Aparte de los FastAPI, `scripts\bat\rift_duel.bat` regenera el fixture estático de Rift Duel (`claude-design-handoff/rift-duel/`) y lo sirve con `python -m http.server` en el puerto 8007 (`LOLCLI_RIFT_DUEL_PORT`): `http://localhost:8007/fixture.html`.
+Aparte de los FastAPI, `scripts\bat\rift_duel.bat` regenera el fixture estático de Rift Duel (`claude-design-handoff/rift-duel/`) y lo sirve con `serve_fixture.py` (librería estándar; `/assets/` sale de `assets/` del repo) en el puerto 8007 (`LOLCLI_RIFT_DUEL_PORT`): `http://localhost:8007/`. La versión pública está en GitHub Pages, rama `gh-pages`: `https://dariofalzone.github.io/lolcli/`.
 
 ## Flujos Operativos
 

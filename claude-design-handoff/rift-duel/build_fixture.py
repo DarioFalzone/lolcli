@@ -3,11 +3,14 @@
 Uso, desde la raiz del repo:
     python claude-design-handoff/rift-duel/build_fixture.py
     python claude-design-handoff/rift-duel/build_fixture.py otro.json --out otro.html
+    python claude-design-handoff/rift-duel/build_fixture.py --pages ../lolcli-pages
 
 Lee fixture.json y valida los datos: pools, regla Fearless, marcador de la serie
 y nombres de campeon contra el catalogo de Data Dragon del repo. Despues genera
-una pagina estatica y autocontenida (CSS adentro, sin iframes ni JavaScript).
-Si hay errores, los lista todos, sale con codigo 1 y no toca el HTML anterior.
+una pagina estatica (CSS adentro, sin iframes ni JavaScript). Los retratos son
+los splash arts Classic que ya estan en assets/splash_arts/. Con --pages escribe
+index.html en la carpeta de la rama gh-pages y copia al lado solo los splash que
+usa. Si hay errores, los lista todos, sale con codigo 1 y no toca el HTML anterior.
 """
 
 from __future__ import annotations
@@ -17,6 +20,7 @@ import difflib
 import html
 import json
 import re
+import shutil
 import sys
 import unicodedata
 from dataclasses import dataclass, field
@@ -29,7 +33,12 @@ REPO = HERE.parents[1]
 DATA = HERE / "fixture.json"
 OUT = HERE / "fixture.html"
 CATALOG = REPO / "data" / "ddragon-splash-catalog.json"
-ICON_URL = "https://ddragon.leagueoflegends.com/cdn/{version}/img/champion/{id}.png"
+SPLASH_DIR = REPO / "assets" / "splash_arts"
+# Ruta de las imagenes vista desde la pagina. fixture.html vive dos carpetas abajo de la
+# raiz del repo (sirve con file:// y con serve_fixture.py, que mapea /assets/); en la
+# rama gh-pages index.html va en la raiz del sitio, con las imagenes copiadas al lado.
+IMG_BASE_REPO = "../../assets/splash_arts"
+IMG_BASE_PAGES = "assets/splash_arts"
 PLACEHOLDER = re.compile(r"^(?:Campeón|Jugador) (\d{1,3})$")
 TIME = re.compile(r"^\d{2}:[0-5]\d$")
 SIDES = ("blue", "red")
@@ -82,7 +91,7 @@ PAGE_CSS = """
   max-width: 420px; }
 .fx-pool .champ-tile { min-width: 0; }
 .fx-portrait { position: relative; overflow: hidden; }
-.fx-portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.fx-portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
 .fx-games { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); align-items: start; }
 .fx-games .game-result-body { grid-template-columns: 1fr; }
 .fx-slot { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3);
@@ -114,20 +123,23 @@ def norm(name: str) -> str:
     return "".join(ch for ch in decomposed if ch.isalnum() and not unicodedata.combining(ch)).lower()
 
 
-def load_catalog(path: Path = CATALOG) -> tuple[str, dict[str, dict]]:
+def load_catalog(path: Path = CATALOG) -> tuple[dict[str, dict], dict[str, str]]:
+    """Indice de alias -> campeon y archivo del splash Classic (skinNum 0) por id."""
     catalog = json.loads(path.read_text(encoding="utf-8"))
     index: dict[str, dict] = {}
     for champ in catalog["champions"]:
         for alias in (champ["id"], champ["name"], champ["nameEn"]):
             index[norm(alias)] = champ
-    return catalog["ddragonVersion"], index
+    classic = {img["championId"]: img["file"] for img in catalog.get("images", []) if img.get("skinNum") == 0}
+    return index, classic
 
 
 @dataclass
 class Champion:
     name: str  # nombre para mostrar
     key: str  # identidad para comparar (id del catalogo o nombre normalizado)
-    icon: str | None  # URL de Data Dragon, None para placeholders
+    icon: str | None  # URL del splash vista desde la pagina; None = se muestra la inicial
+    splash: str | None = None  # "<id>/<archivo>" dentro de assets/splash_arts
 
 
 @dataclass
@@ -153,9 +165,11 @@ class Match:
 class Resolver:
     """Convierte nombres de campeon en Champion; junta errores con sugerencias."""
 
-    def __init__(self, version: str, index: dict[str, dict]):
-        self.version = version
+    def __init__(self, index: dict[str, dict], classic: dict[str, str], img_base: str = IMG_BASE_REPO):
         self.index = index
+        self.classic = classic
+        self.img_base = img_base
+        self.missing: set[str] = set()  # campeones sin splash en assets/splash_arts
 
     def resolve(self, raw: object, where: str, errors: list[str]) -> Champion | None:
         name = str(raw or "").strip()
@@ -170,8 +184,11 @@ class Resolver:
             hint = f" ¿Quisiste decir {self.index[close[0]]['name']}?" if close else ""
             errors.append(f"{where}: '{name}' no está en el catálogo de campeones.{hint}")
             return None
-        icon = ICON_URL.format(version=self.version, id=champ["id"])
-        return Champion(name=champ["name"], key=champ["id"], icon=icon)
+        splash = f"{champ['id']}/{self.classic.get(champ['id'], champ['id'] + '_Classic.jpg')}"
+        if not (SPLASH_DIR / splash).is_file():
+            self.missing.add(champ["name"])
+            return Champion(name=champ["name"], key=champ["id"], icon=None)
+        return Champion(name=champ["name"], key=champ["id"], icon=f"{self.img_base}/{splash}", splash=splash)
 
 
 def validate(data: dict, resolver: Resolver) -> tuple[list[Match], list[str], list[str]]:
@@ -255,6 +272,8 @@ def validate(data: dict, resolver: Resolver) -> tuple[list[Match], list[str], li
     for player, mids in appearances.items():
         if len(mids) > 1:
             warnings.append(f"{player} aparece en más de un enfrentamiento: {', '.join(mids)}")
+    for name in sorted(resolver.missing):
+        warnings.append(f"no está el splash de {name} en assets/splash_arts: se muestra la inicial")
     return matches, errors, warnings
 
 
@@ -433,29 +452,47 @@ def render(data: dict, matches: list[Match]) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Valida fixture.json y genera fixture.html.")
     parser.add_argument("data", nargs="?", type=Path, default=DATA, help="JSON del fixture (default: fixture.json)")
-    parser.add_argument("--out", type=Path, default=OUT, help="HTML a generar (default: fixture.html)")
+    target = parser.add_mutually_exclusive_group()
+    target.add_argument("--out", type=Path, default=OUT, help="HTML a generar (default: fixture.html)")
+    target.add_argument("--pages", type=Path, help="carpeta de la rama gh-pages: escribe index.html y copia los splash")
     args = parser.parse_args()
+
+    pages = args.pages.resolve() if args.pages else None
+    if pages and (not pages.is_dir() or pages == REPO or REPO in pages.parents):
+        print(f"ERROR: --pages tiene que ser la carpeta de la rama gh-pages, fuera del repo ({pages})", file=sys.stderr)
+        return 1
+    out = pages / "index.html" if pages else args.out
 
     try:
         data = json.loads(args.data.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         print(f"ERROR: no se pudo leer {args.data}: {exc}", file=sys.stderr)
         return 1
-    matches, errors, warnings = validate(data, Resolver(*load_catalog()))
+    index, classic = load_catalog()
+    resolver = Resolver(index, classic, IMG_BASE_PAGES if pages else IMG_BASE_REPO)
+    matches, errors, warnings = validate(data, resolver)
     for warning in warnings:
         print(f"AVISO: {warning}")
     if errors:
         for error in errors:
             print(f"ERROR: {error}", file=sys.stderr)
-        print(f"{len(errors)} error(es): no se generó {args.out.name}.", file=sys.stderr)
+        print(f"{len(errors)} error(es): no se generó {out.name}.", file=sys.stderr)
         return 1
 
     page = render(data, matches)
-    args.out.write_text(page, encoding="utf-8")
+    out.write_text(page, encoding="utf-8")
+    if pages:
+        splashes = sorted({c.splash for m in matches for pool in m.pools.values() for c in pool if c.splash})
+        for rel in splashes:
+            dst = pages / IMG_BASE_PAGES / rel
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(SPLASH_DIR / rel, dst)
+        (pages / ".nojekyll").touch()
+        print(f"gh-pages: {len(splashes)} splash copiados a {pages / IMG_BASE_PAGES}")
     done = sum(1 for m in matches if m.winner)
     live = sum(1 for m in matches if not m.winner and (m.live or m.games))
     print(
-        f"{args.out.name} generado ({len(page) // 1024} KB): {len(matches)} enfrentamientos "
+        f"{out.name} generado ({len(page) // 1024} KB): {len(matches)} enfrentamientos "
         f"(terminados: {done}, en curso: {live}, pendientes: {len(matches) - done - live})."
     )
     return 0

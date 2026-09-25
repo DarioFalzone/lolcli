@@ -12,8 +12,9 @@ lado: azul a la izquierda y rojo a la derecha.
 | `build_gallery.py` | Genera `gallery.html` a partir de `design-system/`. |
 | `gallery.html` | Galería local generada y autocontenida: portada, colores, tipografía y los 17 componentes. No editar a mano. |
 | `fixture.json` | Datos del fixture del torneo: evento, jugadores, pools y resultados. Es lo que se edita. |
-| `build_fixture.py` | Valida `fixture.json` y genera `fixture.html`. |
-| `fixture.html` | Fixture generado y autocontenido. No editar a mano. |
+| `build_fixture.py` | Valida `fixture.json` y genera `fixture.html`; con `--pages` arma la rama `gh-pages`. |
+| `fixture.html` | Fixture generado. No editar a mano. |
+| `serve_fixture.py` | Servidor local: `/` abre el fixture y `/assets/` sirve los splash del repo. |
 
 El prompt para Claude Design está en `../rift-duel-prompt.md`.
 
@@ -29,22 +30,24 @@ python claude-design-handoff/rift-duel/build_gallery.py
 
 ## Fixture del torneo
 
-`fixture.html` muestra cada enfrentamiento con el design system. Arriba va el VersusHero, con el avatar de cada jugador y su pool de 3 campeones debajo del nombre. Después vienen el SeriesScore y un GameResult por partida (P1 a P3). Es autocontenido como la galería: se abre con doble clic y los estados se ven sin JavaScript.
+`fixture.html` muestra cada enfrentamiento con el design system. Arriba va el VersusHero, con el avatar de cada jugador y su pool de 3 campeones debajo del nombre. Después vienen el SeriesScore y un GameResult por partida (P1 a P3). El CSS va adentro y no usa JavaScript. Los retratos son los splash Classic que ya están en `assets/splash_arts/`.
 
-- **Levantarlo local:** `scripts\bat\rift_duel.bat` regenera `fixture.html` y lo sirve en http://localhost:8007/fixture.html (puerto configurable con `LOLCLI_RIFT_DUEL_PORT`). Abre el navegador solo y se corta con Ctrl+C. Si cambian los datos con el servidor andando, alcanza con regenerar y refrescar la página. Sin el `.bat`:
+- **Levantarlo local:** `scripts\bat\rift_duel.bat` regenera `fixture.html` y lo sirve en **http://localhost:8007/** (puerto configurable con `LOLCLI_RIFT_DUEL_PORT`). Abre el navegador solo y se corta con Ctrl+C. Si cambian los datos con el servidor andando, alcanza con regenerar y refrescar la página. Sin el `.bat`:
 
 ```powershell
 python claude-design-handoff/rift-duel/build_fixture.py
-python -m http.server 8007 --bind 127.0.0.1 --directory claude-design-handoff/rift-duel
+python claude-design-handoff/rift-duel/serve_fixture.py
 ```
 
-- **GitHub Pages:** https://dariofalzone.github.io/lolcli/. Sale de la rama `gh-pages`, que tiene solo `index.html` (una copia de `fixture.html`) y `.nojekyll`. Es pública. Se activa una sola vez: Settings → Pages → Build and deployment → Source "Deploy from a branch" → Branch `gh-pages` / `(root)` → Save. Para publicar una versión nueva después de regenerar:
+  Abrir `fixture.html` con doble clic también funciona, porque las imágenes se buscan en `../../assets/`.
+- **GitHub Pages:** **https://dariofalzone.github.io/lolcli/**. Sale de la rama `gh-pages`, que tiene `index.html`, los splash que usa el fixture (en `assets/splash_arts/`) y `.nojekyll`. Es pública. Se activa una sola vez: Settings → Pages → Build and deployment → Source "Deploy from a branch" → Branch `gh-pages` / `(root)` → Save. Para publicar una versión nueva:
 
 ```powershell
 git fetch origin gh-pages
 git worktree add ..\lolcli-pages gh-pages   # solo la primera vez; después: git -C ..\lolcli-pages pull
-Copy-Item claude-design-handoff\rift-duel\fixture.html ..\lolcli-pages\index.html
-git -C ..\lolcli-pages commit -am "chore(pages): update fixture"
+python claude-design-handoff/rift-duel/build_fixture.py --pages ..\lolcli-pages
+git -C ..\lolcli-pages add -A
+git -C ..\lolcli-pages commit -m "chore(pages): update fixture"
 git -C ..\lolcli-pages push
 ```
 
@@ -63,7 +66,7 @@ python claude-design-handoff/rift-duel/build_fixture.py
   - que cada campeón exista en `data/ddragon-splash-catalog.json`. Si hay un error de tipeo, sugiere el nombre correcto.
 
   Si algo falla, lista todos los errores y deja el `fixture.html` anterior como estaba.
-- **Íconos:** los campeones reales muestran su ícono de Data Dragon, en la versión del catálogo. Si no hay internet, se ve la inicial. Los placeholders `Campeón 01` muestran el número.
+- **Retratos:** cada campeón real muestra su splash Classic de `assets/splash_arts/<id>/`, recortado en cuadrado; el archivo sale de `data/ddragon-splash-catalog.json` (`skinNum` 0). No hace falta internet. Si falta un splash, el script avisa y se ve la inicial. Los placeholders `Campeón 01` muestran el número.
 
 ### Cómo pasar los datos por el chat
 

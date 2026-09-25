@@ -6,6 +6,33 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-09-25] Rift Duel: retratos con los splash del repo y servidor local propio
+
+### Qué se hizo
+- Los retratos del fixture dejan de usar el CDN de Data Dragon. Ahora usan los splash Classic que ya están en el repo, en `assets/splash_arts/<id>/`, con el archivo tomado del catálogo (`images`, `skinNum` 0; están los 172 campeones), recortados en cuadrado con `object-fit`. Si falta un splash, el generador avisa y queda la inicial.
+- Rutas de imagen según dónde se ve la página:
+  - En el repo, `fixture.html` usa `../../assets/splash_arts/...`, que funciona con `file://` y con el servidor local.
+  - En Pages, `index.html` va en la raíz del sitio con `assets/splash_arts/...`.
+- `build_fixture.py --pages <carpeta gh-pages>` escribe `index.html`, copia solo los splash que usa el fixture y agrega `.nojekyll`. Rechaza la raíz del repo y cualquier carpeta dentro de él, para no pisar `assets/`.
+- Nuevo `serve_fixture.py` (librería estándar): `/` abre `fixture.html` y `/assets/` sirve `assets/` del repo, solo en 127.0.0.1. Normaliza la ruta antes de decidir, así que `/assets/../.git/config` no escapa (devuelve 404). `scripts/bat/rift_duel.bat` lo usa y abre **http://localhost:8007/**.
+- Rama `gh-pages` actualizada (`9cd0c03`) con los 6 splash que usan los datos de prueba (1,1 MB). Pages ya estaba activado: la corrida #1 de `pages-build-deployment` terminó con success y la #2 arrancó con este push.
+
+### Verificación
+- `ruff check` y `ruff format` limpios en `build_fixture.py` y `serve_fixture.py`. Los 10 casos negativos siguen pasando; los alias ahora apuntan al splash (`MonkeyKing_Classic.jpg`, etc.).
+- Servidor local: `/`, `/fixture.html` y `/gallery.html` devuelven 200 `text/html` y el splash, 200 `image/jpeg`. Los intentos de salirse de `assets/`, crudo y codificado, devuelven 404. Con el puerto ocupado, sale con un error claro.
+- Imágenes cargadas (`naturalWidth > 0`): 12/12 con el servidor local, 12/12 abriendo el archivo con `file://` y 12/12 en una simulación de Pages bajo `/lolcli/`. Chequeos de render: 23/23 a 1440px (local) y a 390px (simulación de Pages).
+- El sitio real de Pages no se pudo abrir desde el contenedor (la política de red bloquea `dariofalzone.github.io`); el estado sale de la API de Actions.
+
+### Archivos modificados
+- `claude-design-handoff/rift-duel/build_fixture.py` — splash locales, `--pages` y aviso por splash faltante.
+- `claude-design-handoff/rift-duel/serve_fixture.py` — nuevo.
+- `claude-design-handoff/rift-duel/fixture.html` — regenerado.
+- `scripts/bat/rift_duel.bat` — usa `serve_fixture.py` y abre la raíz.
+- `claude-design-handoff/rift-duel/README.md`, `AGENTS.md`, `README.md` — URLs local y de Pages, y cómo publicar.
+- `bitacora_de_cambios.md` — esta entrada.
+
+---
+
 ## [2026-09-25] Rift Duel: fixture en GitHub Pages (rama gh-pages)
 
 ### Qué se hizo
