@@ -8,6 +8,10 @@ Contexto unico para importar `riot_lol_cli` a Claude Design. Reemplaza los docum
 - Adjuntar junto con este README, `docs/design-system.md`, tokens/componentes CSS y screenshots actuales de Items Browser/Jungle Meta.
 - El objetivo del prompt no es rediseñar una pantalla aislada, sino generar un sistema de patrones reusable para HTML/CSS/JS vanilla.
 
+## Otros prompts
+
+- `rift-duel-prompt.md`: mockups de una serie 1v1 al mejor de 3 entre amigos (ejemplo: Quex vs Mingo). Usa el design system Rift Duel: Pattern Library v2 más colores por lado (`blue-side`, `red-side`).
+
 ## Resumen
 
 - Proyecto: CLI + servicios locales de analisis para League of Legends.

@@ -6,6 +6,21 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-09-25] Rift Duel: prompt de Claude Design para serie 1v1 Bo3
+
+### Qué se hizo
+- Nuevo `claude-design-handoff/rift-duel-prompt.md`: prompt para generar en Claude Design los mockups de una serie 1v1 al mejor de 3 entre amigos (Quex vs Mingo), con pool predefinida, regla Fearless y victoria por First Blood, 100 CS o primera torre. Seis pantallas con datos ficticios coherentes (0-0, 1-1, 2-1).
+- Colores de lado nuevos, solo para Rift Duel: `blue-side` `#4a97ff`, `red-side` `#ff5a68`, sus variantes `-deep` y `-soft`, y `text-on-side`. No tocan `tokens.css` ni `docs/design-system.md`.
+- Contraste verificado con script WCAG 2: `blue-side` da mínimo 4.78:1 y `red-side` 4.62:1 como texto sobre `forge-black`, `surface-card`, `surface-raised` y `surface-overlay`. Los primeros candidatos (`#3a8dff`, `#ff4f5e`) fallaban sobre `surface-overlay` (4.30 y 4.36).
+- Design system Rift Duel (artifact privado del tipo Design System): https://claude.ai/artifact/2pYJqbC4tHCaMhQ5Umiu2N. Retoma una sesión anterior que creó el artifact pero se cortó por límite de uso antes de cargarle contenido.
+
+### Archivos modificados
+- `claude-design-handoff/rift-duel-prompt.md` — nuevo; supuestos de la serie explícitos en una tabla para confirmar.
+- `claude-design-handoff/README.md` — sección "Otros prompts" con el puntero al prompt nuevo.
+- `bitacora_de_cambios.md` — esta entrada.
+
+---
+
 ## [2026-05-25] PR-D: Tier 3 deuda UI (4 tareas, cierre completo)
 
 **Commit**: `51391c8` refactor(dashboard): extract HTML/CSS/JS + mini-router + drill-down  
