@@ -32,12 +32,13 @@ python claude-design-handoff/rift-duel/build_gallery.py
 
 `fixture.html` muestra cada enfrentamiento con el design system. Arriba va el VersusHero, con el avatar de cada jugador y su pool de 3 campeones debajo del nombre. Después vienen el SeriesScore y un GameResult por partida (P1 a P3). El CSS va adentro y no usa JavaScript. Los retratos son los splash Classic que ya están en `assets/splash_arts/`.
 
-- **Levantarlo local:** `scripts\bat\rift_duel.bat` regenera `fixture.html` y lo sirve en **http://localhost:8007/** (puerto configurable con `LOLCLI_RIFT_DUEL_PORT`). Abre el navegador solo y se corta con Ctrl+C. Si cambian los datos con el servidor andando, alcanza con regenerar y refrescar la página. Sin el `.bat`:
+- **Levantarlo local:** `scripts\bat\rift_duel.bat` regenera `fixture.html` y lo sirve en **http://localhost:8007/** (puerto configurable con `LOLCLI_RIFT_DUEL_PORT`). El navegador se abre recién cuando el servidor está escuchando. La ventana negra tiene que quedar abierta: si la cerrás, se cae el servidor. Se corta con Ctrl+C. Si cambian los datos con el servidor andando, alcanza con regenerar y refrescar la página. Sin el `.bat`:
 
 ```powershell
-python claude-design-handoff/rift-duel/build_fixture.py
-python claude-design-handoff/rift-duel/serve_fixture.py
+python claude-design-handoff/rift-duel/serve_fixture.py --build --open
 ```
+
+  El `.bat` busca Python en este orden: `.venv` de la carpeta, `.venv` del clon principal (si se corre desde un git worktree), el lanzador `py` y `python`. Si no levanta, la ventana dice por qué: no encontró Python o el puerto está ocupado por otro programa (en ese caso, `set LOLCLI_RIFT_DUEL_PORT=8017`).
 
   Abrir `fixture.html` con doble clic también funciona, porque las imágenes se buscan en `../../assets/`.
 - **GitHub Pages:** **https://dariofalzone.github.io/lolcli/**. Sale de la rama `gh-pages`, que tiene `index.html`, los splash que usa el fixture (en `assets/splash_arts/`) y `.nojekyll`. Es pública. Se activa una sola vez: Settings → Pages → Build and deployment → Source "Deploy from a branch" → Branch `gh-pages` / `(root)` → Save. Para publicar una versión nueva:

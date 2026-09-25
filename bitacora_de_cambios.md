@@ -6,6 +6,34 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-09-25] Fix: launcher local de Rift Duel más robusto
+
+### Qué se hizo
+- `scripts/bat/rift_duel.bat` busca un Python que funcione, en este orden: `.venv` de la carpeta, `.venv` del clon principal (se llega con `git rev-parse --git-common-dir` y la ruta se normaliza con `%%~fP`), `py -3` y `python`. Cada candidato se prueba ejecutándolo, así que el alias de la Microsoft Store no cuenta. Si no encuentra ninguno, muestra cómo resolverlo y no abre el navegador. No usa etiquetas ni `goto`.
+- La lógica pasa a `serve_fixture.py`:
+  - `--build` regenera antes de servir;
+  - `--open` abre el navegador recién cuando el socket ya escucha, así que no puede llegar antes que el servidor;
+  - si el puerto ya lo usa este mismo fixture, solo abre el navegador;
+  - si lo usa otro programa, da un error claro con la salida (`LOLCLI_RIFT_DUEL_PORT`).
+- El `.bat` ya no depende de `Get-NetTCPConnection` ni del timer de PowerShell.
+
+### Causa probable (no verificada en la PC de Darío)
+- Darío reportó http://localhost:8007/ caído. Dos defectos del launcher anterior pueden explicarlo:
+  - Desde un git worktree no hay `.venv` (queda en el clon principal) y el `.bat` caía al `python` del PATH, que en Windows puede ser el alias de la Store.
+  - El navegador se abría a los 2 segundos aunque el servidor hubiera fallado.
+- Tampoco se descarta que el `.bat` no se haya corrido, o que se haya cerrado su ventana.
+
+### Verificación
+- En el contenedor, `serve_fixture.py --build --open`: regenera y sirve; `/` y el splash devuelven 200 y la ruta que intenta salirse de `assets/` da 404.
+- Segunda instancia sobre el mismo puerto: detecta el fixture y termina con código 0. Puerto ocupado por otro programa: error claro y código 1.
+- `git rev-parse --git-common-dir` desde un worktree devuelve el `.git` del clon principal.
+- El `.bat` no se pudo ejecutar acá (Linux): está en ASCII, sin BOM, sin `-Encoding UTF8` y sin etiquetas.
+
+### Archivos modificados
+- `scripts/bat/rift_duel.bat`, `claude-design-handoff/rift-duel/serve_fixture.py`, `claude-design-handoff/rift-duel/README.md`, `bitacora_de_cambios.md`.
+
+---
+
 ## [2026-09-25] Rift Duel: retratos con los splash del repo y servidor local propio
 
 ### Qué se hizo
