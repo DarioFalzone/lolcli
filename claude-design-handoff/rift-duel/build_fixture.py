@@ -47,9 +47,15 @@ CONDITIONS = {"first_blood": "First Blood", "cs_100": "100 CS", "first_tower": "
 WINS_NEEDED = 2
 MAX_GAMES = 3
 
-# Composicion propia del fixture: grillas, hero compacto, slots pendientes y
-# responsive. Solo tokens del design system, sin colores nuevos.
+# Composicion propia del fixture: grillas, hero compacto, tarjetas de campeon, slots
+# pendientes y responsive. Todo sale de los tokens del design system, salvo los
+# degrades metalicos de los nombres (dorado lado azul, plateado lado rojo).
 PAGE_CSS = """
+:root {
+  --fx-gold-metal: linear-gradient(180deg, #fff6d8 0%, #f0e6d2 22%, #dcbc6c 46%, #c89b3c 62%, #8f6d2e 100%);
+  --fx-silver-metal: linear-gradient(180deg, #ffffff 0%, #eef2f6 22%, #c7ced6 46%, #9ba5b0 64%, #5f6975 100%);
+  --fx-silver-text: #c7ced6;
+}
 .fx-page { max-width: var(--container-2xl); margin: 0 auto; padding: var(--space-6) var(--space-4) var(--space-16); }
 .fx-hero { margin-bottom: var(--space-6); }
 .fx-rules { justify-content: center; margin-top: var(--space-4); position: relative; }
@@ -78,18 +84,41 @@ PAGE_CSS = """
 .fx-player.side-red .fx-player-id { align-items: flex-end; }
 .fx-tagrow { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); min-height: 22px; }
 .fx-player.side-red .fx-tagrow { flex-direction: row-reverse; }
-.fx-name { font-family: var(--font-anton); font-style: italic; font-weight: var(--weight-regular);
-  font-size: var(--font-display-xl); line-height: 1; letter-spacing: var(--tracking-hero); text-transform: uppercase;
-  overflow-wrap: anywhere; }
+.fx-name { display: inline-block; padding-right: 0.12em; font-family: var(--font-anton); font-style: italic;
+  font-weight: var(--weight-regular); font-size: clamp(2.4rem, 3.6vw, 3.4rem); line-height: 1.05;
+  letter-spacing: var(--tracking-hero); text-transform: uppercase; overflow-wrap: anywhere;
+  color: transparent; -webkit-text-fill-color: transparent; -webkit-background-clip: text; background-clip: text; }
+.fx-player.side-blue .fx-name { background-image: var(--fx-gold-metal);
+  filter: drop-shadow(0 2px 0 rgba(1, 10, 19, 0.9)) drop-shadow(0 0 16px rgba(200, 155, 60, 0.5)); }
+.fx-player.side-red .fx-name { background-image: var(--fx-silver-metal);
+  filter: drop-shadow(0 2px 0 rgba(1, 10, 19, 0.9)) drop-shadow(0 0 16px rgba(205, 215, 225, 0.4)); }
+.series-side.side-blue .series-name, .result-side.side-blue:not(.loser) strong { color: var(--arc-gold-text); }
+.series-side.side-red .series-name, .result-side.side-red:not(.loser) strong { color: var(--fx-silver-text); }
 .fx-vs { align-self: center; font-family: var(--font-anton); font-style: italic; font-size: var(--font-display-lg);
   text-transform: uppercase; }
 .champ-portrait.fx-avatar { width: 72px; height: 72px; flex: none; font-size: var(--font-display-md); }
 .fx-player.winner .fx-avatar { border-color: var(--arc-gold); box-shadow: var(--glow-gold); }
-.fx-player.loser .fx-name { color: var(--text-secondary); }
+.fx-player.loser .fx-name { filter: saturate(0.3) brightness(0.7) drop-shadow(0 2px 0 rgba(1, 10, 19, 0.9)); }
 .fx-player.loser .fx-avatar { background: var(--surface-raised); }
-.fx-pool { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-2); width: 100%;
-  max-width: 420px; }
-.fx-pool .champ-tile { min-width: 0; }
+.fx-pool { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); width: 100%;
+  max-width: 600px; }
+.fx-card { position: relative; aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--radius-md);
+  border: 1px solid var(--arc-gold-dark); background: var(--side-deep, var(--surface-raised)); box-shadow: var(--elevation-1); }
+.fx-card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%;
+  transition: transform var(--motion-slow); }
+.fx-card:hover img { transform: scale(1.05); }
+.fx-card-glyph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: var(--font-display-lg); font-weight: var(--weight-bold);
+  color: var(--text-primary); }
+.fx-card-name { position: absolute; left: 0; right: 0; bottom: 0; padding: var(--space-6) var(--space-2) var(--space-2);
+  background: linear-gradient(180deg, transparent, rgba(1, 10, 19, 0.92)); font-family: var(--font-display);
+  font-size: var(--font-body-sm); font-weight: var(--weight-bold); color: var(--text-primary); text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8); }
+.fx-card-flag { position: absolute; top: var(--space-2); left: var(--space-2); background: rgba(1, 10, 19, 0.88); }
+.fx-card.used img { filter: grayscale(0.5) brightness(0.8); }
+.fx-card.empty { background: var(--forge-darker); border: 1px dashed var(--border-metal); box-shadow: none; }
+.fx-card.empty .fx-card-glyph { color: var(--text-tertiary); font-size: var(--font-display-md); }
+.fx-card.empty .fx-card-name { background: none; color: var(--text-secondary); font-weight: var(--weight-semibold); }
 .fx-portrait { position: relative; overflow: hidden; }
 .fx-portrait img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
 .fx-games { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); align-items: start; }
@@ -105,6 +134,8 @@ PAGE_CSS = """
 @media (max-width: 820px) {
   .fx-versus-grid { grid-template-columns: 1fr; gap: var(--space-4); }
   .fx-vs { justify-self: center; }
+  .fx-pool { gap: var(--space-2); }
+  .fx-card-name { font-size: var(--font-caption); padding-top: var(--space-4); }
   .series-score { grid-template-columns: 1fr 1fr; gap: var(--space-4); padding: var(--space-4); }
   .series-side.side-blue { grid-column: 1; grid-row: 1; }
   .series-side.side-red { grid-column: 2; grid-row: 1; }
@@ -149,6 +180,7 @@ class Match:
     pools: dict[str, list[Champion]]
     games: list[dict] = field(default_factory=list)
     live: bool = False
+    slots: int = 3  # tamaño de la pool; lo que falta se muestra como "Por elegir"
 
     @property
     def wins(self) -> dict[str, int]:
@@ -221,16 +253,19 @@ def validate(data: dict, resolver: Resolver) -> tuple[list[Match], list[str], li
             else:
                 appearances.setdefault(player, []).append(mid)
             players[side] = player or SIDE_TAG[side]
-            pool_raw = slot.get("pool") or []
-            if len(pool_raw) != pool_size:
-                errors.append(f"{where}: la pool de {players[side]} tiene {len(pool_raw)} campeones y van {pool_size}")
+            # Plantilla: una pool puede venir incompleta o vacía; lo que falta queda "Por elegir".
+            pool_raw = [c for c in (slot.get("pool") or []) if str(c or "").strip()]
+            if len(pool_raw) > pool_size:
+                errors.append(
+                    f"{where}: la pool de {players[side]} tiene {len(pool_raw)} campeones y el máximo es {pool_size}"
+                )
             champs = [resolver.resolve(c, f"{where}, pool de {players[side]}", errors) for c in pool_raw]
             pools[side] = [c for c in champs if c]
             keys = [c.key for c in pools[side]]
             for dup in sorted({k for k in keys if keys.count(k) > 1}):
                 errors.append(f"{where}: la pool de {players[side]} repite {dup}")
 
-        match = Match(id=mid, players=players, pools=pools, live=bool(raw.get("live", False)))
+        match = Match(id=mid, players=players, pools=pools, live=bool(raw.get("live", False)), slots=pool_size)
         games_raw = raw.get("games") or []
         if len(games_raw) > MAX_GAMES:
             errors.append(f"{where}: tiene {len(games_raw)} partidas y el máximo es {MAX_GAMES}")
@@ -293,10 +328,20 @@ def portrait(champ: Champion) -> str:
     return f'<span class="champ-portrait fx-portrait" aria-hidden="true">{esc(initials(champ.name))}{img}</span>'
 
 
-def champ_tile(champ: Champion, used_in: int | None) -> str:
-    cls = "champ-tile used" if used_in else "champ-tile"
-    pill = f'<span class="pill pill-neutral">Usado en P{used_in}</span>' if used_in else ""
-    return f'<div class="{cls}">{portrait(champ)}<span class="champ-name">{esc(champ.name)}</span>{pill}</div>'
+def champ_card(champ: Champion | None, used_in: int | None = None) -> str:
+    """Tarjeta grande de la pool: splash del campeón con el nombre encima; None = lugar vacío."""
+    if champ is None:
+        return (
+            '<div class="fx-card empty"><span class="fx-card-glyph" aria-hidden="true">?</span>'
+            '<span class="fx-card-name">Por elegir</span></div>'
+        )
+    cls = "fx-card used" if used_in else "fx-card"
+    img = f'<img src="{esc(champ.icon)}" alt="" loading="lazy">' if champ.icon else ""
+    flag = f'<span class="pill pill-neutral fx-card-flag">Usado en P{used_in}</span>' if used_in else ""
+    return (
+        f'<div class="{cls}"><span class="fx-card-glyph" aria-hidden="true">{esc(initials(champ.name))}</span>'
+        f'{img}{flag}<span class="fx-card-name">{esc(champ.name)}</span></div>'
+    )
 
 
 def status_pill(match: Match) -> str:
@@ -316,7 +361,9 @@ def player_block(match: Match, side: str) -> str:
     name = match.players[side]
     trophy = '<span class="pill pill-gold">Ganó la serie</span>' if match.winner == side else ""
     used = match.used_in(side)
-    tiles = "".join(champ_tile(c, used.get(c.key)) for c in match.pools[side])
+    pool = match.pools[side]
+    tiles = "".join(champ_card(c, used.get(c.key)) for c in pool)
+    tiles += champ_card(None) * max(0, match.slots - len(pool))
     return (
         f'<div class="fx-player side-{side}{state}">'
         f'<div class="fx-player-head"><span class="champ-portrait fx-avatar" aria-hidden="true">{esc(initials(name))}</span>'
@@ -414,6 +461,8 @@ def render(data: dict, matches: list[Match]) -> str:
         for m in matches
     )
     rules = "".join(f'<span class="win-cond">{label}</span>' for label in CONDITIONS.values())
+    date = str(event.get("date", "")).strip()
+    date_html = f'<span class="hero-meta">{esc(date)}</span>' if date else ""
     return f"""<!doctype html>
 <html lang="es" data-theme="dark">
 <head>
@@ -434,7 +483,7 @@ def render(data: dict, matches: list[Match]) -> str:
 <body>
 <main class="fx-page">
 <header class="hero fx-hero">
-<div class="hero-row"><span class="hero-eyebrow">Fixture</span><span class="hero-meta">{esc(event.get("date", ""))}</span></div>
+<div class="hero-row"><span class="hero-eyebrow">Fixture</span>{date_html}</div>
 <h1 class="hero-title">{esc(title)}</h1>
 <p class="hero-subtitle">{esc(event.get("subtitle", ""))} · {len(matches)} enfrentamientos</p>
 <div class="win-conds fx-rules">{rules}

@@ -6,6 +6,26 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-09-25] Rift Duel: nombres dorado/plateado, tarjetas grandes y plantilla limpia
+
+### Qué se hizo
+- Nombres del VersusHero en degradé metálico estilo LoL, con brillo: dorado para el lado azul y plateado para el lado rojo. En el marcador y en los resultados, dorado o plateado liso. Al perdedor de la serie se lo atenúa. Son los únicos colores fuera de los tokens (`--fx-gold-metal`, `--fx-silver-metal`, `--fx-silver-text`), a pedido de Darío.
+- La pool pasa de casillas chicas a tarjetas grandes 16:10 con el splash del campeón y el nombre encima. Las usadas siguen viéndose (grayscale 0.5) con la marca "Usado en Pn". Los lugares vacíos muestran "Por elegir".
+- `fixture.json` limpio como plantilla: 01 Cuex vs Mingo (con C, corregido por Darío) y 02-10 "Jugador NN", pools vacías, sin partidas ni fecha. El validador ahora acepta pools incompletas y solo marca error si superan `poolSize`.
+- "Quex" → "Cuex" en `rift-duel-prompt.md`, el README de `rift-duel` y `claude-design-handoff/README.md`. Los ejemplos del design system (repo y artifact) siguen diciendo "Quex".
+- Rama `gh-pages` (`2f82003`): plantilla publicada, sin los splash de los datos de prueba.
+- Campeones actuales: no se pudieron bajar desde este entorno, que bloquea Data Dragon. En el README quedó el comando del script existente (`scripts/update_ddragon_assets.py --skip-items`) para correrlo en otra sesión o en la PC.
+
+### Verificación
+- `ruff check` y `ruff format` limpios. Los 10 casos negativos, con un JSON de ejemplo en el scratchpad, siguen pasando; el de tamaño de pool ahora espera "máximo 3".
+- Render con Chromium: con el ejemplo con campeones, 12/12 imágenes del 01 y 18 tarjetas (7 vacías); con la plantilla, 60 tarjetas "Por elegir". Nombres con relleno transparente y degradé dorado o plateado. Sin scroll horizontal a 1440 ni a 390px. Capturas revisadas.
+
+### Archivos modificados
+- `claude-design-handoff/rift-duel/build_fixture.py`, `fixture.json` y `fixture.html` (regenerado).
+- `claude-design-handoff/rift-duel/README.md`, `claude-design-handoff/rift-duel-prompt.md`, `claude-design-handoff/README.md`, `bitacora_de_cambios.md`.
+
+---
+
 ## [2026-09-25] Fix: launcher local de Rift Duel más robusto
 
 ### Qué se hizo

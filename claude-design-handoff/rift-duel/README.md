@@ -1,6 +1,6 @@
 # Rift Duel
 
-Design system para series 1v1 de League of Legends entre amigos (ejemplo: Quex
+Design system para series 1v1 de League of Legends entre amigos (ejemplo: Cuex
 vs Mingo, al mejor de 3). Es el Hextech de la Pattern Library v2 más un color por
 lado: azul a la izquierda y rojo a la derecha.
 
@@ -30,7 +30,11 @@ python claude-design-handoff/rift-duel/build_gallery.py
 
 ## Fixture del torneo
 
-`fixture.html` muestra cada enfrentamiento con el design system. Arriba va el VersusHero, con el avatar de cada jugador y su pool de 3 campeones debajo del nombre. Después vienen el SeriesScore y un GameResult por partida (P1 a P3). El CSS va adentro y no usa JavaScript. Los retratos son los splash Classic que ya están en `assets/splash_arts/`.
+`fixture.html` muestra cada enfrentamiento con el design system. Arriba va el VersusHero, con el avatar de cada jugador y su pool de 3 campeones debajo del nombre. Después vienen el SeriesScore y un GameResult por partida (P1 a P3). El CSS va adentro y no usa JavaScript.
+
+- **Nombres:** el jugador del lado azul va en dorado metálico y el del lado rojo en plateado, estilo LoL, con brillo. En el marcador y en los resultados, el nombre va en dorado o plateado liso. Al perdedor de la serie se lo atenúa.
+- **Pool:** tarjetas grandes (16:10) con el splash Classic de cada campeón y el nombre encima. Las usadas siguen viéndose, apenas atenuadas, con la marca "Usado en Pn". Los lugares sin campeón muestran "Por elegir".
+- **Plantilla:** `fixture.json` arranca limpio: 01 Cuex vs Mingo y 02 a 10 con "Jugador NN", pools vacías y partidas sin cargar ("Pendiente"). Se completa a medida que llegan los datos.
 
 - **Levantarlo local:** `scripts\bat\rift_duel.bat` regenera `fixture.html` y lo sirve en **http://localhost:8007/** (puerto configurable con `LOLCLI_RIFT_DUEL_PORT`). El navegador se abre recién cuando el servidor está escuchando. La ventana negra tiene que quedar abierta: si la cerrás, se cae el servidor. Se corta con Ctrl+C. Si cambian los datos con el servidor andando, alcanza con regenerar y refrescar la página. Sin el `.bat`:
 
@@ -41,7 +45,7 @@ python claude-design-handoff/rift-duel/serve_fixture.py --build --open
   El `.bat` busca Python en este orden: `.venv` de la carpeta, `.venv` del clon principal (si se corre desde un git worktree), el lanzador `py` y `python`. Si no levanta, la ventana dice por qué: no encontró Python o el puerto está ocupado por otro programa (en ese caso, `set LOLCLI_RIFT_DUEL_PORT=8017`).
 
   Abrir `fixture.html` con doble clic también funciona, porque las imágenes se buscan en `../../assets/`.
-- **GitHub Pages:** **https://dariofalzone.github.io/lolcli/**. Sale de la rama `gh-pages`, que tiene `index.html`, los splash que usa el fixture (en `assets/splash_arts/`) y `.nojekyll`. Es pública. Se activa una sola vez: Settings → Pages → Build and deployment → Source "Deploy from a branch" → Branch `gh-pages` / `(root)` → Save. Para publicar una versión nueva:
+- **GitHub Pages:** **https://dariofalzone.github.io/lolcli/**. Sale de la rama `gh-pages`, que tiene `index.html`, los splash que usa el fixture (en `assets/splash_arts/`, solo si hay campeones cargados) y `.nojekyll`. Es pública. Se activa una sola vez: Settings → Pages → Build and deployment → Source "Deploy from a branch" → Branch `gh-pages` / `(root)` → Save. Para publicar una versión nueva:
 
 ```powershell
 git fetch origin gh-pages
@@ -60,14 +64,19 @@ python claude-design-handoff/rift-duel/build_fixture.py
 ```
 
 - **Validación:** antes de generar, el script revisa:
-  - que cada pool tenga 3 campeones distintos;
+  - que cada pool tenga hasta 3 campeones distintos (lo que falta queda "Por elegir");
   - la regla Fearless;
   - que nadie siga jugando después de llegar a 2;
   - el formato `mm:ss` del tiempo y la condición de victoria;
   - que cada campeón exista en `data/ddragon-splash-catalog.json`. Si hay un error de tipeo, sugiere el nombre correcto.
 
   Si algo falla, lista todos los errores y deja el `fixture.html` anterior como estaba.
-- **Retratos:** cada campeón real muestra su splash Classic de `assets/splash_arts/<id>/`, recortado en cuadrado; el archivo sale de `data/ddragon-splash-catalog.json` (`skinNum` 0). No hace falta internet. Si falta un splash, el script avisa y se ve la inicial. Los placeholders `Campeón 01` muestran el número.
+- **Imágenes:** cada campeón muestra su splash Classic de `assets/splash_arts/<id>/`; el archivo sale de `data/ddragon-splash-catalog.json` (`skinNum` 0). No hace falta internet. Si falta un splash, el script avisa y se ve la inicial.
+- **Campeones actuales:** el catálogo local es de la versión 16.9.1 (172 campeones). Para bajar los que salieron después, corré el script del repo en una PC o sesión con acceso a `ddragon.leagueoflegends.com`. Baja solo lo que falta y actualiza el catálogo:
+
+```powershell
+$env:PYTHONPATH = "src"; python scripts/update_ddragon_assets.py --skip-items
+```
 
 ### Cómo pasar los datos por el chat
 

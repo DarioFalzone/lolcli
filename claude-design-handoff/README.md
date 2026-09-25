@@ -10,7 +10,7 @@ Contexto unico para importar `riot_lol_cli` a Claude Design. Reemplaza los docum
 
 ## Otros prompts
 
-- `rift-duel-prompt.md`: mockups de una serie 1v1 al mejor de 3 entre amigos (ejemplo: Quex vs Mingo). Usa el design system Rift Duel: Pattern Library v2 más colores por lado (`blue-side`, `red-side`). Sus archivos, una galería local para verlo y el fixture del torneo (`fixture.html`, generado desde `fixture.json`) están en `rift-duel/`.
+- `rift-duel-prompt.md`: mockups de una serie 1v1 al mejor de 3 entre amigos (ejemplo: Cuex vs Mingo). Usa el design system Rift Duel: Pattern Library v2 más colores por lado (`blue-side`, `red-side`). Sus archivos, una galería local para verlo y el fixture del torneo (`fixture.html`, generado desde `fixture.json`) están en `rift-duel/`.
 
 ## Resumen
 

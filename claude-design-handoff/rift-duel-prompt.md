@@ -1,7 +1,7 @@
 # Claude Design Prompt - Rift Duel (1v1 al mejor de 3)
 
 Prompt para generar en Claude Design los mockups de una serie 1v1 de League of
-Legends entre amigos, al mejor de 3 (ejemplo: Quex vs Mingo), con la paleta
+Legends entre amigos, al mejor de 3 (ejemplo: Cuex vs Mingo), con la paleta
 Hextech de LOLCLI.
 
 ## Para qué sirve
@@ -30,7 +30,7 @@ ficticios: se ven como producto terminado, pero los datos son de ejemplo.
 
 | Tema | Supuesto |
 |------|----------|
-| Lados | Quex juega del lado azul (izquierda) y Mingo del rojo (derecha). No cambian en toda la serie. |
+| Lados | Cuex juega del lado azul (izquierda) y Mingo del rojo (derecha). No cambian en toda la serie. |
 | Pool | 5 campeones por jugador, definidos antes de la serie. |
 | Fearless | Cada jugador usa cada campeón de su pool una sola vez en la serie. |
 | Victoria de partida | Gana el primero que consigue First Blood, 100 CS o la primera torre. |
@@ -50,19 +50,19 @@ Contexto
 
 Reglas de la serie
 - Formato: 1v1, mejor de 3. Gana la serie el primero que gana 2 partidas.
-- Lados fijos: Quex juega del lado azul (siempre a la izquierda) y Mingo del lado rojo (siempre a la derecha).
+- Lados fijos: Cuex juega del lado azul (siempre a la izquierda) y Mingo del lado rojo (siempre a la derecha).
 - Pool predefinida: cada jugador tiene 5 campeones y la pool se ve siempre.
 - Regla Fearless: cada jugador usa cada campeón de su pool una sola vez en la serie. Un campeón ya usado queda bloqueado y muestra en qué partida se usó ("Usado en P1").
 - Cómo se gana una partida: el primero que consigue First Blood, 100 CS o la primera torre.
 
 Datos de ejemplo
-- Jugadores: Quex (lado azul) y Mingo (lado rojo).
-- Pool de Quex: Ahri, Yasuo, Zed, Syndra, Orianna.
+- Jugadores: Cuex (lado azul) y Mingo (lado rojo).
+- Pool de Cuex: Ahri, Yasuo, Zed, Syndra, Orianna.
 - Pool de Mingo: Viktor, Akali, LeBlanc, Sylas, Katarina.
 - Cuándo y dónde: hoy a las 22:00, carril central de la Grieta del Invocador.
-- Partida 1: Ahri (Quex) vs Viktor (Mingo). Gana Quex por First Blood a los 06:42.
-- Partida 2: Zed (Quex) vs Akali (Mingo). Gana Mingo por 100 CS a los 09:15 (100 a 91).
-- Partida 3: Syndra (Quex) vs LeBlanc (Mingo). Gana Mingo por primera torre a los 11:03.
+- Partida 1: Ahri (Cuex) vs Viktor (Mingo). Gana Cuex por First Blood a los 06:42.
+- Partida 2: Zed (Cuex) vs Akali (Mingo). Gana Mingo por 100 CS a los 09:15 (100 a 91).
+- Partida 3: Syndra (Cuex) vs LeBlanc (Mingo). Gana Mingo por primera torre a los 11:03.
 - Resultado final: Mingo gana la serie 2-1.
 
 Pantallas (escritorio 1440 × 900, modo oscuro)
@@ -78,7 +78,7 @@ Además mostrá estos estados en alguna pantalla: pool sin cargar (vacía), part
 Dirección visual
 - Estética Hextech oscura inspirada en League of Legends: fondo navy casi negro, superficies azul oscuro, bordes finos dorados de baja opacidad y un patrón diagonal sutil en los encabezados.
 - Dorado para jerarquía, acción principal, foco y ganador.
-- Azul intenso para todo lo de Quex (lado azul) y rojo intenso para todo lo de Mingo (lado rojo): nombre, bordes, barras de progreso y paneles con tinte.
+- Azul intenso para todo lo de Cuex (lado azul) y rojo intenso para todo lo de Mingo (lado rojo): nombre, bordes, barras de progreso y paneles con tinte.
 - Cyan solo para información (reglas, ayudas, datos secundarios). Nunca para un jugador.
 - Tipografía: Anton itálica en mayúsculas para los títulos grandes ("QUEX VS MINGO"), Outfit para encabezados y números del marcador, Inter para el texto. Números con ancho fijo (tabular).
 - Radios de 4 a 12 px, nada muy redondeado.
@@ -90,7 +90,7 @@ Tokens (usar estos valores exactos)
 - Dorado: arc-gold #c89b3c, arc-gold-dark #785a28, arc-gold-text #d4b15c, arc-gold-bright #f0e6d2
 - Información: arc-cyan #0bc6e3
 - Texto: text-primary #f0e6d2, text-secondary #a09b8c, text-on-gold #010a13
-- Lado azul (Quex): blue-side #4a97ff, blue-side-deep #143a80, blue-side-soft rgba(74, 151, 255, 0.14)
+- Lado azul (Cuex): blue-side #4a97ff, blue-side-deep #143a80, blue-side-soft rgba(74, 151, 255, 0.14)
 - Lado rojo (Mingo): red-side #ff5a68, red-side-deep #7a1622, red-side-soft rgba(255, 90, 104, 0.14)
 - Texto sobre relleno de lado: text-on-side #010a13
 - Estados: state-success #00d084, state-error #ff4655, state-warning #ff9a3c
