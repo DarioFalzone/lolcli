@@ -38,6 +38,16 @@ python claude-design-handoff/rift-duel/build_fixture.py
 python -m http.server 8007 --bind 127.0.0.1 --directory claude-design-handoff/rift-duel
 ```
 
+- **GitHub Pages:** https://dariofalzone.github.io/lolcli/. Sale de la rama `gh-pages`, que tiene solo `index.html` (una copia de `fixture.html`) y `.nojekyll`. Es pública. Se activa una sola vez: Settings → Pages → Build and deployment → Source "Deploy from a branch" → Branch `gh-pages` / `(root)` → Save. Para publicar una versión nueva después de regenerar:
+
+```powershell
+git fetch origin gh-pages
+git worktree add ..\lolcli-pages gh-pages   # solo la primera vez; después: git -C ..\lolcli-pages pull
+Copy-Item claude-design-handoff\rift-duel\fixture.html ..\lolcli-pages\index.html
+git -C ..\lolcli-pages commit -am "chore(pages): update fixture"
+git -C ..\lolcli-pages push
+```
+
 - **Datos:** todo sale de `fixture.json`. El HTML no se toca a mano.
 - **Regenerar** después de cambiar los datos:
 

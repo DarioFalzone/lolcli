@@ -6,6 +6,24 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 
 ---
 
+## [2026-09-25] Rift Duel: fixture en GitHub Pages (rama gh-pages)
+
+### Qué se hizo
+- Nueva rama huérfana `gh-pages` (commit `96c1ee3`), con Darío de acuerdo. Tiene solo `index.html`, que es una copia de `claude-design-handoff/rift-duel/fixture.html`, y `.nojekyll`, para que GitHub publique el HTML sin procesarlo. URL: https://dariofalzone.github.io/lolcli/ (pública; el repo ya lo es).
+- Se eligió la rama y no GitHub Actions desde `main` para que cada carga de datos se publique sin esperar el merge de un PR.
+- En el README de `rift-duel`: cómo se activa (Settings → Pages → Deploy from a branch → `gh-pages` / `(root)`) y cómo se publica una versión nueva con un worktree de `gh-pages`.
+
+### Verificación
+- `git ls-remote origin gh-pages` confirma la rama remota en `96c1ee3`.
+- No se pudo comprobar el sitio publicado: la política de red de este entorno bloquea `dariofalzone.github.io` (403). Además, Pages recién responde cuando se activa en Settings.
+
+### Archivos modificados
+- `claude-design-handoff/rift-duel/README.md` — sección GitHub Pages.
+- `bitacora_de_cambios.md` — esta entrada.
+- Rama `gh-pages` — `index.html` y `.nojekyll`.
+
+---
+
 ## [2026-09-25] Rift Duel: fixture servido en localhost (:8007)
 
 ### Qué se hizo
