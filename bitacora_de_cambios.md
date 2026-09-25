@@ -17,7 +17,7 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
   - README con reglas de uso (lados, ganador y perdedor, Fearless, color, tipografía, layout).
   - `bundle.css`: 9 patrones de Pattern Library v2 copiados sin cambios y 8 componentes nuevos del duelo (VersusHero, SeriesScore, PlayerCard, ChampionTile, ChampionPool, WinCondition, MatchTracker, GameResult). Todo HTML + CSS, sin JS.
   - 17 previews estáticas y la portada.
-- Los archivos fuente del design system viven en el artifact, no en el repo.
+- Los archivos del design system quedan versionados en `claude-design-handoff/rift-duel/design-system/`: copia idéntica a la versión 4 del artifact (verificada por sha256). Al lado, `build_gallery.py` genera `gallery.html` (163 KB), una galería local para verlo sin claude.ai.
 
 ### Verificación
 - Contraste de los colores nuevos medido con un script WCAG 2 (números arriba).
@@ -25,11 +25,16 @@ Este documento registra los cambios significativos, refactorizaciones y evolucio
 - Dos bugs encontrados en ese render y corregidos antes de publicar:
   - En ChampionPool, a 1120px o menos, la pill "Usado en P1" se salía de su casilla. Ahora pasa a dos líneas; a 1440px entra en una.
   - Atenuar al perdedor con `opacity: 0.55` bajaba su `text-secondary` a 2.8:1. Ahora se atenúa sacándole el tinte y el borde del lado, sin opacidad.
+- Galería abierta desde `file://` con Chromium: los 18 iframes cargan el `bundle.css` compartido y su alto automático coincide con el contenido. `ruff check` y `ruff format` sin cambios pendientes en `build_gallery.py`.
 - Google Fonts se sirvió local (bajado con curl) porque el Chromium del contenedor no confía en el CA del proxy. La página real del artifact no se pudo abrir desde el contenedor porque es privada.
 
 ### Archivos modificados
 - `claude-design-handoff/rift-duel-prompt.md` — nuevo; supuestos de la serie explícitos en una tabla para confirmar.
-- `claude-design-handoff/README.md` — sección "Otros prompts" con el puntero al prompt nuevo.
+- `claude-design-handoff/README.md` — sección "Otros prompts" con el puntero al prompt nuevo y a `rift-duel/`.
+- `claude-design-handoff/rift-duel/design-system/**` — nuevo; 39 archivos del design system (tokens, README, índice, `bundle.css`, 17 componentes y portada).
+- `claude-design-handoff/rift-duel/build_gallery.py` — nuevo; compila `tokens.css` como el tipo Design System y arma la galería con un iframe por preview.
+- `claude-design-handoff/rift-duel/gallery.html` — nuevo, generado; no editar a mano.
+- `claude-design-handoff/rift-duel/README.md` — nuevo; qué hay en la carpeta y cómo verlo.
 - `bitacora_de_cambios.md` — esta entrada.
 
 ---

@@ -1,0 +1,66 @@
+<!-- @dsCard height=320 -->
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Rift Duel</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap">
+<style>
+  html, body { margin:0; height:100%; }
+  body { background:var(--forge-black); color:var(--text-primary); font-family:var(--font-body); overflow:hidden; }
+  .cover { position:relative; height:320px; overflow:hidden; }
+  /* la composicion: una caja de 480 a la derecha del layout de 960, lejos del nombre */
+  .art { position:absolute; top:0; left:480px; width:480px; height:320px; overflow:hidden; }
+  .art svg { display:block; width:480px; height:320px; }
+  .blue { fill:var(--blue-side); }
+  .red { fill:var(--red-side); }
+  .gold { fill:var(--arc-gold); }
+  .tint { fill:var(--arc-gold-bright); }
+  .cut { fill:var(--forge-black); }
+  .blk { rx:var(--radius-sm); }
+  .words { position:absolute; left:var(--space-6); bottom:var(--space-6); max-width:440px; }
+  .name { margin:0; font-family:var(--font-anton); font-style:italic; font-weight:400; font-size:120px; line-height:.95; letter-spacing:var(--tracking-hero); color:var(--text-primary); }
+  .tag { margin:var(--space-2) 0 0 4px; font-size:14px; line-height:20px; color:var(--text-secondary); }
+</style>
+</head>
+<body>
+<div class="cover">
+<div class="art" aria-hidden="true">
+<svg viewBox="480 0 480 320" width="480" height="320">
+<!--
+  blocks      blue-side 160x288 y red-side 160x288, cortados por arriba, mismo peso para cada lado · arc-gold 48x160 al centro (la grieta: marca y ganador) · arc-gold-bright 48x24 encima como tinte de relieve · ~31% de 960x320
+  arrangement azul | dorado | rojo, espejado alrededor de x=720 como el VS del hero; bases alineadas en y=272 (space-12 sobre el borde), gutters space-4, margenes space-10
+  pattern     chevrones, de la fila "poster type" (Anton italica en mayusculas es la voz de los titulos): 18 recortados en forge-black, los del azul apuntan a la derecha y los del rojo a la izquierda, encarados sobre la grieta
+  scales      lados en multiplos de space-2; gutters space-4; paso horizontal space-10 y vertical space-12; chevron de space-8 de alto con brazo de space-2; esquinas radius-sm
+-->
+<rect class="blue blk" x="520" y="-16" width="160" height="288" rx="6"/>
+<rect class="tint blk" x="696" y="80" width="48" height="24" rx="6"/>
+<rect class="gold blk" x="696" y="112" width="48" height="160" rx="6"/>
+<rect class="red blk" x="760" y="-16" width="160" height="288" rx="6"/>
+<path class="cut" d="M548 72h8l16 16-16 16h-8l16-16z"/>
+<path class="cut" d="M588 72h8l16 16-16 16h-8l16-16z"/>
+<path class="cut" d="M628 72h8l16 16-16 16h-8l16-16z"/>
+<path class="cut" d="M548 120h8l16 16-16 16h-8l16-16z"/>
+<path class="cut" d="M588 120h8l16 16-16 16h-8l16-16z"/>
+<path class="cut" d="M628 120h8l16 16-16 16h-8l16-16z"/>
+<path class="cut" d="M548 168h8l16 16-16 16h-8l16-16z"/>
+<path class="cut" d="M588 168h8l16 16-16 16h-8l16-16z"/>
+<path class="cut" d="M628 168h8l16 16-16 16h-8l16-16z"/>
+<path class="cut" d="M812 72h-8l-16 16 16 16h8l-16-16z"/>
+<path class="cut" d="M852 72h-8l-16 16 16 16h8l-16-16z"/>
+<path class="cut" d="M892 72h-8l-16 16 16 16h8l-16-16z"/>
+<path class="cut" d="M812 120h-8l-16 16 16 16h8l-16-16z"/>
+<path class="cut" d="M852 120h-8l-16 16 16 16h8l-16-16z"/>
+<path class="cut" d="M892 120h-8l-16 16 16 16h8l-16-16z"/>
+<path class="cut" d="M812 168h-8l-16 16 16 16h8l-16-16z"/>
+<path class="cut" d="M852 168h-8l-16 16 16 16h8l-16-16z"/>
+<path class="cut" d="M892 168h-8l-16 16 16 16h8l-16-16z"/>
+</svg>
+</div>
+<div class="words">
+<h1 class="name">Rift<br>Duel</h1>
+<p class="tag">Series 1v1 al mejor de 3, lado contra lado.</p>
+</div>
+</div>
+</body>
+</html>

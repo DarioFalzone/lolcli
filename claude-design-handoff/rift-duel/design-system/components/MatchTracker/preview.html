@@ -1,0 +1,45 @@
+<!-- @dsCard group="Serie" height=400 width=1000 subtitle="Versión estática (HTML + CSS)" -->
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>MatchTracker — preview</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap">
+</head>
+<body>
+<div class="pv-col">
+  <section class="match-tracker" aria-label="Partida 3 en juego">
+    <header class="match-tracker-head">
+      <h3 class="match-tracker-title">Partida 3</h3>
+      <span class="pill pill-cyan">En juego</span>
+      <span class="match-clock" aria-label="Tiempo de partida: 8 minutos 12 segundos">08:12</span>
+    </header>
+    <div class="match-tracker-body">
+      <div class="tracker-champs">
+        <div class="tracker-champ side-blue"><span class="champ-portrait" aria-hidden="true">S</span><div><span class="side-tag">Quex</span><strong>Syndra</strong></div></div>
+        <span class="tracker-vs">vs</span>
+        <div class="tracker-champ side-red"><span class="champ-portrait" aria-hidden="true">L</span><div><span class="side-tag">Mingo</span><strong>LeBlanc</strong></div></div>
+      </div>
+      <div class="tracker-row">
+        <div class="tracker-cell side-blue"><span class="tracker-state">Pendiente</span></div>
+        <span class="tracker-label">First Blood</span>
+        <div class="tracker-cell side-red"><span class="tracker-state">Pendiente</span></div>
+      </div>
+      <div class="tracker-row">
+        <div class="tracker-cell side-blue"><span class="tracker-value">64 CS</span><div class="tracker-track"><div class="tracker-fill" style="width:64%"></div></div></div>
+        <span class="tracker-label">100 CS</span>
+        <div class="tracker-cell side-red"><span class="tracker-value">58 CS</span><div class="tracker-track"><div class="tracker-fill" style="width:58%"></div></div></div>
+      </div>
+      <div class="tracker-row">
+        <div class="tracker-cell side-blue"><span class="tracker-value">Torre 100%</span><div class="tracker-track"><div class="tracker-fill" style="width:100%"></div></div></div>
+        <span class="tracker-label">Primera torre</span>
+        <div class="tracker-cell side-red"><span class="tracker-value">Torre 81%</span><div class="tracker-track"><div class="tracker-fill" style="width:81%"></div></div></div>
+      </div>
+    </div>
+    <footer class="match-tracker-foot">
+      <button class="btn btn-secondary" type="button">Cargar resultado</button>
+    </footer>
+  </section>
+</div>
+</body>
+</html>
